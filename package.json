@@ -76,6 +76,7 @@
     "ag-grid-react": "^20.1.0",
     "body-parser": "^1.18.2",
     "concurrently": "^4.1.0",
+    "d3-ease": "^1.0.5",
     "debounce": "^1.2.0",
     "debug-logger": "^0.4.1",
     "dot-tpl-loader": "^1.2.1",

@@ -39,17 +39,31 @@ body, html {
   user-select: none;
 }
 
-.desk {
+.Page {
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0px;
   left: 0;
-  user-select: none;
-  pointer-events: none;
+  perspective: 200px;
+  //user-select: none;
+  //pointer-events: none;
+  //
+  //> * {
+  //  pointer-events: all;
+  //}
 
-  > * {
-    pointer-events: all;
+  //tr
+  header {
+    background: green;
+    position: fixed;
+    width: calc(100% - 17px);
+    @media (hover: none) {
+      /* ... */
+      width: 100%;
+    }
+    top: 0px;
+    left: 0px;
   }
 }
 

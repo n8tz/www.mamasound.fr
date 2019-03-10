@@ -38,21 +38,20 @@ export default class App extends React.Component {
 			Router = StaticRouter;
 		return <Router location={ this.props.location }>
 			<React.Fragment>
-				<AppBar position="static" className={ "AppBar" }>
-					<Toolbar>
-						<Typography cvariant="h6" color="inherit" noWrap>
-							{/*Mama Importer !!!*/ }
-						</Typography>
-						<div className={ "tools" }>
-							<Link to={ "/" } className={ "homeBtn" }>
-								<IconButton aria-label="home"
-								            color="inherit">
-									<HomeIcon/>
-								</IconButton>
-							</Link>
-						</div>
-					</Toolbar>
-				</AppBar>
+				{/*<AppBar position="static" className={ "AppBar" }>*/}
+					{/*<Toolbar>*/}
+						{/*<Typography cvariant="h6" color="inherit" noWrap>*/}
+						{/*</Typography>*/}
+						{/*<div className={ "tools" }>*/}
+							{/*<Link to={ "/" } className={ "homeBtn" }>*/}
+								{/*<IconButton aria-label="home"*/}
+								            {/*color="inherit">*/}
+									{/*<HomeIcon/>*/}
+								{/*</IconButton>*/}
+							{/*</Link>*/}
+						{/*</div>*/}
+					{/*</Toolbar>*/}
+				{/*</AppBar>*/}
 				
 				{
 					widgets.items.map(
