@@ -8,9 +8,7 @@
   "wpInherit": {
     "default": {
       "rootFolder": "App",
-      "libsPath": "./libs",
       "vars": {
-        "production": true
       },
       "extend": [
       ]
@@ -18,7 +16,6 @@
     "devClient": {
       "rootFolder": "App",
       "basedOn": "default",
-      "libsPath": "./libs",
       "vars": {
         "webpackPatch": {
           "watchOptions": {
@@ -32,7 +29,6 @@
     },
     "api": {
       "rootFolder": "App",
-      "libsPath": "./libs",
       "vars": {
         "externals": true,
         "webpackPatch": {

@@ -1,5 +1,5 @@
 {
-  "name": "mama-importer",
+  "name": "play-with-rs",
   "version": "1.0.0",
   "private": true,
   "license": "MIT",
@@ -13,6 +13,7 @@
         "production": true
       },
       "extend": [
+        "wpi-mongo",
         "wpi-react-rs-sass-ssr"
       ]
     },
@@ -29,6 +30,7 @@
         }
       },
       "extend": [
+        "wpi-mongo",
         "wpi-react-rs-sass-ssr"
       ]
     },
@@ -38,7 +40,7 @@
       "vars": {
         "externals": true,
         "webpackPatch": {
-          "devtool": "inline",
+          "devtool": "eval-source-map",
           "watchOptions": {
             "aggregateTimeout": 300,
             "poll": 1000
@@ -46,6 +48,7 @@
         }
       },
       "extend": [
+        "wpi-mongo",
         "wpi-react-rs-sass-ssr"
       ]
     }
@@ -55,6 +58,7 @@
     "dev-api": "wpi :api -w",
     "docker_start": "start docker-compose up&",
     "docker_down": "docker-compose down",
+    "docker_kill": "docker-compose kill",
     "docker_ash": "start docker-compose exec app ash -c \"cd /home/app&&ash\"&",
     "docker_restoreDb": "start docker-compose exec app ash -c \"cd /home/app&&mongorestore --uri ${mongoUrl}\"&",
     "start-dev": "wpi :api&&concurrently \"wpi-dev-server :devClient --hot --host 0.0.0.0 \" \"wpi :api -w\" \"sleep 3&&nodemon -L --watch ./dist/App.server.js --inspect=[::]:9229 ./dist/App.server.js  -p 9701\"",

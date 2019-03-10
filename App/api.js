@@ -24,9 +24,13 @@ export default ( server, http ) => Object
 			is.fn(api[service]) ?
 			{
 				name         : service,
-				priorityLevel: 0,
+				priorityLevel: 10,
 				service      : api[service]
-			} : api[service]
+			} : {
+					name         : api[service].name || service,
+					priorityLevel: api[service].priorityLevel || 10,
+					service      : api[service].service
+				}
 		)
 	)
 	.sort(
