@@ -19,15 +19,15 @@ import CloseIcon                             from '@material-ui/icons/Close';
 import CardHeader                            from '@material-ui/core/CardHeader';
 import IconButton                            from '@material-ui/core/IconButton';
 import {withStateMap, asRef, asStore}        from "rescope-spells";
-import MongoQueries                          from 'App/stores/MongoQueries';
 
+import stores from 'App/stores/(*).js';
 
 @reScope(
 	{
 		
 		@withStateMap(
 			{
-				places: {
+				events: {
 					collection: 'Event',
 					$limit    : 100,
 					query     : {}
@@ -37,19 +37,33 @@ import MongoQueries                          from 'App/stores/MongoQueries';
 				//}
 			}
 		)
-		Queries: MongoQueries,
-		//@withStateMap(
-		//	{
-		//		@asRef
-		//		items  : "Exportable.items",
-		//		docName: "NewEvents",
-		//	}
-		//)
-		//Exporter: XlsExporter,
+		Queries     : stores.MongoQueries,
+		@withStateMap(
+			{
+				@asRef
+				items  : "Queries.events.items",
+				imgKeys: ["previewImage"]
+			}
+		)
+		WithImgList : stores.ImgFieldsLoader,
+		@withStateMap(
+			{
+				@asRef
+				items      : "WithImgList.items",
+				toMountKeys: ["category", "place"]
+			}
+		)
+		MountedItems: stores.MongoListRefsLoader,
+		@asStore
+		Events      : {
+			@asRef
+			items: "MountedItems.items",
+			
+		},
 		
 	}
 )
-@scopeToProps("Queries")
+@scopeToProps("Events")
 export default class EventList extends React.Component {
 	static propTypes = {
 		//record  : PropTypes.object.isRequired,
@@ -66,7 +80,7 @@ export default class EventList extends React.Component {
 		    state = this.state;
 		return (
 			<div
-				className={ "EventList" }
+				className={ "EventList container" }
 			>
 				<div className={ " item" } onClick={ e => e.preventDefault() }>
 					EventList item

@@ -161,9 +161,7 @@ export default class Home extends React.Component {
 								width     : "100%",
 								background: "blue",
 							} }>
-							<div className={ "container" }>
-								<Highlighter/>
-							</div>
+							<Highlighter/>
 						</div>
 					</TweenRef>
 					<TweenRef
@@ -178,9 +176,7 @@ export default class Home extends React.Component {
 								width     : "100%",
 								background: "green",
 							} }>
-							<div className={ "container" }>
-								<EventList/>
-							</div>
+							<EventList/>
 						</div>
 					</TweenRef>
 				</div>

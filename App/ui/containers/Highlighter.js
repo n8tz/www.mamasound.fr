@@ -23,8 +23,12 @@ import ReactGridLayout                       from 'react-grid-layout';
 
 import {withStateMap, asRef, asStore} from "rescope-spells";
 import stores                         from 'App/stores/(*).js';
+import Comps                          from 'App/ui/components/(*).js';
 
-
+if ( typeof window !== "undefined" ) {
+	require('react-resizable/css/styles.css');
+	require('react-grid-layout/css/styles.css');
+}
 @reScope(
 	{
 		
@@ -44,7 +48,15 @@ import stores                         from 'App/stores/(*).js';
 		@withStateMap(
 			{
 				@asRef
-				items      : "Queries.FocusedItems.items",
+				items  : "Queries.FocusedItems.items",
+				imgKeys: ["previewImage"]
+			}
+		)
+		WithImgList : stores.ImgFieldsLoader,
+		@withStateMap(
+			{
+				@asRef
+				items      : "WithImgList.items",
 				toMountKeys: ["targetEtty"]
 			}
 		)
@@ -62,7 +74,7 @@ import stores                         from 'App/stores/(*).js';
 		@asStore
 		Grid        : {
 			@asRef
-			items: "Queries.FocusedItems.items",
+			items: "MountedItems.items",
 			
 			@asRef
 			layout: "GridLayout.layout",
@@ -87,13 +99,14 @@ export default class Highlighter extends React.Component {
 		return (
 			<div
 				//onClick={ $actions.saveState }
-				className={ "Highlighter" }
+				className={ "Highlighter container" }
 			>
-				<ReactGridLayout className="layout" layout={ layout } cols={ 6 } rowHeight={ 30 }
+				<ReactGridLayout className="layout" layout={ layout } cols={ 8 } rowHeight={ 50 }
+				                 isResizable={ true }
 				                 width={ 1200 }>
 					{
 						gridItems.map(
-							item => <div key={ item._id }>{ item._id }</div>
+							item => <div key={ item._id }><Comps.FocusedItems record={ item }/></div>
 						)
 					}
 				</ReactGridLayout>
