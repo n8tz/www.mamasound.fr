@@ -13,6 +13,7 @@
         "production": true
       },
       "extend": [
+        "wpi-forms",
         "wpi-mongo",
         "wpi-react-rs-sass-ssr"
       ]
@@ -30,6 +31,7 @@
         }
       },
       "extend": [
+        "wpi-forms",
         "wpi-mongo",
         "wpi-react-rs-sass-ssr"
       ]
@@ -48,6 +50,7 @@
         }
       },
       "extend": [
+        "wpi-forms",
         "wpi-mongo",
         "wpi-react-rs-sass-ssr"
       ]

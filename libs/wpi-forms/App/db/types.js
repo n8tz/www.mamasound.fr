@@ -1,4 +1,4 @@
-/*!
+/*
  * The MIT License (MIT)
  * Copyright (c) 2019. Wise Wild Web
  *
@@ -13,30 +13,5 @@
  */
 
 
-.Widget {
-  border: 1px solid #E8E8E8;
-  border-radius: 10px;
-  background: white;
-
-
-  .widgetHead {
-    padding: 7px;
-    //margin: 5px;
-    //padding-right: 15px;
-    position: absolute;
-    //width: 100%;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-  }
-
-  .content {
-    position: absolute;
-    top: 50px;
-    bottom: 5px;
-    left: 5px;
-    right: 5px;
-    //padding-top: 50px;
-    overflow: auto;
-  }
-}
+export *         from './types/(*).js';
+export {default} from './types/(*).js';

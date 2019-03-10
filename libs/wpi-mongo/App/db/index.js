@@ -12,11 +12,15 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-import typesList from "App/db/types/(*).js";
+import typesList from "App/db/types";
 //import {pushDbTask} from "App/db/pool";
 
 export const types = typesList;
 
 export function get( type, id ) {
+
+};
+
+export function create( type, id ) {
 
 };

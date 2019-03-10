@@ -43,7 +43,7 @@ export default {
 		items: [{
 			"_id"     : "rkUQHZrqM",
 			"label"   : "Importer de dates",
-			"type"    : "MamaImporter",
+			"type"    : "RecordEditor",
 			"props"   : {},
 			"size"    : { "width": 600, "height": 400 },
 			"position": { "x": 50, "y": 111 },

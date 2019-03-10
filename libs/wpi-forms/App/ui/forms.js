@@ -1,4 +1,4 @@
-/*!
+/*
  * The MIT License (MIT)
  * Copyright (c) 2019. Wise Wild Web
  *
@@ -12,31 +12,37 @@
  *  @contact : n8tz.js@gmail.com
  */
 
+//import forms    from './forms/(*).js';
+import entities from 'App/db/entities';
+import React    from "react";
+import AutoForm from 'uniforms-material/AutoForm';
+import Ajv      from 'ajv';
 
-.Widget {
-  border: 1px solid #E8E8E8;
-  border-radius: 10px;
-  background: white;
+import JSONSchemaBridge from 'uniforms/JSONSchemaBridge';
 
-
-  .widgetHead {
-    padding: 7px;
-    //margin: 5px;
-    //padding-right: 15px;
-    position: absolute;
-    //width: 100%;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-  }
-
-  .content {
-    position: absolute;
-    top: 50px;
-    bottom: 5px;
-    left: 5px;
-    right: 5px;
-    //padding-top: 50px;
-    overflow: auto;
-  }
+function mkSchema( schema ) {
+	const validator = new Ajv({ allErrors: true, useDefaults: true }).compile(schema);
+	
+	const schemaValidator = model => {
+		validator(model);
+		
+		if ( validator.errors && validator.errors.length ) {
+			throw { details: validator.errors };
+		}
+	};
+	return new JSONSchemaBridge(schema, schemaValidator)
 }
+
+const allForms = {
+	//...forms
+}
+
+Object.keys(entities)
+      .map(
+	      etty => {
+		      allForms[etty] = ( props ) => <AutoForm
+			      schema={ mkSchema(entities[etty]) } { ...props }/>;
+	      }
+      )
+
+export default allForms;

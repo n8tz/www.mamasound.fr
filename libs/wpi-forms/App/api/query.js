@@ -1,4 +1,4 @@
-/*!
+/*
  * The MIT License (MIT)
  * Copyright (c) 2019. Wise Wild Web
  *
@@ -11,32 +11,35 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
+//
+import {pushDbTask} from "App/db/pool";
 
+const config   = require('App/config'),
+      aliasAPI = require("App/db/aliasHelpers"),
+      shortid  = require("shortid");
+//multer  = require('multer');
 
-.Widget {
-  border: 1px solid #E8E8E8;
-  border-radius: 10px;
-  background: white;
-
-
-  .widgetHead {
-    padding: 7px;
-    //margin: 5px;
-    //padding-right: 15px;
-    position: absolute;
-    //width: 100%;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-  }
-
-  .content {
-    position: absolute;
-    top: 50px;
-    bottom: 5px;
-    left: 5px;
-    right: 5px;
-    //padding-top: 50px;
-    overflow: auto;
-  }
+export default ( server, http ) => {
+	console.log("wpi-mongo server running ! :D");
+	//
+	//server.post(
+	//	'/query',
+	//	function ( req, res, next ) {
+	//		//res.json(req.body)
+	//		let { query, collection } = req.body;
+	//		pushDbTask(
+	//			( client, dbRelease ) => {
+	//				var db = client.db("mamasound_fr");
+	//				db.collection(collection)
+	//				  .find(query)
+	//				  .toArray(
+	//					  ( e, items ) => {
+	//						  res.json(items);
+	//						  dbRelease()
+	//					  }
+	//				  )
+	//			}
+	//		)
+	//	}
+	//);
 }
