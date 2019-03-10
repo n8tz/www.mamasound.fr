@@ -21,6 +21,7 @@ import IconButton                            from '@material-ui/core/IconButton'
 import {withStateMap, asRef, asStore}        from "rescope-spells";
 
 import stores from 'App/stores/(*).js';
+import Comps  from 'App/ui/components/(*).js';
 
 @reScope(
 	{
@@ -74,7 +75,7 @@ export default class EventList extends React.Component {
 	render() {
 		let {
 			    record: { position, size } = {},
-			    record, children, disabled,
+			    Events, children, disabled,
 			    $actions, onSelect, selected
 		    }     = this.props,
 		    state = this.state;
@@ -82,6 +83,11 @@ export default class EventList extends React.Component {
 			<div
 				className={ "EventList container" }
 			>
+				{
+					Events && Events.items && Events.items.map(
+						item => <div key={ item._id }><Comps.Event record={ item }/></div>
+					)
+				}
 				<div className={ " item" } onClick={ e => e.preventDefault() }>
 					EventList item
 				</div>
