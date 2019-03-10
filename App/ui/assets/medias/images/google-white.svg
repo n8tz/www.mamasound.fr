@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017.  Caipi Labs.  All rights reserved.
+  ~
+  ~ This File is part of Caipi. You can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as
+  ~ published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program. If not, see <http://www.gnu.org/licenses/>.
+  ~  This project is dual licensed under AGPL and Commercial Licence.
+  ~
+  ~ @author : Nathanael Braun
+  ~ @contact : caipilabs@gmail.com
+  -->
+
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="76.913px" height="66.726px" viewBox="0 0 76.913 66.726" enable-background="new 0 0 76.913 66.726" xml:space="preserve">
+<g>
+	<path fill="#FFFFFF" d="M22.483,39.172c-9.949-0.211-22.297,3.616-22.297,14.142s12.181,13.412,20.559,13.412
+		s21.381-3.705,21.381-15.906s-12.56-15.579-12.56-19.559c0-5.42,9.639-4.975,9.639-15.971c0-10.578-5.549-12.358-5.549-12.358
+		C41.72,2.695,42.142,0,42.142,0S22.4,0,20.777,0C19.154,0,4.051,3.142,4.051,17.124C4.051,31.105,20,31,20,31v4.189
+		C21,35.818,24.847,39.222,22.483,39.172z M23.081,26.916c-3.299,0-10.264-3.613-10.264-13.196c0-9.583,7.332-9.949,7.332-9.949
+		c6.022,0,10.054,6.703,10.054,13.51C30.203,24.088,26.38,26.916,23.081,26.916z M35.439,51.527
+		c0,10.054-11.782,10.054-13.72,10.054c-1.938,0-13.51-0.681-13.51-9.007c0-8.326,9.478-10.264,14.558-10.473
+		C22.767,42.102,35.439,41.473,35.439,51.527z"/>
+	<polygon fill="#FFFFFF" points="59.737,0 59.676,13 46.75,13 46.681,17.113 59.657,17.079 59.597,30.024 63.787,30.163 
+		63.847,17.067 76.843,17.043 76.913,13 63.866,13 63.926,0 	"/>
+</g>
+</svg>

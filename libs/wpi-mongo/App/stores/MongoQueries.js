@@ -38,7 +38,7 @@ export default class MongoQueries extends Store {
 		                 .map(
 			                 key => {
 				                 if ( previousQueries[key] !== queries[key] )
-					                 query(queries[key].collection, queries[key].query)
+					                 query(queries[key])
 						                 .then(result => this.push({
 							                                           results: {
 								                                           ...(this.data.results || {}),

@@ -22,17 +22,13 @@ export function get( type, id ) {
 
 };
 
-export function query( table, query ) {
+export function query( query ) {
 	let p = new Promise(
 		( resolve, reject ) => {
-			superagent.post('/query', { table, query })
+			superagent.post('/query', query)
 			          .then(
 				          res => {
-					          let schema = res.body.reduce(
-						          ( h, row ) => (Object.keys(row).forEach(k => (h[k] = h[k] || types.string)), h),
-						          {}
-					          )
-					          resolve({ items: res.body, schema })
+					          resolve(res.body)
 				          }
 			          )
 		}

@@ -16,7 +16,7 @@ import {pushDbTask} from "App/db/pool";
 
 const config   = require('App/config'),
       aliasAPI = require("App/db/aliasHelpers"),
-      shortid  = require("shortid");
+      is       = require("is");
 //multer  = require('multer');
 
 export default ( server, http ) => {
@@ -26,18 +26,41 @@ export default ( server, http ) => {
 		'/query',
 		function ( req, res, next ) {
 			//res.json(req.body)
-			let { query, collection } = req.body;
+			let { query, collection, $limit = 1000, $skip, $orderby } = req.body;
 			pushDbTask(
 				( client, dbRelease ) => {
 					var db = client.db("mamasound_fr");
-					db.collection(collection)
-					  .find(query)
-					  .toArray(
-						  ( e, items ) => {
-							  res.json(items);
-							  dbRelease()
-						  }
-					  )
+					
+					var data  = {},
+					    complete,
+					    done  = ( r, ln ) => {
+						    data.length = typeof ln == 'number' ? ln : data.length;
+						    data.items  = r || data.items;
+						    if ( typeof data.length == 'number' && is.array(data.items) ) {
+							    done = null;
+							    dbRelease();
+							    res.json(data)
+						    }
+						
+					    };
+					var
+						ptr   = db.collection(collection)
+						          .find(query || {}),//{$query : {}, $orderby : {updated : -1}}
+						count = ptr.count(null, ( e, r ) => {
+							done(null, r || 0);
+						}),
+						
+						parse = function ( err, docs ) {
+							
+							
+							done(docs || []);
+							
+						};
+					ptr.sort($orderby)
+					   .skip(parseInt($skip) || 0)
+					   .limit(parseInt($limit) || 20)
+					   .toArray(parse);
+					
 				}
 			)
 		}

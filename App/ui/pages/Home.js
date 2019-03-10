@@ -15,6 +15,8 @@
 import React                                 from 'react';
 import {reScope, scopeToProps, propsToScope} from "rscopes";
 import MongoQueries                          from 'App/stores/MongoQueries';
+import Highlighter                           from 'App/ui/containers/Highlighter';
+import EventList                             from 'App/ui/containers/EventList';
 
 import {withStateMap, asRef, asStore} from "rescope-spells";
 import Fab                            from '@material-ui/core/Fab';
@@ -58,35 +60,6 @@ let pushOut = function ( target ) {
 };
 
 
-@reScope(
-	{
-		
-		@withStateMap(
-			{
-				queries: {
-					places: {
-						collection: 'Place',
-						query     : {}
-					}
-				},
-				//updateQueries() {
-				//	return { query: {} }
-				//}
-			}
-		)
-		Queries: MongoQueries,
-		//@withStateMap(
-		//	{
-		//		@asRef
-		//		items  : "Exportable.items",
-		//		docName: "NewEvents",
-		//	}
-		//)
-		//Exporter: XlsExporter,
-		
-	}
-)
-@scopeToProps("Queries")
 @asTweener
 export default class Home extends React.Component {
 	state = {};
@@ -97,27 +70,27 @@ export default class Home extends React.Component {
 			type    : "Tween",
 			target  : "header",
 			from    : 0,
-			duration: 50,
+			duration: 100,
 			easeFn  : easingFn.easePolyOut,
 			apply   : {
-				height: -100,
+				height: -80,
 			}
 		},
 		{
 			type    : "Tween",
 			target  : "page",
 			from    : 0,
-			duration: 50,
+			duration: 100,
 			easeFn  : easingFn.easePolyOut,
 			apply   : {
-				top: -100,
+				top: -80,
 			}
 		},
 		{
 			type    : "Tween",
 			target  : "highlighted",
 			from    : 0,
-			duration: 50,
+			duration: 100,
 			easeFn  : easingFn.easePolyOut,
 			apply   : {
 				height: -70,
@@ -127,7 +100,7 @@ export default class Home extends React.Component {
 			type    : "Tween",
 			target  : "events",
 			from    : 0,
-			duration: 50,
+			duration: 100,
 			easeFn  : easingFn.easePolyOut,
 			apply   : {
 				height: 70,
@@ -141,7 +114,7 @@ export default class Home extends React.Component {
 			<TweenRef
 				id={ "header" }
 				initial={ {
-					height: "150px"
+					height: "120px"
 				} }
 			>
 				<header
@@ -150,13 +123,20 @@ export default class Home extends React.Component {
 						width     : "100%",
 						background: "red",
 					} }>
-					header
+					<TweenRef
+						id={ "logo" }
+						initial={ {
+							height: "100%"
+						} }
+					>
+						<img src={ require('App/ui/assets/medias/LogoVF_MAMA_SOUND_w.png') }/>
+					</TweenRef>
 				</header>
 			</TweenRef>
 			<TweenRef
 				id={ "page" }
 				initial={ {
-					top   : "150px",
+					top   : "120px",
 					left  : "0px",
 					bottom: "0px",
 					width : "100%",
@@ -177,12 +157,15 @@ export default class Home extends React.Component {
 						} }
 					>
 						<div
+							onClick={ e => this.scrollTo(0, 500) }
 							style={ {
 								display   : "inline-block",
 								width     : "100%",
 								background: "blue",
 							} }>
-							<div className={ "container" }>hggjgh</div>
+							<div className={ "container" }>
+								<Highlighter/>
+							</div>
 						</div>
 					</TweenRef>
 					<TweenRef
@@ -192,12 +175,15 @@ export default class Home extends React.Component {
 						} }
 					>
 						<div
+							onClick={ e => this.scrollTo(100, 500) }
 							style={ {
 								display   : "inline-block",
 								width     : "100%",
 								background: "green",
 							} }>
-							<div className={ "container" }>hgjhgj</div>
+							<div className={ "container" }>
+								<EventList/>
+							</div>
 						</div>
 					</TweenRef>
 				</div>
