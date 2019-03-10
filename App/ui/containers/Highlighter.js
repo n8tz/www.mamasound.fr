@@ -20,7 +20,44 @@ import CardHeader                            from '@material-ui/core/CardHeader'
 import IconButton                            from '@material-ui/core/IconButton';
 
 
-@reScope
+import {withStateMap, asRef, asStore} from "rescope-spells";
+import MongoQueries                   from 'App/stores/MongoQueries';
+
+
+@reScope(
+	{
+		
+		@withStateMap(
+			{
+				FocusedItems: {
+					collection: 'FocusedItems',
+					$limit    : 100,
+					query     : {}
+				},
+				updateQueries() {
+					return { FocusedItems: { ...this.nextState.FocusedItems, $skip: 5 } }
+				}
+			}
+		)
+		Queries: MongoQueries,
+		@asStore
+		Grid   : {
+			@asRef
+			items: "Queries.FocusedItems.items",
+			$apply( data, { items = [] } ) {
+				return <div>
+					{
+						items.map(
+							item => <div key={ item._id }>{ item._id }</div>
+						)
+					}
+				</div>
+			}
+		},
+		
+	}
+)
+@scopeToProps("Queries", "Grid")
 export default class Highlighter extends React.Component {
 	static propTypes = {
 		//record  : PropTypes.object.isRequired,
@@ -31,17 +68,16 @@ export default class Highlighter extends React.Component {
 	render() {
 		let {
 			    record: { position, size } = {},
-			    record, children, disabled,
+			    Grid,
 			    $actions, onSelect, selected
 		    }     = this.props,
 		    state = this.state;
 		return (
 			<div
+				onClick={ $actions.updateQueries }
 				className={ "Highlighter" }
 			>
-				<div className={ " item" } onClick={ e => e.preventDefault() }>
-					Highlighter item
-				</div>
+				{ Grid }
 			</div>
 		);
 	}

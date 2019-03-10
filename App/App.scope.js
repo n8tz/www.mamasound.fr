@@ -34,20 +34,22 @@ export default {
 		},
 		clearState() {
 			localStorage.mama = null;
-			window.location+="";
+			window.location += "";
 		}
 	},
 	@asStore
 	widgets : {
 		// initial state
-		items: [{
-			"_id"     : "rkUQHZrqM",
-			"label"   : "Importer de dates",
-			"type"    : "RecordEditor",
-			"props"   : {},
-			"size"    : { "width": 600, "height": 400 },
-			"position": { "x": 50, "y": 111 },
-		}],
+		items: [
+			//{
+			//	"_id"     : "rkUQHZrqM",
+			//	"label"   : "Importer de dates",
+			//	"type"    : "RecordEditor",
+			//	"props"   : {},
+			//	"size"    : { "width": 600, "height": 400 },
+			//	"position": { "x": 50, "y": 111 },
+			//}
+		],
 		
 		// actions
 		newWidget() {

@@ -11,22 +11,37 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-//
-import {pushDbTask} from "App/db/pool";
 
-const config   = require('App/config'),
-      aliasAPI = require("App/db/aliasHelpers"),
-      db       = require("App/db");
-//multer  = require('multer');
+import {Scope, Store} from "rscopes";
 
-export default ( server, http ) => {
-	console.log("wpi-mongo server running ! :D");
+import XLSX      from "xlsx";
+import camelCase from "camelcase";
+import shortId   from "shortid";
+
+import {types, query} from 'App/db';
+
+
+export default class MongoRefs extends Store {
+	static state = {};
+	//data         = {
+	//	results: {},
 	//
-	server.post(
-		'/query',
-		function ( req, res, next ) {
-			db.query(req, res)
-			
-		}
-	);
+	//};
+	
+	
+	apply( d = {}, {}, queries ) {
+		queries && Object.keys(queries)
+		                 .map(
+			                 key => {
+				                 if ( d[key] !== queries[key] )
+					                 query(queries[key])
+						                 .then(result => this.push({
+							                                           ...(this.data || {}),
+							                                           [key]: result
+						                                           }))
+			                 }
+		                 )
+		return d;
+	}
+	
 }

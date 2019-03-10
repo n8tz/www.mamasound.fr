@@ -11,22 +11,57 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-//
+import is           from "is";
+import typesList    from "App/db/types";
 import {pushDbTask} from "App/db/pool";
 
-const config   = require('App/config'),
-      aliasAPI = require("App/db/aliasHelpers"),
-      db       = require("App/db");
-//multer  = require('multer');
+export const types = typesList;
 
-export default ( server, http ) => {
-	console.log("wpi-mongo server running ! :D");
-	//
-	server.post(
-		'/query',
-		function ( req, res, next ) {
-			db.query(req, res)
+export function get( type, id ) {
+
+};
+
+export function query( req, res ) {
+	return new Promise(
+		( resolve, reject ) => {
 			
+			let { query, collection, $limit = 1000, $skip, $orderby } = req.body;
+			pushDbTask(
+				( client, dbRelease ) => {
+					var db = client.db("mamasound_fr");
+					
+					var data  = {},
+					    complete,
+					    done  = ( r, ln ) => {
+						    data.length = typeof ln == 'number' ? ln : data.length;
+						    data.items  = r || data.items;
+						    if ( typeof data.length == 'number' && is.array(data.items) ) {
+							    done = null;
+							    dbRelease();
+							    res.json(data)
+						    }
+						
+					    };
+					var
+						ptr   = db.collection(collection)
+						          .find(query || {}),//{$query : {}, $orderby : {updated : -1}}
+						count = ptr.count(null, ( e, r ) => {
+							done(null, r || 0);
+						}),
+						
+						parse = function ( err, docs ) {
+							
+							
+							done(docs || []);
+							
+						};
+					ptr.sort($orderby)
+					   .skip(parseInt($skip) || 0)
+					   .limit(parseInt($limit) || 20)
+					   .toArray(parse);
+					
+				}
+			)
 		}
 	);
-}
+};

@@ -23,15 +23,14 @@ export function get( type, id ) {
 };
 
 export function query( query ) {
-	let p = new Promise(
+	return new Promise(
 		( resolve, reject ) => {
 			superagent.post('/query', query)
 			          .then(
 				          res => {
 					          resolve(res.body)
 				          }
-			          )
+			          ).catch(reject)
 		}
-	)
-	return p;
+	);
 };

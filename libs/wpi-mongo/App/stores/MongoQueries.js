@@ -22,31 +22,26 @@ import {types, query} from 'App/db';
 
 
 export default class MongoQueries extends Store {
-	static state = {
-		queries: {},
-		
-	};
+	static state = {};
 	//data         = {
 	//	results: {},
 	//
 	//};
 	
 	
-	apply( d = {}, {}, { queries } ) {
-		let { queries: previousQueries = {} } = d;
+	apply( d = {}, {}, queries ) {
 		queries && Object.keys(queries)
 		                 .map(
 			                 key => {
-				                 if ( previousQueries[key] !== queries[key] )
+				                 if ( d[key] !== queries[key] )
 					                 query(queries[key])
 						                 .then(result => this.push({
-							                                           results: {
-								                                           ...(this.data.results || {}),
-								                                           [key]: result
-							                                           }
+							                                           ...(this.data || {}),
+							                                           [key]: result
 						                                           }))
 			                 }
 		                 )
+		return d;
 	}
 	
 }

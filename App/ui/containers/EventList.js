@@ -27,13 +27,11 @@ import MongoQueries                          from 'App/stores/MongoQueries';
 		
 		@withStateMap(
 			{
-				queries: {
-					places: {
-						collection: 'Event',
-						$limit    : 100,
-						query     : {}
-					}
-				},
+				places: {
+					collection: 'Event',
+					$limit    : 100,
+					query     : {}
+				}
 				//updateQueries() {
 				//	return { query: {} }
 				//}

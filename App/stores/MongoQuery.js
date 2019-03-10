@@ -18,7 +18,7 @@ import XLSX      from "xlsx";
 import camelCase from "camelcase";
 import shortId   from "shortid";
 
-//import {types} from 'App/db';
+import {types} from 'App/db';
 
 import superagent from "superagent";
 
@@ -30,16 +30,16 @@ export default class MongoQuery extends Store {
 	
 	
 	apply( d, state, c ) {
-		//superagent.post('/query', state)
-		//          .then(
-		//	          res => {
-		//		          let schema = res.body.reduce(
-		//			          ( h, row ) => (Object.keys(row).forEach(k => (h[k] = h[k] || types.string)), h),
-		//			          {}
-		//		          )
-		//		          this.push({ items: res.body, schema })
-		//	          }
-		//          )
+		superagent.post('/query', state)
+		          .then(
+			          res => {
+				          let schema = res.body.reduce(
+					          ( h, row ) => (Object.keys(row).forEach(k => (h[k] = h[k] || types.string)), h),
+					          {}
+				          )
+				          this.push({ items: res.body, schema })
+			          }
+		          )
 	}
 	
 }
