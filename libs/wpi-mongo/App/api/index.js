@@ -22,7 +22,7 @@ const wpiConf = require('App/.wpiConfig.json'),
       tpl     = require('../index.html.tpl');
 
 export const name          = "Rendering";
-export const priorityLevel = Infinity;
+export const priorityLevel = 100000;
 
 export function service( server ) {
 	
