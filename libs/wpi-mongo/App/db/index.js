@@ -12,21 +12,27 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-import superagent from "superagent";
-import typesList  from "App/db/types";
+import superagent   from "superagent";
+import typesList    from "App/db/types";
+import {mount}      from "App/db/mountRecord";
 //import {pushDbTask} from "App/db/pool";
 
 export const types = typesList;
+export {mount}      from "App/db/mountRecord";
+export default { get, query, mount };
 
-export function get( cls, objId ) {
+export function get( cls, objId, cb ) {
 	return new Promise(
 		( resolve, reject ) => {
 			superagent.post('/db/get', { cls, objId })
 			          .then(
 				          res => {
 					          resolve(res.body)
+					          cb && cb(null, res.body)
 				          }
-			          ).catch(reject)
+			          )
+			          .catch(reject)
+			          .catch(err => cb && cb(err))
 		}
 	);
 };

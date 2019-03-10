@@ -40,36 +40,37 @@ import stores                         from 'App/stores/(*).js';
 				}
 			}
 		)
-		Queries   : stores.MongoQueries,
+		Queries     : stores.MongoQueries,
 		@withStateMap(
 			{
-				objId: "HomeGridLayout",
-				cls  : "Assets"
+				@asRef
+				items      : "Queries.FocusedItems.items",
+				toMountKeys: ["targetEtty"]
 			}
 		)
-		GridLayout: stores.MongoRecord,
+		MountedItems: stores.MongoListRefsLoader,
+		@withStateMap(
+			{
+				objId   : "HomeGridLayout",
+				cls     : "Assets",
+				template: {
+					layout: []
+				}
+			}
+		)
+		GridLayout  : stores.MongoRecord,
 		@asStore
-		Grid      : {
+		Grid        : {
 			@asRef
 			items: "Queries.FocusedItems.items",
 			
 			@asRef
 			layout: "GridLayout.layout",
-			$apply( data, { items = [], layout } ) {
-				return <ReactGridLayout className="layout" layout={ layout } cols={ 12 } rowHeight={ 30 }
-				                        width={ 1200 }>
-					{
-						items.map(
-							item => <div key={ item._id }>{ item._id }</div>
-						)
-					}
-				</ReactGridLayout>
-			}
 		},
 		
 	}
 )
-@scopeToProps("Queries", "Grid")
+@scopeToProps("MountedItems", "Grid")
 export default class Highlighter extends React.Component {
 	static propTypes = {
 		//record  : PropTypes.object.isRequired,
@@ -79,17 +80,23 @@ export default class Highlighter extends React.Component {
 	
 	render() {
 		let {
-			    record: { position, size } = {},
-			    Grid                       = "",
+			    Grid: { items: gridItems = [], layout = [] },
 			    $actions, onSelect, selected
 		    }     = this.props,
 		    state = this.state;
 		return (
 			<div
-				onClick={ $actions.updateQueries }
+				//onClick={ $actions.saveState }
 				className={ "Highlighter" }
 			>
-				{ Grid }
+				<ReactGridLayout className="layout" layout={ layout } cols={ 6 } rowHeight={ 30 }
+				                 width={ 1200 }>
+					{
+						gridItems.map(
+							item => <div key={ item._id }>{ item._id }</div>
+						)
+					}
+				</ReactGridLayout>
 			</div>
 		);
 	}

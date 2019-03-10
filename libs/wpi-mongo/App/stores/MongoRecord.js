@@ -29,10 +29,10 @@ export default class MongoRecord extends Store {
 	//};
 	
 	
-	apply( d = {}, { objId, cls }, {} ) {
+	apply( d = {}, { objId, cls, template }, {} ) {
 		get(cls, objId)
 			.then(result => this.push(result))
-			.catch(e => this.push({}))
+			.catch(e => this.push({ ...template }))
 	}
 	
 }

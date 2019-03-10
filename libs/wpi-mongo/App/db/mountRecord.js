@@ -12,9 +12,44 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-import is       from "is";
-import entities from "App/db/entities";
+import is from "is";
 
+
+export function mount( db, record, toMountKeys, cb ) {
+	return new Promise(
+		( resolve, reject ) => {
+			var r    = is.array(record) && record || [record],
+			    refs = {},
+			    i    = 1,
+			    done = function () {
+				
+				    if ( !(--i) ) {
+					    resolve(
+						    {
+							    items: r,
+							    refs : refs
+						    });
+					    cb = null;
+//                    queryFlow.release();
+				    }
+			    };
+			
+			r.map(( item ) => {
+				if ( item ) {
+					i++;
+					
+					mountRecord.call(this,
+					                 item, item._cls, toMountKeys,
+					                 function ( e, refs ) {
+						                 delete refs[item._id];
+						                 done();
+					                 }, null, refs, db)
+				}
+			});
+			done();
+		}
+	)
+}
 
 /**
  * Load related records according the entities autoMount property
@@ -24,12 +59,12 @@ import entities from "App/db/entities";
  * @param required
  * @param mounted
  */
-export default function mountEtty( record, etty, cuser, cb, required, mounted, db ) {
-	var toMount = [], sema = 0, failed, v, key, toMountKeys;
+export function mountRecord( record, etty, toMountKeys, cb, required, mounted, db ) {
+	var toMount = [], sema = 0, failed, v, key;
 	db          = db || this;
 	required    = required || {};
 	
-	toMountKeys = is.array(etty) ? etty : entities[etty].autoMount;
+	//toMountKeys = is.array(etty) ? etty : entities[etty].autoMount;
 	
 	// console.warn("Mount !!!!!",record);
 	if ( !record ) return cb && cb("Monting a null record :" + record);
@@ -90,17 +125,17 @@ export default function mountEtty( record, etty, cuser, cb, required, mounted, d
 				       // sema++;
 //                       // me.queryFlow.wait()
 				       // setTimeout(
-				       mountEtty.call(this, docs, v.cls, cuser,
-				                      function ( e, r ) {
+				       mountRecord.call(this, docs, v.cls, toMountKeys,
+				                        function ( e, r ) {
 					
-					                      if ( !--sema ) {
-						                      cb && cb(null, mounted);
-						                      cb = null;
-						                      // console.log("mounted ", key, sema);
-					                      }
+					                        if ( !--sema ) {
+						                        cb && cb(null, mounted);
+						                        cb = null;
+						                        // console.log("mounted ", key, sema);
+					                        }
 //                                          // me.queryFlow.release()
 					
-				                      }, required, mounted, db)
+				                        }, required, mounted, db)
 				       // );
 				       // if ( !--sema ) cb(null, mounted);
 			       };

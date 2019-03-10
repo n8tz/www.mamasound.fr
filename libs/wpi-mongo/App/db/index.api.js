@@ -15,17 +15,18 @@ import is           from "is";
 import aliasAPI     from "App/db/aliasHelpers";
 import typesList    from "App/db/types";
 import {pushDbTask} from "App/db/pool";
+import {mount}      from "App/db/mountRecord";
 
 export const types = typesList;
+export {mount}      from "App/db/mountRecord";
 
 const defaults = { get, query }
 export default defaults;
 
-export function get( obj ) {
+export function get( objId, cls ) {
 	return new Promise(
 		( resolve, reject ) => {
 			
-			let { objId, cls } = obj;
 			
 			pushDbTask(
 				( client, dbRelease ) => {

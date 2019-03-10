@@ -71,7 +71,7 @@ export default class Home extends React.Component {
 			target  : "header",
 			from    : 0,
 			duration: 100,
-			easeFn  : easingFn.easePolyOut,
+			easeFn  : easingFn.easePolyInOut,
 			apply   : {
 				height: -80,
 			}
@@ -81,7 +81,7 @@ export default class Home extends React.Component {
 			target  : "page",
 			from    : 0,
 			duration: 100,
-			easeFn  : easingFn.easePolyOut,
+			easeFn  : easingFn.easePolyInOut,
 			apply   : {
 				top: -80,
 			}
@@ -91,7 +91,7 @@ export default class Home extends React.Component {
 			target  : "highlighted",
 			from    : 0,
 			duration: 100,
-			easeFn  : easingFn.easePolyOut,
+			easeFn  : easingFn.easePolyInOut,
 			apply   : {
 				height: -70,
 			}
@@ -101,7 +101,7 @@ export default class Home extends React.Component {
 			target  : "events",
 			from    : 0,
 			duration: 100,
-			easeFn  : easingFn.easePolyOut,
+			easeFn  : easingFn.easePolyInOut,
 			apply   : {
 				height: 70,
 			}
@@ -129,7 +129,7 @@ export default class Home extends React.Component {
 							height: "100%"
 						} }
 					>
-						<div className={"logo"}/>
+						<div className={ "logo" }/>
 					</TweenRef>
 				</header>
 			</TweenRef>
@@ -146,7 +146,6 @@ export default class Home extends React.Component {
 				<div
 					style={ {
 						position: "absolute",
-						display : "inline-block",
 						width   : "100%",
 						//background: "blue",
 					} }>
@@ -159,7 +158,6 @@ export default class Home extends React.Component {
 						<div
 							onClick={ e => this.scrollTo(0, 500) }
 							style={ {
-								display   : "inline-block",
 								width     : "100%",
 								background: "blue",
 							} }>
@@ -177,7 +175,6 @@ export default class Home extends React.Component {
 						<div
 							onClick={ e => this.scrollTo(100, 500) }
 							style={ {
-								display   : "inline-block",
 								width     : "100%",
 								background: "green",
 							} }>

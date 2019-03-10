@@ -32,7 +32,8 @@ export default ( server, http ) => {
 	server.post(
 		'/db/get',
 		function ( req, res, next ) {
-			db.get(req.body).then(data => res.json(data)).catch(err => res.json({ error: err + '' }, 500))
+			let { objId, cls } = req.body;
+			db.get(objId, cls).then(data => res.json(data)).catch(err => res.json({ error: err + '' }, 500))
 			
 		}
 	);

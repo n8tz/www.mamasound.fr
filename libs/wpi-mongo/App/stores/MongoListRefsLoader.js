@@ -13,34 +13,23 @@
  */
 
 import {Scope, Store} from "rscopes";
+import db, {mount}    from "App/db";
 
-import XLSX      from "xlsx";
-import camelCase from "camelcase";
-import shortId   from "shortid";
 
 import {types, query} from 'App/db';
 
 
-export default class MongoRefs extends Store {
-	static state = {};
+export default class MongoListRefsLoader extends Store {
+	static state = { items: [], toMountKeys: [] };
 	//data         = {
 	//	results: {},
 	//
 	//};
 	
 	
-	apply( d = {}, {}, queries ) {
-		queries && Object.keys(queries)
-		                 .map(
-			                 key => {
-				                 if ( d[key] !== queries[key] )
-					                 query(queries[key])
-						                 .then(result => this.push({
-							                                           ...(this.data || {}),
-							                                           [key]: result
-						                                           }))
-			                 }
-		                 )
+	apply( d = {}, state, { items } ) {
+		//debugger
+		items && mount(db, items, state.toMountKeys).then(data => this.push(data))
 		return d;
 	}
 	
