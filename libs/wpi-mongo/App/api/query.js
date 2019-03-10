@@ -22,24 +22,24 @@ const config   = require('App/config'),
 export default ( server, http ) => {
 	console.log("wpi-mongo server running ! :D");
 	//
-	//server.post(
-	//	'/query',
-	//	function ( req, res, next ) {
-	//		//res.json(req.body)
-	//		let { query, collection } = req.body;
-	//		pushDbTask(
-	//			( client, dbRelease ) => {
-	//				var db = client.db("mamasound_fr");
-	//				db.collection(collection)
-	//				  .find(query)
-	//				  .toArray(
-	//					  ( e, items ) => {
-	//						  res.json(items);
-	//						  dbRelease()
-	//					  }
-	//				  )
-	//			}
-	//		)
-	//	}
-	//);
+	server.post(
+		'/query',
+		function ( req, res, next ) {
+			//res.json(req.body)
+			let { query, collection } = req.body;
+			pushDbTask(
+				( client, dbRelease ) => {
+					var db = client.db("mamasound_fr");
+					db.collection(collection)
+					  .find(query)
+					  .toArray(
+						  ( e, items ) => {
+							  res.json(items);
+							  dbRelease()
+						  }
+					  )
+				}
+			)
+		}
+	);
 }

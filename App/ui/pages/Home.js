@@ -14,10 +14,13 @@
 
 import React                                 from 'react';
 import {reScope, scopeToProps, propsToScope} from "rscopes";
-import Fab                                   from '@material-ui/core/Fab';
-import DeleteIcon                            from '@material-ui/icons/Delete';
-import SaveIcon                              from '@material-ui/icons/Save';
-import {asTweener, TweenRef}                 from "react-rtween";
+import MongoQueries                          from 'App/stores/MongoQueries';
+
+import {withStateMap, asRef, asStore} from "rescope-spells";
+import Fab                            from '@material-ui/core/Fab';
+import DeleteIcon                     from '@material-ui/icons/Delete';
+import SaveIcon                       from '@material-ui/icons/Save';
+import {asTweener, TweenRef}          from "react-rtween";
 
 var easingFn = require('d3-ease');
 
@@ -53,6 +56,37 @@ let pushOut = function ( target ) {
 		]
 	};
 };
+
+
+@reScope(
+	{
+		
+		@withStateMap(
+			{
+				queries: {
+					places: {
+						collection: 'Place',
+						query     : {}
+					}
+				},
+				//updateQueries() {
+				//	return { query: {} }
+				//}
+			}
+		)
+		Queries: MongoQueries,
+		//@withStateMap(
+		//	{
+		//		@asRef
+		//		items  : "Exportable.items",
+		//		docName: "NewEvents",
+		//	}
+		//)
+		//Exporter: XlsExporter,
+		
+	}
+)
+@scopeToProps("Queries")
 @asTweener
 export default class Home extends React.Component {
 	state = {};
@@ -66,7 +100,17 @@ export default class Home extends React.Component {
 			duration: 50,
 			easeFn  : easingFn.easePolyOut,
 			apply   : {
-				height: -130,
+				height: -100,
+			}
+		},
+		{
+			type    : "Tween",
+			target  : "page",
+			from    : 0,
+			duration: 50,
+			easeFn  : easingFn.easePolyOut,
+			apply   : {
+				top: -100,
 			}
 		},
 		{
@@ -76,7 +120,7 @@ export default class Home extends React.Component {
 			duration: 50,
 			easeFn  : easingFn.easePolyOut,
 			apply   : {
-				height: -50,
+				height: -70,
 			}
 		},
 		{
@@ -86,7 +130,7 @@ export default class Home extends React.Component {
 			duration: 50,
 			easeFn  : easingFn.easePolyOut,
 			apply   : {
-				height: 50,
+				height: 70,
 			}
 		},
 	];
@@ -102,62 +146,62 @@ export default class Home extends React.Component {
 			>
 				<header
 					style={ {
-						//position  : "absolute",
 						display   : "inline-block",
 						width     : "100%",
-						//height    : "15em",
-						//cursor    : "pointer",
 						background: "red",
-						//overflow  : "hidden",
-						//margin    : "-7.5em 0 0 -7.5em",
-						//top       : "0px",
-						//left      : "0px"
-					} }>click me !
+					} }>
+					header
 				</header>
 			</TweenRef>
 			<TweenRef
-				id={ "highlighted" }
+				id={ "page" }
 				initial={ {
-					height: "80%"
+					top   : "150px",
+					left  : "0px",
+					bottom: "0px",
+					width : "100%",
+					//paddingTop: "150px"
 				} }
 			>
 				<div
 					style={ {
-						//position  : "absolute",
-						display   : "inline-block",
-						width     : "100%",
-						//height    : "15em",
-						//cursor    : "pointer",
-						background: "blue",
-						//overflow  : "hidden",
-						//margin    : "-7.5em 0 0 -7.5em",
-						//top       : "0px",
-						//left      : "0px"
-					} }>slides
+						position: "absolute",
+						display : "inline-block",
+						width   : "100%",
+						//background: "blue",
+					} }>
+					<TweenRef
+						id={ "highlighted" }
+						initial={ {
+							height: "80%"
+						} }
+					>
+						<div
+							style={ {
+								display   : "inline-block",
+								width     : "100%",
+								background: "blue",
+							} }>
+							<div className={ "container" }>hggjgh</div>
+						</div>
+					</TweenRef>
+					<TweenRef
+						id={ "events" }
+						initial={ {
+							height: "20%"
+						} }
+					>
+						<div
+							style={ {
+								display   : "inline-block",
+								width     : "100%",
+								background: "green",
+							} }>
+							<div className={ "container" }>hgjhgj</div>
+						</div>
+					</TweenRef>
 				</div>
 			</TweenRef>
-			<TweenRef
-				id={ "events" }
-				initial={ {
-					height: "20%"
-				} }
-			>
-				<div
-					style={ {
-						//position  : "absolute",
-						display   : "inline-block",
-						width     : "100%",
-						//height    : "15em",
-						//cursor    : "pointer",
-						background: "green",
-						//overflow  : "hidden",
-						//margin    : "-7.5em 0 0 -7.5em",
-						//top       : "0px",
-						//left      : "0px"
-					} }>events
-				</div>
-			</TweenRef>
-		
 		</div>
 	}
 }

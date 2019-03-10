@@ -12,30 +12,41 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-import superagent from "superagent";
-import typesList  from "App/db/types";
-//import {pushDbTask} from "App/db/pool";
+import {Scope, Store} from "rscopes";
 
-export const types = typesList;
+import XLSX      from "xlsx";
+import camelCase from "camelcase";
+import shortId   from "shortid";
 
-export function get( type, id ) {
+import {types, query} from 'App/db';
 
-};
 
-export function query( table, query ) {
-	let p = new Promise(
-		( resolve, reject ) => {
-			superagent.post('/query', { table, query })
-			          .then(
-				          res => {
-					          let schema = res.body.reduce(
-						          ( h, row ) => (Object.keys(row).forEach(k => (h[k] = h[k] || types.string)), h),
-						          {}
-					          )
-					          resolve({ items: res.body, schema })
-				          }
-			          )
-		}
-	)
-	return p;
-};
+export default class MongoRecord extends Store {
+	static state = {
+		queries: {},
+		
+	};
+	//data         = {
+	//	results: {},
+	//
+	//};
+	
+	
+	apply( d = {}, {}, { queries } ) {
+		let { queries: previousQueries = {} } = d;
+		queries && Object.keys(queries)
+		                 .map(
+			                 key => {
+				                 if ( previousQueries[key] !== queries[key] )
+					                 query(queries[key].collection, queries[key].query)
+						                 .then(result => this.push({
+							                                           results: {
+								                                           ...(this.data.results || {}),
+								                                           [key]: result
+							                                           }
+						                                           }))
+			                 }
+		                 )
+	}
+	
+}
