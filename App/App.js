@@ -13,6 +13,8 @@
  */
 
 import React                                      from 'react';
+import Widget                                     from 'App/ui/containers/Widget.js';
+import allWidgets                                 from "App/ui/widgets/(*).js";
 import Home                                       from './ui/pages/Home';
 import {BrowserRouter, StaticRouter, Route, Link} from "react-router-dom";
 import AppBar                                     from '@material-ui/core/AppBar';
@@ -21,13 +23,17 @@ import IconButton                                 from '@material-ui/core/IconBu
 import Typography                                 from '@material-ui/core/Typography';
 import HomeIcon                                   from '@material-ui/icons/Home';
 import "./ui/styles/index.scss"
+import {reScope, scopeToProps, propsToScope}      from "rscopes";
 
 
+@scopeToProps("widgets", "appState")
 export default class App extends React.Component {
 	state = {};
 	
 	render() {
-		let Router = BrowserRouter;
+		let Router                                          = BrowserRouter;
+		let { widgets = { items: [] }, appState, $actions } = this.props;
+		
 		if ( this.props.location )
 			Router = StaticRouter;
 		return <Router location={ this.props.location }>
@@ -48,6 +54,18 @@ export default class App extends React.Component {
 					</Toolbar>
 				</AppBar>
 				
+				{
+					widgets.items.map(
+						widget => {
+							let WidgetComp = allWidgets[widget.type] || 'div';
+							return <Widget key={ widget._id } record={ widget }
+							               onSelect={ e => $actions.selectWidget(widget._id) }
+							               selected={ widget._id == appState.selectedWidgetId }>
+								<WidgetComp record={ widget } { ...widget.props }/>
+							</Widget>
+						}
+					)
+				}
 				
 				<Route path="/" exact component={ Home }/>
 			</React.Fragment>

@@ -13,32 +13,19 @@
  */
 
 import React                                 from 'react';
-import Widget                                from 'App/ui/containers/Widget.js';
 import {reScope, scopeToProps, propsToScope} from "rscopes";
-import allWidgets                            from "App/ui/widgets/(*).js";
 import Fab                                   from '@material-ui/core/Fab';
 import DeleteIcon                            from '@material-ui/icons/Delete';
 import SaveIcon                              from '@material-ui/icons/Save';
+import {asTweener, TweenRef}                 from "react-rtween";
 
-@scopeToProps("widgets", "appState")
+@asTweener
 export default class Home extends React.Component {
 	state = {};
 	
 	render() {
 		let { widgets = { items: [] }, appState, $actions } = this.props;
-		return <div className={ "desk" }>
-			{
-				widgets.items.map(
-					widget => {
-						let WidgetComp = allWidgets[widget.type] || 'div';
-						return <Widget key={ widget._id } record={ widget }
-						               onSelect={ e => $actions.selectWidget(widget._id) }
-						               selected={ widget._id == appState.selectedWidgetId }>
-							<WidgetComp record={ widget } { ...widget.props }/>
-						</Widget>
-					}
-				)
-			}
+		return <div className={ "Home" }>
 			<Fab aria-label="edit" className={ "newBtn button" }
 			     onClick={ e => $actions.clearState() }>
 				<DeleteIcon/>
