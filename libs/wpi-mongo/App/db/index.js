@@ -18,14 +18,23 @@ import typesList  from "App/db/types";
 
 export const types = typesList;
 
-export function get( type, id ) {
-
+export function get( cls, objId ) {
+	return new Promise(
+		( resolve, reject ) => {
+			superagent.post('/db/get', { cls, objId })
+			          .then(
+				          res => {
+					          resolve(res.body)
+				          }
+			          ).catch(reject)
+		}
+	);
 };
 
 export function query( query ) {
 	return new Promise(
 		( resolve, reject ) => {
-			superagent.post('/query', query)
+			superagent.post('/db/query', query)
 			          .then(
 				          res => {
 					          resolve(res.body)

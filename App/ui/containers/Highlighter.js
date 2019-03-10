@@ -18,10 +18,11 @@ import {reScope, scopeToProps, propsToScope} from "rscopes";
 import CloseIcon                             from '@material-ui/icons/Close';
 import CardHeader                            from '@material-ui/core/CardHeader';
 import IconButton                            from '@material-ui/core/IconButton';
+import ReactGridLayout                       from 'react-grid-layout';
 
 
 import {withStateMap, asRef, asStore} from "rescope-spells";
-import MongoQueries                   from 'App/stores/MongoQueries';
+import stores                         from 'App/stores/(*).js';
 
 
 @reScope(
@@ -35,23 +36,34 @@ import MongoQueries                   from 'App/stores/MongoQueries';
 					query     : {}
 				},
 				updateQueries() {
-					return { FocusedItems: { ...this.nextState.FocusedItems, $skip: 5 } }
+					//return { FocusedItems: { ...this.nextState.FocusedItems, $skip: 5 } }
 				}
 			}
 		)
-		Queries: MongoQueries,
+		Queries   : stores.MongoQueries,
+		@withStateMap(
+			{
+				objId: "HomeGridLayout",
+				cls  : "Assets"
+			}
+		)
+		GridLayout: stores.MongoRecord,
 		@asStore
-		Grid   : {
+		Grid      : {
 			@asRef
 			items: "Queries.FocusedItems.items",
-			$apply( data, { items = [] } ) {
-				return <div>
+			
+			@asRef
+			layout: "GridLayout.layout",
+			$apply( data, { items = [], layout } ) {
+				return <ReactGridLayout className="layout" layout={ layout } cols={ 12 } rowHeight={ 30 }
+				                        width={ 1200 }>
 					{
 						items.map(
 							item => <div key={ item._id }>{ item._id }</div>
 						)
 					}
-				</div>
+				</ReactGridLayout>
 			}
 		},
 		
@@ -68,7 +80,7 @@ export default class Highlighter extends React.Component {
 	render() {
 		let {
 			    record: { position, size } = {},
-			    Grid,
+			    Grid                       = "",
 			    $actions, onSelect, selected
 		    }     = this.props,
 		    state = this.state;

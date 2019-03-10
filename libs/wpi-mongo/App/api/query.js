@@ -23,9 +23,16 @@ export default ( server, http ) => {
 	console.log("wpi-mongo server running ! :D");
 	//
 	server.post(
-		'/query',
+		'/db/query',
 		function ( req, res, next ) {
-			db.query(req, res)
+			db.query(req.body).then(data => res.json(data)).catch(err => res.json({ error: err + '' }, 500))
+			
+		}
+	);
+	server.post(
+		'/db/get',
+		function ( req, res, next ) {
+			db.get(req.body).then(data => res.json(data)).catch(err => res.json({ error: err + '' }, 500))
 			
 		}
 	);

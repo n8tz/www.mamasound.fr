@@ -65,6 +65,12 @@ body, html {
     top: 0px;
     left: 0px;
     text-align: center;
+
+    .logo {
+      background: url("../assets/medias/LogoVF_MAMA_SOUND_w.png") no-repeat;
+      background-size: contain;
+      background-position: center;
+    }
   }
 }
 

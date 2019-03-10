@@ -18,35 +18,21 @@ import XLSX      from "xlsx";
 import camelCase from "camelcase";
 import shortId   from "shortid";
 
-import {types, query} from 'App/db';
+import {types, get} from 'App/db';
 
 
 export default class MongoRecord extends Store {
-	static state = {
-		queries: {},
-		
-	};
+	static state = {};
 	//data         = {
 	//	results: {},
 	//
 	//};
 	
 	
-	apply( d = {}, {}, { queries } ) {
-		let { queries: previousQueries = {} } = d;
-		queries && Object.keys(queries)
-		                 .map(
-			                 key => {
-				                 if ( previousQueries[key] !== queries[key] )
-					                 query(queries[key].collection, queries[key].query)
-						                 .then(result => this.push({
-							                                           results: {
-								                                           ...(this.data.results || {}),
-								                                           [key]: result
-							                                           }
-						                                           }))
-			                 }
-		                 )
+	apply( d = {}, { objId, cls }, {} ) {
+		get(cls, objId)
+			.then(result => this.push(result))
+			.catch(e => this.push({}))
 	}
 	
 }

@@ -129,7 +129,7 @@ export default class Home extends React.Component {
 							height: "100%"
 						} }
 					>
-						<img src={ require('App/ui/assets/medias/LogoVF_MAMA_SOUND_w.png') }/>
+						<div className={"logo"}/>
 					</TweenRef>
 				</header>
 			</TweenRef>

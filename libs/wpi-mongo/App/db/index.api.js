@@ -12,20 +12,64 @@
  *  @contact : n8tz.js@gmail.com
  */
 import is           from "is";
+import aliasAPI     from "App/db/aliasHelpers";
 import typesList    from "App/db/types";
 import {pushDbTask} from "App/db/pool";
 
 export const types = typesList;
 
-export function get( type, id ) {
+const defaults = { get, query }
+export default defaults;
 
-};
-
-export function query( req, res ) {
+export function get( obj ) {
 	return new Promise(
 		( resolve, reject ) => {
 			
-			let { query, collection, $limit = 1000, $skip, $orderby } = req.body;
+			let { objId, cls } = obj;
+			
+			pushDbTask(
+				( client, dbRelease ) => {
+					var db = client.db("mamasound_fr");
+					
+					aliasAPI.getAlias(
+						cls,
+						objId,
+						db,
+						( err, alias ) => {
+							//if ( err ) {
+							//	dbRelease();
+							//	return cb(404);
+							//}
+							db.collection(cls)
+							  .findOne(
+								  { _id: alias && alias.target.objId || objId },
+								  ( err, docs ) => {
+									  dbRelease();
+									
+									  if ( !docs ) {
+										  reject(err || 404);
+										  return;
+									  }
+									  resolve(docs)
+									
+								  }
+							  );
+						}
+					);
+					
+				}
+			)
+		}
+	)
+		;
+}
+;
+
+export function query( req ) {
+	return new Promise(
+		( resolve, reject ) => {
+			
+			let { query, collection, $limit = 1000, $skip, $orderby } = req;
 			pushDbTask(
 				( client, dbRelease ) => {
 					var db = client.db("mamasound_fr");
@@ -38,7 +82,7 @@ export function query( req, res ) {
 						    if ( typeof data.length == 'number' && is.array(data.items) ) {
 							    done = null;
 							    dbRelease();
-							    res.json(data)
+							    resolve(data)
 						    }
 						
 					    };
