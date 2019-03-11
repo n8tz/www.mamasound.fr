@@ -26,10 +26,10 @@ Desktop.ini
 $RECYCLE.BIN/
 
 # App specific
-node_modules
+
 .tmp
+node_modules
 .idea
-/docker/
-/src/
-/samples
-/assets
+/dist
+/upload
+/public
