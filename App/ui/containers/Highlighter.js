@@ -25,6 +25,34 @@ import {withStateMap, asRef, asStore} from "rescope-spells";
 import stores                         from 'App/stores/(*).js';
 import Comps                          from 'App/ui/components/(*).js';
 
+import {asTweener, TweenRef} from "react-rtween";
+
+var easingFn      = require('d3-ease');
+const scrollAnims = {
+	scrollX: [
+		{
+			type    : "Tween",
+			from    : 0,
+			duration: 200,
+			//easeFn  : easingFn.easePolyOut,
+			apply   : {
+				left   : -200,
+				rotateY: 180
+			}
+		}
+	],
+	//scrollY: [
+	//	{
+	//		type    : "Tween",
+	//		from    : 0,
+	//		duration: 200,
+	//		//easeFn  : easingFn.easePolyOut,
+	//		apply   : {
+	//			top: -200,
+	//		}
+	//	},
+	//]
+};
 if ( typeof window !== "undefined" ) {
 	require('react-resizable/css/styles.css');
 	require('react-grid-layout/css/styles.css');
@@ -83,6 +111,7 @@ if ( typeof window !== "undefined" ) {
 	}
 )
 @scopeToProps("MountedItems", "Grid")
+@asTweener({ initialScrollPos: { scrollX: 100 } })
 export default class Highlighter extends React.Component {
 	static propTypes = {
 		//record  : PropTypes.object.isRequired,
@@ -101,15 +130,32 @@ export default class Highlighter extends React.Component {
 				//onClick={ $actions.saveState }
 				className={ "Highlighter container" }
 			>
-				<ReactGridLayout className="layout" layout={ layout } cols={ 8 } rowHeight={ 50 }
-				                 isResizable={ true }
-				                 width={ 1200 }>
-					{
-						gridItems.map(
-							item => <div key={ item._id }><Comps.FocusedItems record={ item }/></div>
-						)
-					}
-				</ReactGridLayout>
+				<TweenRef
+					id={ "today" }
+					initial={ {
+						_x     : 0,
+						_y     : 0,
+						rotateY: -90,
+						top    : "0%",
+						left   : "100%",
+						bottom : "0px",
+						width  : "100%",
+						//paddingTop: "150px"
+					} }
+					scrollableAnims={ scrollAnims }
+				>
+					<div className={ " today" } onClick={ e => e.preventDefault() }>
+						<ReactGridLayout className="layout" layout={ layout } cols={ 8 } rowHeight={ 50 }
+						                 isResizable={ true }
+						                 width={ 1200 }>
+							{
+								gridItems.map(
+									item => <div key={ item._id }><Comps.FocusedItems record={ item }/></div>
+								)
+							}
+						</ReactGridLayout>
+					</div>
+				</TweenRef>
 			</div>
 		);
 	}

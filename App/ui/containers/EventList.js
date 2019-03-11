@@ -37,17 +37,17 @@ const scrollAnims = {
 			}
 		}
 	],
-	scrollY: [
-		{
-			type    : "Tween",
-			from    : 0,
-			duration: 200,
-			//easeFn  : easingFn.easePolyOut,
-			apply   : {
-				top: -200,
-			}
-		},
-	]
+	//scrollY: [
+	//	{
+	//		type    : "Tween",
+	//		from    : 0,
+	//		duration: 200,
+	//		//easeFn  : easingFn.easePolyOut,
+	//		apply   : {
+	//			top: -200,
+	//		}
+	//	},
+	//]
 };
 @reScope(
 	{
@@ -117,7 +117,7 @@ export default class EventList extends React.Component {
 					initial={ {
 						_x    : 0,
 						_y    : 0,
-						top   : "100%",
+						top   : "0%",
 						left  : "100%",
 						bottom: "0px",
 						width : "100%",
