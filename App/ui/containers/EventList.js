@@ -20,9 +20,35 @@ import CardHeader                            from '@material-ui/core/CardHeader'
 import IconButton                            from '@material-ui/core/IconButton';
 import {withStateMap, asRef, asStore}        from "rescope-spells";
 
-import stores from 'App/stores/(*).js';
-import Comps  from 'App/ui/components/(*).js';
+import stores                from 'App/stores/(*).js';
+import Comps                 from 'App/ui/components/(*).js';
+import {asTweener, TweenRef} from "react-rtween";
 
+var easingFn      = require('d3-ease');
+const scrollAnims = {
+	scrollX: [
+		{
+			type    : "Tween",
+			from    : 0,
+			duration: 200,
+			//easeFn  : easingFn.easePolyOut,
+			apply   : {
+				left: -200,
+			}
+		}
+	],
+	scrollY: [
+		{
+			type    : "Tween",
+			from    : 0,
+			duration: 200,
+			//easeFn  : easingFn.easePolyOut,
+			apply   : {
+				top: -200,
+			}
+		},
+	]
+};
 @reScope(
 	{
 		
@@ -65,6 +91,7 @@ import Comps  from 'App/ui/components/(*).js';
 	}
 )
 @scopeToProps("Events")
+@asTweener({ initialScrollPos: { scrollX: 100, scrollY: 100 } })
 export default class EventList extends React.Component {
 	static propTypes = {
 		//record  : PropTypes.object.isRequired,
@@ -83,14 +110,29 @@ export default class EventList extends React.Component {
 			<div
 				className={ "EventList container" }
 			>
-				{
-					Events && Events.items && Events.items.map(
-						item => <div key={ item._id }><Comps.Event record={ item }/></div>
-					)
-				}
-				<div className={ " item" } onClick={ e => e.preventDefault() }>
-					EventList item
-				</div>
+				
+				
+				<TweenRef
+					id={ "today" }
+					initial={ {
+						_x    : 0,
+						_y    : 0,
+						top   : "100%",
+						left  : "100%",
+						bottom: "0px",
+						width : "100%",
+						//paddingTop: "150px"
+					} }
+					scrollableAnims={ scrollAnims }
+				>
+					<div className={ " today" } onClick={ e => e.preventDefault() }>
+						{
+							Events && Events.items && Events.items.map(
+								item => <div key={ item._id }><Comps.Event record={ item }/></div>
+							)
+						}
+					</div>
+				</TweenRef>
 			</div>
 		);
 	}
