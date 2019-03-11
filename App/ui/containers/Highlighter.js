@@ -33,11 +33,55 @@ const scrollAnims = {
 		{
 			type    : "Tween",
 			from    : 0,
-			duration: 200,
-			//easeFn  : easingFn.easePolyOut,
+			duration: 100,
+			easeFn  : easingFn.easeCircleIn,
 			apply   : {
-				left   : -200,
-				rotateY: 180
+				_z: -.2,
+			}
+		},
+		{
+			type    : "Tween",
+			from    : 100,
+			duration: 100,
+			easeFn  : easingFn.easeCircleIn,
+			apply   : {
+				_z: .2,
+			}
+		},
+		{
+			type    : "Tween",
+			from    : 50,
+			duration: 100,
+			easeFn  : easingFn.easeCircle,
+			apply   : {
+				rotateY: 180,
+			}
+		},
+		{
+			type    : "Tween",
+			from    : 200,
+			duration: 100,
+			easeFn  : easingFn.easeCircleIn,
+			apply   : {
+				_z: -.2,
+			}
+		},
+		{
+			type    : "Tween",
+			from    : 300,
+			duration: 100,
+			easeFn  : easingFn.easeCircleIn,
+			apply   : {
+				_z: .2,
+			}
+		},
+		{
+			type    : "Tween",
+			from    : 250,
+			duration: 100,
+			easeFn  : easingFn.easeCircle,
+			apply   : {
+				rotateY: -180,
 			}
 		}
 	],
@@ -111,7 +155,7 @@ if ( typeof window !== "undefined" ) {
 	}
 )
 @scopeToProps("MountedItems", "Grid")
-@asTweener({ initialScrollPos: { scrollX: 100 } })
+@asTweener({ initialScrollPos: { scrollX: 200 } })
 export default class Highlighter extends React.Component {
 	static propTypes = {
 		//record  : PropTypes.object.isRequired,
@@ -135,9 +179,10 @@ export default class Highlighter extends React.Component {
 					initial={ {
 						_x     : 0,
 						_y     : 0,
-						rotateY: -90,
+						_z     : 0,
+						rotateY: -180,
 						top    : "0%",
-						left   : "100%",
+						left   : "0%",
 						bottom : "0px",
 						width  : "100%",
 						//paddingTop: "150px"
