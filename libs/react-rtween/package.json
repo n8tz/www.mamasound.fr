@@ -1,0 +1,51 @@
+{
+  "name": "react-rtween",
+  "version": "1.2.4",
+  "license": "AGPL-3.0",
+  "main": "./dist/Comp.js",
+  "author": "Nathan Braun <n8tz.js@gmail.com>",
+  "wpInherit": {
+    "default": {
+      "rootFolder": "src",
+      "basedOn": "Component",
+      "vars": {
+        "externals": true,
+        "webpackPatch": {}
+      },
+      "extend": [
+        "wpi-react-hmr-ssr"
+      ]
+    },
+    "samples": {
+      "rootFolder": "src",
+      "basedOn": "ComponentSamples",
+      "vars": {
+        "webpackPatch": {}
+      },
+      "extend": [
+        "wpi-react-hmr-ssr"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "wpi && wpi :samples",
+    "dev": "wpi-dev-server :samples --hot",
+    "runBrowser": "start http://localhost:8080"
+  },
+  "peerDependencies": {
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.3.1",
+    "d3-ease": "^1.0.5",
+    "is": "^3.2.1",
+    "isfunction": "0.0.6",
+    "rtween": "^1.2.0",
+    "taskflows": "^1.0.0"
+  },
+  "devDependencies": {
+    "wpi-react-hmr-ssr": "^0.2.3",
+    "webpack-inherit": "^1.4.9"
+  }
+}
