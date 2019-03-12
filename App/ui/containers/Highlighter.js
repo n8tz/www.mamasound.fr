@@ -11,18 +11,19 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-import PropTypes                             from "prop-types";
-import React                                 from "react";
-import {Rnd}                                 from "react-rnd";
-import {reScope, scopeToProps, propsToScope} from "rscopes";
-import CloseIcon                             from '@material-ui/icons/Close';
-import CardHeader                            from '@material-ui/core/CardHeader';
-import IconButton                            from '@material-ui/core/IconButton';
-import ReactGridLayout                       from 'react-grid-layout';
+import PropTypes                                    from "prop-types";
+import React                                        from "react";
+import {Rnd}                                        from "react-rnd";
+import {reScope, scopeToProps, propsToScope, Store} from "rscopes";
+import CloseIcon                                    from '@material-ui/icons/Close';
+import CardHeader                                   from '@material-ui/core/CardHeader';
+import IconButton                                   from '@material-ui/core/IconButton';
+import ReactGridLayout                              from 'react-grid-layout';
 
 
 import {withStateMap, asRef, asStore} from "rescope-spells";
 import stores                         from 'App/stores/(*).js';
+import DataProvider, {withQueries}    from 'App/stores/DataProvider';
 import Comps                          from 'App/ui/components/(*).js';
 
 import {asTweener, TweenRef} from "react-rtween";
@@ -102,14 +103,14 @@ if ( typeof window !== "undefined" ) {
 	require('react-grid-layout/css/styles.css');
 }
 @reScope(
-	{
+	typeof window !== "undefined" && {
 		
 		@withStateMap(
 			{
 				FocusedItems: {
-					collection: 'FocusedItems',
-					$limit    : 100,
-					query     : {}
+					etty : 'FocusedItems',
+					limit: 100,
+					query: {}
 				},
 				updateQueries() {
 					//return { FocusedItems: { ...this.nextState.FocusedItems, $skip: 5 } }
@@ -163,6 +164,12 @@ export default class Highlighter extends React.Component {
 	};
 	state            = {};
 	
+	onLayoutChange = ( layout ) => {
+		/*eslint no-console: 0*/
+		//this.setState({ layout });
+		//this.props.onLayoutChange(layout); // updates status display
+	}
+	
 	render() {
 		let {
 			    Grid: { items: gridItems = [], layout = [] },
@@ -171,7 +178,7 @@ export default class Highlighter extends React.Component {
 		    state = this.state;
 		return (
 			<div
-				//onClick={ $actions.saveState }
+				onClick={ $actions.saveState }
 				className={ "Highlighter container" }
 			>
 				<TweenRef
@@ -191,6 +198,7 @@ export default class Highlighter extends React.Component {
 				>
 					<div className={ " today" } onClick={ e => e.preventDefault() }>
 						<ReactGridLayout className="layout" layout={ layout } cols={ 8 } rowHeight={ 50 }
+						                 onLayoutChange={ this.onLayoutChange }
 						                 isResizable={ true }
 						                 width={ 1200 }>
 							{

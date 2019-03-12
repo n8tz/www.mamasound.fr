@@ -11,15 +11,14 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-import is                  from "is";
-import PropTypes           from "prop-types";
-import React               from "react";
-import TableGrid           from 'App/ui/containers/TableGrid.js';
-import PopAnywhere         from 'App/ui/containers/PopAnywhere.js';
-import {types}             from 'App/db';
-import {DropzoneComponent} from "react-dropzone-component";
-import Select              from 'react-select';
-
+import is                                           from "is";
+import PropTypes                                    from "prop-types";
+import React                                        from "react";
+import TableGrid                                    from 'App/ui/components/TableGrid.js';
+import PopAnywhere                                  from 'App/ui/components/PopAnywhere.js';
+import {types}                                      from 'App/db';
+import {DropzoneComponent}                          from "react-dropzone-component";
+import Select                                       from 'react-select';
 import XlsDataProvider                              from 'App/stores/XlsDataProvider';
 import MamaConverter                                from 'App/stores/MamaConverter';
 import MongoQuery                                   from 'App/stores/MongoQuery';
@@ -27,11 +26,10 @@ import DataImporter                                 from 'App/stores/DataImporte
 import XlsExporter                                  from 'App/stores/XlsExporter';
 import {reScope, Store, scopeToProps, propsToScope} from "rscopes";
 import {withStateMap, asRef, asStore}               from "rescope-spells";
-
-import ImportIcon  from '@material-ui/icons/CloudUploadOutlined';
-import ExportIcon  from '@material-ui/icons/Delete';
-import RefreshIcon from '@material-ui/icons/Refresh';
-import IconButton  from '@material-ui/core/IconButton';
+import ImportIcon                                   from '@material-ui/icons/CloudUploadOutlined';
+import ExportIcon                                   from '@material-ui/icons/Delete';
+import RefreshIcon                                  from '@material-ui/icons/Refresh';
+import IconButton                                   from '@material-ui/core/IconButton';
 
 if ( typeof window !== "undefined" )
 	require('react-dropzone-component/styles/filepicker.css');

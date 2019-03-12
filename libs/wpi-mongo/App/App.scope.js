@@ -12,34 +12,24 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-import {Scope, Store} from "rscopes";
+import superagent   from "superagent";
+import DataProvider from "App/stores/DataProvider";
 
-import XLSX                       from "xlsx";
-import camelCase                  from "camelcase";
-import {withRecords, withQueries} from "./DataProvider";
+import rscopes, {
+	spells
+} from "rscopes";
 
-import {types} from 'App/db';
+let { withStateMap, asRef } = spells;
 
-import superagent from "superagent";
 
-export default class MongoQuery extends Store {
-	static state = {
-		query     : {},
-		collection: ''
-	};
-	
-	
-	apply( d, state, c ) {
-		superagent.post('/query', state)
-		          .then(
-			          res => {
-				          let schema = res.body.reduce(
-					          ( h, row ) => (Object.keys(row).forEach(k => (h[k] = h[k] || types.string)), h),
-					          {}
-				          )
-				          this.push({ items: res.body, schema })
-			          }
-		          )
-	}
-	
+export default {
+	//@withStateMap(
+	//	{
+	//		api: {
+	//			get  : "/db/get",
+	//			query: "/db/query"
+	//		}
+	//	}
+	//)
+	DataProvider: DataProvider
 }

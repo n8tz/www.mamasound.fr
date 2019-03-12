@@ -70,7 +70,7 @@ export function query( req ) {
 	return new Promise(
 		( resolve, reject ) => {
 			
-			let { query, collection, $limit = 1000, $skip, $orderby } = req;
+			let { query, etty, limit = 1000, skip, orderby } = req;
 			pushDbTask(
 				( client, dbRelease ) => {
 					var db = client.db("mamasound_fr");
@@ -88,7 +88,7 @@ export function query( req ) {
 						
 					    };
 					var
-						ptr   = db.collection(collection)
+						ptr   = db.collection(etty)
 						          .find(query || {}),//{$query : {}, $orderby : {updated : -1}}
 						count = ptr.count(null, ( e, r ) => {
 							done(null, r || 0);
@@ -100,9 +100,9 @@ export function query( req ) {
 							done(docs || []);
 							
 						};
-					ptr.sort($orderby)
-					   .skip(parseInt($skip) || 0)
-					   .limit(parseInt($limit) || 20)
+					ptr.sort(orderby)
+					   .skip(parseInt(skip) || 0)
+					   .limit(parseInt(limit) || 20)
 					   .toArray(parse);
 					
 				}

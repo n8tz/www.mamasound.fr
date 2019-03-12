@@ -18,30 +18,84 @@ import XLSX      from "xlsx";
 import camelCase from "camelcase";
 import shortId   from "shortid";
 
-import {types, query} from 'App/db';
+import {types, query}                                        from 'App/db';
+import {updateWatchers, clearWatchers, getQueriesFromIdKeys} from './DataProvider';
 
 
 export default class MongoQueries extends Store {
 	static state = {};
+	//static use   = ["DataProvider"];
 	//data         = {
 	//	results: {},
 	//
 	//};
 	
-	
-	apply( d = {}, {}, queries ) {
-		queries && Object.keys(queries)
-		                 .map(
-			                 key => {
-				                 if ( d[key] !== queries[key] )
-					                 query(queries[key])
-						                 .then(result => this.push({
-							                                           ...(this.data || {}),
-							                                           [key]: result
-						                                           }))
-			                 }
-		                 )
-		return d;
+	serialize( cfg = {}, output = {} ) {
+		return super.serialize(
+			{
+				...cfg,
+				dataRefs: Object.keys(this.__queryWatchers)
+				                .reduce(
+					                ( h, k ) => {
+						                h[k] = "DataProvider.__queries." + this.__queryWatchers[k].key;
+						                return h;
+					                },
+					                {}
+				                )
+			},
+			output);
+		
 	}
+	
+	shouldApply( changes ) {
+		let DataProvider = this.scope.DataProvider,
+		    hasChanges, update,
+		    curState     = this.nextState;
+		if ( !DataProvider )
+			throw new Error("No DataProvider found !!");
+		
+		if ( updateWatchers(this, DataProvider, curState, changes, true) ) {
+			
+			// initial & instant update
+			update     = getQueriesFromIdKeys(
+				DataProvider, curState, changes, true
+			);
+			hasChanges = false;
+			Object.keys(update)
+			      .forEach(
+				      key => (hasChanges = hasChanges || (update[key] !== changes[key]))
+			      );
+			hasChanges && this.setState(update);
+		}
+		
+		
+		return false;//super.shouldApply(...arguments);
+	}
+	
+	destroy() {
+		let DataProvider = this.scope.DataProvider,
+		    curState     = this.state;
+		
+		// stop watching the injected records
+		// (auto delete will clean it if the resource is no used anymore)
+		clearWatchers(this, DataProvider, curState, true);
+		
+		super.destroy();
+	}
+	
+	//apply( d = {}, {}, queries ) {
+	//	queries && Object.keys(queries)
+	//	                 .map(
+	//		                 key => {
+	//			                 if ( d[key] !== queries[key] )
+	//				                 query(queries[key])
+	//					                 .then(result => this.push({
+	//						                                           ...(this.data || {}),
+	//						                                           [key]: result
+	//					                                           }))
+	//		                 }
+	//	                 )
+	//	return d;
+	//}
 	
 }

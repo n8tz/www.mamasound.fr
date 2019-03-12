@@ -12,8 +12,8 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-import superagent from "superagent";
-import shortid    from "shortid";
+import $super  from "$super";
+import shortid from "shortid";
 
 import rscopes, {
 	spells
@@ -23,6 +23,8 @@ let { asStore, asScope } = spells;
 
 
 export default {
+	...$super,
+	
 	@asStore
 	appState: {
 		selectedWidgetId: "rkUQHZrqM",
