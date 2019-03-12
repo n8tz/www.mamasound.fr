@@ -176,7 +176,7 @@ export default class Home extends React.Component {
 								width     : "100%",
 								background: "green",
 							} }>
-							{/*<EventList/>*/}
+							<EventList/>
 						</div>
 					</TweenRef>
 				</div>

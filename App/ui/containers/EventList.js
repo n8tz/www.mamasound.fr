@@ -55,9 +55,9 @@ const scrollAnims = {
 		@withStateMap(
 			{
 				events: {
-					collection: 'Event',
-					$limit    : 100,
-					query     : {}
+					etty : 'Event',
+					limit: 100,
+					query: {}
 				}
 				//updateQueries() {
 				//	return { query: {} }
