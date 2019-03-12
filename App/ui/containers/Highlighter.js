@@ -136,21 +136,23 @@ if ( typeof window !== "undefined" ) {
 		MountedItems: stores.MongoListRefsLoader,
 		@withStateMap(
 			{
-				objId   : "HomeGridLayout",
-				cls     : "Assets",
-				template: {
-					layout: []
+				HomeGridLayout: {
+					id       : "HomeGridLayout",
+					etty     : "Assets",
+					"default": {
+						layout: []
+					}
 				}
 			}
 		)
-		GridLayout  : stores.MongoRecord,
+		GridLayout  : stores.MongoRecords,
 		@asStore
 		Grid        : {
 			@asRef
 			items: "MountedItems.items",
 			
 			@asRef
-			layout: "GridLayout.layout",
+			layout: "GridLayout.HomeGridLayout.layout",
 		},
 		
 	}

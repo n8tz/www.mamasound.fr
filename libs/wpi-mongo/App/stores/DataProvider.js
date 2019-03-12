@@ -18,7 +18,7 @@ import debounce                       from 'debounce'
 import is                             from 'is'
 import shortid                        from 'shortid'
 import xxhashjs                       from 'xxhashjs'
-import {types, query}                 from 'App/db';
+import {types, query, get}            from 'App/db';
 
 var H = xxhashjs.h64(0)	// seed = 0xABCD
 
@@ -26,6 +26,8 @@ var H = xxhashjs.h64(0)	// seed = 0xABCD
 /**
  * base data provider
  *  - centralize record update & dispatch
+ *
+ *  @todo : rewrite !!!!
  */
 
 export default class DataProvider extends Store {
@@ -150,10 +152,10 @@ export default class DataProvider extends Store {
 	constructor() {
 		super(...arguments);
 		this.retain("keepAlive");
-		// data cache
 		
 	}
 	
+	// data cache
 	data           = {};
 	// recently updated records & queries
 	updatedRecords = {};
@@ -222,20 +224,19 @@ export default class DataProvider extends Store {
 	 * @param id
 	 */
 	syncRemoteRecord( etty, id ) {
-		if ( !this.state[etty] ) {
-			this.pushRemoteRecord(etty, id, {})
-			return console.error("DataProvider: Unknown data type '" + etty + "'")
-		}
-		if ( !this.state[etty].query ) {
-			this.pushRemoteRecord(etty, id, {})
-			return console.error("DataProvider: No query API for data type '" + etty + "'")
-		}
+		//if ( !this.state[etty] ) {
+		//	this.pushRemoteRecord(etty, id, {})
+		//	return console.error("DataProvider: Unknown data type '" + etty + "'")
+		//}
+		//if ( !this.state[etty].query ) {
+		//	this.pushRemoteRecord(etty, id, {})
+		//	return console.error("DataProvider: No query API for data type '" + etty + "'")
+		//}
 		this.dispatch('setLoading');
-		this.state[etty]
-			.query({ id })
+		get(etty, id)
 			.then(
 				( data ) => {
-					this.pushRemoteRecord(etty, id, data.result)
+					this.pushRemoteRecord(etty, id, data)
 					this.dispatch('setLoaded');
 				},
 				( err ) => {
@@ -408,7 +409,7 @@ export default class DataProvider extends Store {
 		console.info("! watch record : ", id)
 		// + socket watch record (debounced)
 		newRequest && noData && this.syncRemoteRecord(etty, id);
-		return id;
+		return etty + "." + id;
 	}
 	
 	unBindRecord( etty, id, watcher ) {
@@ -523,7 +524,7 @@ export function updateWatchers( target, DataProvider, idKeys, changes, isQuery )
 	Object.keys(idKeys)
 	      .forEach(
 		      idKey => {
-			      let newValue = walk(changes, idKey);
+			      let newValue = isQuery ? changes[idKey] : changes[idKey].id;
 			      if ( idKeys[idKey] &&
 				      (!watchs[idKey] || watchs[idKey].value !== newValue)
 			      ) {
@@ -549,15 +550,11 @@ export function updateWatchers( target, DataProvider, idKeys, changes, isQuery )
 				
 				      delete watchs[idKey];
 				      if ( newValue ) {
-					      //if ( initial && idKeys[ idKey ].dispatchLoading )
-					      //    target.dispatch("setLoading");
 					
 					      watchs[idKey] = {
 						      value: newValue,
 						      fn   : ( update ) => {
 							      initial && target.__activeRequests--;
-							      //if ( initial && idKeys[ idKey ].dispatchLoading )
-							      //    target.dispatch("setLoaded");
 							      initial = false;
 							      !target.dead &&
 							      target.push(
@@ -578,6 +575,11 @@ export function updateWatchers( target, DataProvider, idKeys, changes, isQuery )
 							      watchs[idKey].value,
 							      watchs[idKey].fn
 						      );
+					      if ( (!target.data || !target.data[idKeys[idKey].target]) && changes[idKey].default )
+						      target.push(
+							      {
+								      [idKeys[idKey].target || idKey]: { ...changes[idKey].default }
+							      })
 				      }
 			      }
 		      }

@@ -18,21 +18,25 @@ import XLSX      from "xlsx";
 import camelCase from "camelcase";
 import shortId   from "shortid";
 
-import {types, query}                                        from 'App/db';
-import {updateWatchers, clearWatchers, getQueriesFromIdKeys} from './DataProvider';
+import {types, get}                                          from 'App/db';
+import {clearWatchers, getRecordsFromIdKeys, updateWatchers} from "./DataProvider";
 
 
-export default class MongoQueries extends Store {
+export default class MongoRecords extends Store {
 	static state = {};
+	//data         = {
+	//	results: {},
+	//
+	//};
 	
 	serialize( cfg = {}, output = {} ) {
 		return super.serialize(
 			{
 				...cfg,
-				dataRefs: Object.keys(this.__queryWatchers)
+				dataRefs: Object.keys(this.__recWatchers)
 				                .reduce(
 					                ( h, k ) => {
-						                h[k] = "DataProvider.__queries." + this.__queryWatchers[k].key;
+						                h[k] = "DataProvider." + this.__recWatchers[k].key;
 						                return h;
 					                },
 					                {}
@@ -47,7 +51,7 @@ export default class MongoQueries extends Store {
 		super.restore(
 			snapshot, immediate);
 		
-		updateWatchers(this, this.scope.DataProvider, this.state, this.state, true)
+		updateWatchers(this, this.scope.DataProvider, this.state, this.state)
 	}
 	
 	shouldApply( changes ) {
@@ -57,18 +61,18 @@ export default class MongoQueries extends Store {
 		if ( !DataProvider )
 			throw new Error("No DataProvider found !!");
 		
-		if ( updateWatchers(this, DataProvider, curState, changes, true) ) {
+		if ( updateWatchers(this, DataProvider, curState, changes) ) {
 			
 			// initial & instant update
-			update     = getQueriesFromIdKeys(
-				DataProvider, curState, changes, true
+			update     = getRecordsFromIdKeys(
+				DataProvider, curState, changes
 			);
 			hasChanges = false;
 			Object.keys(update)
 			      .forEach(
 				      key => (hasChanges = hasChanges || (update[key] !== changes[key]))
 			      );
-			hasChanges && this.setState(update);
+			hasChanges && this.push(update);
 		}
 		
 		
@@ -81,9 +85,16 @@ export default class MongoQueries extends Store {
 		
 		// stop watching the injected records
 		// (auto delete will clean it if the resource is no used anymore)
-		clearWatchers(this, DataProvider, curState, true);
+		clearWatchers(this, DataProvider, curState);
 		
 		super.destroy();
 	}
+	
+	//
+	//apply( d = {}, { objId, cls, template }, {} ) {
+	//	get(cls, objId)
+	//		.then(result => this.push(result))
+	//		.catch(e => this.push({ ...template }))
+	//}
 	
 }

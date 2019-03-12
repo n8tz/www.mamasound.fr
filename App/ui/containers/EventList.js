@@ -59,9 +59,6 @@ const scrollAnims = {
 					limit: 100,
 					query: {}
 				}
-				//updateQueries() {
-				//	return { query: {} }
-				//}
 			}
 		)
 		Queries     : stores.MongoQueries,
