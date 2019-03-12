@@ -47,6 +47,15 @@ export default class MongoQueries extends Store {
 		
 	}
 	
+	restore( snapshot, immediate ) {
+		
+		super.restore(
+			snapshot, immediate);
+		
+		
+		updateWatchers(this, this.scope.DataProvider, this.state, this.state, true)
+	}
+	
 	shouldApply( changes ) {
 		let DataProvider = this.scope.DataProvider,
 		    hasChanges, update,

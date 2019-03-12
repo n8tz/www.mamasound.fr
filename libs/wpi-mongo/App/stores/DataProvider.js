@@ -151,13 +151,14 @@ export default class DataProvider extends Store {
 		super(...arguments);
 		this.retain("keepAlive");
 		// data cache
-		this.recordsByEttyId = {};
+		
 	}
 	
+	data           = {};
 	// recently updated records & queries
 	updatedRecords = {};
 	
-	apply( data = this.recordsByEttyId, state, changes ) {
+	apply( data, state, changes ) {
 		return data;
 	}
 	
@@ -168,8 +169,8 @@ export default class DataProvider extends Store {
 	 * @returns {*}
 	 */
 	getRecord( etty, id ) {
-		return this.recordsByEttyId[etty]
-			&& this.recordsByEttyId[etty][id];
+		return this.data[etty]
+			&& this.data[etty][id];
 	}
 	
 	/**
@@ -179,8 +180,8 @@ export default class DataProvider extends Store {
 	 */
 	getQuery( query ) {
 		let hash = JSON.stringify(query)
-		return query && this.recordsByEttyId["__queries"]
-			&& this.recordsByEttyId["__queries"][hash];
+		return query && this.data["__queries"]
+			&& this.data["__queries"][hash];
 	}
 	
 	/**
@@ -190,10 +191,10 @@ export default class DataProvider extends Store {
 	 * @param rec
 	 */
 	pushRemoteRecord( etty, id, rec ) {
-		this.recordsByEttyId[etty]     = this.recordsByEttyId[etty] || {};
-		this.recordsByEttyId[etty][id] = rec;
-		this.updatedRecords[etty]      = this.recordsByEttyId[etty] || {};
-		this.updatedRecords[etty][id]  = rec;
+		this.data[etty]               = this.data[etty] || {};
+		this.data[etty][id]           = rec;
+		this.updatedRecords[etty]     = this.data[etty] || {};
+		this.updatedRecords[etty][id] = rec;
 		
 		this.dispatchUpdates();
 	}
@@ -207,10 +208,10 @@ export default class DataProvider extends Store {
 	pushRemoteQuery( etty, query, results ) {
 		let hash = H.update(JSON.stringify(query)).digest().toString(32);
 		
-		this.recordsByEttyId["__queries"]       = this.recordsByEttyId["__queries"] || {};
-		this.recordsByEttyId["__queries"][hash] = results;
-		this.updatedRecords["__queries"]        = this.recordsByEttyId["__queries"] || {};
-		this.updatedRecords["__queries"][hash]  = results;
+		this.data["__queries"]                 = this.data["__queries"] || {};
+		this.data["__queries"][hash]           = results;
+		this.updatedRecords["__queries"]       = this.data["__queries"] || {};
+		this.updatedRecords["__queries"][hash] = results;
 		
 		this.dispatchUpdates();
 	}
@@ -290,7 +291,7 @@ export default class DataProvider extends Store {
 				&& [types]
 				|| types
 			)
-			|| Object.keys(this.recordsByEttyId);
+			|| Object.keys(this.data);
 		
 		types.forEach(
 			etty => {
@@ -355,7 +356,7 @@ export default class DataProvider extends Store {
 	
 	_autoClean = () => {
 		let watchers = this.watchersByEttyId,
-		    data     = this.recordsByEttyId,
+		    data     = this.data,
 		    item,
 		    toClean  = this._scrapStack,
 		    dtLimit  = Date.now() - 1000 * 60; // 1mn ttl for unused items
@@ -391,7 +392,7 @@ export default class DataProvider extends Store {
 	 */
 	bindRecord( etty, id, watcher ) {
 		let refs   = this.watchersByEttyId, newRequest,
-		    noData = !this.recordsByEttyId[etty] || !this.recordsByEttyId[etty][id];
+		    noData = !this.data[etty] || !this.data[etty][id];
 		
 		refs[etty]     = refs[etty] || {};
 		newRequest     = !refs[etty][id];
@@ -441,10 +442,10 @@ export default class DataProvider extends Store {
 		    hash   = H.update(JSON.stringify(query)).digest().toString(32),
 		    etty   = query.etty,
 		    newRequest,
-		    noData = !this.recordsByEttyId["__queries"] || !this.recordsByEttyId["__queries"][hash];
+		    noData = !this.data["__queries"] || !this.data["__queries"][hash];
 		
 		refs["__queries"]       = refs["__queries"] || {};
-		newRequest       = !refs["__queries"][hash];
+		newRequest              = !refs["__queries"][hash];
 		refs["__queries"][hash] = refs["__queries"][hash] || [];
 		
 		refs["__queries"][hash].push(watcher);
