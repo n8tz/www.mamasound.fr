@@ -103,8 +103,7 @@ if ( typeof window !== "undefined" ) {
 	require('react-grid-layout/css/styles.css');
 }
 @reScope(
-	typeof window !== "undefined" && {
-		
+	{
 		@withStateMap(
 			{
 				FocusedItems: {

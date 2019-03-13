@@ -64,10 +64,7 @@ export function mountRecord( record, etty, toMountKeys, cb, required, mounted, d
 	db          = db || this;
 	required    = required || {};
 	
-	//toMountKeys = is.array(etty) ? etty : entities[etty].autoMount;
-	
-	// console.warn("Mount !!!!!",record);
-	if ( !record ) return cb && cb("Monting a null record :" + record);
+	if ( !record ) return cb && cb("Mounting a null record :" + record);
 	if ( !mounted ) {
 		mounted             = {};
 		mounted[record._id] = true;
@@ -122,9 +119,6 @@ export function mountRecord( record, etty, toMountKeys, cb, required, mounted, d
 				       }
 				       docs._cls    = v.cls;
 				       mounted[key] = docs;
-				       // sema++;
-//                       // me.queryFlow.wait()
-				       // setTimeout(
 				       mountRecord.call(this, docs, v.cls, toMountKeys,
 				                        function ( e, r ) {
 					
@@ -133,11 +127,8 @@ export function mountRecord( record, etty, toMountKeys, cb, required, mounted, d
 						                        cb = null;
 						                        // console.log("mounted ", key, sema);
 					                        }
-//                                          // me.queryFlow.release()
 					
 				                        }, required, mounted, db)
-				       // );
-				       // if ( !--sema ) cb(null, mounted);
 			       };
 		       })(v, key),
 		       true
