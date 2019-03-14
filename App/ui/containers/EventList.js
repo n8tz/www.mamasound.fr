@@ -16,13 +16,101 @@ import React                                 from "react";
 import {Rnd}                                 from "react-rnd";
 import {reScope, scopeToProps, propsToScope} from "rscopes";
 import CloseIcon                             from '@material-ui/icons/Close';
-import CardHeader                            from '@material-ui/core/CardHeader';
+import moment                                from 'moment';
 import IconButton                            from '@material-ui/core/IconButton';
 import {withStateMap, asRef, asStore}        from "rescope-spells";
 
 import stores                from 'App/stores/(*).js';
 import Comps                 from 'App/ui/components/(*).js';
 import {asTweener, TweenRef} from "react-rtween";
+
+function _getQuery( dt = moment(), type ) {
+	let from = moment(dt).startOf('day').add(2, 'hour').unix() * 1000,
+	    to   = moment(dt).endOf('day').add(2, 'hour').unix() * 1000;
+	return {
+		query  : {
+			$or: [
+				
+				...([undefined, 'Tout-Montpellier', 'Concerts'].includes(type) && [
+					{
+						_cls    : 'Concert',
+						schedule: {
+							$elemMatch: {
+								startTM: {
+									'$gt': from,
+									'$lt': to
+								}
+							}
+						}
+					},
+					{
+						_cls   : 'Concert',
+						startTM: {
+							'$gt': from,
+							'$lt': to
+						}
+					}]),
+				...([undefined, 'Tout-Montpellier', 'Theatres'].includes(type) && [
+					{
+						_cls    : 'Theatre',
+						schedule: {
+							$elemMatch: {
+								startTM: {
+									'$gt': from,
+									'$lt': to
+								}
+							}
+						}
+					},
+					{
+						_cls   : 'Theatre',
+						startTM: {
+							'$gt': from,
+							'$lt': to
+						}
+					}]),
+				
+				...([undefined, 'Tout-Montpellier'].includes(type) && [
+					{
+						_cls     : 'Expo',
+						haveVerni: true,
+						verniTM  : {
+							'$gt': from,
+							'$lt': to
+						}
+					}]),
+				...(type == 'Expositions' && [{
+					_cls    : 'Expo',
+					schedule: {
+						$elemMatch: {
+							startTM: {
+								'$lt': from
+							},
+							endTM  : {
+								'$gt': to
+							}
+						}
+					}
+				}, {
+					$and: [
+						{
+							_cls   : 'Expo',
+							startTM: {
+								'$lt': from
+							},
+							endTM  : {
+								'$gt': to
+							}
+						}
+					]
+				}] || []),
+			]
+		},
+		limit  : 1000,
+		orderby: { startTM: 1 }
+		
+	};
+}
 
 var easingFn      = require('d3-ease');
 const scrollAnims = {
@@ -57,7 +145,8 @@ const scrollAnims = {
 				events: {
 					etty : 'Event',
 					limit: 100,
-					query: {}
+					query: {},
+					..._getQuery()
 				}
 			}
 		)
@@ -90,8 +179,7 @@ const scrollAnims = {
 @scopeToProps("Events")
 @asTweener({ initialScrollPos: { scrollX: 100, scrollY: 100 } })
 export default class EventList extends React.Component {
-	static propTypes = {
-	};
+	static propTypes = {};
 	state            = {};
 	
 	render() {

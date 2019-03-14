@@ -16,7 +16,7 @@ import React                                        from "react";
 import {Rnd}                                        from "react-rnd";
 import {reScope, scopeToProps, propsToScope, Store} from "rscopes";
 import CloseIcon                                    from '@material-ui/icons/Close';
-import CardHeader                                   from '@material-ui/core/CardHeader';
+import moment                                       from 'moment';
 import anims                                        from 'App/ui/anims/(*).js';
 import ReactGridLayout                              from 'react-grid-layout';
 
@@ -32,6 +32,7 @@ if ( typeof window !== "undefined" ) {
 	require('react-resizable/css/styles.css');
 	require('react-grid-layout/css/styles.css');
 }
+
 @reScope(
 	{
 		@withStateMap(
@@ -39,8 +40,9 @@ if ( typeof window !== "undefined" ) {
 				FocusedItems: {
 					etty : 'FocusedItems',
 					limit: 100,
-					query: {}
+					query: {},
 				},
+				
 				updateQueries() {
 					//return { FocusedItems: { ...this.nextState.FocusedItems, $skip: 5 } }
 				}
@@ -89,8 +91,7 @@ if ( typeof window !== "undefined" ) {
 @scopeToProps("MountedItems", "Grid")
 @asTweener({ initialScrollPos: { scrollX: 100 } })
 export default class Highlighter extends React.Component {
-	static propTypes = {
-	};
+	static propTypes = {};
 	state            = {};
 	
 	onLayoutChange = ( layout ) => {
