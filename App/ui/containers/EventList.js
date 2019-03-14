@@ -125,17 +125,6 @@ const scrollAnims = {
 			}
 		}
 	],
-	//scrollY: [
-	//	{
-	//		type    : "Tween",
-	//		from    : 0,
-	//		duration: 200,
-	//		//easeFn  : easingFn.easePolyOut,
-	//		apply   : {
-	//			top: -200,
-	//		}
-	//	},
-	//]
 };
 @reScope(
 	{
