@@ -28,76 +28,7 @@ import Comps                          from 'App/ui/components/(*).js';
 
 import {asTweener, TweenRef} from "react-rtween";
 
-var easingFn      = require('d3-ease');
-const scrollAnims = {
-	scrollX: [
-		{
-			type    : "Tween",
-			from    : 0,
-			duration: 100,
-			easeFn  : easingFn.easeCircleIn,
-			apply   : {
-				_z: -.2,
-			}
-		},
-		{
-			type    : "Tween",
-			from    : 100,
-			duration: 100,
-			easeFn  : easingFn.easeCircleIn,
-			apply   : {
-				_z: .2,
-			}
-		},
-		{
-			type    : "Tween",
-			from    : 50,
-			duration: 100,
-			easeFn  : easingFn.easeCircle,
-			apply   : {
-				rotateY: 180,
-			}
-		},
-		{
-			type    : "Tween",
-			from    : 200,
-			duration: 100,
-			easeFn  : easingFn.easeCircleIn,
-			apply   : {
-				_z: -.2,
-			}
-		},
-		{
-			type    : "Tween",
-			from    : 300,
-			duration: 100,
-			easeFn  : easingFn.easeCircleIn,
-			apply   : {
-				_z: .2,
-			}
-		},
-		{
-			type    : "Tween",
-			from    : 250,
-			duration: 100,
-			easeFn  : easingFn.easeCircle,
-			apply   : {
-				rotateY: -180,
-			}
-		}
-	],
-	//scrollY: [
-	//	{
-	//		type    : "Tween",
-	//		from    : 0,
-	//		duration: 200,
-	//		//easeFn  : easingFn.easePolyOut,
-	//		apply   : {
-	//			top: -200,
-	//		}
-	//	},
-	//]
-};
+var easingFn = require('d3-ease');
 if ( typeof window !== "undefined" ) {
 	require('react-resizable/css/styles.css');
 	require('react-grid-layout/css/styles.css');
@@ -157,7 +88,7 @@ if ( typeof window !== "undefined" ) {
 	}
 )
 @scopeToProps("MountedItems", "Grid")
-//@asTweener({ initialScrollPos: { scrollX: 200 } })
+@asTweener({ initialScrollPos: { scrollX: 100 } })
 export default class Highlighter extends React.Component {
 	static propTypes = {
 		//record  : PropTypes.object.isRequired,
@@ -222,7 +153,10 @@ export default class Highlighter extends React.Component {
 										      display    : "inline-block",
 										      overflow   : "hidden"
 									      } }
-									      scrollableAnims={ anims.flyOut(i * 5, 100) }
+									      scrollableAnims={ {
+										      scrollY: anims.flyOut(i * 5, 100),
+										      scrollX: [...anims.flip(0, 100), ...anims.flip(100, 100)]
+									      } }
 								>
 									<div>
 										<Comps.FocusedItems record={ item }/>
