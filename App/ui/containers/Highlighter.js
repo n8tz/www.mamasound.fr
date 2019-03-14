@@ -17,7 +17,7 @@ import {Rnd}                                        from "react-rnd";
 import {reScope, scopeToProps, propsToScope, Store} from "rscopes";
 import CloseIcon                                    from '@material-ui/icons/Close';
 import CardHeader                                   from '@material-ui/core/CardHeader';
-import IconButton                                   from '@material-ui/core/IconButton';
+import anims                                        from 'App/ui/anims/(*).js';
 import ReactGridLayout                              from 'react-grid-layout';
 
 
@@ -157,7 +157,7 @@ if ( typeof window !== "undefined" ) {
 	}
 )
 @scopeToProps("MountedItems", "Grid")
-@asTweener({ initialScrollPos: { scrollX: 200 } })
+//@asTweener({ initialScrollPos: { scrollX: 200 } })
 export default class Highlighter extends React.Component {
 	static propTypes = {
 		//record  : PropTypes.object.isRequired,
@@ -177,39 +177,62 @@ export default class Highlighter extends React.Component {
 			    $actions, onSelect, selected
 		    }     = this.props,
 		    state = this.state;
+		console.log(anims.flyOut(2 * 500, 500))
 		return (
 			<div
 				onClick={ $actions.saveState }
 				className={ "Highlighter container" }
 			>
-				<TweenRef
-					id={ "today" }
-					initial={ {
-						_x     : 0,
-						_y     : 0,
-						_z     : 0,
-						rotateY: -180,
-						top    : "0%",
-						left   : "0%",
-						bottom : "0px",
-						width  : "100%",
-						//paddingTop: "150px"
-					} }
-					scrollableAnims={ scrollAnims }
-				>
-					<div className={ " today" } onClick={ e => e.preventDefault() }>
-						<ReactGridLayout className="layout" layout={ layout } cols={ 8 } rowHeight={ 50 }
-						                 onLayoutChange={ this.onLayoutChange }
-						                 isResizable={ true }
-						                 width={ 1200 }>
-							{
-								gridItems.map(
-									item => <div key={ item._id }><Comps.FocusedItems record={ item }/></div>
-								)
-							}
-						</ReactGridLayout>
-					</div>
-				</TweenRef>
+				{/*<TweenRef*/ }
+				{/*id={ "today" }*/ }
+				{/*initial={ {*/ }
+				{/*_x     : 0,*/ }
+				{/*_y     : 0,*/ }
+				{/*_z     : 0,*/ }
+				{/*rotateY: -180,*/ }
+				{/*top    : "0%",*/ }
+				{/*left   : "0%",*/ }
+				{/*bottom : "0px",*/ }
+				{/*width  : "100%",*/ }
+				{/*//paddingTop: "150px"*/ }
+				{/*} }*/ }
+				{/*scrollableAnims={ scrollAnims }*/ }
+				{/*>*/ }
+				<div className={ " today" } onClick={ e => e.preventDefault() }>
+					{/*<ReactGridLayout className="layout" layout={ layout } cols={ 8 } rowHeight={ 50 }*/ }
+					{/*onLayoutChange={ this.onLayoutChange }*/ }
+					{/*isResizable={ true }*/ }
+					{/*width={ 1200 }>*/ }
+					{
+						gridItems.map(
+							( item, i ) =>
+								<TweenRef key={ item._id }
+									//id={ "today" }
+									      initial={ {
+										      //_x     : 0,
+										      //_y     : 0,
+										      //_z     : 0,
+										      //rotateY: -180,
+										      //top    : "0%",
+										      //left   : "0%",
+										      perspective: "200px",
+										      width      : "200px",
+										      height     : "100px",
+										      margin     : "10px",
+										      display    : "inline-block",
+										      overflow   : "hidden"
+									      } }
+									      scrollableAnims={ anims.flyOut(i * 5, 100) }
+								>
+									<div>
+										<Comps.FocusedItems record={ item }/>
+									</div>
+								</TweenRef>
+						)
+					}
+					{/*</ReactGridLayout>*/ }
+				</div>
+				{/*</TweenRef>*/ }
 			</div>
 		);
 	}

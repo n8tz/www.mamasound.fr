@@ -1,4 +1,4 @@
-/*!
+/*
  * The MIT License (MIT)
  * Copyright (c) 2019. Wise Wild Web
  *
@@ -12,33 +12,71 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-.Highlighter {
-  touch-action: none;
-  overflow: hidden;
-  height: 100%;
-  position: relative;
-
-  @include use_hvCenteredContent();
-
-  .today {
-    width: 100%;
-    //position: absolute;
-  }
-
-  .react-grid-item {
-    overflow: hidden;
-
-    .FocusedItems {
-      .preview {
-        width: 100%;
-        height: 100%;
-
-        img {
-          @include use_hvCenteredAbs();
-          height: 100%;
-          //max-width: 100%;
-        }
-      }
-    }
-  }
-}
+var easingFn = require('d3-ease');
+var keys     = {
+	top  : '_y',
+	bot  : '_y',
+	right: '_x',
+	left : '_x'
+}, dirs      = {
+	top  : -1,
+	bot  : 1,
+	right: -1,
+	left : 1
+};
+export default function ( tmStart, duration, dir ) {
+	dir = dir || 'right';
+	
+	
+	return [
+		{
+			type    : "Tween",
+			from    : tmStart + 0,
+			duration: .4 * duration,
+			easeFn  : easingFn.easeSinOut,
+			apply   : {
+				_z     : .06,
+				rotateY: -25,
+				rotateX: 25
+			}
+		},
+		{
+			type    : "Tween",
+			from    : tmStart + .1 * duration,
+			duration: .9 * duration,
+			easeFn  : easingFn.easeSinOut,
+			apply   : {
+				[keys[dir]]: dirs[dir]
+			}
+		},
+		{
+			type    : "Tween",
+			from    : tmStart + .1 * duration,
+			duration: .9 * duration,
+			easeFn  : easingFn.easeSinIn,
+			apply   : {
+				y: -300
+			}
+		},
+		{
+			type    : "Tween",
+			from    : tmStart + .4 * duration,
+			duration: .6 * duration,
+			easeFn  : easingFn.easeSinIn,
+			apply   : {
+				_z     : .12,
+				rotateY: -20,
+				rotateX: 20,
+				// rotate : -50
+			}
+		},
+		{
+			type    : "Tween",
+			from    : tmStart + .4 * duration,
+			duration: .5 * duration,
+			apply   : {
+				opacity: -1
+			}
+		}
+	]
+};
