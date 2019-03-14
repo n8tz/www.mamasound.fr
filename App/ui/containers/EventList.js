@@ -91,8 +91,6 @@ const scrollAnims = {
 @asTweener({ initialScrollPos: { scrollX: 100, scrollY: 100 } })
 export default class EventList extends React.Component {
 	static propTypes = {
-		//record  : PropTypes.object.isRequired,
-		//onSelect: PropTypes.func
 	};
 	state            = {};
 	
@@ -107,7 +105,6 @@ export default class EventList extends React.Component {
 			<div
 				className={ "EventList container" }
 			>
-				
 				
 				<TweenRef
 					id={ "today" }

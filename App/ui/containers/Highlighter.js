@@ -28,7 +28,6 @@ import Comps                          from 'App/ui/components/(*).js';
 
 import {asTweener, TweenRef} from "react-rtween";
 
-var easingFn = require('d3-ease');
 if ( typeof window !== "undefined" ) {
 	require('react-resizable/css/styles.css');
 	require('react-grid-layout/css/styles.css');
@@ -91,15 +90,10 @@ if ( typeof window !== "undefined" ) {
 @asTweener({ initialScrollPos: { scrollX: 100 } })
 export default class Highlighter extends React.Component {
 	static propTypes = {
-		//record  : PropTypes.object.isRequired,
-		//onSelect: PropTypes.func
 	};
 	state            = {};
 	
 	onLayoutChange = ( layout ) => {
-		/*eslint no-console: 0*/
-		//this.setState({ layout });
-		//this.props.onLayoutChange(layout); // updates status display
 	}
 	
 	render() {
@@ -108,27 +102,11 @@ export default class Highlighter extends React.Component {
 			    $actions, onSelect, selected
 		    }     = this.props,
 		    state = this.state;
-		console.log(anims.flyOut(2 * 500, 500))
 		return (
 			<div
 				onClick={ $actions.saveState }
 				className={ "Highlighter container" }
 			>
-				{/*<TweenRef*/ }
-				{/*id={ "today" }*/ }
-				{/*initial={ {*/ }
-				{/*_x     : 0,*/ }
-				{/*_y     : 0,*/ }
-				{/*_z     : 0,*/ }
-				{/*rotateY: -180,*/ }
-				{/*top    : "0%",*/ }
-				{/*left   : "0%",*/ }
-				{/*bottom : "0px",*/ }
-				{/*width  : "100%",*/ }
-				{/*//paddingTop: "150px"*/ }
-				{/*} }*/ }
-				{/*scrollableAnims={ scrollAnims }*/ }
-				{/*>*/ }
 				<div className={ " today" } onClick={ e => e.preventDefault() }>
 					{/*<ReactGridLayout className="layout" layout={ layout } cols={ 8 } rowHeight={ 50 }*/ }
 					{/*onLayoutChange={ this.onLayoutChange }*/ }
@@ -138,25 +116,18 @@ export default class Highlighter extends React.Component {
 						gridItems.map(
 							( item, i ) =>
 								<TweenRef key={ item._id }
-									//id={ "today" }
-									      initial={ {
-										      //_x     : 0,
-										      //_y     : 0,
-										      //_z     : 0,
-										      //rotateY: -180,
-										      //top    : "0%",
-										      //left   : "0%",
-										      perspective: "200px",
-										      width      : "200px",
-										      height     : "100px",
-										      margin     : "10px",
-										      display    : "inline-block",
-										      overflow   : "hidden"
-									      } }
-									      scrollableAnims={ {
-										      scrollY: anims.flyOut(i * 5, 100),
-										      scrollX: [...anims.flip(0, 100), ...anims.flip(100, 100)]
-									      } }
+								          initial={ {
+									          perspective: "200px",
+									          width      : "200px",
+									          height     : "100px",
+									          margin     : "10px",
+									          display    : "inline-block",
+									          overflow   : "hidden"
+								          } }
+								          scrollableAnims={ {
+									          scrollY: anims.flyOut(i * 5, 100),
+									          scrollX: [...anims.flip(0, 100), ...anims.flip(100, 100)]
+								          } }
 								>
 									<div>
 										<Comps.FocusedItems record={ item }/>
@@ -166,7 +137,6 @@ export default class Highlighter extends React.Component {
 					}
 					{/*</ReactGridLayout>*/ }
 				</div>
-				{/*</TweenRef>*/ }
 			</div>
 		);
 	}

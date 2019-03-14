@@ -81,7 +81,7 @@ export default class MongoRecords extends Store {
 	
 	destroy() {
 		let DataProvider = this.scope.DataProvider,
-		    curState     = this.state;
+		    curState     = this.nextState;
 		
 		// stop watching the injected records
 		// (auto delete will clean it if the resource is no used anymore)
