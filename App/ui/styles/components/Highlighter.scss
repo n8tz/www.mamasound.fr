@@ -19,8 +19,9 @@
   height: 100%;
 
   @media screen and (max-width: $tablet-portrait-breakpoint) {
-
-    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
   }
 
 
@@ -33,10 +34,11 @@
 
     > * {
       margin: 5px;
-      @include aspect-ratio(4/3);
+      @include aspect-ratio(2/1);
 
       display: inline-block;
-      width: 30vw;
+      width: 45%;
+      //height: 20vw;
       overflow: hidden;
     }
   }
@@ -46,7 +48,6 @@
 
   .FocusedItems {
     display: inline-block;
-    height: 20vw;
 
     .preview {
       width: 100%;

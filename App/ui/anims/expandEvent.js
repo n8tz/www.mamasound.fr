@@ -33,9 +33,9 @@ export default function ( tmStart, duration, dir ) {
 			type    : "Tween",
 			from    : tmStart,
 			duration: 1 * duration,
-			easeFn  : easingFn.easeCircleIn,
+			//easeFn  : easingFn.easeCircleIn,
 			apply   : {
-				height: 30,
+				height: "30px",
 			}
 		},
 		//{
