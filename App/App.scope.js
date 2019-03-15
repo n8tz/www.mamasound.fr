@@ -48,6 +48,7 @@ export default {
 			if ( !state.query ) {
 				this.$actions.updateQuery()
 			}
+			return state;
 		},
 		updateQuery( dt = moment(), type ) {
 			let from = moment(dt).startOf('day').add(2, 'hour').unix() * 1000,

@@ -163,7 +163,7 @@ const scrollAnims = {
 	}
 )
 @scopeToProps("Events")
-@asTweener({ initialScrollPos: {} })
+//@asTweener({ initialScrollPos: {}, propagateAxes: { scrollY: true } })
 export default class EventList extends React.Component {
 	static propTypes = {};
 	state            = {};
