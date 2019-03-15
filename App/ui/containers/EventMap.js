@@ -19,6 +19,7 @@ import CloseIcon                             from '@material-ui/icons/Close';
 import moment                                from 'moment';
 import IconButton                            from '@material-ui/core/IconButton';
 import {withStateMap, asRef, asStore}        from "rescope-spells";
+//import React, {Component} from "react";
 
 import stores                from 'App/stores/(*).js';
 import Comps                 from 'App/ui/components/(*).js';
@@ -26,20 +27,17 @@ import {asTweener, TweenRef} from "react-rtween";
 
 import anims from 'App/ui/anims/(*).js';
 
-var easingFn      = require('d3-ease');
-const scrollAnims = {
-	scrollX: [
-		{
-			type    : "Tween",
-			from    : 0,
-			duration: 200,
-			//easeFn  : easingFn.easePolyOut,
-			apply   : {
-				left: -200,
-			}
-		}
-	],
-};
+
+if ( typeof window !== "undefined" ) {
+	
+	var LeafletCss = require('leaflet/dist/leaflet.css');
+	var Leaflet    = require('leaflet');
+	var {
+		    LayerGroup, Map, Popup,
+		    Rectangle, TileLayer, ZoomControl
+	    }          = require("react-leaflet");
+}
+
 @reScope(
 	{
 		
@@ -93,7 +91,15 @@ export default class EventMap extends React.Component {
 				className={ "EventMap container" }
 			>
 				
-				map
+				<Map center={ [51.505, -0.09] } zoom={ 13 }>
+					<TileLayer
+						url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+						attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+					/>
+					{/*<Marker position={position}>*/ }
+					{/*<Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>*/ }
+					{/*</Marker>*/ }
+				</Map>
 			</div>
 		);
 	}

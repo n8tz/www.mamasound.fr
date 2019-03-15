@@ -24,7 +24,8 @@
   height: 100%;
   position: relative;
 
-  .today {
-    position: absolute;
+  .leaflet-container {
+    height: 100%;
+    width: 100% !important;
   }
 }
