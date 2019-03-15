@@ -17,9 +17,11 @@
   overflow: hidden;
   height: 100%;
   position: relative;
-  @media screen and (max-width: $tablet-portrait-breakpoint) {
 
-    width: 100%;
+  @media screen and (max-width: $tablet-portrait-breakpoint) {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
   }
 
   .today {

@@ -13,11 +13,17 @@
  */
 
 .EventMap {
+  @media screen and (max-width: $tablet-portrait-breakpoint) {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
   touch-action: none;
   overflow: hidden;
   //width: 100%;
   height: 100%;
   position: relative;
+
   .today {
     position: absolute;
   }
