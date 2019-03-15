@@ -17,6 +17,7 @@ import {reScope, scopeToProps, propsToScope} from "rscopes";
 import MongoQueries                          from 'App/stores/MongoQueries';
 import Highlighter                           from 'App/ui/containers/Highlighter';
 import EventList                             from 'App/ui/containers/EventList';
+import EventMap                              from 'App/ui/containers/EventMap';
 
 import {withStateMap, asRef, asStore} from "rescope-spells";
 import Fab                            from '@material-ui/core/Fab';
@@ -25,39 +26,6 @@ import SaveIcon                       from '@material-ui/icons/Save';
 import {asTweener, TweenRef}          from "react-rtween";
 
 var easingFn = require('d3-ease');
-
-let pushIn  = function ( target ) {
-	return {
-		anims: [
-			{
-				type    : "Tween",
-				target  : target,
-				from    : 0,
-				duration: 500,
-				easeFn  : easingFn.easeCircleIn,
-				apply   : {
-					_z: .2,
-				}
-			}
-		]
-	};
-};
-let pushOut = function ( target ) {
-	return {
-		anims: [
-			{
-				type    : "Tween",
-				target  : target,
-				from    : 0,
-				duration: 500,
-				easeFn  : easingFn.easeCubicInOut,
-				apply   : {
-					_z: -.2,
-				}
-			}
-		]
-	};
-};
 
 
 @asTweener
@@ -91,9 +59,9 @@ export default class Home extends React.Component {
 			target  : "highlighted",
 			from    : 0,
 			duration: 100,
-			easeFn  : easingFn.easePolyInOut,
+			//easeFn  : easingFn.easePolyInOut,
 			apply   : {
-				height: -70,
+				height: -65,
 			}
 		},
 		{
@@ -101,11 +69,32 @@ export default class Home extends React.Component {
 			target  : "events",
 			from    : 0,
 			duration: 100,
-			easeFn  : easingFn.easePolyInOut,
+			//easeFn  : easingFn.easePolyInOut,
 			apply   : {
-				height: 70,
+				height: 65,
 			}
 		},
+		//show map
+		{
+			type    : "Tween",
+			target  : "map",
+			from    : 90,
+			duration: 20,
+			easeFn  : easingFn.easePolyInOut,
+			apply   : {
+				height: 20,
+			}
+		},
+		{
+			type    : "Tween",
+			target  : "events",
+			from    : 90,
+			duration: 20,
+			easeFn  : easingFn.easePolyInOut,
+			apply   : {
+				height: -20,
+			}
+		}
 	];
 	
 	render() {
@@ -177,6 +166,21 @@ export default class Home extends React.Component {
 								background: "green",
 							} }>
 							<EventList/>
+						</div>
+					</TweenRef>
+					<TweenRef
+						id={ "map" }
+						initial={ {
+							height: "0%"
+						} }
+					>
+						<div
+							onClick={ e => this.scrollTo(100, 500) }
+							style={ {
+								width     : "100%",
+								background: "cyan",
+							} }>
+							<EventMap/>
 						</div>
 					</TweenRef>
 				</div>
