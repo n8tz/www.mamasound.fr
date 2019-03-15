@@ -19,99 +19,12 @@ import CloseIcon                             from '@material-ui/icons/Close';
 import moment                                from 'moment';
 import IconButton                            from '@material-ui/core/IconButton';
 import {withStateMap, asRef, asStore}        from "rescope-spells";
-import anims                                 from 'App/ui/anims/(*).js';
 
 import stores                from 'App/stores/(*).js';
 import Comps                 from 'App/ui/components/(*).js';
 import {asTweener, TweenRef} from "react-rtween";
 
-function _getQuery( dt = moment(), type ) {
-	let from = moment(dt).startOf('day').add(2, 'hour').unix() * 1000,
-	    to   = moment(dt).endOf('day').add(2, 'hour').unix() * 1000;
-	return {
-		query  : {
-			$or: [
-				
-				...([undefined, 'Tout-Montpellier', 'Concerts'].includes(type) && [
-					{
-						_cls    : 'Concert',
-						schedule: {
-							$elemMatch: {
-								startTM: {
-									'$gt': from,
-									'$lt': to
-								}
-							}
-						}
-					},
-					{
-						_cls   : 'Concert',
-						startTM: {
-							'$gt': from,
-							'$lt': to
-						}
-					}]),
-				...([undefined, 'Tout-Montpellier', 'Theatres'].includes(type) && [
-					{
-						_cls    : 'Theatre',
-						schedule: {
-							$elemMatch: {
-								startTM: {
-									'$gt': from,
-									'$lt': to
-								}
-							}
-						}
-					},
-					{
-						_cls   : 'Theatre',
-						startTM: {
-							'$gt': from,
-							'$lt': to
-						}
-					}]),
-				
-				...([undefined, 'Tout-Montpellier'].includes(type) && [
-					{
-						_cls     : 'Expo',
-						haveVerni: true,
-						verniTM  : {
-							'$gt': from,
-							'$lt': to
-						}
-					}]),
-				...(type == 'Expositions' && [{
-					_cls    : 'Expo',
-					schedule: {
-						$elemMatch: {
-							startTM: {
-								'$lt': from
-							},
-							endTM  : {
-								'$gt': to
-							}
-						}
-					}
-				}, {
-					$and: [
-						{
-							_cls   : 'Expo',
-							startTM: {
-								'$lt': from
-							},
-							endTM  : {
-								'$gt': to
-							}
-						}
-					]
-				}] || []),
-			]
-		},
-		limit  : 1000,
-		orderby: { startTM: 1 }
-		
-	};
-}
+import anims from 'App/ui/anims/(*).js';
 
 var easingFn      = require('d3-ease');
 const scrollAnims = {
@@ -163,8 +76,8 @@ const scrollAnims = {
 	}
 )
 @scopeToProps("Events")
-@asTweener({ initialScrollPos: {} })
-export default class EventList extends React.Component {
+@asTweener({ initialScrollPos: { scrollX: 100, scrollY: 100 } })
+export default class EventMap extends React.Component {
 	static propTypes = {};
 	state            = {};
 	
@@ -177,46 +90,10 @@ export default class EventList extends React.Component {
 		    state = this.state;
 		return (
 			<div
-				className={ "EventList container" }
+				className={ "EventMap container" }
 			>
 				
-				{/*<TweenRef*/ }
-				{/*id={ "today" }*/ }
-				{/*initial={ {*/ }
-				{/*_x    : 0,*/ }
-				{/*_y    : 0,*/ }
-				{/*top   : "0%",*/ }
-				{/*left  : "0%",*/ }
-				{/*bottom: "0px",*/ }
-				{/*width : "100%",*/ }
-				{/*//paddingTop: "150px"*/ }
-				{/*} }*/ }
-				{/*scrollableAnims={ scrollAnims }*/ }
-				{/*>*/ }
-				{/*<div className={ " today" } onClick={ e => e.preventDefault() }>*/ }
-				{
-					Events && Events.items && Events.items.map(
-						( item, i ) =>
-							<TweenRef key={ item._id + i }
-							          initial={ {
-								          height         : "20px",
-								          width          : "100%",
-								          //display        : "inline-block",
-								          backgroundColor: i % 2 ? "lightgrey" : "white",
-								          overflow       : "hidden"
-							          } }
-							          scrollableAnims={ {
-								          scrollY: anims.expandEvent(0, 50),
-							          } }
-							>
-								<div>
-									<Comps.Event record={ item }/>
-								</div>
-							</TweenRef>
-					)
-				}
-				{/*</div>*/ }
-				{/*</TweenRef>*/ }
+				map
 			</div>
 		);
 	}

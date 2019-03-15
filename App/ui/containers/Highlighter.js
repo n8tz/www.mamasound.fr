@@ -89,7 +89,7 @@ if ( typeof window !== "undefined" ) {
 	}
 )
 @scopeToProps("MountedItems", "Grid")
-@asTweener({ initialScrollPos: { scrollX: 100 } })
+//@asTweener({ initialScrollPos: { scrollX: 100 }, propagateAxes: { scrollY: true } })
 export default class Highlighter extends React.Component {
 	static propTypes = {};
 	state            = {};

@@ -13,6 +13,7 @@
  */
 
 import $super  from "$super";
+import moment  from "moment";
 import shortid from "shortid";
 
 import rscopes, {
@@ -26,7 +27,7 @@ export default {
 	...$super,
 	
 	@asStore
-	appState: {
+	appState        : {
 		selectedWidgetId: "rkUQHZrqM",
 		selectWidget( selectedWidgetId ) {
 			return { selectedWidgetId };
@@ -40,7 +41,105 @@ export default {
 		}
 	},
 	@asStore
-	widgets : {
+	GlobalEventQuery: {
+		etty : 'Event',
+		limit: 1000,
+		$apply( data, state ) {
+			if ( !state.query ) {
+				this.$actions.updateQuery()
+			}
+		},
+		updateQuery( dt = moment(), type ) {
+			let from = moment(dt).startOf('day').add(2, 'hour').unix() * 1000,
+			    to   = moment(dt).endOf('day').add(2, 'hour').unix() * 1000;
+			return {
+				query  : {
+					$or: [
+						
+						...([undefined, 'Tout-Montpellier', 'Concerts'].includes(type) && [
+							{
+								_cls    : 'Concert',
+								schedule: {
+									$elemMatch: {
+										startTM: {
+											'$gt': from,
+											'$lt': to
+										}
+									}
+								}
+							},
+							{
+								_cls   : 'Concert',
+								startTM: {
+									'$gt': from,
+									'$lt': to
+								}
+							}]),
+						...([undefined, 'Tout-Montpellier', 'Theatres'].includes(type) && [
+							{
+								_cls    : 'Theatre',
+								schedule: {
+									$elemMatch: {
+										startTM: {
+											'$gt': from,
+											'$lt': to
+										}
+									}
+								}
+							},
+							{
+								_cls   : 'Theatre',
+								startTM: {
+									'$gt': from,
+									'$lt': to
+								}
+							}]),
+						
+						...([undefined, 'Tout-Montpellier'].includes(type) && [
+							{
+								_cls     : 'Expo',
+								haveVerni: true,
+								verniTM  : {
+									'$gt': from,
+									'$lt': to
+								}
+							}]),
+						...(type == 'Expositions' && [{
+							_cls    : 'Expo',
+							schedule: {
+								$elemMatch: {
+									startTM: {
+										'$lt': from
+									},
+									endTM  : {
+										'$gt': to
+									}
+								}
+							}
+						}, {
+							$and: [
+								{
+									_cls   : 'Expo',
+									startTM: {
+										'$lt': from
+									},
+									endTM  : {
+										'$gt': to
+									}
+								}
+							]
+						}] || []),
+					]
+				},
+				limit  : 1000,
+				orderby: { startTM: 1 }
+				
+			};
+		}
+		
+	},
+	@asStore
+	widgets         : {
 		// initial state
 		items: [
 			//{

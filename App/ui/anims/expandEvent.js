@@ -12,3 +12,49 @@
  *  @contact : n8tz.js@gmail.com
  */
 
+var easingFn = require('d3-ease');
+var keys     = {
+	top  : '_y',
+	bot  : '_y',
+	right: '_x',
+	left : '_x'
+}, dirs      = {
+	top  : -1,
+	bot  : 1,
+	right: -1,
+	left : 1
+};
+export default function ( tmStart, duration, dir ) {
+	dir = dir || 'right';
+	
+	
+	return [
+		{
+			type    : "Tween",
+			from    : tmStart,
+			duration: 1 * duration,
+			easeFn  : easingFn.easeCircleIn,
+			apply   : {
+				height: 50,
+			}
+		},
+		//{
+		//	type    : "Tween",
+		//	from    : tmStart + .7 * duration,
+		//	duration: .3 * duration,
+		//	easeFn  : easingFn.easeCircleIn,
+		//	apply   : {
+		//		_z: .1,
+		//	}
+		//},
+		//{
+		//	type    : "Tween",
+		//	from    : tmStart + .1 * duration,
+		//	duration: .8 * duration,
+		//	easeFn  : easingFn.easeCircle,
+		//	apply   : {
+		//		rotateY: 180,
+		//	}
+		//}
+	]
+};
