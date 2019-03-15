@@ -119,11 +119,11 @@ export default class Highlighter extends React.Component {
 								<TweenRef key={ item._id }
 								          initial={ {
 									          perspective: "200px",
-									          width      : "200px",
-									          height     : "100px",
-									          margin     : "10px",
-									          display    : "inline-block",
-									          overflow   : "hidden"
+									          //width      : "200px",
+									          //height     : "100px",
+									          //margin     : "10px",
+									          //display    : "inline-block",
+									          //overflow   : "hidden"
 								          } }
 								          scrollableAnims={ {
 									          scrollY: anims.flyOut(i * 5, 100),

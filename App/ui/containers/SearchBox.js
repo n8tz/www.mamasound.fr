@@ -45,9 +45,8 @@ import {asTweener, TweenRef} from "react-rtween";
 		
 	}
 )
-@scopeToProps("Events")
-//@asTweener({ initialScrollPos: {}, propagateAxes: { scrollY: true } })
-export default class EventList extends React.Component {
+@scopeToProps("SearchValues")
+export default class SearchBox extends React.Component {
 	static propTypes = {};
 	state            = {};
 	
@@ -60,46 +59,9 @@ export default class EventList extends React.Component {
 		    state = this.state;
 		return (
 			<div
-				className={ "EventList container" }
+				className={ "SearchBox" }
 			>
-				
-				{/*<TweenRef*/ }
-				{/*id={ "today" }*/ }
-				{/*initial={ {*/ }
-				{/*_x    : 0,*/ }
-				{/*_y    : 0,*/ }
-				{/*top   : "0%",*/ }
-				{/*left  : "0%",*/ }
-				{/*bottom: "0px",*/ }
-				{/*width : "100%",*/ }
-				{/*//paddingTop: "150px"*/ }
-				{/*} }*/ }
-				{/*scrollableAnims={ scrollAnims }*/ }
-				{/*>*/ }
-				{/*<div className={ " today" } onClick={ e => e.preventDefault() }>*/ }
-				{
-					Events && Events.items && Events.items.map(
-						( item, i ) =>
-							<TweenRef key={ item._id + i }
-							          initial={ {
-								          height         : "20px",
-								          width          : "100%",
-								          //display        : "inline-block",
-								          backgroundColor: i % 2 ? "lightgrey" : "white",
-								          overflow       : "hidden"
-							          } }
-							          scrollableAnims={ {
-								          scrollY: anims.expandEvent(0, 50),
-							          } }
-							>
-								<div>
-									<Comps.Event record={ item }/>
-								</div>
-							</TweenRef>
-					)
-				}
-				{/*</div>*/ }
-				{/*</TweenRef>*/ }
+				searchBox
 			</div>
 		);
 	}

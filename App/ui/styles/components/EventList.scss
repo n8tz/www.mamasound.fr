@@ -15,10 +15,15 @@
 .EventList {
   touch-action: none;
   overflow: hidden;
-  //width: 100%;
   height: 100%;
   position: relative;
+  @media screen and (max-width: $tablet-portrait-breakpoint) {
+
+    width: 100%;
+  }
+
   .today {
-    position: absolute;
+    //position: absolute;
+    margin-left: 200px;
   }
 }

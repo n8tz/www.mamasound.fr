@@ -1,0 +1,56 @@
+/*!
+ * Copyright (c) 2018. Wise Wild Web
+ *
+ * This File is part of Caipi and under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License
+ * Full license at https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+ *
+ *  @author : Nathanael Braun
+ *  @contact : caipilabs@gmail.com
+ */
+
+// layout
+// $container-width: 1170px;
+$box_names: 'xs' 'ss' 's' 'm' 'l' 'sl' 'xl';
+$box_sizes: 32px 64px 128px 192px 256px 512px 1024px;
+
+// breakpoints
+$tablet-landscape-breakpoint: 1200px;
+$tablet-portrait-breakpoint: 980px;
+$smartphone-landscape-breakpoint: 720px;
+$smartphone-portrait-breakpoint: 480px;
+
+
+// colors
+$font-color--dark: #333;
+$font-color--light: #fff;
+$background--light: #fff;
+$background--dark: #222;
+$blue: #1f8de2;
+$light-blue: #18a0ff;
+$green: #1fe27b;
+$red: #e21f3f;
+$orange: #ff7a12;
+
+$facebook-color: #3B5CA8;
+$google-color: #DC4E38;
+$twitter-color: #5EBEF2;
+$youtube-color: #b90000;
+
+
+// spacing
+$full-space: 40px;
+$half-space: 20px;
+
+
+// font sizing
+$font-size--xs: 10px;
+$font-size--sm: 12px;
+$font-size--md: 16px;
+$font-size--lg: 24px;
+$font-size--xl: 32px;
+
+
+// gutters
+$gutter-width: 15px;
+$slider-gutter-width: 2px;
+$slider-padding: 2em;

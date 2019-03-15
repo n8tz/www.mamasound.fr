@@ -35,7 +35,7 @@ export default function ( tmStart, duration, dir ) {
 			duration: 1 * duration,
 			easeFn  : easingFn.easeCircleIn,
 			apply   : {
-				height: 50,
+				height: 30,
 			}
 		},
 		//{

@@ -14,15 +14,9 @@
 
 import React                                 from 'react';
 import {reScope, scopeToProps, propsToScope} from "rscopes";
-import MongoQueries                          from 'App/stores/MongoQueries';
-import Highlighter                           from 'App/ui/containers/Highlighter';
-import EventList                             from 'App/ui/containers/EventList';
-import EventMap                              from 'App/ui/containers/EventMap';
+import Blocks                                from 'App/ui/containers/(*).js';
 
 import {withStateMap, asRef, asStore} from "rescope-spells";
-import Fab                            from '@material-ui/core/Fab';
-import DeleteIcon                     from '@material-ui/icons/Delete';
-import SaveIcon                       from '@material-ui/icons/Save';
 import {asTweener, TweenRef}          from "react-rtween";
 
 var easingFn = require('d3-ease');
@@ -150,13 +144,14 @@ export default class Home extends React.Component {
 								width     : "100%",
 								background: "blue",
 							} }>
-							<Highlighter/>
+							<Blocks.Highlighter/>
 						</div>
 					</TweenRef>
 					<TweenRef
 						id={ "events" }
 						initial={ {
-							height: "20%"
+							position: "relative",
+							height  : "20%"
 						} }
 					>
 						<div
@@ -165,7 +160,8 @@ export default class Home extends React.Component {
 								width     : "100%",
 								background: "green",
 							} }>
-							<EventList/>
+							<Blocks.EventList/>
+							
 						</div>
 					</TweenRef>
 					<TweenRef
@@ -180,7 +176,7 @@ export default class Home extends React.Component {
 								width     : "100%",
 								background: "cyan",
 							} }>
-							<EventMap/>
+							<Blocks.EventMap/>
 						</div>
 					</TweenRef>
 				</div>
