@@ -27,5 +27,10 @@
   .today {
     //position: absolute;
     margin-left: 200px;
+    .Event{
+
+      @include use_hvCenteredContent();
+      height: 100%;
+    }
   }
 }

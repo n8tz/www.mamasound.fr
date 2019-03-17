@@ -35,18 +35,18 @@ export default function ( tmStart, duration, dir ) {
 			duration: 1 * duration,
 			//easeFn  : easingFn.easeCircleIn,
 			apply   : {
-				height: "30px",
+				height: "50px",
 			}
 		},
-		//{
-		//	type    : "Tween",
-		//	from    : tmStart + .7 * duration,
-		//	duration: .3 * duration,
-		//	easeFn  : easingFn.easeCircleIn,
-		//	apply   : {
-		//		_z: .1,
-		//	}
-		//},
+		{
+			type    : "Tween",
+			from    : tmStart,
+			duration: 1 * duration,
+			//easeFn  : easingFn.easeCircleIn,
+			apply   : {
+				fontSize       : "10px"
+			}
+		},
 		//{
 		//	type    : "Tween",
 		//	from    : tmStart + .1 * duration,

@@ -72,21 +72,21 @@ export default class Home extends React.Component {
 		{
 			type    : "Tween",
 			target  : "map",
-			from    : 90,
-			duration: 20,
-			easeFn  : easingFn.easePolyInOut,
+			from    : 65,
+			duration: 35,
+			//easeFn  : easingFn.easePolyInOut,
 			apply   : {
-				height: 20,
+				height: 30,
 			}
 		},
 		{
 			type    : "Tween",
 			target  : "events",
-			from    : 90,
-			duration: 20,
-			easeFn  : easingFn.easePolyInOut,
+			from    : 65,
+			duration: 35,
+			//easeFn  : easingFn.easePolyInOut,
 			apply   : {
-				height: -20,
+				height: -30,
 			}
 		}
 	];
@@ -161,7 +161,7 @@ export default class Home extends React.Component {
 								background: "green",
 							} }>
 							<Blocks.EventList/>
-							
+						
 						</div>
 					</TweenRef>
 					<TweenRef

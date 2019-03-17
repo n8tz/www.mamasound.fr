@@ -100,6 +100,7 @@ export default class EventList extends React.Component {
 								<TweenRef key={ item._id + i }
 								          initial={ {
 									          height         : "20px",
+									          fontSize       : "18px",
 									          width          : "100%",
 									          //display        : "inline-block",
 									          backgroundColor: i % 2 ? "lightgrey" : "white",
@@ -132,6 +133,25 @@ export default class EventList extends React.Component {
 								//height: "100%",
 							} }>
 							<Blocks.SearchBox/>
+						</div>
+					</TweenRef>
+					<TweenRef
+						id={ "searchBar" }
+						initial={ {
+							position  : "absolute",
+							background: "pink",
+							bottom    : "0px",
+							left      : "0px",
+							width     : "100%",
+							height    : "75px"
+						} }
+					>
+						<div
+							style={ {
+								//width : "100%",
+								//height: "100%",
+							} }>
+							<Blocks.SearchBar/>
 						</div>
 					</TweenRef>
 					{/*</div>*/ }
