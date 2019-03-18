@@ -15,7 +15,7 @@ import PropTypes                             from "prop-types";
 import React                                 from "react";
 import {Rnd}                                 from "react-rnd";
 import {reScope, scopeToProps, propsToScope} from "rscopes";
-import CloseIcon                             from '@material-ui/icons/Close';
+import geolib                                from 'geolib';
 import moment                                from 'moment';
 import IconButton                            from '@material-ui/core/IconButton';
 import {withStateMap, asRef, asStore}        from "rescope-spells";
@@ -33,9 +33,25 @@ if ( typeof window !== "undefined" ) {
 	var LeafletCss = require('leaflet/dist/leaflet.css');
 	var Leaflet    = require('leaflet');
 	var {
-		    LayerGroup, Map, Popup,
+		    LayerGroup, Map, Popup, Marker,
 		    Rectangle, TileLayer, ZoomControl
 	    }          = require("react-leaflet");
+
+// fix webpack messing with leaflet markers icon
+	Leaflet.Icon.Default.imagePath = '.';
+	Leaflet.Icon.Default.mergeOptions({
+		                                  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+		                                  iconUrl      : require('leaflet/dist/images/marker-icon.png'),
+		                                  shadowUrl    : require('leaflet/dist/images/marker-shadow.png'),
+	                                  });
+	
+	Leaflet.Marker.prototype.options.icon = Leaflet.icon({
+		                                                     iconRetinaUrl: require(
+			                                                     'leaflet/dist/images/marker-icon-2x.png'),
+		                                                     iconUrl      : require('leaflet/dist/images/marker-icon.png'),
+		                                                     shadowUrl    : require(
+			                                                     'leaflet/dist/images/marker-shadow.png'),
+	                                                     });
 }
 
 @reScope(
@@ -51,15 +67,7 @@ if ( typeof window !== "undefined" ) {
 		@withStateMap(
 			{
 				@asRef
-				items  : "Queries.events.items",
-				imgKeys: ["previewImage"]
-			}
-		)
-		WithImgList : stores.ImgFieldsLoader,
-		@withStateMap(
-			{
-				@asRef
-				items      : "WithImgList.items",
+				items      : "Queries.events.items",
 				toMountKeys: ["category", "place"]
 			}
 		)
@@ -67,7 +75,36 @@ if ( typeof window !== "undefined" ) {
 		@asStore
 		Events      : {
 			@asRef
-			items: "MountedItems.items",
+			MountedItems: "MountedItems",
+			$apply( d, { MountedItems: { items, refs } } ) {
+				//debugger;
+				let POIs = [], center;
+				items && items.forEach(
+					event => {
+						let place = refs[event.place.objId];
+						place.address && place.address.geoPoint && POIs.push({
+							                                                     geoPoint: place.address.geoPoint,
+							                                                     event,
+							                                                     place
+						                                                     });
+						
+					}
+				)
+				center = POIs.length && geolib.getCenter(POIs.map(poi => poi.geoPoint)) || {
+					latitude : "43.618091",
+					longitude: "3.876624"
+				};
+				
+				return {
+					items,
+					refs,
+					POIs,
+					center: {
+						lat: center.latitude,
+						lng: center.longitude
+					}
+				}
+			}
 			
 		},
 		
@@ -81,7 +118,7 @@ export default class EventMap extends React.Component {
 	
 	render() {
 		let {
-			    record: { position, size } = {},
+			    Events: { center = {}, POIs = [] } = {},
 			    Events, children, disabled,
 			    $actions, onSelect, selected
 		    }     = this.props,
@@ -90,14 +127,20 @@ export default class EventMap extends React.Component {
 			<div
 				className={ "EventMap container" }
 			>
-				<Map center={ [51.505, -0.09] } zoom={ 13 }>
+				<Map center={ center } zoom={ 13 }>
 					<TileLayer
 						url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 						attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
 					/>
-					{/*<Marker position={position}>*/ }
-					{/*<Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>*/ }
-					{/*</Marker>*/ }
+					
+					{
+						POIs.map(
+							( { geoPoint, event } ) =>
+								<Marker position={ { lat: geoPoint[1], lng: geoPoint[0] } } key={ event._id }>
+									<Popup>{ event.title }</Popup>
+								</Marker>
+						)
+					}
 				</Map>
 			</div>
 		);

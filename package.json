@@ -83,6 +83,7 @@
     "dot-tpl-loader": "^1.2.1",
     "express": "^4.16.3",
     "extract-hoc": "0.0.5",
+    "geolib": "^2.0.24",
     "is": "^3.3.0",
     "js-file-download": "^0.4.4",
     "knex-schemer": "^0.1.17",

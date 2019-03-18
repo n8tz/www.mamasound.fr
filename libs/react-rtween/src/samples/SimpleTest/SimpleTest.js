@@ -30,9 +30,11 @@ let pushIn        = function ( target ) {
 				duration: 500,
 				easeFn  : easingFn.easeCircleIn,
 				apply   : {
-					_z    : -.2,
-					filter: {
-						blur: 10
+					transform: [{}, {
+						translateZ: "-.2box"
+					}],
+					filter   : {
+						sepia: 100
 					}
 				}
 			},
@@ -43,9 +45,11 @@ let pushIn        = function ( target ) {
 				duration: 500,
 				easeFn  : easingFn.easeCircleIn,
 				apply   : {
-					_z    : .2,
-					filter: {
-						blur: -10
+					transform: [{}, {
+						translateZ: ".2box"
+					}],
+					filter   : {
+						sepia: -100
 					}
 				}
 			},
@@ -56,7 +60,9 @@ let pushIn        = function ( target ) {
 				duration: 500,
 				easeFn  : easingFn.easeCircle,
 				apply   : {
-					rotateY: 180,
+					transform: [{}, {
+						rotateY: 180,
+					}],
 				}
 			}
 		]
@@ -67,59 +73,68 @@ const scrollAnims = {
 		{
 			type    : "Tween",
 			from    : 0,
-			duration: 150,
+			duration: 200,
 			apply   : {
-				_z: -.2,
+				transform: {
+					translateX: "-1box"
+				},
 			}
 		},
 		{
 			type    : "Tween",
-			from    : 25,
-			duration: 150,
+			from    : 0,
+			duration: 100,
 			apply   : {
-				_x: .5,
+				transform: {
+					rotateX: 30,
+				},
 			}
 		},
 		{
 			type    : "Tween",
-			from    : 50,
-			duration: 150,
+			from    : 100,
+			duration: 100,
 			apply   : {
-				rotateY: -30,
+				transform: {
+					rotateX: 30,
+				},
 			}
 		}
 	],
 	scrollY: [
 		{
 			type    : "Tween",
-			from    : -150,
-			duration: 150,
-			apply   : {
-				_y: .25,
-			}
-		},
-		{
-			type    : "Tween",
 			from    : 0,
-			duration: 150,
+			duration: 200,
 			apply   : {
-				_y    : .25,
-				filter: {
-					invert: 100
+				transform: {
+					translateY: "-1box"
 				},
 			}
 		},
 		{
 			type    : "Tween",
-			from    : 50,
-			duration: 150,
+			from    : 0,
+			duration: 100,
 			apply   : {
-				rotateX: -30,
+				transform: {
+					rotateY: -30,
+				},
+			}
+		},
+		{
+			type    : "Tween",
+			from    : 100,
+			duration: 100,
+			apply   : {
+				transform: {
+					rotateY: -30,
+				},
 			}
 		}
 	]
 };
-@asTweener({ initialScrollPos: { scrollX: 100, scrollY: 10 }, enableMouseDrag: true })
+@asTweener({ initialScrollPos: { scrollX: 100, scrollY: 100 }, enableMouseDrag: true })
 export default class Sample extends React.Component {
 	state = {
 		count: 0
@@ -154,10 +169,10 @@ export default class Sample extends React.Component {
 		} }>
 			hello ! { this.state.count } concurent anims <br/>
 			scrollPos : { this._.scrollPos } / { this._.scrollableArea }
-			<br/>
+			<br/>y:
 			<button onClick={ e => this.scrollTo(0, 500) }>( go to 0 )</button>
 			<button onClick={ e => this.scrollTo(200, 500) }>( go to 200 )</button>
-			<br/>
+			<br/>x:
 			<button onClick={ e => this.scrollTo(0, 500, "scrollX") }>( go to 0 )</button>
 			<button onClick={ e => this.scrollTo(200, 500, "scrollX") }>( go to 200 )</button>
 			
@@ -172,9 +187,17 @@ export default class Sample extends React.Component {
 					backgroundColor: "red",
 					overflow       : "hidden",
 					margin         : "-7.5em 0 0 -7.5em",
-					top            : "0px",
-					left           : "0px",
-					_x             : .5, _y: .5, _z: 0, rotateY: 0, opacity: .75
+					top            : "0%",
+					left           : "0%",
+					
+					transform: {
+						translateZ: "0box",
+						translateX: "1box",
+						translateY: "1box",
+						rotateX   : -30,
+						rotateY   : 30,
+						//translateZ: "100px"
+					}
 				} }
 				scrollableAnims={ scrollAnims }
 			>
