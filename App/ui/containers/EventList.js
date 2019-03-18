@@ -83,9 +83,9 @@ export default class EventList extends React.Component {
 									          backgroundColor: i % 2 ? "lightgrey" : "white",
 									          overflow       : "hidden"
 								          } }
-								          scrollableAnims={ {
-									          scrollY: anims.expandEvent(0, 50),
-								          } }
+								          //scrollableAnims={ {
+									      //    scrollY: anims.expandEvent(0, 50),
+								          //} }
 								>
 									<div>
 										<Comps.Event record={ item }/>

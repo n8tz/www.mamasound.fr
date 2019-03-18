@@ -20,6 +20,7 @@ import moment                                from 'moment';
 import IconButton                            from '@material-ui/core/IconButton';
 import {withStateMap, asRef, asStore}        from "rescope-spells";
 import anims                                 from 'App/ui/anims/(*).js';
+import Chip                                  from '@material-ui/core/Chip';
 
 import stores                from 'App/stores/(*).js';
 import Comps                 from 'App/ui/components/(*).js';
@@ -27,6 +28,28 @@ import {asTweener, TweenRef} from "react-rtween";
 
 @reScope(
 	{
+		@asStore
+		Tags        : {
+			@asRef
+			events: "EventList",
+			
+			$apply( data, { events: { items = [], refs } } ) {
+				let available = [], seen = {};
+				items.forEach(
+					event => {
+						let style = event.category && refs[event.category.objId];
+						style && style.name
+							        .replace(/([\.\(\)\/\\]+)/ig, '|')
+							        .split('|')
+							        .filter(t => (!!t && /\s*/.test(t)))
+							        .filter(t => (seen[t] || (seen[t] = true, false)))
+					}
+				)
+				
+				return { available: Object.keys(seen) };
+			},
+			
+		},
 		@asStore
 		SearchValues: {
 			tags  : [],
@@ -45,7 +68,7 @@ import {asTweener, TweenRef} from "react-rtween";
 		
 	}
 )
-@scopeToProps("SearchValues")
+@scopeToProps("SearchValues", "Tags")
 export default class SearchBar extends React.Component {
 	static propTypes = {};
 	state            = {};
@@ -53,7 +76,7 @@ export default class SearchBar extends React.Component {
 	render() {
 		let {
 			    record: { position, size } = {},
-			    Events, children, disabled,
+			    Tags, children, disabled,
 			    $actions, onSelect, selected
 		    }     = this.props,
 		    state = this.state;
@@ -61,7 +84,16 @@ export default class SearchBar extends React.Component {
 			<div
 				className={ "SearchBar" }
 			>
-				SearchBar
+				{ Tags && Tags.available.map(
+					tag =>
+						<Chip
+							//icon={<FaceIcon />}
+							label={ tag }
+							//onClick={handleClick}
+							//onDelete={handleDelete}
+							//className={classes.chip}
+						/>
+				) }
 			</div>
 		);
 	}

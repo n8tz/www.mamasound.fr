@@ -66,7 +66,7 @@ if ( typeof window !== "undefined" ) {
 				items && items.forEach(
 					event => {
 						let place = refs[event.place.objId];
-						place.address && place.address.geoPoint && POIs.push({
+						place&&place.address && place.address.geoPoint && POIs.push({
 							                                                     geoPoint: place.address.geoPoint,
 							                                                     event,
 							                                                     place
@@ -74,10 +74,10 @@ if ( typeof window !== "undefined" ) {
 						
 					}
 				)
-				center = POIs.length && geolib.getCenter(POIs.map(poi => poi.geoPoint)) || {
+				center = {
 					latitude : "43.618091",
 					longitude: "3.876624"
-				};
+				};//POIs.length && geolib.getCenter(POIs.map(poi => poi.geoPoint)) ||
 				
 				return {
 					items,
