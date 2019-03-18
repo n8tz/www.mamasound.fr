@@ -45,6 +45,7 @@ const cssDemux = {
 	_x           : transforms,
 	_y           : transforms,
 	_z           : transforms,
+	blur         : transforms,
 	perspective  : transforms
 };
 import cssAnimProps         from 'css-animated-properties'

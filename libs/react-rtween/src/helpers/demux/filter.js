@@ -25,50 +25,40 @@ const
 		return Math.round(v * p) / p;
 	},
 	defaultUnits = {
-		//matrix     : true,
-		//translate  : 'px',
-		translateX : 'px',
-		translateY : 'px',
-		scale      : 'px',
-		scaleX     : 'px',
-		scaleY     : 'px',
-		rotate     : 'deg',
-		//skew       : 'deg',
-		skewX      : 'deg',
-		skewY      : 'deg',
-		//matrix3d   : true,
-		//translate3d: true,
-		translateZ : 'px',
-		//scale3d    : true,
-		scaleZ     : 'px',
-		//rotate3d   : true,
-		rotateX    : 'deg',
-		rotateY    : 'deg',
-		rotateZ    : 'deg',
-		perspective: 'px',
+		blur      : 'px',
+		brightness: '%',
+		contrast  : '%',
+		dropShadow: true,
+		grayscale : '%',
+		hueRotate : 'deg',
+		invert    : "%",
+		opacity   : "%",
+		saturate  : "%",
+		sepia     : "%"
 	};
+const filters    = {};
 
 function demux( key, tweenable, target, data, box ) {
 	
-	if ( data["transform_head"] === key ) {
-		let transforms = "";
+	if ( data["filter_head"] === key ) {
+		let filters = "";
 		Object.keys(data[key]).forEach(
 			fkey => {
 				let dkey        = key + '_' + fkey;
 				data[key][fkey] = true;
-				transforms += fkey + "(" + floatCut(tweenable[dkey], 2) + data[dkey] + ") ";
+				filters += fkey + "(" + floatCut(tweenable[dkey], 2) + data[dkey] + ") ";
 			}
 		)
-		target.transform = transforms;
+		target.filter = filters;
 	}
 	
 }
 
 export default ( key, value, target, data, initials ) => {
 	
-	data["transform_head"] = data["transform_head"] || key;
-	data[key]              = data[key] || {};
-	initials[key]          = 0;
+	data["filter_head"] = data["filter_head"] || key;
+	data[key]           = data[key] || {};
+	initials[key]       = 0;
 	
 	Object.keys(value).forEach(
 		fkey => {
