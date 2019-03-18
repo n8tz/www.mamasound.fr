@@ -25,7 +25,11 @@ export default {
 	
 	@asStore
 	appState        : {
-		selectedWidgetId: "rkUQHZrqM",
+		
+		curDay      : undefined,
+		curEventType: undefined,
+		curTags     : undefined,
+		
 		selectWidget( selectedWidgetId ) {
 			return { selectedWidgetId };
 		},

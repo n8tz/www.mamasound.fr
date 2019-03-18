@@ -39,14 +39,23 @@ import {asTweener, TweenRef} from "react-rtween";
 					event => {
 						let style = event.category && refs[event.category.objId];
 						style && style.name
-							        .replace(/([\.\(\)\/\\]+)/ig, '|')
-							        .split('|')
-							        .filter(t => (!!t && /\s*/.test(t)))
-							        .filter(t => (seen[t] || (seen[t] = true, false)))
+						              .replace(/([\.\(\)\/\\]+)/ig, '|')
+						              .split('|')
+						              .filter(t => (!!t && /\s*/.test(t)))
+						              .filter(t => (seen[t] && seen[t]++ || (seen[t] = 1, false)))
 					}
 				)
 				
-				return { available: Object.keys(seen) };
+				return {
+					available: Object
+						.keys(seen)
+						.sort(( a, b ) => (seen[a] < seen[b]
+						                   ? 1
+						                   : -1)).map(tag => ({
+							title: tag,
+							count: seen[tag]
+						}))
+				};
 			},
 			
 		},
@@ -88,7 +97,7 @@ export default class SearchBar extends React.Component {
 					tag =>
 						<Chip
 							//icon={<FaceIcon />}
-							label={ tag }
+							label={ tag.title + " " + tag.count }
 							//onClick={handleClick}
 							//onDelete={handleDelete}
 							//className={classes.chip}

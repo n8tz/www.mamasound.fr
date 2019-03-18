@@ -159,6 +159,7 @@ export default class Home extends React.Component {
 							style={ {
 								width     : "100%",
 								background: "green",
+								overflow  : 'hidden'
 							} }>
 							<Blocks.EventList/>
 						
@@ -175,6 +176,7 @@ export default class Home extends React.Component {
 							style={ {
 								width     : "100%",
 								background: "cyan",
+								overflow  : 'hidden',
 							} }>
 							<Blocks.EventMap/>
 						</div>

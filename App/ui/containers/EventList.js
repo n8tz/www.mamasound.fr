@@ -31,7 +31,7 @@ import {asTweener, TweenRef} from "react-rtween";
 	{
 		
 		@asStore
-		Events      : {
+		Events: {
 			@asRef
 			items: "EventList.items",
 			
@@ -83,9 +83,9 @@ export default class EventList extends React.Component {
 									          backgroundColor: i % 2 ? "lightgrey" : "white",
 									          overflow       : "hidden"
 								          } }
-								          //scrollableAnims={ {
-									      //    scrollY: anims.expandEvent(0, 50),
-								          //} }
+									//scrollableAnims={ {
+									//    scrollY: anims.expandEvent(0, 50),
+									//} }
 								>
 									<div>
 										<Comps.Event record={ item }/>
@@ -120,6 +120,7 @@ export default class EventList extends React.Component {
 					initial={ {
 						position  : "absolute",
 						background: "pink",
+						overflow  : "hidden",
 						bottom    : "0px",
 						left      : "0px",
 						width     : "100%",
