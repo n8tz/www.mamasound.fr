@@ -53,6 +53,19 @@ export default class ImgFieldsLoader extends Store {
 		items = items && items.map(
 			item => state.imgKeys.reduce(( item, key ) => ({ ...item, [key]: getSrc(item[key]) }), item)
 		) || state.items;
+		
+		
+		items&&items.forEach(
+			event => {
+				let style = event.category && refs[event.category.objId];
+				if ( style )
+					refs[event.category.objId] = state.imgKeys.reduce(( item, key ) => ({
+						...item,
+						[key]: getSrc(item[key])
+					}), refs[event.category.objId])
+			}
+		)
+		
 		return { items, refs };
 	}
 	

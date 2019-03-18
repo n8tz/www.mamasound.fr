@@ -76,7 +76,7 @@ export default class EventList extends React.Component {
 							( item, i ) =>
 								<TweenRef key={ item._id + i }
 								          initial={ {
-									          height         : "20px",
+									          height         : "30px",
 									          fontSize       : "18px",
 									          width          : "100%",
 									          //display        : "inline-block",
@@ -124,7 +124,7 @@ export default class EventList extends React.Component {
 						bottom    : "0px",
 						left      : "0px",
 						width     : "100%",
-						height    : "75px"
+						height    : "50px"
 					} }
 				>
 					<div

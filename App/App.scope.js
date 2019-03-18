@@ -162,7 +162,7 @@ export default {
 			items  : "MountedEventList.items",
 			@asRef
 			refs   : "MountedEventList.refs",
-			imgKeys: ["previewImage"]
+			imgKeys: ["previewImage", "icon"]
 		}
 	)
 	EventList       : stores.ImgFieldsLoader,

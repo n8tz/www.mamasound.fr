@@ -14,5 +14,6 @@
 
 export default {
 	STATIC_URL: "static.mamasound.fr",
+	PUBLIC_URL: "www.mamasound.fr",
 	...require('$super')
 };

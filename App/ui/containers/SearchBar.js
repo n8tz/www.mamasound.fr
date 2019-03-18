@@ -17,10 +17,11 @@ import {Rnd}                                 from "react-rnd";
 import {reScope, scopeToProps, propsToScope} from "rscopes";
 import CloseIcon                             from '@material-ui/icons/Close';
 import moment                                from 'moment';
-import IconButton                            from '@material-ui/core/IconButton';
+import Badge from '@material-ui/core/Badge';
 import {withStateMap, asRef, asStore}        from "rescope-spells";
 import anims                                 from 'App/ui/anims/(*).js';
 import Chip                                  from '@material-ui/core/Chip';
+import Avatar                                from '@material-ui/core/Avatar';
 
 import stores                from 'App/stores/(*).js';
 import Comps                 from 'App/ui/components/(*).js';
@@ -34,7 +35,7 @@ import {asTweener, TweenRef} from "react-rtween";
 			events: "EventList",
 			
 			$apply( data, { events: { items = [], refs } } ) {
-				let available = [], seen = {};
+				let available = [], seen = {}, styles = {};
 				items.forEach(
 					event => {
 						let style = event.category && refs[event.category.objId];
@@ -43,16 +44,20 @@ import {asTweener, TweenRef} from "react-rtween";
 						              .split('|')
 						              .filter(t => (!!t && /\s*/.test(t)))
 						              .filter(t => (seen[t] && seen[t]++ || (seen[t] = 1, false)))
+						              .forEach(t => (styles[t] = styles[t] || style))
 					}
 				)
 				
 				return {
 					available: Object
 						.keys(seen)
+						.filter(t => (!!styles[t]))
 						.sort(( a, b ) => (seen[a] < seen[b]
 						                   ? 1
-						                   : -1)).map(tag => ({
+						                   : -1))
+						.map(tag => ({
 							title: tag,
+							style: styles[tag] || {},
 							count: seen[tag]
 						}))
 				};
@@ -96,8 +101,12 @@ export default class SearchBar extends React.Component {
 				{ Tags && Tags.available && Tags.available.map(
 					tag =>
 						<Chip
-							//icon={<FaceIcon />}
-							label={ tag.title + " " + tag.count }
+							icon={
+								//<Badge badgeContent={ tag.count} color="secondary" >
+									<img alt={ tag.title } src={ tag.style.icon } className={"icon"}/>
+								//</Badge>
+							}
+							label={ tag.title }
 							//onClick={handleClick}
 							//onDelete={handleDelete}
 							//className={classes.chip}
