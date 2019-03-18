@@ -48,12 +48,12 @@ export default class ImgFieldsLoader extends Store {
 	//};
 	
 	
-	apply( d = {}, state, { items } ) {
+	apply( d = {}, state, { items, refs } ) {
 		//debugger
 		items = items && items.map(
 			item => state.imgKeys.reduce(( item, key ) => ({ ...item, [key]: getSrc(item[key]) }), item)
 		) || state.items;
-		return { items };
+		return { items, refs };
 	}
 	
 }

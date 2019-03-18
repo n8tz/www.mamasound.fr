@@ -30,33 +30,10 @@ import {asTweener, TweenRef} from "react-rtween";
 @reScope(
 	{
 		
-		@withStateMap(
-			{
-				@asRef
-				events: "GlobalEventQuery",
-			}
-		)
-		Queries     : stores.MongoQueries,
-		@withStateMap(
-			{
-				@asRef
-				items  : "Queries.events.items",
-				imgKeys: ["previewImage"]
-			}
-		)
-		WithImgList : stores.ImgFieldsLoader,
-		@withStateMap(
-			{
-				@asRef
-				items      : "WithImgList.items",
-				toMountKeys: ["category", "place"]
-			}
-		)
-		MountedItems: stores.MongoListRefsLoader,
 		@asStore
 		Events      : {
 			@asRef
-			items: "MountedItems.items",
+			items: "EventList.items",
 			
 		},
 		

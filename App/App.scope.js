@@ -16,11 +16,8 @@ import $super  from "$super";
 import moment  from "moment";
 import shortid from "shortid";
 
-import rscopes, {
-	spells
-} from "rscopes";
-
-let { asStore, asScope } = spells;
+import {withStateMap, asRef, asStore} from "rescope-spells";
+import stores                         from 'App/stores/(*).js';
 
 
 export default {
@@ -139,6 +136,32 @@ export default {
 		}
 		
 	},
+	
+	@withStateMap(
+		{
+			@asRef
+			events: "GlobalEventQuery",
+		}
+	)
+	Queries         : stores.MongoQueries,
+	@withStateMap(
+		{
+			@asRef
+			items      : "Queries.events.items",
+			toMountKeys: ["category", "place"]
+		}
+	)
+	MountedEventList: stores.MongoListRefsLoader,
+	@withStateMap(
+		{
+			@asRef
+			items  : "MountedEventList.items",
+			@asRef
+			refs   : "MountedEventList.refs",
+			imgKeys: ["previewImage"]
+		}
+	)
+	EventList       : stores.ImgFieldsLoader,
 	@asStore
 	widgets         : {
 		// initial state

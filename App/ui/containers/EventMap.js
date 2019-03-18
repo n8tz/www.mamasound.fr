@@ -57,27 +57,11 @@ if ( typeof window !== "undefined" ) {
 @reScope(
 	{
 		
-		@withStateMap(
-			{
-				@asRef
-				events: "GlobalEventQuery",
-			}
-		)
-		Queries     : stores.MongoQueries,
-		@withStateMap(
-			{
-				@asRef
-				items      : "Queries.events.items",
-				toMountKeys: ["category", "place"]
-			}
-		)
-		MountedItems: stores.MongoListRefsLoader,
 		@asStore
-		Events      : {
+		Events: {
 			@asRef
-			MountedItems: "MountedItems",
+			MountedItems: "EventList",
 			$apply( d, { MountedItems: { items, refs } } ) {
-				//debugger;
 				let POIs = [], center;
 				items && items.forEach(
 					event => {
