@@ -14,15 +14,15 @@
 
 var easingFn = require('d3-ease');
 var keys     = {
-	top  : '_y',
-	bot  : '_y',
-	right: '_x',
-	left : '_x'
+	top  : 'translateY',
+	bot  : 'translateY',
+	right: 'translateX',
+	left : 'translateX'
 }, dirs      = {
-	top  : -1,
-	bot  : 1,
-	right: -1,
-	left : 1
+	top  : "-1box",
+	bot  : "1box",
+	right: "-1box",
+	left : "1box"
 };
 export default function ( tmStart, duration, dir ) {
 	dir = dir || 'right';
@@ -35,9 +35,11 @@ export default function ( tmStart, duration, dir ) {
 			duration: .4 * duration,
 			easeFn  : easingFn.easeSinOut,
 			apply   : {
-				_z     : .06,
-				rotateY: -25,
-				rotateX: 25
+				transform: {
+					translateZ: '.06box',
+					rotateY   : -25,
+					rotateX   : 25
+				}
 			}
 		},
 		{
@@ -46,7 +48,9 @@ export default function ( tmStart, duration, dir ) {
 			duration: .9 * duration,
 			easeFn  : easingFn.easeSinOut,
 			apply   : {
-				[keys[dir]]: dirs[dir]
+				transform: {
+					[keys[dir]]: dirs[dir]
+				}
 			}
 		},
 		{
@@ -55,7 +59,9 @@ export default function ( tmStart, duration, dir ) {
 			duration: .9 * duration,
 			easeFn  : easingFn.easeSinIn,
 			apply   : {
-				y: -300
+				transform: {
+					translateY: '-300px',
+				}
 			}
 		},
 		{
@@ -64,10 +70,12 @@ export default function ( tmStart, duration, dir ) {
 			duration: .6 * duration,
 			easeFn  : easingFn.easeSinIn,
 			apply   : {
-				_z     : .12,
-				rotateY: -20,
-				rotateX: 20,
-				// rotate : -50
+				
+				transform: {
+					translateZ: '.12box',
+					rotateY   : -20,
+					rotateX   : 20
+				}
 			}
 		},
 		{

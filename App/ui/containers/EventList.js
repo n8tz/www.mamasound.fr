@@ -93,47 +93,47 @@ export default class EventList extends React.Component {
 								</TweenRef>
 						)
 					}
-					<TweenRef
-						id={ "searchBox" }
-						initial={ {
-							position  : "absolute",
-							background: "yellow",
-							top       : "10px",
-							left      : "0px",
-							width     : "200px",
-							height    : "250px"
-						} }
-					>
-						<div
-							style={ {
-								//width : "100%",
-								//height: "100%",
-							} }>
-							<Blocks.SearchBox/>
-						</div>
-					</TweenRef>
-					<TweenRef
-						id={ "searchBar" }
-						initial={ {
-							position  : "absolute",
-							background: "pink",
-							bottom    : "0px",
-							left      : "0px",
-							width     : "100%",
-							height    : "75px"
-						} }
-					>
-						<div
-							style={ {
-								//width : "100%",
-								//height: "100%",
-							} }>
-							<Blocks.SearchBar/>
-						</div>
-					</TweenRef>
 					{/*</div>*/ }
 					{/*</TweenRef>*/ }
 				</div>
+				<TweenRef
+					id={ "searchBox" }
+					initial={ {
+						position  : "absolute",
+						background: "yellow",
+						top       : "10px",
+						left      : "0px",
+						width     : "200px",
+						height    : "250px"
+					} }
+				>
+					<div
+						style={ {
+							//width : "100%",
+							//height: "100%",
+						} }>
+						<Blocks.SearchBox/>
+					</div>
+				</TweenRef>
+				<TweenRef
+					id={ "searchBar" }
+					initial={ {
+						position  : "absolute",
+						background: "pink",
+						bottom    : "0px",
+						left      : "0px",
+						width     : "100%",
+						height    : "75px"
+					} }
+				>
+					<div
+						style={ {
+							//width : "100%",
+							//height: "100%",
+						} }>
+						<Blocks.SearchBar/>
+					</div>
+				</TweenRef>
 			</div>
 		);
 	}

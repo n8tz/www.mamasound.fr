@@ -40,7 +40,7 @@ export default {
 	@asStore
 	GlobalEventQuery: {
 		etty : 'Event',
-		limit: 1000,
+		limit: 100,
 		$apply( data, state ) {
 			if ( !state.query ) {
 				this.$actions.updateQuery()

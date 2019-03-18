@@ -84,7 +84,7 @@ export default class SearchBar extends React.Component {
 			<div
 				className={ "SearchBar" }
 			>
-				{ Tags && Tags.available.map(
+				{ Tags && Tags.available && Tags.available.map(
 					tag =>
 						<Chip
 							//icon={<FaceIcon />}

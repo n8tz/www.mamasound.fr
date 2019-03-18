@@ -39,7 +39,7 @@ if ( typeof window !== "undefined" ) {
 			{
 				FocusedItems: {
 					etty : 'FocusedItems',
-					limit: 100,
+					limit: 6,
 					query: {},
 				},
 				
@@ -118,7 +118,10 @@ export default class Highlighter extends React.Component {
 							( item, i ) =>
 								<TweenRef key={ item._id }
 								          initial={ {
-									          perspective: "200px",
+								          	transform:{
+									            perspective: "200px",
+								            }
+									          
 									          //width      : "200px",
 									          //height     : "100px",
 									          //margin     : "10px",
