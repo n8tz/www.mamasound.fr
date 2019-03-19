@@ -14,9 +14,11 @@
 
 .EventList {
   touch-action: none;
-  overflow: hidden;
+  overflow: auto;
   //position: relative;
   height: 100%;
+  position: relative;
+  transform: translate3d(0, 0, 0);
 
   @media screen and (max-width: $tablet-landscape-breakpoint) {
     margin: 0 !important;
@@ -24,19 +26,60 @@
     width: 100% !important;
   }
 
+
   .today {
-    //position: absolute;
-    margin-left: 200px;
-    height: 1000px;
+
+    @media screen and (min-width: $tablet-landscape-breakpoint) {
+      margin-left: 300px;
+    }
 
     .Event {
-
       @include use_hvCenteredContent();
       height: 100%;
+
+      .start {
+        @include use_hvCenteredContent();
+        float: left;
+        height: 100%;
+        margin-left: 15px;
+        margin-right: 25px;
+        width: 50px;
+      }
+
+      .icon {
+        @include use_hvCenteredContent();
+        float: left;
+        background: rgba(249, 249, 249, 0.56);
+        padding: 5px;
+        width: 2em;
+        height: 2em;
+        overflow: hidden;
+        border-radius: 25px;
+        transform: scale(1.8);
+        border: solid 1px #b0b0b0;
+
+        img {
+          width: 100%;
+          //height: 100%;
+        }
+      }
+    }
+  }
+
+  .LeftBox {
+
+    @media screen and (max-width: $tablet-landscape-breakpoint) {
+      display: none;
     }
   }
 
   .SearchBar {
+
+    @media screen and (max-width: $tablet-landscape-breakpoint) {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100% !important;
+    }
 
     > * {
       margin: 4px;

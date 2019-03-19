@@ -96,7 +96,7 @@ export default class SearchBar extends React.Component {
 		    state = this.state;
 		return (
 			<div
-				className={ "SearchBar" }
+				className={ "SearchBar container" }
 			>
 				{ Tags && Tags.available && Tags.available.map(
 					tag =>

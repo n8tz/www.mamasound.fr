@@ -18,7 +18,7 @@ import {reScope, scopeToProps, propsToScope, Store} from "rscopes";
 import CloseIcon                                    from '@material-ui/icons/Close';
 import moment                                       from 'moment';
 import anims                                        from 'App/ui/anims/(*).js';
-import ReactGridLayout                              from 'react-grid-layout';
+import Slider                                       from "react-slick";
 
 
 import {withStateMap, asRef, asStore} from "rescope-spells";
@@ -29,8 +29,8 @@ import Comps                          from 'App/ui/components/(*).js';
 import {asTweener, TweenRef} from "react-rtween";
 
 if ( typeof window !== "undefined" ) {
-	require('react-resizable/css/styles.css');
-	require('react-grid-layout/css/styles.css');
+	require('slick-carousel/slick/slick.css');
+	require('slick-carousel/slick/slick-theme.css');
 }
 
 @reScope(
@@ -39,7 +39,7 @@ if ( typeof window !== "undefined" ) {
 			{
 				FocusedItems: {
 					etty : 'FocusedItems',
-					limit: 6,
+					limit: 4,
 					query: {},
 				},
 				
@@ -101,13 +101,59 @@ export default class Highlighter extends React.Component {
 		let {
 			    Grid: { items: gridItems = [], layout = [] },
 			    $actions, onSelect, selected
-		    }     = this.props,
-		    state = this.state;
+		    }          = this.props,
+		    state      = this.state;
+		const settings = {
+			className    : "center",
+			centerMode   : true,
+			infinite     : true,
+			centerPadding: "60px",
+			slidesToShow : 1,
+			variableWidth: true,
+			autoplay     : true,
+			autoplaySpeed: 2000,
+			speed        : 500
+		};
 		return (
 			<div
 				onClick={ $actions.saveState }
 				className={ "Highlighter container" }
 			>
+				
+				<TweenRef id={ "slider" }
+				          initial={ {
+					          position       : "absolute",
+					          backgroundColor: "yellow",
+					          top            : "0px",
+					          left           : "0px",
+					          width          : "100%",
+					          height         : "15vh",
+					          zIndex         : 1000,
+					          opacity        : 0,
+					
+					          transform: {
+						          translateZ: '-.2box',
+						          translateY: '-1box',
+					          }
+				          } }
+				          scrollableAnims={ {
+					          scrollY: anims.slideIn(0, 100, "top"),
+				          } }
+				>
+					<div onClick={ e => {
+						e.stopPropagation()
+						e.preventDefault()
+					} }>
+						<Slider { ...settings }>
+							{
+								gridItems.map(
+									( item, i ) =>
+										<Comps.FocusedItems record={ item }/>
+								)
+							}
+						</Slider>
+					</div>
+				</TweenRef>
 				<div className={ " today" } onClick={ e => e.preventDefault() }>
 					{/*<ReactGridLayout className="layout" layout={ layout } cols={ 8 } rowHeight={ 50 }*/ }
 					{/*onLayoutChange={ this.onLayoutChange }*/ }
@@ -118,10 +164,10 @@ export default class Highlighter extends React.Component {
 							( item, i ) =>
 								<TweenRef key={ item._id }
 								          initial={ {
-								          	transform:{
-									            perspective: "200px",
-								            }
-									          
+									          transform: {
+										          perspective: "200px",
+									          }
+									
 									          //width      : "200px",
 									          //height     : "100px",
 									          //margin     : "10px",
@@ -129,7 +175,7 @@ export default class Highlighter extends React.Component {
 									          //overflow   : "hidden"
 								          } }
 								          scrollableAnims={ {
-									          scrollY: anims.flyOut(i * 5, 100),
+									          scrollY: anims.slideOut(30, 170, i % 2 ? "left" : "right"),
 									          scrollX: [...anims.flip(0, 100), ...anims.flip(100, 100)]
 								          } }
 								>

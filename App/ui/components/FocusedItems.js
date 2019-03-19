@@ -29,7 +29,7 @@ export default ( { record } ) =>
 	<div className="FocusedItems">
 		{ record.previewImage &&
 		<div className="preview">
-			<img src={ record.previewImage }/>
+			<img src={ record.previewImage +"w=420"}/>
 		</div>
 		}
 		<div className="title">

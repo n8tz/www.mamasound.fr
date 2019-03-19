@@ -14,15 +14,15 @@
 
 var easingFn = require('d3-ease');
 var keys     = {
-	top  : '_y',
-	bot  : '_y',
-	right: '_x',
-	left : '_x'
+	top  : 'translateY',
+	bot  : 'translateY',
+	right: 'translateX',
+	left : 'translateX'
 }, dirs      = {
-	top  : -1,
-	bot  : 1,
-	right: -1,
-	left : 1
+	top  : "1box",
+	bot  : "-1box",
+	right: "1box",
+	left : "-1box"
 };
 export default function ( tmStart, duration, dir ) {
 	dir = dir || 'right';
@@ -31,30 +31,43 @@ export default function ( tmStart, duration, dir ) {
 	return [
 		{
 			type    : "Tween",
-			from    : tmStart,
-			duration: 1 * duration,
-			//easeFn  : easingFn.easeCircleIn,
+			from    : tmStart + 0,
+			duration: .8 * duration,
+			easeFn  : easingFn.easeSinOut,
 			apply   : {
-				height: "20px",
+				transform: {
+					translateZ: '.2box',
+				}
 			}
 		},
 		{
 			type    : "Tween",
-			from    : tmStart,
-			duration: 1 * duration,
-			//easeFn  : easingFn.easeCircleIn,
+			from    : tmStart + .1 * duration,
+			duration: .9 * duration,
+			easeFn  : easingFn.easeSinOut,
 			apply   : {
-				fontSize: "5px"
+				transform: {
+					[keys[dir]]: dirs[dir]
+				}
 			}
 		},
-		//{
-		//	type    : "Tween",
-		//	from    : tmStart + .1 * duration,
-		//	duration: .8 * duration,
-		//	easeFn  : easingFn.easeCircle,
-		//	apply   : {
-		//		rotateY: 180,
-		//	}
-		//}
+		{
+			type    : "Tween",
+			from    : tmStart + .1 * duration,
+			duration: .8 * duration,
+			apply   : {
+				filter: {
+					//blur: '20px',
+				}
+			}
+		},
+		{
+			type    : "Tween",
+			from    : tmStart + .2 * duration,
+			duration: .8 * duration,
+			apply   : {
+				opacity: 1
+			}
+		}
 	]
 };

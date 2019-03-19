@@ -28,18 +28,9 @@ import {asTweener, TweenRef} from "react-rtween";
 
 
 @reScope(
-	{
-		
-		@asStore
-		Events: {
-			@asRef
-			items: "EventList.items",
-			
-		},
-		
-	}
+	{}
 )
-@scopeToProps("Events")
+@scopeToProps("EventList")
 //@asTweener({ initialScrollPos: {}, propagateAxes: { scrollY: true } })
 export default class EventList extends React.Component {
 	static propTypes = {};
@@ -48,7 +39,7 @@ export default class EventList extends React.Component {
 	render() {
 		let {
 			    record: { position, size } = {},
-			    Events, children, disabled,
+			    EventList, children, disabled,
 			    $actions, onSelect, selected
 		    }     = this.props,
 		    state = this.state;
@@ -71,24 +62,36 @@ export default class EventList extends React.Component {
 				{/*scrollableAnims={ scrollAnims }*/ }
 				{/*>*/ }
 				<div className={ " today" } onClick={ e => e.preventDefault() }>
+					<div className={ "LeftBox" }
+						style={ {
+							position  : "fixed",
+							background: "yellow",
+							top       : "10px",
+							left      : "10px",
+							width     : "290px",
+							height    : "250px"
+							//width : "100%",
+							//height: "100%",
+						} }>
+						<Blocks.SearchBox/>
+					</div>
 					{
-						Events && Events.items && Events.items.map(
+						EventList && EventList.items && EventList.items.map(
 							( item, i ) =>
 								<TweenRef key={ item._id + i }
 								          initial={ {
-									          height         : "30px",
-									          fontSize       : "18px",
+									          height         : "2.5em",
+									          fontSize       : "20px",
 									          width          : "100%",
-									          //display        : "inline-block",
 									          backgroundColor: i % 2 ? "lightgrey" : "white",
 									          overflow       : "hidden"
 								          } }
-									//scrollableAnims={ {
-									//    scrollY: anims.expandEvent(0, 50),
-									//} }
+								          scrollableAnims={ {
+									          //scrollY: anims.expandEvent(0, 50),
+								          } }
 								>
 									<div>
-										<Comps.Event record={ item }/>
+										<Comps.Event record={ item } refs={ EventList.refs || {} }/>
 									</div>
 								</TweenRef>
 						)
@@ -96,25 +99,12 @@ export default class EventList extends React.Component {
 					{/*</div>*/ }
 					{/*</TweenRef>*/ }
 				</div>
-				<TweenRef
-					id={ "searchBox" }
-					initial={ {
-						position  : "absolute",
-						background: "yellow",
-						top       : "10px",
-						left      : "0px",
-						width     : "200px",
-						height    : "250px"
-					} }
-				>
-					<div
-						style={ {
-							//width : "100%",
-							//height: "100%",
-						} }>
-						<Blocks.SearchBox/>
-					</div>
-				</TweenRef>
+				{/*<TweenRef*/ }
+				{/*id={ "searchBox" }*/ }
+				{/*initial={ {*/ }
+				{/*} }*/ }
+				{/*>*/ }
+				{/*</TweenRef>*/ }
 				<TweenRef
 					id={ "searchBar" }
 					initial={ {

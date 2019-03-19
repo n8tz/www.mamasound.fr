@@ -34,7 +34,7 @@ export default {
 			return { selectedWidgetId };
 		},
 		saveState() {
-			localStorage.mama = JSON.stringify(this.scopeObj.serialize());
+			//localStorage.mama = JSON.stringify(this.scopeObj.serialize());
 		},
 		clearState() {
 			localStorage.mama = null;

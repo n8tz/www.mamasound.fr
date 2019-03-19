@@ -20,13 +20,22 @@
  */
 'use strict';
 
-import React from "react";
+import React  from "react";
+import moment from "moment";
 
 import {NavLink} from "react-router-dom";
 
 
-export default ( { record } ) =>
+export default ( { record, refs } ) =>
 	<div className="Event">
+		<div className="start">
+			{ moment(record.startTM).format("H:mm") }
+		</div>
+		{ record.category &&
+		<div className="icon">
+			<img src={ refs[record.category.objId].icon }/>
+		</div>
+		}
 		{ record.previewImage &&
 		<div className="preview">
 			<img src={ record.previewImage }/>
