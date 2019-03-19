@@ -20,29 +20,37 @@ import config         from 'App/config';
 import {types, query} from 'App/db';
 
 export default class UserGeoLocation extends Store {
+	static actions = {
+		toggleUserGeoLocation() {
+			return { active: !this.nextState.active }
+		}
+	};
+	state          = { active: false };
 	
-	
-	static state = { active: true };
-	//data         = {
-	//	results: {},
-	//
-	//};
-	
-	
-	apply( d = {}, state, { active } ) {
+	apply( d = {}, { active, activating, pos } ) {
 		
-		active && navigator.geolocation.getCurrentPosition(( pos ) => {
-			                                                   this.push(pos)
+		if ( (!pos || activating) && active ) {
+			navigator.geolocation.getCurrentPosition(
+				( _pos ) => {
+					if ( !activating )
+						pos = _pos.coords;
+					else this.setState({ pos: _pos.coords, active: true, activating: false })
+					setTimeout(
+						tm => this.setState({ activating: true }),
+						1000
+					)
+				},
+				( error ) => {
+					this.setState({ active: false, activating: false, pos: null })
+				})
 			
-		                                                   },
-		                                                   function ( error ) {
-			                                                   console.log(error);
-			                                                   this.setState({ active: false })
-		                                                   })
-		;
+			activating = true;
+			active     = false;
+		}
+		else activating = false;
 		
 		
-		return d;
+		return { active, activating, pos };
 	}
 	
 }

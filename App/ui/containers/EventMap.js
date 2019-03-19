@@ -21,6 +21,12 @@ import IconButton                            from '@material-ui/core/IconButton'
 import {withStateMap, asRef, asStore}        from "rescope-spells";
 //import React, {Component} from "react";
 
+import Fab            from '@material-ui/core/Fab';
+import GpsNoFixedIcon from '@material-ui/icons/GpsNotFixed';
+import GpsFixedIcon   from '@material-ui/icons/GpsFixed';
+import GpsOffIcon     from '@material-ui/icons/GpsOff';
+
+
 import stores                from 'App/stores/(*).js';
 import Comps                 from 'App/ui/components/(*).js';
 import {asTweener, TweenRef} from "react-rtween";
@@ -36,6 +42,9 @@ if ( typeof window !== "undefined" ) {
 		    LayerGroup, Map, Popup, Marker,
 		    Rectangle, TileLayer, ZoomControl
 	    }          = require("react-leaflet");
+	
+	var LeafletPulseIcon     = require('leaflet-pulse-icon/src/L.Icon.Pulse');
+	var LeafletPulseIcon_css = require('leaflet-pulse-icon/src/L.Icon.Pulse.css');
 
 // fix webpack messing with leaflet markers icon
 	Leaflet.Icon.Default.imagePath = '.';
@@ -66,11 +75,11 @@ if ( typeof window !== "undefined" ) {
 				items && items.forEach(
 					event => {
 						let place = refs[event.place.objId];
-						place&&place.address && place.address.geoPoint && POIs.push({
-							                                                     geoPoint: place.address.geoPoint,
-							                                                     event,
-							                                                     place
-						                                                     });
+						place && place.address && place.address.geoPoint && POIs.push({
+							                                                              geoPoint: place.address.geoPoint,
+							                                                              event,
+							                                                              place
+						                                                              });
 						
 					}
 				)
@@ -103,7 +112,7 @@ export default class EventMap extends React.Component {
 	render() {
 		let {
 			    Events: { center = {}, POIs = [] } = {},
-			    Events, children, disabled,
+			    Events, UserGeoLocation, disabled,
 			    $actions, onSelect, selected
 		    }     = this.props,
 		    state = this.state;
@@ -125,7 +134,29 @@ export default class EventMap extends React.Component {
 								</Marker>
 						)
 					}
+					{
+						UserGeoLocation.pos &&
+						<Marker
+							icon={
+								Leaflet.icon.pulse({ iconSize: [12, 12], color: 'red' })
+							}
+							position={ { lat: UserGeoLocation.pos.latitude, lng: UserGeoLocation.pos.longitude } }/>
+					}
 				</Map>
+				<div
+					className={ "EventMapTools" }
+				>
+					
+					<Fab aria-label="edit" className={ "newBtn button" }
+					     onClick={ $actions.toggleUserGeoLocation }>
+						{
+							UserGeoLocation.activating &&
+							<GpsNoFixedIcon/> ||
+							<GpsOffIcon/>
+						}
+					
+					</Fab>
+				</div>
 			</div>
 		);
 	}

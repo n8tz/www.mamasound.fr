@@ -28,7 +28,16 @@ import {asTweener, TweenRef} from "react-rtween";
 
 
 @reScope(
-	{}
+	{
+		@asStore
+		EventsByDay: {
+			@asRef
+			events: "EventList",
+			$apply( data, { events: { items, refs } } ) {
+			
+			}
+		}
+	}
 )
 @scopeToProps("EventList")
 //@asTweener({ initialScrollPos: {}, propagateAxes: { scrollY: true } })

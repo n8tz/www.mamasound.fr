@@ -88,6 +88,7 @@
     "js-file-download": "^0.4.4",
     "knex-schemer": "^0.1.17",
     "leaflet": "^1.4.0",
+    "leaflet-pulse-icon": "^0.1.0",
     "minimist": "^1.2.0",
     "moment": "^2.23.0",
     "mongodb": "^3.1.13",
