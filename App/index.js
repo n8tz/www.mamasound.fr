@@ -27,7 +27,7 @@ const ctrl = {
 		    }),
 		    App         = reScope(cScope)(require('./App').default);
 		window.contexts = Scope.scopes;
-		localStorage.mama && cScope.restore(JSON.parse(localStorage.mama));
+		//localStorage.mama && cScope.restore(JSON.parse(localStorage.mama));
 		ReactDom.render(<App/>, node);
 		
 		if ( process.env.NODE_ENV !== 'production' && module.hot ) {

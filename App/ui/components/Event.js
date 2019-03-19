@@ -31,16 +31,16 @@ export default ( { record, refs } ) =>
 		<div className="start">
 			{ moment(record.startTM).format("H:mm") }
 		</div>
-		{ record.category &&
 		<div className="icon">
+			{ record.category &&
 			<img src={ refs[record.category.objId].icon }/>
+			}
 		</div>
-		}
-		{ record.previewImage &&
-		<div className="preview">
-			<img src={ record.previewImage }/>
-		</div>
-		}
+		{/*{ record.previewImage &&*/}
+		{/*<div className="preview">*/}
+			{/*<img src={ record.previewImage }/>*/}
+		{/*</div>*/}
+		{/*}*/}
 		<div className="title">
 			{ record.title }
 		</div>

@@ -15,6 +15,7 @@
 import React                                 from 'react';
 import {reScope, scopeToProps, propsToScope} from "rscopes";
 import Blocks                                from 'App/ui/containers/(*).js';
+import ReactDom                              from "react-dom";
 
 import {withStateMap, asRef, asStore} from "rescope-spells";
 import {asTweener, TweenRef}          from "react-rtween";
@@ -90,6 +91,27 @@ export default class Home extends React.Component {
 			}
 		}
 	];
+	
+	shouldApplyScroll( newPos, oldPos, axe ) {
+		let node = document.getElementById("scrollableEvents");
+		if ( axe !== "scrollY" )
+			return true;
+		
+		if ( newPos > oldPos ) {
+			if ( (node.scrollTop + node.offsetHeight) > node.scrollHeight - 25 ) {
+				this.scrollTo(100, 250);
+				console.log("bot")
+			}
+			else
+				this.scrollTo(100, 250);
+		}
+		else if ( newPos < oldPos ) {
+			if ( node.scrollTop < 25 ) {
+				this.scrollTo(0, 250);
+				console.log("top")
+			}
+		}
+	}
 	
 	render() {
 		let { widgets = { items: [] }, appState, $actions } = this.props;

@@ -48,33 +48,7 @@ export default class EventList extends React.Component {
 				className={ "EventList container" }
 			>
 				
-				{/*<TweenRef*/ }
-				{/*id={ "today" }*/ }
-				{/*initial={ {*/ }
-				{/*_x    : 0,*/ }
-				{/*_y    : 0,*/ }
-				{/*top   : "0%",*/ }
-				{/*left  : "0%",*/ }
-				{/*bottom: "0px",*/ }
-				{/*width : "100%",*/ }
-				{/*//paddingTop: "150px"*/ }
-				{/*} }*/ }
-				{/*scrollableAnims={ scrollAnims }*/ }
-				{/*>*/ }
-				<div className={ " today" } onClick={ e => e.preventDefault() }>
-					<div className={ "LeftBox" }
-						style={ {
-							position  : "fixed",
-							background: "yellow",
-							top       : "10px",
-							left      : "10px",
-							width     : "290px",
-							height    : "250px"
-							//width : "100%",
-							//height: "100%",
-						} }>
-						<Blocks.SearchBox/>
-					</div>
+				<div className={ "dayList" } onClick={ e => e.preventDefault() } id={ "scrollableEvents" }>
 					{
 						EventList && EventList.items && EventList.items.map(
 							( item, i ) =>
@@ -96,15 +70,20 @@ export default class EventList extends React.Component {
 								</TweenRef>
 						)
 					}
-					{/*</div>*/ }
-					{/*</TweenRef>*/ }
 				</div>
-				{/*<TweenRef*/ }
-				{/*id={ "searchBox" }*/ }
-				{/*initial={ {*/ }
-				{/*} }*/ }
-				{/*>*/ }
-				{/*</TweenRef>*/ }
+				<div className={ "LeftBox" }
+				     style={ {
+					     position  : "absolute",
+					     background: "yellow",
+					     top       : "10px",
+					     left      : "10px",
+					     width     : "290px",
+					     height    : "250px"
+					     //width : "100%",
+					     //height: "100%",
+				     } }>
+					<Blocks.SearchBox/>
+				</div>
 				<TweenRef
 					id={ "searchBar" }
 					initial={ {

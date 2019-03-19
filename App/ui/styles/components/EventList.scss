@@ -14,7 +14,6 @@
 
 .EventList {
   touch-action: none;
-  overflow: auto;
   //position: relative;
   height: 100%;
   position: relative;
@@ -27,11 +26,13 @@
   }
 
 
-  .today {
+  .dayList {
 
     @media screen and (min-width: $tablet-landscape-breakpoint) {
       margin-left: 300px;
     }
+    height: 100%;
+    overflow: auto;
 
     .Event {
       @include use_hvCenteredContent();
