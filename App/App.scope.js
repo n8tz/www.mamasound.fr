@@ -22,7 +22,7 @@ import stores                         from 'App/stores/(*).js';
 
 export default {
 	...$super,
-	
+	UserGeoLocation : stores.UserGeoLocation,
 	@asStore
 	appState        : {
 		

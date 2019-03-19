@@ -94,7 +94,7 @@ if ( typeof window !== "undefined" ) {
 		
 	}
 )
-@scopeToProps("Events")
+@scopeToProps("Events", "UserGeoLocation")
 @asTweener({ initialScrollPos: { scrollX: 100, scrollY: 100 } })
 export default class EventMap extends React.Component {
 	static propTypes = {};

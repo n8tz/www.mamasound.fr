@@ -127,7 +127,7 @@ export default class Highlighter extends React.Component {
 					          top            : "0px",
 					          left           : "0px",
 					          width          : "100%",
-					          height         : "15vh",
+					          height         : "20vh",
 					          zIndex         : 1000,
 					          opacity        : 0,
 					

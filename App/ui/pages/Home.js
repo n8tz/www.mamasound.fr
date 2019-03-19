@@ -56,7 +56,7 @@ export default class Home extends React.Component {
 			duration: 100,
 			//easeFn  : easingFn.easePolyInOut,
 			apply   : {
-				height: -65,
+				height: -55,
 			}
 		},
 		{
@@ -66,7 +66,7 @@ export default class Home extends React.Component {
 			duration: 100,
 			//easeFn  : easingFn.easePolyInOut,
 			apply   : {
-				height: 65,
+				height: 55,
 			}
 		},
 		//show map
@@ -157,7 +157,7 @@ export default class Home extends React.Component {
 					<TweenRef
 						id={ "highlighted" }
 						initial={ {
-							height: "80%"
+							height: "75%"
 						} }
 					>
 						<div
@@ -173,7 +173,7 @@ export default class Home extends React.Component {
 						id={ "events" }
 						initial={ {
 							position: "relative",
-							height  : "20%"
+							height  : "25%"
 						} }
 					>
 						<div

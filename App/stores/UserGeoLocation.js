@@ -12,39 +12,37 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-/**
- * @author Nathanael BRAUN
- *
- * Date: 08/12/2015
- * Time: 11:50
- */
-'use strict';
-
-import React  from "react";
-import moment from "moment";
-
-import {NavLink} from "react-router-dom";
+import {Scope, Store} from "rscopes";
+import db, {mount}    from "App/db";
 
 
-export default ( { record, refs } ) =>
-	<div className={ "Event Event" + record._cls }>
-		<div className="start">
-			{ moment(record.startTM).format("H:mm") }
-		</div>
-		<div className="icon">
-			{ record.category &&
-			<img src={ refs[record.category.objId].icon }/>
-			}
-		</div>
-		{/*{ record.previewImage &&*/ }
-		{/*<div className="preview">*/ }
-		{/*<img src={ record.previewImage }/>*/ }
-		{/*</div>*/ }
-		{/*}*/ }
-		<div className="title">
-			{ record.title }
-		</div>
-		{ !/^\s*$/.test(record.resume || '') &&
-		<div className="resume" dangerouslySetInnerHTML={ { __html: record.resume } }/> || '' }
-	</div>
-;
+import config         from 'App/config';
+import {types, query} from 'App/db';
+
+export default class UserGeoLocation extends Store {
+	
+	
+	static state = { active: true };
+	//data         = {
+	//	results: {},
+	//
+	//};
+	
+	
+	apply( d = {}, state, { active } ) {
+		
+		active && navigator.geolocation.getCurrentPosition(( pos ) => {
+			                                                   this.push(pos)
+			
+		                                                   },
+		                                                   function ( error ) {
+			                                                   console.log(error);
+			                                                   this.setState({ active: false })
+		                                                   })
+		;
+		
+		
+		return d;
+	}
+	
+}
