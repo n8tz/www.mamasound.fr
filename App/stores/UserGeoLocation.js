@@ -22,7 +22,8 @@ import {types, query} from 'App/db';
 export default class UserGeoLocation extends Store {
 	static actions = {
 		toggleUserGeoLocation() {
-			return { active: !this.nextState.active }
+			let sw = this.nextState.active;
+			return { active: !sw, pos: null }
 		}
 	};
 	state          = { active: false };
@@ -36,7 +37,7 @@ export default class UserGeoLocation extends Store {
 						pos = _pos.coords;
 					else this.setState({ pos: _pos.coords, active: true, activating: false })
 					setTimeout(
-						tm => this.setState({ activating: true }),
+						tm => this.setState({ activating: this.nextState.active }),
 						1000
 					)
 				},

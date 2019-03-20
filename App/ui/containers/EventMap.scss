@@ -14,10 +14,10 @@
 
 .EventMap {
   @media screen and (max-width: $tablet-landscape-breakpoint) {
-    margin: 0 !important;
-    padding: 0 !important;
     width: 100% !important;
   }
+  margin: 0 !important;
+  padding: 0 !important;
   touch-action: none;
   overflow: hidden;
   //width: 100%;

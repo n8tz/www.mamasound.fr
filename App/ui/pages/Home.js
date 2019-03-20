@@ -89,6 +89,38 @@ export default class Home extends React.Component {
 			apply   : {
 				height: -30,
 			}
+		},
+		//show map
+		{
+			type    : "Tween",
+			target  : "map",
+			from    : 100,
+			duration: 50,
+			//easeFn  : easingFn.easePolyInOut,
+			apply   : {
+				marginLeft: "30%",
+				width     : "-30%",
+			}
+		},
+		{
+			type    : "Tween",
+			target  : "events",
+			from    : 100,
+			duration: 50,
+			//easeFn  : easingFn.easePolyInOut,
+			apply   : {
+				height: -30,
+			}
+		},
+		{
+			type    : "Tween",
+			target  : "PageBloc",
+			from    : 100,
+			duration: 50,
+			//easeFn  : easingFn.easePolyInOut,
+			apply   : {
+				height: 30,
+			}
 		}
 	];
 	
@@ -96,7 +128,7 @@ export default class Home extends React.Component {
 		let node = document.getElementById("scrollableEvents");
 		if ( axe !== "scrollY" )
 			return true;
-		
+
 		if ( newPos > oldPos ) {
 			if ( (node.scrollTop + node.offsetHeight) > node.scrollHeight - 25 ) {
 				this.scrollTo(100, 250);
@@ -123,6 +155,7 @@ export default class Home extends React.Component {
 				} }
 			>
 				<header
+					onClick={ e => this.scrollTo(150, 500) }
 					style={ {
 						display   : "inline-block",
 						width     : "100%",
@@ -190,6 +223,22 @@ export default class Home extends React.Component {
 					<TweenRef
 						id={ "map" }
 						initial={ {
+							width : "100%",
+							height: "0%"
+						} }
+					>
+						<div
+							onClick={ e => this.scrollTo(100, 500) }
+							style={ {
+								background: "cyan",
+								overflow  : 'hidden',
+							} }>
+							<Blocks.EventMap/>
+						</div>
+					</TweenRef>
+					<TweenRef
+						id={ "PageBloc" }
+						initial={ {
 							height: "0%"
 						} }
 					>
@@ -197,10 +246,10 @@ export default class Home extends React.Component {
 							onClick={ e => this.scrollTo(100, 500) }
 							style={ {
 								width     : "100%",
-								background: "cyan",
+								background: "green",
 								overflow  : 'hidden',
 							} }>
-							<Blocks.EventMap/>
+							<Blocks.PageBloc/>
 						</div>
 					</TweenRef>
 				</div>

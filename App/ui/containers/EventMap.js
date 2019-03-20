@@ -152,6 +152,8 @@ export default class EventMap extends React.Component {
 						{
 							UserGeoLocation.activating &&
 							<GpsNoFixedIcon/> ||
+							UserGeoLocation.active &&
+							<GpsFixedIcon/> ||
 							<GpsOffIcon/>
 						}
 					
