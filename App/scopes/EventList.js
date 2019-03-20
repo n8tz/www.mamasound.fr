@@ -12,57 +12,140 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-import $super  from "$super";
 import moment  from "moment";
 import shortid from "shortid";
 
 import {withStateMap, asRef, asStore} from "rescope-spells";
 import stores                         from 'App/stores/(*).js';
-import scopes                         from 'App/scopes/(*).js';
 
 
 export default {
-	...$super,
-	UserGeoLocation: stores.UserGeoLocation,
 	@asStore
-	appState       : {
-		
-		currentPageFocus: "head",// head, events, page
-		
-		selectedEvent  : undefined,
-		selectedEventId: undefined,
-		selectedEventDT: undefined,
-		curDay         : undefined,
-		curEventType   : undefined,
-		curTags        : undefined,
-		
-		selectEvent( selectedEventId, showPageBlock ) {
-			let { currentPageFocus } = this.nextState;
-			currentPageFocus         = showPageBlock ? "page" : currentPageFocus;
-			return { selectedEventId, currentPageFocus, selectedEvent: { id: selectedEventId, etty: "Event" } };
+	GlobalEventQuery: {
+		etty : 'Event',
+		limit: 100,
+		$apply( data, state ) {
+			if ( !state.query ) {
+				this.$actions.updateQuery()
+			}
+			return state;
 		},
-		selectWidget( selectedWidgetId ) {
-			return { selectedWidgetId };
-		},
-		saveState() {
-			//localStorage.mama = JSON.stringify(this.scopeObj.serialize());
-		},
-		clearState() {
-			localStorage.mama = null;
-			window.location += "";
+		updateQuery( dt = moment(), type ) {
+			let from = moment(dt).startOf('day').add(2, 'hour').unix() * 1000,
+			    to   = moment(dt).endOf('week').add(2, 'hour').unix() * 1000;
+			return {
+				query  : {
+					$or: [
+						
+						...([undefined, 'Tout-Montpellier', 'Concerts'].includes(type) && [
+							{
+								_cls    : 'Concert',
+								schedule: {
+									$elemMatch: {
+										startTM: {
+											'$gt': from,
+											'$lt': to
+										}
+									}
+								}
+							},
+							{
+								_cls   : 'Concert',
+								startTM: {
+									'$gt': from,
+									'$lt': to
+								}
+							}]),
+						...([undefined, 'Tout-Montpellier', 'Theatres'].includes(type) && [
+							{
+								_cls    : 'Theatre',
+								schedule: {
+									$elemMatch: {
+										startTM: {
+											'$gt': from,
+											'$lt': to
+										}
+									}
+								}
+							},
+							{
+								_cls   : 'Theatre',
+								startTM: {
+									'$gt': from,
+									'$lt': to
+								}
+							}]),
+						
+						...([undefined, 'Tout-Montpellier'].includes(type) && [
+							{
+								_cls     : 'Expo',
+								haveVerni: true,
+								verniTM  : {
+									'$gt': from,
+									'$lt': to
+								}
+							}]),
+						...(type == 'Expositions' && [{
+							_cls    : 'Expo',
+							schedule: {
+								$elemMatch: {
+									startTM: {
+										'$lt': from
+									},
+									endTM  : {
+										'$gt': to
+									}
+								}
+							}
+						}, {
+							$and: [
+								{
+									_cls   : 'Expo',
+									startTM: {
+										'$lt': from
+									},
+									endTM  : {
+										'$gt': to
+									}
+								}
+							]
+						}] || []),
+					]
+				},
+				limit  : 1000,
+				orderby: { startTM: 1 }
+				
+			};
 		}
+		
 	},
-	
 	
 	@withStateMap(
 		{
 			@asRef
-			Event: "appState.selectedEvent"
+			events: "GlobalEventQuery",
 		}
 	)
-	Selected: stores.MongoRecords,
+	Queries         : stores.MongoQueries,
+	@withStateMap(
+		{
+			@asRef
+			items      : "Queries.events.items",
+			toMountKeys: ["category", "place"]
+		}
+	)
+	MountedEventList: stores.MongoListRefsLoader,
+	@withStateMap(
+		{
+			@asRef
+			items  : "MountedEventList.items",
+			@asRef
+			refs   : "MountedEventList.refs",
+			imgKeys: ["previewImage", "icon"]
+		}
+	)
+	EventList       : stores.ImgFieldsLoader,
 	
-	...scopes.EventList,
 	
 	@asStore
 	ActiveTags: {
@@ -99,51 +182,4 @@ export default {
 		},
 		
 	},
-	
-	@asStore
-	widgets: {
-		// initial state
-		items: [
-			//{
-			//	"_id"     : "rkUQHZrqM",
-			//	"label"   : "Importer de dates",
-			//	"type"    : "RecordEditor",
-			//	"props"   : {},
-			//	"size"    : { "width": 600, "height": 400 },
-			//	"position": { "x": 50, "y": 111 },
-			//}
-		],
-		
-		// actions
-		newWidget() {
-			return {
-				items: [...this.nextState.items, {
-					_id     : shortid.generate(),
-					size    : { width: 350, height: 200 },
-					position: {
-						x: 100 + ~~(Math.random() * 600),
-						y: 100 + ~~(Math.random() * 600)
-					},
-				}]
-			}
-		},
-		updateWidget( widget ) {
-			return {
-				items: this.nextState.items
-				           .map(
-					           it => (it._id === widget._id)
-					                 ? widget
-					                 : it
-				           )
-			}
-		},
-		rmWidget( id ) {
-			return {
-				items: this.nextState.items
-				           .filter(
-					           it => (it._id !== id)
-				           )
-			}
-		}
-	}
 }
