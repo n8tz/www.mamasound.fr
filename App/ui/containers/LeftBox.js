@@ -46,7 +46,7 @@ import {asTweener, TweenRef} from "react-rtween";
 	}
 )
 @scopeToProps("SearchValues")
-export default class SearchBox extends React.Component {
+export default class LeftBox extends React.Component {
 	static propTypes = {};
 	state            = {};
 	
@@ -59,7 +59,7 @@ export default class SearchBox extends React.Component {
 		    state = this.state;
 		return (
 			<div
-				className={ "SearchBox" }
+				className={ "LeftBox" }
 			>
 				searchBox
 			</div>

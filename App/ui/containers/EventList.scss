@@ -37,7 +37,9 @@
     .Event {
       @include use_hvCenteredContent();
       height: 100%;
-
+      &.selected .title{
+        text-decoration: underline;
+      }
 
       .start {
         @include use_hvCenteredContent();

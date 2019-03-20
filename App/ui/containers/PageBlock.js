@@ -41,7 +41,7 @@ import {asTweener, TweenRef} from "react-rtween";
 //)
 //@scopeToProps("EventList")
 //@asTweener({ initialScrollPos: {}, propagateAxes: { scrollY: true } })
-export default class PageBloc extends React.Component {
+export default class PageBlock extends React.Component {
 	static propTypes = {};
 	state            = {};
 	
@@ -54,8 +54,8 @@ export default class PageBloc extends React.Component {
 		    state = this.state;
 		return (
 			<div
-				className={ "PageBloc container" }
-			>PageBloc
+				className={ "PageBlock container" }
+			>PageBlock
 			</div>
 		);
 	}

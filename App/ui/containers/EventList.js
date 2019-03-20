@@ -39,7 +39,7 @@ import {asTweener, TweenRef} from "react-rtween";
 		}
 	}
 )
-@scopeToProps("EventList")
+@scopeToProps("EventList", "appState")
 //@asTweener({ initialScrollPos: {}, propagateAxes: { scrollY: true } })
 export default class EventList extends React.Component {
 	static propTypes = {};
@@ -48,7 +48,7 @@ export default class EventList extends React.Component {
 	render() {
 		let {
 			    record: { position, size } = {},
-			    EventList, children, disabled,
+			    EventList, appState, disabled,
 			    $actions, onSelect, selected
 		    }     = this.props,
 		    state = this.state;
@@ -73,8 +73,11 @@ export default class EventList extends React.Component {
 									          //scrollY: anims.expandEvent(0, 50),
 								          } }
 								>
-									<div>
-										<Comps.Event record={ item } refs={ EventList.refs || {} }/>
+									<div onClick={ e => $actions.selectEvent(item._id, true) }>
+										<Comps.Event
+											selected={ appState.selectedEventId === item._id }
+											record={ item }
+											refs={ EventList.refs || {} }/>
 									</div>
 								</TweenRef>
 						)
@@ -91,7 +94,7 @@ export default class EventList extends React.Component {
 					     //width : "100%",
 					     //height: "100%",
 				     } }>
-					<Blocks.SearchBox/>
+					<Blocks.LeftBox/>
 				</div>
 				<TweenRef
 					id={ "searchBar" }

@@ -62,6 +62,10 @@ if ( typeof window !== "undefined" ) {
 			                                                     'leaflet/dist/images/marker-shadow.png'),
 	                                                     });
 }
+else {
+	let Map, Marker, TileLayer, Popup;
+	Popup = Map = Marker = TileLayer = 'div'
+}
 
 @reScope(
 	{
@@ -146,7 +150,6 @@ export default class EventMap extends React.Component {
 				<div
 					className={ "EventMapTools" }
 				>
-					
 					<Fab aria-label="edit" className={ "newBtn button" }
 					     onClick={ $actions.toggleUserGeoLocation }>
 						{

@@ -41,7 +41,6 @@ const ctrl = {
 		}
 	},
 	renderSSR( cfg, cb, _attempts = 0 ) {
-		
 		let html = cfg.tpl.render(
 			{
 				app: "",

@@ -26,8 +26,8 @@ import moment from "moment";
 import {NavLink} from "react-router-dom";
 
 
-export default ( { record, refs } ) =>
-	<div className={ "Event Event" + record._cls }>
+export default ( { record, refs, selected } ) =>
+	<div className={ "Event Event" + record._cls + ' ' + (selected ? "selected" : "") }>
 		<div className="start">
 			{ moment(record.startTM).format("H:mm") }
 		</div>

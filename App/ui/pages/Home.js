@@ -22,7 +22,7 @@ import {asTweener, TweenRef}          from "react-rtween";
 
 var easingFn = require('d3-ease');
 
-
+@scopeToProps("appState")
 @asTweener
 export default class Home extends React.Component {
 	state = {};
@@ -98,8 +98,8 @@ export default class Home extends React.Component {
 			duration: 50,
 			//easeFn  : easingFn.easePolyInOut,
 			apply   : {
-				marginLeft: "30%",
-				width     : "-30%",
+				//marginLeft: "30%",
+				//width     : "-30%",
 			}
 		},
 		{
@@ -114,7 +114,7 @@ export default class Home extends React.Component {
 		},
 		{
 			type    : "Tween",
-			target  : "PageBloc",
+			target  : "PageBlock",
 			from    : 100,
 			duration: 50,
 			//easeFn  : easingFn.easePolyInOut,
@@ -128,7 +128,7 @@ export default class Home extends React.Component {
 		let node = document.getElementById("scrollableEvents");
 		if ( axe !== "scrollY" )
 			return true;
-
+		
 		if ( newPos > oldPos ) {
 			if ( (node.scrollTop + node.offsetHeight) > node.scrollHeight - 25 ) {
 				this.scrollTo(100, 250);
@@ -142,6 +142,38 @@ export default class Home extends React.Component {
 				this.scrollTo(0, 250);
 				console.log("top")
 			}
+		}
+	}
+	
+	componentDidMount( props = this.props ) {
+		let { appState } = props;
+		switch ( appState.currentPageFocus ) {
+			case 'head' :
+				this.scrollTo(0);
+				break;
+			case 'events' :
+				this.scrollTo(100);
+				break;
+			case 'page' :
+				this.scrollTo(150);
+				break;
+			
+		}
+	}
+	
+	componentDidUpdate( props = this.props ) {
+		let { appState } = props;
+		switch ( appState.currentPageFocus ) {
+			case 'head' :
+				this.scrollTo(0, 250);
+				break;
+			case 'events' :
+				this.scrollTo(100, 250);
+				break;
+			case 'page' :
+				this.scrollTo(150, 250);
+				break;
+			
 		}
 	}
 	
@@ -194,7 +226,7 @@ export default class Home extends React.Component {
 						} }
 					>
 						<div
-							onClick={ e => this.scrollTo(0, 500) }
+							//onClick={ e => this.scrollTo(0, 500) }
 							style={ {
 								width     : "100%",
 								background: "blue",
@@ -210,7 +242,7 @@ export default class Home extends React.Component {
 						} }
 					>
 						<div
-							onClick={ e => this.scrollTo(100, 500) }
+							//onClick={ e => this.scrollTo(100, 500) }
 							style={ {
 								width     : "100%",
 								background: "green",
@@ -228,7 +260,7 @@ export default class Home extends React.Component {
 						} }
 					>
 						<div
-							onClick={ e => this.scrollTo(100, 500) }
+							//onClick={ e => this.scrollTo(100, 500) }
 							style={ {
 								background: "cyan",
 								overflow  : 'hidden',
@@ -237,19 +269,19 @@ export default class Home extends React.Component {
 						</div>
 					</TweenRef>
 					<TweenRef
-						id={ "PageBloc" }
+						id={ "PageBlock" }
 						initial={ {
 							height: "0%"
 						} }
 					>
 						<div
-							onClick={ e => this.scrollTo(100, 500) }
+							//onClick={ e => this.scrollTo(100, 500) }
 							style={ {
 								width     : "100%",
 								background: "green",
 								overflow  : 'hidden',
 							} }>
-							<Blocks.PageBloc/>
+							<Blocks.PageBlock/>
 						</div>
 					</TweenRef>
 				</div>

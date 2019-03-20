@@ -26,10 +26,19 @@ export default {
 	@asStore
 	appState        : {
 		
-		curDay      : undefined,
-		curEventType: undefined,
-		curTags     : undefined,
+		currentPageFocus: "head",// head, events, page
 		
+		selectedEventId: undefined,
+		selectedEventDT: undefined,
+		curDay         : undefined,
+		curEventType   : undefined,
+		curTags        : undefined,
+		
+		selectEvent( selectedEventId, showPageBlock ) {
+			let {currentPageFocus} = this.nextState;
+			currentPageFocus=showPageBlock?"page":currentPageFocus;
+			return { selectedEventId, currentPageFocus };
+		},
 		selectWidget( selectedWidgetId ) {
 			return { selectedWidgetId };
 		},
@@ -166,8 +175,46 @@ export default {
 		}
 	)
 	EventList       : stores.ImgFieldsLoader,
+	
+	
 	@asStore
-	widgets         : {
+	ActiveTags: {
+		@asRef
+		events: "EventList",
+		
+		$apply( data, { events: { items = [], refs } } ) {
+			let available = [], seen = {}, styles = {};
+			items.forEach(
+				event => {
+					let style = event.category && refs[event.category.objId];
+					style && style.name
+					              .replace(/([\.\(\)\/\\]+)/ig, '|')
+					              .split('|')
+					              .filter(t => (!!t && /\s*/.test(t)))
+					              .filter(t => (seen[t] && seen[t]++ || (seen[t] = 1, false)))
+					              .forEach(t => (styles[t] = styles[t] || style))
+				}
+			)
+			
+			return {
+				available: Object
+					.keys(seen)
+					.filter(t => (!!styles[t]))
+					.sort(( a, b ) => (seen[a] < seen[b]
+					                   ? 1
+					                   : -1))
+					.map(tag => ({
+						title: tag,
+						style: styles[tag] || {},
+						count: seen[tag]
+					}))
+			};
+		},
+		
+	},
+	
+	@asStore
+	widgets: {
 		// initial state
 		items: [
 			//{

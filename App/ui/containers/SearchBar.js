@@ -17,7 +17,7 @@ import {Rnd}                                 from "react-rnd";
 import {reScope, scopeToProps, propsToScope} from "rscopes";
 import CloseIcon                             from '@material-ui/icons/Close';
 import moment                                from 'moment';
-import Badge from '@material-ui/core/Badge';
+import Badge                                 from '@material-ui/core/Badge';
 import {withStateMap, asRef, asStore}        from "rescope-spells";
 import anims                                 from 'App/ui/anims/(*).js';
 import Chip                                  from '@material-ui/core/Chip';
@@ -29,41 +29,6 @@ import {asTweener, TweenRef} from "react-rtween";
 
 @reScope(
 	{
-		@asStore
-		Tags        : {
-			@asRef
-			events: "EventList",
-			
-			$apply( data, { events: { items = [], refs } } ) {
-				let available = [], seen = {}, styles = {};
-				items.forEach(
-					event => {
-						let style = event.category && refs[event.category.objId];
-						style && style.name
-						              .replace(/([\.\(\)\/\\]+)/ig, '|')
-						              .split('|')
-						              .filter(t => (!!t && /\s*/.test(t)))
-						              .filter(t => (seen[t] && seen[t]++ || (seen[t] = 1, false)))
-						              .forEach(t => (styles[t] = styles[t] || style))
-					}
-				)
-				
-				return {
-					available: Object
-						.keys(seen)
-						.filter(t => (!!styles[t]))
-						.sort(( a, b ) => (seen[a] < seen[b]
-						                   ? 1
-						                   : -1))
-						.map(tag => ({
-							title: tag,
-							style: styles[tag] || {},
-							count: seen[tag]
-						}))
-				};
-			},
-			
-		},
 		@asStore
 		SearchValues: {
 			tags  : [],
@@ -82,7 +47,7 @@ import {asTweener, TweenRef} from "react-rtween";
 		
 	}
 )
-@scopeToProps("SearchValues", "Tags")
+@scopeToProps("SearchValues", "ActiveTags")
 export default class SearchBar extends React.Component {
 	static propTypes = {};
 	state            = {};
@@ -90,7 +55,7 @@ export default class SearchBar extends React.Component {
 	render() {
 		let {
 			    record: { position, size } = {},
-			    Tags, children, disabled,
+			    ActiveTags, children, disabled,
 			    $actions, onSelect, selected
 		    }     = this.props,
 		    state = this.state;
@@ -98,12 +63,12 @@ export default class SearchBar extends React.Component {
 			<div
 				className={ "SearchBar container" }
 			>
-				{ Tags && Tags.available && Tags.available.map(
+				{ ActiveTags && ActiveTags.available && ActiveTags.available.map(
 					tag =>
 						<Chip
 							icon={
 								//<Badge badgeContent={ tag.count} color="secondary" >
-									<img alt={ tag.title } src={ tag.style.icon } className={"icon"}/>
+								<img alt={ tag.title } src={ tag.style.icon } className={ "icon" }/>
 								//</Badge>
 							}
 							label={ tag.title }
