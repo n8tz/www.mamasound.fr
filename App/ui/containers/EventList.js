@@ -54,6 +54,12 @@ export default class EventList extends React.Component {
 				className={ "EventList container" }
 			>
 				
+				<div className={ "curDay" }
+				     style={ {
+					     //width : "100%",
+					     //height: "100%",
+				     } }>
+				</div>
 				<div className={ "dayList" } onClick={ e => e.preventDefault() } id={ "scrollableEvents" }>
 					{
 						EventList && EventList.items && EventList.items.map(
@@ -82,12 +88,6 @@ export default class EventList extends React.Component {
 				</div>
 				<div className={ "LeftBox" }
 				     style={ {
-					     position       : "absolute",
-					     backgroundColor: "yellow",
-					     top            : "10px",
-					     left           : "10px",
-					     width          : "290px",
-					     height         : "250px"
 					     //width : "100%",
 					     //height: "100%",
 				     } }>

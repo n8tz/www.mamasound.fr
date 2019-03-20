@@ -52,8 +52,10 @@ export default class PageBlock extends React.Component {
 				className={ "PageBlock container" }
 			>
 				{
-					Selected && Selected.Event &&
-					<Comps.Event_page record={ Selected && Selected.Event } refs={ EventList.refs }/>
+					Selected &&
+					Selected.record &&
+					Selected.record._cls==="Concert" &&
+					<Comps.Event_page record={ Selected && Selected.record } refs={ EventList.refs }/>
 				}
 				
 			</div>
