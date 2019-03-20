@@ -74,7 +74,7 @@ export default class EventList extends React.Component {
 								          } }
 								>
 									<div onClick={ e => $actions.selectEvent(item._id, true) }>
-										<Comps.Event
+										<Comps.Event_item
 											selected={ appState.selectedEventId === item._id }
 											record={ item }
 											refs={ EventList.refs || {} }/>
@@ -85,12 +85,12 @@ export default class EventList extends React.Component {
 				</div>
 				<div className={ "LeftBox" }
 				     style={ {
-					     position  : "absolute",
-					     background: "yellow",
-					     top       : "10px",
-					     left      : "10px",
-					     width     : "290px",
-					     height    : "250px"
+					     position       : "absolute",
+					     backgroundColor: "yellow",
+					     top            : "10px",
+					     left           : "10px",
+					     width          : "290px",
+					     height         : "250px"
 					     //width : "100%",
 					     //height: "100%",
 				     } }>
@@ -99,13 +99,13 @@ export default class EventList extends React.Component {
 				<TweenRef
 					id={ "searchBar" }
 					initial={ {
-						position  : "absolute",
-						background: "pink",
-						overflow  : "hidden",
-						bottom    : "0px",
-						left      : "0px",
-						width     : "100%",
-						height    : "50px"
+						position       : "absolute",
+						backgroundColor: "pink",
+						overflow       : "hidden",
+						bottom         : "0px",
+						left           : "0px",
+						width          : "100%",
+						height         : "50px"
 					} }
 				>
 					<div

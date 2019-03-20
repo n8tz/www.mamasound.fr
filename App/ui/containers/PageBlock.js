@@ -13,18 +13,13 @@
  */
 import PropTypes                             from "prop-types";
 import React                                 from "react";
-import {Rnd}                                 from "react-rnd";
 import {reScope, scopeToProps, propsToScope} from "rscopes";
-import CloseIcon                             from '@material-ui/icons/Close';
-import moment                                from 'moment';
-import IconButton                            from '@material-ui/core/IconButton';
 import {withStateMap, asRef, asStore}        from "rescope-spells";
 import anims                                 from 'App/ui/anims/(*).js';
 import Blocks                                from 'App/ui/containers/(*).js';
-
-import stores                from 'App/stores/(*).js';
-import Comps                 from 'App/ui/components/(*).js';
-import {asTweener, TweenRef} from "react-rtween";
+import stores                                from 'App/stores/(*).js';
+import Comps                                 from 'App/ui/components/(*).js';
+import {asTweener, TweenRef}                 from "react-rtween";
 
 
 //@reScope(
@@ -39,7 +34,7 @@ import {asTweener, TweenRef} from "react-rtween";
 //		//}
 //	}
 //)
-//@scopeToProps("EventList")
+@scopeToProps("Selected", "EventList")
 //@asTweener({ initialScrollPos: {}, propagateAxes: { scrollY: true } })
 export default class PageBlock extends React.Component {
 	static propTypes = {};
@@ -48,14 +43,19 @@ export default class PageBlock extends React.Component {
 	render() {
 		let {
 			    record: { position, size } = {},
-			    EventList, children, disabled,
+			    Selected, EventList, disabled,
 			    $actions, onSelect, selected
 		    }     = this.props,
 		    state = this.state;
 		return (
 			<div
 				className={ "PageBlock container" }
-			>PageBlock
+			>
+				{
+					Selected && Selected.Event &&
+					<Comps.Event_page record={ Selected && Selected.Event } refs={ EventList.refs }/>
+				}
+				
 			</div>
 		);
 	}

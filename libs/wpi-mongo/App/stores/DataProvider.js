@@ -524,7 +524,7 @@ export function updateWatchers( target, DataProvider, idKeys, changes, isQuery )
 	Object.keys(idKeys)
 	      .forEach(
 		      idKey => {
-			      let newValue = isQuery ? changes[idKey] : changes[idKey].id;
+			      let newValue = isQuery ? changes[idKey] : idKeys[idKey] && changes[idKey].id;
 			      if ( idKeys[idKey] &&
 				      (!watchs[idKey] || watchs[idKey].value !== newValue)
 			      ) {

@@ -22,12 +22,13 @@ import stores                         from 'App/stores/(*).js';
 
 export default {
 	...$super,
-	UserGeoLocation : stores.UserGeoLocation,
+	UserGeoLocation: stores.UserGeoLocation,
 	@asStore
-	appState        : {
+	appState       : {
 		
 		currentPageFocus: "head",// head, events, page
 		
+		selectedEvent  : undefined,
 		selectedEventId: undefined,
 		selectedEventDT: undefined,
 		curDay         : undefined,
@@ -35,9 +36,9 @@ export default {
 		curTags        : undefined,
 		
 		selectEvent( selectedEventId, showPageBlock ) {
-			let {currentPageFocus} = this.nextState;
-			currentPageFocus=showPageBlock?"page":currentPageFocus;
-			return { selectedEventId, currentPageFocus };
+			let { currentPageFocus } = this.nextState;
+			currentPageFocus         = showPageBlock ? "page" : currentPageFocus;
+			return { selectedEventId, currentPageFocus, selectedEvent: { id: selectedEventId, etty: "Event" } };
 		},
 		selectWidget( selectedWidgetId ) {
 			return { selectedWidgetId };
@@ -50,6 +51,16 @@ export default {
 			window.location += "";
 		}
 	},
+	
+	
+	@withStateMap(
+		{
+			@asRef
+			Event: "appState.selectedEvent"
+		}
+	)
+	Selected: stores.MongoRecords,
+	
 	@asStore
 	GlobalEventQuery: {
 		etty : 'Event',

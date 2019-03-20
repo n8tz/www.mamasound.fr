@@ -90,7 +90,7 @@ export default class Home extends React.Component {
 				height: -30,
 			}
 		},
-		//show map
+		//show page
 		{
 			type    : "Tween",
 			target  : "map",
@@ -98,6 +98,7 @@ export default class Home extends React.Component {
 			duration: 50,
 			//easeFn  : easingFn.easePolyInOut,
 			apply   : {
+				//height: -10,
 				//marginLeft: "30%",
 				//width     : "-30%",
 			}
@@ -109,7 +110,7 @@ export default class Home extends React.Component {
 			duration: 50,
 			//easeFn  : easingFn.easePolyInOut,
 			apply   : {
-				height: -30,
+				height: -50,
 			}
 		},
 		{
@@ -119,7 +120,7 @@ export default class Home extends React.Component {
 			duration: 50,
 			//easeFn  : easingFn.easePolyInOut,
 			apply   : {
-				height: 30,
+				height: 60,
 			}
 		}
 	];
