@@ -16,10 +16,11 @@
 import App              from "App/index.js";
 import {renderToString} from "react-dom/server";
 
-const wpiConf = require('App/.wpiConfig.json'),
-      fs      = require('fs'),
-      express = require('express'),
-      tpl     = require('../index.html.tpl');
+const wpiConf   = require('App/.wpiConfig.json'),
+      fs        = require('fs'),
+      express   = require('express'),
+      tpl       = require('../index.html.tpl');
+const basicAuth = require('express-basic-auth')
 
 export const name          = "Rendering";
 export const priorityLevel = 100000;
@@ -27,6 +28,11 @@ export const priorityLevel = 100000;
 export function service( server ) {
 	
 	console.warn("req.url")
+	
+	server.use(basicAuth({
+		                     users: { 'operator': 'HippyHippyShake' }
+	                     }))
+	
 	server.get(
 		'/',
 		function ( req, res, next ) {

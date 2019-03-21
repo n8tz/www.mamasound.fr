@@ -82,6 +82,7 @@
     "debug-logger": "^0.4.1",
     "dot-tpl-loader": "^1.2.1",
     "express": "^4.16.3",
+    "express-basic-auth": "^1.1.6",
     "extract-hoc": "0.0.5",
     "geolib": "^2.0.24",
     "is": "^3.3.0",
