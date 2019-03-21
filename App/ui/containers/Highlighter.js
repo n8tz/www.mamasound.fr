@@ -148,7 +148,7 @@ export default class Highlighter extends React.Component {
 							{
 								gridItems.map(
 									( item, i ) =>
-										<Comps.FocusedItems record={ item }/>
+										<Comps.FocusedItems record={ item } key={ item._id }/>
 								)
 							}
 						</Slider>

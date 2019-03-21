@@ -19,29 +19,27 @@ import PopAnywhere                                  from 'App/ui/components/PopA
 import {types}                                      from 'App/db';
 import {DropzoneComponent}                          from "react-dropzone-component";
 import Select                                       from 'react-select';
-import XlsDataProvider                              from 'App/stores/XlsDataProvider';
-import MamaConverter                                from 'App/stores/MamaConverter';
-import MongoQuery                                   from 'App/stores/MongoQuery';
-import DataImporter                                 from 'App/stores/DataImporter';
-import XlsExporter                                  from 'App/stores/XlsExporter';
 import {reScope, Store, scopeToProps, propsToScope} from "rscopes";
 import {withStateMap, asRef, asStore}               from "rescope-spells";
 import ImportIcon                                   from '@material-ui/icons/CloudUploadOutlined';
 import ExportIcon                                   from '@material-ui/icons/Delete';
+import SaveIcon                                     from '@material-ui/icons/Save';
+import ClearIcon                                    from '@material-ui/icons/Clear';
 import RefreshIcon                                  from '@material-ui/icons/Refresh';
 import IconButton                                   from '@material-ui/core/IconButton';
+import stores                                       from 'App/stores/(*).js';
 
 if ( typeof window !== "undefined" )
 	require('react-dropzone-component/styles/filepicker.css');
 
-@scopeToProps("Places")
+@scopeToProps("allQueries")
 class PlaceRenderer extends React.Component {
 	state = {
 		edit: false
 	}
 	
 	render() {
-		let { value, data, rowIndex, $actions, Places, api } = this.props;
+		let { value, data, rowIndex, $actions, allQueries: { Places }, api } = this.props;
 		return (
 			<span className="PlaceRenderer"
 			      onClick={ e => this.setState({ edit: true }) }
@@ -75,14 +73,14 @@ class PlaceRenderer extends React.Component {
 	}
 }
 
-@scopeToProps("EventCategory")
+@scopeToProps("allQueries")
 class StyleRenderer extends React.Component {
 	state = {
 		edit: false
 	}
 	
 	render() {
-		let { value, data, EventCategory, api, $actions } = this.props;
+		let { value, data, allQueries: { EventCategories }, api, $actions } = this.props;
 		return (
 			<span className="StyleRenderer"
 			      onClick={ e => this.setState({ edit: true }) }
@@ -100,7 +98,7 @@ class StyleRenderer extends React.Component {
 			                            api.updateRowData(data);
 			                            $actions.checkValidity();
 		                            }) }
-		                            options={ EventCategory && EventCategory.items.map(row => ({
+		                            options={ EventCategories && EventCategories.items.map(row => ({
 			                            label: row.name,
 			                            value: row._id
 		                            })) || [] }
@@ -116,39 +114,35 @@ class StyleRenderer extends React.Component {
 
 @reScope(
 	{
-		XlsDataProvider,
+		XlsDataProvider: stores.XlsDataProvider,
 		
 		@withStateMap(
 			{
-				collection: 'Place',
-				query     : {},
+				Places         : {
+					etty : 'Place',
+					query: {},
+					limit: 10000000
+				},
+				EventCategories: {
+					etty : 'EventCategory',
+					query: {},
+					limit: 10000000
+				},
 				updateQueries() {
 					return { query: {} }
 				}
 			}
 		)
-		Places: MongoQuery,
-		
-		@withStateMap(
-			{
-				collection: 'EventCategory',
-				query     : {},
-				updateQueries() {
-					return { query: {} }
-				}
-			}
-		)
-		EventCategory: MongoQuery,
+		DBQueries: stores.MongoQueries,
 		
 		@asStore
 		allQueries: {
 			@asRef
-			lieu: "!Places.items",
+			Places: "!DBQueries.Places",
 			
 			@asRef
-			style: "!EventCategory.items"
+			EventCategories: "!DBQueries.EventCategories"
 		},
-		
 		
 		@withStateMap(
 			{
@@ -164,7 +158,7 @@ class StyleRenderer extends React.Component {
 				},
 			}
 		)
-		MamaXls: MamaConverter,
+		MamaXls: stores.MamaConverter,
 		
 		@withStateMap(
 			{
@@ -174,7 +168,7 @@ class StyleRenderer extends React.Component {
 				deleteUrl  : "/delete",
 			}
 		)
-		Importer: DataImporter,
+		Importer: stores.DataImporter,
 		
 		@asStore
 		Exportable: {
@@ -198,7 +192,7 @@ class StyleRenderer extends React.Component {
 				docName: "NewEvents",
 			}
 		)
-		Exporter: XlsExporter,
+		Exporter: stores.XlsExporter,
 		
 	}
 )
@@ -253,8 +247,12 @@ export default class MamaImporter extends React.Component {
 					<span>
 						Année en cour : { MamaXls.options && MamaXls.options.year || "inconnue" }
 					</span>
-					{ !Importer.imported && MamaXls.valid &&
-					<IconButton onClick={ e => $actions.doDbImport() } title={ "Upload to server" }>
+					{ !Importer.imported &&
+					<IconButton onClick={ e => {
+						if ( !Importer.valid && !confirm("Seul les events tout vert seront importé !") )
+							return;
+						$actions.doDbImport();
+					} } title={ "Upload to server" }>
 						<ImportIcon/>
 					</IconButton> }
 					{ Importer.imported &&
@@ -263,6 +261,12 @@ export default class MamaImporter extends React.Component {
 					</IconButton> }
 					<IconButton onClick={ e => $actions.updateQueries() } title={ "Update styles & places" }>
 						<RefreshIcon/>
+					</IconButton>
+					<IconButton onClick={ e => $actions.saveState() } title={ "Save app state" }>
+						<SaveIcon/>
+					</IconButton>
+					<IconButton onClick={ e => $actions.clearState() } title={ "Save app state" }>
+						<ClearIcon/>
 					</IconButton>
 				</div>
 				<TableGrid

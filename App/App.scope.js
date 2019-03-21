@@ -45,7 +45,7 @@ export default {
 			return { selectedWidgetId };
 		},
 		saveState() {
-			//localStorage.mama = JSON.stringify(this.scopeObj.serialize());
+			localStorage.mama = JSON.stringify(this.scopeObj.serialize());
 		},
 		clearState() {
 			localStorage.mama = null;
@@ -115,14 +115,15 @@ export default {
 		],
 		
 		// actions
-		newWidget() {
+		newWidget( type ) {
 			return {
 				items: [...this.nextState.items, {
 					_id     : shortid.generate(),
-					size    : { width: 350, height: 200 },
+					size    : { width: 600, height: 400 },
+					type,
 					position: {
-						x: 100 + ~~(Math.random() * 600),
-						y: 100 + ~~(Math.random() * 600)
+						x: 50 + ~~(Math.random() * 200),
+						y: 50 + ~~(Math.random() * 200)
 					},
 				}]
 			}

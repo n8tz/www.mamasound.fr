@@ -66,6 +66,7 @@ export default class SearchBar extends React.Component {
 				{ ActiveTags && ActiveTags.available && ActiveTags.available.map(
 					tag =>
 						<Chip
+							key={tag.title}
 							icon={
 								//<Badge badgeContent={ tag.count} color="secondary" >
 								<img alt={ tag.title } src={ tag.style.icon } className={ "icon" }/>

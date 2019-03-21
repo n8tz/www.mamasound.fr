@@ -16,18 +16,26 @@ body, html {
   padding: 0;
 }
 
-.newBtn {
-  position: absolute !important;
-  bottom: 10px;
-  left: 10px;
+.inContextMenu {
+  background: white;
+  border: 1px solid gray;
   display: inline-block;
-}
+  border-radius: 3px;
+  //padding: 5px;
 
-.saveBtn {
-  position: absolute !important;
-  bottom: 10px;
-  right: 10px;
-  display: inline-block;
+  .inContextSubMenu {
+    margin: 2px;
+    padding: 2px;
+    white-space: nowrap;
+    list-style: none;
+    cursor: pointer;
+    min-width: 200px;
+    text-align: center;
+    &:hover {
+      background: lightblue;
+    }
+
+  }
 }
 
 #app {
@@ -46,12 +54,6 @@ body, html {
   top: 0px;
   left: 0;
   perspective: 200px;
-  //user-select: none;
-  //pointer-events: none;
-  //
-  //> * {
-  //  pointer-events: all;
-  //}
 
   //tr
   header {

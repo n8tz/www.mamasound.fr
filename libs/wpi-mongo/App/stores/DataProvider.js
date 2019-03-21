@@ -559,6 +559,7 @@ export function updateWatchers( target, DataProvider, idKeys, changes, isQuery )
 							      !target.dead &&
 							      target.push(
 								      {
+									      ...target.data,
 									      [idKeys[idKey].target || idKey]: update
 								      })
 						      }

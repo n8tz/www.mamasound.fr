@@ -47,8 +47,8 @@ export default class MamaConverter extends Store {
 						let rstyle    = new RegExp(".*" + row.style.replace(/[^\w]/g, '.*') + ".*", 'i');
 						let rplace    = new RegExp(".*" + row.lieu.replace(/[^\w]/g, '.*') + ".*", 'i');
 						
-						let lieu  = mustMatch.lieu.find(place => rplace.test(place.label)),
-						    style = mustMatch.style.find(style => rstyle.test(style.name));
+						let lieu  = mustMatch.Places.items.find(place => rplace.test(place.label)),
+						    style = mustMatch.EventCategories.items.find(style => rstyle.test(style.name));
 						
 						row.validPlace  = !!lieu;
 						row.validStyle  = !!style;
