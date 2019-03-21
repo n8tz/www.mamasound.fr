@@ -32,7 +32,7 @@ export default ( { record, refs, selected } ) =>
 			{ moment(record.startTM).format("H:mm") }
 		</div>
 		<div className="icon">
-			{ record.category &&
+			{ record.category && refs[record.category.objId] &&
 			<img src={ refs[record.category.objId].icon }/>
 			}
 		</div>

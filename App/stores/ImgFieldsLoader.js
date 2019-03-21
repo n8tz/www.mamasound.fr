@@ -16,8 +16,9 @@ import {Scope, Store} from "rscopes";
 import db, {mount}    from "App/db";
 
 
-import config         from 'App/config';
-import {types, query} from 'App/db';
+import config           from 'App/config';
+import {types, query}   from 'App/db';
+import {updateWatchers} from "../../libs/wpi-mongo/App/stores/DataProvider";
 
 function getSrc( src, dims ) {
 	var p = '';
@@ -40,14 +41,15 @@ function getSrc( src, dims ) {
 
 export default class ImgFieldsLoader extends Store {
 	
-	
-	static state = { items: [], imgKeys: [] };
+	static state      = { items: [], imgKeys: [] };
 	//data         = {
 	//	results: {},
 	//
 	//};
-	
-	
+	//
+	shouldSerialize(){
+		return false;
+	}
 	apply( d = {}, state, { items, refs } ) {
 		//debugger
 		items = items && items.map(
@@ -55,7 +57,7 @@ export default class ImgFieldsLoader extends Store {
 		) || state.items;
 		
 		
-		items&&items.forEach(
+		items && items.forEach(
 			event => {
 				let style = event.category && refs[event.category.objId];
 				if ( style )

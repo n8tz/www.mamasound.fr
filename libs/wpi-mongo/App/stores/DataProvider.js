@@ -156,11 +156,11 @@ export default class DataProvider extends Store {
 	}
 	
 	// data cache
-	data           = {};
+	//data           ;
 	// recently updated records & queries
 	updatedRecords = {};
 	
-	apply( data, state, changes ) {
+	apply( data = {}, state, changes ) {
 		return data;
 	}
 	

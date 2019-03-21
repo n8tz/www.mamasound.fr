@@ -23,7 +23,9 @@ import {updateWatchers, clearWatchers, getQueriesFromIdKeys} from './DataProvide
 
 
 export default class MongoQueries extends Store {
+	//static use = ["DataProvider"];
 	static state = {};
+	
 	
 	serialize( cfg = {}, output = {} ) {
 		return super.serialize(
