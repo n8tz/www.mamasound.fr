@@ -32,7 +32,7 @@ export default {
 		},
 		updateQuery( dt = moment(), type ) {
 			let from = moment(dt).startOf('day').add(2, 'hour').unix() * 1000,
-			    to   = moment(dt).endOf('week').add(2, 'hour').unix() * 1000;
+			    to   = moment(dt).endOf('day').add(2, 'hour').unix() * 1000;
 			return {
 				query  : {
 					$or: [

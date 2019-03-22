@@ -84,6 +84,9 @@ export default class DataProvider extends Store {
 	static state     = {};
 	
 	static actions = {
+		dataProvider_flushAll() {
+			this.flushAndReload()
+		},
 		data_create( etty, record, cb ) {
 			if ( !this.nextState[etty] )
 				return console.error("DataProvider: Unknown data type '" + etty + "'")
@@ -296,16 +299,17 @@ export default class DataProvider extends Store {
 		
 		types.forEach(
 			etty => {
-				this.activeQueries[etty] &&
-				Object.keys(this.activeQueries[etty])
-				      .map(
-					      id => this.syncRemoteQuery(this.activeQueries[etty][id])
-				      )
-				this.activeRecords[etty] &&
-				Object.keys(this.activeRecords[etty])
-				      .map(
-					      id => this.syncRemoteRecord(etty, id)
-				      )
+				if ( etty !== "__queries" )
+					this.activeRecords[etty] &&
+					Object.keys(this.activeRecords[etty])
+					      .map(
+						      id => this.syncRemoteRecord(etty, id)
+					      )
+			}
+		)
+		Object.keys(this.activeQueries.__queries).forEach(
+			id => {
+				this.syncRemoteQuery(this.activeQueries.__queries[id])
 			}
 		)
 	}

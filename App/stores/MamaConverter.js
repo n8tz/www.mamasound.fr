@@ -52,6 +52,7 @@ export default class MamaConverter extends Store {
 						
 						row.validPlace  = !!lieu;
 						row.validStyle  = !!style;
+						row.valid       = !!style && !!lieu;
 						row.lieuId      = lieu && lieu._id;
 						row.styleId     = style && style._id || "cat_62";
 						row.originIndex = i;

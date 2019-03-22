@@ -50,7 +50,7 @@ export default ( server, http ) => {
 									    objId: _record.lieuId
 								    },
 								    category: {
-									    cls  : "Place",
+									    cls  : "EventCategory",
 									    objId: _record.styleId
 								    }
 							    };

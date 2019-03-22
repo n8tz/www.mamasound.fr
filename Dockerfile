@@ -17,4 +17,3 @@ RUN apk --no-cache update \
         git
 
 CMD bash
-

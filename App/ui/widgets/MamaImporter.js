@@ -56,6 +56,7 @@ class PlaceRenderer extends React.Component {
 						                            data.lieu       = e.label;
 						                            data.lieuId     = e.value;
 						                            data.validPlace = true;
+						                            data.valid      = data.validStyle;
 						                            api.updateRowData(data);
 						                            $actions.checkValidity();
 					                            }) }
@@ -95,6 +96,7 @@ class StyleRenderer extends React.Component {
 			                            data.style      = e.label;
 			                            data.styleId    = e.value;
 			                            data.validStyle = true;
+			                            data.valid      = data.validPlace;
 			                            api.updateRowData(data);
 			                            $actions.checkValidity();
 		                            }) }
@@ -128,8 +130,8 @@ class StyleRenderer extends React.Component {
 					query: {},
 					limit: 10000000
 				},
-				updateQueries() {
-					return { query: {} }
+				updateImporterQueries() {
+					return Object.keys(this.nextState).reduce(( h, k ) => (h[k] = { ...h[k] }, h), { ...this.nextState })
 				}
 			}
 		)
@@ -217,6 +219,7 @@ export default class MamaImporter extends React.Component {
 		let { $actions, MamaXls, Importer, Exporter, $scope }
 			    = this.props,
 		    schema           = {
+			    valid    : types.boolean,
 			    date     : types.string,
 			    groupe   : types.string,
 			    lieu     : {
@@ -259,7 +262,7 @@ export default class MamaImporter extends React.Component {
 					<IconButton onClick={ e => $actions.doDbDelete() } title={ "Delete imported" }>
 						<ExportIcon/>
 					</IconButton> }
-					<IconButton onClick={ e => $actions.updateQueries() } title={ "Update styles & places" }>
+					<IconButton onClick={ e => $actions.dataProvider_flushAll() } title={ "Update styles & places" }>
 						<RefreshIcon/>
 					</IconButton>
 					<IconButton onClick={ e => $actions.saveState() } title={ "Save app state" }>

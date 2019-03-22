@@ -34,7 +34,7 @@ export default class DataImporter extends Store {
 			let state = this.nextState;
 			if ( confirm("Commencer l'importation ?") )
 				superagent
-					.post(state.importerUrl, state.items)
+					.post(state.importerUrl, state.items.filter(row=>row.valid))
 					.then(
 						( res ) => {
 							if ( res.body.success ) {

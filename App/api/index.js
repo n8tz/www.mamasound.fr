@@ -29,9 +29,9 @@ export function service( server ) {
 	
 	console.warn("req.url")
 	
-	server.use(basicAuth({
-		                     users: { 'operator': 'HippyHippyShake' }
-	                     }))
+	//server.use(basicAuth({
+	//	                     users: { 'operator': 'HippyHippyShake' }
+	//                     }))
 	
 	server.get(
 		'/',
