@@ -20,18 +20,15 @@ const wpiConf   = require('App/.wpiConfig.json'),
       fs        = require('fs'),
       express   = require('express'),
       tpl       = require('../index.html.tpl');
-const basicAuth = require('express-basic-auth')
+const basicAuth = require('basic-auth-connect')
 
 export const name          = "Rendering";
 export const priorityLevel = 100000;
 
 export function service( server ) {
 	
-	console.warn("req.url")
-	
-	//server.use(basicAuth({
-	//	                     users: { 'operator': 'HippyHippyShake' }
-	//                     }))
+	let creds = JSON.parse(fs.readFileSync(process.cwd() + '/creds.json'));
+	server.use(basicAuth(creds.user, creds.pass))
 	
 	server.get(
 		'/',

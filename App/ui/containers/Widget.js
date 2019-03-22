@@ -32,6 +32,9 @@ export default class Widget extends React.Component {
 	
 	saveState = ( e, d ) => {
 		let { $actions, record } = this.props;
+		
+		e.preventDefault();
+		e.stopPropagation();
 		$actions.updateWidget(
 			{
 				...record,
@@ -58,7 +61,13 @@ export default class Widget extends React.Component {
 				position={ state.position || position }
 				onDragStop={ this.saveState }
 				onResizeStop={ this.saveState }
+				onDragStart={ ( e, d ) => {
+					e.preventDefault();
+					e.stopPropagation();
+				} }
 				onDrag={ ( e, d ) => {
+					e.preventDefault();
+					e.stopPropagation();
 					!selected && onSelect(record)
 					this.setState(
 						{

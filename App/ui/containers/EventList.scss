@@ -49,6 +49,12 @@
       &.selected .title {
         text-decoration: underline;
       }
+      .title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: calc( 100% - 220px );
+      }
 
       .start {
         @include use_hvCenteredContent();

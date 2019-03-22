@@ -124,7 +124,10 @@ export default class EventMap extends React.Component {
 			<div
 				className={ "EventMap container" }
 			>
-				<Map center={ center } zoom={ 13 }>
+				<Map center={ center } zoom={ 13 }
+				     scrollWheelZoom={ false }
+				     dragging={ false }
+				>
 					<TileLayer
 						url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 						attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"

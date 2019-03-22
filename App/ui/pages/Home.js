@@ -126,22 +126,27 @@ export default class Home extends React.Component {
 	];
 	
 	shouldApplyScroll( newPos, oldPos, axe ) {
+		let { $actions } = this.props;
+		
 		let node = document.getElementById("scrollableEvents");
 		if ( axe !== "scrollY" )
 			return true;
 		
 		if ( newPos > oldPos ) {
 			if ( (node.scrollTop + node.offsetHeight) > node.scrollHeight - 25 ) {
-				this.scrollTo(100, 250);
+				$actions.setPageFocus('page');
 				console.log("bot")
 			}
 			else
-				this.scrollTo(100, 250);
+				$actions.setPageFocus('events');
 		}
 		else if ( newPos < oldPos ) {
 			if ( node.scrollTop < 25 ) {
-				this.scrollTo(0, 250);
+				$actions.setPageFocus('head');
 				console.log("top")
+			}
+			else {
+				$actions.setPageFocus('events');
 			}
 		}
 	}
