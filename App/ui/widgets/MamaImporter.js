@@ -25,7 +25,8 @@ import ImportIcon                                   from '@material-ui/icons/Clo
 import ExportIcon                                   from '@material-ui/icons/Delete';
 import SaveIcon                                     from '@material-ui/icons/Save';
 import ClearIcon                                    from '@material-ui/icons/Clear';
-import RefreshIcon                                  from '@material-ui/icons/Refresh';
+import ClearCacheIcon                               from '@material-ui/icons/Refresh';
+import RefreshIcon                                  from '@material-ui/icons/CloudDownload';
 import IconButton                                   from '@material-ui/core/IconButton';
 import stores                                       from 'App/stores/(*).js';
 
@@ -265,10 +266,13 @@ export default class MamaImporter extends React.Component {
 					<IconButton onClick={ e => $actions.dataProvider_flushAll() } title={ "Update styles & places" }>
 						<RefreshIcon/>
 					</IconButton>
-					<IconButton onClick={ e => $actions.saveState() } title={ "Save app state" }>
+					<IconButton onClick={ e => $actions.clearWebSiteCache() } title={ "Clear website cache" }>
+						<ClearCacheIcon/>
+					</IconButton>
+					<IconButton onClick={ e => $actions.saveState() } title={ "Save app state in the browser" }>
 						<SaveIcon/>
 					</IconButton>
-					<IconButton onClick={ e => $actions.clearState() } title={ "Save app state" }>
+					<IconButton onClick={ e => $actions.clearState() } title={ "Clear app state" }>
 						<ClearIcon/>
 					</IconButton>
 				</div>

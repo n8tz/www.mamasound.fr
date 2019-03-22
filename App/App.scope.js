@@ -12,9 +12,10 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-import $super  from "$super";
-import moment  from "moment";
-import shortid from "shortid";
+import $super     from "$super";
+import moment     from "moment";
+import shortid    from "shortid";
+import superagent from "superagent";
 
 import {withStateMap, asRef, asStore} from "rescope-spells";
 import stores                         from 'App/stores/(*).js';
@@ -46,6 +47,9 @@ export default {
 		},
 		selectWidget( selectedWidgetId ) {
 			return { selectedWidgetId };
+		},
+		clearWebSiteCache() {
+			window.open("http://api.mamasound.fr/cleanCache")
 		},
 		saveState() {
 			localStorage.mama = JSON.stringify(this.scopeObj.serialize());

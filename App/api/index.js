@@ -46,6 +46,6 @@ export function service( server ) {
 			)
 		}
 	);
-	server.use(express.static(wpiConf.projectRoot + '/dist'));
+	server.use(express.static(process.cwd() + '/dist'));
 	
 };

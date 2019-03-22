@@ -159,7 +159,7 @@ export function pushDbTask( task ) {
 			tid = ++PoolScope.cCount;
 			return getLink(( err, db ) => {
 				if ( err ) {
-					console.error("Fail getting new db connect !!!!!");
+					console.error("Fail getting new db connect !!!!!", err);
 					PoolScope.delayedTasks.push(task);
 					return;
 				}

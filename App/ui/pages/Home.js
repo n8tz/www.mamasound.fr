@@ -134,19 +134,16 @@ export default class Home extends React.Component {
 		
 		if ( newPos > oldPos ) {
 			if ( (node.scrollTop + node.offsetHeight) > node.scrollHeight - 25 ) {
-				$actions.setPageFocus('page');
+				this.scrollTo(100, 250);
 				console.log("bot")
 			}
 			else
-				$actions.setPageFocus('events');
+				this.scrollTo(100, 250);
 		}
 		else if ( newPos < oldPos ) {
 			if ( node.scrollTop < 25 ) {
-				$actions.setPageFocus('head');
+				this.scrollTo(0, 250);
 				console.log("top")
-			}
-			else {
-				$actions.setPageFocus('events');
 			}
 		}
 	}
