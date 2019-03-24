@@ -214,6 +214,8 @@ export default class Home extends React.Component {
 		let { widgets = { items: [] }, appState, $actions } = this.props;
 		if ( typeof window !== "undefined" )
 			window.$actions = $actions;
+		
+		console.log('render')
 		return <div className={ "Page Home" }>
 			<TweenRef
 				id={ "header" }
