@@ -30,17 +30,17 @@
   .dayList {
 
     position: absolute;
-    top: 2.5em;
+    top: 50px;
     left: 0px;
     bottom: 0px;
     right: 0%;
-
+    height: 100%;
+    overflow: auto;
     margin-left: 75px;
+
     @media screen and (min-width: $tablet-landscape-breakpoint) {
       margin-left: 300px;
     }
-    height: 100%;
-    overflow: auto;
 
     .Event {
       @include use_hvCenteredContent();
@@ -49,11 +49,12 @@
       &.selected .title {
         text-decoration: underline;
       }
+
       .title {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        width: calc( 100% - 220px );
+        width: calc(100% - 220px);
       }
 
       .start {
@@ -106,13 +107,11 @@
   .curDay {
 
     position: absolute;
-    background: seagreen;
     top: 0px;
+    right: 0%;
+    height: 50px;
     left: 75px;
-    width: 100%;
-
-    height: 2.5em;
-    fontSize: 20px;
+    background: #612499;
 
     @media screen and (min-width: $tablet-landscape-breakpoint) {
       left: 300px;

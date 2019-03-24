@@ -19,10 +19,10 @@ var keys     = {
 	right: 'translateX',
 	left : 'translateX'
 }, dirs      = {
-	top  : "1box",
-	bot  : "-1box",
-	right: "1box",
-	left : "-1box"
+	top  : "500px",
+	bot  : "-500px",
+	right: "500px",
+	left : "-500px"
 };
 export default function ( tmStart, duration, dir ) {
 	dir = dir || 'right';

@@ -133,7 +133,7 @@ export default class Highlighter extends React.Component {
 					
 					          transform: {
 						          translateZ: '-.2box',
-						          translateY: '-1box',
+						          translateY: '-500px',
 					          }
 				          } }
 				          scrollableAnims={ {

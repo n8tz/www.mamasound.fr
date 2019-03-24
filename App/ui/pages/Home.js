@@ -125,6 +125,29 @@ export default class Home extends React.Component {
 		}
 	];
 	
+	//shouldApplyScroll( newPos, oldPos, axe ) {
+	//	let { $actions } = this.props;
+	//
+	//	let node = document.getElementById("scrollableEvents");
+	//	if ( axe !== "scrollY" )
+	//		return true;
+	//
+	//	if ( newPos > oldPos ) {
+	//		if ( (node.scrollTop + node.offsetHeight) > node.scrollHeight - 25 ) {
+	//			this.scrollTo(100, 250);
+	//			console.log("bot")
+	//		}
+	//		else
+	//			this.scrollTo(100, 250);
+	//	}
+	//	else if ( newPos < oldPos ) {
+	//		if ( node.scrollTop < 25 ) {
+	//			this.scrollTo(0, 250);
+	//			console.log("top")
+	//		}
+	//	}
+	//}
+	
 	shouldApplyScroll( newPos, oldPos, axe ) {
 		let { $actions } = this.props;
 		
@@ -134,16 +157,19 @@ export default class Home extends React.Component {
 		
 		if ( newPos > oldPos ) {
 			if ( (node.scrollTop + node.offsetHeight) > node.scrollHeight - 25 ) {
-				this.scrollTo(100, 250);
+				$actions.setPageFocus('page');
 				console.log("bot")
 			}
 			else
-				this.scrollTo(100, 250);
+				$actions.setPageFocus('events');
 		}
 		else if ( newPos < oldPos ) {
 			if ( node.scrollTop < 25 ) {
-				this.scrollTo(0, 250);
+				$actions.setPageFocus('head');
 				console.log("top")
+			}
+			else {
+				$actions.setPageFocus('events');
 			}
 		}
 	}
@@ -164,24 +190,29 @@ export default class Home extends React.Component {
 		}
 	}
 	
-	componentDidUpdate( props = this.props ) {
-		let { appState } = props;
-		switch ( appState.currentPageFocus ) {
-			case 'head' :
-				this.scrollTo(0, 250);
-				break;
-			case 'events' :
-				this.scrollTo(100, 250);
-				break;
-			case 'page' :
-				this.scrollTo(150, 250);
-				break;
-			
+	componentDidUpdate( props ) {
+		let { appState } = this.props;
+		if ( props.appState.currentPageFocus !== appState.currentPageFocus ) {
+			console.log(appState.currentPageFocus);
+			switch ( appState.currentPageFocus ) {
+				case 'head' :
+					this.scrollTo(0, 250);
+					break;
+				case 'events' :
+					this.scrollTo(100, 250);
+					break;
+				case 'page' :
+					this.scrollTo(150, 250);
+					break;
+				
+			}
 		}
 	}
 	
 	render() {
 		let { widgets = { items: [] }, appState, $actions } = this.props;
+		if ( typeof window !== "undefined" )
+			window.$actions = $actions;
 		return <div className={ "Page Home" }>
 			<TweenRef
 				id={ "header" }

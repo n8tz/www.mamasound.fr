@@ -37,8 +37,10 @@ export default {
 		curEventType   : undefined,
 		curTags        : undefined,
 		
-		setPageFocus( currentPageFocus ) {
-			return { currentPageFocus };
+		setPageFocus( _currentPageFocus ) {
+			let { currentPageFocus } = this.nextState;
+			if ( _currentPageFocus !== currentPageFocus )
+				return { currentPageFocus: _currentPageFocus };
 		},
 		selectEvent( selectedEventId, showPageBlock ) {
 			let { currentPageFocus } = this.nextState;
