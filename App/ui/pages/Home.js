@@ -192,6 +192,7 @@ export default class Home extends React.Component {
 	
 	componentDidUpdate( props ) {
 		let { appState } = this.props;
+		console.warn(appState === props.appState)
 		if ( props.appState.currentPageFocus !== appState.currentPageFocus ) {
 			console.log(appState.currentPageFocus);
 			switch ( appState.currentPageFocus ) {

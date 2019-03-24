@@ -21,4 +21,961 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-module.exports=function(e){var t={};function o(n){if(t[n])return t[n].exports;var r=t[n]={i:n,l:!1,exports:{}};return e[n].call(r.exports,r,r.exports,o),r.l=!0,r.exports}return o.m=e,o.c=t,o.d=function(e,t,n){o.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:n})},o.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},o.t=function(e,t){if(1&t&&(e=o(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var n=Object.create(null);if(o.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var r in e)o.d(n,r,function(t){return e[t]}.bind(null,r));return n},o.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return o.d(t,"a",t),t},o.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},o.p="/",o(o.s=15)}([function(e,t){e.exports=require("react")},function(e,t){e.exports=require("rescope")},function(e,t){e.exports=require("is")},function(e,t,o){"use strict";o.d(t,"a",function(){return z}),o.d(t,"d",function(){return F}),o.d(t,"e",function(){return D}),o.d(t,"b",function(){return R}),o.d(t,"c",function(){return B});var n=o(14),r=o.n(n),s=o(5),i=o.n(s),p=o(13),a=o.n(p),c=o(10),u=o.n(c),f=o(11),l=o.n(f),h=o(6),m=o.n(h),d=o(7),$=o.n(d),y=o(8),C=o.n(y),g=o(4),v=o.n(g),b=o(9),S=o.n(b),_=o(12),x=o.n(_),T=o(1),P=o(2),N=o.n(P),q=(o(16),o(0)),U=o.n(q),k={}.constructor,E=Object(q.createContext)(T.Store.staticScope),W=E.Provider,O=E.Consumer;function j(e,t,o,n){return N.a.string(t)&&(t=t.split(".")),t.length?1==t.length?(e[t[0]]=n?[].concat(x()(e[t[0]]||[]),[o]):o,e):j(e[t[0]]=e[t[0]]||{},t.slice(1),o,n)&&e||e:o}function w(e,t,o){return N.a.string(t)&&(t=t.split(".")),t.length?e[t[0]]&&w(e[t[0]],t.slice(1)):e}function M(e){var t=e.split(":");return t[0]=t[0].split("."),t[1]=t[1]&&t[1].split("."),{pathFrom:t[0],pathTo:t[1]||[t[0][t[0].length-1]]}}function D(){for(var e,t,o=arguments.length,n=new Array(o),r=0;r<o;r++)n[r]=arguments[r];var s=(!n[0]||n[0].prototype instanceof U.a.Component||n[0]===U.a.Component)&&n.shift(),i=(!n[0]||n[0]instanceof T.Scope||N.a.fn(n[0]))&&n.shift(),p=(!n[0]||N.a.array(n[0])||n[0]instanceof k)&&n.shift();if(!p)for(p=[];N.a.string(n[0]);)p.push(n.shift());if(!s||!(s.prototype instanceof U.a.Component||s===U.a.Component))return function(e){return D(e,i,p)};var a=s._originComponent&&s._originComponent.displayName||s._originComponent&&s._originComponent.name||s.displayName||s.name,c=A((t=e=function(e){function t(){return m()(this,t),C()(this,v()(t).apply(this,arguments))}return S()(t,e),$()(t,[{key:"render",value:function(){return U.a.createElement(s,l()({},this.props,this.state,{$dispatch:this.$dispatch,$actions:this.$actions,$scope:this.$scope,$stores:this.$stores}))}}]),t}(U.a.Component),e._originComponent=s._originComponent||s,e.displayName="s2p("+a+")",t),N.a.fn(i)&&i,p);return(i||!s._originComponent)&&F(!N.a.fn(i)&&i)(c)||c}function A(){for(var e=arguments.length,t=new Array(e),o=0;o<e;o++)t[o]=arguments[o];var n=(!t[0]||t[0].prototype instanceof U.a.Component||t[0]===U.a.Component)&&t.shift(),r=(!t[0]||t[0]instanceof T.Scope||N.a.fn(t[0]))&&t.shift(),s=N.a.array(t[0])&&t.shift(),p=!s&&(!t[0]||t[0]instanceof k)&&t.shift(),c={};if(!s)for(s=[];N.a.string(t[0]);)s.push(t.shift());var f=n._originComponent&&n._originComponent.displayName||n._originComponent&&n._originComponent.name||n.displayName||n.name;s=[].concat(x()(n.use||[]),x()(s||[])),p&&T.Scope.stateMapToRefList(p,c,s);var l=function(e){function t(e,o,n){var p;return m()(this,t),(p=C()(this,v()(t).call(this,e,o,n)))._scopeWillUpdate=function(e){p.scopeWillUpdate&&p.scopeWillUpdate(e,p.$stores),p.applyScopeUpdate&&(e=p.applyScopeUpdate(e,p.$stores)),p.setState(e)},N.a.fn(r)?p.$scope=r(a()(p),p.props,{rescope:e.$scope}):p.$scope=e.$scope,p.$scope&&p.$scope.dead&&(console.error("ReScoping using dead scope !"),p.$scope=null),p.$stores=p.$scope&&p.$scope.stores,p.$actions=p.$scope&&p.$scope.actions,p.$scope&&s.length?p.state=i()({},p.state,c,p.$scope.map(a()(p),s,!1)):p.$scope||console.warn("No Scope found in ".concat(f)),p}return S()(t,e),$()(t,[{key:"componentDidMount",value:function(){s.length&&this.$scope&&this.$scope.bind(this._scopeWillUpdate,s,!1),u()(v()(t.prototype),"componentDidMount",this)&&u()(v()(t.prototype),"componentDidMount",this).call(this)}},{key:"componentDidUpdate",value:function(e){var t=e.$scope;t!==this.$scope&&(N.a.fn(r)&&(t=r(this,this.props,{rescope:t})),s.length&&this.$scope.unBind(this._scopeWillUpdate,s),this.$scope=t,this.$scope&&this.$scope.dead?(console.error("ReScoping using dead scope"),this.$actions=this.$stores=this.$scope=null):(this.$actions=this.$scope.actions,this.$stores=this.$scope.stores,s.length&&t.bind(this._scopeWillUpdate,s)))}},{key:"componentWillUnmount",value:function(){u()(v()(t.prototype),"componentWillUnmount",this)&&u()(v()(t.prototype),"componentWillUnmount",this).call(this),this.$scope&&!this.$scope.dead&&s.length&&this.$scope.unBind(this._scopeWillUpdate,s)}}]),t}(n);return l._originComponent=n._originComponent||n,l.defaultProps=i()({},n.defaultProps||{}),l.displayName="s2s("+f+")",(r||!n._originComponent)&&F(!N.a.fn(r)&&r)(l)||l}function F(){for(var e=arguments.length,t=new Array(e),o=0;o<e;o++)t[o]=arguments[o];var n=(!t[0]||t[0].prototype instanceof U.a.Component||t[0]===U.a.Component)&&t.shift(),r=(!t[0]||t[0]instanceof T.Scope||N.a.fn(t[0]))&&t.shift(),s=(!t[0]||t[0]instanceof k&&!(t[0]instanceof T.Scope))&&t.shift(),p=(!t[0]||t[0]instanceof k)&&t.shift()||{};if(!n||!(n.prototype instanceof U.a.Component||n===U.a.Component))return function(e){return F(e,r,s,p)};var a=n._originComponent&&n._originComponent.displayName||n._originComponent&&n._originComponent.name||n.displayName||n.name,c=function(e){function t(){return m()(this,t),C()(this,v()(t).apply(this,arguments))}return S()(t,e),$()(t,[{key:"componentWillUnmount",value:function(){this.$scope&&this.$scope.dispose("hoc")}},{key:"render",value:function(){var e=this,t=r||this.props.$scope;return t?(this.$scope&&t===this.$scope.parent||(this.$scope&&this.$scope.dispose("hoc"),this.$scope=t,this.$scope&&this.$scope.retain("hoc")),U.a.createElement(W,{value:this.$scope},U.a.createElement(n,l()({},this.props,{$dispatch:this.$scope.dispatch,$actions:this.$scope.actions,$scope:this.$scope,$stores:this.$scope.stores})))):U.a.createElement(O,null,function(t){return!(t=t||T.Store.staticScope)||e.$scope&&t===e.$scope.parent||(e.$scope&&e.$scope.dispose("hoc"),t=new T.Scope(s||{},i()({autoDestroy:"inherit",key:a,parent:t},p)),e.$scope=t,e.$scope&&e.$scope.retain("hoc")),U.a.createElement(W,{value:e.$scope},U.a.createElement(n,l()({},e.props,{$dispatch:e.$scope.dispatch,$actions:e.$scope.actions,$scope:e.$scope,$stores:e.$scope.stores})))})}}]),t}(U.a.Component);return c._originComponent=n._originComponent||n,c.displayName="rs("+a+")",c}function R(){for(var e=arguments.length,t=new Array(e),o=0;o<e;o++)t[o]=arguments[o];var n=(!t[0]||t[0].prototype instanceof U.a.Component||t[0]===U.a.Component)&&t.shift(),r=(!t[0]||N.a.array(t[0]))&&t.shift()||[];if(!r.length)for(r=[];N.a.string(t[0]);)r.push(t.shift());var s=(!t[0]||t[0]instanceof T.Scope)&&t.shift(),p=(!t[0]||t[0]instanceof k)&&t.shift()||{};if(!n||!(n.prototype instanceof U.a.Component||n===U.a.Component))return function(e){return R(e,r,s,p)};var a=n.displayName||n.name,c=r.map(M),u=function(e){function t(e,o,n){var r;return m()(this,t),(r=C()(this,v()(t).apply(this,arguments))).state={},e.$scope&&c.forEach(function(t){return e.$scope.state[t.pathTo[0]]=j({},t.pathTo.slice(1),w(e,t.pathFrom))}),r}return S()(t,e),$()(t,[{key:"render",value:function(){return U.a.createElement(n,this.props)}}],[{key:"getDerivedStateFromProps",value:function(e,t){return c.forEach(function(t){w(e,t.pathFrom)!==w(e.$scope.state,t.pathTo)&&(e.$scope.state[t.pathTo[0]]=j({},t.pathTo.slice(1),w(e,t.pathFrom)))}),null}}]),t}(U.a.Component);return u._originComponent=n._originComponent||n,u.defaultProps=i()({},n.defaultProps||{}),u.displayName="p2s("+a+")",(s||!n._originComponent)&&F(s)(u)||u}function B(){for(var e,t,o=arguments.length,n=new Array(o),s=0;s<o;s++)n[s]=arguments[s];var p=(!n[0]||n[0].prototype instanceof U.a.Component||n[0]===U.a.Component)&&n.shift(),a=(!n[0]||n[0]instanceof T.Store)&&n.shift()||T.Store,c=(!n[0]||N.a.string(n[0]))&&n.shift()||a.displayName||"props",u=(!n[0]||n[0]instanceof k)&&n.shift()||{},f=(!n[0]||n[0]instanceof T.Scope)&&n.shift();if(!p||!(p.prototype instanceof U.a.Component||p===U.a.Component))return function(e){return B(e,a,c,u,f)};var h=p._originComponent&&p._originComponent.displayName||p._originComponent&&p._originComponent.name||p.displayName||p.name;return t=e=function(e){function t(){return m()(this,t),C()(this,v()(t).apply(this,arguments))}return S()(t,e),$()(t,[{key:"componentWillUnmount",value:function(){this.$scope&&this.$scope.dispose("hoc")}},{key:"render",value:function(){var e=this;return U.a.createElement(O,null,function(t){return!(t=f||e.props.$scope||t||T.Store.staticScope)||e.$scope&&t===e.$scope.parent||(e.$scope&&e.$scope.dispose("hoc"),t=new T.Scope(r()({},c,a),i()({autoDestroy:"inherit",key:h,parent:t},u)),e.$scope=t,e.$scope&&e.$scope.retain("hoc")),U.a.createElement(W,{value:e.$scope},U.a.createElement(p,l()({},e.props,{$dispatch:e.$scope.dispatch,$actions:e.$scope.actions,$scope:e.$scope,$stores:e.$scope.stores})))})}}]),t}(U.a.Component),e._originComponent=p._originComponent||p,e.displayName="p2st("+h+")",t}Object(T.addScopableType)(function(e){return e&&(e.prototype instanceof U.a.Component||e===U.a.Component)},A,!1,!0);var z=A(U.a.Component)},function(e,t){e.exports=require("@babel/runtime/helpers/getPrototypeOf")},function(e,t){e.exports=require("@babel/runtime/helpers/objectSpread")},function(e,t){e.exports=require("@babel/runtime/helpers/classCallCheck")},function(e,t){e.exports=require("@babel/runtime/helpers/createClass")},function(e,t){e.exports=require("@babel/runtime/helpers/possibleConstructorReturn")},function(e,t){e.exports=require("@babel/runtime/helpers/inherits")},function(e,t){e.exports=require("@babel/runtime/helpers/get")},function(e,t){e.exports=require("@babel/runtime/helpers/extends")},function(e,t){e.exports=require("@babel/runtime/helpers/toConsumableArray")},function(e,t){e.exports=require("@babel/runtime/helpers/assertThisInitialized")},function(e,t){e.exports=require("@babel/runtime/helpers/defineProperty")},function(e,t,o){"use strict";o.r(t),o.d(t,"Component",function(){return p}),o.d(t,"reScopeProps",function(){return a}),o.d(t,"reScope",function(){return c}),o.d(t,"scopeToProps",function(){return u}),o.d(t,"propsToScope",function(){return f}),o.d(t,"propsToStore",function(){return l});var n=o(1),r=o.n(n),s=o(3);for(var i in n)["Component","reScopeProps","reScope","scopeToProps","propsToScope","propsToStore","default"].indexOf(i)<0&&function(e){o.d(t,e,function(){return n[e]})}(i);r.a.Component=s.a,r.a.reScopeProps=s.e,r.a.reScope=s.d,r.a.scopeToProps=s.e,r.a.propsToScope=s.b,r.a.propsToStore=s.c;var p=s.a,a=s.e,c=s.d,u=s.e,f=s.b,l=s.c;t.default=r.a},function(e,t){e.exports=require("prop-types")}]);
+module.exports =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./src/ReactHocs.js":
+/*!**************************!*\
+  !*** ./src/ReactHocs.js ***!
+  \**************************/
+/*! exports provided: default, Component, reScope, reScopeProps, propsToScope, propsToStore */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Component; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Component", function() { return Component; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reScope", function() { return reScope; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reScopeProps", function() { return reScopeProps; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "propsToScope", function() { return propsToScope; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "propsToStore", function() { return propsToStore; });
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "undefined?188d");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/objectSpread */ "undefined?e108");
+/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "undefined?e4e5");
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/get */ "undefined?56eb");
+/* harmony import */ var _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "undefined?df9b");
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "undefined?24b3");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "undefined?36a1");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "undefined?03c7");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "undefined?20a8");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "undefined?74ba");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "undefined?4d9b");
+/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var rescope__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! rescope */ "undefined?8e7d");
+/* harmony import */ var rescope__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(rescope__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! is */ "undefined?63a5");
+/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(is__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! prop-types */ "undefined?3832");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react */ "undefined?588e");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_14__);
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * Copyright (c)  2018 Wise Wild Web .
+ *
+ *  MIT License
+ *  
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *  
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *  
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ *  
+ * @author : Nathanael Braun
+ * @contact : caipilabs@gmail.com
+ */
+
+
+
+
+var SimpleObjectProto = {}.constructor;
+
+var _createContext = Object(react__WEBPACK_IMPORTED_MODULE_14__["createContext"])(rescope__WEBPACK_IMPORTED_MODULE_11__["Store"].staticScope),
+    Provider = _createContext.Provider,
+    Consumer = _createContext.Consumer;
+
+function walknSet(obj, path, value, stack) {
+  if (is__WEBPACK_IMPORTED_MODULE_12___default.a.string(path)) path = path.split('.');
+  if (!path.length) return value;else if (path.length == 1) {
+    obj[path[0]] = stack ? [].concat(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_10___default()(obj[path[0]] || []), [value]) : value;
+    return obj;
+  } else return walknSet(obj[path[0]] = obj[path[0]] || {}, path.slice(1), value, stack) && obj || obj;
+}
+
+function walknGet(obj, path, isKey) {
+  if (is__WEBPACK_IMPORTED_MODULE_12___default.a.string(path)) path = path.split('.');
+  return path.length ? obj[path[0]] && walknGet(obj[path[0]], path.slice(1)) : obj;
+}
+
+function parseRef(_ref) {
+  var ref = _ref.split(':');
+
+  ref[0] = ref[0].split('.');
+  ref[1] = ref[1] && ref[1].split('.');
+  return {
+    pathFrom: ref[0],
+    pathTo: ref[1] || [ref[0][ref[0].length - 1]]
+  };
+}
+/**
+ * Return a React "HOC" (High Order Component) that :
+ *  - Inject & maintain the stores listed baseComponent::use and/or (use) in the
+ * instances props.
+ *  - Propag (scope) in the returned React Component context
+ *
+ * @param BaseComponent {React.Component} Base React Component ( default :
+ *     React.Component )
+ * @param scope {ReScope.Scope|function} the propagated Scope where the stores will be
+ *     searched ( default : the default ReScope::Scope::scopes.static scope )
+ * @param use {array} the list of stores to inject from the current scope
+ * @returns {ReScopeProvider}
+ */
+
+
+function reScopeProps() {
+  var _class, _temp;
+
+  for (var _len = arguments.length, argz = new Array(_len), _key = 0; _key < _len; _key++) {
+    argz[_key] = arguments[_key];
+  }
+
+  var BaseComponent = (!argz[0] || argz[0].prototype instanceof react__WEBPACK_IMPORTED_MODULE_14___default.a.Component || argz[0] === react__WEBPACK_IMPORTED_MODULE_14___default.a.Component) && argz.shift(),
+      scope = (!argz[0] || argz[0] instanceof rescope__WEBPACK_IMPORTED_MODULE_11__["Scope"] || is__WEBPACK_IMPORTED_MODULE_12___default.a.fn(argz[0])) && argz.shift(),
+      use = (!argz[0] || is__WEBPACK_IMPORTED_MODULE_12___default.a.array(argz[0]) || argz[0] instanceof SimpleObjectProto) && argz.shift();
+
+  if (!use) {
+    use = [];
+
+    while (is__WEBPACK_IMPORTED_MODULE_12___default.a.string(argz[0])) {
+      use.push(argz.shift());
+    }
+  }
+
+  if (!(BaseComponent && (BaseComponent.prototype instanceof react__WEBPACK_IMPORTED_MODULE_14___default.a.Component || BaseComponent === react__WEBPACK_IMPORTED_MODULE_14___default.a.Component))) {
+    return function (BaseComponent) {
+      return reScopeProps(BaseComponent, scope, use);
+    };
+  }
+
+  var compName = BaseComponent._originComponent && BaseComponent._originComponent.displayName || BaseComponent._originComponent && BaseComponent._originComponent.name || BaseComponent.displayName || BaseComponent.name; //if ( BaseComponent.use )
+  //	use = [...use, ...BaseComponent.use];
+
+  var provider = reScopeToState((_temp = _class =
+  /*#__PURE__*/
+  function (_React$Component) {
+    _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_9___default()(ReScopePropsProvider, _React$Component);
+
+    function ReScopePropsProvider() {
+      _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_5___default()(this, ReScopePropsProvider);
+
+      return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_7___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_8___default()(ReScopePropsProvider).apply(this, arguments));
+    }
+
+    _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_6___default()(ReScopePropsProvider, [{
+      key: "render",
+      value: function render() {
+        return react__WEBPACK_IMPORTED_MODULE_14___default.a.createElement(BaseComponent, _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_4___default()({}, this.props, this.state, {
+          $dispatch: this.$dispatch,
+          $actions: this.$actions,
+          $scope: this.$scope,
+          $stores: this.$stores
+        }));
+      }
+    }]);
+
+    return ReScopePropsProvider;
+  }(react__WEBPACK_IMPORTED_MODULE_14___default.a.Component), _class._originComponent = BaseComponent._originComponent || BaseComponent, _class.displayName = "s2p(" + compName + ")", _temp), is__WEBPACK_IMPORTED_MODULE_12___default.a.fn(scope) && scope, use);
+  return (scope || !BaseComponent._originComponent) && reScope(!is__WEBPACK_IMPORTED_MODULE_12___default.a.fn(scope) && scope)(provider) || provider;
+}
+/**
+ * Return a React "HOC" (High Order Component) that :
+ *  - Inherit BaseComponent,
+ *  - Inject & maintain the stores in BaseComponent::use and/or (use) in the instances
+ * state.
+ *  - Propag (scope) in the returned React Component context
+ *
+ *
+ * @param BaseComponent {React.Component} Base React Component ( default :
+ *     React.Component )
+ * @param scope {ReScope.Scope|function} the propagated Scope where the stores will be
+ *     searched
+ * @param use {array} the list of stores injected from the current scope
+ * @param additionalContext {Object} context to be propagated
+ * @returns {ReScopeProvider}
+ */
+
+
+function reScopeToState() {
+  for (var _len2 = arguments.length, argz = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+    argz[_key2] = arguments[_key2];
+  }
+
+  var BaseComponent = (!argz[0] || argz[0].prototype instanceof react__WEBPACK_IMPORTED_MODULE_14___default.a.Component || argz[0] === react__WEBPACK_IMPORTED_MODULE_14___default.a.Component) && argz.shift(),
+      scope = (!argz[0] || argz[0] instanceof rescope__WEBPACK_IMPORTED_MODULE_11__["Scope"] || is__WEBPACK_IMPORTED_MODULE_12___default.a.fn(argz[0])) && argz.shift(),
+      use = is__WEBPACK_IMPORTED_MODULE_12___default.a.array(argz[0]) && argz.shift(),
+      stateMap = !use && (!argz[0] || argz[0] instanceof SimpleObjectProto) && argz.shift(),
+      initialState = {};
+
+  if (!use) {
+    use = [];
+
+    while (is__WEBPACK_IMPORTED_MODULE_12___default.a.string(argz[0])) {
+      use.push(argz.shift());
+    }
+  }
+
+  var compName = BaseComponent._originComponent && BaseComponent._originComponent.displayName || BaseComponent._originComponent && BaseComponent._originComponent.name || BaseComponent.displayName || BaseComponent.name;
+  use = [].concat(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_10___default()(BaseComponent.use || []), _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_10___default()(use || []));
+  stateMap && rescope__WEBPACK_IMPORTED_MODULE_11__["Scope"].stateMapToRefList(stateMap, initialState, use);
+
+  var ReScopeProvider =
+  /*#__PURE__*/
+  function (_BaseComponent) {
+    _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_9___default()(ReScopeProvider, _BaseComponent);
+
+    function ReScopeProvider(p, ctx, q) {
+      var _this;
+
+      _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_5___default()(this, ReScopeProvider);
+
+      _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_7___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_8___default()(ReScopeProvider).call(this, p, ctx, q));
+
+      _this._scopeWillUpdate = function (state) {
+        // trigger update hook
+        _this.scopeWillUpdate && _this.scopeWillUpdate(state, _this.$stores);
+        if (_this.applyScopeUpdate) state = _this.applyScopeUpdate(state, _this.$stores); //else
+        //// clone updated objects so react will propag them...
+        //	state = Object.keys(state)
+        //	              .reduce(
+        //		              ( h, k ) => (
+        //			              h[k] = is.array(state[k])
+        //			                     ? [...state[k]]
+        //			                     : state[k] instanceof SimpleObjectProto
+        //			                       ? { ...state[k] }
+        //			                       : state[k],
+        //				              h), {}
+        //	              )
+
+        _this.setState(state);
+      };
+
+      if (is__WEBPACK_IMPORTED_MODULE_12___default.a.fn(scope)) {
+        _this.$scope = scope(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this), _this.props, {
+          rescope: p.$scope
+        });
+      } else _this.$scope = p.$scope;
+
+      if (_this.$scope && _this.$scope.dead) {
+        console.error("ReScoping using dead scope !");
+        _this.$scope = null;
+      }
+
+      _this.$stores = _this.$scope && _this.$scope.stores;
+      _this.$actions = _this.$scope && _this.$scope.actions;
+
+      if (_this.$scope && use.length) {
+        _this.state = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, _this.state, initialState, _this.$scope.map(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this), use, false));
+      } else if (!_this.$scope) console.warn("No Scope found in ".concat(compName)); //this.$dispatch = this.$scope && this.$scope.$dispatch.bind(this);
+
+
+      return _this;
+    }
+
+    _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_6___default()(ReScopeProvider, [{
+      key: "componentDidMount",
+      value: function componentDidMount() {
+        if (use.length) {
+          this.$scope && this.$scope.bind(this._scopeWillUpdate, use, false);
+        }
+
+        _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_8___default()(ReScopeProvider.prototype), "componentDidMount", this) && _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_8___default()(ReScopeProvider.prototype), "componentDidMount", this).call(this);
+      } //static getDerivedStateFromProps( props, state ) {
+      //	let nScope = props.$scope;
+      //
+      //	if ( nScope ) {
+      //		console.log('new scope ?')
+      //		if ( use.length )
+      //			return nScope.map(this, use, false);
+      //	}
+      //	return null;
+      //
+      //}
+
+    }, {
+      key: "componentDidUpdate",
+      value: function componentDidUpdate(props) {
+        var nScope = props.$scope;
+
+        if (nScope !== this.$scope) {
+          if (is__WEBPACK_IMPORTED_MODULE_12___default.a.fn(scope)) nScope = scope(this, this.props, {
+            rescope: nScope
+          });
+          use.length && this.$scope.unBind(this._scopeWillUpdate, use);
+          this.$scope = nScope;
+
+          if (this.$scope && this.$scope.dead) {
+            console.error("ReScoping using dead scope");
+            this.$actions = this.$stores = this.$scope = null;
+          } else {
+            this.$actions = this.$scope.actions;
+            this.$stores = this.$scope.stores;
+            use.length && nScope.bind(this._scopeWillUpdate, use);
+          }
+        }
+      }
+    }, {
+      key: "componentWillUnmount",
+      value: function componentWillUnmount() {
+        _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_8___default()(ReScopeProvider.prototype), "componentWillUnmount", this) && _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_8___default()(ReScopeProvider.prototype), "componentWillUnmount", this).call(this);
+
+        if (this.$scope && !this.$scope.dead) {
+          use.length && this.$scope.unBind(this._scopeWillUpdate, use);
+        }
+      }
+    }]);
+
+    return ReScopeProvider;
+  }(BaseComponent);
+
+  ReScopeProvider._originComponent = BaseComponent._originComponent || BaseComponent;
+  ReScopeProvider.defaultProps = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, BaseComponent.defaultProps || {});
+  ReScopeProvider.displayName = "s2s(" + compName + ")";
+  ;
+  return (scope || !BaseComponent._originComponent) && reScope(!is__WEBPACK_IMPORTED_MODULE_12___default.a.fn(scope) && scope)(ReScopeProvider) || ReScopeProvider;
+}
+
+Object(rescope__WEBPACK_IMPORTED_MODULE_11__["addScopableType"])(function (Comp) {
+  return Comp && (Comp.prototype instanceof react__WEBPACK_IMPORTED_MODULE_14___default.a.Component || Comp === react__WEBPACK_IMPORTED_MODULE_14___default.a.Component);
+}, reScopeToState, false, true);
+/**
+ * Return a React "HOC" (High Order Component) that :
+ *  - Render BaseComponent with new scope that inherit the given scope or context scope
+ *
+ * @param BaseComponent {React.Component} Base React Component ( default :
+ *     React.Component )
+ * @param storesMap {Object} the propagated Scope where the stores will be searched
+ * @param parentScope {Scope} the propagated Scope where the stores will be searched
+ * @param parentScopeId {string} the propagated Scope where the stores will be searched
+ * @param additionalContext {Object} context to be propagated
+ * @returns {*}
+ */
+
+function reScope() {
+  for (var _len3 = arguments.length, argz = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+    argz[_key3] = arguments[_key3];
+  }
+
+  var BaseComponent = (!argz[0] || argz[0].prototype instanceof react__WEBPACK_IMPORTED_MODULE_14___default.a.Component || argz[0] === react__WEBPACK_IMPORTED_MODULE_14___default.a.Component) && argz.shift(),
+      scope = (!argz[0] || argz[0] instanceof rescope__WEBPACK_IMPORTED_MODULE_11__["Scope"] || is__WEBPACK_IMPORTED_MODULE_12___default.a.fn(argz[0])) && argz.shift(),
+      scoped = (!argz[0] || argz[0] instanceof SimpleObjectProto && !(argz[0] instanceof rescope__WEBPACK_IMPORTED_MODULE_11__["Scope"])) && argz.shift(),
+      scopeCfg = (!argz[0] || argz[0] instanceof SimpleObjectProto) && argz.shift() || {};
+
+  if (!(BaseComponent && (BaseComponent.prototype instanceof react__WEBPACK_IMPORTED_MODULE_14___default.a.Component || BaseComponent === react__WEBPACK_IMPORTED_MODULE_14___default.a.Component))) {
+    return function (BaseComponent) {
+      return reScope(BaseComponent, scope, scoped, scopeCfg);
+    };
+  }
+
+  var compName = BaseComponent._originComponent && BaseComponent._originComponent.displayName || BaseComponent._originComponent && BaseComponent._originComponent.name || BaseComponent.displayName || BaseComponent.name;
+
+  var ScopeProvider =
+  /*#__PURE__*/
+  function (_React$Component2) {
+    _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_9___default()(ScopeProvider, _React$Component2);
+
+    function ScopeProvider() {
+      _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_5___default()(this, ScopeProvider);
+
+      return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_7___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_8___default()(ScopeProvider).apply(this, arguments));
+    }
+
+    _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_6___default()(ScopeProvider, [{
+      key: "componentWillUnmount",
+      value: function componentWillUnmount() {
+        this.$scope && this.$scope.dispose("hoc");
+      }
+    }, {
+      key: "render",
+      value: function render() {
+        var _this2 = this;
+
+        var forcedScope = scope || this.props.$scope;
+
+        if (forcedScope) {
+          if (!this.$scope || forcedScope !== this.$scope.parent) {
+            this.$scope && this.$scope.dispose("hoc");
+            this.$scope = forcedScope;
+            this.$scope && this.$scope.retain("hoc");
+          }
+
+          return react__WEBPACK_IMPORTED_MODULE_14___default.a.createElement(Provider, {
+            value: this.$scope
+          }, react__WEBPACK_IMPORTED_MODULE_14___default.a.createElement(BaseComponent, _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_4___default()({}, this.props, {
+            $dispatch: this.$scope.dispatch,
+            $actions: this.$scope.actions,
+            $scope: this.$scope,
+            $stores: this.$scope.stores
+          })));
+        }
+
+        return react__WEBPACK_IMPORTED_MODULE_14___default.a.createElement(Consumer, null, function (nScope) {
+          nScope = nScope || rescope__WEBPACK_IMPORTED_MODULE_11__["Store"].staticScope;
+
+          if (nScope && (!_this2.$scope || nScope !== _this2.$scope.parent)) {
+            _this2.$scope && _this2.$scope.dispose("hoc");
+            nScope = new rescope__WEBPACK_IMPORTED_MODULE_11__["Scope"](scoped || {}, _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({
+              autoDestroy: 'inherit',
+              key: compName,
+              parent: nScope
+            }, scopeCfg));
+            _this2.$scope = nScope;
+            _this2.$scope && _this2.$scope.retain("hoc");
+          }
+
+          return react__WEBPACK_IMPORTED_MODULE_14___default.a.createElement(Provider, {
+            value: _this2.$scope
+          }, react__WEBPACK_IMPORTED_MODULE_14___default.a.createElement(BaseComponent, _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_4___default()({}, _this2.props, {
+            $dispatch: _this2.$scope.dispatch,
+            $actions: _this2.$scope.actions,
+            $scope: _this2.$scope,
+            $stores: _this2.$scope.stores
+          })));
+        });
+      }
+    }]);
+
+    return ScopeProvider;
+  }(react__WEBPACK_IMPORTED_MODULE_14___default.a.Component);
+
+  ScopeProvider._originComponent = BaseComponent._originComponent || BaseComponent;
+  ScopeProvider.displayName = "rs(" + compName + ")";
+  return ScopeProvider;
+}
+/**
+ * Map specified props to
+ * @param BaseComponent {React.Component} Base React Component ( default :
+ *     React.Component )
+ * @param storesMap {Object} the propagated Scope where the stores will be searched
+ * @param parentScope {Scope} the propagated Scope where the stores will be searched
+ * @param parentScopeId {string} the propagated Scope where the stores will be searched
+ * @param additionalContext {Object} context to be propagated
+ * @returns {*}
+ */
+
+
+function propsToScope() {
+  for (var _len4 = arguments.length, argz = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+    argz[_key4] = arguments[_key4];
+  }
+
+  var BaseComponent = (!argz[0] || argz[0].prototype instanceof react__WEBPACK_IMPORTED_MODULE_14___default.a.Component || argz[0] === react__WEBPACK_IMPORTED_MODULE_14___default.a.Component) && argz.shift(),
+      scopedProps = (!argz[0] || is__WEBPACK_IMPORTED_MODULE_12___default.a.array(argz[0])) && argz.shift() || [];
+
+  if (!scopedProps.length) {
+    scopedProps = [];
+
+    while (is__WEBPACK_IMPORTED_MODULE_12___default.a.string(argz[0])) {
+      scopedProps.push(argz.shift());
+    }
+  }
+
+  var scope = (!argz[0] || argz[0] instanceof rescope__WEBPACK_IMPORTED_MODULE_11__["Scope"]) && argz.shift(),
+      scopeCfg = (!argz[0] || argz[0] instanceof SimpleObjectProto) && argz.shift() || {};
+
+  if (!(BaseComponent && (BaseComponent.prototype instanceof react__WEBPACK_IMPORTED_MODULE_14___default.a.Component || BaseComponent === react__WEBPACK_IMPORTED_MODULE_14___default.a.Component))) {
+    return function (BaseComponent) {
+      return propsToScope(BaseComponent, scopedProps, scope, scopeCfg);
+    };
+  }
+
+  var compName = BaseComponent.displayName || BaseComponent.name,
+      refList = scopedProps.map(parseRef);
+
+  var ScopeProvider =
+  /*#__PURE__*/
+  function (_React$Component3) {
+    _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_9___default()(ScopeProvider, _React$Component3);
+
+    function ScopeProvider(p, ctx, q) {
+      var _this3;
+
+      _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_5___default()(this, ScopeProvider);
+
+      _this3 = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_7___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_8___default()(ScopeProvider).apply(this, arguments));
+      _this3.state = {};
+      p.$scope && refList.forEach(function (ref) {
+        return p.$scope.state[ref.pathTo[0]] = walknSet( //ref.pathTo.length > 1
+        //&& this.$scope.retrieve(ref.pathTo.slice(0, ref.pathTo.length - 1))
+        //||
+        {}, ref.pathTo.slice(1), walknGet(p, ref.pathFrom));
+      });
+      return _this3;
+    }
+
+    _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_6___default()(ScopeProvider, [{
+      key: "render",
+      //componentDidUpdate( np ) {
+      //	if ( np.$scope ) {
+      //		refList.forEach(
+      //			( ref ) => {
+      //				if ( walknGet(np, ref.pathFrom) !== walknGet(np.$scope.state, ref.pathTo) )
+      //					np.$scope.state[ref.pathTo[0]] = walknSet(
+      //						{},
+      //						ref.pathTo.slice(1),
+      //						walknGet(np, ref.pathFrom)
+      //					)
+      //			}
+      //		)
+      //	}
+      //}
+      value: function render() {
+        return react__WEBPACK_IMPORTED_MODULE_14___default.a.createElement(BaseComponent, this.props);
+      }
+    }], [{
+      key: "getDerivedStateFromProps",
+      value: function getDerivedStateFromProps(props, state) {
+        refList.forEach(function (ref) {
+          if (walknGet(props, ref.pathFrom) !== walknGet(props.$scope.state, ref.pathTo)) props.$scope.state[ref.pathTo[0]] = walknSet({}, ref.pathTo.slice(1), walknGet(props, ref.pathFrom));
+        });
+        return null;
+      }
+    }]);
+
+    return ScopeProvider;
+  }(react__WEBPACK_IMPORTED_MODULE_14___default.a.Component);
+
+  ScopeProvider._originComponent = BaseComponent._originComponent || BaseComponent;
+  ScopeProvider.defaultProps = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, BaseComponent.defaultProps || {});
+  ScopeProvider.displayName = "p2s(" + compName + ")";
+  return (scope || !BaseComponent._originComponent) && reScope(scope)(ScopeProvider) || ScopeProvider;
+}
+/**
+ * Bind a component props to the specified store,
+ * render with the specified store result data
+ *
+ * @param BaseComponent {React.Component} Base React Component ( default :
+ *     React.Component )
+ * @param storesMap {Object} the propagated Scope where the stores will be searched
+ * @param parentScope {Scope} the propagated Scope where the stores will be searched
+ * @param parentScopeId {string} the propagated Scope where the stores will be searched
+ * @param additionalContext {Object} context to be propagated
+ * @returns {*}
+ */
+
+
+function propsToStore() {
+  var _class2, _temp2;
+
+  for (var _len5 = arguments.length, argz = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+    argz[_key5] = arguments[_key5];
+  }
+
+  var BaseComponent = (!argz[0] || argz[0].prototype instanceof react__WEBPACK_IMPORTED_MODULE_14___default.a.Component || argz[0] === react__WEBPACK_IMPORTED_MODULE_14___default.a.Component) && argz.shift(),
+      storeComp = (!argz[0] || argz[0] instanceof rescope__WEBPACK_IMPORTED_MODULE_11__["Store"]) && argz.shift() || rescope__WEBPACK_IMPORTED_MODULE_11__["Store"],
+      storeName = (!argz[0] || is__WEBPACK_IMPORTED_MODULE_12___default.a.string(argz[0])) && argz.shift() || storeComp.displayName || "props",
+      scopeCfg = (!argz[0] || argz[0] instanceof SimpleObjectProto) && argz.shift() || {},
+      scope = (!argz[0] || argz[0] instanceof rescope__WEBPACK_IMPORTED_MODULE_11__["Scope"]) && argz.shift();
+
+  if (!(BaseComponent && (BaseComponent.prototype instanceof react__WEBPACK_IMPORTED_MODULE_14___default.a.Component || BaseComponent === react__WEBPACK_IMPORTED_MODULE_14___default.a.Component))) {
+    return function (BaseComponent) {
+      return propsToStore(BaseComponent, storeComp, storeName, scopeCfg, scope);
+    };
+  }
+
+  var compName = BaseComponent._originComponent && BaseComponent._originComponent.displayName || BaseComponent._originComponent && BaseComponent._originComponent.name || BaseComponent.displayName || BaseComponent.name;
+  return _temp2 = _class2 =
+  /*#__PURE__*/
+  function (_React$Component4) {
+    _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_9___default()(ScopeProvider, _React$Component4);
+
+    function ScopeProvider() {
+      _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_5___default()(this, ScopeProvider);
+
+      return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_7___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_8___default()(ScopeProvider).apply(this, arguments));
+    }
+
+    _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_6___default()(ScopeProvider, [{
+      key: "componentWillUnmount",
+      value: function componentWillUnmount() {
+        this.$scope && this.$scope.dispose("hoc");
+      }
+    }, {
+      key: "render",
+      value: function render() {
+        var _this4 = this;
+
+        return react__WEBPACK_IMPORTED_MODULE_14___default.a.createElement(Consumer, null, function (nScope) {
+          nScope = scope || _this4.props.$scope || nScope || rescope__WEBPACK_IMPORTED_MODULE_11__["Store"].staticScope;
+
+          if (nScope && (!_this4.$scope || nScope !== _this4.$scope.parent)) {
+            _this4.$scope && _this4.$scope.dispose("hoc");
+            nScope = new rescope__WEBPACK_IMPORTED_MODULE_11__["Scope"](_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, storeName, storeComp), _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({
+              autoDestroy: 'inherit',
+              key: compName,
+              parent: nScope
+            }, scopeCfg));
+            _this4.$scope = nScope;
+            _this4.$scope && _this4.$scope.retain("hoc");
+          }
+
+          return react__WEBPACK_IMPORTED_MODULE_14___default.a.createElement(Provider, {
+            value: _this4.$scope
+          }, react__WEBPACK_IMPORTED_MODULE_14___default.a.createElement(BaseComponent, _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_4___default()({}, _this4.props, {
+            $dispatch: _this4.$scope.dispatch,
+            $actions: _this4.$scope.actions,
+            $scope: _this4.$scope,
+            $stores: _this4.$scope.stores
+          })));
+        });
+      }
+    }]);
+
+    return ScopeProvider;
+  }(react__WEBPACK_IMPORTED_MODULE_14___default.a.Component), _class2._originComponent = BaseComponent._originComponent || BaseComponent, _class2.displayName = "p2st(" + compName + ")", _temp2;
+}
+
+var Component = reScopeToState(react__WEBPACK_IMPORTED_MODULE_14___default.a.Component);
+
+
+/***/ }),
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Component", function() { return Component; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reScopeProps", function() { return reScopeProps; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reScope", function() { return reScope; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scopeToProps", function() { return scopeToProps; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "propsToScope", function() { return propsToScope; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "propsToStore", function() { return propsToStore; });
+/* harmony import */ var rescope__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rescope */ "undefined?8e7d");
+/* harmony import */ var rescope__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(rescope__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _ReactHocs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReactHocs */ "./src/ReactHocs.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in rescope__WEBPACK_IMPORTED_MODULE_0__) if(["Component","reScopeProps","reScope","scopeToProps","propsToScope","propsToStore","default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return rescope__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/*
+ * Copyright (c)  2018 Wise Wild Web .
+ *
+ *  MIT License
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ *
+ * @author : Nathanael Braun
+ * @contact : caipilabs@gmail.com
+ */
+
+
+rescope__WEBPACK_IMPORTED_MODULE_0___default.a.Component = _ReactHocs__WEBPACK_IMPORTED_MODULE_1__["Component"];
+rescope__WEBPACK_IMPORTED_MODULE_0___default.a.reScopeProps = _ReactHocs__WEBPACK_IMPORTED_MODULE_1__["reScopeProps"];
+rescope__WEBPACK_IMPORTED_MODULE_0___default.a.reScope = _ReactHocs__WEBPACK_IMPORTED_MODULE_1__["reScope"];
+rescope__WEBPACK_IMPORTED_MODULE_0___default.a.scopeToProps = _ReactHocs__WEBPACK_IMPORTED_MODULE_1__["reScopeProps"];
+rescope__WEBPACK_IMPORTED_MODULE_0___default.a.propsToScope = _ReactHocs__WEBPACK_IMPORTED_MODULE_1__["propsToScope"];
+rescope__WEBPACK_IMPORTED_MODULE_0___default.a.propsToStore = _ReactHocs__WEBPACK_IMPORTED_MODULE_1__["propsToStore"];
+
+var Component = _ReactHocs__WEBPACK_IMPORTED_MODULE_1__["Component"];
+var reScopeProps = _ReactHocs__WEBPACK_IMPORTED_MODULE_1__["reScopeProps"];
+var reScope = _ReactHocs__WEBPACK_IMPORTED_MODULE_1__["reScope"];
+var scopeToProps = _ReactHocs__WEBPACK_IMPORTED_MODULE_1__["reScopeProps"];
+var propsToScope = _ReactHocs__WEBPACK_IMPORTED_MODULE_1__["propsToScope"];
+var propsToStore = _ReactHocs__WEBPACK_IMPORTED_MODULE_1__["propsToStore"];
+/* harmony default export */ __webpack_exports__["default"] = (rescope__WEBPACK_IMPORTED_MODULE_0___default.a);
+
+/***/ }),
+
+/***/ "undefined?03c7":
+/*!*******************************************************************!*\
+  !*** external "@babel/runtime/helpers/possibleConstructorReturn" ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@babel/runtime/helpers/possibleConstructorReturn");
+
+/***/ }),
+
+/***/ "undefined?188d":
+/*!********************************************************!*\
+  !*** external "@babel/runtime/helpers/defineProperty" ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@babel/runtime/helpers/defineProperty");
+
+/***/ }),
+
+/***/ "undefined?20a8":
+/*!********************************************************!*\
+  !*** external "@babel/runtime/helpers/getPrototypeOf" ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@babel/runtime/helpers/getPrototypeOf");
+
+/***/ }),
+
+/***/ "undefined?24b3":
+/*!********************************************************!*\
+  !*** external "@babel/runtime/helpers/classCallCheck" ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@babel/runtime/helpers/classCallCheck");
+
+/***/ }),
+
+/***/ "undefined?36a1":
+/*!*****************************************************!*\
+  !*** external "@babel/runtime/helpers/createClass" ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@babel/runtime/helpers/createClass");
+
+/***/ }),
+
+/***/ "undefined?3832":
+/*!*****************************!*\
+  !*** external "prop-types" ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("prop-types");
+
+/***/ }),
+
+/***/ "undefined?4d9b":
+/*!***********************************************************!*\
+  !*** external "@babel/runtime/helpers/toConsumableArray" ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@babel/runtime/helpers/toConsumableArray");
+
+/***/ }),
+
+/***/ "undefined?56eb":
+/*!*********************************************!*\
+  !*** external "@babel/runtime/helpers/get" ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@babel/runtime/helpers/get");
+
+/***/ }),
+
+/***/ "undefined?588e":
+/*!************************!*\
+  !*** external "react" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react");
+
+/***/ }),
+
+/***/ "undefined?63a5":
+/*!*********************!*\
+  !*** external "is" ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("is");
+
+/***/ }),
+
+/***/ "undefined?74ba":
+/*!**************************************************!*\
+  !*** external "@babel/runtime/helpers/inherits" ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@babel/runtime/helpers/inherits");
+
+/***/ }),
+
+/***/ "undefined?8e7d":
+/*!**************************!*\
+  !*** external "rescope" ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("rescope");
+
+/***/ }),
+
+/***/ "undefined?df9b":
+/*!*************************************************!*\
+  !*** external "@babel/runtime/helpers/extends" ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@babel/runtime/helpers/extends");
+
+/***/ }),
+
+/***/ "undefined?e108":
+/*!******************************************************!*\
+  !*** external "@babel/runtime/helpers/objectSpread" ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@babel/runtime/helpers/objectSpread");
+
+/***/ }),
+
+/***/ "undefined?e4e5":
+/*!***************************************************************!*\
+  !*** external "@babel/runtime/helpers/assertThisInitialized" ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@babel/runtime/helpers/assertThisInitialized");
+
+/***/ })
+
+/******/ });
+//# sourceMappingURL=ReactRS.js.map

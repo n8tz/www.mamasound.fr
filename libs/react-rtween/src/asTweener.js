@@ -283,11 +283,12 @@ export default function asTweener( ...argz ) {
 				{
 					apply   : ( pos, max ) => {
 						let x = (from + (easing(pos / max)) * length);
-						
-						this._.axes[axe].scrollableAnims.forEach(
-							sl => sl.goTo(x)
-						);
-						tick && tick(x);
+						if ( this._.tweenEnabled ) {
+							this._.axes[axe].scrollableAnims.forEach(
+								sl => sl.goTo(x)
+							);
+							tick && tick(x);
+						}
 					},
 					duration: tm,
 					cpos    : 0,
@@ -619,17 +620,16 @@ export default function asTweener( ...argz ) {
 		}
 		
 		_updateTweenRefs() {
-			//if ( this._.tweenEnabled ) {
-			//console.log("refs update")
-			for ( var i = 0, target, node; i < this._.tweenRefTargets.length; i++ ) {
-				target = this._.tweenRefTargets[i];
-				muxToCss(this._.tweenRefMaps[target], this._.tweenRefCSS[target], this._.muxByTarget[target], this._.muxDataByTarget[target], this._.box);
-				node = this._.tweenEnabled && target == "__root"
-				       ? ReactDom.findDOMNode(this)
-				       : this.getTweenableRef(target);
-				node && Object.assign(node.style, this._.tweenRefCSS[target]);
+			if ( this._.tweenEnabled ) {
+				for ( var i = 0, target, node; i < this._.tweenRefTargets.length; i++ ) {
+					target = this._.tweenRefTargets[i];
+					muxToCss(this._.tweenRefMaps[target], this._.tweenRefCSS[target], this._.muxByTarget[target], this._.muxDataByTarget[target], this._.box);
+					node = this._.tweenEnabled && target == "__root"
+					       ? ReactDom.findDOMNode(this)
+					       : this.getTweenableRef(target);
+					node && Object.assign(node.style, this._.tweenRefCSS[target]);
+				}
 			}
-			//}
 		}
 		
 		componentWillUnmount() {
