@@ -60,19 +60,21 @@ export default class EventList extends React.Component {
 				<div className={ "curDay" }>
 					{ moment(appState.curDay).format("dddd DD/MM") }
 					<Tabs
-						value={ this.state.value }
-						onChange={ this.handleChange }
+						value={ appState.curStyleTab }
+						onChange={ ( e, v ) => {
+							$actions.setCurStyleTab(v)
+						} }
+						height={50}
 						variant="fullWidth"
 						indicatorColor="primary"
 						textColor="primary"
 						className={ "typeEventsTab" }
 					>
-						<Tab icon={ <img className={ "icon" }
-						                 src={ require("App/ui/assets/medias/jip/concert-gif.gif") }/> }/>
-						<Tab icon={ <img className={ "icon" }
-						                 src={ require("App/ui/assets/medias/jip/expo-gif.gif") }/> }/>
-						<Tab icon={ <img className={ "icon theatre" }
-						                 src={ require("App/ui/assets/medias/jip/theatre-gif.gif") }/> }/>
+						<Tab label={ "Tous" }/>
+						<Tab label={ "Concerts" }/>
+						<Tab label={ "Expos" }/>
+						<Tab label={ "Theatre" }/>
+						<Tab label={ "Cinéma" }/>
 					</Tabs>
 				</div>
 				<div className={ "dayList" } onClick={ e => e.preventDefault() } id={ "scrollableEvents" }>

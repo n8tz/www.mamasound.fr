@@ -23,101 +23,106 @@ export default {
 	@asStore
 	GlobalEventQuery: {
 		@asRef
-		curDay: "appState.curDay",
-		etty  : 'Event',
-		limit : 100,
+		curDay     : "appState.curDay",
+		@asRef
+		curStyleTab: "appState.curStyleTab",
+		query      : {},
 		$apply( data, state ) {
-			if ( !state.query ) {
-				this.$actions.updateQuery()
-			}
-			return state;
-		},
-		updateQuery( dt = moment(), type ) {
-			let { curDay } = this.nextState;
-			let from       = moment(curDay).startOf('day').add(2, 'hour').unix() * 1000,
-			    to         = moment(curDay).add(3, 'day').add(2, 'hour').unix() * 1000;
+			//if ( !state.query.query ) {
+		//		this.$actions.updateQuery()
+		//	//}
+		//	return state;
+		//},
+		//updateQuery( dt = moment() ) {
+			let { curDay, curStyleTab: type } = state;
+			let from                          = moment(curDay).startOf('day').add(2, 'hour').unix() * 1000,
+			    to                            = moment(curDay).endOf('day').add(2, 'hour').unix() * 1000;
+			console.log('Query ', type)
 			return {
-				query  : {
-					$or: [
-						
-						...([undefined, 'Tout-Montpellier', 'Concerts'].includes(type) && [
-							{
-								_cls    : 'Concert',
-								schedule: {
-									$elemMatch: {
-										startTM: {
-											'$gt': from,
-											'$lt': to
-										}
-									}
-								}
-							},
-							{
-								_cls   : 'Concert',
-								startTM: {
-									'$gt': from,
-									'$lt': to
-								}
-							}]),
-						...([undefined, 'Tout-Montpellier', 'Theatres'].includes(type) && [
-							{
-								_cls    : 'Theatre',
-								schedule: {
-									$elemMatch: {
-										startTM: {
-											'$gt': from,
-											'$lt': to
-										}
-									}
-								}
-							},
-							{
-								_cls   : 'Theatre',
-								startTM: {
-									'$gt': from,
-									'$lt': to
-								}
-							}]),
-						
-						...([undefined, 'Tout-Montpellier'].includes(type) && [
-							{
-								_cls     : 'Expo',
-								haveVerni: true,
-								verniTM  : {
-									'$gt': from,
-									'$lt': to
-								}
-							}]),
-						...(type == 'Expositions' && [{
-							_cls    : 'Expo',
-							schedule: {
-								$elemMatch: {
-									startTM: {
-										'$lt': from
-									},
-									endTM  : {
-										'$gt': to
-									}
-								}
-							}
-						}, {
-							$and: [
+				query: {
+					etty   : 'Event',
+					query  : {
+						$or: [
+							
+							...([0,1].includes(type) && [
 								{
-									_cls   : 'Expo',
+									_cls    : 'Concert',
+									schedule: {
+										$elemMatch: {
+											startTM: {
+												'$gt': from,
+												'$lt': to
+											}
+										}
+									}
+								},
+								{
+									_cls   : 'Concert',
 									startTM: {
-										'$lt': from
-									},
-									endTM  : {
-										'$gt': to
+										'$gt': from,
+										'$lt': to
+									}
+								}]||[]),
+							...([0, 1, 3].includes(type) && [
+								{
+									_cls    : 'Theatre',
+									schedule: {
+										$elemMatch: {
+											startTM: {
+												'$gt': from,
+												'$lt': to
+											}
+										}
+									}
+								},
+								{
+									_cls   : 'Theatre',
+									startTM: {
+										'$gt': from,
+										'$lt': to
+									}
+								}]||[]),
+							
+							...([0].includes(type) && [
+								{
+									_cls     : 'Expo',
+									haveVerni: true,
+									verniTM  : {
+										'$gt': from,
+										'$lt': to
+									}
+								}]||[]),
+							...(type === 2 && [{
+								_cls    : 'Expo',
+								schedule: {
+									$elemMatch: {
+										startTM: {
+											'$lt': from
+										},
+										endTM  : {
+											'$gt': to
+										}
 									}
 								}
-							]
-						}] || []),
-					]
-				},
-				limit  : 1000,
-				orderby: { startTM: 1 }
-				
+							}, {
+								$and: [
+									{
+										_cls   : 'Expo',
+										startTM: {
+											'$lt': from
+										},
+										endTM  : {
+											'$gt': to
+										}
+									}
+								]
+							}] || []),
+						]
+					},
+					limit  : 1000,
+					orderby: { startTM: 1 }
+					
+				}
 			};
 		}
 		
@@ -126,7 +131,7 @@ export default {
 	@withStateMap(
 		{
 			@asRef
-			events: "GlobalEventQuery",
+			events: "GlobalEventQuery.query",
 		}
 	)
 	Queries         : stores.MongoQueries,

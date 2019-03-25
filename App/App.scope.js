@@ -34,9 +34,12 @@ export default {
 		selectedEventId: undefined,
 		selectedEventDT: undefined,
 		curDay         : undefined,
-		curEventType   : undefined,
+		curStyleTab    : 0,
 		curTags        : undefined,
 		
+		setCurStyleTab( curStyleTab ) {
+			return { curStyleTab };
+		},
 		setPageFocus( _currentPageFocus ) {
 			let { currentPageFocus } = this.nextState;
 			if ( _currentPageFocus !== currentPageFocus )

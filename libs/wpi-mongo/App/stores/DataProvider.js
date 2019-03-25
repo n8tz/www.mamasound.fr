@@ -462,7 +462,14 @@ export default class DataProvider extends Store {
 		
 		// + socket watch / sync query record (debounced)
 		console.info("! watch query : ", hash, query)
-		newRequest && noData && this.syncRemoteQuery(query);
+		if ( newRequest ) {
+			if ( noData )
+				this.syncRemoteQuery(query);
+			else
+				watcher(this.data["__queries"][hash])
+		}
+		else
+			!noData && watcher(this.data["__queries"][hash])
 		
 		return hash;
 	}

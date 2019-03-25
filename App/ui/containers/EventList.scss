@@ -34,7 +34,7 @@
     right: 0%;
     height: 50px;
     left: 75px;
-    background: #612499;
+    background: #ffbcc3;
 
     @media screen and (min-width: $tablet-landscape-breakpoint) {
       left: 300px;
@@ -45,18 +45,29 @@
       top: 0px;
       right: 0%;
       height: 50px;
-      width: 250px;
+      width: 300px;
       text-align: center;
+
+      button {
+        min-width: auto !important;
+      }
+
+      div, span {
+        max-height: 50px;
+        padding: 0 !important;
+        color: #000000;
+        font-weight: bold;
+      }
 
       .icon {
         font-size: 75px;
         height: 1em;
         width: auto;
-        margin-top: -30px;
+        margin-top: -25px;
 
         &.theatre {
 
-          margin-top: -10px;
+          margin-top: -5px;
         }
       }
     }
