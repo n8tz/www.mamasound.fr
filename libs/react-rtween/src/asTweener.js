@@ -486,7 +486,20 @@ export default function asTweener( ...argz ) {
 			if ( !this._.scrollEnabled ) {
 				this._.scrollEnabled = true;
 				this._.scrollHook    = [];
-				this._.axes          = {};
+				this._.axes          = {
+					scrollX: {
+						scrollableAnims: [],
+						scrollPos      : opts.initialScrollPos && opts.initialScrollPos.scrollX || 0,
+						targetPos      : 0,
+						scrollableArea : 0
+					},
+					scrollY: {
+						scrollableAnims: [],
+						scrollPos      : opts.initialScrollPos && opts.initialScrollPos.scrollY || 0,
+						targetPos      : 0,
+						scrollableArea : 0
+					}
+				};
 				this._registerScrollListeners();
 				//ReactDom.findDOMNode(this).addEventListener("onscroll", this._.onScroll)
 			}
