@@ -10,7 +10,11 @@
       "basedOn": "Component",
       "vars": {
         "externals": true,
-        "webpackPatch": {}
+        "webpackPatch": {
+          "optimization": {
+            "usedExports": true
+          }
+        }
       },
       "extend": [
         "wpi-react-hmr-ssr"

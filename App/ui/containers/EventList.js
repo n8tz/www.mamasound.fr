@@ -19,6 +19,9 @@ import {withStateMap, asRef, asStore}        from "rescope-spells";
 import anims                                 from 'App/ui/anims/(*).js';
 import Blocks                                from 'App/ui/containers/(*).js';
 
+import Tabs                  from '@material-ui/core/Tabs';
+import Tab                   from '@material-ui/core/Tab';
+import moment                from "moment";
 import stores                from 'App/stores/(*).js';
 import Comps                 from 'App/ui/components/(*).js';
 import {asTweener, TweenRef} from "react-rtween";
@@ -54,11 +57,23 @@ export default class EventList extends React.Component {
 				className={ "EventList container" }
 			>
 				
-				<div className={ "curDay" }
-				     style={ {
-					     //width : "100%",
-					     //height: "100%",
-				     } }>
+				<div className={ "curDay" }>
+					{ moment(appState.curDay).format("dddd DD/MM") }
+					<Tabs
+						value={ this.state.value }
+						onChange={ this.handleChange }
+						variant="fullWidth"
+						indicatorColor="primary"
+						textColor="primary"
+						className={ "typeEventsTab" }
+					>
+						<Tab icon={ <img className={ "icon" }
+						                 src={ require("App/ui/assets/medias/jip/concert-gif.gif") }/> }/>
+						<Tab icon={ <img className={ "icon" }
+						                 src={ require("App/ui/assets/medias/jip/expo-gif.gif") }/> }/>
+						<Tab icon={ <img className={ "icon theatre" }
+						                 src={ require("App/ui/assets/medias/jip/theatre-gif.gif") }/> }/>
+					</Tabs>
 				</div>
 				<div className={ "dayList" } onClick={ e => e.preventDefault() } id={ "scrollableEvents" }>
 					{
@@ -93,26 +108,26 @@ export default class EventList extends React.Component {
 				     } }>
 					<Blocks.LeftBox/>
 				</div>
-				<TweenRef
-					id={ "searchBar" }
-					initial={ {
-						position       : "absolute",
-						backgroundColor: "pink",
-						overflow       : "hidden",
-						bottom         : "0px",
-						left           : "0px",
-						width          : "100%",
-						height         : "50px"
-					} }
-				>
-					<div
-						style={ {
-							//width : "100%",
-							//height: "100%",
-						} }>
-						<Blocks.SearchBar/>
-					</div>
-				</TweenRef>
+				{/*<TweenRef*/ }
+				{/*id={ "searchBar" }*/ }
+				{/*initial={ {*/ }
+				{/*position       : "absolute",*/ }
+				{/*backgroundColor: "pink",*/ }
+				{/*overflow       : "hidden",*/ }
+				{/*bottom         : "0px",*/ }
+				{/*left           : "0px",*/ }
+				{/*width          : "100%",*/ }
+				{/*height         : "50px"*/ }
+				{/*} }*/ }
+				{/*>*/ }
+				{/*<div*/ }
+				{/*style={ {*/ }
+				{/*//width : "100%",*/ }
+				{/*//height: "100%",*/ }
+				{/*} }>*/ }
+				{/*<Blocks.SearchBar/>*/ }
+				{/*</div>*/ }
+				{/*</TweenRef>*/ }
 			</div>
 		);
 	}

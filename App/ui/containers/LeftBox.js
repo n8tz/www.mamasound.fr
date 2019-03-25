@@ -20,10 +20,13 @@ import moment                                from 'moment';
 import IconButton                            from '@material-ui/core/IconButton';
 import {withStateMap, asRef, asStore}        from "rescope-spells";
 import anims                                 from 'App/ui/anims/(*).js';
-
-import stores                from 'App/stores/(*).js';
-import Comps                 from 'App/ui/components/(*).js';
-import {asTweener, TweenRef} from "react-rtween";
+import Fab                                   from '@material-ui/core/Fab';
+import CreateIcon                            from '@material-ui/icons/Add';
+import SaveIcon                              from '@material-ui/icons/Save';
+import stores                                from 'App/stores/(*).js';
+import Comps                                 from 'App/ui/components/(*).js';
+import {asTweener, TweenRef}                 from "react-rtween";
+import Chip                                  from "./SearchBar";
 
 @reScope(
 	{
@@ -45,7 +48,7 @@ import {asTweener, TweenRef} from "react-rtween";
 		
 	}
 )
-@scopeToProps("SearchValues")
+@scopeToProps("SearchValues", "ActiveTags")
 export default class LeftBox extends React.Component {
 	static propTypes = {};
 	state            = {};
@@ -61,7 +64,32 @@ export default class LeftBox extends React.Component {
 			<div
 				className={ "LeftBox" }
 			>
+				<div
+					className={ "toolbar" }
+				>
+					<Fab>
+						<div className={ "material-icons icon" }>search</div>
+					</Fab>
+					<Fab>
+						<img className={ "icon" } src={ require('App/ui/assets/icons/tagFilter.svg') }/>
+					</Fab>
+				</div>
 				searchBox
+				{/*{ ActiveTags && ActiveTags.available && ActiveTags.available.map(*/ }
+				{/*tag =>*/ }
+				{/*<Chip*/ }
+				{/*key={tag.title}*/ }
+				{/*icon={*/ }
+				{/*//<Badge badgeContent={ tag.count} color="secondary" >*/ }
+				{/*<img alt={ tag.title } src={ tag.style.icon } className={ "icon" }/>*/ }
+				{/*//</Badge>*/ }
+				{/*}*/ }
+				{/*label={ tag.title }*/ }
+				{/*//onClick={handleClick}*/ }
+				{/*//onDelete={handleDelete}*/ }
+				{/*//className={classes.chip}*/ }
+				{/*/>*/ }
+				{/*) }*/ }
 			</div>
 		);
 	}

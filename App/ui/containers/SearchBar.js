@@ -63,21 +63,7 @@ export default class SearchBar extends React.Component {
 			<div
 				className={ "SearchBar container" }
 			>
-				{ ActiveTags && ActiveTags.available && ActiveTags.available.map(
-					tag =>
-						<Chip
-							key={tag.title}
-							icon={
-								//<Badge badgeContent={ tag.count} color="secondary" >
-								<img alt={ tag.title } src={ tag.style.icon } className={ "icon" }/>
-								//</Badge>
-							}
-							label={ tag.title }
-							//onClick={handleClick}
-							//onDelete={handleDelete}
-							//className={classes.chip}
-						/>
-				) }
+			
 			</div>
 		);
 	}

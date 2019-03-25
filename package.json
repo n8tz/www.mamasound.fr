@@ -10,7 +10,12 @@
       "rootFolder": "App",
       "libsPath": "./libs",
       "vars": {
-        "production": true
+        "production": true,
+        "webpackPatch": {
+          "optimization": {
+            "usedExports": true
+          }
+        }
       },
       "extend": [
         "wpi-forms",
@@ -104,7 +109,7 @@
     "react-grid-layout": "^0.16.6",
     "react-inheritable-contextmenu": "^1.5.0",
     "react-leaflet": "^2.2.1",
-    "react-rescope": "^16.0.5",
+    "react-rescope": "^16.0.6",
     "react-rnd": "^9.0.4",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",

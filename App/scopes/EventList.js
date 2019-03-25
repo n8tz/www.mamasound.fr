@@ -22,8 +22,10 @@ import stores                         from 'App/stores/(*).js';
 export default {
 	@asStore
 	GlobalEventQuery: {
-		etty : 'Event',
-		limit: 100,
+		@asRef
+		curDay: "appState.curDay",
+		etty  : 'Event',
+		limit : 100,
 		$apply( data, state ) {
 			if ( !state.query ) {
 				this.$actions.updateQuery()
@@ -31,8 +33,9 @@ export default {
 			return state;
 		},
 		updateQuery( dt = moment(), type ) {
-			let from = moment(dt).startOf('day').add(2, 'hour').unix() * 1000,
-			    to   = moment(dt).endOf('day').add(2, 'hour').unix() * 1000;
+			let { curDay } = this.nextState;
+			let from       = moment(curDay).startOf('day').add(2, 'hour').unix() * 1000,
+			    to         = moment(curDay).add(3, 'day').add(2, 'hour').unix() * 1000;
 			return {
 				query  : {
 					$or: [
