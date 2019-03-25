@@ -160,7 +160,7 @@ export default class Home extends React.Component {
 				$actions.setPageFocus('page');
 				console.log("bot")
 			}
-			else if ( appState.currentPageFocus === 'head' )
+			else if(appState.currentPageFocus==='head')
 				$actions.setPageFocus('events');
 		}
 		else if ( newPos < oldPos ) {
@@ -267,7 +267,7 @@ export default class Home extends React.Component {
 								width     : "100%",
 								background: "blue",
 							} }>
-							{/*<Blocks.Highlighter/>*/}
+							<Blocks.Highlighter/>
 						</div>
 					</TweenRef>
 					<TweenRef
@@ -301,7 +301,7 @@ export default class Home extends React.Component {
 								background: "cyan",
 								overflow  : 'hidden',
 							} }>
-							{/*<Blocks.EventMap/>*/}
+							<Blocks.EventMap/>
 						</div>
 					</TweenRef>
 					<TweenRef
@@ -317,7 +317,7 @@ export default class Home extends React.Component {
 								background: "green",
 								overflow  : 'hidden',
 							} }>
-							{/*<Blocks.PageBlock/>*/}
+							<Blocks.PageBlock/>
 						</div>
 					</TweenRef>
 				</div>
