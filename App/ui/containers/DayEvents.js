@@ -23,9 +23,9 @@ import Tabs                  from '@material-ui/core/Tabs';
 import Tab                   from '@material-ui/core/Tab';
 import moment                from "moment";
 import stores                from 'App/stores/(*).js';
-import scopes                from 'App/scopes/(*).js';
 import Comps                 from 'App/ui/components/(*).js';
 import {asTweener, TweenRef} from "react-rtween";
+import scopes                from 'App/scopes/(*).js';
 
 
 @reScope(

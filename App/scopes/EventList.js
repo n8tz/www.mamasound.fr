@@ -61,7 +61,7 @@ export default {
 										'$lt': to
 									}
 								}] || []),
-							...([0, 1, 3].includes(type) && [
+							...([0, 3].includes(type) && [
 								{
 									_cls    : 'Theatre',
 									schedule: {

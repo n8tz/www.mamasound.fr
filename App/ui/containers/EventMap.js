@@ -67,9 +67,13 @@ else {
 	Popup = Map = Marker = TileLayer = 'div'
 }
 
+import scopes from 'App/scopes/(*).js';
+
+
 @reScope(
 	{
 		
+		...scopes.EventList,
 		@asStore
 		Events: {
 			@asRef
@@ -119,6 +123,11 @@ else {
 		
 	}
 )
+@propsToScope(
+	[
+		"day:DayEventsQuery.curDay",
+		"viewType:DayEventsQuery.viewType"
+	])
 @scopeToProps("Selected", "Events", "UserGeoLocation")
 @asTweener({ initialScrollPos: { scrollX: 100, scrollY: 100 } })
 export default class EventMap extends React.Component {
