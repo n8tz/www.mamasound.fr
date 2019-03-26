@@ -150,15 +150,16 @@ export default class Home extends React.Component {
 	
 	shouldApplyScroll( newPos, oldPos, axe ) {
 		let { $actions, appState } = this.props;
-		
+
 		let node = document.getElementById("scrollableEvents");
 		if ( axe !== "scrollY" )
 			return true;
-		
+
 		if ( newPos > oldPos ) {
-			if ( (node.scrollTop + node.offsetHeight) > node.scrollHeight - 25 ) {
+			if ( (node.scrollTop + node.offsetHeight) > node.scrollHeight - 5 ) {
 				$actions.setPageFocus('page');
 				console.log("bot")
+				return true;
 			}
 			else if(appState.currentPageFocus==='head')
 				$actions.setPageFocus('events');
@@ -301,7 +302,7 @@ export default class Home extends React.Component {
 								background: "cyan",
 								overflow  : 'hidden',
 							} }>
-							<Blocks.EventMap/>
+							{/*<Blocks.EventMap/>*/}
 						</div>
 					</TweenRef>
 					<TweenRef

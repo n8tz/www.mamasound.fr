@@ -84,7 +84,7 @@
     overflow: auto;
     margin-left: 75px;
 
-    @media screen and (min-width: $tablet-landscape-breakpoint) {
+    @media screen and (min-width: $tablet-portrait-breakpoint) {
       margin-left: 300px;
     }
 
@@ -208,7 +208,7 @@
     left: 0px;
     width: 300px;
     bottom: 0px;
-    @media screen and (max-width: $tablet-landscape-breakpoint) {
+    @media screen and (max-width: $tablet-portrait-breakpoint) {
       width: 75px;
 
     }
@@ -216,7 +216,7 @@
 
   .SearchBar {
 
-    @media screen and (max-width: $tablet-landscape-breakpoint) {
+    @media screen and (max-width: $tablet-portrait-breakpoint) {
       margin: 0 !important;
       padding: 0 !important;
       width: 100% !important;

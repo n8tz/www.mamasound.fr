@@ -62,17 +62,17 @@ export default class MongoRecords extends Store {
 			throw new Error("No DataProvider found !!");
 		
 		if ( updateWatchers(this, DataProvider, curState, changes) ) {
-			
-			// initial & instant update
-			update     = getRecordsFromIdKeys(
-				DataProvider, curState, changes
-			);
-			hasChanges = false;
-			Object.keys(update)
-			      .forEach(
-				      key => (hasChanges = hasChanges || (update[key] !== changes[key]))
-			      );
-			hasChanges && this.push(update);
+			//
+			//// initial & instant update
+			//update     = getRecordsFromIdKeys(
+			//	DataProvider, curState, changes
+			//);
+			//hasChanges = false;
+			//Object.keys(update)
+			//      .forEach(
+			//	      key => (hasChanges = hasChanges || (update[key] !== changes[key]))
+			//      );
+			//hasChanges && this.push(update);
 		}
 		
 		

@@ -78,8 +78,9 @@ else {
 			MountedItems: "EventList",
 			$apply( d, { MountedItems: { items, refs }, selected } ) {
 				let POIs = [], center;
-				//if ( selected )
-				//	items = [selected];
+				if ( selected ) {
+					items = [selected];
+				}
 				
 				items && items.forEach(
 					event => {
@@ -92,10 +93,16 @@ else {
 						
 					}
 				)
-				center = {
-					latitude : "43.618091",
-					longitude: "3.876624"
-				};//POIs.length && geolib.getCenter(POIs.map(poi => poi.geoPoint)) ||
+				
+				if ( selected ) {
+					items = [selected];
+				}
+				else {
+					center = {
+						latitude : "43.618091",
+						longitude: "3.876624"
+					};//POIs.length && geolib.getCenter(POIs.map(poi => poi.geoPoint)) ||
+				}
 				
 				return {
 					items,
@@ -128,7 +135,7 @@ export default class EventMap extends React.Component {
 		return (
 			<div
 				className={ "EventMap container" }
-				
+			
 			>
 				<Map center={ center } zoom={ 13 }
 				     scrollWheelZoom={ false }

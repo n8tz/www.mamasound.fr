@@ -31,15 +31,15 @@ import {asTweener, TweenRef} from "react-rtween";
 	{
 		@asStore
 		EventsByDay: {
-			@asRef
-			events: "EventList",
-			$apply( data, { events: { items, refs } } ) {
-			
-			}
+			//@asRef
+			//events: "EventList",
+			//$apply( data, { events: { items, refs } } ) {
+			//
+			//}
 		}
 	}
 )
-@scopeToProps("EventsByDay", "EventList", "appState")
+@scopeToProps("appState")
 //@asTweener({ initialScrollPos: {}, propagateAxes: { scrollY: true } })
 export default class EventList extends React.Component {
 	static propTypes = {};
@@ -60,7 +60,7 @@ export default class EventList extends React.Component {
 				<div className={ "curDay" }>
 					{ moment(appState.curDay).format("dddd DD/MM") }
 					<Tabs
-						value={ appState.curStyleTab }
+						value={ appState.viewType }
 						onChange={ ( e, v ) => {
 							$actions.setCurStyleTab(v)
 						} }
@@ -78,23 +78,26 @@ export default class EventList extends React.Component {
 					</Tabs>
 				</div>
 				<div className={ "dayList" } onClick={ e => e.preventDefault() } id={ "scrollableEvents" }>
-					{
-						EventList && EventList.items && EventList.items.map(
-							( item, i ) =>
-								<Comps.Event_item onClick={ e => $actions.selectEvent(item._id, true) }
-								                  key={ item._id }
-								                  selected={ appState.selectedEventId === item._id }
-								                  record={ item }
-								                  refs={ EventList.refs || {} }/>
-						)
-					}
+					{/*{*/ }
+					{/*EventList && EventList.items && EventList.items.map(*/ }
+					{/*( item, i ) =>*/ }
+					{/*<Comps.Event_item onClick={ e => $actions.selectEvent(item._id, true) }*/ }
+					{/*key={ item._id }*/ }
+					{/*selected={ appState.selectedEventId === item._id }*/ }
+					{/*record={ item }*/ }
+					{/*refs={ EventList.refs || {} }/>*/ }
+					{/*)*/ }
+					{/*}*/ }
+					
+					<Blocks.DayEvents day={ appState.curDay } viewType={ appState.viewType }/>
+					<Blocks.DayEvents day={ moment(appState.curDay).add(1, 'day') } viewType={ appState.viewType }/>
 				</div>
 				<div className={ "LeftBox" }
 				     style={ {
 					     //width : "100%",
 					     //height: "100%",
 				     } }>
-					<Blocks.LeftBox/>
+					{/*<Blocks.LeftBox/>*/ }
 				</div>
 				{/*<TweenRef*/ }
 				{/*id={ "searchBar" }*/ }

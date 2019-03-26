@@ -34,11 +34,10 @@ export default {
 		selectedEventId: undefined,
 		selectedEventDT: undefined,
 		curDay         : undefined,
-		curStyleTab    : 0,
+		viewType       : 0,
 		curTags        : undefined,
-		nbDays         : 0,
-		setCurStyleTab( curStyleTab ) {
-			return { curStyleTab };
+		setCurStyleTab( viewType ) {
+			return { viewType };
 		},
 		setPageFocus( _currentPageFocus ) {
 			let { currentPageFocus } = this.nextState;
@@ -80,12 +79,12 @@ export default {
 	)
 	Selected: stores.MongoRecords,
 	
-	...scopes.EventList,
+	//...scopes.EventList,
 	
 	@asStore
 	ActiveTags: {
-		@asRef
-		events: "EventList",
+		//@asRef
+		//events: "EventList",
 		
 		$apply( data, { events: { items = [], refs } } ) {
 			let available = [], seen = {}, styles = {};

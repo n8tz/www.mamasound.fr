@@ -21,22 +21,21 @@ import stores                         from 'App/stores/(*).js';
 
 export default {
 	@asStore
-	GlobalEventQuery: {
-		@asRef
-		curDay     : "appState.curDay",
-		@asRef
-		curStyleTab: "appState.curStyleTab",
-		@asRef
-		nbDays     : "appState.nbDays",
-		query      : {},
+	DayEventsQuery: {
+		//@asRef
+		//curDay     : "appState.curDay",
+		//@asRef
+		//curStyleTab: "appState.curStyleTab",
+		//@asRef
+		//nbDays     : "appState.nbDays",
+		query: {},
 		$apply( data, state ) {
 			let {
 				    curDay, nbDays = 0,
-				    curStyleTab: type
+				    viewType: type
 			    }    = state,
 			    from = moment(curDay).startOf('day').add(2, 'hour').unix() * 1000,
-			    to   = moment(curDay).add(nbDays, 'days').endOf('day').add(2, 'hour').unix() * 1000;
-			console.log('Query ', type)
+			    to   = moment(curDay).endOf('day').add(2, 'hour').unix() * 1000;
 			return {
 				query: {
 					etty   : 'Event',
@@ -130,7 +129,7 @@ export default {
 	@withStateMap(
 		{
 			@asRef
-			events: "GlobalEventQuery.query",
+			events: "DayEventsQuery.query",
 		}
 	)
 	Queries         : stores.MongoQueries,
