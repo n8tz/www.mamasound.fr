@@ -70,7 +70,7 @@
     "docker_ash": "start docker-compose exec app ash -c \"cd /home/app&&ash\"&",
     "docker_restoreDb": "start docker-compose exec app ash -c \"cd /home/app&&mongorestore --uri ${mongoUrl}\"&",
     "start-dev": "wpi :api&&concurrently \"wpi-dev-server :devClient --hot --host 0.0.0.0 \" \"wpi :api -w\" \"sleep 3&&nodemon -L --watch ./dist/App.server.js --inspect=[::]:9229 ./dist/App.server.js  -p 9701\"",
-    "start": "node ./dist/App.server.js  -p 8080",
+    "start": "node ./dist/App.server.js  -p 80",
     "runBrowser": "start http://localhost:8080"
   },
   "dependencies": {
@@ -91,6 +91,9 @@
     "express-basic-auth": "^1.1.6",
     "extract-hoc": "0.0.5",
     "geolib": "^2.0.24",
+    "greenlock-express": "^2.6.8",
+    "helmet": "^3.16.0",
+    "https": "^1.0.0",
     "is": "^3.3.0",
     "js-file-download": "^0.4.4",
     "knex-schemer": "^0.1.17",

@@ -14,6 +14,9 @@ RUN apk --no-cache update \
         mongodb-tools \
         bash \
         rsync \
-        git
+        git \
+        nano \
+        certbot
 
+ENV PATH=node_modules/.bin:$PATH
 CMD bash

@@ -26,14 +26,22 @@ import moment from "moment";
 import {NavLink} from "react-router-dom";
 
 
-export default ( { record, refs, selected } ) =>
-	<div className={ "Event Event" + record._cls + ' ' + (selected ? "selected" : "") }>
+let defaultPreview = {
+	Concert: require("App/ui/assets/medias/mms.png"),
+	Theatre: require("App/ui/assets/medias/mmt.png"),
+	Expo   : require("App/ui/assets/medias/mme.png")
+};
+export default ( { record, refs, selected, onClick } ) =>
+	<div className={ "Event Event" + record._cls + ' ' + (selected ? "selected" : "") } onClick={onClick}>
 		<div className="start">
 			{ moment(record.startTM).format("H:mm") }
 		</div>
 		<div className="icon">
-			{ record.category && refs[record.category.objId] &&
-			<img src={ refs[record.category.objId].icon }/>
+			{
+				record.category && refs[record.category.objId] &&
+				<img src={ refs[record.category.objId].icon }/>
+				||
+				<img src={ defaultPreview[record._cls] } style={ { transform: "scale(.8)" } }/>
 			}
 		</div>
 		{/*{ record.previewImage &&*/ }
@@ -44,6 +52,19 @@ export default ( { record, refs, selected } ) =>
 		<div className="title">
 			{ record.title }
 		</div>
+		
+		<div className="price">
+			{
+				record.price
+			}
+		</div>
+		{
+			record.place && refs[record.place.objId] &&
+			<div className="place">
+				( <span>{ refs[record.place.objId].label }</span> )
+			</div>
+		}
+		
 		{ !/^\s*$/.test(record.resume || '') &&
 		<div className="resume" dangerouslySetInnerHTML={ { __html: record.resume } }/> || '' }
 	</div>

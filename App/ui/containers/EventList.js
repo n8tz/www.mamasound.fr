@@ -39,7 +39,7 @@ import {asTweener, TweenRef} from "react-rtween";
 		}
 	}
 )
-@scopeToProps("EventList", "appState")
+@scopeToProps("EventsByDay", "EventList", "appState")
 //@asTweener({ initialScrollPos: {}, propagateAxes: { scrollY: true } })
 export default class EventList extends React.Component {
 	static propTypes = {};
@@ -64,7 +64,7 @@ export default class EventList extends React.Component {
 						onChange={ ( e, v ) => {
 							$actions.setCurStyleTab(v)
 						} }
-						height={50}
+						height={ 50 }
 						variant="fullWidth"
 						indicatorColor="primary"
 						textColor="primary"
@@ -81,25 +81,11 @@ export default class EventList extends React.Component {
 					{
 						EventList && EventList.items && EventList.items.map(
 							( item, i ) =>
-								<TweenRef key={ item._id + i }
-								          initial={ {
-									          height         : "2.5em",
-									          fontSize       : "20px",
-									          width          : "100%",
-									          backgroundColor: i % 2 ? "lightgrey" : "white",
-									          overflow       : "hidden"
-								          } }
-								          scrollableAnims={ {
-									          //scrollY: anims.expandEvent(0, 50),
-								          } }
-								>
-									<div onClick={ e => $actions.selectEvent(item._id, true) }>
-										<Comps.Event_item
-											selected={ appState.selectedEventId === item._id }
-											record={ item }
-											refs={ EventList.refs || {} }/>
-									</div>
-								</TweenRef>
+								<Comps.Event_item onClick={ e => $actions.selectEvent(item._id, true) }
+								                  key={ item._id }
+								                  selected={ appState.selectedEventId === item._id }
+								                  record={ item }
+								                  refs={ EventList.refs || {} }/>
 						)
 					}
 				</div>

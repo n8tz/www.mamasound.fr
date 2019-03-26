@@ -73,9 +73,14 @@ else {
 		@asStore
 		Events: {
 			@asRef
+			selected    : "Selected.record",
+			@asRef
 			MountedItems: "EventList",
-			$apply( d, { MountedItems: { items, refs } } ) {
+			$apply( d, { MountedItems: { items, refs }, selected } ) {
 				let POIs = [], center;
+				//if ( selected )
+				//	items = [selected];
+				
 				items && items.forEach(
 					event => {
 						let place = refs[event.place.objId];
@@ -107,7 +112,7 @@ else {
 		
 	}
 )
-@scopeToProps("Events", "UserGeoLocation")
+@scopeToProps("Selected", "Events", "UserGeoLocation")
 @asTweener({ initialScrollPos: { scrollX: 100, scrollY: 100 } })
 export default class EventMap extends React.Component {
 	static propTypes = {};
@@ -116,13 +121,14 @@ export default class EventMap extends React.Component {
 	render() {
 		let {
 			    Events: { center = {}, POIs = [] } = {},
-			    Events, UserGeoLocation, disabled,
+			    Events, UserGeoLocation, Selected,
 			    $actions, onSelect, selected
 		    }     = this.props,
 		    state = this.state;
 		return (
 			<div
 				className={ "EventMap container" }
+				
 			>
 				<Map center={ center } zoom={ 13 }
 				     scrollWheelZoom={ false }

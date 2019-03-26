@@ -36,7 +36,7 @@ export default {
 		curDay         : undefined,
 		curStyleTab    : 0,
 		curTags        : undefined,
-		
+		nbDays         : 0,
 		setCurStyleTab( curStyleTab ) {
 			return { curStyleTab };
 		},
@@ -48,7 +48,13 @@ export default {
 		selectEvent( selectedEventId, showPageBlock ) {
 			let { currentPageFocus } = this.nextState;
 			currentPageFocus         = showPageBlock ? "page" : currentPageFocus;
-			return { selectedEventId, currentPageFocus, selectedEvent: { id: selectedEventId, etty: "Event" } };
+			if ( !selectedEventId && currentPageFocus === 'page' )
+				currentPageFocus = 'events';
+			return {
+				selectedEventId,
+				currentPageFocus,
+				selectedEvent: selectedEventId && { id: selectedEventId, etty: "Event" } || null
+			};
 		},
 		selectWidget( selectedWidgetId ) {
 			return { selectedWidgetId };

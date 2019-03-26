@@ -593,6 +593,20 @@ export function updateWatchers( target, DataProvider, idKeys, changes, isQuery )
 								      [idKeys[idKey].target || idKey]: { ...changes[idKey].default }
 							      })
 				      }
+				      else {
+					      target.push(
+						      {
+							      ...target.data,
+							      [idKeys[idKey].target || idKey]: null
+						      })
+				      }
+			      }
+			      else if ( !newValue ) {
+				      target.push(
+					      {
+						      ...target.data,
+						      [idKeys[idKey] && idKeys[idKey].target || idKey]: null
+					      })
 			      }
 		      }
 	      )

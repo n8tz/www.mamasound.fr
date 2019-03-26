@@ -62,15 +62,15 @@ export default class MongoQueries extends Store {
 		if ( updateWatchers(this, DataProvider, curState, changes, true) ) {
 			
 			// initial & instant update
-			update     = getQueriesFromIdKeys(
-				DataProvider, curState, changes, true
-			);
-			hasChanges = false;
-			Object.keys(update)
-			      .forEach(
-				      key => (hasChanges = hasChanges || (update[key] !== changes[key]))
-			      );
-			hasChanges && this.setState(update);
+			//update     = getQueriesFromIdKeys(
+			//	DataProvider, curState, changes, true
+			//);
+			//hasChanges = false;
+			//Object.keys(update)
+			//      .forEach(
+			//	      key => (hasChanges = hasChanges || (update[key] !== changes[key]))
+			//      );
+			//hasChanges && this.setState(update);
 		}
 		
 		

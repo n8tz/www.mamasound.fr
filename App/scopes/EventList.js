@@ -26,17 +26,16 @@ export default {
 		curDay     : "appState.curDay",
 		@asRef
 		curStyleTab: "appState.curStyleTab",
+		@asRef
+		nbDays     : "appState.nbDays",
 		query      : {},
 		$apply( data, state ) {
-			//if ( !state.query.query ) {
-		//		this.$actions.updateQuery()
-		//	//}
-		//	return state;
-		//},
-		//updateQuery( dt = moment() ) {
-			let { curDay, curStyleTab: type } = state;
-			let from                          = moment(curDay).startOf('day').add(2, 'hour').unix() * 1000,
-			    to                            = moment(curDay).endOf('day').add(2, 'hour').unix() * 1000;
+			let {
+				    curDay, nbDays = 0,
+				    curStyleTab: type
+			    }    = state,
+			    from = moment(curDay).startOf('day').add(2, 'hour').unix() * 1000,
+			    to   = moment(curDay).add(nbDays, 'days').endOf('day').add(2, 'hour').unix() * 1000;
 			console.log('Query ', type)
 			return {
 				query: {
@@ -44,7 +43,7 @@ export default {
 					query  : {
 						$or: [
 							
-							...([0,1].includes(type) && [
+							...([0, 1].includes(type) && [
 								{
 									_cls    : 'Concert',
 									schedule: {
@@ -62,7 +61,7 @@ export default {
 										'$gt': from,
 										'$lt': to
 									}
-								}]||[]),
+								}] || []),
 							...([0, 1, 3].includes(type) && [
 								{
 									_cls    : 'Theatre',
@@ -81,7 +80,7 @@ export default {
 										'$gt': from,
 										'$lt': to
 									}
-								}]||[]),
+								}] || []),
 							
 							...([0].includes(type) && [
 								{
@@ -91,7 +90,7 @@ export default {
 										'$gt': from,
 										'$lt': to
 									}
-								}]||[]),
+								}] || []),
 							...(type === 2 && [{
 								_cls    : 'Expo',
 								schedule: {
