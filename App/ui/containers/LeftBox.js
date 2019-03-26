@@ -74,22 +74,21 @@ export default class LeftBox extends React.Component {
 						<img className={ "icon" } src={ require('App/ui/assets/icons/tagFilter.svg') }/>
 					</Fab>
 				</div>
-				searchBox
-				{/*{ ActiveTags && ActiveTags.available && ActiveTags.available.map(*/ }
-				{/*tag =>*/ }
-				{/*<Chip*/ }
-				{/*key={tag.title}*/ }
-				{/*icon={*/ }
-				{/*//<Badge badgeContent={ tag.count} color="secondary" >*/ }
-				{/*<img alt={ tag.title } src={ tag.style.icon } className={ "icon" }/>*/ }
-				{/*//</Badge>*/ }
-				{/*}*/ }
-				{/*label={ tag.title }*/ }
-				{/*//onClick={handleClick}*/ }
-				{/*//onDelete={handleDelete}*/ }
-				{/*//className={classes.chip}*/ }
-				{/*/>*/ }
-				{/*) }*/ }
+				{/*{ ActiveTags && ActiveTags.available && ActiveTags.available.map(*/}
+					{/*tag =>*/}
+						{/*<Chip*/}
+							{/*key={ tag.title }*/}
+							{/*icon={*/}
+								{/*//<Badge badgeContent={ tag.count} color="secondary" >*/}
+								{/*<img alt={ tag.title } src={ tag.style.icon } className={ "icon" }/>*/}
+								{/*//</Badge>*/}
+							{/*}*/}
+							{/*label={ tag.title }*/}
+							{/*//onClick={handleClick}*/}
+							{/*//onDelete={handleDelete}*/}
+							{/*//className={classes.chip}*/}
+						{/*/>*/}
+				{/*) }*/}
 			</div>
 		);
 	}

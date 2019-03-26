@@ -28,14 +28,14 @@ export default {
 	@asStore
 	appState       : {
 		
-		currentPageFocus: "events",// head, events, page
+		currentPageFocus: "head",// head, events, page
 		
 		selectedEvent     : undefined,
 		selectedEventId   : undefined,
 		selectedEventDT   : undefined,
 		curDay            : undefined,
 		viewType          : 0,
-		dayCountByViewType: [1, 1, 1, 1, 1],
+		dayCountByViewType: [2, 2, 1, 1, 1],
 		curTags           : undefined,
 		
 		// global app actions

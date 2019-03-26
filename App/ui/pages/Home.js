@@ -125,39 +125,18 @@ export default class Home extends React.Component {
 		}
 	];
 	
-	//shouldApplyScroll( newPos, oldPos, axe ) {
-	//	let { $actions } = this.props;
-	//
-	//	let node = document.getElementById("scrollableEvents");
-	//	if ( axe !== "scrollY" )
-	//		return true;
-	//
-	//	if ( newPos > oldPos ) {
-	//		if ( (node.scrollTop + node.offsetHeight) > node.scrollHeight - 25 ) {
-	//			this.scrollTo(100, 250);
-	//			console.log("bot")
-	//		}
-	//		else
-	//			this.scrollTo(100, 250);
-	//	}
-	//	else if ( newPos < oldPos ) {
-	//		if ( node.scrollTop < 25 ) {
-	//			this.scrollTo(0, 250);
-	//			console.log("top")
-	//		}
-	//	}
-	//}
-	
 	shouldApplyScroll( newPos, oldPos, axe ) {
 		let { $actions, appState } = this.props;
+		let node                   = document.getElementById("endList_" + appState.viewType),
+		    delta                  = Math.abs(newPos - oldPos);
 		
-		let node  = document.getElementById("scrollableEvents"),
-		    delta = Math.abs(newPos - oldPos);
+		node = node && node.parentNode;
+		
 		if ( axe !== "scrollY" )
 			return true;
 		
-		//if ( delta < 5 )
-		//	return;
+		if ( !node )
+			return;
 		
 		if ( newPos > oldPos ) {
 			//if ( (node.scrollTop + node.offsetHeight) > node.scrollHeight - 5 ) {
@@ -171,7 +150,7 @@ export default class Home extends React.Component {
 		}
 		else if ( newPos < oldPos ) {
 			if ( node.scrollTop < 25 ) {
-				//$actions.setPageFocus('head');
+				$actions.setPageFocus('head');
 				console.log("top")
 			}
 			else {

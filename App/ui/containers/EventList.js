@@ -40,7 +40,6 @@ import InfiniteScroll                        from 'react-infinite-scroller';
 	}
 )
 @scopeToProps("appState")
-//@asTweener({ initialScrollPos: {}, propagateAxes: { scrollY: true } })
 export default class EventList extends React.Component {
 	static propTypes = {};
 	state            = {};
@@ -56,11 +55,11 @@ export default class EventList extends React.Component {
 		var parent       = element.parentNode,
 		    parentHeight = parent.offsetHeight,
 		    parentPos    = parent.scrollTop,
-		    top          = element.offsetTop;
+		    scrollHeight = parent.scrollHeight;
 		
-		if ( top < (parentPos + parentHeight) ) {
+		if ( scrollHeight < (parentPos + parentHeight + 500) ) {
 			
-			console.log("should do more query", appState.viewType);
+			//console.log("should do more query", appState.viewType);
 			this._running = true;
 			$actions.oneMoreDay(appState.viewType)
 		}
@@ -129,7 +128,7 @@ export default class EventList extends React.Component {
 												)
 										}
 										
-										<div id={ "endList_" + type }>&nbsp;loading</div>
+										<div id={ "endList_" + type }>loading...</div>
 									</div>
 							)
 					}
@@ -139,28 +138,8 @@ export default class EventList extends React.Component {
 					     //width : "100%",
 					     //height: "100%",
 				     } }>
-					{/*<Blocks.LeftBox/>*/ }
+					<Blocks.LeftBox/>
 				</div>
-				{/*<TweenRef*/ }
-				{/*id={ "searchBar" }*/ }
-				{/*initial={ {*/ }
-				{/*position       : "absolute",*/ }
-				{/*backgroundColor: "pink",*/ }
-				{/*overflow       : "hidden",*/ }
-				{/*bottom         : "0px",*/ }
-				{/*left           : "0px",*/ }
-				{/*width          : "100%",*/ }
-				{/*height         : "50px"*/ }
-				{/*} }*/ }
-				{/*>*/ }
-				{/*<div*/ }
-				{/*style={ {*/ }
-				{/*//width : "100%",*/ }
-				{/*//height: "100%",*/ }
-				{/*} }>*/ }
-				{/*<Blocks.SearchBar/>*/ }
-				{/*</div>*/ }
-				{/*</TweenRef>*/ }
 			</div>
 		);
 	}
