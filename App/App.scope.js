@@ -28,16 +28,25 @@ export default {
 	@asStore
 	appState       : {
 		
-		currentPageFocus: "head",// head, events, page
+		currentPageFocus: "events",// head, events, page
 		
-		selectedEvent  : undefined,
-		selectedEventId: undefined,
-		selectedEventDT: undefined,
-		curDay         : undefined,
-		viewType       : 0,
-		curTags        : undefined,
+		selectedEvent     : undefined,
+		selectedEventId   : undefined,
+		selectedEventDT   : undefined,
+		curDay            : undefined,
+		viewType          : 0,
+		dayCountByViewType: [1, 1, 1, 1, 1],
+		curTags           : undefined,
+		
+		// global app actions
+		
 		setCurStyleTab( viewType ) {
 			return { viewType };
+		},
+		oneMoreDay( viewType = 0 ) {
+			let { dayCountByViewType } = this.nextState;
+			dayCountByViewType[viewType]++;
+			return { dayCountByViewType: [...dayCountByViewType] };
 		},
 		setPageFocus( _currentPageFocus ) {
 			let { currentPageFocus } = this.nextState;
@@ -70,7 +79,6 @@ export default {
 		}
 	},
 	
-	
 	@withStateMap(
 		{
 			@asRef
@@ -79,57 +87,10 @@ export default {
 	)
 	Selected: stores.MongoRecords,
 	
-	//...scopes.EventList,
-	
-	@asStore
-	ActiveTags: {
-		//@asRef
-		//events: "EventList",
-		
-		$apply( data, { events: { items = [], refs } } ) {
-			let available = [], seen = {}, styles = {};
-			items.forEach(
-				event => {
-					let style = event.category && refs[event.category.objId];
-					style && style.name
-					              .replace(/([\.\(\)\/\\]+)/ig, '|')
-					              .split('|')
-					              .filter(t => (!!t && /\s*/.test(t)))
-					              .filter(t => (seen[t] && seen[t]++ || (seen[t] = 1, false)))
-					              .forEach(t => (styles[t] = styles[t] || style))
-				}
-			)
-			
-			return {
-				available: Object
-					.keys(seen)
-					.filter(t => (!!styles[t]))
-					.sort(( a, b ) => (seen[a] < seen[b]
-					                   ? 1
-					                   : -1))
-					.map(tag => ({
-						title: tag,
-						style: styles[tag] || {},
-						count: seen[tag]
-					}))
-			};
-		},
-		
-	},
-	
 	@asStore
 	widgets: {
 		// initial state
-		items: [
-			//{
-			//	"_id"     : "rkUQHZrqM",
-			//	"label"   : "Importer de dates",
-			//	"type"    : "RecordEditor",
-			//	"props"   : {},
-			//	"size"    : { "width": 600, "height": 400 },
-			//	"position": { "x": 50, "y": 111 },
-			//}
-		],
+		items: [],
 		
 		// actions
 		newWidget( type ) {

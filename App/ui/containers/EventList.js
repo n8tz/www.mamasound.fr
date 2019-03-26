@@ -18,14 +18,14 @@ import {reScope, scopeToProps, propsToScope} from "rscopes";
 import {withStateMap, asRef, asStore}        from "rescope-spells";
 import anims                                 from 'App/ui/anims/(*).js';
 import Blocks                                from 'App/ui/containers/(*).js';
-
-import Tabs                  from '@material-ui/core/Tabs';
-import Tab                   from '@material-ui/core/Tab';
-import moment                from "moment";
-import stores                from 'App/stores/(*).js';
-import Comps                 from 'App/ui/components/(*).js';
-import {asTweener, TweenRef} from "react-rtween";
-
+import Tabs                                  from '@material-ui/core/Tabs';
+import Tab                                   from '@material-ui/core/Tab';
+import moment                                from "moment";
+import stores                                from 'App/stores/(*).js';
+import Comps                                 from 'App/ui/components/(*).js';
+import {asTweener, TweenRef}                 from "react-rtween";
+import SwipeableViews                        from 'react-swipeable-views';
+import InfiniteScroll                        from 'react-infinite-scroller';
 
 @reScope(
 	{
@@ -44,6 +44,35 @@ import {asTweener, TweenRef} from "react-rtween";
 export default class EventList extends React.Component {
 	static propTypes = {};
 	state            = {};
+	
+	isBotListIsInViewport = () => {
+		let { $actions, appState, $scope } = this.props;
+		let element                        = document.getElementById("endList_" + appState.viewType);
+		this._infinite                     = setTimeout(this.isBotListIsInViewport, 2000);
+		
+		if ( !element )
+			return console.warn('Not found infinite loader');
+		
+		var parent       = element.parentNode,
+		    parentHeight = parent.offsetHeight,
+		    parentPos    = parent.scrollTop,
+		    top          = element.offsetTop;
+		
+		if ( top < (parentPos + parentHeight) ) {
+			
+			console.log("should do more query", appState.viewType);
+			this._running = true;
+			$actions.oneMoreDay(appState.viewType)
+		}
+	}
+	
+	componentDidMount() {
+		this.isBotListIsInViewport()
+	}
+	
+	componentWillUnmount() {
+		clearTimeout(this._infinite)
+	}
 	
 	render() {
 		let {
@@ -77,21 +106,34 @@ export default class EventList extends React.Component {
 						<Tab label={ "Cinéma" }/>
 					</Tabs>
 				</div>
-				<div className={ "dayList" } onClick={ e => e.preventDefault() } id={ "scrollableEvents" }>
-					{/*{*/ }
-					{/*EventList && EventList.items && EventList.items.map(*/ }
-					{/*( item, i ) =>*/ }
-					{/*<Comps.Event_item onClick={ e => $actions.selectEvent(item._id, true) }*/ }
-					{/*key={ item._id }*/ }
-					{/*selected={ appState.selectedEventId === item._id }*/ }
-					{/*record={ item }*/ }
-					{/*refs={ EventList.refs || {} }/>*/ }
-					{/*)*/ }
-					{/*}*/ }
-					
-					<Blocks.DayEvents day={ appState.curDay } viewType={ appState.viewType }/>
-					<Blocks.DayEvents day={ moment(appState.curDay).add(1, 'day') } viewType={ appState.viewType }/>
-				</div>
+				<SwipeableViews index={ appState.viewType }
+				                onChangeIndex={ $actions.setCurStyleTab }
+				                className={ "dayList" } onClick={ e => e.preventDefault() }
+				                id={ "scrollableEvents" }>
+					{
+						Array(5)
+							.fill(0)
+							.map(
+								( v, type ) =>
+									<div className={ "slide" } key={ type }>
+										{
+											Array(appState.dayCountByViewType[type])
+												.fill(0)
+												.map(
+													( v, i ) =>
+														<Blocks.DayEvents
+															className={ "dayBlock" }
+															key={ i }
+															day={ moment(appState.curDay).add(i, 'day').unix() * 1000 }
+															viewType={ type }/>
+												)
+										}
+										
+										<div id={ "endList_" + type }>&nbsp;loading</div>
+									</div>
+							)
+					}
+				</SwipeableViews>
 				<div className={ "LeftBox" }
 				     style={ {
 					     //width : "100%",

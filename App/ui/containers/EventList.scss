@@ -81,10 +81,30 @@
     bottom: 0px;
     right: 0%;
     //height: 100%;
-    overflow: auto;
+    overflow: hidden;
     margin-left: 75px;
 
-    @media screen and (min-width: $tablet-portrait-breakpoint) {
+    .DayEvents {
+      min-height: 100px;
+      background: #1f8de2;
+    }
+
+    .react-swipeable-view-container {
+      height: 100%;
+      width: 100%;
+    }
+
+    .slide {
+      height: 100%;
+      width: 100%;
+      overflow: auto;
+
+      .inf {
+        //min-height: 90%;
+      }
+    }
+
+    @media screen and (min-width: $tablet-landscape-breakpoint) {
       margin-left: 300px;
     }
 
