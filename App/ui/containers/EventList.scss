@@ -31,15 +31,18 @@
 
     position: absolute;
     top: 0px;
-    right: 17px;
     height: 50px;
     left: 75px;
     background: #ffbcc3;
     z-index: 1000;
     @media screen and (min-width: $tablet-landscape-breakpoint) {
       left: 300px;
+    }
+    right: 17px;
+    @media (hover: none), (hover: on-demand) {
       right: 0px;
     }
+
 
     .typeEventsTab {
       position: absolute;
@@ -116,7 +119,10 @@
         font-size: 15px;
       }
       @media screen and (max-width: $tablet-portrait-breakpoint) {
-        font-size: 13px;
+        font-size: 15px;
+      }
+      @media screen and (max-width: $smartphone-landscape-breakpoint) {
+        font-size: 22px;
       }
       height: 3.5em;
       position: relative;
@@ -230,7 +236,8 @@
     left: 0px;
     width: 300px;
     bottom: 0px;
-    @media screen and (max-width: $tablet-portrait-breakpoint) {
+    z-index: 1001;
+    @media screen and (max-width: $tablet-landscape-breakpoint) {
       width: 75px;
 
     }
