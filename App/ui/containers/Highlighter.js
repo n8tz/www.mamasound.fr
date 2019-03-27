@@ -234,7 +234,7 @@ export default class Highlighter extends React.Component {
 									//infiniteMode                       : false,
 									autoScroll                        : true,
 									autoScrollPeriod                  : 3000,
-									visibleItems                      : 5,
+									visibleItems                      : 3,
 									//hSlotWidth                        : .85,
 									hSlotHeight                       : 1,
 									listenMouseWheel                  : false,
