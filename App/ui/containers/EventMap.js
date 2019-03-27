@@ -88,7 +88,7 @@ import scopes from 'App/scopes/(*).js';
 				
 				items && items.forEach(
 					event => {
-						let place = refs[event.place.objId];
+						let place = event.place && refs[event.place.objId];
 						place && place.address && place.address.geoPoint && POIs.push({
 							                                                              geoPoint: place.address.geoPoint,
 							                                                              event,

@@ -19,6 +19,7 @@ import CloseIcon                                    from '@material-ui/icons/Clo
 import moment                                       from 'moment';
 import anims                                        from 'App/ui/anims/(*).js';
 import Slider                                       from "react-slick";
+//import CaipiSlideshow                               from "react-caipi-slider";
 
 
 import {withStateMap, asRef, asStore} from "rescope-spells";
@@ -28,10 +29,13 @@ import Comps                          from 'App/ui/components/(*).js';
 
 import {asTweener, TweenRef} from "react-rtween";
 
+var CaipiSlideshow
 if ( typeof window !== "undefined" ) {
 	require('slick-carousel/slick/slick.css');
 	require('slick-carousel/slick/slick-theme.css');
+	CaipiSlideshow = require('react-caipi-slider');
 }
+else CaipiSlideshow = 'div';
 
 @reScope(
 	{
@@ -147,39 +151,137 @@ export default class Highlighter extends React.Component {
 						</Slider>
 					</div>
 				</TweenRef>
-				<div className={ " today" } onClick={ e => e.preventDefault() }>
-					{/*<ReactGridLayout className="layout" layout={ layout } cols={ 8 } rowHeight={ 50 }*/ }
-					{/*onLayoutChange={ this.onLayoutChange }*/ }
-					{/*isResizable={ true }*/ }
-					{/*width={ 1200 }>*/ }
-					{
-						gridItems.map(
-							( item, i ) =>
-								<TweenRef key={ item._id }
-								          initial={ {
-									          transform: {
-										          perspective: "200px",
-									          }
-									
-									          //width      : "200px",
-									          //height     : "100px",
-									          //margin     : "10px",
-									          //display    : "inline-block",
-									          //overflow   : "hidden"
-								          } }
-								          scrollableAnims={ {
-									          scrollY: anims.slideOut(30, 170, i % 2 ? "left" : "right"),
-									          scrollX: [...anims.flip(0, 100), ...anims.flip(100, 100)]
-								          } }
-								>
-									<div>
-										<Comps.FocusedItems record={ item }/>
-									</div>
-								</TweenRef>
-						)
-					}
-					{/*</ReactGridLayout>*/ }
-				</div>
+				
+				<TweenRef
+					initial={ {
+						position : "absolute",
+						top      : "0px",
+						left     : "0px",
+						width    : "100%",
+						height   : "100%",
+						transform: {
+							scale     : '1.2',
+							translateY: '-150px',
+						}
+					} }
+					scrollableAnims={ {
+						scrollY: [
+							{
+								type    : "Tween",
+								from    : 0,
+								duration: 100,
+								apply   : {
+									transform: {
+										translateY: "400px",
+									}
+								}
+							}
+						],
+					} }
+				>
+					<div className={ "headBackground" }>
+						<img src={ require("App/ui/assets/couvs/test.jpg") }/>
+					</div>
+				</TweenRef>
+				{/*<div className={ " today" } onClick={ e => e.preventDefault() }>*/ }
+				
+				<TweenRef
+					initial={ {
+						position : "absolute",
+						bottom   : "0px",
+						left     : "0px",
+						width    : "100%",
+						height   : "175px",
+						transform: {
+							//opacity   : "1"
+							//scale: '1',
+							//translateY: '-150px',
+						}
+					} }
+					scrollableAnims={ {
+						scrollY: [
+							{
+								type    : "Tween",
+								from    : 0,
+								duration: 100,
+								apply   : {
+									opacity  : "-1",
+									transform: {
+										translateY: "100px"
+									}
+								}
+							}
+						],
+					} }
+				>
+					<div className={ "slider" }>
+						<CaipiSlideshow
+							showArrow
+							vignets
+							autoSlide={ 10000 }
+							
+							onClick={
+								( e, item ) => {
+									//
+								}
+							}
+							config={
+								{
+									hPositioningFn                    : 'hCentralZoom',
+									predictiveMomentum_maxMomentumJump: 1,
+									predictiveMomentum                : true,
+									//forceSlotRatio                    : 7 / 5,
+									//infiniteMode                       : false,
+									autoScroll                        : true,
+									autoScrollPeriod                  : 3000,
+									visibleItems                      : 5,
+									//hSlotWidth                        : .85,
+									hSlotHeight                       : 1,
+									listenMouseWheel                  : false,
+									direction                         : 'horizontal',
+									//
+									//itemClicked : function ( item, offset, index, slot, e ) {
+									//
+									//	let { App: { history } } = me.context;
+									//	if ( offset ) {
+									//		e.preventDefault();
+									//		e.stopPropagation();
+									//		//
+									//		me.refs.slider._slideShow.goTo(offset);
+									//		return false;
+									//	}
+									//	else {//debugger;
+									//		var item = me.refs.slider.state.items[index].targetEtty;
+									//		var View = require('App/ui/View');
+									//		history.push(db.getRouteTo(item.cls, item.objId));
+									//		return false;
+									//
+									//	}
+									//},
+									//itemTargeted: function ( item, node ) {
+									//	var SlideshowDom = require('App/ui/utils/Dom');
+									//	if ( node && node != me._selected ) {
+									//		var s = me._selected;
+									//		SlideshowDom.addCls(node, "selected");
+									//		me._selected = node;
+									//		setTimeout(function () {
+									//			s && SlideshowDom.rmCls(s, "selected");
+									//		});
+									//
+									//	}
+									//}
+								}
+							}>
+							{
+								gridItems.map(
+									( item, i ) =>
+										<div><Comps.FocusedItems record={ item } key={ item._id }/></div>
+								)
+							}
+						</CaipiSlideshow>
+					</div>
+				</TweenRef>
+				{/*</div>*/ }
 			</div>
 		);
 	}

@@ -185,7 +185,7 @@ export default class Home extends React.Component {
 					this.scrollTo(0, 250);
 					break;
 				case 'events' :
-					this.scrollTo(100, 250);
+					this.scrollTo(100, 500);
 					break;
 				case 'page' :
 					this.scrollTo(150, 250);
