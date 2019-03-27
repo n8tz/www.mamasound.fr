@@ -1,0 +1,25 @@
+
+http://www.mamasound.fr/
+
+http://www.mamasound.fr/Concerts/Aujourd'hui
+http://www.mamasound.fr/Theatres/Aujourd'hui
+http://www.mamasound.fr/Expositions/Aujourd'hui
+http://www.mamasound.fr/Tout-Montpellier/Aujourd'hui
+http://www.mamasound.fr/Concerts/Demain
+http://www.mamasound.fr/Theatres/Demain
+http://www.mamasound.fr/Expositions/Demain
+http://www.mamasound.fr/Tout-Montpellier/Demain
+http://www.mamasound.fr/Concerts/Ce Weekend
+http://www.mamasound.fr/Theatres/Ce Weekend
+http://www.mamasound.fr/Expositions/Ce Weekend
+http://www.mamasound.fr/Tout-Montpellier/Ce Weekend
+http://www.mamasound.fr/Concerts/Ce-Weekend
+http://www.mamasound.fr/Theatres/Ce-Weekend
+http://www.mamasound.fr/Expositions/Ce-Weekend
+http://www.mamasound.fr/Tout-Montpellier/Ce-Weekend
+
+
+http://www.mamasound.fr/Concerts/*
+http://www.mamasound.fr/Theatres/*
+http://www.mamasound.fr/Expositions/*
+http://www.mamasound.fr/Tout-Montpellier/*

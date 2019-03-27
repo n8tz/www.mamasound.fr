@@ -1,0 +1,27 @@
+User-agent: *
+Allow: /
+
+Allow: /Concerts/Aujourd'hui
+Allow: /Theatres/Aujourd'hui
+Allow: /Expositions/Aujourd'hui
+Allow: /Tout-Montpellier/Aujourd'hui
+Allow: /Concerts/Demain
+Allow: /Theatres/Demain
+Allow: /Expositions/Demain
+Allow: /Tout-Montpellier/Demain
+Allow: /Concerts/Ce Weekend
+Allow: /Theatres/Ce Weekend
+Allow: /Expositions/Ce Weekend
+Allow: /Tout-Montpellier/Ce Weekend
+Allow: /Concerts/Ce-Weekend
+Allow: /Theatres/Ce-Weekend
+Allow: /Expositions/Ce-Weekend
+Allow: /Tout-Montpellier/Ce-Weekend
+
+Disallow: /Expo
+Disallow: /Theatre
+Disallow: /Concert
+Disallow: /Concerts/*
+Disallow: /Theatres/*
+Disallow: /Expositions/*
+Disallow: /Tout-Montpellier/*
