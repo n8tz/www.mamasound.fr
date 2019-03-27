@@ -23,7 +23,7 @@ export {mount}      from "App/db/mountRecord";
 const defaults = { get, query }
 export default defaults;
 
-export function get( objId, cls ) {
+export function get( cls, objId ) {
 	return new Promise(
 		( resolve, reject ) => {
 			
@@ -70,7 +70,7 @@ export function query( req ) {
 	return new Promise(
 		( resolve, reject ) => {
 			
-			let { query, etty, limit = 1000, skip, orderby } = req;
+			let { query: _query, etty, limit = 1000, skip, orderby, mountKeys = [] } = req;
 			pushDbTask(
 				( client, dbRelease ) => {
 					var db = client.db("mamasound_fr");
@@ -79,27 +79,34 @@ export function query( req ) {
 					    complete,
 					    done  = ( r, ln ) => {
 						    data.length = typeof ln == 'number' ? ln : data.length;
-						    data.items  = r || data.items;
+						    data.items  = r && r.items || data.items;
+						    data.refs   = r && r.refs || data.refs;
 						    if ( typeof data.length == 'number' && is.array(data.items) ) {
 							    done = null;
 							    dbRelease();
 							    resolve(data)
 						    }
 						
-					    };
-					var
-						ptr   = db.collection(etty)
-						          .find(query || {}),//{$query : {}, $orderby : {updated : -1}}
-						count = ptr.count(null, ( e, r ) => {
-							done(null, r || 0);
-						}),
+					    },
+					    ptr   = db.collection(etty)
+					              .find(_query || {}),//{$query : {}, $orderby : {updated : -1}}
+					    count = ptr.count(null, ( e, r ) => {
+						    done(null, r || 0);
+					    }),
+					
+					    parse = function ( err, items ) {
+						    mount({ get, query }, items || [], mountKeys)
+							    .then(refs => {
+								    debugger
+								    done({ refs, items })
+							    })
+							    .catch(data => {
+								    debugger
+								    done({ refs, items })
+							    })
+						    //done(docs || []);
 						
-						parse = function ( err, docs ) {
-							
-							
-							done(docs || []);
-							
-						};
+					    };
 					ptr.sort(orderby)
 					   .skip(parseInt(skip) || 0)
 					   .limit(parseInt(limit) || 20)

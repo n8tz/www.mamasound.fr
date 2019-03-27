@@ -210,13 +210,20 @@ export default class DataProvider extends Store {
 	 * @param id
 	 * @param rec
 	 */
-	pushRemoteQuery( etty, query, results ) {
-		let hash = H.update(JSON.stringify(query)).digest().toString(32);
+	pushRemoteQuery( etty, query, results, hash ) {
+		hash = hash || H.update(JSON.stringify(query)).digest().toString(32);
 		
 		this.data["__queries"]                 = this.data["__queries"] || {};
 		this.data["__queries"][hash]           = results;
 		this.updatedRecords["__queries"]       = this.data["__queries"] || {};
 		this.updatedRecords["__queries"][hash] = results;
+		
+		if ( results.refs ) {
+			Object.keys(results.refs)
+			      .forEach(
+				      id => this.pushRemoteRecord(results.refs[id]._cls, id, results.refs[id])
+			      )
+		}
 		
 		this.dispatchUpdates();
 	}
@@ -235,15 +242,15 @@ export default class DataProvider extends Store {
 		//	this.pushRemoteRecord(etty, id, {})
 		//	return console.error("DataProvider: No query API for data type '" + etty + "'")
 		//}
-		this.dispatch('setLoading');
+		//this.dispatch('setLoading');
 		get(etty, id)
 			.then(
 				( data ) => {
 					this.pushRemoteRecord(etty, id, data)
-					this.dispatch('setLoaded');
+					//this.dispatch('setLoaded');
 				},
 				( err ) => {
-					this.dispatch('setLoaded');
+					//this.dispatch('setLoaded');
 					if ( err ) {
 						this.pushRemoteRecord(etty, id, {})
 						return console.error("DataProvider: query fail '", etty, err);
@@ -256,21 +263,12 @@ export default class DataProvider extends Store {
 	 * Order API call to update/get a query result
 	 * @param query
 	 */
-	syncRemoteQuery( queryData ) {
-		//if ( !this.state[query.etty] ) {
-		//	this.pushRemoteQuery(query.etty, query, { items: [], total: 0, length: 0 })
-		//	return console.error("DataProvider: Unknown data type '" + query.etty + "'")
-		//}
-		//if ( !this.state[query.etty].query ) {
-		//	this.pushRemoteQuery(query.etty, query, { items: [], total: 0, length: 0 })
-		//	return console.error("DataProvider: No query API for data type '" + query.etty + "'")
-		//}
-		//
-		//this.dispatch('setLoading');
+	syncRemoteQuery( queryData, hash ) {
+		console.info("! query : ", hash, queryData)
 		query(queryData)
 			.then(
 				( data ) => {
-					this.pushRemoteQuery(queryData.etty, queryData, data)
+					this.pushRemoteQuery(queryData.etty, queryData, data, hash)
 					//this.dispatch('setLoaded');
 				},
 				( err ) => {
@@ -309,7 +307,7 @@ export default class DataProvider extends Store {
 		)
 		Object.keys(this.activeQueries.__queries).forEach(
 			id => {
-				this.syncRemoteQuery(this.activeQueries.__queries[id])
+				this.syncRemoteQuery(this.activeQueries.__queries[id], id)
 			}
 		)
 	}
@@ -413,6 +411,15 @@ export default class DataProvider extends Store {
 		console.info("! watch record : ", id)
 		// + socket watch record (debounced)
 		newRequest && noData && this.syncRemoteRecord(etty, id);
+		if ( newRequest ) {
+			if ( noData )
+				this.syncRemoteRecord(etty, id);
+			else
+				watcher(this.data[etty][id])
+		}
+		else
+			!noData && watcher(this.data[etty][id])
+		
 		return etty + "." + id;
 	}
 	
@@ -461,10 +468,10 @@ export default class DataProvider extends Store {
 		}
 		
 		// + socket watch / sync query record (debounced)
-		console.info("! watch query : ", hash, query)
+		//console.info("! watch query : ", hash, query)
 		if ( newRequest ) {
 			if ( noData )
-				this.syncRemoteQuery(query);
+				this.syncRemoteQuery(query, hash);
 			else
 				watcher(this.data["__queries"][hash])
 		}
@@ -493,7 +500,7 @@ export default class DataProvider extends Store {
 		}
 		
 		// - socket watch record if no more watchers
-		console.info("! unwatch query : ", hash)
+		//console.info("! unwatch query : ", hash)
 	}
 }
 

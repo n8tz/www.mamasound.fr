@@ -18,8 +18,8 @@
   height: 100%;
   position: relative;
   transform: translate3d(0, 0, 0);
-
   fontSize: 20px;
+
   @media screen and (max-width: $tablet-landscape-breakpoint) {
     margin: 0 !important;
     padding: 0 !important;
@@ -31,13 +31,14 @@
 
     position: absolute;
     top: 0px;
-    right: 0%;
+    right: 17px;
     height: 50px;
     left: 75px;
     background: #ffbcc3;
-
+    z-index: 1000;
     @media screen and (min-width: $tablet-landscape-breakpoint) {
       left: 300px;
+      right: 0px;
     }
 
     .typeEventsTab {
@@ -66,7 +67,6 @@
         margin-top: -25px;
 
         &.theatre {
-
           margin-top: -5px;
         }
       }
@@ -76,17 +76,19 @@
   .dayList {
 
     position: absolute;
-    top: 50px;
+    top: 0px;
     left: 0px;
     bottom: 0px;
     right: 0%;
-    //height: 100%;
     overflow: hidden;
     margin-left: 75px;
 
     .DayEvents {
-      min-height: 100px;
       background: #1f8de2;
+
+      .day {
+        height: 50px;
+      }
     }
 
     .react-swipeable-view-container {

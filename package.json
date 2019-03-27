@@ -64,14 +64,14 @@
   "scripts": {
     "build": "wpi&&wpi :api",
     "dev-api": "wpi :api -w",
+    "start-dev": "wpi :api&&concurrently \"wpi-dev-server :devClient --hot --host 0.0.0.0 \" \"wpi :api -w\" \"sleep 3&&nodemon -L --watch ./dist/App.server.js --inspect=[::]:9229 ./dist/App.server.js  -p 9701\"",
+    "start": "node ./dist/App.server.js  -p 80",
+    "runBrowser": "start http://localhost:8080",
     "docker_start": "start docker-compose up&",
     "docker_down": "docker-compose down",
     "docker_kill": "docker-compose kill",
     "docker_ash": "start docker-compose exec app ash -c \"cd /home/app&&ash\"&",
-    "docker_restoreDb": "start docker-compose exec app ash -c \"cd /home/app&&mongorestore --uri ${mongoUrl}\"&",
-    "start-dev": "wpi :api&&concurrently \"wpi-dev-server :devClient --hot --host 0.0.0.0 \" \"wpi :api -w\" \"sleep 3&&nodemon -L --watch ./dist/App.server.js --inspect=[::]:9229 ./dist/App.server.js  -p 9701\"",
-    "start": "node ./dist/App.server.js  -p 80",
-    "runBrowser": "start http://localhost:8080"
+    "docker_restoreDb": "start docker-compose exec app ash -c \"cd /home/app&&mongorestore --uri ${mongoUrl}\"&"
   },
   "dependencies": {
     "@material-ui/core": "^3.9.2",

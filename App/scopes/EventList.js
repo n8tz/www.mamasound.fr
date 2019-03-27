@@ -25,23 +25,23 @@ export default {
 		//@asRef
 		//curDay     : "appState.curDay",
 		//@asRef
-		//curStyleTab: "appState.curStyleTab",
+		viewType: 0,
 		//@asRef
 		//nbDays     : "appState.nbDays",
 		query: {},
 		$apply( data, state ) {
 			let {
 				    curDay, nbDays = 0,
-				    viewType: type
+				    viewType: type = 0
 			    }    = state,
 			    from = moment(curDay).startOf('day').add(2, 'hour').unix() * 1000,
 			    to   = moment(curDay).endOf('day').add(2, 'hour').unix() * 1000;
 			return {
 				query: {
-					etty   : 'Event',
-					query  : {
+					mountKeys: ["place", "category"],
+					etty     : 'Event',
+					query    : {
 						$or: [
-							
 							...([0, 1].includes(type) && [
 								{
 									_cls    : 'Concert',
@@ -117,8 +117,8 @@ export default {
 							}] || []),
 						]
 					},
-					limit  : 1000,
-					orderby: { startTM: 1 }
+					limit    : 1000,
+					orderby  : { startTM: 1 }
 					
 				}
 			};
@@ -132,25 +132,17 @@ export default {
 			events: "DayEventsQuery.query",
 		}
 	)
-	Queries         : stores.MongoQueries,
+	Queries  : stores.MongoQueries,
 	@withStateMap(
 		{
 			@asRef
-			items      : "Queries.events.items",
-			toMountKeys: ["category", "place"]
-		}
-	)
-	MountedEventList: stores.MongoListRefsLoader,
-	@withStateMap(
-		{
+			items  : "Queries.events.items",
 			@asRef
-			items  : "MountedEventList.items",
-			@asRef
-			refs   : "MountedEventList.refs",
+			refs   : "Queries.events.refs",
 			imgKeys: ["previewImage", "icon"]
 		}
 	)
-	EventList       : stores.ImgFieldsLoader,
+	EventList: stores.ImgFieldsLoader,
 	
 	
 	@asStore

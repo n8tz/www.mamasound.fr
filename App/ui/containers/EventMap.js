@@ -81,7 +81,7 @@ import scopes from 'App/scopes/(*).js';
 			@asRef
 			MountedItems: "EventList",
 			$apply( d, { MountedItems: { items, refs }, selected } ) {
-				let POIs = [], center;
+				let POIs = [], center, zoom = 13;
 				if ( selected ) {
 					items = [selected];
 				}
@@ -98,8 +98,12 @@ import scopes from 'App/scopes/(*).js';
 					}
 				)
 				
-				if ( selected ) {
-					items = [selected];
+				if ( selected && POIs[0] ) {
+					center = {
+						latitude : POIs[0].geoPoint[1],
+						longitude: POIs[0].geoPoint[0]
+					};
+					zoom   = 16
 				}
 				else {
 					center = {
@@ -111,7 +115,7 @@ import scopes from 'App/scopes/(*).js';
 				return {
 					items,
 					refs,
-					POIs,
+					POIs, zoom,
 					center: {
 						lat: center.latitude,
 						lng: center.longitude
@@ -136,7 +140,7 @@ export default class EventMap extends React.Component {
 	
 	render() {
 		let {
-			    Events: { center = {}, POIs = [] } = {},
+			    Events: { center = {}, POIs = [], zoom } = {},
 			    Events, UserGeoLocation, Selected,
 			    $actions, onSelect, selected
 		    }     = this.props,
@@ -146,8 +150,10 @@ export default class EventMap extends React.Component {
 				className={ "EventMap container" }
 			
 			>
-				<Map center={ center } zoom={ 13 }
+				<Map center={ center } zoom={ zoom }
 				     scrollWheelZoom={ false }
+				     animate={ true }
+				     useFlyTo={ true }
 				     dragging={ false }
 				>
 					<TileLayer

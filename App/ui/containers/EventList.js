@@ -59,7 +59,7 @@ export default class EventList extends React.Component {
 		
 		if ( scrollHeight < (parentPos + parentHeight + 500) ) {
 			
-			//console.log("should do more query", appState.viewType);
+			console.log("should do more query", appState.viewType);
 			this._running = true;
 			$actions.oneMoreDay(appState.viewType)
 		}
@@ -102,7 +102,7 @@ export default class EventList extends React.Component {
 						<Tab label={ "Concerts" }/>
 						<Tab label={ "Expos" }/>
 						<Tab label={ "Theatre" }/>
-						<Tab label={ "Cinéma" }/>
+						{/*<Tab label={ "Cinéma" }/>*/ }
 					</Tabs>
 				</div>
 				<SwipeableViews index={ appState.viewType }
@@ -110,7 +110,7 @@ export default class EventList extends React.Component {
 				                className={ "dayList" } onClick={ e => e.preventDefault() }
 				                id={ "scrollableEvents" }>
 					{
-						Array(5)
+						Array(4)
 							.fill(0)
 							.map(
 								( v, type ) =>

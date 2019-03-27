@@ -34,8 +34,7 @@ import {asTweener, TweenRef}                 from "react-rtween";
 //		//}
 //	}
 //)
-@scopeToProps("Selected", "EventList")
-//@asTweener({ initialScrollPos: {}, propagateAxes: { scrollY: true } })
+@scopeToProps("Selected", "EventList", "DataProvider")
 export default class PageBlock extends React.Component {
 	static propTypes = {};
 	state            = {};
@@ -43,7 +42,7 @@ export default class PageBlock extends React.Component {
 	render() {
 		let {
 			    record: { position, size } = {},
-			    Selected, EventList, disabled,
+			    Selected, EventList, DataProvider,
 			    $actions, onSelect, selected
 		    }     = this.props,
 		    state = this.state;
@@ -56,7 +55,7 @@ export default class PageBlock extends React.Component {
 					Selected &&
 					Selected.record &&
 					Selected.record._cls === "Concert" &&
-					<Comps.Event_page record={ Selected && Selected.record } refs={ {} }/>
+					<Comps.Event_page record={ Selected && Selected.record } refs={ DataProvider }/>
 				}
 			
 			</div>

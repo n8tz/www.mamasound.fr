@@ -21,7 +21,6 @@ const config   = require('App/config'),
 
 export default ( server, http ) => {
 	console.log("wpi-mongo server running ! :D");
-	//
 	server.post(
 		'/db/query',
 		function ( req, res, next ) {
@@ -33,7 +32,7 @@ export default ( server, http ) => {
 		'/db/get',
 		function ( req, res, next ) {
 			let { objId, cls } = req.body;
-			db.get(objId, cls).then(data => res.json(data)).catch(err => res.json({ error: err + '' }, 500))
+			db.get(cls, objId).then(data => res.json(data)).catch(err => res.json({ error: err + '' }, 500))
 			
 		}
 	);

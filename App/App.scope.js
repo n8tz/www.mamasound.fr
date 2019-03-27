@@ -35,7 +35,7 @@ export default {
 		selectedEventDT   : undefined,
 		curDay            : undefined,
 		viewType          : 0,
-		dayCountByViewType: [2, 2, 1, 1, 1],
+		dayCountByViewType: [1, 1, 1, 1, 0],
 		curTags           : undefined,
 		
 		// global app actions

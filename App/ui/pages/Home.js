@@ -110,7 +110,7 @@ export default class Home extends React.Component {
 			duration: 50,
 			//easeFn  : easingFn.easePolyInOut,
 			apply   : {
-				height: -50,
+				height: -30,
 			}
 		},
 		{
@@ -120,7 +120,7 @@ export default class Home extends React.Component {
 			duration: 50,
 			//easeFn  : easingFn.easePolyInOut,
 			apply   : {
-				height: 60,
+				height: 40,
 			}
 		}
 	];

@@ -38,9 +38,10 @@ if ( typeof window !== "undefined" ) {
 		@withStateMap(
 			{
 				FocusedItems: {
-					etty : 'FocusedItems',
-					limit: 4,
-					query: {},
+					etty     : 'FocusedItems',
+					limit    : 4,
+					query    : {},
+					mountKeys: ["targetEtty"],
 				},
 				
 				updateQueries() {
@@ -56,15 +57,7 @@ if ( typeof window !== "undefined" ) {
 				imgKeys: ["previewImage"]
 			}
 		)
-		WithImgList : stores.ImgFieldsLoader,
-		@withStateMap(
-			{
-				@asRef
-				items      : "WithImgList.items",
-				toMountKeys: ["targetEtty"]
-			}
-		)
-		MountedItems: stores.MongoListRefsLoader,
+		MountedItems: stores.ImgFieldsLoader,
 		@withStateMap(
 			{
 				HomeGridLayout: {

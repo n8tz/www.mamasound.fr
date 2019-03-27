@@ -15,42 +15,6 @@
 import is from "is";
 
 
-export function mount( db, record, toMountKeys, cb ) {
-	return new Promise(
-		( resolve, reject ) => {
-			var r    = is.array(record) && record || [record],
-			    refs = {},
-			    i    = 1,
-			    done = function () {
-				
-				    if ( !(--i) ) {
-					    resolve(
-						    {
-							    items: r,
-							    refs : refs
-						    });
-					    cb = null;
-//                    queryFlow.release();
-				    }
-			    };
-			
-			r.map(( item ) => {
-				if ( item ) {
-					i++;
-					
-					mountRecord.call(this,
-					                 item, item._cls, toMountKeys,
-					                 function ( e, refs ) {
-						                 delete refs[item._id];
-						                 done();
-					                 }, null, refs, db)
-				}
-			});
-			done();
-		}
-	)
-}
-
 /**
  * Load related records according the entities autoMount property
  * @param record
@@ -59,6 +23,39 @@ export function mount( db, record, toMountKeys, cb ) {
  * @param required
  * @param mounted
  */
+export function mount( db, record, toMountKeys, cb ) {
+	return new Promise(
+		( resolve, reject ) => {
+			var r    = is.array(record) && record || [record],
+			    refs = {},
+			    i    = 1;
+			
+			Promise.all(
+				r.reduce(
+					( refsList, record ) => {
+						toMountKeys.forEach(
+							key => (
+								record[key]
+								&&
+								refsList.push(
+									db.get(
+										record[key].cls,
+										record[key].objId
+									).then(doc => (refs[record[key].objId] = doc))
+								)
+							))
+						;
+						return refsList;
+					},
+					[]
+				)
+			)
+			       .then(r => resolve(refs))
+			       .catch(r => resolve(refs))
+		}
+	)
+}
+
 export function mountRecord( record, etty, toMountKeys, cb, required, mounted, db ) {
 	var toMount = [], sema = 0, failed, v, key;
 	db          = db || this;
