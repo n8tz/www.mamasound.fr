@@ -218,6 +218,10 @@ export default class DataProvider extends Store {
 		this.updatedRecords["__queries"]       = this.data["__queries"] || {};
 		this.updatedRecords["__queries"][hash] = results;
 		
+		results.items.forEach(
+			record => this.pushRemoteRecord(record._cls, record._id, record)
+		)
+		
 		if ( results.refs ) {
 			Object.keys(results.refs)
 			      .forEach(
@@ -410,7 +414,6 @@ export default class DataProvider extends Store {
 		
 		console.info("! watch record : ", id)
 		// + socket watch record (debounced)
-		newRequest && noData && this.syncRemoteRecord(etty, id);
 		if ( newRequest ) {
 			if ( noData )
 				this.syncRemoteRecord(etty, id);
@@ -435,7 +438,8 @@ export default class DataProvider extends Store {
 		
 		if ( !refs[etty][id].length ) {
 			delete refs[etty][id];
-			delete this.activeRecords[etty][id];
+			if ( this.activeRecords[etty] )
+				delete this.activeRecords[etty][id];
 			this.scrapIt(etty, id);
 		}
 		

@@ -165,7 +165,8 @@ export default class EventMap extends React.Component {
 						POIs.map(
 							( { geoPoint, event } ) =>
 								<Marker position={ { lat: geoPoint[1], lng: geoPoint[0] } } key={ event._id }>
-									<Popup>{ event.title }</Popup>
+									<Popup
+										open={ Selected.record && (Selected.record._id === event._id) }>{ event.title }</Popup>
 								</Marker>
 						)
 					}

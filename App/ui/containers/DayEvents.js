@@ -62,7 +62,7 @@ export default class DayEvents extends React.Component {
 				{
 					EventList && EventList.items && EventList.items.map(
 						( item, i ) =>
-							<Comps.Event_item onClick={ e => $actions.selectEvent(item._id, true) }
+							<Comps.Event_item onClick={ e => $actions.selectEvent(item, true) }
 							                  key={ item._id }
 							                  selected={ appState.selectedEventId === item._id }
 							                  record={ item }

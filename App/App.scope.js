@@ -53,15 +53,15 @@ export default {
 			if ( _currentPageFocus !== currentPageFocus )
 				return { currentPageFocus: _currentPageFocus };
 		},
-		selectEvent( selectedEventId, showPageBlock ) {
+		selectEvent( selectedEvent, showPageBlock ) {
 			let { currentPageFocus } = this.nextState;
 			currentPageFocus         = showPageBlock ? "page" : currentPageFocus;
-			if ( !selectedEventId && currentPageFocus === 'page' )
+			if ( !selectedEvent && currentPageFocus === 'page' )
 				currentPageFocus = 'events';
 			return {
-				selectedEventId,
+				selectedEventId: selectedEvent._id,
 				currentPageFocus,
-				selectedEvent: selectedEventId && { id: selectedEventId, etty: "Event" } || null
+				selectedEvent  : selectedEvent && { id: selectedEvent._id, etty: selectedEvent._cls } || null
 			};
 		},
 		selectWidget( selectedWidgetId ) {
