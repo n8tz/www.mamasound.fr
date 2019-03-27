@@ -108,7 +108,7 @@ export default class Highlighter extends React.Component {
 			slidesToShow : 1,
 			variableWidth: true,
 			autoplay     : true,
-			autoplaySpeed: 2000,
+			autoplaySpeed: 5000,
 			speed        : 500
 		};
 		return (
@@ -160,8 +160,7 @@ export default class Highlighter extends React.Component {
 						width    : "100%",
 						height   : "100%",
 						transform: {
-							scale     : '1.2',
-							translateY: '-150px',
+							translateY: '-.20box',
 						}
 					} }
 					scrollableAnims={ {
@@ -171,8 +170,13 @@ export default class Highlighter extends React.Component {
 								from    : 0,
 								duration: 100,
 								apply   : {
+									filter   : {
+										blur: "5px",
+										//translateY: "-50px",
+									},
 									transform: {
-										translateY: "400px",
+										translateZ: "50px",
+										//translateY: "-50px",
 									}
 								}
 							}
@@ -233,8 +237,8 @@ export default class Highlighter extends React.Component {
 									//forceSlotRatio                    : 7 / 5,
 									//infiniteMode                       : false,
 									autoScroll                        : true,
-									autoScrollPeriod                  : 3000,
-									visibleItems                      : 3,
+									autoScrollPeriod                  : 5000,
+									visibleItems                      : 5,
 									//hSlotWidth                        : .85,
 									hSlotHeight                       : 1,
 									listenMouseWheel                  : false,

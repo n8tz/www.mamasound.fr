@@ -17,6 +17,7 @@
   overflow: hidden;
   position: relative;
 
+  perspective: 200px;
   height: 100%;
   @media screen and (max-width: $tablet-landscape-breakpoint) {
     margin: 0 !important;

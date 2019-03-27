@@ -28,13 +28,11 @@ export default class Home extends React.Component {
 	state = {};
 	
 	static scrollableAnim = [
-		
 		{
 			type    : "Tween",
 			target  : "header",
 			from    : 0,
 			duration: 100,
-			easeFn  : easingFn.easePolyInOut,
 			apply   : {
 				height: -60,
 			}
@@ -44,7 +42,6 @@ export default class Home extends React.Component {
 			target  : "page",
 			from    : 0,
 			duration: 100,
-			easeFn  : easingFn.easePolyInOut,
 			apply   : {
 				top: -60,
 			}
@@ -54,9 +51,8 @@ export default class Home extends React.Component {
 			target  : "highlighted",
 			from    : 0,
 			duration: 100,
-			//easeFn  : easingFn.easePolyInOut,
 			apply   : {
-				height: -55,
+				height: -65,
 			}
 		},
 		{
@@ -64,9 +60,8 @@ export default class Home extends React.Component {
 			target  : "events",
 			from    : 0,
 			duration: 100,
-			//easeFn  : easingFn.easePolyInOut,
 			apply   : {
-				height: 55,
+				height: 65,
 			}
 		},
 		//show map
@@ -75,7 +70,6 @@ export default class Home extends React.Component {
 			target  : "map",
 			from    : 65,
 			duration: 35,
-			//easeFn  : easingFn.easePolyInOut,
 			apply   : {
 				height: 30,
 			}
@@ -85,7 +79,6 @@ export default class Home extends React.Component {
 			target  : "events",
 			from    : 65,
 			duration: 35,
-			//easeFn  : easingFn.easePolyInOut,
 			apply   : {
 				height: -30,
 			}
@@ -96,7 +89,6 @@ export default class Home extends React.Component {
 			target  : "map",
 			from    : 100,
 			duration: 50,
-			//easeFn  : easingFn.easePolyInOut,
 			apply   : {
 				//height: -10,
 				//marginLeft: "30%",
@@ -108,7 +100,6 @@ export default class Home extends React.Component {
 			target  : "events",
 			from    : 100,
 			duration: 50,
-			//easeFn  : easingFn.easePolyInOut,
 			apply   : {
 				height: -30,
 			}
@@ -118,7 +109,6 @@ export default class Home extends React.Component {
 			target  : "PageBlock",
 			from    : 100,
 			duration: 50,
-			//easeFn  : easingFn.easePolyInOut,
 			apply   : {
 				height: 40,
 			}
@@ -185,7 +175,7 @@ export default class Home extends React.Component {
 					this.scrollTo(0, 250);
 					break;
 				case 'events' :
-					this.scrollTo(100, 500);
+					this.scrollTo(100, 250);
 					break;
 				case 'page' :
 					this.scrollTo(150, 250);
@@ -243,7 +233,7 @@ export default class Home extends React.Component {
 					<TweenRef
 						id={ "highlighted" }
 						initial={ {
-							height: "75%"
+							height: "85%"
 						} }
 					>
 						<div
@@ -259,7 +249,7 @@ export default class Home extends React.Component {
 						id={ "events" }
 						initial={ {
 							position: "relative",
-							height  : "25%"
+							height  : "15%"
 						} }
 					>
 						<div
