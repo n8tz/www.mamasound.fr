@@ -39,7 +39,10 @@
   .slider {
     width: 100%;
     text-align: center;
-
+    height: 175px;
+    @media screen and (max-width: $smartphone-landscape-breakpoint) {
+      height: 120px;
+    }
     .CaipiSlider {
       height: 100%;
       width: 100%;

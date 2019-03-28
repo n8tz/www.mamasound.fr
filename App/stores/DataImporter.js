@@ -41,7 +41,7 @@ export default class DataImporter extends Store {
 								alert('Importation compléte !')
 								this.push({ imported: res.body.items });
 								//this.$scope.then(s => this.$actions.exportAsXLS());
-								this.$actions.saveState();
+								//this.$actions.saveState();
 							}
 							else {
 								alert('Pas marché :(... rééssay plus tard ?')
@@ -59,7 +59,7 @@ export default class DataImporter extends Store {
 							if ( res.body.success ) {
 								alert('Suppression compléte !')
 								this.push({ imported: null });
-								this.$actions.saveState();
+								//this.$actions.saveState();
 							}
 							else {
 								alert('Pas marché :(... rééssay plus tard ?')

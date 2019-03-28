@@ -38,6 +38,9 @@
     @media screen and (min-width: $tablet-portrait-breakpoint) {
       left: 300px;
     }
+    @media screen and (max-width: $smartphone-landscape-breakpoint) {
+      left: 40px;
+    }
     right: 17px;
     @media (hover: none), (hover: on-demand) {
       right: 0px;
@@ -51,6 +54,21 @@
       height: 50px;
       width: 300px;
       text-align: center;
+
+      @media screen and (max-width: $smartphone-landscape-breakpoint) {
+
+        width: 150px;
+        span {
+          font-size: 10px;
+        }
+        button{
+          overflow: visible;
+        }
+        span > span > span {
+          transform: rotate(-48deg);
+          display: inline-block;
+        }
+      }
 
       button {
         min-width: auto !important;
@@ -113,6 +131,10 @@
       margin-left: 300px;
     }
 
+    @media screen and (max-width: $smartphone-landscape-breakpoint) {
+      margin-left: 40px;
+    }
+
     .Event {
       font-size: 16px;
       @media screen and (max-width: $tablet-landscape-breakpoint) {
@@ -122,7 +144,8 @@
         font-size: 15px;
       }
       @media screen and (max-width: $smartphone-landscape-breakpoint) {
-        font-size: 14px;
+        font-size: 10px;
+
       }
       height: 3.5em;
       position: relative;
@@ -239,7 +262,10 @@
     z-index: 1001;
     @media screen and (max-width: $tablet-portrait-breakpoint) {
       width: 75px;
+    }
 
+    @media screen and (max-width: $smartphone-landscape-breakpoint) {
+      width: 40px;
     }
   }
 

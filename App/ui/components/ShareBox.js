@@ -53,7 +53,7 @@ export default (
 			startTime  : moment(event.startTM),
 			endTime    : moment(event.startTM).add(1, 'hour')
 		} }/>
-		<a href={ "sms://?body=" + encodeURI(shareBody) }>
+		<a href={ "sms:?body=" + encodeURI(shareBody) }>
 			Share via SMS
 		</a>
 		<br/>

@@ -49,14 +49,14 @@ if ( typeof window !== "undefined" ) {
 // fix webpack messing with leaflet markers icon
 	Leaflet.Icon.Default.imagePath = '.';
 	Leaflet.Icon.Default.mergeOptions({
-		                                  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+		                                  //iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
 		                                  iconUrl      : require('leaflet/dist/images/marker-icon.png'),
 		                                  shadowUrl    : require('leaflet/dist/images/marker-shadow.png'),
 	                                  });
 	
 	Leaflet.Marker.prototype.options.icon = Leaflet.icon({
-		                                                     iconRetinaUrl: require(
-			                                                     'leaflet/dist/images/marker-icon-2x.png'),
+		                                                     //iconRetinaUrl: require(
+			                                                 //    'leaflet/dist/images/marker-icon-2x.png'),
 		                                                     iconUrl      : require('leaflet/dist/images/marker-icon.png'),
 		                                                     shadowUrl    : require(
 			                                                     'leaflet/dist/images/marker-shadow.png'),

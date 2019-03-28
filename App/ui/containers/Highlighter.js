@@ -113,7 +113,6 @@ export default class Highlighter extends React.Component {
 		};
 		return (
 			<div
-				onClick={ $actions.saveState }
 				className={ "Highlighter container" }
 			>
 				
@@ -171,7 +170,7 @@ export default class Highlighter extends React.Component {
 								duration: 100,
 								apply   : {
 									filter   : {
-										blur: "5px",
+										//blur: "5px",
 										//translateY: "-50px",
 									},
 									transform: {
@@ -195,7 +194,7 @@ export default class Highlighter extends React.Component {
 						bottom   : "0px",
 						left     : "0px",
 						width    : "100%",
-						height   : "175px",
+						//height   : "175px",
 						transform: {
 							//opacity   : "1"
 							//scale: '1',
