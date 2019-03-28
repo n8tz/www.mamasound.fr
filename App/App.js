@@ -13,6 +13,7 @@
  */
 
 import React                                      from 'react';
+import moment                                     from 'moment';
 import Widget                                     from 'App/ui/containers/Widget.js';
 import allWidgets                                 from "App/ui/widgets/(*).js";
 import Home                                       from './ui/pages/Home';
@@ -25,6 +26,7 @@ import SettingsIcon                               from '@material-ui/icons/Setti
 import "./ui/styles/index.scss"
 import {reScope, scopeToProps, propsToScope}      from "rscopes";
 
+moment.locale('fr');
 
 @scopeToProps("widgets", "appState")
 export default class App extends React.Component {

@@ -1,4 +1,4 @@
-/*!
+/*
  * The MIT License (MIT)
  * Copyright (c) 2019. Wise Wild Web
  *
@@ -11,9 +11,29 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-@import "Mixins.scss";
-@import "Vars.scss";
-@import "Page.scss";
-@import "flexboxgrid.scss";
-@import "./components/*.scss";
-@import "../containers/*.scss";
+import App              from "App/App"
+import React            from "react";
+import api              from "./api";
+import {renderToString} from "react-dom/server";
+
+var express    = require("express"),
+    server     = express(),
+    http       = require('http').Server(server),
+    argz       = require('minimist')(process.argv.slice(2)),
+    wpiConf    = require('App/.wpiConfig'),
+    debug      = require('App/console').default("server");
+
+process.title = wpiConf.project.name + '::server';
+
+debug.warn("process.env.DEBUG : ", process.env.DEBUG);
+server.use(express.json());       // to support JSON-encoded bodies
+server.use(express.urlencoded()); // to support URL-encoded bodies
+
+api(server, http);
+
+var server_instance = http.listen(parseInt(argz.p || argz.port || 8000), function () {
+	debug.info('Running on ', server_instance.address().port)
+});
+
+
+

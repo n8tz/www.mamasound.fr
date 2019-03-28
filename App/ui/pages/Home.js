@@ -34,7 +34,7 @@ export default class Home extends React.Component {
 			from    : 0,
 			duration: 100,
 			apply   : {
-				height: -40,
+				height: -1,
 			}
 		},
 		{
@@ -43,7 +43,7 @@ export default class Home extends React.Component {
 			from    : 0,
 			duration: 100,
 			apply   : {
-				top: -40,
+				top: -1,
 			}
 		},
 		{
@@ -172,10 +172,10 @@ export default class Home extends React.Component {
 			console.log(appState.currentPageFocus);
 			switch ( appState.currentPageFocus ) {
 				case 'head' :
-					this.scrollTo(0, 250);
+					setTimeout(tm => this.scrollTo(0, 300), 50);
 					break;
 				case 'events' :
-					this.scrollTo(100, 250);
+					setTimeout(tm => this.scrollTo(100, 300), 50);
 					break;
 				case 'page' :
 					this.scrollTo(150, 250);
@@ -194,11 +194,11 @@ export default class Home extends React.Component {
 			<TweenRef
 				id={ "header" }
 				initial={ {
-					height: "100px"
+					height: "2cm"
 				} }
 			>
 				<header
-					onClick={ e => this.scrollTo(150, 500) }
+					onClick={ e => $actions.setPageFocus("head") }
 					style={ {
 						display   : "inline-block",
 						width     : "100%",
@@ -217,7 +217,7 @@ export default class Home extends React.Component {
 			<TweenRef
 				id={ "page" }
 				initial={ {
-					top   : "100px",
+					top   : "2cm",
 					left  : "0px",
 					bottom: "0px",
 					width : "100%",
