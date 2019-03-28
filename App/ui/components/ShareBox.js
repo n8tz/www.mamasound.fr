@@ -20,48 +20,61 @@
  */
 'use strict';
 
-import React  from "react";
-import moment from "moment";
-import ShareBox from "./ShareBox";
+import React           from "react";
+import moment          from "moment";
+import AddToCalendar   from 'react-add-to-calendar';
+import * as shareStuff from 'react-share';
+import {NavLink}       from "react-router-dom";
 
-import {NavLink} from "react-router-dom";
 
+let shareLinks = [
+	"Facebook",
+	"Linkedin",
+	"Twitter",
+	"Telegram",
+	"Whatsapp",
+	"Pinterest",
+	"Tumblr",
+];
 
 export default (
 	{
-		record,
-		refs,
-		selected,
-		place = record.place
-		&& refs[record.place.cls]
-		&& refs[record.place.cls][record.place.objId],
-		category = record.category
-		&& refs[record.category.cls]
-		&& refs[record.category.cls][record.category.objId]
+		event,
+		place,
+		shareBody = "Yo !\nViens voir " + event.title + " au " + (place && place.label) + ", le " + moment(event.startTM).format("ddd DD/MM à H:mm")
 	}
 ) => {
 	//debugger;
-	return <div className={ "Event Event" + record._cls + ' ' + (selected ? "selected" : "") }>
-		<div className="start">
-			{ moment(record.startTM).format("H:mm") }
-		</div>
-		<div className="icon">
-			{
-				category
-				&& <img src={ category.icon }/>
-			}
-		</div>
-		{/*{ record.previewImage &&*/ }
-		{/*<div className="preview">*/ }
-		{/*<img src={ record.previewImage }/>*/ }
-		{/*</div>*/ }
-		{/*}*/ }
-		<div className="title">
-			{ record.title }
-		</div>
-		<ShareBox event={record} place={place}/>
-		{ !/^\s*$/.test(record.resume || '') &&
-		<div className="resume" dangerouslySetInnerHTML={ { __html: record.resume } }/> || '' }
+	return <div className={ "ShareBox" }>
+		<AddToCalendar event={ {
+			title      : event.title,
+			description: event.title,
+			location   : place.label + ',' + (place.address && place.address.address || "Montpellier"),
+			startTime  : moment(event.startTM),
+			endTime    : moment(event.startTM).add(1, 'hour')
+		} }/>
+		<a href={ "sms://?body=" + encodeURI(shareBody) }>
+			Share via SMS
+		</a>
+		<br/>
+		<a href={ "mailto://?body=" + encodeURI(shareBody) }
+		   target={ "_blank" }>
+			Share via mail
+		</a>
+		{
+			shareLinks.map(
+				id => {
+					let ShareLink = shareStuff[id + "ShareButton"],
+					    ShareIcon = shareStuff[id + "Icon"];
+					return <ShareLink url={ "http://www.mamasound.fr" }>
+						<ShareIcon
+							size={ 32 }
+							round/>
+					</ShareLink>
+				}
+			)
+		}
+	
 	</div>
 }
 ;

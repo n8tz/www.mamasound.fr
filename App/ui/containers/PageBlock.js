@@ -49,7 +49,7 @@ export default class PageBlock extends React.Component {
 		return (
 			<div
 				className={ "PageBlock container" }
-				onClick={ e => $actions.selectEvent(null) }
+				//onClick={ e => $actions.selectEvent(null) }
 			>
 				{
 					Selected &&

@@ -1,4 +1,4 @@
-/*
+/*!
  * The MIT License (MIT)
  * Copyright (c) 2019. Wise Wild Web
  *
@@ -12,56 +12,29 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-/**
- * @author Nathanael BRAUN
- *
- * Date: 08/12/2015
- * Time: 11:50
- */
-'use strict';
+.PageBlock {
+  position: relative;
 
-import React  from "react";
-import moment from "moment";
-import ShareBox from "./ShareBox";
+  @media screen and (max-width: $tablet-landscape-breakpoint) {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
 
-import {NavLink} from "react-router-dom";
+  height: 100%;
 
+  .ShareBox {
+    position: absolute;
+    background: violet;
+    top: 0px;
+    right: 0px;
+    width: 150px;
+    height: 100%;
+    min-height: 200px;
 
-export default (
-	{
-		record,
-		refs,
-		selected,
-		place = record.place
-		&& refs[record.place.cls]
-		&& refs[record.place.cls][record.place.objId],
-		category = record.category
-		&& refs[record.category.cls]
-		&& refs[record.category.cls][record.category.objId]
-	}
-) => {
-	//debugger;
-	return <div className={ "Event Event" + record._cls + ' ' + (selected ? "selected" : "") }>
-		<div className="start">
-			{ moment(record.startTM).format("H:mm") }
-		</div>
-		<div className="icon">
-			{
-				category
-				&& <img src={ category.icon }/>
-			}
-		</div>
-		{/*{ record.previewImage &&*/ }
-		{/*<div className="preview">*/ }
-		{/*<img src={ record.previewImage }/>*/ }
-		{/*</div>*/ }
-		{/*}*/ }
-		<div className="title">
-			{ record.title }
-		</div>
-		<ShareBox event={record} place={place}/>
-		{ !/^\s*$/.test(record.resume || '') &&
-		<div className="resume" dangerouslySetInnerHTML={ { __html: record.resume } }/> || '' }
-	</div>
+    .SocialMediaShareButton {
+      display: inline-block;
+      margin: 2px;
+    }
+  }
 }
-;

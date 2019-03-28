@@ -51,7 +51,7 @@ export function get( cls, objId ) {
 										  reject(err || 404);
 										  return;
 									  }
-									  resolve(docs)
+									  resolve({ ...docs, _cls: cls })
 									
 								  }
 							  );
@@ -95,17 +95,18 @@ export function query( req ) {
 					    }),
 					
 					    parse = function ( err, items ) {
+						    items.forEach(
+							    item => {
+								    items._cls = items._cls || etty;
+							    }
+						    )
 						    mount({ get, query }, items || [], mountKeys)
 							    .then(refs => {
-								    debugger
 								    done({ refs, items })
 							    })
 							    .catch(data => {
-								    debugger
 								    done({ refs, items })
 							    })
-						    //done(docs || []);
-						
 					    };
 					ptr.sort(orderby)
 					   .skip(parseInt(skip) || 0)
