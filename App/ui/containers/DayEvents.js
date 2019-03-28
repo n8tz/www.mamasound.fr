@@ -49,9 +49,10 @@ export default class DayEvents extends React.Component {
 		let {
 			    record: { position, size } = {},
 			    EventList, appState, day,
-			    $actions, onSelect, selected
+			    $actions, onSelect
 		    }     = this.props,
-		    state = this.state;
+		    state = this.state,
+		    selected;
 		return (
 			<div
 				className={ "DayEvents" }
@@ -61,12 +62,15 @@ export default class DayEvents extends React.Component {
 				</div>
 				{
 					EventList && EventList.items && EventList.items.map(
-						( item, i ) =>
-							<Comps.Event_item onClick={ e => $actions.selectEvent(item, true) }
-							                  key={ item._id }
-							                  selected={ appState.selectedEventId === item._id }
-							                  record={ item }
-							                  refs={ EventList.refs || {} }/>
+						( item, i ) => {
+							return <Comps.Event_item
+								onClick={ e => $actions.selectEvent(item, moment(day).valueOf(), true) }
+								key={ item._id }
+								day={ day }
+								selected={ appState.selectedEventId === item._id && moment(appState.selectedEventDT).isSame(day, "day") }
+								record={ item }
+								refs={ EventList.refs || {} }/>;
+						}
 					)
 				}
 			</div>

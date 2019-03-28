@@ -756,7 +756,7 @@ export default function asTweener( ...argz ) {
 		}
 		
 		render() {
-			console.log('render', this.constructor.name)
+			//console.log('render', this.constructor.name)
 			return <TweenerContext.Provider value={ this }>
 				{ super.render() }
 			</TweenerContext.Provider>;

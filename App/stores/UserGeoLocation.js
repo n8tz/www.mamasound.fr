@@ -38,7 +38,7 @@ export default class UserGeoLocation extends Store {
 					else this.setState({ pos: _pos.coords, active: true, activating: false })
 					setTimeout(
 						tm => this.setState({ activating: this.nextState.active }),
-						1000
+						3000
 					)
 				},
 				( error ) => {

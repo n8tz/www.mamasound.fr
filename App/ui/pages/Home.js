@@ -34,7 +34,7 @@ export default class Home extends React.Component {
 			from    : 0,
 			duration: 100,
 			apply   : {
-				height: -60,
+				height: -40,
 			}
 		},
 		{
@@ -43,7 +43,7 @@ export default class Home extends React.Component {
 			from    : 0,
 			duration: 100,
 			apply   : {
-				top: -60,
+				top: -40,
 			}
 		},
 		{
@@ -194,7 +194,7 @@ export default class Home extends React.Component {
 			<TweenRef
 				id={ "header" }
 				initial={ {
-					height: "120px"
+					height: "100px"
 				} }
 			>
 				<header
@@ -217,7 +217,7 @@ export default class Home extends React.Component {
 			<TweenRef
 				id={ "page" }
 				initial={ {
-					top   : "120px",
+					top   : "100px",
 					left  : "0px",
 					bottom: "0px",
 					width : "100%",

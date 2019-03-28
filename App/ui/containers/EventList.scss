@@ -35,7 +35,7 @@
     left: 75px;
     background: #ffbcc3;
     z-index: 1000;
-    @media screen and (min-width: $tablet-landscape-breakpoint) {
+    @media screen and (min-width: $tablet-portrait-breakpoint) {
       left: 300px;
     }
     right: 17px;
@@ -109,7 +109,7 @@
       }
     }
 
-    @media screen and (min-width: $tablet-landscape-breakpoint) {
+    @media screen and (min-width: $tablet-portrait-breakpoint) {
       margin-left: 300px;
     }
 
@@ -237,7 +237,7 @@
     width: 300px;
     bottom: 0px;
     z-index: 1001;
-    @media screen and (max-width: $tablet-landscape-breakpoint) {
+    @media screen and (max-width: $tablet-portrait-breakpoint) {
       width: 75px;
 
     }

@@ -11,21 +11,23 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-import PropTypes                             from "prop-types";
-import React                                 from "react";
-import {Rnd}                                 from "react-rnd";
-import {reScope, scopeToProps, propsToScope} from "rscopes";
-import {withStateMap, asRef, asStore}        from "rescope-spells";
-import anims                                 from 'App/ui/anims/(*).js';
-import Blocks                                from 'App/ui/containers/(*).js';
-import Tabs                                  from '@material-ui/core/Tabs';
-import Tab                                   from '@material-ui/core/Tab';
-import moment                                from "moment";
-import stores                                from 'App/stores/(*).js';
-import Comps                                 from 'App/ui/components/(*).js';
-import {asTweener, TweenRef}                 from "react-rtween";
-import SwipeableViews                        from 'react-swipeable-views';
-import InfiniteScroll                        from 'react-infinite-scroller';
+import PropTypes             from "prop-types";
+import React                 from "react";
+import {
+	reScope, scopeToProps, propsToScope
+}                            from "rscopes";
+import {
+	withStateMap, asRef, asStore
+}                            from "rescope-spells";
+import anims                 from 'App/ui/anims/(*).js';
+import Blocks                from 'App/ui/containers/(*).js';
+import Tabs                  from '@material-ui/core/Tabs';
+import Tab                   from '@material-ui/core/Tab';
+import moment                from "moment";
+import stores                from 'App/stores/(*).js';
+import Comps                 from 'App/ui/components/(*).js';
+import {asTweener, TweenRef} from "react-rtween";
+import SwipeableViews        from 'react-swipeable-views';
 
 @reScope(
 	{
@@ -44,6 +46,9 @@ export default class EventList extends React.Component {
 	static propTypes = {};
 	state            = {};
 	
+	/**
+	 * Infinite loader
+	 */
 	isBotListIsInViewport = () => {
 		let { $actions, appState, $scope } = this.props;
 		let element                        = document.getElementById("endList_" + appState.viewType);
@@ -64,9 +69,33 @@ export default class EventList extends React.Component {
 			$actions.oneMoreDay(appState.viewType)
 		}
 	}
+	/**
+	 * scrollTo selected
+	 */
+	scrollToSelected      = () => {
+		let {
+			    $actions,
+			    appState, $scope
+		    }       = this.props,
+		    element = document.querySelector(".EventList *[aria-hidden=false] .selected");
+		if ( element ) {
+			let
+				parent       = document.querySelector(".EventList *[aria-hidden=false] .slide"),
+				elemPos = element.offsetTop,
+				scrollHeight = parent.scrollHeight;
+			parent.scrollTo({
+				                top     : elemPos - 60,
+				                behavior: 'smooth',
+			                });
+		}
+	}
 	
 	componentDidMount() {
 		this.isBotListIsInViewport()
+	}
+	
+	componentDidUpdate() {
+		this.scrollToSelected();
 	}
 	
 	componentWillUnmount() {
@@ -107,7 +136,8 @@ export default class EventList extends React.Component {
 				</div>
 				<SwipeableViews index={ appState.viewType }
 				                onChangeIndex={ $actions.setCurStyleTab }
-				                className={ "dayList" } onClick={ e => e.preventDefault() }
+				                className={ "dayList" }
+				                onClick={ e => e.preventDefault() }
 				                id={ "scrollableEvents" }>
 					{
 						Array(4)
@@ -127,19 +157,12 @@ export default class EventList extends React.Component {
 															viewType={ type }/>
 												)
 										}
-										
 										<div id={ "endList_" + type }>loading...</div>
 									</div>
 							)
 					}
 				</SwipeableViews>
-				<div className={ "LeftBox" }
-				     style={ {
-					     //width : "100%",
-					     //height: "100%",
-				     } }>
-					<Blocks.LeftBox/>
-				</div>
+				<Blocks.LeftBox/>
 			</div>
 		);
 	}

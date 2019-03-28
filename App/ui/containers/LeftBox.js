@@ -13,20 +13,15 @@
  */
 import PropTypes                             from "prop-types";
 import React                                 from "react";
-import {Rnd}                                 from "react-rnd";
 import {reScope, scopeToProps, propsToScope} from "rscopes";
-import CloseIcon                             from '@material-ui/icons/Close';
-import moment                                from 'moment';
-import IconButton                            from '@material-ui/core/IconButton';
 import {withStateMap, asRef, asStore}        from "rescope-spells";
 import anims                                 from 'App/ui/anims/(*).js';
 import Fab                                   from '@material-ui/core/Fab';
-import CreateIcon                            from '@material-ui/icons/Add';
-import SaveIcon                              from '@material-ui/icons/Save';
 import stores                                from 'App/stores/(*).js';
 import Comps                                 from 'App/ui/components/(*).js';
 import {asTweener, TweenRef}                 from "react-rtween";
 import Chip                                  from "./SearchBar";
+import {FacebookProvider, Page}              from 'react-facebook';
 
 @reScope(
 	{
@@ -64,31 +59,35 @@ export default class LeftBox extends React.Component {
 			<div
 				className={ "LeftBox" }
 			>
-				<div
-					className={ "toolbar" }
-				>
+				<div className={ "toolbar" }>
 					<Fab>
 						<div className={ "material-icons icon" }>search</div>
 					</Fab>
-					<Fab>
-						<img className={ "icon" } src={ require('App/ui/assets/icons/tagFilter.svg') }/>
-					</Fab>
 				</div>
-				{/*{ ActiveTags && ActiveTags.available && ActiveTags.available.map(*/}
-					{/*tag =>*/}
-						{/*<Chip*/}
-							{/*key={ tag.title }*/}
-							{/*icon={*/}
-								{/*//<Badge badgeContent={ tag.count} color="secondary" >*/}
-								{/*<img alt={ tag.title } src={ tag.style.icon } className={ "icon" }/>*/}
-								{/*//</Badge>*/}
-							{/*}*/}
-							{/*label={ tag.title }*/}
-							{/*//onClick={handleClick}*/}
-							{/*//onDelete={handleDelete}*/}
-							{/*//className={classes.chip}*/}
-						{/*/>*/}
-				{/*) }*/}
+				<div className={ "fbPage" }>
+					<FacebookProvider appId="1191108604284018">
+						<Page href="https://www.facebook.com/mamasound.fr"
+						      smallHeader={ true } tabs="timeline"
+						      adaptContainerWidth={ true }
+						      height={ 350 }
+						      width={ 300 }/>
+					</FacebookProvider>
+				</div>
+				{/*{ ActiveTags && ActiveTags.available && ActiveTags.available.map(*/ }
+				{/*tag =>*/ }
+				{/*<Chip*/ }
+				{/*key={ tag.title }*/ }
+				{/*icon={*/ }
+				{/*//<Badge badgeContent={ tag.count} color="secondary" >*/ }
+				{/*<img alt={ tag.title } src={ tag.style.icon } className={ "icon" }/>*/ }
+				{/*//</Badge>*/ }
+				{/*}*/ }
+				{/*label={ tag.title }*/ }
+				{/*//onClick={handleClick}*/ }
+				{/*//onDelete={handleDelete}*/ }
+				{/*//className={classes.chip}*/ }
+				{/*/>*/ }
+				{/*) }*/ }
 			</div>
 		);
 	}

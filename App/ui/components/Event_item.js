@@ -32,7 +32,10 @@ let defaultPreview = {
 	Expo   : require("App/ui/assets/medias/mme.png")
 };
 export default ( { record, refs, selected, onClick } ) =>
-	<div className={ "Event Event" + record._cls + ' ' + (selected ? "selected" : "") } onClick={ onClick }>
+	<div className={ "Event Event" + record._cls + ' ' + (selected ? "selected" : "") }
+	     onClick={ onClick }
+	     
+	>
 		<div className="start">
 			{ moment(record.startTM).format("H:mm") }
 		</div>

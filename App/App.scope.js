@@ -53,13 +53,14 @@ export default {
 			if ( _currentPageFocus !== currentPageFocus )
 				return { currentPageFocus: _currentPageFocus };
 		},
-		selectEvent( selectedEvent, showPageBlock ) {
+		selectEvent( selectedEvent, selectedEventDT, showPageBlock ) {
 			let { currentPageFocus } = this.nextState;
 			currentPageFocus         = showPageBlock ? "page" : currentPageFocus;
 			if ( !selectedEvent && currentPageFocus === 'page' )
 				currentPageFocus = 'events';
 			return {
 				selectedEventId: selectedEvent._id,
+				selectedEventDT,
 				currentPageFocus,
 				selectedEvent  : selectedEvent && { id: selectedEvent._id, etty: selectedEvent._cls } || null
 			};

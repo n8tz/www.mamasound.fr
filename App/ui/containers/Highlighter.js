@@ -279,7 +279,7 @@ export default class Highlighter extends React.Component {
 							{
 								gridItems.map(
 									( item, i ) =>
-										<div><Comps.FocusedItems record={ item } key={ item._id }/></div>
+										<div key={ item._id }><Comps.FocusedItems record={ item }/></div>
 								)
 							}
 						</CaipiSlideshow>
