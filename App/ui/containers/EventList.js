@@ -49,7 +49,7 @@ export default class EventList extends React.Component {
 	/**
 	 * Infinite loader
 	 */
-	isBotListIsInViewport = () => {
+	isBotListIsInViewport     = () => {
 		let { $actions, appState, $scope } = this.props;
 		let element                        = document.getElementById("endList_" + appState.viewType);
 		this._infinite                     = setTimeout(this.isBotListIsInViewport, 2000);
@@ -72,7 +72,7 @@ export default class EventList extends React.Component {
 	/**
 	 * scrollTo selected
 	 */
-	scrollToSelected      = () => {
+	scrollToSelected          = () => {
 		let {
 			    $actions,
 			    appState, $scope
@@ -81,7 +81,7 @@ export default class EventList extends React.Component {
 		if ( element ) {
 			let
 				parent       = document.querySelector(".EventList *[aria-hidden=false] .slide"),
-				elemPos = element.offsetTop,
+				elemPos      = element.offsetTop,
 				scrollHeight = parent.scrollHeight;
 			parent.scrollTo({
 				                top     : elemPos - 60,
@@ -89,17 +89,56 @@ export default class EventList extends React.Component {
 			                });
 		}
 	}
+	/**
+	 * watchCurrentDayFromScroll
+	 */
+	watchCurrentDayFromScroll = () => {
+		let {
+			    $actions,
+			    appState, $scope
+		    }       = this.props,
+		    element = document.querySelector(".EventList *[aria-hidden=false] .slide");
+		
+		if ( element ) {
+			this._scrollList && element.removeEventListener("scroll", this._scrollList);
+			
+			element.addEventListener(
+				"scroll",
+				this._scrollList = e => {
+					let allDays = document.querySelectorAll(".EventList *[aria-hidden=false] .slide .DayEvents"),
+					    cDay,
+					    cPos    = element.scrollTop;
+					
+					for ( let i = 0; i < allDays.length; i++ ) {
+						if ( cPos < allDays[i].offsetTop + 50 )
+							break;
+						cDay = allDays[i].dataset.dt;
+					}
+					cDay && $actions.updateCurrentDay(parseInt(cDay));
+				}
+			)
+		}
+	}
 	
 	componentDidMount() {
 		this.isBotListIsInViewport()
+		this.watchCurrentDayFromScroll()
 	}
 	
 	componentDidUpdate() {
 		this.scrollToSelected();
+		this.watchCurrentDayFromScroll();
 	}
 	
 	componentWillUnmount() {
 		clearTimeout(this._infinite)
+		
+		let element = document.querySelector(".EventList *[aria-hidden=false] .slide");
+		
+		if ( element ) {
+			this._scrollList && element.removeEventListener("scroll", this._scrollList);
+			
+		}
 	}
 	
 	render() {
@@ -115,7 +154,7 @@ export default class EventList extends React.Component {
 			>
 				
 				<div className={ "curDay" }>
-					{ moment(appState.curDay).format("dddd DD/MM") }
+					{ moment(appState.currentVisibleDay || appState.curDay).format("dddd DD/MM") }
 					<Tabs
 						value={ appState.viewType }
 						onChange={ ( e, v ) => {

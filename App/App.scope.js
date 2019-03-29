@@ -53,6 +53,11 @@ export default {
 			if ( _currentPageFocus !== currentPageFocus )
 				return { currentPageFocus: _currentPageFocus };
 		},
+		updateCurrentDay( _currentVisibleDay ) {
+			let { currentVisibleDay } = this.nextState;
+			if ( _currentVisibleDay !== currentVisibleDay )
+				return { currentVisibleDay: _currentVisibleDay };
+		},
 		selectEvent( selectedEvent, selectedEventDT, showPageBlock ) {
 			let { currentPageFocus } = this.nextState;
 			currentPageFocus         = showPageBlock ? "page" : currentPageFocus;

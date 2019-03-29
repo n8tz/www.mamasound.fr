@@ -233,6 +233,48 @@
           //height: 100%;
         }
       }
+      @media screen and (max-width: $smartphone-landscape-breakpoint) {
+        .title {
+          right: (4em / 1.25);
+          font-size: 1.25em;
+          position: absolute;
+          top: .45em;
+          height: (3.5em / 1.25);
+          left: (8.5em / 1.25);
+          text-align: left;
+          padding-top: .1em;
+          display: inline-block;
+        }
+
+        .start {
+          @include use_hvCenteredContent();
+          float: left;
+          height: 100%;
+          padding-top: .1em;
+          padding-left: 0em;
+          padding-right: .95em;
+          width: 3em;
+          font-size: 1.25em;
+
+        }
+
+        .price {
+          position: absolute;
+          bottom: 2px;
+          right: 2px;
+          font-size: .9em;
+        }
+
+        .icon {
+          @include use_hvCenteredContent();
+          padding: .2em;
+          width: 1.75em;
+          height: 1.75em;
+          transform: scale(1.75);
+          margin-top: .5em;
+          margin-left: -.4em;
+        }
+      }
 
       //&.EventTheatre .icon,
       &.EventTheatre .start {

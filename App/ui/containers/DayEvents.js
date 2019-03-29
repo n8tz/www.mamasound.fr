@@ -56,6 +56,7 @@ export default class DayEvents extends React.Component {
 		return (
 			<div
 				className={ "DayEvents" }
+				data-dt={ moment(day).valueOf() }
 			>
 				<div className={ "day" }>
 					{ moment(day).format("dddd DD/MM") }
