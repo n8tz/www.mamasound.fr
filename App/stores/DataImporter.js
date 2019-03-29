@@ -25,7 +25,7 @@ export default class DataImporter extends Store {
 				.post(state.validateUrl, state.items)
 				.then(
 					( res ) => {
-						this.push({ items: res.body, complete: true })
+						this.push({ items: res.body, complete: true });
 						console.log(res)
 					}
 				)
@@ -41,7 +41,7 @@ export default class DataImporter extends Store {
 								alert('Importation compléte !')
 								this.push({ imported: res.body.items });
 								//this.$scope.then(s => this.$actions.exportAsXLS());
-								//this.$actions.saveState();
+								this.$actions.saveState();
 							}
 							else {
 								alert('Pas marché :(... rééssay plus tard ?')

@@ -228,7 +228,6 @@ export default class Home extends React.Component {
 					style={ {
 						position: "absolute",
 						width   : "100%",
-						//background: "blue",
 					} }>
 					<TweenRef
 						id={ "highlighted" }
@@ -237,7 +236,6 @@ export default class Home extends React.Component {
 						} }
 					>
 						<div
-							//onClick={ e => this.scrollTo(0, 500) }
 							style={ {
 								width     : "100%",
 								background: "blue",
@@ -253,14 +251,12 @@ export default class Home extends React.Component {
 						} }
 					>
 						<div
-							//onClick={ e => this.scrollTo(100, 500) }
 							style={ {
 								width     : "100%",
 								background: "green",
 								overflow  : 'hidden'
 							} }>
 							<Blocks.EventList/>
-						
 						</div>
 					</TweenRef>
 					<TweenRef
@@ -271,13 +267,13 @@ export default class Home extends React.Component {
 						} }
 					>
 						<div
-							//onClick={ e => this.scrollTo(100, 500) }
 							style={ {
 								background: "cyan",
 								overflow  : 'hidden',
 							} }>
-							
-							<Blocks.EventMap day={ appState.curDay } viewType={ appState.viewType }/>
+							<Blocks.EventMap
+								day={ appState.currentVisibleDay || appState.curDay }
+								viewType={ appState.viewType }/>
 						</div>
 					</TweenRef>
 					<TweenRef
@@ -287,7 +283,6 @@ export default class Home extends React.Component {
 						} }
 					>
 						<div
-							//onClick={ e => this.scrollTo(100, 500) }
 							style={ {
 								width     : "100%",
 								background: "green",

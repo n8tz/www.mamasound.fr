@@ -31,7 +31,7 @@ npm run start
 
 ## Code structure
 
-This app inherit a redux structure/boilerplate from [wpi-react-rs-sass-ssr](https://github.com/n8tz/wpi-react-rs-sass-ssr)<br/>
+This app inherit a RS structure/boilerplate from [wpi-react-rs-sass-ssr](https://github.com/n8tz/wpi-react-rs-sass-ssr)<br/>
 which inherit itself SSR & webpack from [wpi-react-hmr-ssr](https://github.com/n8tz/wpi-react-hmr-ssr)
 
 See [webpack-inherit](https://github.com/n8tz/webpack-inherit)

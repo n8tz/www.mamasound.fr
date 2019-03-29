@@ -61,7 +61,7 @@
         span {
           font-size: 10px;
         }
-        button{
+        button {
           overflow: visible;
         }
         span > span > span {
@@ -233,9 +233,10 @@
           //height: 100%;
         }
       }
-      @media screen and (max-width: $smartphone-landscape-breakpoint) {
+
+      @media screen and (max-width: $smartphone-portrait-breakpoint) {
         .title {
-          right: (4em / 1.25);
+          right: (3em / 1.25);
           font-size: 1.25em;
           position: absolute;
           top: .45em;
@@ -243,7 +244,6 @@
           left: (8.5em / 1.25);
           text-align: left;
           padding-top: .1em;
-          display: inline-block;
         }
 
         .start {
@@ -255,7 +255,6 @@
           padding-right: .95em;
           width: 3em;
           font-size: 1.25em;
-
         }
 
         .price {
