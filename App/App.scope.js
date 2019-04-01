@@ -49,14 +49,19 @@ export default {
 			return { dayCountByViewType: [...dayCountByViewType] };
 		},
 		setPageFocus( _currentPageFocus ) {
-			let { currentPageFocus } = this.nextState;
-			if ( _currentPageFocus !== currentPageFocus )
+			let { currentPageFocus, selectedEventId } = this.nextState;
+			if ( _currentPageFocus !== currentPageFocus ) {
+				if ( selectedEventId && _currentPageFocus === 'events' )
+					this.$actions.selectEvent();
 				return { currentPageFocus: _currentPageFocus };
+			}
 		},
 		updateCurrentDay( _currentVisibleDay ) {
-			let { currentVisibleDay } = this.nextState;
-			if ( _currentVisibleDay !== currentVisibleDay )
+			let { currentVisibleDay, selectedEventId } = this.nextState;
+			if ( _currentVisibleDay !== currentVisibleDay ) {
+				//selectedEventId && this.$actions.selectEvent();
 				return { currentVisibleDay: _currentVisibleDay };
+			}
 		},
 		selectEvent( selectedEvent, selectedEventDT, showPageBlock ) {
 			let { currentPageFocus } = this.nextState;
@@ -64,7 +69,7 @@ export default {
 			if ( !selectedEvent && currentPageFocus === 'page' )
 				currentPageFocus = 'events';
 			return {
-				selectedEventId: selectedEvent._id,
+				selectedEventId: selectedEvent && selectedEvent._id,
 				selectedEventDT,
 				currentPageFocus,
 				selectedEvent  : selectedEvent && { id: selectedEvent._id, etty: selectedEvent._cls } || null

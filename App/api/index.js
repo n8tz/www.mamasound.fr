@@ -31,7 +31,7 @@ export function service( server ) {
 		let creds = JSON.parse(fs.readFileSync(process.cwd() + '/creds.json'));
 		server.use(basicAuth(creds.user, creds.pass))
 	}
-	
+	//
 	server.get(
 		'/',
 		function ( req, res, next ) {
