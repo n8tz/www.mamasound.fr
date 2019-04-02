@@ -29,6 +29,12 @@ import Comps                 from 'App/ui/components/(*).js';
 import {asTweener, TweenRef} from "react-rtween";
 import SwipeableViews        from 'react-swipeable-views';
 
+import {
+	reScope, scopeToProps, propsToScope
+}                            from "rscopes";
+import {
+	withStateMap, asRef, asStore
+}                            from "rescope-spells";
 @reScope(
 	{
 		@asStore
