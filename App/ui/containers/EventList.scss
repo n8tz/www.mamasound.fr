@@ -54,6 +54,7 @@
     img {
       @include use_hvCenteredAbs();
       width: 100%;
+      min-height: 100%;
     }
   }
 
