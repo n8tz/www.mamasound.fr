@@ -38,6 +38,11 @@ export default {
 		dayCountByViewType: [1, 1, 1, 1, 0],
 		curTags           : undefined,
 		
+		$apply( data, state ) {
+			!state.curDay && this.setState({ curDay: moment().startOf('day').valueOf() })
+			return state;
+		},
+		
 		// global app actions
 		
 		setCurStyleTab( viewType ) {
@@ -60,7 +65,7 @@ export default {
 			let { currentVisibleDay, selectedEventId } = this.nextState;
 			if ( _currentVisibleDay !== currentVisibleDay ) {
 				//selectedEventId && this.$actions.selectEvent();
-				return { currentVisibleDay: _currentVisibleDay };
+				return { currentVisibleDay: moment(_currentVisibleDay).startOf("day").valueOf() };
 			}
 		},
 		selectEvent( selectedEvent, selectedEventDT, showPageBlock ) {

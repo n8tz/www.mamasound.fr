@@ -2,13 +2,14 @@
   "name": "react-rtween",
   "version": "1.2.5",
   "license": "AGPL-3.0",
-  "main": "./dist/Comp.js",
+  "main": "./dist/RTween.js",
   "author": "Nathan Braun <n8tz.js@gmail.com>",
   "wpInherit": {
     "default": {
       "rootFolder": "src",
       "basedOn": "Component",
       "vars": {
+        "rootAlias": "RTween",
         "externals": true,
         "webpackPatch": {
           "optimization": {
@@ -24,6 +25,7 @@
       "rootFolder": "src",
       "basedOn": "ComponentSamples",
       "vars": {
+        "rootAlias": "RTween",
         "webpackPatch": {}
       },
       "extend": [

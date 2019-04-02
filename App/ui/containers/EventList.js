@@ -28,6 +28,7 @@ import stores                from 'App/stores/(*).js';
 import Comps                 from 'App/ui/components/(*).js';
 import {asTweener, TweenRef} from "react-rtween";
 import SwipeableViews        from 'react-swipeable-views';
+
 @reScope(
 	{
 		@asStore
@@ -151,27 +152,26 @@ export default class EventList extends React.Component {
 			<div
 				className={ "EventList container" }
 			>
+				<Blocks.DayBlock day={ appState.currentVisibleDay || appState.curDay }>
 				
-				<div className={ "curDay" }>
-					{ moment(appState.currentVisibleDay || appState.curDay).format("dddd DD/MM") }
-					<Tabs
-						value={ appState.viewType }
-						onChange={ ( e, v ) => {
-							$actions.setCurStyleTab(v)
-						} }
-						height={ 50 }
-						variant="fullWidth"
-						indicatorColor="primary"
-						textColor="primary"
-						className={ "typeEventsTab" }
-					>
-						<Tab label={ "Tous" }/>
-						<Tab label={ "Concerts" }/>
-						<Tab label={ "Expos" }/>
-						<Tab label={ "Theatre" }/>
-						{/*<Tab label={ "Cinéma" }/>*/ }
-					</Tabs>
-				</div>
+				</Blocks.DayBlock>
+				<Tabs
+					value={ appState.viewType }
+					onChange={ ( e, v ) => {
+						$actions.setCurStyleTab(v)
+					} }
+					height={ 50 }
+					variant="fullWidth"
+					indicatorColor="primary"
+					textColor="primary"
+					className={ "typeEventsTab" }
+				>
+					<Tab label={ "Tous" }/>
+					<Tab label={ "Concerts" }/>
+					<Tab label={ "Expos" }/>
+					<Tab label={ "Theatre" }/>
+					{/*<Tab label={ "Cinéma" }/>*/ }
+				</Tabs>
 				<SwipeableViews index={ appState.viewType }
 				                onChangeIndex={ $actions.setCurStyleTab }
 				                className={ "dayList" }

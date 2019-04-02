@@ -125,15 +125,15 @@ export default class Highlighter extends React.Component {
 					          width          : "100%",
 					          height         : "20vh",
 					          zIndex         : 1000,
-					          opacity        : 0,
+					          opacity        : 1,
 					
 					          transform: {
-						          translateZ: '-.2box',
-						          translateY: '-500px',
+						          //translateZ: '-.2box',
+						          translateY: '-1box',
 					          }
 				          } }
 				          scrollableAnims={ {
-					          scrollY: anims.slideIn(0, 100, "top"),
+					          scrollY: anims.slideIn(null, 0, 100, "top").anims,
 				          } }
 				>
 					<div onClick={ e => {

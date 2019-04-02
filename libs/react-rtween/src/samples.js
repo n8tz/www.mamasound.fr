@@ -18,7 +18,7 @@
 import React    from "react";
 import ReactDom from "react-dom";
 
-import Samples from "Comp/samples/*/(*).js"
+import Samples from "RTween/samples/*/(*).js"
 import "./samples/samples.scss";
 
 console.log(Samples);

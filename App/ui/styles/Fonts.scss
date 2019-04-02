@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Fugaz+One|Leckerli+One|Sarina');
+
+
+@font-face {
+  font-family: 'gulliasgullias';
+  src: url('../assets/fonts/gullias-webfont.woff2') format('woff2'),
+  url('../assets/fonts/gullias-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+//@font-face {
+//  font-family: 'EmPower42-Bold';
+//  src:url('../assets/fonts/EmPower42-Bold.ttf.woff') format('woff'),
+//  url('../assets/fonts/EmPower42-Bold.ttf.svg#EmPower42-Bold') format('svg'),
+//  url('../assets/fonts/EmPower42-Bold.ttf.eot'),
+//  url('../assets/fonts/EmPower42-Bold.ttf.eot?#iefix') format('embedded-opentype');
+//  font-weight: normal;
+//  font-style: normal;
+//}
+@font-face {
+  font-family: 'EmPower42';
+  src: url('../assets/fonts/EmPower42-Condensed.eot');
+  src: url('../assets/fonts/EmPower42-Condensed.eot?#iefix') format('embedded-opentype'),
+  url('../assets/fonts/EmPower42-Condensed.woff') format('woff'),
+  url('../assets/fonts/EmPower42-Condensed.ttf') format('truetype'),
+  url('../assets/fonts/EmPower42-Condensed.svg#EmPower42-Condensed') format('svg');
+  font-weight: 100;
+  font-style: normal;
+}

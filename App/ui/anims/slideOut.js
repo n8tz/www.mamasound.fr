@@ -19,55 +19,36 @@ var keys     = {
 	right: 'translateX',
 	left : 'translateX'
 }, dirs      = {
-	top  : "500px",
-	bot  : "-500px",
-	right: "500px",
-	left : "-500px"
+	top  : -1,
+	bot  : 1,
+	right: -1,
+	left : 1
 };
-export default function ( tmStart, duration, dir ) {
-	dir = dir || 'right';
+export default function ( target, tmStart = 0, duration = 500, dir = "top" ) {
 	
 	
-	return [
-		{
-			type    : "Tween",
-			from    : tmStart + 0,
-			duration: .8 * duration,
-			easeFn  : easingFn.easeSinOut,
-			apply   : {
+	return {
+		
+		initial: {
+			[target]: {
 				transform: {
-					translateZ: '-.2box',
-				}
+					[keys[dir]]: '0box',
+				},
 			}
 		},
-		{
-			type    : "Tween",
-			from    : tmStart + .1 * duration,
-			duration: .9 * duration,
-			easeFn  : easingFn.easeSinOut,
-			apply   : {
-				transform: {
-					[keys[dir]]: dirs[dir]
+		anims  : [
+			{
+				type    : "Tween",
+				target,
+				from    : tmStart,
+				duration: duration,
+				easeFn  : easingFn.easeSinOut,
+				apply   : {
+					transform: {
+						[keys[dir]]: dirs[dir] + 'box'
+					}
 				}
-			}
-		},
-		{
-			type    : "Tween",
-			from    : tmStart + .1 * duration,
-			duration: .8 * duration,
-			apply   : {
-				filter: {
-					//blur: '20px',
-				}
-			}
-		},
-		{
-			type    : "Tween",
-			from    : tmStart + .2 * duration,
-			duration: .5 * duration,
-			apply   : {
-				opacity: -1
-			}
-		}
-	]
+			},
+		]
+	}
 };

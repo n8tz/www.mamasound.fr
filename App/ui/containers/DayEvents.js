@@ -59,7 +59,7 @@ export default class DayEvents extends React.Component {
 				data-dt={ moment(day).valueOf() }
 			>
 				<div className={ "day" }>
-					{ moment(day).format("dddd DD/MM") }
+					<Comps.SimpleDay day={ day }/>
 				</div>
 				{
 					EventList && EventList.items && EventList.items.map(
