@@ -16,6 +16,7 @@ import React    from "react";
 import is       from "is";
 import taskflow from "taskflows";
 import utils    from "./utils";
+import Inertia  from './helpers/Inertia';
 
 import TweenerContext                    from "./TweenerContext";
 import rtween                            from "rtween";
@@ -361,8 +362,10 @@ export default function asTweener( ...argz ) {
 				scrollableAnims: [],
 				scrollPos      : opts.initialScrollPos && opts.initialScrollPos[axe] || 0,
 				targetPos      : 0,
-				scrollableArea : 0
-			}
+				inertia        : new Inertia({
+					                             value: opts.initialScrollPos && opts.initialScrollPos[axe] || 0,
+				                             }),
+			};
 			
 			return _.axes[axe];
 		}
@@ -425,11 +428,12 @@ export default function asTweener( ...argz ) {
 		scrollTo( newPos, ms = 0, axe = "scrollY" ) {
 			if ( this._.axes ) {
 				let oldPos = this._.axes[axe].targetPos,
-				    setPos = pos => (
-					    this._.axes[axe].scrollPos = pos,
-					    this.componentDidScroll && this.componentDidScroll(~~pos),
-						    this._updateTweenRefs()
-				    );
+				    setPos = pos => {
+					    this._.axes[axe].scrollPos = pos;
+					    this.componentDidScroll && this.componentDidScroll(~~pos);
+					    this._updateTweenRefs()
+				    }
+				;
 				
 				newPos                     = Math.max(0, newPos);
 				newPos                     = Math.min(newPos, this._.axes[axe].scrollableArea);
@@ -469,8 +473,8 @@ export default function asTweener( ...argz ) {
 					this._.onScroll = ( e ) => {//@todo
 						let prevent;
 						
-						prevent = this.dispatchScroll(e.deltaY, "scrollY");
-						prevent = this.dispatchScroll(e.deltaX, "scrollX") || prevent;
+						prevent = this.dispatchScroll(e.deltaY * 10, "scrollY");
+						prevent = this.dispatchScroll(e.deltaX * 10, "scrollX") || prevent;
 						
 						if ( prevent ) {
 							e.preventDefault();
@@ -533,8 +537,22 @@ export default function asTweener( ...argz ) {
 		
 		}
 		
+		
+		applyInertia( dim, axe ) {
+			if ( dim.inertia.active ) {
+				let x = dim.inertia.update();
+				
+				this.scrollTo(x, 0, axe);
+				dim.inertiaFrame = window.requestAnimationFrame(this.applyInertia.bind(this, dim, axe));
+			}
+			else {
+				dim.inertiaFrame = null;
+				console.log("complete");
+			}
+		}
+		
+		
 		dispatchScroll( delta, axe = "scrollY" ) {
-			
 			let prevent,
 			    dim    = this._.axes[axe],
 			    oldPos = dim && dim.scrollPos,
@@ -542,10 +560,14 @@ export default function asTweener( ...argz ) {
 			
 			if ( dim && oldPos !== newPos ) {
 				
+				if ( !newPos ) debugger
+				console.log("dispatch " + newPos);
+				dim.inertia.to(newPos);
+				!dim.inertiaFrame && this.applyInertia(dim, axe);
 				
-				if ( this.scrollTo(newPos, 0, axe) )
-					prevent = !(opts.propagateAxes && opts.propagateAxes[axe]);
-				
+				//if ( this.scrollTo(newPos, 0, axe) )
+				//	prevent = !(opts.propagateAxes && opts.propagateAxes[axe]);
+				prevent = true;
 			}
 			
 			return prevent;

@@ -28,8 +28,7 @@
       "vars": {
         "rootAlias": "RTween",
         "externals": true,
-        "webpackPatch": {
-        }
+        "webpackPatch": {}
       },
       "extend": [
         "wpi-react-hmr-ssr"
@@ -69,6 +68,7 @@
     "color-rgba": "^2.1.0",
     "css-color-converter": "^1.1.0",
     "d3-ease": "^1.0.5",
+    "inrtia": "^0.2.3",
     "is": "^3.2.1",
     "isfunction": "0.0.6",
     "kebab-case": "^1.0.0",
