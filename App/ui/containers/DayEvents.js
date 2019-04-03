@@ -37,6 +37,7 @@ import scopes                from 'App/scopes/(*).js';
 		"viewType:DayEventsQuery.viewType"
 	])
 @scopeToProps("EventList", "appState")
+@asTweener({ initialScrollPos: { scrollX: 100 }, propagateAxes: { scrollY: true } })
 export default class DayEvents extends React.Component {
 	static propTypes = {
 		day     : PropTypes.number,

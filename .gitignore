@@ -27,6 +27,7 @@ $RECYCLE.BIN/
 # App specific
 
 User.bson
+User.bson.gz
 .tmp
 node_modules
 .idea
