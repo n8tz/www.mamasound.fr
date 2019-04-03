@@ -103,6 +103,27 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
+}
+
+module.exports = _arrayWithoutHoles;
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js":
 /*!**********************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/assertThisInitialized.js ***!
@@ -166,6 +187,67 @@ module.exports = _createClass;
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime/helpers/defineProperty.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/defineProperty.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+module.exports = _defineProperty;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/get.js":
+/*!****************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/get.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getPrototypeOf = __webpack_require__(/*! ./getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+
+var superPropBase = __webpack_require__(/*! ./superPropBase */ "./node_modules/@babel/runtime/helpers/superPropBase.js");
+
+function _get(target, property, receiver) {
+  if (typeof Reflect !== "undefined" && Reflect.get) {
+    module.exports = _get = Reflect.get;
+  } else {
+    module.exports = _get = function _get(target, property, receiver) {
+      var base = superPropBase(target, property);
+      if (!base) return;
+      var desc = Object.getOwnPropertyDescriptor(base, property);
+
+      if (desc.get) {
+        return desc.get.call(receiver);
+      }
+
+      return desc.value;
+    };
+  }
+
+  return _get(target, property, receiver || target);
+}
+
+module.exports = _get;
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js":
 /*!***************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/getPrototypeOf.js ***!
@@ -212,6 +294,68 @@ module.exports = _inherits;
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime/helpers/iterableToArray.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/iterableToArray.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _iterableToArray(iter) {
+  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+}
+
+module.exports = _iterableToArray;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/nonIterableSpread.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/nonIterableSpread.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
+}
+
+module.exports = _nonIterableSpread;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/objectSpread.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/objectSpread.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var defineProperty = __webpack_require__(/*! ./defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+    var ownKeys = Object.keys(source);
+
+    if (typeof Object.getOwnPropertySymbols === 'function') {
+      ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+      }));
+    }
+
+    ownKeys.forEach(function (key) {
+      defineProperty(target, key, source[key]);
+    });
+  }
+
+  return target;
+}
+
+module.exports = _objectSpread;
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js":
 /*!**************************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js ***!
@@ -255,6 +399,49 @@ module.exports = _setPrototypeOf;
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime/helpers/superPropBase.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/superPropBase.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getPrototypeOf = __webpack_require__(/*! ./getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+
+function _superPropBase(object, property) {
+  while (!Object.prototype.hasOwnProperty.call(object, property)) {
+    object = getPrototypeOf(object);
+    if (object === null) break;
+  }
+
+  return object;
+}
+
+module.exports = _superPropBase;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/toConsumableArray.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toConsumableArray.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithoutHoles = __webpack_require__(/*! ./arrayWithoutHoles */ "./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js");
+
+var iterableToArray = __webpack_require__(/*! ./iterableToArray */ "./node_modules/@babel/runtime/helpers/iterableToArray.js");
+
+var nonIterableSpread = __webpack_require__(/*! ./nonIterableSpread */ "./node_modules/@babel/runtime/helpers/nonIterableSpread.js");
+
+function _toConsumableArray(arr) {
+  return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
+}
+
+module.exports = _toConsumableArray;
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/typeof.js":
 /*!*******************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/typeof.js ***!
@@ -279,6 +466,942 @@ function _typeof(obj) {
 }
 
 module.exports = _typeof;
+
+/***/ }),
+
+/***/ "./node_modules/abs-svg-path/index.js":
+/*!********************************************!*\
+  !*** ./node_modules/abs-svg-path/index.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+module.exports = absolutize
+
+/**
+ * redefine `path` with absolute coordinates
+ *
+ * @param {Array} path
+ * @return {Array}
+ */
+
+function absolutize(path){
+	var startX = 0
+	var startY = 0
+	var x = 0
+	var y = 0
+
+	return path.map(function(seg){
+		seg = seg.slice()
+		var type = seg[0]
+		var command = type.toUpperCase()
+
+		// is relative
+		if (type != command) {
+			seg[0] = command
+			switch (type) {
+				case 'a':
+					seg[6] += x
+					seg[7] += y
+					break
+				case 'v':
+					seg[1] += y
+					break
+				case 'h':
+					seg[1] += x
+					break
+				default:
+					for (var i = 1; i < seg.length;) {
+						seg[i++] += x
+						seg[i++] += y
+					}
+			}
+		}
+
+		// update cursor state
+		switch (command) {
+			case 'Z':
+				x = startX
+				y = startY
+				break
+			case 'H':
+				x = seg[1]
+				break
+			case 'V':
+				y = seg[1]
+				break
+			case 'M':
+				x = startX = seg[1]
+				y = startY = seg[2]
+				break
+			default:
+				x = seg[seg.length - 2]
+				y = seg[seg.length - 1]
+		}
+
+		return seg
+	})
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/clamp/index.js":
+/*!*************************************!*\
+  !*** ./node_modules/clamp/index.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = clamp
+
+function clamp(value, min, max) {
+  return min < max
+    ? (value < min ? min : value > max ? max : value)
+    : (value < max ? max : value > min ? min : value)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/color-name/index.js":
+/*!******************************************!*\
+  !*** ./node_modules/color-name/index.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = {
+	"aliceblue": [240, 248, 255],
+	"antiquewhite": [250, 235, 215],
+	"aqua": [0, 255, 255],
+	"aquamarine": [127, 255, 212],
+	"azure": [240, 255, 255],
+	"beige": [245, 245, 220],
+	"bisque": [255, 228, 196],
+	"black": [0, 0, 0],
+	"blanchedalmond": [255, 235, 205],
+	"blue": [0, 0, 255],
+	"blueviolet": [138, 43, 226],
+	"brown": [165, 42, 42],
+	"burlywood": [222, 184, 135],
+	"cadetblue": [95, 158, 160],
+	"chartreuse": [127, 255, 0],
+	"chocolate": [210, 105, 30],
+	"coral": [255, 127, 80],
+	"cornflowerblue": [100, 149, 237],
+	"cornsilk": [255, 248, 220],
+	"crimson": [220, 20, 60],
+	"cyan": [0, 255, 255],
+	"darkblue": [0, 0, 139],
+	"darkcyan": [0, 139, 139],
+	"darkgoldenrod": [184, 134, 11],
+	"darkgray": [169, 169, 169],
+	"darkgreen": [0, 100, 0],
+	"darkgrey": [169, 169, 169],
+	"darkkhaki": [189, 183, 107],
+	"darkmagenta": [139, 0, 139],
+	"darkolivegreen": [85, 107, 47],
+	"darkorange": [255, 140, 0],
+	"darkorchid": [153, 50, 204],
+	"darkred": [139, 0, 0],
+	"darksalmon": [233, 150, 122],
+	"darkseagreen": [143, 188, 143],
+	"darkslateblue": [72, 61, 139],
+	"darkslategray": [47, 79, 79],
+	"darkslategrey": [47, 79, 79],
+	"darkturquoise": [0, 206, 209],
+	"darkviolet": [148, 0, 211],
+	"deeppink": [255, 20, 147],
+	"deepskyblue": [0, 191, 255],
+	"dimgray": [105, 105, 105],
+	"dimgrey": [105, 105, 105],
+	"dodgerblue": [30, 144, 255],
+	"firebrick": [178, 34, 34],
+	"floralwhite": [255, 250, 240],
+	"forestgreen": [34, 139, 34],
+	"fuchsia": [255, 0, 255],
+	"gainsboro": [220, 220, 220],
+	"ghostwhite": [248, 248, 255],
+	"gold": [255, 215, 0],
+	"goldenrod": [218, 165, 32],
+	"gray": [128, 128, 128],
+	"green": [0, 128, 0],
+	"greenyellow": [173, 255, 47],
+	"grey": [128, 128, 128],
+	"honeydew": [240, 255, 240],
+	"hotpink": [255, 105, 180],
+	"indianred": [205, 92, 92],
+	"indigo": [75, 0, 130],
+	"ivory": [255, 255, 240],
+	"khaki": [240, 230, 140],
+	"lavender": [230, 230, 250],
+	"lavenderblush": [255, 240, 245],
+	"lawngreen": [124, 252, 0],
+	"lemonchiffon": [255, 250, 205],
+	"lightblue": [173, 216, 230],
+	"lightcoral": [240, 128, 128],
+	"lightcyan": [224, 255, 255],
+	"lightgoldenrodyellow": [250, 250, 210],
+	"lightgray": [211, 211, 211],
+	"lightgreen": [144, 238, 144],
+	"lightgrey": [211, 211, 211],
+	"lightpink": [255, 182, 193],
+	"lightsalmon": [255, 160, 122],
+	"lightseagreen": [32, 178, 170],
+	"lightskyblue": [135, 206, 250],
+	"lightslategray": [119, 136, 153],
+	"lightslategrey": [119, 136, 153],
+	"lightsteelblue": [176, 196, 222],
+	"lightyellow": [255, 255, 224],
+	"lime": [0, 255, 0],
+	"limegreen": [50, 205, 50],
+	"linen": [250, 240, 230],
+	"magenta": [255, 0, 255],
+	"maroon": [128, 0, 0],
+	"mediumaquamarine": [102, 205, 170],
+	"mediumblue": [0, 0, 205],
+	"mediumorchid": [186, 85, 211],
+	"mediumpurple": [147, 112, 219],
+	"mediumseagreen": [60, 179, 113],
+	"mediumslateblue": [123, 104, 238],
+	"mediumspringgreen": [0, 250, 154],
+	"mediumturquoise": [72, 209, 204],
+	"mediumvioletred": [199, 21, 133],
+	"midnightblue": [25, 25, 112],
+	"mintcream": [245, 255, 250],
+	"mistyrose": [255, 228, 225],
+	"moccasin": [255, 228, 181],
+	"navajowhite": [255, 222, 173],
+	"navy": [0, 0, 128],
+	"oldlace": [253, 245, 230],
+	"olive": [128, 128, 0],
+	"olivedrab": [107, 142, 35],
+	"orange": [255, 165, 0],
+	"orangered": [255, 69, 0],
+	"orchid": [218, 112, 214],
+	"palegoldenrod": [238, 232, 170],
+	"palegreen": [152, 251, 152],
+	"paleturquoise": [175, 238, 238],
+	"palevioletred": [219, 112, 147],
+	"papayawhip": [255, 239, 213],
+	"peachpuff": [255, 218, 185],
+	"peru": [205, 133, 63],
+	"pink": [255, 192, 203],
+	"plum": [221, 160, 221],
+	"powderblue": [176, 224, 230],
+	"purple": [128, 0, 128],
+	"rebeccapurple": [102, 51, 153],
+	"red": [255, 0, 0],
+	"rosybrown": [188, 143, 143],
+	"royalblue": [65, 105, 225],
+	"saddlebrown": [139, 69, 19],
+	"salmon": [250, 128, 114],
+	"sandybrown": [244, 164, 96],
+	"seagreen": [46, 139, 87],
+	"seashell": [255, 245, 238],
+	"sienna": [160, 82, 45],
+	"silver": [192, 192, 192],
+	"skyblue": [135, 206, 235],
+	"slateblue": [106, 90, 205],
+	"slategray": [112, 128, 144],
+	"slategrey": [112, 128, 144],
+	"snow": [255, 250, 250],
+	"springgreen": [0, 255, 127],
+	"steelblue": [70, 130, 180],
+	"tan": [210, 180, 140],
+	"teal": [0, 128, 128],
+	"thistle": [216, 191, 216],
+	"tomato": [255, 99, 71],
+	"turquoise": [64, 224, 208],
+	"violet": [238, 130, 238],
+	"wheat": [245, 222, 179],
+	"white": [255, 255, 255],
+	"whitesmoke": [245, 245, 245],
+	"yellow": [255, 255, 0],
+	"yellowgreen": [154, 205, 50]
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/color-parse/index.js":
+/*!*******************************************!*\
+  !*** ./node_modules/color-parse/index.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {/**
+ * @module color-parse
+ */
+
+
+
+var names = __webpack_require__(/*! color-name */ "./node_modules/color-name/index.js")
+var isObject = __webpack_require__(/*! is-plain-obj */ "./node_modules/is-plain-obj/index.js")
+var defined = __webpack_require__(/*! defined */ "./node_modules/defined/index.js")
+
+module.exports = parse
+
+/**
+ * Base hues
+ * http://dev.w3.org/csswg/css-color/#typedef-named-hue
+ */
+//FIXME: use external hue detector
+var baseHues = {
+	red: 0,
+	orange: 60,
+	yellow: 120,
+	green: 180,
+	blue: 240,
+	purple: 300
+}
+
+/**
+ * Parse color from the string passed
+ *
+ * @return {Object} A space indicator `space`, an array `values` and `alpha`
+ */
+function parse (cstr) {
+	var m, parts = [], alpha = 1, space
+
+	if (typeof cstr === 'string') {
+		//keyword
+		if (names[cstr]) {
+			parts = names[cstr].slice()
+			space = 'rgb'
+		}
+
+		//reserved words
+		else if (cstr === 'transparent') {
+			alpha = 0
+			space = 'rgb'
+			parts = [0,0,0]
+		}
+
+		//hex
+		else if (/^#[A-Fa-f0-9]+$/.test(cstr)) {
+			var base = cstr.slice(1)
+			var size = base.length
+			var isShort = size <= 4
+			alpha = 1
+
+			if (isShort) {
+				parts = [
+					parseInt(base[0] + base[0], 16),
+					parseInt(base[1] + base[1], 16),
+					parseInt(base[2] + base[2], 16)
+				]
+				if (size === 4) {
+					alpha = parseInt(base[3] + base[3], 16) / 255
+				}
+			}
+			else {
+				parts = [
+					parseInt(base[0] + base[1], 16),
+					parseInt(base[2] + base[3], 16),
+					parseInt(base[4] + base[5], 16)
+				]
+				if (size === 8) {
+					alpha = parseInt(base[6] + base[7], 16) / 255
+				}
+			}
+
+			if (!parts[0]) parts[0] = 0
+			if (!parts[1]) parts[1] = 0
+			if (!parts[2]) parts[2] = 0
+
+			space = 'rgb'
+		}
+
+		//color space
+		else if (m = /^((?:rgb|hs[lvb]|hwb|cmyk?|xy[zy]|gray|lab|lchu?v?|[ly]uv|lms)a?)\s*\(([^\)]*)\)/.exec(cstr)) {
+			var name = m[1]
+			var base = name.replace(/a$/, '')
+			space = base
+			var size = base === 'cmyk' ? 4 : base === 'gray' ? 1 : 3
+			parts = m[2].trim()
+				.split(/\s*,\s*/)
+				.map(function (x, i) {
+					//<percentage>
+					if (/%$/.test(x)) {
+						//alpha
+						if (i === size)	return parseFloat(x) / 100
+						//rgb
+						if (base === 'rgb') return parseFloat(x) * 255 / 100
+						return parseFloat(x)
+					}
+					//hue
+					else if (base[i] === 'h') {
+						//<deg>
+						if (/deg$/.test(x)) {
+							return parseFloat(x)
+						}
+						//<base-hue>
+						else if (baseHues[x] !== undefined) {
+							return baseHues[x]
+						}
+					}
+					return parseFloat(x)
+				})
+
+			if (name === base) parts.push(1)
+			alpha = parts[size] === undefined ? 1 : parts[size]
+			parts = parts.slice(0, size)
+		}
+
+		//named channels case
+		else if (cstr.length > 10 && /[0-9](?:\s|\/)/.test(cstr)) {
+			parts = cstr.match(/([0-9]+)/g).map(function (value) {
+				return parseFloat(value)
+			})
+
+			space = cstr.match(/([a-z])/ig).join('').toLowerCase()
+		}
+	}
+
+	//numeric case
+	else if (!isNaN(cstr)) {
+		space = 'rgb'
+		parts = [cstr >>> 16, (cstr & 0x00ff00) >>> 8, cstr & 0x0000ff]
+	}
+
+	//object case - detects css cases of rgb and hsl
+	else if (isObject(cstr)) {
+		var r = defined(cstr.r, cstr.red, cstr.R, null)
+
+		if (r !== null) {
+			space = 'rgb'
+			parts = [
+				r,
+				defined(cstr.g, cstr.green, cstr.G),
+				defined(cstr.b, cstr.blue, cstr.B)
+			]
+		}
+		else {
+			space = 'hsl'
+			parts = [
+				defined(cstr.h, cstr.hue, cstr.H),
+				defined(cstr.s, cstr.saturation, cstr.S),
+				defined(cstr.l, cstr.lightness, cstr.L, cstr.b, cstr.brightness)
+			]
+		}
+
+		alpha = defined(cstr.a, cstr.alpha, cstr.opacity, 1)
+
+		if (cstr.opacity != null) alpha /= 100
+	}
+
+	//array
+	else if (Array.isArray(cstr) || global.ArrayBuffer && ArrayBuffer.isView && ArrayBuffer.isView(cstr)) {
+		parts = [cstr[0], cstr[1], cstr[2]]
+		space = 'rgb'
+		alpha = cstr.length === 4 ? cstr[3] : 1
+	}
+
+	return {
+		space: space,
+		values: parts,
+		alpha: alpha
+	}
+}
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/color-rgba/index.js":
+/*!******************************************!*\
+  !*** ./node_modules/color-rgba/index.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/** @module  color-rgba */
+
+
+
+var parse = __webpack_require__(/*! color-parse */ "./node_modules/color-parse/index.js")
+var hsl = __webpack_require__(/*! color-space/hsl */ "./node_modules/color-space/hsl.js")
+var clamp = __webpack_require__(/*! clamp */ "./node_modules/clamp/index.js")
+
+module.exports = function rgba (color) {
+	var values, i, l
+
+	//attempt to parse non-array arguments
+	var parsed = parse(color)
+
+	if (!parsed.space) return []
+
+	values = Array(3)
+	values[0] = clamp(parsed.values[0], 0, 255)
+	values[1] = clamp(parsed.values[1], 0, 255)
+	values[2] = clamp(parsed.values[2], 0, 255)
+
+	if (parsed.space[0] === 'h') {
+		values = hsl.rgb(values)
+	}
+
+	values.push(clamp(parsed.alpha, 0, 1))
+
+	return values
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/color-space/hsl.js":
+/*!*****************************************!*\
+  !*** ./node_modules/color-space/hsl.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * @module color-space/hsl
+ */
+
+
+var rgb = __webpack_require__(/*! ./rgb */ "./node_modules/color-space/rgb.js");
+
+module.exports = {
+	name: 'hsl',
+	min: [0,0,0],
+	max: [360,100,100],
+	channel: ['hue', 'saturation', 'lightness'],
+	alias: ['HSL'],
+
+	rgb: function(hsl) {
+		var h = hsl[0] / 360,
+				s = hsl[1] / 100,
+				l = hsl[2] / 100,
+				t1, t2, t3, rgb, val;
+
+		if (s === 0) {
+			val = l * 255;
+			return [val, val, val];
+		}
+
+		if (l < 0.5) {
+			t2 = l * (1 + s);
+		}
+		else {
+			t2 = l + s - l * s;
+		}
+		t1 = 2 * l - t2;
+
+		rgb = [0, 0, 0];
+		for (var i = 0; i < 3; i++) {
+			t3 = h + 1 / 3 * - (i - 1);
+			if (t3 < 0) {
+				t3++;
+			}
+			else if (t3 > 1) {
+				t3--;
+			}
+
+			if (6 * t3 < 1) {
+				val = t1 + (t2 - t1) * 6 * t3;
+			}
+			else if (2 * t3 < 1) {
+				val = t2;
+			}
+			else if (3 * t3 < 2) {
+				val = t1 + (t2 - t1) * (2 / 3 - t3) * 6;
+			}
+			else {
+				val = t1;
+			}
+
+			rgb[i] = val * 255;
+		}
+
+		return rgb;
+	}
+};
+
+
+//extend rgb
+rgb.hsl = function(rgb) {
+	var r = rgb[0]/255,
+			g = rgb[1]/255,
+			b = rgb[2]/255,
+			min = Math.min(r, g, b),
+			max = Math.max(r, g, b),
+			delta = max - min,
+			h, s, l;
+
+	if (max === min) {
+		h = 0;
+	}
+	else if (r === max) {
+		h = (g - b) / delta;
+	}
+	else if (g === max) {
+		h = 2 + (b - r) / delta;
+	}
+	else if (b === max) {
+		h = 4 + (r - g)/ delta;
+	}
+
+	h = Math.min(h * 60, 360);
+
+	if (h < 0) {
+		h += 360;
+	}
+
+	l = (min + max) / 2;
+
+	if (max === min) {
+		s = 0;
+	}
+	else if (l <= 0.5) {
+		s = delta / (max + min);
+	}
+	else {
+		s = delta / (2 - max - min);
+	}
+
+	return [h, s * 100, l * 100];
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/color-space/rgb.js":
+/*!*****************************************!*\
+  !*** ./node_modules/color-space/rgb.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * RGB space.
+ *
+ * @module  color-space/rgb
+ */
+
+
+module.exports = {
+	name: 'rgb',
+	min: [0,0,0],
+	max: [255,255,255],
+	channel: ['red', 'green', 'blue'],
+	alias: ['RGB']
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/css-animated-properties/index.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/css-animated-properties/index.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*!
+ * https://github.com/gilmoreorless/css-animated-properties
+ * MIT Licensed: http://gilmoreorless.mit-license.org/
+ */
+(function (exports) {
+    /**
+     * Data collated from multiple W3C specs: https://www.w3.org/Style/CSS/current-work
+     * Only specs that are Candidate Recommendations or better are counted, with the
+     * exception of some Working Drafts that have a lot of traction in browser implementations.
+     * So far the WD specs included here are Multi-column Layout, Text Level 3, and Transforms.
+     *
+     * If a property is not in this list, it's not able to be consistently animated.
+     * Technically `background-image` can be animated in some ways, but against the spec.
+     *
+     * @type {Object}
+     */
+    var props = exports.animatedProperties = {
+
+        /*** Recommendations (REC) ***/
+
+        // CSS 2.1: https://www.w3.org/TR/css3-transitions/#animatable-types
+        // --Box model
+        'margin': {properties: ['margin-top', 'margin-right', 'margin-bottom', 'margin-left']},
+        'margin-bottom': {types: ['length']},
+        'margin-left': {types: ['length']},
+        'margin-right': {types: ['length']},
+        'margin-top': {types: ['length']},
+        'padding': {properties: ['padding-top', 'padding-right', 'padding-bottom', 'padding-left']},
+        'padding-bottom': {types: ['length']},
+        'padding-left': {types: ['length']},
+        'padding-right': {types: ['length']},
+        'padding-top': {types: ['length']},
+        // --Visual formatting model
+        'bottom': {types: ['length-percentage-calc']},
+        'left': {types: ['length-percentage-calc']},
+        'right': {types: ['length-percentage-calc']},
+        'top': {types: ['length-percentage-calc']},
+        'z-index': {types: ['integer']},
+        // --Visual formatting model details
+        'width': {types: ['length-percentage-calc']},
+        'max-width': {types: ['length-percentage-calc']},
+        'min-width': {types: ['length-percentage-calc']},
+        'height': {types: ['length-percentage-calc']},
+        'max-height': {types: ['length-percentage-calc']},
+        'min-height': {types: ['length-percentage-calc']},
+        'line-height': {types: ['number', 'length']},
+        'vertical-align': {types: ['length']},
+        // --Visual effects
+        'visibility': {types: ['visibility']},
+        // --Tables
+        'border-spacing': {types: ['length'], multiple: true},
+
+        // CSS Color Module Level 3: https://www.w3.org/TR/css3-color/
+        'color': {types: ['color']},
+        'opacity': {types: ['number']},
+
+
+        /*** Candidate Recommendations (CR) ***/
+
+        // CSS Backgrounds and Borders Module Level 3: https://www.w3.org/TR/css3-background/
+        'background': {properties: ['background-color', 'background-position', 'background-size']},
+        'background-color': {types: ['color']},
+        'background-position': {types: ['length-percentage-calc'], multiple: true, repeatable: true},
+        'background-size': {types: ['length-percentage-calc'], multiple: true, repeatable: true},
+        // --Border combinations
+        'border': {properties: ['border-color', 'border-width']},
+        'border-bottom': {properties: ['border-bottom-color', 'border-bottom-width']},
+        'border-left': {properties: ['border-left-color', 'border-left-width']},
+        'border-right': {properties: ['border-right-color', 'border-right-width']},
+        'border-top': {properties: ['border-top-color', 'border-top-width']},
+        'border-color': {properties: ['border-top-color', 'border-right-color', 'border-bottom-color', 'border-left-color']},
+        'border-width': {properties: ['border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width']},
+        // --Border details
+        'border-bottom-color': {types: ['color']},
+        'border-left-color': {types: ['color']},
+        'border-right-color': {types: ['color']},
+        'border-top-color': {types: ['color']},
+        'border-bottom-width': {types: ['length']},
+        'border-left-width': {types: ['length']},
+        'border-right-width': {types: ['length']},
+        'border-top-width': {types: ['length']},
+        // --Border radius
+        'border-radius': {properties: ['border-top-left-radius', 'border-top-right-radius', 'border-bottom-right-radius', 'border-bottom-left-radius']},
+        'border-top-left-radius': {types: ['length-percentage-calc'], multiple: true},
+        'border-top-right-radius': {types: ['length-percentage-calc'], multiple: true},
+        'border-bottom-right-radius': {types: ['length-percentage-calc'], multiple: true},
+        'border-bottom-left-radius': {types: ['length-percentage-calc'], multiple: true},
+        // --Box shadow
+        'box-shadow': {types: ['shadow-list']},
+
+        // CSS Basic User Interface Module Level 3 (CSS3 UI): https://www.w3.org/TR/css3-ui/
+        'caret-color': {types: ['color']},
+        'outline': {properties: ['outline-color', 'outline-width']},
+        'outline-color': {types: ['color']},
+        'outline-width': {types: ['length']},
+        'outline-offset': {types: ['length']},
+
+        // CSS Flexible Box Layout Module Level 1: https://www.w3.org/TR/css3-flexbox/
+        'flex': {properties: ['flex-grow', 'flex-shrink', 'flex-basis']},
+        'flex-grow': {types: ['number']},
+        'flex-shrink': {types: ['number']},
+        'flex-basis': {types: ['length-percentage-calc']},
+        'order': {types: ['integer']},
+
+        // CSS Fonts Module Level 3: https://www.w3.org/TR/css3-fonts/
+        'font': {properties: ['font-weight', 'font-stretch', 'font-size', 'line-height']},
+        'font-weight': {types: ['font-weight']},
+        'font-stretch': {types: ['font-stretch']},
+        'font-size': {types: ['length']},
+        'font-size-adjust': {types: ['number']},
+
+        // CSS Grid Layout Module Level 1: https://www.w3.org/TR/css-grid-1/
+        'grid-template-columns': {types: ['length-percentage-calc'], multiple: true},
+        'grid-template-rows': {types: ['length-percentage-calc'], multiple: true},
+        'grid-template': {properties: ['grid-template-rows', 'grid-template-columns']},
+        'grid': {properties: ['grid-template-rows', 'grid-template-columns']},
+        'grid-row-gap': {types: ['length-percentage-calc']},
+        'grid-column-gap': {types: ['length-percentage-calc']},
+        'grid-gap': {properties: ['grid-row-gap', 'grid-column-gap']},
+
+        // CSS Masking Module Level 1: https://www.w3.org/TR/css-masking/
+        'clip': {types: ['rectangle']},  // Deprecated
+        'clip-path': {types: ['basic-shape']},
+        'mask': {properties: ['mask-position', 'mask-size']},
+        'mask-position': {types: ['length-percentage-calc'], multiple: true, repeatable: true},
+        'mask-size': {types: ['length-percentage-calc'], multiple: true, repeatable: true},
+
+        // CSS Shapes Module Level 1: https://www.w3.org/TR/css-shapes-1/
+        'shape-outside': {types: ['basic-shape']},
+        'shape-margin': {types: ['length-percentage-calc']},
+        'shape-image-threshold': {types: ['number']},
+
+        // CSS Scroll Snap Module Level 1: https://www.w3.org/TR/css-scroll-snap-1/
+        'scroll-padding': {properties: ['scroll-padding-top', 'scroll-padding-right', 'scroll-padding-bottom', 'scroll-padding-left']},
+        'scroll-padding-top': {types: ['length-percentage-calc']},
+        'scroll-padding-right': {types: ['length-percentage-calc']},
+        'scroll-padding-bottom': {types: ['length-percentage-calc']},
+        'scroll-padding-left': {types: ['length-percentage-calc']},
+        'scroll-padding-block': {properties: ['scroll-padding-block-start', 'scroll-padding-block-end']},
+        'scroll-padding-block-start': {types: ['length-percentage-calc']},
+        'scroll-padding-block-end': {types: ['length-percentage-calc']},
+        'scroll-padding-inline': {properties: ['scroll-padding-inline-start', 'scroll-padding-inline-end']},
+        'scroll-padding-inline-start': {types: ['length-percentage-calc']},
+        'scroll-padding-inline-end': {types: ['length-percentage-calc']},
+        'scroll-snap-margin': {properties: ['scroll-snap-margin-top', 'scroll-snap-margin-right', 'scroll-snap-margin-bottom', 'scroll-snap-margin-left']},
+        'scroll-snap-margin-top': {types: ['length']},
+        'scroll-snap-margin-right': {types: ['length']},
+        'scroll-snap-margin-bottom': {types: ['length']},
+        'scroll-snap-margin-left': {types: ['length']},
+        'scroll-snap-margin-block': {properties: ['scroll-snap-margin-block-start', 'scroll-snap-margin-block-end']},
+        'scroll-snap-margin-block-start': {types: ['length']},
+        'scroll-snap-margin-block-end': {types: ['length']},
+        'scroll-snap-margin-inline': {properties: ['scroll-snap-margin-inline-start', 'scroll-snap-margin-inline-end']},
+        'scroll-snap-margin-inline-start': {types: ['length']},
+        'scroll-snap-margin-inline-end': {types: ['length']},
+
+        // CSS Text Decoration Module Level 3: https://www.w3.org/TR/css-text-decor-3/
+        'text-decoration': {properties: ['text-decoration-color']},
+        'text-decoration-color': {types: ['color']},
+        'text-emphasis': {properties: ['text-emphasis-color']},
+        'text-emphasis-color': {types: ['color']},
+        'text-shadow': {types: ['shadow-list']},
+
+
+        /*** Working Drafts (WD) ***/
+
+        // CSS Multi-column Layout Module Level 1: https://www.w3.org/TR/css3-multicol/ (WD)
+        'columns': {properties: ['column-width', 'column-count']},
+        'column-width': {types: ['length']},
+        'column-count': {types: ['integer']},
+        'column-gap': {types: ['length-percentage-calc']},
+        'column-rule': {properties: ['column-rule-color', 'column-rule-width']},
+        'column-rule-color': {types: ['color']},
+        'column-rule-width': {types: ['length']},
+
+        // CSS Text Module Level 3: https://www.w3.org/TR/css3-text/
+        'letter-spacing': {types: ['length']},
+        'tab-size': {types: ['length']},
+        'text-indent': {types: ['length-percentage-calc']},
+        'word-spacing': {types: ['length-percentage-calc']},
+
+        // CSS Transforms Module Level 1: https://www.w3.org/TR/css3-transforms/
+        'transform': {types: ['transform']},
+        'transform-origin': {types: ['length-percentage-calc'], multiple: true},
+        'perspective': {types: ['length']},
+        'perspective-origin': {types: ['length-percentage-calc'], multiple: true},
+    };
+
+    /**
+     * List of animatable types used by properties, with descriptions of how to interpolate each type.
+     * Data taken from https://www.w3.org/TR/css3-transitions/#animatable-types and some other W3C specs.
+     *
+     * @type {Object}
+     */
+    exports.types = {
+        'color': {
+            name: 'color',
+            href: 'https://www.w3.org/TR/css3-transitions/#animtype-color'
+        },
+        'length': {
+            name: 'length',
+            href: 'https://www.w3.org/TR/css3-transitions/#animtype-length'
+        },
+        'percentage': {
+            name: 'percentage',
+            href: 'https://www.w3.org/TR/css3-transitions/#animtype-percentage'
+        },
+        'length-percentage-calc': {
+            name: 'length, percentage, or calc',
+            href: 'https://www.w3.org/TR/css3-transitions/#animtype-lpcalc'
+        },
+        'integer': {
+            name: 'integer',
+            href: 'https://www.w3.org/TR/css3-transitions/#animtype-integer'
+        },
+        'font-weight': {
+            name: 'font weight',
+            href: 'https://www.w3.org/TR/css3-transitions/#animtype-font-weight'
+        },
+        'number': {
+            name: 'number',
+            href: 'https://www.w3.org/TR/css3-transitions/#animtype-number'
+        },
+        'rectangle': {
+            name: 'rectangle',
+            href: 'https://www.w3.org/TR/css3-transitions/#animtype-rect'
+        },
+        'visibility': {
+            name: 'visibility',
+            href: 'https://www.w3.org/TR/css3-transitions/#animtype-visibility'
+        },
+        'shadow-list': {
+            name: 'shadow list',
+            href: 'https://www.w3.org/TR/css3-transitions/#animtype-shadow-list'
+        },
+        // Other specs
+        'transform': {
+            name: 'transform',
+            href: 'https://www.w3.org/TR/css3-transforms/#interpolation-of-transforms'
+        },
+        'font-stretch': {
+            name: 'font stretch',
+            href: 'https://www.w3.org/TR/css3-fonts/#font-stretch-animation'
+        },
+        'basic-shape': {
+            name: 'basic shape',
+            href: 'https://www.w3.org/TR/css-shapes-1/#basic-shape-interpolation'
+        },
+    };
+
+    /**
+     * Check if a CSS property can be animated
+     * @param  {string} property CSS property name
+     * @return {boolean}         True if the property can be animated
+     */
+    exports.canAnimate = function (property) {
+        return props.hasOwnProperty(property);
+    };
+
+    /**
+     * Get a definition of how a CSS property can be animated
+     * @param  {string} property CSS property name
+     * @param  {boolean} expand  Expand definitions for sub-properties, when available
+     * @return {object}          Property definition, or null if it can't be animated
+     */
+    exports.getProperty = function (property, expand) {
+        if (!exports.canAnimate(property)) {
+            return null;
+        }
+        var prop = props[property];
+        var ret = {name: property};
+        Object.keys(prop).forEach(function (key) {
+            var value = prop[key];
+            if (Array.isArray(value)) {
+                if (key === 'properties' && expand) {
+                    value = value.map(function (subProp) {
+                        return exports.getProperty(subProp, expand);
+                    });
+                } else {
+                    value = value.slice(); // clone
+                }
+            }
+            ret[key] = value;
+        });
+        return ret;
+    };
+})((function (root) {
+    // CommonJS
+    if ( true && module.exports !== undefined) return module.exports;
+    // Global `cssAnimProps`
+    return (root.cssAnimProps = {});
+})(this));
+
 
 /***/ }),
 
@@ -901,6 +2024,1222 @@ function sinInOut(t) {
 
 /***/ }),
 
+/***/ "./node_modules/defined/index.js":
+/*!***************************************!*\
+  !*** ./node_modules/defined/index.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function () {
+    for (var i = 0; i < arguments.length; i++) {
+        if (arguments[i] !== undefined) return arguments[i];
+    }
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/is-plain-obj/index.js":
+/*!********************************************!*\
+  !*** ./node_modules/is-plain-obj/index.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var toString = Object.prototype.toString;
+
+module.exports = function (x) {
+	var prototype;
+	return toString.call(x) === '[object Object]' && (prototype = Object.getPrototypeOf(x), prototype === null || prototype === Object.getPrototypeOf({}));
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/is/index.js":
+/*!**********************************!*\
+  !*** ./node_modules/is/index.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* globals window, HTMLElement */
+
+
+
+/**!
+ * is
+ * the definitive JavaScript type testing library
+ *
+ * @copyright 2013-2014 Enrico Marino / Jordan Harband
+ * @license MIT
+ */
+
+var objProto = Object.prototype;
+var owns = objProto.hasOwnProperty;
+var toStr = objProto.toString;
+var symbolValueOf;
+if (typeof Symbol === 'function') {
+  symbolValueOf = Symbol.prototype.valueOf;
+}
+var bigIntValueOf;
+if (typeof BigInt === 'function') {
+  bigIntValueOf = BigInt.prototype.valueOf;
+}
+var isActualNaN = function (value) {
+  return value !== value;
+};
+var NON_HOST_TYPES = {
+  'boolean': 1,
+  number: 1,
+  string: 1,
+  undefined: 1
+};
+
+var base64Regex = /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$/;
+var hexRegex = /^[A-Fa-f0-9]+$/;
+
+/**
+ * Expose `is`
+ */
+
+var is = {};
+
+/**
+ * Test general.
+ */
+
+/**
+ * is.type
+ * Test if `value` is a type of `type`.
+ *
+ * @param {*} value value to test
+ * @param {String} type type
+ * @return {Boolean} true if `value` is a type of `type`, false otherwise
+ * @api public
+ */
+
+is.a = is.type = function (value, type) {
+  return typeof value === type;
+};
+
+/**
+ * is.defined
+ * Test if `value` is defined.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if 'value' is defined, false otherwise
+ * @api public
+ */
+
+is.defined = function (value) {
+  return typeof value !== 'undefined';
+};
+
+/**
+ * is.empty
+ * Test if `value` is empty.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is empty, false otherwise
+ * @api public
+ */
+
+is.empty = function (value) {
+  var type = toStr.call(value);
+  var key;
+
+  if (type === '[object Array]' || type === '[object Arguments]' || type === '[object String]') {
+    return value.length === 0;
+  }
+
+  if (type === '[object Object]') {
+    for (key in value) {
+      if (owns.call(value, key)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  return !value;
+};
+
+/**
+ * is.equal
+ * Test if `value` is equal to `other`.
+ *
+ * @param {*} value value to test
+ * @param {*} other value to compare with
+ * @return {Boolean} true if `value` is equal to `other`, false otherwise
+ */
+
+is.equal = function equal(value, other) {
+  if (value === other) {
+    return true;
+  }
+
+  var type = toStr.call(value);
+  var key;
+
+  if (type !== toStr.call(other)) {
+    return false;
+  }
+
+  if (type === '[object Object]') {
+    for (key in value) {
+      if (!is.equal(value[key], other[key]) || !(key in other)) {
+        return false;
+      }
+    }
+    for (key in other) {
+      if (!is.equal(value[key], other[key]) || !(key in value)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  if (type === '[object Array]') {
+    key = value.length;
+    if (key !== other.length) {
+      return false;
+    }
+    while (key--) {
+      if (!is.equal(value[key], other[key])) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  if (type === '[object Function]') {
+    return value.prototype === other.prototype;
+  }
+
+  if (type === '[object Date]') {
+    return value.getTime() === other.getTime();
+  }
+
+  return false;
+};
+
+/**
+ * is.hosted
+ * Test if `value` is hosted by `host`.
+ *
+ * @param {*} value to test
+ * @param {*} host host to test with
+ * @return {Boolean} true if `value` is hosted by `host`, false otherwise
+ * @api public
+ */
+
+is.hosted = function (value, host) {
+  var type = typeof host[value];
+  return type === 'object' ? !!host[value] : !NON_HOST_TYPES[type];
+};
+
+/**
+ * is.instance
+ * Test if `value` is an instance of `constructor`.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is an instance of `constructor`
+ * @api public
+ */
+
+is.instance = is['instanceof'] = function (value, constructor) {
+  return value instanceof constructor;
+};
+
+/**
+ * is.nil / is.null
+ * Test if `value` is null.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is null, false otherwise
+ * @api public
+ */
+
+is.nil = is['null'] = function (value) {
+  return value === null;
+};
+
+/**
+ * is.undef / is.undefined
+ * Test if `value` is undefined.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is undefined, false otherwise
+ * @api public
+ */
+
+is.undef = is.undefined = function (value) {
+  return typeof value === 'undefined';
+};
+
+/**
+ * Test arguments.
+ */
+
+/**
+ * is.args
+ * Test if `value` is an arguments object.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is an arguments object, false otherwise
+ * @api public
+ */
+
+is.args = is.arguments = function (value) {
+  var isStandardArguments = toStr.call(value) === '[object Arguments]';
+  var isOldArguments = !is.array(value) && is.arraylike(value) && is.object(value) && is.fn(value.callee);
+  return isStandardArguments || isOldArguments;
+};
+
+/**
+ * Test array.
+ */
+
+/**
+ * is.array
+ * Test if 'value' is an array.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is an array, false otherwise
+ * @api public
+ */
+
+is.array = Array.isArray || function (value) {
+  return toStr.call(value) === '[object Array]';
+};
+
+/**
+ * is.arguments.empty
+ * Test if `value` is an empty arguments object.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is an empty arguments object, false otherwise
+ * @api public
+ */
+is.args.empty = function (value) {
+  return is.args(value) && value.length === 0;
+};
+
+/**
+ * is.array.empty
+ * Test if `value` is an empty array.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is an empty array, false otherwise
+ * @api public
+ */
+is.array.empty = function (value) {
+  return is.array(value) && value.length === 0;
+};
+
+/**
+ * is.arraylike
+ * Test if `value` is an arraylike object.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is an arguments object, false otherwise
+ * @api public
+ */
+
+is.arraylike = function (value) {
+  return !!value && !is.bool(value)
+    && owns.call(value, 'length')
+    && isFinite(value.length)
+    && is.number(value.length)
+    && value.length >= 0;
+};
+
+/**
+ * Test boolean.
+ */
+
+/**
+ * is.bool
+ * Test if `value` is a boolean.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a boolean, false otherwise
+ * @api public
+ */
+
+is.bool = is['boolean'] = function (value) {
+  return toStr.call(value) === '[object Boolean]';
+};
+
+/**
+ * is.false
+ * Test if `value` is false.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is false, false otherwise
+ * @api public
+ */
+
+is['false'] = function (value) {
+  return is.bool(value) && Boolean(Number(value)) === false;
+};
+
+/**
+ * is.true
+ * Test if `value` is true.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is true, false otherwise
+ * @api public
+ */
+
+is['true'] = function (value) {
+  return is.bool(value) && Boolean(Number(value)) === true;
+};
+
+/**
+ * Test date.
+ */
+
+/**
+ * is.date
+ * Test if `value` is a date.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a date, false otherwise
+ * @api public
+ */
+
+is.date = function (value) {
+  return toStr.call(value) === '[object Date]';
+};
+
+/**
+ * is.date.valid
+ * Test if `value` is a valid date.
+ *
+ * @param {*} value value to test
+ * @returns {Boolean} true if `value` is a valid date, false otherwise
+ */
+is.date.valid = function (value) {
+  return is.date(value) && !isNaN(Number(value));
+};
+
+/**
+ * Test element.
+ */
+
+/**
+ * is.element
+ * Test if `value` is an html element.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is an HTML Element, false otherwise
+ * @api public
+ */
+
+is.element = function (value) {
+  return value !== undefined
+    && typeof HTMLElement !== 'undefined'
+    && value instanceof HTMLElement
+    && value.nodeType === 1;
+};
+
+/**
+ * Test error.
+ */
+
+/**
+ * is.error
+ * Test if `value` is an error object.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is an error object, false otherwise
+ * @api public
+ */
+
+is.error = function (value) {
+  return toStr.call(value) === '[object Error]';
+};
+
+/**
+ * Test function.
+ */
+
+/**
+ * is.fn / is.function (deprecated)
+ * Test if `value` is a function.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a function, false otherwise
+ * @api public
+ */
+
+is.fn = is['function'] = function (value) {
+  var isAlert = typeof window !== 'undefined' && value === window.alert;
+  if (isAlert) {
+    return true;
+  }
+  var str = toStr.call(value);
+  return str === '[object Function]' || str === '[object GeneratorFunction]' || str === '[object AsyncFunction]';
+};
+
+/**
+ * Test number.
+ */
+
+/**
+ * is.number
+ * Test if `value` is a number.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a number, false otherwise
+ * @api public
+ */
+
+is.number = function (value) {
+  return toStr.call(value) === '[object Number]';
+};
+
+/**
+ * is.infinite
+ * Test if `value` is positive or negative infinity.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is positive or negative Infinity, false otherwise
+ * @api public
+ */
+is.infinite = function (value) {
+  return value === Infinity || value === -Infinity;
+};
+
+/**
+ * is.decimal
+ * Test if `value` is a decimal number.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a decimal number, false otherwise
+ * @api public
+ */
+
+is.decimal = function (value) {
+  return is.number(value) && !isActualNaN(value) && !is.infinite(value) && value % 1 !== 0;
+};
+
+/**
+ * is.divisibleBy
+ * Test if `value` is divisible by `n`.
+ *
+ * @param {Number} value value to test
+ * @param {Number} n dividend
+ * @return {Boolean} true if `value` is divisible by `n`, false otherwise
+ * @api public
+ */
+
+is.divisibleBy = function (value, n) {
+  var isDividendInfinite = is.infinite(value);
+  var isDivisorInfinite = is.infinite(n);
+  var isNonZeroNumber = is.number(value) && !isActualNaN(value) && is.number(n) && !isActualNaN(n) && n !== 0;
+  return isDividendInfinite || isDivisorInfinite || (isNonZeroNumber && value % n === 0);
+};
+
+/**
+ * is.integer
+ * Test if `value` is an integer.
+ *
+ * @param value to test
+ * @return {Boolean} true if `value` is an integer, false otherwise
+ * @api public
+ */
+
+is.integer = is['int'] = function (value) {
+  return is.number(value) && !isActualNaN(value) && value % 1 === 0;
+};
+
+/**
+ * is.maximum
+ * Test if `value` is greater than 'others' values.
+ *
+ * @param {Number} value value to test
+ * @param {Array} others values to compare with
+ * @return {Boolean} true if `value` is greater than `others` values
+ * @api public
+ */
+
+is.maximum = function (value, others) {
+  if (isActualNaN(value)) {
+    throw new TypeError('NaN is not a valid value');
+  } else if (!is.arraylike(others)) {
+    throw new TypeError('second argument must be array-like');
+  }
+  var len = others.length;
+
+  while (--len >= 0) {
+    if (value < others[len]) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+/**
+ * is.minimum
+ * Test if `value` is less than `others` values.
+ *
+ * @param {Number} value value to test
+ * @param {Array} others values to compare with
+ * @return {Boolean} true if `value` is less than `others` values
+ * @api public
+ */
+
+is.minimum = function (value, others) {
+  if (isActualNaN(value)) {
+    throw new TypeError('NaN is not a valid value');
+  } else if (!is.arraylike(others)) {
+    throw new TypeError('second argument must be array-like');
+  }
+  var len = others.length;
+
+  while (--len >= 0) {
+    if (value > others[len]) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+/**
+ * is.nan
+ * Test if `value` is not a number.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is not a number, false otherwise
+ * @api public
+ */
+
+is.nan = function (value) {
+  return !is.number(value) || value !== value;
+};
+
+/**
+ * is.even
+ * Test if `value` is an even number.
+ *
+ * @param {Number} value value to test
+ * @return {Boolean} true if `value` is an even number, false otherwise
+ * @api public
+ */
+
+is.even = function (value) {
+  return is.infinite(value) || (is.number(value) && value === value && value % 2 === 0);
+};
+
+/**
+ * is.odd
+ * Test if `value` is an odd number.
+ *
+ * @param {Number} value value to test
+ * @return {Boolean} true if `value` is an odd number, false otherwise
+ * @api public
+ */
+
+is.odd = function (value) {
+  return is.infinite(value) || (is.number(value) && value === value && value % 2 !== 0);
+};
+
+/**
+ * is.ge
+ * Test if `value` is greater than or equal to `other`.
+ *
+ * @param {Number} value value to test
+ * @param {Number} other value to compare with
+ * @return {Boolean}
+ * @api public
+ */
+
+is.ge = function (value, other) {
+  if (isActualNaN(value) || isActualNaN(other)) {
+    throw new TypeError('NaN is not a valid value');
+  }
+  return !is.infinite(value) && !is.infinite(other) && value >= other;
+};
+
+/**
+ * is.gt
+ * Test if `value` is greater than `other`.
+ *
+ * @param {Number} value value to test
+ * @param {Number} other value to compare with
+ * @return {Boolean}
+ * @api public
+ */
+
+is.gt = function (value, other) {
+  if (isActualNaN(value) || isActualNaN(other)) {
+    throw new TypeError('NaN is not a valid value');
+  }
+  return !is.infinite(value) && !is.infinite(other) && value > other;
+};
+
+/**
+ * is.le
+ * Test if `value` is less than or equal to `other`.
+ *
+ * @param {Number} value value to test
+ * @param {Number} other value to compare with
+ * @return {Boolean} if 'value' is less than or equal to 'other'
+ * @api public
+ */
+
+is.le = function (value, other) {
+  if (isActualNaN(value) || isActualNaN(other)) {
+    throw new TypeError('NaN is not a valid value');
+  }
+  return !is.infinite(value) && !is.infinite(other) && value <= other;
+};
+
+/**
+ * is.lt
+ * Test if `value` is less than `other`.
+ *
+ * @param {Number} value value to test
+ * @param {Number} other value to compare with
+ * @return {Boolean} if `value` is less than `other`
+ * @api public
+ */
+
+is.lt = function (value, other) {
+  if (isActualNaN(value) || isActualNaN(other)) {
+    throw new TypeError('NaN is not a valid value');
+  }
+  return !is.infinite(value) && !is.infinite(other) && value < other;
+};
+
+/**
+ * is.within
+ * Test if `value` is within `start` and `finish`.
+ *
+ * @param {Number} value value to test
+ * @param {Number} start lower bound
+ * @param {Number} finish upper bound
+ * @return {Boolean} true if 'value' is is within 'start' and 'finish'
+ * @api public
+ */
+is.within = function (value, start, finish) {
+  if (isActualNaN(value) || isActualNaN(start) || isActualNaN(finish)) {
+    throw new TypeError('NaN is not a valid value');
+  } else if (!is.number(value) || !is.number(start) || !is.number(finish)) {
+    throw new TypeError('all arguments must be numbers');
+  }
+  var isAnyInfinite = is.infinite(value) || is.infinite(start) || is.infinite(finish);
+  return isAnyInfinite || (value >= start && value <= finish);
+};
+
+/**
+ * Test object.
+ */
+
+/**
+ * is.object
+ * Test if `value` is an object.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is an object, false otherwise
+ * @api public
+ */
+is.object = function (value) {
+  return toStr.call(value) === '[object Object]';
+};
+
+/**
+ * is.primitive
+ * Test if `value` is a primitive.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a primitive, false otherwise
+ * @api public
+ */
+is.primitive = function isPrimitive(value) {
+  if (!value) {
+    return true;
+  }
+  if (typeof value === 'object' || is.object(value) || is.fn(value) || is.array(value)) {
+    return false;
+  }
+  return true;
+};
+
+/**
+ * is.hash
+ * Test if `value` is a hash - a plain object literal.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a hash, false otherwise
+ * @api public
+ */
+
+is.hash = function (value) {
+  return is.object(value) && value.constructor === Object && !value.nodeType && !value.setInterval;
+};
+
+/**
+ * Test regexp.
+ */
+
+/**
+ * is.regexp
+ * Test if `value` is a regular expression.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a regexp, false otherwise
+ * @api public
+ */
+
+is.regexp = function (value) {
+  return toStr.call(value) === '[object RegExp]';
+};
+
+/**
+ * Test string.
+ */
+
+/**
+ * is.string
+ * Test if `value` is a string.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if 'value' is a string, false otherwise
+ * @api public
+ */
+
+is.string = function (value) {
+  return toStr.call(value) === '[object String]';
+};
+
+/**
+ * Test base64 string.
+ */
+
+/**
+ * is.base64
+ * Test if `value` is a valid base64 encoded string.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if 'value' is a base64 encoded string, false otherwise
+ * @api public
+ */
+
+is.base64 = function (value) {
+  return is.string(value) && (!value.length || base64Regex.test(value));
+};
+
+/**
+ * Test base64 string.
+ */
+
+/**
+ * is.hex
+ * Test if `value` is a valid hex encoded string.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if 'value' is a hex encoded string, false otherwise
+ * @api public
+ */
+
+is.hex = function (value) {
+  return is.string(value) && (!value.length || hexRegex.test(value));
+};
+
+/**
+ * is.symbol
+ * Test if `value` is an ES6 Symbol
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a Symbol, false otherise
+ * @api public
+ */
+
+is.symbol = function (value) {
+  return typeof Symbol === 'function' && toStr.call(value) === '[object Symbol]' && typeof symbolValueOf.call(value) === 'symbol';
+};
+
+/**
+ * is.bigint
+ * Test if `value` is an ES-proposed BigInt
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a BigInt, false otherise
+ * @api public
+ */
+
+is.bigint = function (value) {
+  // eslint-disable-next-line valid-typeof
+  return typeof BigInt === 'function' && toStr.call(value) === '[object BigInt]' && typeof bigIntValueOf.call(value) === 'bigint';
+};
+
+module.exports = is;
+
+
+/***/ }),
+
+/***/ "./node_modules/isarray/index.js":
+/*!***************************************!*\
+  !*** ./node_modules/isarray/index.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = Array.isArray || function (arr) {
+  return Object.prototype.toString.call(arr) == '[object Array]';
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/isfunction/lib/main.js":
+/*!*********************************************!*\
+  !*** ./node_modules/isfunction/lib/main.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// if (typeof require !== 'undefined') {}
+
+var isFunction = function (functionToCheck) {
+	var getType = {};
+	return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
+};
+
+if ( true && module.exports) {
+	module.exports = isFunction;
+}
+
+/***/ }),
+
+/***/ "./node_modules/isnumber/index.js":
+/*!****************************************!*\
+  !*** ./node_modules/isnumber/index.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = isNumber
+
+/**
+ * Determine if something is a non-infinite javascript number.
+ * @param  {Number}  n A (potential) number to see if it is a number.
+ * @return {Boolean}   True for non-infinite numbers, false for all else.
+ */
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+/***/ }),
+
+/***/ "./node_modules/isstring/isString.umd.js":
+/*!***********************************************!*\
+  !*** ./node_modules/isstring/isString.umd.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;;(function (factory) {
+  if (true)
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  else {}
+})(function () {
+  var strToString  = ('').toString,
+      hasBind      = Function.prototype && Function.prototype.bind,
+      strToStrCall = hasBind && strToString.call.bind(strToString),
+      isString     = function (str) {
+        /*@cc_on
+          @if (@_jscript_version >= 5) @*/
+            try {
+                hasBind ? strToStrCall(str) : strToString.call(str);
+                return true;
+            } catch (e) {
+                return false;
+            }
+          /*@end
+        @*/
+      };
+
+  return function (str) {
+    return  typeof str === 'string' ||
+            str && typeof str === 'object' &&
+            /*@cc_on
+              @if (@_jscript_version < 5.5)
+                /^\s*function\s*String\(\)\s*{\s*\[native code\]\s*}\s*$/.test(str.constructor)
+              @else @*/
+                isString(str)
+              /*@end
+            @*/
+            || false;
+  };
+});
+
+
+/***/ }),
+
+/***/ "./node_modules/merge/merge.js":
+/*!*************************************!*\
+  !*** ./node_modules/merge/merge.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(module) {/*!
+ * @name JavaScript/NodeJS Merge v1.2.1
+ * @author yeikos
+ * @repository https://github.com/yeikos/js.merge
+
+ * Copyright 2014 yeikos - MIT license
+ * https://raw.github.com/yeikos/js.merge/master/LICENSE
+ */
+
+;(function(isNode) {
+
+	/**
+	 * Merge one or more objects 
+	 * @param bool? clone
+	 * @param mixed,... arguments
+	 * @return object
+	 */
+
+	var Public = function(clone) {
+
+		return merge(clone === true, false, arguments);
+
+	}, publicName = 'merge';
+
+	/**
+	 * Merge two or more objects recursively 
+	 * @param bool? clone
+	 * @param mixed,... arguments
+	 * @return object
+	 */
+
+	Public.recursive = function(clone) {
+
+		return merge(clone === true, true, arguments);
+
+	};
+
+	/**
+	 * Clone the input removing any reference
+	 * @param mixed input
+	 * @return mixed
+	 */
+
+	Public.clone = function(input) {
+
+		var output = input,
+			type = typeOf(input),
+			index, size;
+
+		if (type === 'array') {
+
+			output = [];
+			size = input.length;
+
+			for (index=0;index<size;++index)
+
+				output[index] = Public.clone(input[index]);
+
+		} else if (type === 'object') {
+
+			output = {};
+
+			for (index in input)
+
+				output[index] = Public.clone(input[index]);
+
+		}
+
+		return output;
+
+	};
+
+	/**
+	 * Merge two objects recursively
+	 * @param mixed input
+	 * @param mixed extend
+	 * @return mixed
+	 */
+
+	function merge_recursive(base, extend) {
+
+		if (typeOf(base) !== 'object')
+
+			return extend;
+
+		for (var key in extend) {
+
+			if (typeOf(base[key]) === 'object' && typeOf(extend[key]) === 'object') {
+
+				base[key] = merge_recursive(base[key], extend[key]);
+
+			} else {
+
+				base[key] = extend[key];
+
+			}
+
+		}
+
+		return base;
+
+	}
+
+	/**
+	 * Merge two or more objects
+	 * @param bool clone
+	 * @param bool recursive
+	 * @param array argv
+	 * @return object
+	 */
+
+	function merge(clone, recursive, argv) {
+
+		var result = argv[0],
+			size = argv.length;
+
+		if (clone || typeOf(result) !== 'object')
+
+			result = {};
+
+		for (var index=0;index<size;++index) {
+
+			var item = argv[index],
+
+				type = typeOf(item);
+
+			if (type !== 'object') continue;
+
+			for (var key in item) {
+
+				if (key === '__proto__') continue;
+
+				var sitem = clone ? Public.clone(item[key]) : item[key];
+
+				if (recursive) {
+
+					result[key] = merge_recursive(result[key], sitem);
+
+				} else {
+
+					result[key] = sitem;
+
+				}
+
+			}
+
+		}
+
+		return result;
+
+	}
+
+	/**
+	 * Get type of variable
+	 * @param mixed input
+	 * @return string
+	 *
+	 * @see http://jsperf.com/typeofvar
+	 */
+
+	function typeOf(input) {
+
+		return ({}).toString.call(input).slice(8, -1).toLowerCase();
+
+	}
+
+	if (isNode) {
+
+		module.exports = Public;
+
+	} else {
+
+		window[publicName] = Public;
+
+	}
+
+})( true && module && typeof module.exports === 'object' && module.exports);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/module.js */ "./node_modules/webpack/buildin/module.js")(module)))
+
+/***/ }),
+
+/***/ "./node_modules/nanoid/format.js":
+/*!***************************************!*\
+  !*** ./node_modules/nanoid/format.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Secure random string generator with custom alphabet.
+ *
+ * Alphabet must contain 256 symbols or less. Otherwise, the generator
+ * will not be secure.
+ *
+ * @param {generator} random The random bytes generator.
+ * @param {string} alphabet Symbols to be used in new random string.
+ * @param {size} size The number of symbols in new random string.
+ *
+ * @return {string} Random string.
+ *
+ * @example
+ * const format = require('nanoid/format')
+ *
+ * function random (size) {
+ *   const result = []
+ *   for (let i = 0; i < size; i++) {
+ *     result.push(randomByte())
+ *   }
+ *   return result
+ * }
+ *
+ * format(random, "abcdef", 5) //=> "fbaef"
+ *
+ * @name format
+ * @function
+ */
+module.exports = function (random, alphabet, size) {
+  var mask = (2 << Math.log(alphabet.length - 1) / Math.LN2) - 1
+  var step = Math.ceil(1.6 * mask * size / alphabet.length)
+
+  var id = ''
+  while (true) {
+    var bytes = random(step)
+    for (var i = 0; i < step; i++) {
+      var byte = bytes[i] & mask
+      if (alphabet[byte]) {
+        id += alphabet[byte]
+        if (id.length === size) return id
+      }
+    }
+  }
+}
+
+/**
+ * @callback generator
+ * @param {number} bytes The number of bytes to generate.
+ * @return {number[]} Random bytes.
+ */
+
+
+/***/ }),
+
 /***/ "./node_modules/object-assign/index.js":
 /*!*********************************************!*\
   !*** ./node_modules/object-assign/index.js ***!
@@ -999,6 +3338,296 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 	return to;
 };
+
+
+/***/ }),
+
+/***/ "./node_modules/parse-svg-path/index.js":
+/*!**********************************************!*\
+  !*** ./node_modules/parse-svg-path/index.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+module.exports = parse
+
+/**
+ * expected argument lengths
+ * @type {Object}
+ */
+
+var length = {a: 7, c: 6, h: 1, l: 2, m: 2, q: 4, s: 4, t: 2, v: 1, z: 0}
+
+/**
+ * segment pattern
+ * @type {RegExp}
+ */
+
+var segment = /([astvzqmhlc])([^astvzqmhlc]*)/ig
+
+/**
+ * parse an svg path data string. Generates an Array
+ * of commands where each command is an Array of the
+ * form `[command, arg1, arg2, ...]`
+ *
+ * @param {String} path
+ * @return {Array}
+ */
+
+function parse(path) {
+	var data = []
+	path.replace(segment, function(_, command, args){
+		var type = command.toLowerCase()
+		args = parseValues(args)
+
+		// overloaded moveTo
+		if (type == 'm' && args.length > 2) {
+			data.push([command].concat(args.splice(0, 2)))
+			type = 'l'
+			command = command == 'm' ? 'l' : 'L'
+		}
+
+		while (true) {
+			if (args.length == length[type]) {
+				args.unshift(command)
+				return data.push(args)
+			}
+			if (args.length < length[type]) throw new Error('malformed path data')
+			data.push([command].concat(args.splice(0, length[type])))
+		}
+	})
+	return data
+}
+
+var number = /-?[0-9]*\.?[0-9]+(?:e[-+]?\d+)?/ig
+
+function parseValues(args) {
+	var numbers = args.match(number)
+	return numbers ? numbers.map(Number) : []
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/point-at-length/index.js":
+/*!***********************************************!*\
+  !*** ./node_modules/point-at-length/index.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var parse = __webpack_require__(/*! parse-svg-path */ "./node_modules/parse-svg-path/index.js");
+var isarray = __webpack_require__(/*! isarray */ "./node_modules/isarray/index.js");
+var abs = __webpack_require__(/*! abs-svg-path */ "./node_modules/abs-svg-path/index.js");
+
+module.exports = Points;
+
+function Points (path) {
+    if (!(this instanceof Points)) return new Points(path);
+    this._path = isarray(path) ? path : parse(path);
+    this._path = abs(this._path);
+    this._path = zvhToL(this._path);
+    this._path = longhand(this._path);
+}
+
+Points.prototype.at = function (pos, opts) {
+    return this._walk(pos, opts).pos;
+};
+
+Points.prototype.length = function () {
+    return this._walk(null).length;
+};
+
+Points.prototype._walk = function (pos, opts) {
+    var cur = [ 0, 0 ];
+    var prev = [ 0, 0, 0 ];
+    var p0 = [ 0, 0 ];
+    var len = 0;
+
+    for (var i = 0; i < this._path.length; i++) {
+        var p = this._path[i];
+        if (p[0] === 'M') {
+            cur[0] = p[1];
+            cur[1] = p[2];
+            if (pos === 0) {
+                return { length: len, pos: cur };
+            }
+        }
+        else if (p[0] === 'C') {
+            prev[0] = p0[0] = cur[0];
+            prev[1] = p0[1] = cur[1];
+            prev[2] = len;
+
+            var n = 100;
+            for (var j = 0; j <= n; j++) {
+                var t = j / n;
+                var x = xof_C(p, t);
+                var y = yof_C(p, t);
+                len += dist(cur[0], cur[1], x, y);
+
+                cur[0] = x;
+                cur[1] = y;
+
+                if (typeof pos === 'number' && len >= pos) {
+                    var dv = (len - pos) / (len - prev[2]);
+
+                    var npos = [
+                        cur[0] * (1 - dv) + prev[0] * dv,
+                        cur[1] * (1 - dv) + prev[1] * dv
+                    ];
+                    return { length: len, pos: npos };
+                }
+                prev[0] = cur[0];
+                prev[1] = cur[1];
+                prev[2] = len;
+            }
+        }
+        else if (p[0] === 'Q') {
+            prev[0] = p0[0] = cur[0];
+            prev[1] = p0[1] = cur[1];
+            prev[2] = len;
+
+            var n = 100;
+            for (var j = 0; j <= n; j++) {
+                var t = j / n;
+                var x = xof_Q(p, t);
+                var y = yof_Q(p, t);
+                len += dist(cur[0], cur[1], x, y);
+
+                cur[0] = x;
+                cur[1] = y;
+
+                if (typeof pos === 'number' && len >= pos) {
+                    var dv = (len - pos) / (len - prev[2]);
+
+                    var npos = [
+                        cur[0] * (1 - dv) + prev[0] * dv,
+                        cur[1] * (1 - dv) + prev[1] * dv
+                    ];
+                    return { length: len, pos: npos };
+                }
+                prev[0] = cur[0];
+                prev[1] = cur[1];
+                prev[2] = len;
+            }
+        }
+        else if (p[0] === 'L') {
+            prev[0] = cur[0];
+            prev[1] = cur[1];
+            prev[2] = len;
+
+            len   += dist(cur[0], cur[1], p[1], p[2]);
+            cur[0] = p[1];
+            cur[1] = p[2];
+
+            if (typeof pos === 'number' && len >= pos) {
+                var dv = (len - pos) / (len - prev[2]);
+                var npos = [
+                    cur[0] * (1 - dv) + prev[0] * dv,
+                    cur[1] * (1 - dv) + prev[1] * dv
+                ];
+                return { length: len, pos: npos };
+            }
+            prev[0] = cur[0];
+            prev[1] = cur[1];
+            prev[2] = len;
+        }
+    }
+
+    return { length: len, pos: cur };
+    function xof_C (p, t) {
+        return Math.pow((1-t), 3) * p0[0]
+            + 3 * Math.pow((1-t), 2) * t * p[1]
+            + 3 * (1-t) * Math.pow(t, 2) * p[3]
+            + Math.pow(t, 3) * p[5]
+        ;
+    }
+    function yof_C (p, t) {
+        return Math.pow((1-t), 3) * p0[1]
+            + 3 * Math.pow((1-t), 2) * t * p[2]
+            + 3 * (1-t) * Math.pow(t, 2) * p[4]
+            + Math.pow(t, 3) * p[6]
+        ;
+    }
+
+    function xof_Q (p, t) {
+        return Math.pow((1-t), 2) * p0[0]
+            + 2 * (1-t) * t * p[1]
+            + Math.pow(t, 2) * p[3]
+        ;
+    }
+    function yof_Q (p, t) {
+        return Math.pow((1-t), 2) * p0[1]
+            + 2 * (1-t) * t * p[2]
+            + Math.pow(t, 2) * p[4]
+        ;
+    }
+};
+
+function dist (ax, ay, bx, by) {
+    var x = ax - bx;
+    var y = ay - by;
+    return Math.sqrt(x*x + y*y);
+}
+
+// Expand shorthand curve commands to full versions; mutates the path in place for efficiency
+// Requires commands have already been converted to absolute versions
+function longhand(path){
+    var prev,x1=0,y1=0;
+    var conversion = { S:{to:'C',x:3}, T:{to:'Q',x:1} };
+    for(var i=0, len=path.length; i<len; i++){
+        var cmd = path[i];
+        var convert = conversion[cmd[0]];
+
+        if (convert) {
+            cmd[0] = convert.to;
+            if (prev) {
+                if (prev[0] === convert.to) {
+                    x1 = 2*prev[convert.x+2]-prev[convert.x  ];
+                    y1 = 2*prev[convert.x+3]-prev[convert.x+1];
+                } else {
+                    x1 = prev[prev.length-2];
+                    y1 = prev[prev.length-1];
+                }
+            }
+            cmd.splice(1,0,x1,y1);
+        }
+        prev=cmd;
+    }
+    return path;
+}
+
+// Convert 'Z', 'V' and 'H' segments to 'L' segments
+function zvhToL(path){
+    var ret = [];
+    var startPoint = ['L',0,0];
+    var last_point;
+
+    for(var i=0, len=path.length; i<len; i++){
+        var pt = path[i];
+        switch(pt[0]){
+            case 'M':
+                startPoint = ['L', pt[1], pt[2]];
+                ret.push(pt);
+                break;
+            case 'Z':
+                ret.push(startPoint);
+                break;
+            case 'H':
+                last_point = ret[ret.length - 1] || ['L',0,0];
+                ret.push( ['L', pt[1], last_point[last_point.length - 1]] );
+                break;
+            case 'V':
+                last_point = ret[ret.length - 1] || ['L',0,0];
+                ret.push( ['L', last_point[last_point.length - 2], pt[1]] );
+                break;
+            default:
+                ret.push(pt);
+        }
+    }
+    return ret;
+}
 
 
 /***/ }),
@@ -24230,6 +26859,781 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./node_modules/rtween/dist/lines sync recursive ^\\.\\/.*$":
+/*!******************************************************!*\
+  !*** ./node_modules/rtween/dist/lines sync ^\.\/.*$ ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./Ring": "./node_modules/rtween/dist/lines/Ring.js",
+	"./Ring.js": "./node_modules/rtween/dist/lines/Ring.js",
+	"./SVGPath": "./node_modules/rtween/dist/lines/SVGPath.js",
+	"./SVGPath.js": "./node_modules/rtween/dist/lines/SVGPath.js",
+	"./Tween": "./node_modules/rtween/dist/lines/Tween.js",
+	"./Tween.js": "./node_modules/rtween/dist/lines/Tween.js"
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "./node_modules/rtween/dist/lines sync recursive ^\\.\\/.*$";
+
+/***/ }),
+
+/***/ "./node_modules/rtween/dist/lines/Ring.js":
+/*!************************************************!*\
+  !*** ./node_modules/rtween/dist/lines/Ring.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/*
+ * Copyright (c) 2019. Nathanael Braun.  All rights reserved.
+ *
+ * This File is part of Caipi. You can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *  This project is dual licensed under AGPL and Commercial Licence.
+ *
+ * @author : Nathanael Braun
+ * @contact : n8tz.js@gmail.com
+ */
+
+var PI = Math.PI,
+    isNumber = __webpack_require__(/*! is */ "./node_modules/is/index.js").number,
+    sin = Math.sin,
+    cos = Math.cos;
+
+module.exports =
+//function () {
+function (scope, cfg, target) {
+    target && scope && (scope = scope[target] = scope[target] || {}); // !
+
+    var fn = "var _2PI=2*Math.PI,",
+        axe1 = cfg.axes && cfg.axes[0] || 'x',
+        // should factorise....
+    axe2 = cfg.axes && cfg.axes[1] || 'y',
+        factor1 = (cfg.factors && cfg.factors[0] || 1) * cfg.radius,
+        // should factorise....
+    factor2 = (cfg.factors && cfg.factors[1] || 1) * cfg.radius,
+        startPos = (cfg.startPos || 0) * 2 * PI,
+        length = isNumber(cfg.length) ? cfg.length : 1;
+    fn += "pos1=(" + startPos + "+((lastPos+update)*_2PI)*" + length + " )%(_2PI)," + "pos2 = (" + startPos + "+(lastPos)*_2PI*" + length + " )%(_2PI);";
+    fn += "scope." + axe1 + "+=" + factor1 + "*(Math.cos(pos1)-Math.cos(pos2));" + // ! optims
+    "scope." + axe2 + " += " + factor2 + "*(Math.sin(pos1)-Math.sin(pos2));";
+
+    return new Function("lastPos, update, scope, cfg, target", fn);
+};
+module.exports.isFactory = true;
+
+/***/ }),
+
+/***/ "./node_modules/rtween/dist/lines/SVGPath.js":
+/*!***************************************************!*\
+  !*** ./node_modules/rtween/dist/lines/SVGPath.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/*
+ * Copyright (c) 2019. Nathanael Braun.  All rights reserved.
+ *
+ * This File is part of Caipi. You can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *  This project is dual licensed under AGPL and Commercial Licence.
+ *
+ * @author : Nathanael Braun
+ * @contact : n8tz.js@gmail.com
+ */
+
+var cache = {},
+    buildPath,
+    getPoint;
+if (typeof document == "undefined") {
+    buildPath = function buildPath(P) {
+        return cache[P] || __webpack_require__(/*! point-at-length */ "./node_modules/point-at-length/index.js")(P);
+    };
+    getPoint = function getPoint(P, p) {
+
+        return cache[P].at(p);
+    };
+} else {
+    buildPath = function buildPath(P) {
+        var p = cache[P];
+        if (!p) {
+            cache[P] = p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+
+            p.setAttribute('d', P);
+        }
+        ;
+    };
+    getPoint = function getPoint(P, p) {
+        return cache[P].getPointAtLength(p * cache[P].getTotalLength());
+    };
+}
+module.exports = function (_scope, cfg, target) {
+    // @todo incremental path reader
+
+    var axe1 = cfg.axes && cfg.axes[0] || 'x',
+        // should factorise better....
+    axe2 = cfg.axes && cfg.axes[1] || 'y',
+        lastPtsPos,
+        lastPts;
+    buildPath(cfg.path);
+    return function (lastPos, update, scope, cfg, target) {
+        var p1 = lastPtsPos == lastPos ? lastPts : getPoint(cfg.path, cfg.reverse ? 1 - lastPos : lastPos),
+            p2 = lastPts = getPoint(cfg.path, cfg.reverse ? 1 - (lastPos + update) : lastPos + update);
+        lastPtsPos = lastPos + update;
+        scope[axe1] += (p2.x - p1.x) * 4;
+        scope[axe2] += (p2.y - p1.y) * 4;
+    };
+};
+module.exports.isFactory = true;
+
+/***/ }),
+
+/***/ "./node_modules/rtween/dist/lines/Tween.js":
+/*!*************************************************!*\
+  !*** ./node_modules/rtween/dist/lines/Tween.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/*
+ * Copyright (c) 2019. Nathanael Braun.  All rights reserved.
+ *
+ * This File is part of Caipi. You can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *  This project is dual licensed under AGPL and Commercial Licence.
+ *
+ * @author : Nathanael Braun
+ * @contact : n8tz.js@gmail.com
+ */
+
+module.exports = function (_scope, cfg, target) {
+	var fn = "";
+
+	target && (fn += "scope = scope['" + target + "'];\n");
+
+	for (var k in cfg.apply) {
+		if (cfg.apply.hasOwnProperty(k)) {
+
+			_scope && (_scope[k] = _scope[k] || 0);
+
+			fn += "scope." + k + "+=(" + (cfg.easeFn ? "cfg.easeFn(lastPos+update)" + "- cfg.easeFn(lastPos)" : "update") + ") * cfg.apply." + k + ";";
+		}
+	}return new Function("lastPos, update, scope, cfg, target", fn);
+};
+module.exports.isFactory = true;
+
+/***/ }),
+
+/***/ "./node_modules/rtween/dist/rTween.js":
+/*!********************************************!*\
+  !*** ./node_modules/rtween/dist/rTween.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/*
+ * Copyright (c) 2019. Nathanael Braun.  All rights reserved.
+ *
+ * This File is part of Caipi. You can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *  This project is dual licensed under AGPL and Commercial Licence.
+ *
+ * @author : Nathanael Braun
+ * @contact : n8tz.js@gmail.com
+ */
+
+/**
+ * # Caipi rTween
+ *
+ * Scalable, multiscope, reversible, delta based, interpolation/tweening engine
+ *
+ * ## rTween what ?
+ *
+ * - Tweening engine allowing to apply forward and backward multiples tweens on same
+ * properties and multiple objects
+ * - Allow live composition of classic tweens, circle tweens, SVG Path tweens, other
+ * rTweens, etc
+ * - Equivalent to the GreenSocks TweenMax/TweenLite objects, minus specialized helpers.
+ * - Purely Abstract, no Dom deps, rTween don't apply the CSS itself
+ * - Work in node & webpack environment
+ *
+ * @author Nathanael BRAUN
+ * @contact caipilabs@gmail.com
+ * @licence AGPL-3.0
+ */
+var is = __webpack_require__(/*! is */ "./node_modules/is/index.js"),
+    isArray = is.array,
+    isFunction = is.fn,
+    isNumber = is.number,
+    isString = is.string,
+    merge = __webpack_require__(/*! merge */ "./node_modules/merge/merge.js"),
+    slice = Array.prototype.slice,
+    push = Array.prototype.push,
+    abs = Math.abs,
+    forkedrTween = function forkedrTween(cfg) {
+	this.__cPos = 0;
+	this.__cIndex = 0;
+	this.onScopeUpdated = false;
+	this.__activeProcess = [];
+	this.__outgoing = [];
+	this.__incoming = [];
+},
+
+// runner
+_live = false,
+    lastTm,
+    _running = [];
+
+var RTween = function () {
+	function RTween(cfg, scope) {
+		_classCallCheck(this, RTween);
+
+		var me = this;
+		this.scope = scope;
+		cfg = cfg || {};
+		this.__marks = [];
+		this.__marksLength = [];
+		this.__marksKeys = [];
+		this.__processors = [];
+		this.__config = [];
+
+		this.__activeForks = [];
+		this.__activeProcess = [];
+
+		this.__activeProcess = [];
+		this.__outgoing = [];
+		this.__incoming = [];
+		this.__cPos = 0;
+		this.__cIndex = 0;
+		this.__cMaxKey = 1;
+		if (isArray(cfg)) {
+			this.localLength = 1;
+			this.mount(cfg, scope);
+		} else {
+			merge(this, cfg);
+			if (cfg.rTween) this.mount(cfg.rTween, scope);
+		}
+	}
+
+	/**
+  * Run this tween line from 0 to his duration using linear
+  * @param target
+  * @param cb
+  * @param tm
+  */
+
+
+	_createClass(RTween, [{
+		key: 'run',
+		value: function run(target, cb, tm) {
+			RTween.Runner.run(this, target, tm || this.duration, cb);
+		}
+
+		/**
+   * Tween this tween line to 'to' during 'tm' ms using easing fn
+   * @param to {int}
+   * @param tm {int} duration in ms
+   * @param easing {function} easing fn
+   * @param tick {function} fn called at each tick
+   * @param cb {function} fn called on complete
+   */
+
+	}, {
+		key: 'runTo',
+		value: function runTo(to, tm) {
+			var easing = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (x) {
+				return x;
+			};
+
+			var _this = this;
+
+			var tick = arguments[3];
+			var cb = arguments[4];
+
+			var from = this.__cPos,
+			    length = to - from;
+
+			_running.push({
+				apply: function apply(pos, max) {
+					var x = from + easing(pos / max) * length;
+					_this.goTo(x);
+					tick && tick(x);
+				},
+				duration: tm,
+				cpos: 0,
+				cb: cb
+			});
+
+			if (!_live) {
+				_live = true;
+				lastTm = Date.now();
+				// console.log("TL runner On");
+				setTimeout(RTween.Runner._tick, 16);
+			}
+		}
+
+		/**
+   * Map process descriptors to get a runnable timeline
+   * @method mount
+   * @param map
+   */
+
+	}, {
+		key: 'mount',
+		value: function mount(map, scope) {
+			var i,
+			    ln,
+			    d = this.duration || 0,
+			    p = 0,
+			    me = this,
+			    max = 0,
+			    factory;
+			for (i = 0, ln = map.length; i < ln; i++) {
+				if (isString(map[i].easingFn)) map[i].easingFn = easingFN[map[i].easingFn] || false;
+				if (map[i].type == "Subline") {
+					factory = map[i].apply.fork(null, map[i], map[i].easingFn);
+				} else {
+					factory = __webpack_require__("./node_modules/rtween/dist/lines sync recursive ^\\.\\/.*$")("./" + (map[i].type || 'Event'));
+				}
+				if (!factory) {
+					console.log('rTween : Anim not found : ' + map[i].type);
+					continue;
+				}
+				if (!isNumber(map[i].from))
+					// no from so assume it's sync
+					this.addProcess(d, d + map[i].duration, factory, map[i]), d += map[i].duration || 0;else // have from so assume it's async
+					this.addProcess(map[i].from, map[i].from + map[i].duration, factory, map[i]), max = Math.max(max, map[i].from + map[i].duration);
+			}
+
+			this.duration = d = Math.max(d, max);
+			return this;
+		}
+
+		/**
+   * Clone this rTween
+   * @method fork
+   * @param fn
+   * @param ctx
+   * @param easeFn
+   * @returns {forkedrTween}
+   */
+
+	}, {
+		key: 'fork',
+		value: function fork(cfg) {
+			this._masterLine = this._masterLine || this;
+			forkedrTween.prototype = this._masterLine;
+			return new forkedrTween(cfg);
+		}
+
+		/**
+   * Map a process descriptor
+   * @method addProcess
+   * @param from
+   * @param to
+   * @param process
+   * @param cfg
+   * @returns {rTween}
+   */
+
+	}, {
+		key: 'addProcess',
+		value: function addProcess(from, to, process, cfg) {
+			var i = 0,
+			    _ln = process.localLength,
+			    ln = to - from || 0,
+			    key = this.__cMaxKey++,
+			    isTl = process instanceof RTween;
+
+			if (isTl) process = process.fork(null, cfg);
+
+			this.__activeForks[key] = true;
+			this.__processors[key] = process.isFactory ? process(null, cfg, cfg.target) : process;
+			this.__marksLength[key] = ln;
+			this.__config[key] = cfg;
+
+			// put start marker in the ordered marker list
+			while (i <= this.__marks.length && this.__marks[i] < from) {
+				i++;
+			}this.__marks.splice(i, 0, from);
+			this.__marksKeys.splice(i, 0, key);
+
+			// put end marker in the ordered marker list
+			while (i <= this.__marks.length && this.__marks[i] <= to) {
+				i++;
+			}this.__marks.splice(i, 0, to);
+			this.__marksKeys.splice(i, 0, -key);
+			return this;
+		}
+
+		/**
+   *
+   * @param key
+   * @returns {*}
+   * @private
+   */
+
+	}, {
+		key: '_getIndex',
+		value: function _getIndex(key) {
+			return (key = this.__marksKeys.indexOf(key)) !== -1 ? key : false;
+		}
+
+		/**
+   * apply to scope or this.scope the delta of the process mapped from cPos to 'to'
+   * using a rTween length of 1
+   * @method go
+   * @param to
+   * @param scope
+   * @param reset
+   */
+
+	}, {
+		key: 'go',
+		value: function go(to, scope, reset) {
+			this.goTo(to * this.duration, scope, reset);
+			this.__cRPos = to;
+			return scope || this.scope;
+		}
+	}, {
+		key: 'getPosAt',
+		value: function getPosAt(to, scope) {
+
+			this.__activeProcess.length = 0;
+			this.__outgoing.length = 0;
+			this.__incoming.length = 0;
+			this.__cPos = 0;
+			this.__cIndex = 0;
+			return this.go(to, scope);
+		}
+
+		/**
+   * apply to scope or this.scope the delta of the process mapped from cPos to 'to'
+   * using the mapped rTween length
+   * @method goTo
+   * @param to
+   * @param scope
+   * @param reset
+   */
+
+	}, {
+		key: 'goTo',
+		value: function goTo(to, scope, reset) {
+			scope = scope || this.scope;
+			if (this.window) to = this.window.start + to / this.duration * this.window.length;
+
+			if (!this._started) {
+				this._started = true;
+				this.__cIndex = this.__cPos = 0;
+			}
+
+			var i = this.__cIndex,
+			    p,
+			    ln,
+			    outgoing = this.__outgoing,
+			    incoming = this.__incoming,
+			    pos,
+			    _from,
+			    _to,
+			    d,
+			    key,
+			    mLn = this.__marks.length,
+			    diff = to - this.__cPos;
+			if (reset) {
+				this.__activeProcess.length = 0;
+				this.__outgoing.length = 0;
+				this.__incoming.length = 0;
+				// reset forks
+				//console.log('reset ', to);
+				//for ( i = 0, ln = this.__processors.length ; i < ln ; i++ ) {
+				//    if (this.__processors[i] instanceof rTween){
+				//        this.__processors[i].goTo(0,0,true);
+				//    }
+				//}
+			}
+
+			// 1st ajust period, knowing which process are involved / leaving
+			// while my indice target a marker/time period inferior to my pos
+
+			while (i < mLn && to > this.__marks[i] || diff >= 0 && this.__marks[i] == to) {
+
+				// if next marker is ending an active process
+				if ((p = this.__activeProcess.indexOf(-this.__marksKeys[i])) != -1) {
+					this.__activeProcess.splice(p, 1);
+					outgoing.push(this.__marksKeys[i]);
+					//console.log("close " + this.__marksKeys[i]);
+				}
+				// if next marker is process ending a process who just start (direction has
+				// change)
+				else if ((p = this.__activeProcess.indexOf(this.__marksKeys[i])) != -1) {
+						this.__activeProcess.splice(p, 1);
+						outgoing.push(this.__marksKeys[i]);
+						//console.log("close after dir change" + this.__marksKeys[i]);
+					}
+					// if next marker is process ending a process who just start
+					else if ((p = incoming.indexOf(-this.__marksKeys[i])) != -1) {
+							incoming.splice(p, 1);
+							outgoing.push(this.__marksKeys[i]);
+							//console.log("close starting " + this.__marksKeys[i]);
+						} else {
+							incoming.push(this.__marksKeys[i]);
+							//console.log("right say in " + this.__marksKeys[i]);
+						}
+				i++;
+			}
+
+			// while my indice-1 target a marker/time period superior to my pos
+			while (i - 1 >= 0 && (to < this.__marks[i - 1] || diff < 0 && this.__marks[i - 1] == to)) {
+				i--;
+
+				if ((p = this.__activeProcess.indexOf(-this.__marksKeys[i])) != -1) {
+					this.__activeProcess.splice(p, 1);
+					outgoing.push(this.__marksKeys[i]);
+					//console.log("left say out " + this.__marksKeys[i]);
+				} // if next marker is process ending a process who just start (direction has
+				// change)
+				else if ((p = this.__activeProcess.indexOf(this.__marksKeys[i])) != -1) {
+						this.__activeProcess.splice(p, 1);
+						outgoing.push(this.__marksKeys[i]);
+						//console.log("close after dir change" + this.__marksKeys[i]);
+					} else if ((p = incoming.indexOf(-this.__marksKeys[i])) != -1) {
+						incoming.splice(p, 1);
+						outgoing.push(this.__marksKeys[i]);
+						//console.log("left say out from incoming " + this.__marksKeys[i]);
+					} else {
+						//console.log("left say in " + this.__marksKeys[i]);
+						incoming.push(this.__marksKeys[i]);
+					}
+			}
+
+			// now dispatching deltas
+			//console.log(incoming, outgoing, this.__activeProcess);
+
+			this.__cIndex = i;
+			// those leaving subline
+			for (i = 0, ln = outgoing.length; i < ln; i++) {
+				p = this._getIndex(outgoing[i]);
+				key = abs(outgoing[i]);
+				if (outgoing[i] < 0) {
+					_from = Math.min(this.__marks[p], Math.max(this.__cPos, this.__marks[p] - this.__marksLength[key])) - (this.__marks[p] - this.__marksLength[key]);
+					_to = this.__marksLength[key];
+					pos = _from;
+					d = _to - _from;
+					pos = (this.localLength || 1) * pos / this.__marksLength[key];
+					d = (this.localLength || 1) * d / this.__marksLength[key];
+				} else {
+					_from = Math.max(this.__marks[p], Math.min(this.__cPos, this.__marks[p] + this.__marksLength[key])) - this.__marks[p];
+					_to = 0;
+					pos = _from;
+					d = _to - _from;
+
+					pos = (this.localLength || 1) * pos / this.__marksLength[key];
+					d = (this.localLength || 1) * d / this.__marksLength[key];
+				}
+				//
+				//console.log("out " + this.__marksKeys[p] + " " + this.__marksLength[p]+
+				//            '\npos:'+this.__cPos+
+				//            '\nmark:'+this.__marks[p]+
+				//            '\ninnerpos:'+pos+
+				//            '\ndelta:'+d
+				//);
+
+				if (this.__processors[key].go) {
+					this.__processors[key].go(pos + d, scope, reset);
+				} else this.__processors[key](pos, d, scope, this.__config[key], this.__config[key].target || this.__config[key].$target && this.__context && this.__context[this.__config[key].$target]);
+			}
+
+			// those entering subline
+			for (i = 0, ln = incoming.length; i < ln; i++) {
+				p = this._getIndex(incoming[i]);
+				key = abs(incoming[i]);
+
+				if (incoming[i] < 0) {
+
+					_from = this.__marksLength[key];
+					_to = Math.max(this.__marks[p] - this.__marksLength[key], Math.min(this.__cPos + diff, this.__marks[p])) - (this.__marks[p] - this.__marksLength[key]);
+
+					pos = _from;
+					d = _to - _from;
+					pos = (this.localLength || 1) * pos / this.__marksLength[key];
+					d = (this.localLength || 1) * d / this.__marksLength[key];
+				} else {
+					_from = 0;
+					_to = Math.max(this.__marks[p], Math.min(this.__cPos + diff, this.__marks[p] + this.__marksLength[key])) - this.__marks[p];
+					pos = _from;
+					d = _to - _from;
+
+					pos = (this.localLength || 1) * pos / this.__marksLength[key];
+					d = (this.localLength || 1) * d / this.__marksLength[key];
+				}
+
+				//console.log("in " + this.__marksKeys[p] + " " + this.__marksLength[p]+
+				//            '\ndiff:'+diff+
+				//            '\npos:'+this.__cPos+
+				//            '\nmark:'+this.__marks[p]+
+				//            '\n_from:'+_from+
+				//            '\n_to:'+_to+
+				//            '\ninnerpos:'+pos+
+				//            '\ndelta:'+d
+				//);
+
+				if (this.__processors[key].go) {
+					//console.log("in " + pos, d);
+					this.__processors[key].go(pos, 0, true); //reset local fork
+					this.__processors[key].go(pos + d, scope);
+				} else if (!reset) this.__processors[key](pos, d, scope, this.__config[key], this.__config[key].target || this.__config[key].$target && this.__context && this.__context[this.__config[key].$target]);
+			}
+			// and those who where already there
+			//if ( !reset )
+			for (i = 0, ln = this.__activeProcess.length; i < ln; i++) {
+				p = this._getIndex(this.__activeProcess[i]);
+				key = abs(this.__activeProcess[i]);
+
+				//d = (this.__cPos - diff)<this.__marks[p]?this.__cPos-this.__marks[p] : diff;
+				pos = this.__activeProcess[i] < 0 ? this.__cPos - (this.__marks[p] - this.__marksLength[key]) : this.__cPos - this.__marks[p];
+				pos = (this.localLength || 1) * pos / this.__marksLength[key];
+				d = diff * (this.localLength || 1) / this.__marksLength[key];
+				//console.log("active " + p + " " + this.__marksLength[p]
+				//            +'\nto:'+to
+				//            +'\npos:'+this.__cPos
+				//            +'\nmark:'+this.__marks[p]+
+				//            '\ngdiff:'+diff68786k
+				//            +'\ninnerpos:'+(pos * (this.localLength || 1)) /
+				// abs(this.__marksLength[p]) +'\ndelta:'+(diff * (this.localLength || 1)) /
+				// abs(this.__marksLength[p]) );
+				if (this.__processors[key].go) {
+
+					this.__processors[key].go(pos + d, scope);
+				} else if (!reset) this.__processors[key](pos, d, scope, this.__config[key], this.__config[key].target || this.__config[key].$target && this.__context && this.__context[this.__config[key].$target]);
+			}
+
+			push.apply(this.__activeProcess, incoming);
+
+			outgoing.length = 0;
+			incoming.length = 0;
+
+			this.__cPos = to;
+			this.onScopeUpdated && this.onScopeUpdated(to, diff, scope);
+		}
+	}]);
+
+	return RTween;
+}();
+
+RTween.Runner = {
+	run: function run(tl, ctx, duration, cb) {
+		var apply = function apply(pos, size) {
+			return tl.go(pos / size, ctx);
+		};
+		_running.push({ apply: apply, duration: duration, cpos: 0, cb: cb });
+		tl.go(0, ctx, true); //reset tl
+
+		if (!_live) {
+			_live = true;
+			lastTm = Date.now();
+			// console.log("TL runner On");
+			setTimeout(this._tick, 16);
+		}
+	},
+	_tick: function _tick() {
+		var i = 0,
+		    o,
+		    tm = Date.now(),
+		    delta = tm - lastTm;
+		lastTm = tm;
+		for (; i < _running.length; i++) {
+			_running[i].cpos = Math.min(delta + _running[i].cpos, _running[i].duration); //cpos
+			_running[i].apply(_running[i].cpos, _running[i].duration);
+			// console.log("TL runner ",_running[i][3]);
+			if (_running[i].cpos == _running[i].duration) {
+
+				_running[i].cb && setTimeout(_running[i].cb);
+				_running.splice(i, 1), i--;
+			}
+		}
+		if (_running.length) setTimeout(_tick, 16);else {
+			// console.log("TL runner Off");
+			_live = false;
+		}
+	}
+};
+exports.default = RTween;
+module.exports = exports['default'];
+
+/***/ }),
+
 /***/ "./node_modules/scheduler/cjs/scheduler-tracing.development.js":
 /*!*********************************************************************!*\
   !*** ./node_modules/scheduler/cjs/scheduler-tracing.development.js ***!
@@ -25411,6 +28815,412 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./node_modules/shortid/index.js":
+/*!***************************************!*\
+  !*** ./node_modules/shortid/index.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+module.exports = __webpack_require__(/*! ./lib/index */ "./node_modules/shortid/lib/index.js");
+
+
+/***/ }),
+
+/***/ "./node_modules/shortid/lib/alphabet.js":
+/*!**********************************************!*\
+  !*** ./node_modules/shortid/lib/alphabet.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var randomFromSeed = __webpack_require__(/*! ./random/random-from-seed */ "./node_modules/shortid/lib/random/random-from-seed.js");
+
+var ORIGINAL = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-';
+var alphabet;
+var previousSeed;
+
+var shuffled;
+
+function reset() {
+    shuffled = false;
+}
+
+function setCharacters(_alphabet_) {
+    if (!_alphabet_) {
+        if (alphabet !== ORIGINAL) {
+            alphabet = ORIGINAL;
+            reset();
+        }
+        return;
+    }
+
+    if (_alphabet_ === alphabet) {
+        return;
+    }
+
+    if (_alphabet_.length !== ORIGINAL.length) {
+        throw new Error('Custom alphabet for shortid must be ' + ORIGINAL.length + ' unique characters. You submitted ' + _alphabet_.length + ' characters: ' + _alphabet_);
+    }
+
+    var unique = _alphabet_.split('').filter(function(item, ind, arr){
+       return ind !== arr.lastIndexOf(item);
+    });
+
+    if (unique.length) {
+        throw new Error('Custom alphabet for shortid must be ' + ORIGINAL.length + ' unique characters. These characters were not unique: ' + unique.join(', '));
+    }
+
+    alphabet = _alphabet_;
+    reset();
+}
+
+function characters(_alphabet_) {
+    setCharacters(_alphabet_);
+    return alphabet;
+}
+
+function setSeed(seed) {
+    randomFromSeed.seed(seed);
+    if (previousSeed !== seed) {
+        reset();
+        previousSeed = seed;
+    }
+}
+
+function shuffle() {
+    if (!alphabet) {
+        setCharacters(ORIGINAL);
+    }
+
+    var sourceArray = alphabet.split('');
+    var targetArray = [];
+    var r = randomFromSeed.nextValue();
+    var characterIndex;
+
+    while (sourceArray.length > 0) {
+        r = randomFromSeed.nextValue();
+        characterIndex = Math.floor(r * sourceArray.length);
+        targetArray.push(sourceArray.splice(characterIndex, 1)[0]);
+    }
+    return targetArray.join('');
+}
+
+function getShuffled() {
+    if (shuffled) {
+        return shuffled;
+    }
+    shuffled = shuffle();
+    return shuffled;
+}
+
+/**
+ * lookup shuffled letter
+ * @param index
+ * @returns {string}
+ */
+function lookup(index) {
+    var alphabetShuffled = getShuffled();
+    return alphabetShuffled[index];
+}
+
+function get () {
+  return alphabet || ORIGINAL;
+}
+
+module.exports = {
+    get: get,
+    characters: characters,
+    seed: setSeed,
+    lookup: lookup,
+    shuffled: getShuffled
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/shortid/lib/build.js":
+/*!*******************************************!*\
+  !*** ./node_modules/shortid/lib/build.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var generate = __webpack_require__(/*! ./generate */ "./node_modules/shortid/lib/generate.js");
+var alphabet = __webpack_require__(/*! ./alphabet */ "./node_modules/shortid/lib/alphabet.js");
+
+// Ignore all milliseconds before a certain time to reduce the size of the date entropy without sacrificing uniqueness.
+// This number should be updated every year or so to keep the generated id short.
+// To regenerate `new Date() - 0` and bump the version. Always bump the version!
+var REDUCE_TIME = 1459707606518;
+
+// don't change unless we change the algos or REDUCE_TIME
+// must be an integer and less than 16
+var version = 6;
+
+// Counter is used when shortid is called multiple times in one second.
+var counter;
+
+// Remember the last time shortid was called in case counter is needed.
+var previousSeconds;
+
+/**
+ * Generate unique id
+ * Returns string id
+ */
+function build(clusterWorkerId) {
+    var str = '';
+
+    var seconds = Math.floor((Date.now() - REDUCE_TIME) * 0.001);
+
+    if (seconds === previousSeconds) {
+        counter++;
+    } else {
+        counter = 0;
+        previousSeconds = seconds;
+    }
+
+    str = str + generate(version);
+    str = str + generate(clusterWorkerId);
+    if (counter > 0) {
+        str = str + generate(counter);
+    }
+    str = str + generate(seconds);
+    return str;
+}
+
+module.exports = build;
+
+
+/***/ }),
+
+/***/ "./node_modules/shortid/lib/generate.js":
+/*!**********************************************!*\
+  !*** ./node_modules/shortid/lib/generate.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var alphabet = __webpack_require__(/*! ./alphabet */ "./node_modules/shortid/lib/alphabet.js");
+var random = __webpack_require__(/*! ./random/random-byte */ "./node_modules/shortid/lib/random/random-byte-browser.js");
+var format = __webpack_require__(/*! nanoid/format */ "./node_modules/nanoid/format.js");
+
+function generate(number) {
+    var loopCounter = 0;
+    var done;
+
+    var str = '';
+
+    while (!done) {
+        str = str + format(random, alphabet.get(), 1);
+        done = number < (Math.pow(16, loopCounter + 1 ) );
+        loopCounter++;
+    }
+    return str;
+}
+
+module.exports = generate;
+
+
+/***/ }),
+
+/***/ "./node_modules/shortid/lib/index.js":
+/*!*******************************************!*\
+  !*** ./node_modules/shortid/lib/index.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var alphabet = __webpack_require__(/*! ./alphabet */ "./node_modules/shortid/lib/alphabet.js");
+var build = __webpack_require__(/*! ./build */ "./node_modules/shortid/lib/build.js");
+var isValid = __webpack_require__(/*! ./is-valid */ "./node_modules/shortid/lib/is-valid.js");
+
+// if you are using cluster or multiple servers use this to make each instance
+// has a unique value for worker
+// Note: I don't know if this is automatically set when using third
+// party cluster solutions such as pm2.
+var clusterWorkerId = __webpack_require__(/*! ./util/cluster-worker-id */ "./node_modules/shortid/lib/util/cluster-worker-id-browser.js") || 0;
+
+/**
+ * Set the seed.
+ * Highly recommended if you don't want people to try to figure out your id schema.
+ * exposed as shortid.seed(int)
+ * @param seed Integer value to seed the random alphabet.  ALWAYS USE THE SAME SEED or you might get overlaps.
+ */
+function seed(seedValue) {
+    alphabet.seed(seedValue);
+    return module.exports;
+}
+
+/**
+ * Set the cluster worker or machine id
+ * exposed as shortid.worker(int)
+ * @param workerId worker must be positive integer.  Number less than 16 is recommended.
+ * returns shortid module so it can be chained.
+ */
+function worker(workerId) {
+    clusterWorkerId = workerId;
+    return module.exports;
+}
+
+/**
+ *
+ * sets new characters to use in the alphabet
+ * returns the shuffled alphabet
+ */
+function characters(newCharacters) {
+    if (newCharacters !== undefined) {
+        alphabet.characters(newCharacters);
+    }
+
+    return alphabet.shuffled();
+}
+
+/**
+ * Generate unique id
+ * Returns string id
+ */
+function generate() {
+  return build(clusterWorkerId);
+}
+
+// Export all other functions as properties of the generate function
+module.exports = generate;
+module.exports.generate = generate;
+module.exports.seed = seed;
+module.exports.worker = worker;
+module.exports.characters = characters;
+module.exports.isValid = isValid;
+
+
+/***/ }),
+
+/***/ "./node_modules/shortid/lib/is-valid.js":
+/*!**********************************************!*\
+  !*** ./node_modules/shortid/lib/is-valid.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var alphabet = __webpack_require__(/*! ./alphabet */ "./node_modules/shortid/lib/alphabet.js");
+
+function isShortId(id) {
+    if (!id || typeof id !== 'string' || id.length < 6 ) {
+        return false;
+    }
+
+    var nonAlphabetic = new RegExp('[^' +
+      alphabet.get().replace(/[|\\{}()[\]^$+*?.-]/g, '\\$&') +
+    ']');
+    return !nonAlphabetic.test(id);
+}
+
+module.exports = isShortId;
+
+
+/***/ }),
+
+/***/ "./node_modules/shortid/lib/random/random-byte-browser.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/shortid/lib/random/random-byte-browser.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var crypto = typeof window === 'object' && (window.crypto || window.msCrypto); // IE 11 uses window.msCrypto
+
+var randomByte;
+
+if (!crypto || !crypto.getRandomValues) {
+    randomByte = function(size) {
+        var bytes = [];
+        for (var i = 0; i < size; i++) {
+            bytes.push(Math.floor(Math.random() * 256));
+        }
+        return bytes;
+    };
+} else {
+    randomByte = function(size) {
+        return crypto.getRandomValues(new Uint8Array(size));
+    };
+}
+
+module.exports = randomByte;
+
+
+/***/ }),
+
+/***/ "./node_modules/shortid/lib/random/random-from-seed.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/shortid/lib/random/random-from-seed.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// Found this seed-based random generator somewhere
+// Based on The Central Randomizer 1.3 (C) 1997 by Paul Houle (houle@msc.cornell.edu)
+
+var seed = 1;
+
+/**
+ * return a random number based on a seed
+ * @param seed
+ * @returns {number}
+ */
+function getNextValue() {
+    seed = (seed * 9301 + 49297) % 233280;
+    return seed/(233280.0);
+}
+
+function setSeed(_seed_) {
+    seed = _seed_;
+}
+
+module.exports = {
+    nextValue: getNextValue,
+    seed: setSeed
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/shortid/lib/util/cluster-worker-id-browser.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/shortid/lib/util/cluster-worker-id-browser.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = 0;
+
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/lib/addStyles.js":
 /*!****************************************************!*\
   !*** ./node_modules/style-loader/lib/addStyles.js ***!
@@ -25920,6 +29730,283 @@ module.exports = function (css) {
 
 /***/ }),
 
+/***/ "./node_modules/taskflows/index.js":
+/*!*****************************************!*\
+  !*** ./node_modules/taskflows/index.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * @author Nathanael BRAUN
+ *
+ * Date: 16/12/2015
+ * Time: 09:37
+ */
+
+/**
+ * @author N.Braun
+ *
+ * Date: 03/09/14
+ * Time: 11:00
+ */
+/**
+ *
+ * Promise / semaphore manager & task sequencer
+ *
+ *
+ * @class TaskFlow
+ */
+
+
+
+var
+    isArray    = __webpack_require__(/*! isarray */ "./node_modules/isarray/index.js"),
+    isFunction = __webpack_require__(/*! isfunction */ "./node_modules/isfunction/lib/main.js"),
+    isNumber   = __webpack_require__(/*! isnumber */ "./node_modules/isnumber/index.js"),
+    isString   = __webpack_require__(/*! isstring */ "./node_modules/isstring/isString.umd.js"),
+    merge      = __webpack_require__(/*! merge */ "./node_modules/merge/merge.js"),
+    slice      = Array.prototype.slice,
+    splice     = Array.prototype.splice;
+
+/**
+ * TaskFlow
+ * @param todo
+ * @param scope
+ * @param followers
+ * @param name
+ * @constructor
+ */
+
+
+var TaskFlowLib    = {},
+    TaskFlow       = function ( todo, scope, followers, name ) {
+        this.scope       = scope || {};
+        this.todo        = isArray(todo)?todo : todo&&[todo]||[];
+        this.doAfter     = [];
+        //this.overides = {};
+        this.locks       = 0;
+        this.fails       = 0;
+        this._complete   = false;
+        this._followers  = followers instanceof Array ? followers : [followers];
+        this._onfail     = null;
+        this.displayName = name;
+
+        this.release   = this.success   = this.release.bind(this);
+        this.asyncFail = this.fail.bind(this);
+    };
+TaskFlow.Task      = function () {
+};
+TaskFlow.Catch     = function () {
+};
+module.exports     = TaskFlow;
+TaskFlow.prototype =
+{
+    kill       : function () {
+        this.doAfter=this.scope=this._onfail = this._followers=0;
+        this.dead = true;
+    },
+    reset       : function () {
+        if (this.dead) return;
+        this._complete=false;
+        this._pos=0;
+    },
+    /**
+     * Add one shot success call back / TaskFlow
+     * Passed wf will be released (so it will start running if there no others locks)
+     * @param cb {function||TaskFlow}
+     * @returns {TaskFlow}
+     */
+    then        : function () {
+        if (this.dead) return;
+        this._followers = (this._followers instanceof Array) && this._followers || [];
+        for ( var i = 0, ln = arguments.length ; i < ln ; i++ ) {
+            if ( arguments[i] instanceof Array ) this.then.apply(this, arguments[i]);
+            else {
+                this._followers.push(arguments[i]);
+                if ( arguments[i] instanceof TaskFlow )// @todo in wait ?
+                    arguments[i].locks++;
+            }
+        }
+        if ( this._complete ) {
+            this.locks++;
+            this.release();
+        }
+        return this;
+    },
+    /**
+     * Add one shot fail call back
+     * @param cb {function||TaskFlow||array}
+     * @returns {TaskFlow}
+     */
+    catchFail   : function () {
+        if (this.dead) return;
+        var done     = this.fails && this._complete;
+        this._onfail = this._onfail || [];
+        for ( var i = 0, ln = arguments.length ; i < ln ; i++ ) {
+            if ( arguments[i] instanceof Array ) this.catchFail.apply(this, arguments[i]);
+            else {
+                if ( !done )
+                    this._onfail.push(arguments[i]);
+                else arguments[i]();
+            }
+        }
+        return this;
+    },
+    /**
+     * make this wf fall in failure, triggering one shot cb
+     * @todo
+     * @param cause
+     */
+    fail        : function ( cause ) {
+        if (this.dead) return;
+        var tmp, i = 0;
+        this._fail = cause;
+        if ( this._onfail )
+            while (i < this._onfail.length) {
+                tmp = this._onfail[i++];
+                if ( tmp instanceof Function ) tmp(this.scope, cause, this);
+                else if ( tmp instanceof TaskFlow ) tmp.release();
+            }
+    },
+    /**
+     * Push a task & start running the wf (or restart it from last pos) if no remaining locks
+     * @param {fn|TaskFlow} the tasks
+     * @returns {TaskFlow}
+     */
+    push        : function () {
+        if (this.dead) return;
+        this.locks++;
+        this._complete = false;
+        this.todo.push.apply(this.todo, arguments);
+        this.release();
+        return this;
+    },
+    /**
+     * Add a lock
+     * @param previous optional wf to wait (when previous will be done this will be unlocked
+     * @returns {TaskFlow}
+     */
+    wait        : function ( previous ) {
+        if (this.dead) return;
+        if ( isArray(previous) )
+            return previous.map(this.wait.bind(this));
+        if ( previous ) {
+            previous.then(this);
+        } else this.locks++;
+        return this;
+    },
+    /**
+     * Decrease locks for this wf, if it reach 0 all stuff passed to "then" call back will be exec / released
+     * @param desync
+     * @returns {*}
+     */
+    release     : function ( desync ) {
+        var me = this;
+        if (this.dead) return;
+        if ( desync && this.locks > 0 ) return setTimeout(this.success) && this;
+        var tmp;
+
+        if ( !--this.locks ) {
+            if ( this.doAfter.length || this.todo.length > this._pos ) {
+                //tmp            = this._nextTask;
+                //this._nextTask = null;
+
+                this.run(tmp);
+
+                return;
+            }
+            //console.log('run '+this.locks)
+            this._complete = true;
+            this.running = false;
+
+            if ( this._followers instanceof Array ) {
+                while (this._followers.length) {
+                    tmp = this._followers.shift();
+
+                    if ( tmp instanceof Function ) tmp(this.scope, this);
+                    else if ( tmp instanceof TaskFlow ) tmp.release();
+                }
+            } else {
+                tmp = this._followers;
+
+                if ( tmp instanceof Function ) tmp(this.scope, this);
+                else if ( tmp instanceof TaskFlow ) tmp.release();
+            }
+        }
+        return this;
+    },
+    _pos        : 0,
+    _nextTask   : 0,
+    pushSubTask : function ( task ) {
+        if (this.dead) return;
+        this.doAfter.push(task);
+    },
+    // override    : function ( taskName, fn ) {
+    //
+    //     this.overrides[taskName] = this.overrides[taskName] || [];
+    //     this.overrides[taskName].push(fn);
+    // },
+
+    /**
+     * Start this wf execution
+     * @returns {*}
+     */
+    run : function ( step, force, releaseAfter ) {
+        if (this.dead) return;
+        if ( !step && !this.locks && !this.doAfter.length && (this._pos>=this.todo.length) ) {
+            this.locks++;
+            this.running = false;
+            this.release();
+            return this;
+        }
+        if ( !force && this.locks ) return step && this.pushSubTask(step);
+
+        this.running = true;
+
+
+        step = step || this.doAfter.length && this.doAfter.shift() || this.todo[this._pos++];
+
+        this.locks++;
+        if ( isString(step) ) {
+
+            if ( !this._succesfull ) {
+                // there was a fail
+            }
+            if ( this.scope[step] instanceof Function ) {
+                step = this.scope[step](null, this.scope, this);
+
+            } else step = this.scope[step];
+        } else if ( step instanceof Function ) {
+
+            this._succesfull = true;
+            step             = step(this.scope, this);
+            this._succesfull = false;
+
+        } else if ( step instanceof TaskFlow ) {// sync wf
+            step.then(this);
+            step = null;
+        } else if ( step instanceof Array ) {//async pool
+            this.locks++;
+            for ( var i = 0 ; i < step.length ; i++, this.locks++ )
+                setTimeout(this.run.bind(this, step[i], true, true));
+            setTimeout(this.success);
+            step = null;
+        } else {
+            step = null;
+        }
+
+        !step && releaseAfter && this.release();
+        this.run(step, step && force, step && releaseAfter);
+        this.release();
+
+        return this;
+    }
+};
+
+/***/ }),
+
 /***/ "./node_modules/webpack/buildin/global.js":
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -25986,6 +30073,172 @@ module.exports = function(originalModule) {
 
 /***/ }),
 
+/***/ "./node_modules/webpack/buildin/module.js":
+/*!***********************************!*\
+  !*** (webpack)/buildin/module.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if (!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if (!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+
+/***/ "./src/MapOf.RTween_helpers_demux_____js.gen.js":
+/*!******************************************************!*\
+  !*** ./src/MapOf.RTween_helpers_demux_____js.gen.js ***!
+  \******************************************************/
+/*! exports provided: $all, backgroundColor, filter, transform, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "$all", function() { return $all; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "backgroundColor", function() { return backgroundColor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "filter", function() { return filter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "transform", function() { return transform; });
+(function () {
+  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
+  enterModule && enterModule(module);
+})();
+
+/* This is a virtual file generated by webpack-inherit */
+var req,
+    _exports = {},
+    root;
+req = __webpack_require__("./src/helpers/demux sync recursive ^\\.\\/([^\\\\\\/]+)\\.js$");
+req.keys().forEach(function (key) {
+  var mod,
+      name = key.match(/^\.\/([^\\\/]+)\.js$/);
+  name = name && name[1] || key.substr(2);
+
+  if (!_exports[name]) {
+    mod = req(key);
+    _exports[name] = Object.keys(mod).length === 1 && mod.default || mod;
+  }
+});
+var $all = _exports.$all;
+var backgroundColor = _exports.backgroundColor;
+var filter = _exports.filter;
+var transform = _exports.transform;
+var _default = _exports;
+/* harmony default export */ __webpack_exports__["default"] = (_default);
+;
+
+(function () {
+  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).default;
+
+  if (!reactHotLoader) {
+    return;
+  }
+
+  reactHotLoader.register(req, "req", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.RTween_helpers_demux_____js.gen.js");
+  reactHotLoader.register(_exports, "_exports", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.RTween_helpers_demux_____js.gen.js");
+  reactHotLoader.register(root, "root", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.RTween_helpers_demux_____js.gen.js");
+  reactHotLoader.register($all, "$all", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.RTween_helpers_demux_____js.gen.js");
+  reactHotLoader.register(backgroundColor, "backgroundColor", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.RTween_helpers_demux_____js.gen.js");
+  reactHotLoader.register(filter, "filter", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.RTween_helpers_demux_____js.gen.js");
+  reactHotLoader.register(transform, "transform", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.RTween_helpers_demux_____js.gen.js");
+  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.RTween_helpers_demux_____js.gen.js");
+})();
+
+;
+
+(function () {
+  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).leaveModule;
+  leaveModule && leaveModule(module);
+})();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/MapOf.RTween_helpers_demux_typed_____js.gen.js":
+/*!************************************************************!*\
+  !*** ./src/MapOf.RTween_helpers_demux_typed_____js.gen.js ***!
+  \************************************************************/
+/*! exports provided: color, number, transforms, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "color", function() { return color; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "number", function() { return number; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "transforms", function() { return transforms; });
+(function () {
+  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
+  enterModule && enterModule(module);
+})();
+
+/* This is a virtual file generated by webpack-inherit */
+var req,
+    _exports = {},
+    root;
+req = __webpack_require__("./src/helpers/demux/typed sync recursive ^\\.\\/([^\\\\\\/]+)\\.js$");
+req.keys().forEach(function (key) {
+  var mod,
+      name = key.match(/^\.\/([^\\\/]+)\.js$/);
+  name = name && name[1] || key.substr(2);
+
+  if (!_exports[name]) {
+    mod = req(key);
+    _exports[name] = Object.keys(mod).length === 1 && mod.default || mod;
+  }
+});
+var color = _exports.color;
+var number = _exports.number;
+var transforms = _exports.transforms;
+var _default = _exports;
+/* harmony default export */ __webpack_exports__["default"] = (_default);
+;
+
+(function () {
+  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).default;
+
+  if (!reactHotLoader) {
+    return;
+  }
+
+  reactHotLoader.register(req, "req", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.RTween_helpers_demux_typed_____js.gen.js");
+  reactHotLoader.register(_exports, "_exports", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.RTween_helpers_demux_typed_____js.gen.js");
+  reactHotLoader.register(root, "root", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.RTween_helpers_demux_typed_____js.gen.js");
+  reactHotLoader.register(color, "color", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.RTween_helpers_demux_typed_____js.gen.js");
+  reactHotLoader.register(number, "number", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.RTween_helpers_demux_typed_____js.gen.js");
+  reactHotLoader.register(transforms, "transforms", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.RTween_helpers_demux_typed_____js.gen.js");
+  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.RTween_helpers_demux_typed_____js.gen.js");
+})();
+
+;
+
+(function () {
+  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).leaveModule;
+  leaveModule && leaveModule(module);
+})();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
 /***/ "./src/MapOf.RTween_samples_______js.gen.js":
 /*!**************************************************!*\
   !*** ./src/MapOf.RTween_samples_______js.gen.js ***!
@@ -26036,6 +30289,2714 @@ var _default = _exports;
   reactHotLoader.register(SimpleHeaderTest, "SimpleHeaderTest", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.RTween_samples_______js.gen.js");
   reactHotLoader.register(SimpleTest, "SimpleTest", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.RTween_samples_______js.gen.js");
   reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.RTween_samples_______js.gen.js");
+})();
+
+;
+
+(function () {
+  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).leaveModule;
+  leaveModule && leaveModule(module);
+})();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/TweenRef.js":
+/*!*************************!*\
+  !*** ./src/TweenRef.js ***!
+  \*************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TweenRef; });
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/objectSpread */ "./node_modules/@babel/runtime/helpers/objectSpread.js");
+/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var shortid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! shortid */ "./node_modules/shortid/index.js");
+/* harmony import */ var shortid__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(shortid__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! is */ "./node_modules/is/index.js");
+/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(is__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _TweenerContext__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./TweenerContext */ "./src/TweenerContext.js");
+
+
+
+
+
+
+
+(function () {
+  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
+  enterModule && enterModule(module);
+})();
+
+/*
+ * The MIT License (MIT)
+ * Copyright (c) 2019. Wise Wild Web
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *  @author : Nathanael Braun
+ *  @contact : n8tz.js@gmail.com
+ */
+
+
+
+
+
+function setTarget(anims, target) {
+  return anims.map(function (tween) {
+    return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_5___default()({}, tween, {
+      target: target
+    });
+  });
+}
+
+var TweenRef =
+/*#__PURE__*/
+function (_React$Component) {
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default()(TweenRef, _React$Component);
+
+  function TweenRef() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, TweenRef);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, (_getPrototypeOf2 = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(TweenRef)).call.apply(_getPrototypeOf2, [this].concat(args)));
+    _this.state = {};
+    _this.__tweenableId = shortid__WEBPACK_IMPORTED_MODULE_7___default.a.generate();
+    return _this;
+  }
+
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(TweenRef, [{
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      var _this2 = this;
+
+      if (this._scrollableAnims) {
+        Object.keys(this._scrollableAnims).forEach(function (axe) {
+          return _this2._previousTweener.rmScrollableAnim(_this2._scrollableAnims[axe], axe);
+        });
+      }
+
+      delete this._previousTweener;
+      delete this._previousScrollable;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      var _this$props = this.props,
+          children = _this$props.children,
+          _this$props$id = _this$props.id,
+          id = _this$props$id === void 0 ? this.__tweenableId : _this$props$id,
+          style = _this$props.style,
+          initial = _this$props.initial,
+          pos = _this$props.pos,
+          noRef = _this$props.noRef,
+          reset = _this$props.reset,
+          scrollableAnims = _this$props.scrollableAnims,
+          _this$props$onClick = _this$props.onClick,
+          onClick = _this$props$onClick === void 0 ? children && children.props && children.props.onClick : _this$props$onClick,
+          _this$props$onDoubleC = _this$props.onDoubleClick,
+          onDoubleClick = _this$props$onDoubleC === void 0 ? children && children.props && children.props.onDoubleClick : _this$props$onDoubleC;
+      return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_TweenerContext__WEBPACK_IMPORTED_MODULE_9__["default"].Consumer, null, function (tweener) {
+        if (react__WEBPACK_IMPORTED_MODULE_6___default.a.isValidElement(children)) {
+          children = react__WEBPACK_IMPORTED_MODULE_6___default.a.cloneElement(children, _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_5___default()({}, tweener.tweenRef(id, style || children.props.style, initial, pos, noRef, reset), {
+            onDoubleClick: onDoubleClick && function (e) {
+              return onDoubleClick(e, tweener);
+            },
+            onClick: onClick && function (e) {
+              return onClick(e, tweener);
+            }
+          }));
+        }
+
+        if (_this3._previousTweener !== tweener || _this3._previousScrollable !== scrollableAnims) {
+          if (_this3._scrollableAnims) {
+            Object.keys(_this3._scrollableAnims).forEach(function (axe) {
+              return _this3._previousTweener.rmScrollableAnim(_this3._scrollableAnims[axe], axe);
+            });
+          }
+
+          if (scrollableAnims && is__WEBPACK_IMPORTED_MODULE_8___default.a.array(scrollableAnims)) _this3._scrollableAnims = {
+            scrollY: tweener.addScrollableAnim(setTarget(scrollableAnims, id))
+          };else _this3._scrollableAnims = scrollableAnims && Object.keys(scrollableAnims).reduce(function (h, axe) {
+            return h[axe] = tweener.addScrollableAnim(setTarget(scrollableAnims[axe], id), axe), h;
+          }, {});
+          _this3._previousTweener = tweener;
+          _this3._previousScrollable = scrollableAnims;
+        }
+
+        return children;
+      });
+    }
+  }, {
+    key: "__reactstandin__regenerateByEval",
+    // @ts-ignore
+    value: function __reactstandin__regenerateByEval(key, code) {
+      // @ts-ignore
+      this[key] = eval(code);
+    }
+  }]);
+
+  return TweenRef;
+}(react__WEBPACK_IMPORTED_MODULE_6___default.a.Component);
+
+TweenRef.propTypes = {//record  : PropTypes.object.isRequired,
+  //onSelect: PropTypes.func
+};
+
+;
+
+(function () {
+  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).default;
+
+  if (!reactHotLoader) {
+    return;
+  }
+
+  reactHotLoader.register(setTarget, "setTarget", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\TweenRef.js");
+  reactHotLoader.register(TweenRef, "TweenRef", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\TweenRef.js");
+})();
+
+;
+
+(function () {
+  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).leaveModule;
+  leaveModule && leaveModule(module);
+})();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/TweenerContext.js":
+/*!*******************************!*\
+  !*** ./src/TweenerContext.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+(function () {
+  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
+  enterModule && enterModule(module);
+})();
+
+/*
+ * The MIT License (MIT)
+ * Copyright (c) 2019. Wise Wild Web
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *  @author : Nathanael Braun
+ *  @contact : n8tz.js@gmail.com
+ */
+
+var context = {
+  tweenerById: {}
+};
+var TweenerContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext(context);
+var _default = TweenerContext;
+/* harmony default export */ __webpack_exports__["default"] = (_default);
+;
+
+(function () {
+  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).default;
+
+  if (!reactHotLoader) {
+    return;
+  }
+
+  reactHotLoader.register(context, "context", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\TweenerContext.js");
+  reactHotLoader.register(TweenerContext, "TweenerContext", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\TweenerContext.js");
+  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\TweenerContext.js");
+})();
+
+;
+
+(function () {
+  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).leaveModule;
+  leaveModule && leaveModule(module);
+})();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/asTweener.js":
+/*!**************************!*\
+  !*** ./src/asTweener.js ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return asTweener; });
+/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "./node_modules/@babel/runtime/helpers/toConsumableArray.js");
+/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/objectSpread */ "./node_modules/@babel/runtime/helpers/objectSpread.js");
+/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js");
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime/helpers/get */ "./node_modules/@babel/runtime/helpers/get.js");
+/* harmony import */ var _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! is */ "./node_modules/is/index.js");
+/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(is__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var taskflows__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! taskflows */ "./node_modules/taskflows/index.js");
+/* harmony import */ var taskflows__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(taskflows__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./utils */ "./src/utils.js");
+/* harmony import */ var _TweenerContext__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./TweenerContext */ "./src/TweenerContext.js");
+/* harmony import */ var rtween__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! rtween */ "./node_modules/rtween/dist/rTween.js");
+/* harmony import */ var rtween__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(rtween__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./helpers */ "./src/helpers/index.js");
+
+
+
+
+
+
+
+
+
+
+(function () {
+  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
+  enterModule && enterModule(module);
+})();
+
+/*
+ * The MIT License (MIT)
+ * Copyright (c) 2019. Wise Wild Web
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *  @author : Nathanael Braun
+ *  @contact : n8tz.js@gmail.com
+ */
+
+
+
+
+
+
+
+
+/**
+ * @todo : clean & comments
+ */
+
+var isBrowserSide = new Function("try {return this===window;}catch(e){ return false;}")(),
+    isArray = is__WEBPACK_IMPORTED_MODULE_10___default.a.array,
+    initialTweenable = {// while no matrix..
+},
+    _live,
+    lastTm,
+    _running = [];
+
+var SimpleObjectProto = {}.constructor;
+var Runner = {
+  run: function run(tl, ctx, duration, cb) {
+    var apply = function apply(pos, size) {
+      return tl.go(pos / size, ctx);
+    };
+
+    _running.push({
+      apply: apply,
+      duration: duration,
+      cpos: 0,
+      cb: cb
+    });
+
+    tl.go(0, ctx, true); //reset tl
+
+    if (!_live) {
+      _live = true;
+      lastTm = Date.now(); // console.log("TL runner On");
+
+      setTimeout(this._tick, 16);
+    }
+  },
+  _tick: function _tick() {
+    var i = 0,
+        o,
+        tm = Date.now(),
+        delta = tm - lastTm;
+    lastTm = tm;
+
+    for (; i < _running.length; i++) {
+      _running[i].cpos = Math.min(delta + _running[i].cpos, _running[i].duration); //cpos
+
+      _running[i].apply(_running[i].cpos, _running[i].duration); // console.log("TL runner ",_running[i][3]);
+
+
+      if (_running[i].cpos == _running[i].duration) {
+        _running[i].cb && setTimeout(_running[i].cb);
+        _running.splice(i, 1), i--;
+      }
+    }
+
+    if (_running.length) setTimeout(_tick, 16);else {
+      // console.log("TL runner Off");
+      _live = false;
+    }
+  }
+};
+/**
+ * asTweener decorator
+ * @param argz
+ * @returns {*}
+ */
+
+function asTweener() {
+  var _class, _temp;
+
+  for (var _len = arguments.length, argz = new Array(_len), _key = 0; _key < _len; _key++) {
+    argz[_key] = arguments[_key];
+  }
+
+  var BaseComponent = (!argz[0] || argz[0].prototype instanceof react__WEBPACK_IMPORTED_MODULE_9___default.a.Component || argz[0] === react__WEBPACK_IMPORTED_MODULE_9___default.a.Component) && argz.shift(),
+      opts = (!argz[0] || argz[0] instanceof SimpleObjectProto) && argz.shift() || {};
+
+  if (!(BaseComponent && (BaseComponent.prototype instanceof react__WEBPACK_IMPORTED_MODULE_9___default.a.Component || BaseComponent === react__WEBPACK_IMPORTED_MODULE_9___default.a.Component))) {
+    return function (BaseComponent) {
+      return asTweener(BaseComponent, opts);
+    };
+  }
+
+  return _temp = _class =
+  /*#__PURE__*/
+  function (_BaseComponent) {
+    _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_8___default()(TweenableComp, _BaseComponent);
+
+    function TweenableComp() {
+      var _this;
+
+      _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2___default()(this, TweenableComp);
+
+      _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(TweenableComp).apply(this, arguments));
+      var _static = _this.constructor;
+      _this._ = {
+        refs: {},
+        muxByTarget: {}
+      };
+      _this._.box = {
+        x: 100,
+        y: 100,
+        z: 800
+      };
+      _this._.curMotionStateId = _static.InitialMotionState || "stand";
+      _this._._rafLoop = _this._rafLoop.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_this));
+      return _this;
+    }
+
+    _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3___default()(TweenableComp, [{
+      key: "resetTweenable",
+      value: function resetTweenable() {
+        var _this2 = this;
+
+        for (var _len2 = arguments.length, targets = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+          targets[_key2] = arguments[_key2];
+        }
+
+        targets.forEach(function (t) {
+          // delete this._.tweenRefs[t];
+          // delete this._.tweenRefCSS[t];
+          _this2._.tweenRefMaps[t] = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, _this2._.tweenRefOrigin[t]);
+        });
+
+        this._updateTweenRefs();
+      }
+      /**
+       * Register tweenable element
+       * @param id
+       * @param iStyle
+       * @param iMap
+       * @param pos
+       * @param noref
+       * @param mapReset
+       * @returns {*}
+       */
+
+    }, {
+      key: "tweenRef",
+      value: function tweenRef(id, iStyle, iMap, pos, noref, mapReset) {
+        var _this3 = this;
+
+        // ref initial style
+        this.makeTweenable();
+        var _static = this.constructor,
+            _ = this._,
+            tweenableMap = {},
+            cState = _static.motionStates && _static.motionStates[this._.curMotionStateId];
+        if (!this._.tweenRefs[id]) this._.tweenRefTargets.push(id);
+
+        if (mapReset || !this._.tweenRefs[id]) {
+          if (cState && cState.refs && cState.refs[id]) {
+            iStyle = iStyle || _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, cState.refs[id][0]);
+            iMap = iMap || _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, cState.refs[id][1]);
+          } else {
+            iStyle = iStyle || {};
+            iMap = iMap || {};
+          }
+
+          var initials = {};
+          this._.tweenRefs[id] = true;
+          this._.muxByTarget[id] = this._.muxByTarget[id] || {};
+          this._.muxDataByTarget[id] = this._.muxDataByTarget[id] || {};
+
+          if (iMap.getPosAt) {
+            // typeof rtween
+            tweenableMap = iMap.getPosAt(pos, !mapReset && this._.tweenRefMaps[id] || Object.assign({}, initialTweenable, iMap.scope || {}));
+          } else {
+            mapReset = noref;
+            noref = pos;
+            iStyle = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, iStyle, Object(_helpers__WEBPACK_IMPORTED_MODULE_16__["deMuxTween"])(iMap, tweenableMap, initials, this._.muxDataByTarget[id], this._.muxByTarget[id])); //this._.tweenRefUnits[id] = extractUnits(iMap);
+          }
+
+          this._.tweenRefOrigin[id] = tweenableMap;
+          iStyle = mapReset && _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, iStyle) || this._.tweenRefCSS[id] || _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, iStyle);
+          this._.tweenRefCSS[id] = iStyle; // init / reset or get the tweenable view
+
+          tweenableMap = this._.tweenRefMaps[id] = !mapReset && this._.tweenRefMaps[id] || Object.assign({}, initials, tweenableMap || {}); //console.log(tweenableMap, iStyle, initials, this._.muxByTarget[id], this._.muxDataByTarget[id])
+          //utils.mapInBoxCSS(iMap, iStyle, this._.box, this._.tweenRefUnits[id]);
+
+          Object(_helpers__WEBPACK_IMPORTED_MODULE_16__["muxToCss"])(tweenableMap, iStyle, this._.muxByTarget[id], this._.muxDataByTarget[id], this._.box); //this._.refs[id] = this._.refs[id] || React.createRef();
+        }
+
+        if (noref) return {
+          style: _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, this._.tweenRefCSS[id])
+        };else return {
+          style: _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, this._.tweenRefCSS[id]),
+          ref: function ref(node) {
+            return _this3._.refs[id] = node;
+          } // __tweenMap : this._.tweenRefMaps[id],
+          // __tweenCSS : this._.tweenRefCSS[id]
+
+        };
+      } // ------------------------------------------------------------
+      // -------------------- Pushable anims ------------------------
+      // ------------------------------------------------------------
+
+      /**
+       * Push anims
+       * @param anim
+       * @param then
+       * @param skipInit
+       * @returns {rtween}
+       */
+
+    }, {
+      key: "pushAnim",
+      value: function pushAnim(anim, then, skipInit) {
+        var _this4 = this;
+
+        var sl,
+            initial,
+            muxed,
+            initials = {};
+
+        if (isArray(anim)) {
+          sl = anim;
+        } else {
+          sl = anim.anims;
+          initial = anim.initial;
+        }
+
+        if (!(sl instanceof rtween__WEBPACK_IMPORTED_MODULE_14___default.a)) {
+          // tweenLine, initials, data, demuxers
+          sl = Object(_helpers__WEBPACK_IMPORTED_MODULE_16__["deMuxLine"])(sl, initials, this._.muxDataByTarget, this._.muxByTarget);
+          sl = new rtween__WEBPACK_IMPORTED_MODULE_14___default.a(sl, this._.tweenRefMaps);
+          Object.keys(initials).forEach(function (id) {
+            return Object.assign(_this4._.tweenRefMaps[id], _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, initials[id], _this4._.tweenRefMaps[id]));
+          });
+        } // console.warn("Should start anim ", sl);
+
+
+        this.makeTweenable();
+        !skipInit && initial && Object.keys(initial).map(function (id) {
+          return _this4.applyTweenState(id, initial[id], anim.reset);
+        });
+        sl.run(this._.tweenRefMaps, function () {
+          var i = _this4._.runningAnims.indexOf(sl);
+
+          if (i != -1) _this4._.runningAnims.splice(i, 1);
+          then && then(sl);
+        }); //launch
+
+        this._.runningAnims.push(sl);
+
+        if (!this._.live) {
+          this._.live = true; //console.log("RAF On");
+
+          requestAnimationFrame(this._._rafLoop = this._._rafLoop || this._rafLoop.bind(this));
+        }
+
+        return sl;
+      }
+    }, {
+      key: "registerPropChangeAnim",
+      value: function registerPropChangeAnim(propId, propValue, anims) {
+        this._.rtweensByProp = this._.rtweensByProp || {};
+        this._.rtween = this._.rtween || new rtween__WEBPACK_IMPORTED_MODULE_14___default.a();
+        this._.rtweensByProp[propId] = this._.rtweensByProp[propId] || {};
+        this._.rtweensByProp[propId][propValue] = this._.rtweensByProp[propId][propValue] || new rtween__WEBPACK_IMPORTED_MODULE_14___default.a();
+
+        this._.rtweensByProp[propId][propValue].mount(anims);
+      }
+    }, {
+      key: "registerStateChangeAnim",
+      value: function registerStateChangeAnim(propId, propValue, anims) {
+        this._.rtweensByStateProp = this._.rtweensByStateProp || {};
+        this._.rtween = this._.rtween || new rtween__WEBPACK_IMPORTED_MODULE_14___default.a();
+        this._.rtweensByStateProp[propId] = this._.rtweensByStateProp[propId] || {};
+        this._.rtweensByStateProp[propId][propValue] = this._.rtweensByStateProp[propId][propValue] || new rtween__WEBPACK_IMPORTED_MODULE_14___default.a();
+
+        this._.rtweensByStateProp[propId][propValue].mount(anims);
+      }
+    }, {
+      key: "makeTweenable",
+      value: function makeTweenable() {
+        var _this5 = this;
+
+        if (!this._.tweenEnabled) {
+          this._.rtweensByProp = {};
+          this._.rtweensByStateProp = {};
+          this._.tweenRefCSS = {};
+          this._.tweenRefs = {};
+          this._.tweenRefMaps = {};
+          this._.tweenRefUnits = {};
+          this._.tweenEnabled = true;
+          this._.tweenRefOrigin = {};
+          this._.muxDataByTarget = this._.muxDataByTarget || {};
+          this._.tweenRefDemuxed = this._.tweenRefDemuxed || {};
+          this._.tweenRefTargets = this._.tweenRefTargets || [];
+          this._.runningAnims = this._.runningAnims || [];
+          isBrowserSide && window.addEventListener("resize", this._.onResize = function () {
+            //@todo
+            _this5._updateBox();
+
+            _this5._updateTweenRefs();
+          });
+        }
+      } // ------------------------------------------------------------
+      // ------------------ Scrollable anims ------------------------
+      // ------------------------------------------------------------
+
+      /**
+       * Tween this tween line to 'to' during 'tm' ms using easing fn
+       * @param to {int}
+       * @param tm {int} duration in ms
+       * @param easing {function} easing fn
+       * @param tick {function} fn called at each tick
+       * @param cb {function} fn called on complete
+       */
+
+    }, {
+      key: "_runScrollGoTo",
+      value: function _runScrollGoTo(axe, to, tm) {
+        var _this6 = this;
+
+        var easing = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function (x) {
+          return x;
+        };
+        var tick = arguments.length > 4 ? arguments[4] : undefined;
+        var cb = arguments.length > 5 ? arguments[5] : undefined;
+        var from = this._.axes[axe].scrollPos,
+            length = to - from;
+
+        _running.push({
+          apply: function apply(pos, max) {
+            var x = from + easing(pos / max) * length;
+
+            if (_this6._.tweenEnabled) {
+              _this6._.axes[axe].scrollableAnims.forEach(function (sl) {
+                return sl.goTo(x);
+              });
+
+              tick && tick(x);
+            }
+          },
+          duration: tm,
+          cpos: 0,
+          cb: cb
+        });
+
+        if (!_live) {
+          _live = true;
+          lastTm = Date.now(); // console.log("TL runner On");
+
+          setTimeout(Runner._tick, 16);
+        }
+      }
+    }, {
+      key: "addScrollableAnim",
+      value: function addScrollableAnim(anim) {
+        var _this7 = this;
+
+        var axe = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "scrollY";
+        var size = arguments.length > 2 ? arguments[2] : undefined;
+        var sl,
+            _ = this._,
+            initials = {};
+
+        if (isArray(anim)) {
+          sl = anim;
+        } else {
+          sl = anim.anims;
+          size = anim.length;
+        }
+
+        if (!(sl instanceof rtween__WEBPACK_IMPORTED_MODULE_14___default.a)) {
+          sl = Object(_helpers__WEBPACK_IMPORTED_MODULE_16__["deMuxLine"])(sl, initials, this._.muxDataByTarget, this._.muxByTarget);
+          sl = new rtween__WEBPACK_IMPORTED_MODULE_14___default.a(sl, _.tweenRefMaps);
+          Object.keys(initials).forEach(function (id) {
+            return Object.assign(_this7._.tweenRefMaps[id], _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, initials[id], _this7._.tweenRefMaps[id]));
+          });
+        }
+
+        this.makeTweenable();
+        this.makeScrollable(); // init scroll
+
+        _.axes[axe] = _.axes[axe] || {
+          scrollableAnims: [],
+          scrollPos: opts.initialScrollPos && opts.initialScrollPos[axe] || 0,
+          targetPos: 0,
+          scrollableArea: 0
+        };
+
+        _.axes[axe].scrollableAnims.push(sl);
+
+        _.axes[axe].scrollPos = _.axes[axe].scrollPos || 0;
+        _.axes[axe].scrollableArea = _.axes[axe].scrollableArea || 0;
+        _.axes[axe].scrollableArea = Math.max(_.axes[axe].scrollableArea, sl.duration);
+        sl.goTo(_.axes[axe].scrollPos, this._.tweenRefMaps);
+
+        this._updateTweenRefs();
+
+        return sl;
+      }
+    }, {
+      key: "rmScrollableAnim",
+      value: function rmScrollableAnim(sl) {
+        var axe = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "scrollY";
+        var _ = this._,
+            found;
+
+        if (_.axes) {
+          var i = _.axes[axe].scrollableAnims.indexOf(sl);
+
+          if (i != -1) {
+            _.axes[axe].scrollableAnims.splice(i, 1);
+
+            _.axes[axe].scrollableArea = Math.max.apply(Math, _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(_.axes[axe].scrollableAnims.map(function (tl) {
+              return tl.duration;
+            })).concat([0]));
+            sl.goTo(0, this._.tweenRefMaps);
+            found = true;
+          }
+        }
+
+        !found && console.warn("TweenLine not found !");
+      }
+    }, {
+      key: "scrollTo",
+      value: function scrollTo(newPos) {
+        var _this8 = this;
+
+        var ms = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+        var axe = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "scrollY";
+
+        if (this._.axes) {
+          var oldPos = this._.axes[axe].targetPos,
+              setPos = function setPos(pos) {
+            return _this8._.axes[axe].scrollPos = pos, _this8.componentDidScroll && _this8.componentDidScroll(~~pos), _this8._updateTweenRefs();
+          };
+
+          newPos = Math.max(0, newPos);
+          newPos = Math.min(newPos, this._.axes[axe].scrollableArea);
+          this._.axes[axe].targetPos = newPos;
+
+          if (!ms) {
+            this._.axes[axe].scrollableAnims.forEach(function (sl) {
+              return sl.goTo(newPos, _this8._.tweenRefMaps);
+            });
+
+            setPos(newPos);
+          } else {
+            this._runScrollGoTo(axe, newPos, ms, undefined, setPos);
+          }
+
+          if (!this._.live) {
+            this._.live = true;
+            requestAnimationFrame(this._._rafLoop);
+          }
+
+          return !(oldPos - newPos);
+        }
+      }
+    }, {
+      key: "makeScrollable",
+      value: function makeScrollable() {
+        if (!this._.scrollEnabled) {
+          this._.scrollEnabled = true;
+          this._.scrollHook = [];
+          this._.axes = {
+            scrollX: {
+              scrollableAnims: [],
+              scrollPos: opts.initialScrollPos && opts.initialScrollPos.scrollX || 0,
+              targetPos: 0,
+              scrollableArea: 0
+            },
+            scrollY: {
+              scrollableAnims: [],
+              scrollPos: opts.initialScrollPos && opts.initialScrollPos.scrollY || 0,
+              targetPos: 0,
+              scrollableArea: 0
+            }
+          };
+
+          this._registerScrollListeners(); //ReactDom.findDOMNode(this).addEventListener("onscroll", this._.onScroll)
+
+        }
+      }
+    }, {
+      key: "_registerScrollListeners",
+      value: function _registerScrollListeners() {
+        var _this9 = this;
+
+        if (this._.rendered) {
+          isBrowserSide && _utils__WEBPACK_IMPORTED_MODULE_12__["default"].addWheelEvent(react_dom__WEBPACK_IMPORTED_MODULE_15___default.a.findDOMNode(this), this._.onScroll = function (e) {
+            //@todo
+            var prevent,
+                axe = "scrollY",
+                oldPos = _this9._.axes[axe].scrollPos,
+                newPos = oldPos + e.deltaY;
+
+            if (oldPos !== newPos) {
+              if (!_this9.shouldApplyScroll || _this9.shouldApplyScroll(newPos, oldPos, axe)) {
+                if (_this9.scrollTo(newPos, 100, axe)) prevent = !(opts.propagateAxes && opts.propagateAxes.scrollY);
+              }
+            }
+
+            axe = "scrollX";
+            oldPos = _this9._.axes[axe].scrollPos;
+            newPos = oldPos + e.deltaX;
+
+            if (oldPos !== newPos) {
+              if (!_this9.shouldApplyScroll || _this9.shouldApplyScroll(newPos, oldPos, axe)) {
+                if (_this9.scrollTo(newPos, 100, axe)) prevent = !(opts.propagateAxes && opts.propagateAxes.scrollX);
+              }
+            }
+
+            if (prevent) {
+              e.preventDefault();
+              e.originalEvent.stopPropagation();
+            }
+          });
+          var lastPos;
+          isBrowserSide && _utils__WEBPACK_IMPORTED_MODULE_12__["default"].addEvent(react_dom__WEBPACK_IMPORTED_MODULE_15___default.a.findDOMNode(this), this._.dragList = {
+            'drag': function drag(e, touch, descr) {
+              //@todo
+              lastPos = lastPos || _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, descr._startPos);
+              var prevent,
+                  axe = "scrollY",
+                  delta = lastPos.y - descr._lastPos.y,
+                  oldPos = _this9._.axes[axe].scrollPos,
+                  newPos = oldPos + delta / 10;
+
+              if (delta && (!_this9.shouldApplyScroll || _this9.shouldApplyScroll(newPos, oldPos, axe))) {
+                lastPos.y = descr._lastPos.y;
+                if (_this9.scrollTo(newPos, 10, axe)) prevent = !(opts.propagateAxes && opts.propagateAxes.scrollX) && prevent;
+              }
+
+              axe = "scrollX";
+              oldPos = _this9._.axes[axe].scrollPos;
+              delta = lastPos.x - descr._lastPos.x;
+              newPos = oldPos + delta / 10;
+
+              if (delta && (!_this9.shouldApplyScroll || _this9.shouldApplyScroll(newPos, oldPos, axe))) {
+                lastPos.x = descr._lastPos.x;
+                if (_this9.scrollTo(newPos, 10, axe)) prevent = !(opts.propagateAxes && opts.propagateAxes.scrollX) && prevent;
+              }
+
+              if (prevent) {
+                e.preventDefault();
+                e.stopPropagation();
+              }
+
+              return !prevent;
+            },
+            'dropped': function dropped(e, touch, descr) {
+              lastPos = null;
+            }
+          }, null, opts.enableMouseDrag);
+        } else {
+          this._.doRegister = true;
+        }
+      } // ------------------------------------------------------------
+      // --------------- Inertia & scroll modifiers -----------------
+      // ------------------------------------------------------------
+
+    }, {
+      key: "addScrollModifier",
+      value: function addScrollModifier(desc) {
+        var axe = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "scrollY";
+      } // ------------------------------------------------------------
+      // ------------------ Motion/FSM anims ------------------------
+      // ------------------------------------------------------------
+
+    }, {
+      key: "goToMotionStateId",
+      value: function goToMotionStateId(targetId) {
+        var _this10 = this;
+
+        var _static = this.constructor,
+            tState = _static.motionStates[targetId],
+            cState = this._.curMotionStateId;
+        if (!this._.rendered) return this._.delayedMotionTarget = targetId;
+        if (this.running) this.running = arguments;
+
+        if (!this.running && targetId != this._.curMotionStateId) {
+          if (!this._.tweenRefCSS) this.makeTweenable();
+          this.running = true;
+          var flow = new taskflows__WEBPACK_IMPORTED_MODULE_11___default.a([_static.motionStates[this._.curMotionStateId] && function (ctx, flow) {
+            return _static.motionStates[cState].leaving(ctx, flow, cState);
+          }, function () {
+            _this10._.curMotionStateId = targetId;
+            if (_this10.running !== true) setTimeout(function () {
+              return _this10.goToMotionStateId.apply(_this10, _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(_this10.running));
+            });
+            _this10.running = false;
+          }, tState && function (ctx, flow) {
+            return tState.entering(ctx, flow, cState);
+          }, function () {
+            tState.refs && Object.keys(tState.refs).map(function (k) {
+              _this10.updateRefStyle(k, tState.refs[k][0]);
+
+              _this10.applyTweenState(k, tState.refs[k][1]);
+            });
+          }], this);
+          flow.run();
+        }
+      }
+    }, {
+      key: "applyTweenState",
+      value: function applyTweenState(id, map, reset) {
+        var _this11 = this;
+
+        var tmap = {},
+            initials = {};
+        Object(_helpers__WEBPACK_IMPORTED_MODULE_16__["deMuxTween"])(map, tmap, initials, this._.muxDataByTarget[id], this._.muxByTarget[id]);
+        Object.keys(tmap).map(function (p) {
+          return _this11._.tweenRefMaps[id][p] = (!reset && _this11._.tweenRefMaps[id][p] || initials[p]) + tmap[p];
+        });
+      }
+    }, {
+      key: "updateRefStyle",
+      value: function updateRefStyle(target, style, postPone) {
+        var _this12 = this;
+
+        if (isArray(target) && isArray(style)) return target.map(function (m, i) {
+          return _this12.updateRefStyle(m, style[i], postPone);
+        });
+        if (isArray(target)) return target.map(function (m) {
+          return _this12.updateRefStyle(m, style, postPone);
+        });
+        if (!this._.tweenRefCSS) this.makeTweenable();
+
+        if (!postPone && this.refs[target]) {
+          var node = this.refs[target] instanceof Element ? this.refs[target] : react_dom__WEBPACK_IMPORTED_MODULE_15___default.a.findDOMNode(this.refs[target]);
+          node && Object.assign(node.style, style);
+        }
+
+        this._.tweenRefCSS[target] = this._.tweenRefCSS[target] || {};
+        Object.assign(this._.tweenRefCSS[target], style);
+      } //
+      //shouldApplyScroll( to, from ) {
+      //	return this._.scrollHook.reduce(( r, hook ) => (!r
+      //	                                                ? false
+      //	                                                : hook(to, from)), true)
+      //		|| super.shouldApplyScroll && super.shouldApplyScroll(to, from);
+      //}
+
+    }, {
+      key: "_updateBox",
+      value: function _updateBox() {
+        var node = react_dom__WEBPACK_IMPORTED_MODULE_15___default.a.findDOMNode(this);
+
+        if (node) {
+          this._.box.inited = true;
+          this._.box.x = node.offsetWidth;
+          this._.box.y = node.offsetHeight;
+        }
+      }
+    }, {
+      key: "getTweenableRef",
+      value: function getTweenableRef(id) {
+        return this._.refs[id];
+      }
+    }, {
+      key: "_rafLoop",
+      value: function _rafLoop() {
+        this._updateTweenRefs();
+
+        if (this._.runningAnims.length) requestAnimationFrame(this._._rafLoop);else {
+          this._.live = false;
+        }
+      }
+    }, {
+      key: "_updateTweenRefs",
+      value: function _updateTweenRefs() {
+        if (this._.tweenEnabled) {
+          for (var i = 0, target, node; i < this._.tweenRefTargets.length; i++) {
+            target = this._.tweenRefTargets[i];
+            Object(_helpers__WEBPACK_IMPORTED_MODULE_16__["muxToCss"])(this._.tweenRefMaps[target], this._.tweenRefCSS[target], this._.muxByTarget[target], this._.muxDataByTarget[target], this._.box);
+            node = this._.tweenEnabled && target == "__root" ? react_dom__WEBPACK_IMPORTED_MODULE_15___default.a.findDOMNode(this) : this.getTweenableRef(target);
+            node && Object.assign(node.style, this._.tweenRefCSS[target]);
+          }
+        }
+      }
+    }, {
+      key: "componentWillUnmount",
+      value: function componentWillUnmount() {
+        if (this._.tweenEnabled) {
+          this._.tweenEnabled = false;
+          window.removeEventListener("resize", this._.onResize);
+        }
+
+        if (this._.scrollEnabled) {
+          this._.scrollEnabled = false; //this._.axes          = undefined;
+
+          _utils__WEBPACK_IMPORTED_MODULE_12__["default"].rmWheelEvent(react_dom__WEBPACK_IMPORTED_MODULE_15___default.a.findDOMNode(this), this._.onScroll);
+          _utils__WEBPACK_IMPORTED_MODULE_12__["default"].removeEvent(react_dom__WEBPACK_IMPORTED_MODULE_15___default.a.findDOMNode(this), this._.dragList);
+        }
+
+        _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(TweenableComp.prototype), "componentWillUnmount", this) && _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(TweenableComp.prototype), "componentWillUnmount", this).apply(this, arguments);
+      }
+    }, {
+      key: "componentDidMount",
+      value: function componentDidMount() {
+        var _this13 = this;
+
+        var _static = this.constructor;
+        this._.rendered = true;
+
+        if (this._.tweenEnabled) {
+          // debugger;
+          this._updateBox();
+
+          this._updateTweenRefs();
+        }
+
+        if (this._.delayedMotionTarget) {
+          this.goToMotionStateId(this._.delayedMotionTarget);
+          delete this._.delayedMotionTarget;
+        }
+
+        if (_static.scrollableAnim) {
+          if (is__WEBPACK_IMPORTED_MODULE_10___default.a.array(_static.scrollableAnim)) this.addScrollableAnim(_static.scrollableAnim);else Object.keys(_static.scrollableAnim).forEach(function (axe) {
+            return _this13.addScrollableAnim(_static.scrollableAnim[axe], axe);
+          });
+        }
+
+        if (this._.doRegister) {
+          this._registerScrollListeners();
+
+          this._.doRegister = false;
+        }
+
+        _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(TweenableComp.prototype), "componentDidMount", this) && _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(TweenableComp.prototype), "componentDidMount", this).apply(this, arguments);
+      }
+    }, {
+      key: "componentDidUpdate",
+      value: function componentDidUpdate(prevProps, prevState) {
+        var _this14 = this;
+
+        if (this._.tweenEnabled) {
+          this._updateBox();
+
+          this._updateTweenRefs();
+
+          this._.rtweensByProp && Object.keys(prevProps).forEach(function (k) {
+            return _this14._.rtweensByProp[k] && _this14.props[k] !== prevProps[k] && _this14._.rtweensByProp[k][_this14.props[k]] && _this14.pushAnim(_this14._.rtweensByProp[k][_this14.props[k]]
+            /*get current pos*/
+            );
+          }, this);
+          this._.rtweensByStateProp && prevState && Object.keys(prevState).forEach(function (k) {
+            return _this14._.rtweensByStateProp[k] && _this14.state[k] !== prevState[k] && _this14._.rtweensByStateProp[k][_this14.state[k]] && _this14.pushAnim(_this14._.rtweensByStateProp[k][_this14.state[k]]
+            /*get current pos*/
+            );
+          }, this);
+        }
+
+        _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(TweenableComp.prototype), "componentDidUpdate", this) && _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(TweenableComp.prototype), "componentDidUpdate", this).apply(this, arguments); // return;
+      }
+    }, {
+      key: "render",
+      value: function render() {
+        //console.log('render', this.constructor.name)
+        return react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_TweenerContext__WEBPACK_IMPORTED_MODULE_13__["default"].Provider, {
+          value: this
+        }, _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(TweenableComp.prototype), "render", this).call(this));
+      }
+    }, {
+      key: "__reactstandin__regenerateByEval",
+      // @ts-ignore
+      value: function __reactstandin__regenerateByEval(key, code) {
+        // @ts-ignore
+        this[key] = eval(code);
+      }
+    }]);
+
+    return TweenableComp;
+  }(BaseComponent), _class.displayName = (BaseComponent.displayName || BaseComponent.name) + " (tweener)", _temp;
+}
+;
+
+(function () {
+  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).default;
+
+  if (!reactHotLoader) {
+    return;
+  }
+
+  reactHotLoader.register(isBrowserSide, "isBrowserSide", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\asTweener.js");
+  reactHotLoader.register(isArray, "isArray", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\asTweener.js");
+  reactHotLoader.register(initialTweenable, "initialTweenable", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\asTweener.js");
+  reactHotLoader.register(_live, "_live", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\asTweener.js");
+  reactHotLoader.register(lastTm, "lastTm", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\asTweener.js");
+  reactHotLoader.register(_running, "_running", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\asTweener.js");
+  reactHotLoader.register(SimpleObjectProto, "SimpleObjectProto", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\asTweener.js");
+  reactHotLoader.register(Runner, "Runner", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\asTweener.js");
+  reactHotLoader.register(asTweener, "asTweener", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\asTweener.js");
+})();
+
+;
+
+(function () {
+  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).leaveModule;
+  leaveModule && leaveModule(module);
+})();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/helpers/demux sync recursive ^\\.\\/([^\\\\\\/]+)\\.js$":
+/*!*****************************************************!*\
+  !*** ./src/helpers/demux sync ^\.\/([^\\\/]+)\.js$ ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./$all.js": "./src/helpers/demux/$all.js",
+	"./backgroundColor.js": "./src/helpers/demux/backgroundColor.js",
+	"./filter.js": "./src/helpers/demux/filter.js",
+	"./transform.js": "./src/helpers/demux/transform.js"
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "./src/helpers/demux sync recursive ^\\.\\/([^\\\\\\/]+)\\.js$";
+
+/***/ }),
+
+/***/ "./src/helpers/demux/$all.js":
+/*!***********************************!*\
+  !*** ./src/helpers/demux/$all.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! is */ "./node_modules/is/index.js");
+/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(is__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var css_animated_properties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! css-animated-properties */ "./node_modules/css-animated-properties/index.js");
+/* harmony import */ var css_animated_properties__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(css_animated_properties__WEBPACK_IMPORTED_MODULE_1__);
+(function () {
+  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
+  enterModule && enterModule(module);
+})();
+
+/*
+ * The MIT License (MIT)
+ * Copyright (c) 2019. Wise Wild Web
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *  @author : Nathanael Braun
+ *  @contact : n8tz.js@gmail.com
+ */
+
+
+
+var unitsRe = new RegExp("([+-]?(?:[0-9]*[.])?[0-9]+)\\s*(" + ['em', 'ex', '%', 'px', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'rem', 'vh', 'vw', 'vmin', 'vmax'].join('|') + ")"),
+    floatCut = function floatCut(v, l) {
+  var p = Math.pow(10, l);
+  return Math.round(v * p) / p;
+},
+    defaultUnits = {
+  left: 'px',
+  right: 'px',
+  top: 'px',
+  bottom: 'px',
+  width: 'px',
+  height: 'px'
+},
+    defaultValue = {
+  opacity: 1
+};
+
+function demux(key, tweenable, target, data, box) {
+  target[key] = data[key] ? floatCut(tweenable[key], 2) + data[key] : floatCut(tweenable[key], 2);
+}
+
+var _default = function _default(key, value, target, data, initials) {
+  var match = is__WEBPACK_IMPORTED_MODULE_0___default.a.string(value) ? value.match(unitsRe) : false;
+  initials[key] = defaultValue[key] || 0;
+
+  if (match) {
+    if (data[key] && data[key] !== match[2]) {
+      console.warn("Have != units on prop ! Ignore ", key, "present:" + data[key], "new:" + match[2]);
+      target[key] = 0;
+    } else {
+      data[key] = match[2];
+      target[key] = parseFloat(match[1]);
+    }
+  } else {
+    target[key] = value;
+    if (!data[key] && key in defaultUnits) data[key] = defaultUnits[key];
+  }
+
+  return demux;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (_default);
+;
+
+(function () {
+  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).default;
+
+  if (!reactHotLoader) {
+    return;
+  }
+
+  reactHotLoader.register(unitsRe, "unitsRe", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\$all.js");
+  reactHotLoader.register(floatCut, "floatCut", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\$all.js");
+  reactHotLoader.register(defaultUnits, "defaultUnits", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\$all.js");
+  reactHotLoader.register(defaultValue, "defaultValue", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\$all.js");
+  reactHotLoader.register(demux, "demux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\$all.js");
+  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\$all.js");
+})();
+
+;
+
+(function () {
+  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).leaveModule;
+  leaveModule && leaveModule(module);
+})();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/helpers/demux/backgroundColor.js":
+/*!**********************************************!*\
+  !*** ./src/helpers/demux/backgroundColor.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _typed_color__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./typed/color */ "./src/helpers/demux/typed/color.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _typed_color__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+/*
+ * The MIT License (MIT)
+ * Copyright (c) 2019. Wise Wild Web
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *  @author : Nathanael Braun
+ *  @contact : n8tz.js@gmail.com
+ */
+
+
+; /* eslint-disable global-require, import/no-unresolved */ (function register() { /* react-hot-loader/webpack */ var reactHotLoader = __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js").default; if (!reactHotLoader) { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { reactHotLoader.register(webpackExports, 'module.exports', "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\backgroundColor.js"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } reactHotLoader.register(namedExport, key, "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\backgroundColor.js"); } })(); 
+
+/***/ }),
+
+/***/ "./src/helpers/demux/filter.js":
+/*!*************************************!*\
+  !*** ./src/helpers/demux/filter.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! is */ "./node_modules/is/index.js");
+/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(is__WEBPACK_IMPORTED_MODULE_0__);
+(function () {
+  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
+  enterModule && enterModule(module);
+})();
+
+/*
+ * The MIT License (MIT)
+ * Copyright (c) 2019. Wise Wild Web
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *  @author : Nathanael Braun
+ *  @contact : n8tz.js@gmail.com
+ */
+
+
+var unitsRe = new RegExp("([+-]?(?:[0-9]*[.])?[0-9]+)\\s*(" + ['em', 'ex', '%', 'px', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'rem', 'vh', 'vw', 'vmin', 'vmax'].join('|') + ")"),
+    floatCut = function floatCut(v, l) {
+  var p = Math.pow(10, l);
+  return Math.round(v * p) / p;
+},
+    defaultUnits = {
+  blur: 'px',
+  brightness: '%',
+  contrast: '%',
+  dropShadow: true,
+  grayscale: '%',
+  hueRotate: 'deg',
+  invert: "%",
+  opacity: "%",
+  saturate: "%",
+  sepia: "%"
+};
+
+var filters = {};
+
+function demux(key, tweenable, target, data, box) {
+  if (data["filter_head"] === key) {
+    var _filters = "";
+    Object.keys(data[key]).forEach(function (fkey) {
+      var dkey = key + '_' + fkey;
+      data[key][fkey] = true;
+      _filters += fkey + "(" + floatCut(tweenable[dkey], 2) + data[dkey] + ") ";
+    });
+    target.filter = _filters;
+  }
+}
+
+var _default = function _default(key, value, target, data, initials) {
+  data["filter_head"] = data["filter_head"] || key;
+  data[key] = data[key] || {};
+  initials[key] = 0;
+  Object.keys(value).forEach(function (fkey) {
+    var fValue = value[fkey],
+        dkey = key + '_' + fkey,
+        match = is__WEBPACK_IMPORTED_MODULE_0___default.a.string(fValue) ? fValue.match(unitsRe) : false;
+    data[key][fkey] = true;
+    initials[dkey] = 0;
+
+    if (match) {
+      if (data[dkey] && data[dkey] !== match[2]) {
+        console.warn("Have != units on prop ! Ignore ", dkey, "present:" + data[dkey], "new:" + match[2]);
+        target[dkey] = 0;
+      } else {
+        data[dkey] = match[2];
+        target[dkey] = parseFloat(match[1]);
+      }
+    } else {
+      target[dkey] = fValue;
+      if (!data[dkey] && fkey in defaultUnits) data[dkey] = defaultUnits[fkey];
+    }
+  });
+  return demux;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (_default);
+;
+
+(function () {
+  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).default;
+
+  if (!reactHotLoader) {
+    return;
+  }
+
+  reactHotLoader.register(unitsRe, "unitsRe", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\filter.js");
+  reactHotLoader.register(floatCut, "floatCut", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\filter.js");
+  reactHotLoader.register(defaultUnits, "defaultUnits", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\filter.js");
+  reactHotLoader.register(filters, "filters", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\filter.js");
+  reactHotLoader.register(demux, "demux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\filter.js");
+  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\filter.js");
+})();
+
+;
+
+(function () {
+  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).leaveModule;
+  leaveModule && leaveModule(module);
+})();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/helpers/demux/transform.js":
+/*!****************************************!*\
+  !*** ./src/helpers/demux/transform.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! is */ "./node_modules/is/index.js");
+/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(is__WEBPACK_IMPORTED_MODULE_0__);
+(function () {
+  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
+  enterModule && enterModule(module);
+})();
+
+/*
+ * The MIT License (MIT)
+ * Copyright (c) 2019. Wise Wild Web
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *  @author : Nathanael Braun
+ *  @contact : n8tz.js@gmail.com
+ */
+
+
+var unitsRe = new RegExp("([+-]?(?:[0-9]*[.])?[0-9]+)\\s*(" + ['\\w+', 'cap', 'ch', 'em', 'ic', 'ex', '%', 'px', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'rem', 'vh', 'vw', 'vmin', 'vmax'].join('|') + ")"),
+    floatCut = function floatCut(v, l) {
+  var p = Math.pow(10, l);
+  return Math.round(v * p) / p;
+},
+    defaultUnits = {
+  //matrix     : true,
+  //translate  : 'px',
+  translateX: 'px',
+  translateY: 'px',
+  translateZ: 'px',
+  scale: '',
+  //scaleX     : 'px',
+  //scaleY     : 'px',
+  rotate: 'deg',
+  //skew       : 'deg',
+  skewX: 'deg',
+  skewY: 'deg',
+  //matrix3d   : true,
+  //translate3d: true,
+  //scale3d    : true,
+  scaleZ: 'px',
+  //rotate3d   : true,
+  rotateX: 'deg',
+  rotateY: 'deg',
+  rotateZ: 'deg',
+  perspective: 'px'
+};
+
+function demux(key, tweenable, target, data, box) {
+  if (data["transform_head"] === key) {
+    var transforms = "";
+    data[key].forEach(function (tmap, i) {
+      return Object.keys(tmap).forEach(function (fkey) {
+        var dkey = key + '_' + fkey + '_' + i,
+            value;
+        if (data[dkey] === 'deg') tweenable[dkey] = tweenable[dkey] % 360;
+
+        if (data[dkey] === 'box') {
+          if (fkey === "translateX") value = tweenable[dkey] * box.x;else if (fkey === "translateY") value = tweenable[dkey] * box.y;else if (fkey === "translateZ") value = tweenable[dkey] * box.z;
+          transforms += fkey + "(" + floatCut(value, 2) + "px) ";
+        } else {
+          value = tweenable[dkey];
+          transforms += fkey + "(" + floatCut(value, 2) + data[dkey] + ") ";
+        }
+      });
+    });
+    target.transform = transforms;
+  }
+}
+
+var _default = function _default(key, value, target, data, initials) {
+  data["transform_head"] = data["transform_head"] || key;
+  data[key] = data[key] || [{}];
+  initials[key] = 0;
+  if (!is__WEBPACK_IMPORTED_MODULE_0___default.a.array(value)) value = [value];
+  value.forEach(function (tmap, i) {
+    return Object.keys(tmap).forEach(function (fkey) {
+      var fValue = tmap[fkey],
+          dkey = key + '_' + fkey + '_' + i,
+          match = is__WEBPACK_IMPORTED_MODULE_0___default.a.string(fValue) ? fValue.match(unitsRe) : false;
+      data[key][i] = data[key][i] || {};
+      data[key][i][fkey] = true;
+      initials[dkey] = 0;
+
+      if (match) {
+        if (data[dkey] && data[dkey] !== match[2]) {
+          console.warn("Have != units on prop ! Ignore ", dkey, "present:" + data[dkey], "new:" + match[2]);
+          target[dkey] = 0;
+        } else {
+          data[dkey] = match[2];
+          target[dkey] = parseFloat(match[1]);
+        }
+      } else {
+        target[dkey] = fValue;
+        if (!data[dkey] && fkey in defaultUnits) data[dkey] = defaultUnits[fkey];
+      }
+    });
+  });
+  return demux;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (_default);
+;
+
+(function () {
+  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).default;
+
+  if (!reactHotLoader) {
+    return;
+  }
+
+  reactHotLoader.register(unitsRe, "unitsRe", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\transform.js");
+  reactHotLoader.register(floatCut, "floatCut", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\transform.js");
+  reactHotLoader.register(defaultUnits, "defaultUnits", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\transform.js");
+  reactHotLoader.register(demux, "demux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\transform.js");
+  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\transform.js");
+})();
+
+;
+
+(function () {
+  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).leaveModule;
+  leaveModule && leaveModule(module);
+})();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/helpers/demux/typed sync recursive ^\\.\\/([^\\\\\\/]+)\\.js$":
+/*!***********************************************************!*\
+  !*** ./src/helpers/demux/typed sync ^\.\/([^\\\/]+)\.js$ ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./color.js": "./src/helpers/demux/typed/color.js",
+	"./number.js": "./src/helpers/demux/typed/number.js",
+	"./transforms.js": "./src/helpers/demux/typed/transforms.js"
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "./src/helpers/demux/typed sync recursive ^\\.\\/([^\\\\\\/]+)\\.js$";
+
+/***/ }),
+
+/***/ "./src/helpers/demux/typed/color.js":
+/*!******************************************!*\
+  !*** ./src/helpers/demux/typed/color.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var color_rgba__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! color-rgba */ "./node_modules/color-rgba/index.js");
+/* harmony import */ var color_rgba__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(color_rgba__WEBPACK_IMPORTED_MODULE_0__);
+(function () {
+  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
+  enterModule && enterModule(module);
+})();
+
+/*
+ * The MIT License (MIT)
+ * Copyright (c) 2019. Wise Wild Web
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *  @author : Nathanael Braun
+ *  @contact : n8tz.js@gmail.com
+ */
+
+
+function demux(key, tweenable, target, data) {
+  target[key] = "rgba(" + tweenable[key + '_r'] + ", " + tweenable[key + '_g'] + ", " + tweenable[key + '_b'] + ", " + tweenable[key + '_a'] + ")";
+}
+
+var _default = function _default(key, value, target, data, initials) {
+  var vect = color_rgba__WEBPACK_IMPORTED_MODULE_0___default()(value);
+  target[key + '_r'] = vect[0];
+  target[key + '_g'] = vect[1];
+  target[key + '_b'] = vect[2];
+  target[key + '_a'] = vect[3];
+  initials[key + '_r'] = 0;
+  initials[key + '_g'] = 0;
+  initials[key + '_b'] = 0;
+  initials[key + '_a'] = 1;
+  return demux;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (_default);
+;
+
+(function () {
+  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).default;
+
+  if (!reactHotLoader) {
+    return;
+  }
+
+  reactHotLoader.register(demux, "demux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\typed\\color.js");
+  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\typed\\color.js");
+})();
+
+;
+
+(function () {
+  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).leaveModule;
+  leaveModule && leaveModule(module);
+})();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/helpers/demux/typed/number.js":
+/*!*******************************************!*\
+  !*** ./src/helpers/demux/typed/number.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! is */ "./node_modules/is/index.js");
+/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(is__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var css_animated_properties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! css-animated-properties */ "./node_modules/css-animated-properties/index.js");
+/* harmony import */ var css_animated_properties__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(css_animated_properties__WEBPACK_IMPORTED_MODULE_1__);
+(function () {
+  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
+  enterModule && enterModule(module);
+})();
+
+/*
+ * The MIT License (MIT)
+ * Copyright (c) 2019. Wise Wild Web
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *  @author : Nathanael Braun
+ *  @contact : n8tz.js@gmail.com
+ */
+
+
+var unitsRe = new RegExp("([+-]?(?:[0-9]*[.])?[0-9]+)\\s*(" + ['em', 'ex', '%', 'px', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'rem', 'vh', 'vw', 'vmin', 'vmax'].join('|') + ")"),
+    floatCut = function floatCut(v, l) {
+  var p = Math.pow(10, l);
+  return Math.round(v * p) / p;
+},
+    defaultUnits = {
+  left: 'px',
+  right: 'px',
+  top: 'px',
+  bottom: 'px',
+  width: 'px',
+  height: 'px'
+};
+
+
+
+function demux(key, tweenable, target, data, box) {
+  //if (!tweenable[key])
+  //	debugger
+  target[key] = data[key] ? floatCut(tweenable[key], 2) + data[key] : floatCut(tweenable[key], 2);
+}
+
+var _default = function _default(key, value, target, data, initials) {
+  //if ( cssAnimProps.canAnimate(key) ) {
+  var match = is__WEBPACK_IMPORTED_MODULE_0___default.a.string(value) ? value.match(unitsRe) : false; //let how = cssAnimProps.getProperty(key);
+  //console.log(how);
+
+  initials[key] = 0;
+
+  if (match) {
+    if (data[key] && data[key] !== match[2]) {
+      console.warn("Have != units on prop ! Ignore ", key, "present:" + data[key], "new:" + match[2]);
+      target[key] = 0;
+    } else {
+      data[key] = match[2];
+      target[key] = parseFloat(match[1]);
+    }
+  } else {
+    target[key] = value;
+    if (!data[key] && key in defaultUnits) data[key] = defaultUnits[key];
+  } //}
+  //else {
+  //	// just do nothing
+  //	//data[key]=
+  //}
+
+
+  return demux;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (_default);
+;
+
+(function () {
+  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).default;
+
+  if (!reactHotLoader) {
+    return;
+  }
+
+  reactHotLoader.register(unitsRe, "unitsRe", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\typed\\number.js");
+  reactHotLoader.register(floatCut, "floatCut", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\typed\\number.js");
+  reactHotLoader.register(defaultUnits, "defaultUnits", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\typed\\number.js");
+  reactHotLoader.register(demux, "demux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\typed\\number.js");
+  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\typed\\number.js");
+})();
+
+;
+
+(function () {
+  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).leaveModule;
+  leaveModule && leaveModule(module);
+})();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/helpers/demux/typed/transforms.js":
+/*!***********************************************!*\
+  !*** ./src/helpers/demux/typed/transforms.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! is */ "./node_modules/is/index.js");
+/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(is__WEBPACK_IMPORTED_MODULE_0__);
+(function () {
+  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
+  enterModule && enterModule(module);
+})();
+
+/*
+ * The MIT License (MIT)
+ * Copyright (c) 2019. Wise Wild Web
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *  @author : Nathanael Braun
+ *  @contact : n8tz.js@gmail.com
+ */
+
+
+var unitsRe = new RegExp("([+-]?(?:[0-9]*[.])?[0-9]+)\\s*(" + ['em', 'ex', '%', 'px', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'rem', 'vh', 'vw', 'vmin', 'vmax'].join('|') + ")"),
+    floatCut = function floatCut(v, l) {
+  var p = Math.pow(10, l);
+  return Math.round(v * p) / p;
+},
+    defaultUnits = {
+  left: 'px',
+  right: 'px',
+  top: 'px',
+  bottom: 'px',
+  width: 'px',
+  height: 'px'
+};
+
+function demux(key, tweenable, target, data, box, offset) {
+  var active = data.transform,
+      t = '';
+
+  if (data.transformApplier === key) {
+    if (active._z || active._x || active._y || active.z || active.x || active.y) t = 'translate3d(' + floatCut((tweenable._x || 0) * (box.x || 0) + (tweenable.x || 0) + (offset && offset.x || 0), 2) + (data && data.x || 'px') + ', ' + floatCut((tweenable._y || 0) * (box.y || 0) + (tweenable.y || 0) + (offset && offset.y || 0), 2) + (data && data.y || 'px') + ', ' + floatCut((tweenable._z || 0) * (box.z || 0) + (tweenable.z || 0) + (offset && offset.z || 0), 2) + (data && data.z || 'px') + '' + ')';
+    if (tweenable.rotate && active.rotate) t += ' rotate(' + floatCut((tweenable.rotate || 0) % 360, 2) + 'deg)';
+    if (tweenable.rotateX && active.rotateX) t += ' rotateX(' + floatCut((tweenable.rotateX || 0) % 360, 2) + 'deg)';
+    if (tweenable.rotateY && active.rotateY) t += ' rotateY(' + floatCut((tweenable.rotateY || 0) % 360, 2) + 'deg)';
+    active.perspective && (t = "perspective(" + tweenable.perspective + (data.perspective || 'px') + ") " + t);
+    target.transform = t;
+  }
+}
+
+var _default = function _default(key, value, target, data, initials) {
+  var match = is__WEBPACK_IMPORTED_MODULE_0___default.a.string(value) ? value.match(unitsRe) : false; //let how = cssAnimProps.getProperty(key);
+  //console.log(how);
+
+  data.transform = data.transform || {};
+  data.transformApplier = data.transformApplier || key;
+  data.transform[key] = true;
+  initials[key] = 0;
+
+  if (match) {
+    data[key] = match[2];
+    target[key] = parseFloat(match[1]);
+  } else {
+    target[key] = value;
+    if (key in defaultUnits) data[key] = defaultUnits[key];
+  }
+
+  return demux;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (_default);
+;
+
+(function () {
+  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).default;
+
+  if (!reactHotLoader) {
+    return;
+  }
+
+  reactHotLoader.register(unitsRe, "unitsRe", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\typed\\transforms.js");
+  reactHotLoader.register(floatCut, "floatCut", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\typed\\transforms.js");
+  reactHotLoader.register(defaultUnits, "defaultUnits", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\typed\\transforms.js");
+  reactHotLoader.register(demux, "demux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\typed\\transforms.js");
+  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\typed\\transforms.js");
+})();
+
+;
+
+(function () {
+  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).leaveModule;
+  leaveModule && leaveModule(module);
+})();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/helpers/index.js":
+/*!******************************!*\
+  !*** ./src/helpers/index.js ***!
+  \******************************/
+/*! exports provided: muxToCss, deMuxTween, deMuxLine */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "muxToCss", function() { return muxToCss; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deMuxTween", function() { return deMuxTween; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deMuxLine", function() { return deMuxLine; });
+/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/objectSpread */ "./node_modules/@babel/runtime/helpers/objectSpread.js");
+/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./src/helpers/utils.js");
+/* harmony import */ var _demux_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./demux/(*).js */ "./src/MapOf.RTween_helpers_demux_____js.gen.js");
+/* harmony import */ var _demux_typed_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./demux/typed/(*).js */ "./src/MapOf.RTween_helpers_demux_typed_____js.gen.js");
+
+
+(function () {
+  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
+  enterModule && enterModule(module);
+})();
+
+/*
+ * The MIT License (MIT)
+ * Copyright (c) 2019. Wise Wild Web
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *  @author : Nathanael Braun
+ *  @contact : n8tz.js@gmail.com
+ */
+
+
+
+
+var cssDemux = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, _demux_js__WEBPACK_IMPORTED_MODULE_2__, {
+  height: _demux_typed_js__WEBPACK_IMPORTED_MODULE_3__["number"],
+  width: _demux_typed_js__WEBPACK_IMPORTED_MODULE_3__["number"],
+  top: _demux_typed_js__WEBPACK_IMPORTED_MODULE_3__["number"],
+  left: _demux_typed_js__WEBPACK_IMPORTED_MODULE_3__["number"],
+  right: _demux_typed_js__WEBPACK_IMPORTED_MODULE_3__["number"],
+  bottom: _demux_typed_js__WEBPACK_IMPORTED_MODULE_3__["number"],
+  marginTop: _demux_typed_js__WEBPACK_IMPORTED_MODULE_3__["number"],
+  marginLeft: _demux_typed_js__WEBPACK_IMPORTED_MODULE_3__["number"],
+  marginRight: _demux_typed_js__WEBPACK_IMPORTED_MODULE_3__["number"],
+  marginBottom: _demux_typed_js__WEBPACK_IMPORTED_MODULE_3__["number"],
+  paddingTop: _demux_typed_js__WEBPACK_IMPORTED_MODULE_3__["number"],
+  paddingLeft: _demux_typed_js__WEBPACK_IMPORTED_MODULE_3__["number"],
+  paddingRight: _demux_typed_js__WEBPACK_IMPORTED_MODULE_3__["number"],
+  paddingBottom: _demux_typed_js__WEBPACK_IMPORTED_MODULE_3__["number"] //rotate       : transforms,
+  //rotateX      : transforms,
+  //rotateY      : transforms,
+  //x            : transforms,
+  //y            : transforms,
+  //z            : transforms,
+  //_x           : transforms,
+  //_y           : transforms,
+  //_z           : transforms,
+  //blur         : transforms,
+  //perspective  : transforms
+
+});
+
+function muxToCss(tweenable, css, demuxers, data, box) {
+  Object.keys(demuxers).forEach(function (key) {
+    demuxers[key](key, tweenable, css, data, box);
+  });
+}
+function deMuxTween(tween, deMuxedTween, initials, data, demuxers) {
+  var fTween = {},
+      excluded = {};
+  Object.keys(tween).forEach(function (key) {
+    if (cssDemux[key]) fTween[key] = tween[key];else if (Object(_utils__WEBPACK_IMPORTED_MODULE_1__["isValidDeclaration"])(key, tween[key])) {
+      if (Object(_utils__WEBPACK_IMPORTED_MODULE_1__["isShorthandProperty"])(key)) {
+        Object(_utils__WEBPACK_IMPORTED_MODULE_1__["expandShorthandProperty"])(key, tween[key], fTween);
+      } else fTween[key] = tween[key];
+    } else excluded[key] = tween[key];
+  });
+  Object.keys(fTween).forEach(function (key) {
+    if (cssDemux[key]) {
+      //key, value, target, data, initials
+      demuxers[key] = cssDemux[key](key, fTween[key], deMuxedTween, data, initials);
+    } else demuxers[key] = cssDemux.$all(key, fTween[key], deMuxedTween, data, initials);
+  });
+  return excluded;
+}
+function deMuxLine(tweenLine, initials, data, demuxers) {
+  return tweenLine.reduce(function (line, tween) {
+    var demuxedTween = {};
+    demuxers[tween.target] = demuxers[tween.target] || {};
+    initials[tween.target] = initials[tween.target] || {};
+    data[tween.target] = data[tween.target] || {};
+    deMuxTween(tween.apply, demuxedTween, initials[tween.target], data[tween.target], demuxers[tween.target]);
+    line.push(_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, tween, {
+      apply: demuxedTween
+    }));
+    return line;
+  }, []);
+}
+;
+
+(function () {
+  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).default;
+
+  if (!reactHotLoader) {
+    return;
+  }
+
+  reactHotLoader.register(cssDemux, "cssDemux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\index.js");
+  reactHotLoader.register(muxToCss, "muxToCss", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\index.js");
+  reactHotLoader.register(deMuxTween, "deMuxTween", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\index.js");
+  reactHotLoader.register(deMuxLine, "deMuxLine", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\index.js");
+})();
+
+;
+
+(function () {
+  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).leaveModule;
+  leaveModule && leaveModule(module);
+})();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/helpers/utils.js":
+/*!******************************!*\
+  !*** ./src/helpers/utils.js ***!
+  \******************************/
+/*! exports provided: expandShorthandProperty, isShorthandProperty, isValidDeclaration, canAnimate, getProperty */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "expandShorthandProperty", function() { return expandShorthandProperty; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isShorthandProperty", function() { return isShorthandProperty; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isValidDeclaration", function() { return isValidDeclaration; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "canAnimate", function() { return canAnimate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProperty", function() { return getProperty; });
+(function () {
+  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
+  enterModule && enterModule(module);
+})();
+
+/*
+ * The MIT License (MIT)
+ * Copyright (c) 2019. Wise Wild Web
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *  @author : Nathanael Braun
+ *  @contact : n8tz.js@gmail.com
+ */
+var props = {
+  "margin": {
+    "properties": ["marginTop", "marginRight", "marginBottom", "marginLeft"]
+  },
+  "marginBottom": {
+    "types": ["length"]
+  },
+  "marginLeft": {
+    "types": ["length"]
+  },
+  "marginRight": {
+    "types": ["length"]
+  },
+  "marginTop": {
+    "types": ["length"]
+  },
+  "padding": {
+    "properties": ["paddingTop", "paddingRight", "paddingBottom", "paddingLeft"]
+  },
+  "paddingBottom": {
+    "types": ["length"]
+  },
+  "paddingLeft": {
+    "types": ["length"]
+  },
+  "paddingRight": {
+    "types": ["length"]
+  },
+  "paddingTop": {
+    "types": ["length"]
+  },
+  "bottom": {
+    "types": ["length-percentage-calc"]
+  },
+  "left": {
+    "types": ["length-percentage-calc"]
+  },
+  "right": {
+    "types": ["length-percentage-calc"]
+  },
+  "top": {
+    "types": ["length-percentage-calc"]
+  },
+  "zIndex": {
+    "types": ["integer"]
+  },
+  "width": {
+    "types": ["length-percentage-calc"]
+  },
+  "maxWidth": {
+    "types": ["length-percentage-calc"]
+  },
+  "minWidth": {
+    "types": ["length-percentage-calc"]
+  },
+  "height": {
+    "types": ["length-percentage-calc"]
+  },
+  "maxHeight": {
+    "types": ["length-percentage-calc"]
+  },
+  "minHeight": {
+    "types": ["length-percentage-calc"]
+  },
+  "lineHeight": {
+    "types": ["number", "length"]
+  },
+  "verticalAlign": {
+    "types": ["length"]
+  },
+  "visibility": {
+    "types": ["visibility"]
+  },
+  "borderSpacing": {
+    "types": ["length"],
+    "multiple": true
+  },
+  "color": {
+    "types": ["color"]
+  },
+  "opacity": {
+    "types": ["number"]
+  },
+  "background": {
+    "properties": ["backgroundColor", "backgroundPosition", "backgroundSize"]
+  },
+  "backgroundColor": {
+    "types": ["color"]
+  },
+  "backgroundPosition": {
+    "types": ["length-percentage-calc"],
+    "multiple": true,
+    "repeatable": true
+  },
+  "backgroundSize": {
+    "types": ["length-percentage-calc"],
+    "multiple": true,
+    "repeatable": true
+  },
+  "border": {
+    "properties": ["borderColor", "borderWidth"]
+  },
+  "borderBottom": {
+    "properties": ["borderBottomColor", "borderBottomWidth"]
+  },
+  "borderLeft": {
+    "properties": ["borderLeftColor", "borderLeftWidth"]
+  },
+  "borderRight": {
+    "properties": ["borderRightColor", "borderRightWidth"]
+  },
+  "borderTop": {
+    "properties": ["borderTopColor", "borderTopWidth"]
+  },
+  "borderColor": {
+    "properties": ["borderTopColor", "borderRightColor", "borderBottomColor", "borderLeftColor"]
+  },
+  "borderWidth": {
+    "properties": ["borderTopWidth", "borderRightWidth", "borderBottomWidth", "borderLeftWidth"]
+  },
+  "borderBottomColor": {
+    "types": ["color"]
+  },
+  "borderLeftColor": {
+    "types": ["color"]
+  },
+  "borderRightColor": {
+    "types": ["color"]
+  },
+  "borderTopColor": {
+    "types": ["color"]
+  },
+  "borderBottomWidth": {
+    "types": ["length"]
+  },
+  "borderLeftWidth": {
+    "types": ["length"]
+  },
+  "borderRightWidth": {
+    "types": ["length"]
+  },
+  "borderTopWidth": {
+    "types": ["length"]
+  },
+  "borderRadius": {
+    "properties": ["borderTopLeftRadius", "borderTopRightRadius", "borderBottomRightRadius", "borderBottomLeftRadius"]
+  },
+  "borderTopLeftRadius": {
+    "types": ["length-percentage-calc"],
+    "multiple": true
+  },
+  "borderTopRightRadius": {
+    "types": ["length-percentage-calc"],
+    "multiple": true
+  },
+  "borderBottomRightRadius": {
+    "types": ["length-percentage-calc"],
+    "multiple": true
+  },
+  "borderBottomLeftRadius": {
+    "types": ["length-percentage-calc"],
+    "multiple": true
+  },
+  "boxShadow": {
+    "types": ["shadow-list"]
+  },
+  "caretColor": {
+    "types": ["color"]
+  },
+  "outline": {
+    "properties": ["outlineColor", "outlineWidth"]
+  },
+  "outlineColor": {
+    "types": ["color"]
+  },
+  "outlineWidth": {
+    "types": ["length"]
+  },
+  "outlineOffset": {
+    "types": ["length"]
+  },
+  "flex": {
+    "properties": ["flexGrow", "flexShrink", "flexBasis"]
+  },
+  "flexGrow": {
+    "types": ["number"]
+  },
+  "flexShrink": {
+    "types": ["number"]
+  },
+  "flexBasis": {
+    "types": ["length-percentage-calc"]
+  },
+  "order": {
+    "types": ["integer"]
+  },
+  "font": {
+    "properties": ["fontWeight", "fontStretch", "fontSize", "lineHeight"]
+  },
+  "fontWeight": {
+    "types": ["font-weight"]
+  },
+  "fontStretch": {
+    "types": ["font-stretch"]
+  },
+  "fontSize": {
+    "types": ["length"]
+  },
+  "fontSizeAdjust": {
+    "types": ["number"]
+  },
+  "gridTemplateColumns": {
+    "types": ["length-percentage-calc"],
+    "multiple": true
+  },
+  "gridTemplateRows": {
+    "types": ["length-percentage-calc"],
+    "multiple": true
+  },
+  "gridTemplate": {
+    "properties": ["gridTemplateRows", "gridTemplateColumns"]
+  },
+  "grid": {
+    "properties": ["gridTemplateRows", "gridTemplateColumns"]
+  },
+  "gridRowGap": {
+    "types": ["length-percentage-calc"]
+  },
+  "gridColumnGap": {
+    "types": ["length-percentage-calc"]
+  },
+  "gridGap": {
+    "properties": ["gridRowGap", "gridColumnGap"]
+  },
+  "clip": {
+    "types": ["rectangle"]
+  },
+  "clipPath": {
+    "types": ["basic-shape"]
+  },
+  "mask": {
+    "properties": ["maskPosition", "maskSize"]
+  },
+  "maskPosition": {
+    "types": ["length-percentage-calc"],
+    "multiple": true,
+    "repeatable": true
+  },
+  "maskSize": {
+    "types": ["length-percentage-calc"],
+    "multiple": true,
+    "repeatable": true
+  },
+  "shapeOutside": {
+    "types": ["basic-shape"]
+  },
+  "shapeMargin": {
+    "types": ["length-percentage-calc"]
+  },
+  "shapeImageThreshold": {
+    "types": ["number"]
+  },
+  "scrollPadding": {
+    "properties": ["scrollPaddingTop", "scrollPaddingRight", "scrollPaddingBottom", "scrollPaddingLeft"]
+  },
+  "scrollPaddingTop": {
+    "types": ["length-percentage-calc"]
+  },
+  "scrollPaddingRight": {
+    "types": ["length-percentage-calc"]
+  },
+  "scrollPaddingBottom": {
+    "types": ["length-percentage-calc"]
+  },
+  "scrollPaddingLeft": {
+    "types": ["length-percentage-calc"]
+  },
+  "scrollPaddingBlock": {
+    "properties": ["scrollPaddingBlockStart", "scrollPaddingBlockEnd"]
+  },
+  "scrollPaddingBlockStart": {
+    "types": ["length-percentage-calc"]
+  },
+  "scrollPaddingBlockEnd": {
+    "types": ["length-percentage-calc"]
+  },
+  "scrollPaddingInline": {
+    "properties": ["scrollPaddingInlineStart", "scrollPaddingInlineEnd"]
+  },
+  "scrollPaddingInlineStart": {
+    "types": ["length-percentage-calc"]
+  },
+  "scrollPaddingInlineEnd": {
+    "types": ["length-percentage-calc"]
+  },
+  "scrollSnapMargin": {
+    "properties": ["scrollSnapMarginTop", "scrollSnapMarginRight", "scrollSnapMarginBottom", "scrollSnapMarginLeft"]
+  },
+  "scrollSnapMarginTop": {
+    "types": ["length"]
+  },
+  "scrollSnapMarginRight": {
+    "types": ["length"]
+  },
+  "scrollSnapMarginBottom": {
+    "types": ["length"]
+  },
+  "scrollSnapMarginLeft": {
+    "types": ["length"]
+  },
+  "scrollSnapMarginBlock": {
+    "properties": ["scrollSnapMarginBlockStart", "scrollSnapMarginBlockEnd"]
+  },
+  "scrollSnapMarginBlockStart": {
+    "types": ["length"]
+  },
+  "scrollSnapMarginBlockEnd": {
+    "types": ["length"]
+  },
+  "scrollSnapMarginInline": {
+    "properties": ["scrollSnapMarginInlineStart", "scrollSnapMarginInlineEnd"]
+  },
+  "scrollSnapMarginInlineStart": {
+    "types": ["length"]
+  },
+  "scrollSnapMarginInlineEnd": {
+    "types": ["length"]
+  },
+  "textDecoration": {
+    "properties": ["textDecorationColor"]
+  },
+  "textDecorationColor": {
+    "types": ["color"]
+  },
+  "textEmphasis": {
+    "properties": ["textEmphasisColor"]
+  },
+  "textEmphasisColor": {
+    "types": ["color"]
+  },
+  "textShadow": {
+    "types": ["shadow-list"]
+  },
+  "columns": {
+    "properties": ["columnWidth", "columnCount"]
+  },
+  "columnWidth": {
+    "types": ["length"]
+  },
+  "columnCount": {
+    "types": ["integer"]
+  },
+  "columnGap": {
+    "types": ["length-percentage-calc"]
+  },
+  "columnRule": {
+    "properties": ["columnRuleColor", "columnRuleWidth"]
+  },
+  "columnRuleColor": {
+    "types": ["color"]
+  },
+  "columnRuleWidth": {
+    "types": ["length"]
+  },
+  "letterSpacing": {
+    "types": ["length"]
+  },
+  "tabSize": {
+    "types": ["length"]
+  },
+  "textIndent": {
+    "types": ["length-percentage-calc"]
+  },
+  "wordSpacing": {
+    "types": ["length-percentage-calc"]
+  },
+  "transform": {
+    "types": ["transform"]
+  },
+  "transformOrigin": {
+    "types": ["length-percentage-calc"],
+    "multiple": true
+  },
+  "perspective": {
+    "types": ["length"]
+  },
+  "perspectiveOrigin": {
+    "types": ["length-percentage-calc"],
+    "multiple": true
+  } //
+  ///**
+  // * List of animatable types used by properties, with descriptions of how to interpolate each type.
+  // * Data taken from https://www.w3.org/TR/css3-transitions/#animatable-types and some other W3C specs.
+  // *
+  // * @type {Object}
+  // */
+  //exports.types = {
+  //	'color'                 : {
+  //		name: 'color',
+  //		href: 'https://www.w3.org/TR/css3-transitions/#animtype-color'
+  //	},
+  //	'length'                : {
+  //		name: 'length',
+  //		href: 'https://www.w3.org/TR/css3-transitions/#animtype-length'
+  //	},
+  //	'percentage'            : {
+  //		name: 'percentage',
+  //		href: 'https://www.w3.org/TR/css3-transitions/#animtype-percentage'
+  //	},
+  //	'length-percentage-calc': {
+  //		name: 'length, percentage, or calc',
+  //		href: 'https://www.w3.org/TR/css3-transitions/#animtype-lpcalc'
+  //	},
+  //	'integer'               : {
+  //		name: 'integer',
+  //		href: 'https://www.w3.org/TR/css3-transitions/#animtype-integer'
+  //	},
+  //	'font-weight'           : {
+  //		name: 'font weight',
+  //		href: 'https://www.w3.org/TR/css3-transitions/#animtype-font-weight'
+  //	},
+  //	'number'                : {
+  //		name: 'number',
+  //		href: 'https://www.w3.org/TR/css3-transitions/#animtype-number'
+  //	},
+  //	'rectangle'             : {
+  //		name: 'rectangle',
+  //		href: 'https://www.w3.org/TR/css3-transitions/#animtype-rect'
+  //	},
+  //	'visibility'            : {
+  //		name: 'visibility',
+  //		href: 'https://www.w3.org/TR/css3-transitions/#animtype-visibility'
+  //	},
+  //	'shadow-list'           : {
+  //		name: 'shadow list',
+  //		href: 'https://www.w3.org/TR/css3-transitions/#animtype-shadow-list'
+  //	},
+  //	// Other specs
+  //	'transform'             : {
+  //		name: 'transform',
+  //		href: 'https://www.w3.org/TR/css3-transforms/#interpolation-of-transforms'
+  //	},
+  //	'font-stretch'          : {
+  //		name: 'font stretch',
+  //		href: 'https://www.w3.org/TR/css3-fonts/#font-stretch-animation'
+  //	},
+  //	'basic-shape'           : {
+  //		name: 'basic shape',
+  //		href: 'https://www.w3.org/TR/css-shapes-1/#basic-shape-interpolation'
+  //	},
+  //};
+  //
+
+};
+function expandShorthandProperty(property, value) {
+  var target = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  var type = props[property],
+      childProps = type && type.properties,
+      values = value.split(' ');
+  childProps && childProps.forEach(function (k, i) {
+    target[k] = values[i % values.length];
+  });
+  return target;
+}
+;
+function isShorthandProperty(property) {
+  var type = props[property],
+      childProps = type && type.properties;
+  return childProps && !!childProps.length;
+}
+;
+function isValidDeclaration(property, value) {
+  return !!props[property];
+}
+;
+/**
+ * Check if a CSS property can be animated
+ * @param  {string} property CSS property name
+ * @return {boolean}         True if the property can be animated
+ */
+
+function canAnimate(property) {
+  return props.hasOwnProperty(property);
+}
+;
+/**
+ * Get a definition of how a CSS property can be animated
+ * @param  {string} property CSS property name
+ * @param  {boolean} expand  Expand definitions for sub-properties, when available
+ * @return {object}          Property definition, or null if it can't be animated
+ */
+
+function getProperty(property, expand) {
+  if (!exports.canAnimate(property)) {
+    return null;
+  }
+
+  var prop = props[property];
+  var ret = {
+    name: property
+  };
+  Object.keys(prop).forEach(function (key) {
+    var value = prop[key];
+
+    if (Array.isArray(value)) {
+      if (key === 'properties' && expand) {
+        value = value.map(function (subProp) {
+          return exports.getProperty(subProp, expand);
+        });
+      } else {
+        value = value.slice(); // clone
+      }
+    }
+
+    ret[key] = value;
+  });
+  return ret;
+}
+;
+;
+
+(function () {
+  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).default;
+
+  if (!reactHotLoader) {
+    return;
+  }
+
+  reactHotLoader.register(props, "props", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\utils.js");
+  reactHotLoader.register(expandShorthandProperty, "expandShorthandProperty", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\utils.js");
+  reactHotLoader.register(isShorthandProperty, "isShorthandProperty", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\utils.js");
+  reactHotLoader.register(isValidDeclaration, "isValidDeclaration", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\utils.js");
+  reactHotLoader.register(canAnimate, "canAnimate", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\utils.js");
+  reactHotLoader.register(getProperty, "getProperty", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\utils.js");
+})();
+
+;
+
+(function () {
+  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).leaveModule;
+  leaveModule && leaveModule(module);
+})();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/*! exports provided: asTweener, TweenRef, Component, TweenerContext, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Component", function() { return Component; });
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _asTweener__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./asTweener */ "./src/asTweener.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "asTweener", function() { return _asTweener__WEBPACK_IMPORTED_MODULE_6__["default"]; });
+
+/* harmony import */ var _TweenRef__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./TweenRef */ "./src/TweenRef.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TweenRef", function() { return _TweenRef__WEBPACK_IMPORTED_MODULE_7__["default"]; });
+
+/* harmony import */ var _TweenerContext__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./TweenerContext */ "./src/TweenerContext.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TweenerContext", function() { return _TweenerContext__WEBPACK_IMPORTED_MODULE_8__["default"]; });
+
+
+
+
+
+
+
+(function () {
+  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
+  enterModule && enterModule(module);
+})();
+
+/*
+ *
+ * Copyright (C) 2019 Nathan Braun
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+
+
+
+var Component = Object(_asTweener__WEBPACK_IMPORTED_MODULE_6__["default"])({})(react__WEBPACK_IMPORTED_MODULE_5___default.a.Component);
+
+var TweenableComponent =
+/*#__PURE__*/
+function (_Component) {
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default()(TweenableComponent, _Component);
+
+  function TweenableComponent() {
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, TweenableComponent);
+
+    return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(TweenableComponent).apply(this, arguments));
+  }
+
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(TweenableComponent, [{
+    key: "render",
+    value: function render() {
+      return 'Should have some render fn here in ' + this.constructor.displayName;
+    }
+  }, {
+    key: "__reactstandin__regenerateByEval",
+    // @ts-ignore
+    value: function __reactstandin__regenerateByEval(key, code) {
+      // @ts-ignore
+      this[key] = eval(code);
+    }
+  }]);
+
+  return TweenableComponent;
+}(Component);
+
+
+var _default = TweenableComponent;
+/* harmony default export */ __webpack_exports__["default"] = (_default);
+;
+
+(function () {
+  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).default;
+
+  if (!reactHotLoader) {
+    return;
+  }
+
+  reactHotLoader.register(Component, "Component", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\index.js");
+  reactHotLoader.register(TweenableComponent, "TweenableComponent", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\index.js");
+  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\index.js");
 })();
 
 ;
@@ -26272,7 +33233,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
-!(function webpackMissingModule() { var e = new Error("Cannot find module 'Comp'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var RTween__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! RTween */ "./src/index.js");
 /* harmony import */ var _samples_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./samples.scss */ "./src/samples/SimpleHeaderTest/samples.scss");
 /* harmony import */ var _samples_scss__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_samples_scss__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
@@ -26369,7 +33330,7 @@ function (_React$Component) {
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(Header, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(!(function webpackMissingModule() { var e = new Error("Cannot find module 'Comp'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(RTween__WEBPACK_IMPORTED_MODULE_6__["TweenRef"], {
         id: "header",
         initial: {
           height: "250px"
@@ -26378,7 +33339,7 @@ function (_React$Component) {
         style: {
           zIndex: 10
         }
-      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(!(function webpackMissingModule() { var e = new Error("Cannot find module 'Comp'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(RTween__WEBPACK_IMPORTED_MODULE_6__["TweenRef"], {
         id: "logo",
         initial: {
           left: "50%",
@@ -26408,7 +33369,7 @@ function (_React$Component) {
   return Header;
 }(react__WEBPACK_IMPORTED_MODULE_5___default.a.Component);
 
-var Sample = !(function webpackMissingModule() { var e = new Error("Cannot find module 'Comp'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(_class = (_temp = _class2 =
+var Sample = Object(RTween__WEBPACK_IMPORTED_MODULE_6__["asTweener"])(_class = (_temp = _class2 =
 /*#__PURE__*/
 function (_React$Component2) {
   _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default()(Sample, _React$Component2);
@@ -26446,7 +33407,7 @@ function (_React$Component2) {
           width: "100%",
           height: "100%"
         }
-      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(Header, null), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(!(function webpackMissingModule() { var e = new Error("Cannot find module 'Comp'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(Header, null), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(RTween__WEBPACK_IMPORTED_MODULE_6__["TweenRef"], {
         id: "body",
         initial: {
           transform: {
@@ -26608,7 +33569,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_6__);
-!(function webpackMissingModule() { var e = new Error("Cannot find module 'Comp'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var RTween__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! RTween */ "./src/index.js");
 /* harmony import */ var _samples_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./samples.scss */ "./src/samples/SimpleTest/samples.scss");
 /* harmony import */ var _samples_scss__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_samples_scss__WEBPACK_IMPORTED_MODULE_8__);
 
@@ -26747,7 +33708,7 @@ var scrollAnims = {
     }
   }]
 };
-var Sample = (_dec = !(function webpackMissingModule() { var e = new Error("Cannot find module 'Comp'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())({
+var Sample = (_dec = Object(RTween__WEBPACK_IMPORTED_MODULE_7__["asTweener"])({
   initialScrollPos: {
     scrollX: 100,
     scrollY: 100
@@ -26822,7 +33783,7 @@ function (_React$Component) {
         onClick: function onClick(e) {
           return _this2.scrollTo(200, 500, "scrollX");
         }
-      }, "( go to 200 )"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(!(function webpackMissingModule() { var e = new Error("Cannot find module 'Comp'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+      }, "( go to 200 )"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(RTween__WEBPACK_IMPORTED_MODULE_7__["TweenRef"], {
         id: "testItem",
         initial: {
           position: "absolute",
@@ -26953,6 +33914,606 @@ var update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyl
 if(content.locals) module.exports = content.locals;
 
 if(false) {}
+
+/***/ }),
+
+/***/ "./src/utils.js":
+/*!**********************!*\
+  !*** ./src/utils.js ***!
+  \**********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {(function () {
+  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
+  enterModule && enterModule(module);
+})();
+
+/*
+ * The MIT License (MIT)
+ * Copyright (c) 2019. Wise Wild Web
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *  @author : Nathanael Braun
+ *  @contact : n8tz.js@gmail.com
+ */
+var is = __webpack_require__(/*! is */ "./node_modules/is/index.js"),
+    floatCut = function floatCut(v, l) {
+  var p = Math.pow(10, l);
+  return Math.round(v * p) / p;
+},
+    min = Math.min,
+    max = Math.max,
+    isBrowser = typeof window !== 'undefined',
+    Dom = isBrowser ? {
+  prefix: /webkit/i.test(navigator.appVersion) ? 'webkit' : /firefox/i.test(navigator.userAgent) ? 'Moz' : /trident/i.test(navigator.userAgent) ? 'ms' : 'opera' in window ? 'O' : '',
+  dashedPrefix: /webkit/i.test(navigator.appVersion) ? '-webkit-' : /firefox/i.test(navigator.userAgent) ? '-moz-' : /trident/i.test(navigator.userAgent) ? '-ms-' : 'opera' in window ? '-o-' : ''
+} : {
+  prefix: '',
+  dashedPrefix: ''
+},
+    customProps = {
+  _x: true,
+  x: true,
+  _y: true,
+  y: true,
+  _z: true,
+  z: true,
+  transform: true,
+  perspective: true,
+  matrix: true,
+  // @todo
+  rotate: true,
+  rotateX: true,
+  rotateY: true,
+  _width: true,
+  _height: true
+},
+    __ = {
+  onPageHided: [],
+  onPageShown: [],
+  dragging: [],
+  dragEnabled: [],
+  dragEnabledDesc: [],
+  fingers: {},
+  nbFingers: 0,
+  dragstartAnywhere: function dragstartAnywhere(e) {
+    var o,
+        me = __,
+        i = me.dragEnabled.indexOf(this),
+        finger,
+        desc,
+        fingers = [];
+
+    if (i === -1) {
+      return;
+    } //e.preventDefault();
+    //e.stopPropagation();
+
+
+    if (!me.nbFingers) {
+      Dom.addEvent(document, {
+        'touchmove': me.dragAnywhere,
+        'mousemove': me.dragAnywhere,
+        'touchend': me.dropAnywhere,
+        'mouseup': me.dropAnywhere
+      });
+      Dom.addEvent(this, {
+        'click': me.dropWithoutClick
+      }, null, null, true);
+    }
+
+    if (e.changedTouches && e.changedTouches.length) {
+      fingers = e.changedTouches;
+    } else fingers.push(e);
+
+    for (var t = 0, ln = fingers.length; t < ln; t++) {
+      finger = fingers[t];
+      desc = me.dragEnabledDesc[i];
+      if (desc.nbFingers) continue;
+      me.nbFingers++;
+      me.fingers[finger.identifier] = me.fingers[finger.identifier] || [];
+      me.fingers[finger.identifier].push(desc);
+      desc.nbFingers++;
+      desc._startPos.x = Dom.prefix == 'MS' ? finger.x : finger.pageX;
+      desc._startPos.y = Dom.prefix == 'MS' ? finger.y : finger.pageY;
+      desc._startTs = e.timeStamp;
+      desc._lastPos.x = Dom.prefix == 'MS' ? finger.x : finger.pageX;
+      desc._lastPos.y = Dom.prefix == 'MS' ? finger.y : finger.pageY;
+
+      for (o = 0; o < desc.dragstart.length; o++) {
+        desc.dragstart[o][0].call(desc.dragstart[o][1] || this, e, finger, desc);
+      }
+    }
+  },
+  dragAnywhere: function dragAnywhere(e) {
+    var _this = this;
+
+    var o,
+        me = __,
+        finger,
+        fingers = [],
+        stopped,
+        desc = __.dragging[0];
+
+    if (e.changedTouches && e.changedTouches.length) {
+      fingers = e.changedTouches;
+    } else fingers.push(e);
+
+    for (var i = 0, ln = fingers.length; i < ln; i++) {
+      finger = fingers[i];
+      desc = me.fingers[finger.identifier];
+      me.fingers[finger.identifier] && me.fingers[finger.identifier].forEach(function (desc) {
+        if (stopped) {
+          desc._lastPos.x = desc._startPos.x = Dom.prefix == 'MS' ? finger.x : finger.pageX;
+          desc._lastPos.y = desc._startPos.y = Dom.prefix == 'MS' ? finger.y : finger.pageY;
+          return;
+        }
+
+        desc._lastPos.x = Dom.prefix == 'MS' ? finger.x : finger.pageX;
+        desc._lastPos.y = Dom.prefix == 'MS' ? finger.y : finger.pageY;
+
+        for (o = 0; o < desc.drag.length; o++) {
+          stopped = desc.drag[o][0].call(desc.drag[o][1] || _this, e, finger, desc) === false;
+        }
+      });
+    }
+  },
+  dropWithoutClick: function dropWithoutClick(e) {
+    if (__.preventNextClick) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      __.preventNextClick = false;
+    }
+
+    Dom.removeEvent(this, {
+      'click': this.dropWithoutClick
+    });
+  },
+  dropAnywhere: function dropAnywhere(e) {
+    var _this2 = this;
+
+    var o,
+        me = __,
+        finger,
+        fingers = [],
+        prevent;
+
+    if (e.changedTouches && e.changedTouches.length) {
+      fingers = e.changedTouches;
+    } else fingers.push(e);
+
+    for (var i = 0, ln = fingers.length; i < ln; i++) {
+      finger = fingers[i];
+      me.nbFingers--;
+      me.fingers[finger.identifier] && me.fingers[finger.identifier].forEach(function (desc) {
+        desc.nbFingers--;
+        prevent = prevent || desc.mouseDrag && e.timeStamp - desc._startTs > 250;
+        desc._lastPos.x = Dom.prefix == 'MS' ? finger.x : finger.pageX;
+        desc._lastPos.y = Dom.prefix == 'MS' ? finger.y : finger.pageY;
+
+        for (o = 0; o < desc.dropped.length; o++) {
+          desc.dropped[o][0].call(desc.dropped[o][1] || _this2, e, finger, desc);
+        }
+      });
+      me.fingers[finger.identifier] = null;
+    }
+
+    if (prevent) {
+      me.preventNextClick = true;
+    }
+
+    if (!me.nbFingers) {
+      Dom.removeEvent(document, {
+        'touchmove': me.dragAnywhere,
+        'mousemove': me.dragAnywhere,
+        'touchend': me.dropAnywhere,
+        'mouseup': me.dropAnywhere
+      });
+    }
+  },
+  getDraggable: function getDraggable(node, mouseDrag) {
+    var i = this.dragEnabled.indexOf(node),
+        desc;
+
+    if (i === -1) {
+      this.dragEnabled.push(node);
+      this.dragEnabledDesc.push(desc = {
+        mouseDrag: mouseDrag,
+        nbFingers: 0,
+        locks: 0,
+        _startPos: {
+          x: 0,
+          y: 0
+        },
+        _lastPos: {
+          x: 0,
+          y: 0
+        },
+        dragstart: [],
+        drag: [],
+        dragEnd: [],
+        dropped: []
+      }); //debugger;
+
+      Dom.addEvent(node, {
+        'mousedown': mouseDrag && this.dragstartAnywhere,
+        'touchstart': this.dragstartAnywhere
+      }, null, null, true);
+    } else desc = this.dragEnabledDesc[i];
+
+    return desc;
+  },
+  freeDraggable: function freeDraggable(node) {
+    var i = this.dragEnabled.indexOf(node),
+        desc;
+
+    if (i !== -1) {
+      this.dragEnabled.splice(i, 1);
+      this.dragEnabledDesc.splice(i, 1);
+      Dom.removeEvent(node, {
+        'mousedown': this.dragstartAnywhere,
+        'touchstart': this.dragstartAnywhere
+      });
+    }
+  },
+  addOverflowEvent: function addFlowListener(element, fn) {
+    var type = 'over',
+        flow = type == 'over';
+    element.addEventListener('OverflowEvent' in window ? 'overflowchanged' : type + 'flow', function (e) {
+      if (e.type == type + 'flow' || e.orient == 0 && e.horizontalOverflow == flow || e.orient == 1 && e.verticalOverflow == flow || e.orient == 2 && e.horizontalOverflow == flow && e.verticalOverflow == flow) {
+        return fn.call(this, e);
+      }
+    }, false);
+  },
+  addEvent: function addEvent(node, type, fn, bubble) {
+    if (node.addEventListener) {
+      node.addEventListener(type, fn, bubble);
+    } else if (node.attachEvent) {
+      node.attachEvent('on' + type, fn.related = function (e) {
+        return fn.call(node, e);
+      });
+    }
+  },
+  removeEvent: function removeEvent(node, type, fn, bubble) {
+    if (node.removeEventListener) {
+      node.removeEventListener(type, fn, bubble);
+    } else if (node.attachEvent) {
+      node.detachEvent('on' + type, fn.related);
+    }
+  },
+  rmDragFn: function rmDragFn(arr, fn, scope) {
+    for (var i = 0, ln = arr.length; i < ln; i++) {
+      if (arr[i][0] === fn) return arr.splice(i, 1);
+    }
+
+    console.warn("Rm event : Listener not found !!");
+  },
+  _createElement: function _createElement(tag, opt, refs, parent) {
+    var a,
+        o,
+        i,
+        ln,
+        node = parent || document.createElement(tag); //if (parent) opt = {content:opt};
+
+    if (opt) for (o in opt) {
+      if (opt.hasOwnProperty(o) && opt[o] !== undefined && !_createElementAttr.hasOwnProperty(o)) {
+        a = document.createAttribute(o);
+        a.value = opt[o];
+        node.setAttributeNode(a);
+      }
+    }
+    refs && opt.$id && (refs[opt.$id] = node);
+    opt.style && Dom.applyCss(node, opt.style);
+    opt.cls && Dom.addCls(node, opt.cls);
+
+    if (opt.events) {
+      for (o in opt.events) {
+        if (opt.events.hasOwnProperty(o) && o !== "$scope") Dom.addEvent(node, o, opt.events[o], opt.events.$scope);
+      }
+    }
+
+    if (opt.content) {
+      if (typeof opt.content === 'string' || typeof opt.content[o] == 'number') {
+        node.innerHTML = opt.content;
+      } else if (opt.content instanceof Array) {
+        for (i = 0, ln = opt.content.length; i < ln; i++) {
+          node.appendChild(typeof opt.content[i] == 'string' || typeof opt.content[i] == 'number' || !opt.content[i] ? document.createTextNode(opt.content[i] || '') : isElement(opt.content[i]) ? opt.content[i] : __createElement(opt.content[i].tagName || 'div', opt.content[i], refs));
+        }
+      } else {
+        node.appendChild(opt.content instanceof HTMLElement ? opt.content : __createElement(opt.content.tagName || 'div', opt.content, refs));
+      }
+    }
+
+    return node;
+  }
+},
+    Dom = {
+  addEvent: function addEvent(node, type, fn, mouseDrag, bubble) {
+    var desc;
+
+    if (is.object(type)) {
+      for (var o in type) {
+        if (type.hasOwnProperty(o)) this.addEvent(node, o, type[o], mouseDrag, bubble);
+      }
+
+      return;
+    } else if (type == 'dragstart') {
+      __.getDraggable(node, mouseDrag).dragstart.push([fn, mouseDrag]);
+    } else if (type == 'drag') {
+      __.getDraggable(node, mouseDrag).drag.push([fn, mouseDrag]);
+    } else if (type == 'dropped') {
+      __.getDraggable(node, mouseDrag).dropped.push([fn, mouseDrag]);
+    } else {
+      if (node.addEventListener) {
+        node.addEventListener(type, fn, bubble);
+      } else if (node.attachEvent) {
+        node.attachEvent('on' + type, fn.related = function (e) {
+          return fn.call(node, e);
+        });
+      }
+    }
+  },
+  removeEvent: function removeEvent(node, type, fn, scope, bubble) {
+    var i, desc;
+
+    if (is.object(type)) {
+      for (var o in type) {
+        if (type.hasOwnProperty(o)) this.removeEvent(node, o, type[o], scope);
+      }
+    } else if (/^(drag|drop)/.test(type)) {
+      desc = __.getDraggable(node);
+
+      __.rmDragFn(desc[type], fn, scope);
+
+      if (!desc.dragstart.length && !desc.drag.length && !desc.dragEnd.length && !desc.dropped.length) __.freeDraggable(node);
+    } else {
+      if (node.removeEventListener) {
+        node.removeEventListener(type, fn, bubble);
+      } else if (node.attachEvent) {
+        node.detachEvent('on' + type, fn.related);
+      }
+    }
+  },
+  offset: function offset(elem) {
+    // @todo
+    var dims = {
+      top: 0,
+      left: 0,
+      width: elem.offsetWidth,
+      height: elem.offsetHeight
+    };
+
+    while (elem) {
+      dims.top = dims.top + parseInt(elem.offsetTop);
+      dims.left = dims.left + parseInt(elem.offsetLeft);
+      elem = elem.offsetParent;
+    }
+
+    return dims;
+  },
+  addWheelEvent: isBrowser && function (window, document) {
+    var prefix = "",
+        _addEventListener,
+        _rmEventListener,
+        onwheel,
+        support; // detect event model
+
+
+    if (window.addEventListener) {
+      _addEventListener = "addEventListener";
+      _rmEventListener = "removeEventListener";
+    } else {
+      _addEventListener = "attachEvent";
+      _rmEventListener = "detachEvent";
+      prefix = "on";
+    } // detect available wheel event
+
+
+    support = "onwheel" in document.createElement("div") ? "wheel" : // Modern browsers support "wheel"
+    document.onmousewheel !== undefined ? "mousewheel" : // Webkit and IE support at least "mousewheel"
+    "DOMMouseScroll"; // let's assume that remaining browsers are older Firefox
+
+    var addWheelListener = function addWheelListener(elem, callback, scope, useCapture) {
+      _addWheelListener(elem, support, callback, scope, useCapture); // handle MozMousePixelScroll in older Firefox
+
+
+      if (support == "DOMMouseScroll") {
+        _addWheelListener(elem, "MozMousePixelScroll", callback, scope, useCapture);
+      }
+    }; // Reasonable defaults
+
+
+    var PIXEL_STEP = 10;
+    var LINE_HEIGHT = 40;
+    var PAGE_HEIGHT = 800;
+
+    function normalizeWheel(
+    /*object*/
+    event)
+    /*object*/
+    {
+      var sX = 0,
+          sY = 0,
+          // spinX, spinY
+      pX = 0,
+          pY = 0; // pixelX, pixelY
+      // Legacy
+
+      if ('detail' in event) {
+        sY = event.detail;
+      }
+
+      if ('wheelDelta' in event) {
+        sY = -event.wheelDelta / 120;
+      }
+
+      if ('wheelDeltaY' in event) {
+        sY = -event.wheelDeltaY / 120;
+      }
+
+      if ('wheelDeltaX' in event) {
+        sX = -event.wheelDeltaX / 120;
+      } // side scrolling on FF with DOMMouseScroll
+
+
+      if ('axis' in event && event.axis === event.HORIZONTAL_AXIS) {
+        sX = sY;
+        sY = 0;
+      }
+
+      pX = sX * PIXEL_STEP;
+      pY = sY * PIXEL_STEP;
+
+      if ('deltaY' in event) {
+        pY = event.deltaY;
+      }
+
+      if ('deltaX' in event) {
+        pX = event.deltaX;
+      }
+
+      if ((pX || pY) && event.deltaMode) {
+        if (event.deltaMode == 1) {
+          // delta in LINE units
+          pX *= LINE_HEIGHT;
+          pY *= LINE_HEIGHT;
+        } else {
+          // delta in PAGE units
+          pX *= PAGE_HEIGHT;
+          pY *= PAGE_HEIGHT;
+        }
+      } // Fall-back if spin cannot be determined
+
+
+      if (pX && !sX) {
+        sX = pX < 1 ? -1 : 1;
+      }
+
+      if (pY && !sY) {
+        sY = pY < 1 ? -1 : 1;
+      }
+
+      return {
+        spinX: sX,
+        spinY: sY,
+        pixelX: pX,
+        pixelY: pY
+      };
+    }
+
+    function _addWheelListener(elem, eventName, callback, scope, useCapture) {
+      elem[_addEventListener](prefix + eventName, callback._wheelList = function (originalEvent) {
+        !originalEvent && (originalEvent = window.event); // create a normalized event object
+
+        var event = {
+          // keep a ref to the original event object
+          originalEvent: originalEvent,
+          target: originalEvent.target || originalEvent.srcElement,
+          type: "wheel",
+          deltaMode: originalEvent.type == "MozMousePixelScroll" ? 0 : 1,
+          deltaX: 0,
+          delatZ: 0,
+          preventDefault: function preventDefault() {
+            originalEvent.preventDefault ? originalEvent.preventDefault() : originalEvent.returnValue = false;
+          },
+          normalized: normalizeWheel(originalEvent)
+        }; // calculate deltaY (and deltaX) according to the event
+
+        if (support == "mousewheel") {
+          event.deltaY = -1 / 40 * originalEvent.wheelDelta; // Webkit also support wheelDeltaX
+          //                            originalEvent.wheelDeltaX && ( event.deltaX = - 1/40 *
+          // originalEvent.wheelDeltaX );
+        } else if (support == "wheel" && Dom.prefix == "Moz") {
+          event.deltaY = originalEvent.deltaY / 3;
+        } else if (support == "wheel") {
+          event.deltaY = originalEvent.deltaY / 100;
+        } else {
+          event.deltaY = originalEvent.deltaY;
+        } //                        if (typeof originalEvent.wheelDeltaY !== 'number')
+        //                            event.wheelDeltaY = originalEvent.deltaY/100;
+        //                        event.wheelDelta = deltaY*120;
+        // it's time to fire the callback
+
+
+        return callback.call(scope || this, event);
+      }, useCapture || false);
+    }
+
+    return addWheelListener;
+  }(window, document),
+  rmWheelEvent: isBrowser && function (window, document) {
+    var prefix = "",
+        _rmEventListener,
+        onwheel,
+        support; // detect event model
+
+
+    if (addEventListener) {
+      _rmEventListener = "removeEventListener";
+    } else {
+      _rmEventListener = "detachEvent";
+      prefix = "on";
+    } // detect available wheel event
+
+
+    support = "onwheel" in document.createElement("div") ? "wheel" : // Modern browsers support "wheel"
+    document.onmousewheel !== undefined ? "mousewheel" : // Webkit and IE support at least "mousewheel"
+    "DOMMouseScroll"; // let's assume that remaining browsers are older Firefox
+
+    var rmWheelListener = function rmWheelListener(elem, callback, scope, useCapture) {
+      _EventListener(elem, support, callback, scope, useCapture); // handle MozMousePixelScroll in older Firefox
+
+
+      if (support == "DOMMouseScroll") {
+        _EventListener(elem, "MozMousePixelScroll", callback, scope, useCapture);
+      }
+    };
+
+    function _EventListener(elem, eventName, callback, scope, useCapture) {
+      elem[_rmEventListener](prefix + eventName, callback._wheelList);
+    }
+
+    return rmWheelListener;
+  }(window, document)
+};
+
+var _default = Dom;
+/* harmony default export */ __webpack_exports__["default"] = (_default);
+;
+
+(function () {
+  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).default;
+
+  if (!reactHotLoader) {
+    return;
+  }
+
+  reactHotLoader.register(floatCut, "floatCut", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\utils.js");
+  reactHotLoader.register(min, "min", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\utils.js");
+  reactHotLoader.register(max, "max", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\utils.js");
+  reactHotLoader.register(isBrowser, "isBrowser", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\utils.js");
+  reactHotLoader.register(Dom, "Dom", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\utils.js");
+  reactHotLoader.register(customProps, "customProps", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\utils.js");
+  reactHotLoader.register(__, "__", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\utils.js");
+  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\utils.js");
+})();
+
+;
+
+(function () {
+  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).leaveModule;
+  leaveModule && leaveModule(module);
+})();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
 
 /***/ })
 

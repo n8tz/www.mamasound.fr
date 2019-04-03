@@ -13,22 +13,19 @@
  */
 import PropTypes                             from "prop-types";
 import React                                 from "react";
-import {Rnd}                                 from "react-rnd";
 import {reScope, scopeToProps, propsToScope} from "rscopes";
 import geolib                                from 'geolib';
 import moment                                from 'moment';
 import IconButton                            from '@material-ui/core/IconButton';
 import {withStateMap, asRef, asStore}        from "rescope-spells";
-//import React, {Component} from "react";
-
-import Fab                   from '@material-ui/core/Fab';
-import GpsNoFixedIcon        from '@material-ui/icons/GpsNotFixed';
-import GpsFixedIcon          from '@material-ui/icons/GpsFixed';
-import GpsOffIcon            from '@material-ui/icons/GpsOff';
-import scopes                from 'App/scopes/(*).js';
-import stores                from 'App/stores/(*).js';
-import Comps                 from 'App/ui/components/(*).js';
-import {asTweener, TweenRef} from "react-rtween";
+import Fab                                   from '@material-ui/core/Fab';
+import GpsNoFixedIcon                        from '@material-ui/icons/GpsNotFixed';
+import GpsFixedIcon                          from '@material-ui/icons/GpsFixed';
+import GpsOffIcon                            from '@material-ui/icons/GpsOff';
+import scopes                                from 'App/scopes/(*).js';
+import stores                                from 'App/stores/(*).js';
+import Comps                                 from 'App/ui/components/(*).js';
+import {asTweener, TweenRef}                 from "react-rtween";
 
 import anims from 'App/ui/anims/(*).js';
 

@@ -13,21 +13,14 @@
  */
 import PropTypes                                    from "prop-types";
 import React                                        from "react";
-import {Rnd}                                        from "react-rnd";
 import {reScope, scopeToProps, propsToScope, Store} from "rscopes";
-import CloseIcon                                    from '@material-ui/icons/Close';
 import moment                                       from 'moment';
-import anims                                        from 'App/ui/anims/(*).js';
 import Slider                                       from "react-slick";
-//import CaipiSlideshow                               from "react-caipi-slider";
-
-
-import {withStateMap, asRef, asStore} from "rescope-spells";
-import stores                         from 'App/stores/(*).js';
-import DataProvider, {withQueries}    from 'App/stores/DataProvider';
-import Comps                          from 'App/ui/components/(*).js';
-
-import {asTweener, TweenRef} from "react-rtween";
+import anims                                        from 'App/ui/anims/(*).js';
+import Comps                                        from 'App/ui/components/(*).js';
+import {withStateMap, asRef, asStore}               from "rescope-spells";
+import stores                                       from 'App/stores/(*).js';
+import {asTweener, TweenRef}                        from "react-rtween";
 
 var CaipiSlideshow
 if ( typeof window !== "undefined" ) {

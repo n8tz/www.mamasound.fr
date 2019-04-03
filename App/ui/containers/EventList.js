@@ -30,16 +30,7 @@ import {asTweener, TweenRef} from "react-rtween";
 import SwipeableViews        from 'react-swipeable-views';
 
 @reScope(
-	{
-		@asStore
-		EventsByDay: {
-			//@asRef
-			//events: "EventList",
-			//$apply( data, { events: { items, refs } } ) {
-			//
-			//}
-		}
-	}
+	{}
 )
 @scopeToProps("appState")
 export default class EventList extends React.Component {
@@ -137,7 +128,6 @@ export default class EventList extends React.Component {
 		
 		if ( element ) {
 			this._scrollList && element.removeEventListener("scroll", this._scrollList);
-			
 		}
 	}
 	
@@ -152,9 +142,7 @@ export default class EventList extends React.Component {
 			<div
 				className={ "EventList container" }
 			>
-				<Blocks.DayBlock day={ appState.currentVisibleDay || appState.curDay }>
-				
-				</Blocks.DayBlock>
+				<Comps.DayBlock day={ appState.currentVisibleDay || appState.curDay }/>
 				<Tabs
 					value={ appState.viewType }
 					onChange={ ( e, v ) => {

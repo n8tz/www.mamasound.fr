@@ -48,7 +48,7 @@ export default class DayBlock extends React.Component {
 	shouldComponentUpdate( { day }, { curDay, nextDay }, nextContext ) {
 		day = day && moment(day).startOf('day').valueOf();
 		if ( day && day !== nextDay ) {
-			console.log("tween new", moment(nextDay).format("dddd DD/MM"), nextDay, moment(day).format("dddd DD/MM"))
+			//console.log("tween new", moment(nextDay).format("dddd DD/MM"), nextDay, moment(day).format("dddd DD/MM"))
 			this.setState(
 				{
 					curDay : nextDay,
@@ -65,12 +65,12 @@ export default class DayBlock extends React.Component {
 									translateY: -2
 								}
 							}
-						)
+						);
 					this.forceUpdate();
 					this.pushAnim(anims.slideOut("from", 0, 500, dir ? "top" : "bot"), null, true);
 					this.pushAnim(anims.slideIn("to", 0, 500, !dir ? "top" : "bot"),
 					              () => {
-						              console.log("tween done", moment(day).format("dddd DD/MM"))
+						              //console.log("tween done", moment(day).format("dddd DD/MM"))
 						              this.setState(
 							              {
 								              curDay : day,
@@ -130,8 +130,7 @@ export default class DayBlock extends React.Component {
 						          position       : 'absolute',
 						          ...anims.slideIn("to").initial.to
 					          }
-				          }
-				>
+				          }>
 					<div>
 						<Comps.SimpleDay day={ nextDay }/>
 					</div>
