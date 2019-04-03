@@ -30757,13 +30757,14 @@ function asTweener() {
       }
       /**
        * Register tweenable element
+       * return its current style
        * @param id
        * @param iStyle
        * @param iMap
        * @param pos
        * @param noref
        * @param mapReset
-       * @returns {*}
+       * @returns {style,ref}
        */
 
     }, {
@@ -31116,26 +31117,9 @@ function asTweener() {
         if (this._.rendered) {
           isBrowserSide && _utils__WEBPACK_IMPORTED_MODULE_12__["default"].addWheelEvent(react_dom__WEBPACK_IMPORTED_MODULE_15___default.a.findDOMNode(this), this._.onScroll = function (e) {
             //@todo
-            var prevent,
-                axe = "scrollY",
-                oldPos = _this9._.axes[axe].scrollPos,
-                newPos = oldPos + e.deltaY;
-
-            if (oldPos !== newPos) {
-              if (!_this9.shouldApplyScroll || _this9.shouldApplyScroll(newPos, oldPos, axe)) {
-                if (_this9.scrollTo(newPos, 100, axe)) prevent = !(opts.propagateAxes && opts.propagateAxes.scrollY);
-              }
-            }
-
-            axe = "scrollX";
-            oldPos = _this9._.axes[axe].scrollPos;
-            newPos = oldPos + e.deltaX;
-
-            if (oldPos !== newPos) {
-              if (!_this9.shouldApplyScroll || _this9.shouldApplyScroll(newPos, oldPos, axe)) {
-                if (_this9.scrollTo(newPos, 100, axe)) prevent = !(opts.propagateAxes && opts.propagateAxes.scrollX);
-              }
-            }
+            var prevent;
+            prevent = _this9.dispatchScroll(e.deltaY, "scrollY");
+            prevent = _this9.dispatchScroll(e.deltaX, "scrollX") || prevent;
 
             if (prevent) {
               e.preventDefault();
@@ -31190,6 +31174,22 @@ function asTweener() {
       key: "addScrollModifier",
       value: function addScrollModifier(desc) {
         var axe = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "scrollY";
+      }
+    }, {
+      key: "dispatchScroll",
+      value: function dispatchScroll(delta) {
+        var axe = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "scrollY";
+        var prevent,
+            oldPos = this._.axes[axe].scrollPos,
+            newPos = oldPos + e.deltaY;
+
+        if (oldPos !== newPos) {
+          if (!this.shouldApplyScroll || this.shouldApplyScroll(newPos, oldPos, axe)) {
+            if (this.scrollTo(newPos, 0, axe)) prevent = !(opts.propagateAxes && opts.propagateAxes[axe]);
+          }
+        }
+
+        return prevent;
       } // ------------------------------------------------------------
       // ------------------ Motion/FSM anims ------------------------
       // ------------------------------------------------------------
