@@ -6,7 +6,6 @@
 .AppleDouble
 .LSOverride
 Icon
-
 # Thumbnails
 ._*
 
@@ -27,6 +26,7 @@ $RECYCLE.BIN/
 
 # App specific
 
+User.bson
 .tmp
 node_modules
 .idea
