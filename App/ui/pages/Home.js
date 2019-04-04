@@ -27,7 +27,7 @@ var easingFn = require('d3-ease');
 	           axes: {
 		           scrollY: {
 			           inertia: {
-				           stops: [0, 100, 150]
+				           stops: [0, 100]
 			           }
 		           }
 	           }

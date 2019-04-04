@@ -470,23 +470,50 @@ export default function asTweener( ...argz ) {
 		
 		_registerScrollListeners() {
 			if ( this._.rendered ) {
+				let rootNode = ReactDom.findDOMNode(this);
 				isBrowserSide && utils.addWheelEvent(
-					ReactDom.findDOMNode(this),
+					rootNode,
 					this._.onScroll = ( e ) => {//@todo
-						let prevent;
+						let prevent, headTarget = e.target, style;
+						
+						
+						// check if there scrollable stuff in dom targets
+						while ( headTarget ) {
+							style = getComputedStyle(headTarget, null)
+							
+							if ( /(auto|scroll)/.test(
+								style.getPropertyValue("overflow")
+								+ style.getPropertyValue("overflow-x")
+								+ style.getPropertyValue("overflow-y")
+							)
+							) {
+								if (
+									(
+										(e.deltaY < 0 && headTarget.scrollTop !== 0)
+										||
+										(e.deltaY > 0 && headTarget.scrollTop !== (headTarget.scrollHeight - headTarget.offsetHeight))
+									)
+								) {
+									return;
+								} // let the node do this scroll
+							}
+							headTarget = headTarget.parentNode;
+							if ( headTarget === document || headTarget === rootNode )
+								break;
+						}
 						
 						prevent = this.dispatchScroll(e.deltaY * 5, "scrollY");
 						prevent = this.dispatchScroll(e.deltaX * 5, "scrollX") || prevent;
-						
-						if ( prevent ) {
-							e.preventDefault();
-							e.originalEvent.stopPropagation();
-						}
+						//
+						//if ( prevent ) {
+						//	e.preventDefault();
+						//	e.originalEvent.stopPropagation();
+						//}
 					}
 				);
 				let lastPos = {};
 				isBrowserSide && utils.addEvent(
-					ReactDom.findDOMNode(this), this._.dragList = {
+					rootNode, this._.dragList = {
 						'dragstart': ( e, touch, descr ) => {//@todo
 							let prevent,
 							    x = this._getDim("scrollX"),
@@ -501,15 +528,42 @@ export default function asTweener( ...argz ) {
 							
 						},
 						'drag'     : ( e, touch, descr ) => {//@todo
+							let prevent,
+							    x          = this._getDim("scrollX"),
+							    y          = this._getDim("scrollY"),
+							    deltaY     = descr._lastPos.y - descr._startPos.y,
+							    deltaX     = descr._lastPos.x - descr._startPos.x,
+							    headTarget = e.target, style;
 							
 							lastPos = lastPos || { ...descr._startPos };
+							// check if there scrollable stuff in dom targets
+							while ( headTarget ) {
+								style = getComputedStyle(headTarget, null)
+								
+								if ( /(auto|scroll)/.test(
+									style.getPropertyValue("overflow")
+									+ style.getPropertyValue("overflow-x")
+									+ style.getPropertyValue("overflow-y")
+								)
+								) {
+									if (
+										(
+											(deltaY > 0 && headTarget.scrollTop > 0)
+											||
+											(deltaY < 0 && headTarget.scrollTop < (headTarget.scrollHeight - headTarget.offsetHeight))
+										)
+									) {
+										return;
+									} // let the node do this scroll
+								}
+								headTarget = headTarget.parentNode;
+								if ( headTarget === document || headTarget === rootNode )
+									break;
+							}
 							
-							let prevent,
-							    x = this._getDim("scrollX"),
-							    y = this._getDim("scrollY");
 							
 							y.inertia.hold(lastPos.y + (-(descr._lastPos.y - descr._startPos.y) / this._.box.y) * y.scrollableArea);
-							x.inertia.hold(lastPos.x + -(descr._lastPos.x - descr._startPos.x));
+							x.inertia.hold(lastPos.x + (-(descr._lastPos.x - descr._startPos.x) / this._.box.x) * x.scrollableArea);
 							return !prevent;
 						},
 						'dropped'  : ( e, touch, descr ) => {
