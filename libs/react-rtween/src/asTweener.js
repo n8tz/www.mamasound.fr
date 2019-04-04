@@ -364,6 +364,7 @@ export default function asTweener( ...argz ) {
 				targetPos      : 0,
 				inertia        : new Inertia({
 					                             value: opts.initialScrollPos && opts.initialScrollPos[axe] || 0,
+					                             ...(opts.axes && opts.axes[axe] && opts.axes[axe].inertia || {})
 				                             }),
 			};
 			
@@ -429,6 +430,7 @@ export default function asTweener( ...argz ) {
 			if ( this._.axes ) {
 				let oldPos = this._.axes[axe].targetPos,
 				    setPos = pos => {
+					
 					    this._.axes[axe].scrollPos = pos;
 					    this.componentDidScroll && this.componentDidScroll(~~pos);
 					    this._updateTweenRefs()
@@ -436,7 +438,7 @@ export default function asTweener( ...argz ) {
 				;
 				
 				newPos                     = Math.max(0, newPos);
-				newPos                     = Math.min(newPos, this._.axes[axe].scrollableArea);
+				newPos                     = Math.min(newPos, this._.axes[axe].scrollableArea || 0);
 				this._.axes[axe].targetPos = newPos;
 				
 				if ( !ms ) {
@@ -473,8 +475,8 @@ export default function asTweener( ...argz ) {
 					this._.onScroll = ( e ) => {//@todo
 						let prevent;
 						
-						prevent = this.dispatchScroll(e.deltaY * 10, "scrollY");
-						prevent = this.dispatchScroll(e.deltaX * 10, "scrollX") || prevent;
+						prevent = this.dispatchScroll(e.deltaY * 5, "scrollY");
+						prevent = this.dispatchScroll(e.deltaX * 5, "scrollX") || prevent;
 						
 						if ( prevent ) {
 							e.preventDefault();
@@ -482,43 +484,38 @@ export default function asTweener( ...argz ) {
 						}
 					}
 				);
-				let lastPos;
+				let lastPos = {};
 				isBrowserSide && utils.addEvent(
 					ReactDom.findDOMNode(this), this._.dragList = {
-						'drag'   : ( e, touch, descr ) => {//@todo
+						'dragstart': ( e, touch, descr ) => {//@todo
+							let prevent,
+							    x = this._getDim("scrollX"),
+							    y = this._getDim("scrollY");
+							x.inertia.startMove();
+							y.inertia.startMove();
+							lastPos.x = x.scrollPos;
+							lastPos.y = y.scrollPos;
+							!x.inertiaFrame && this.applyInertia(x, "scrollX");
+							!y.inertiaFrame && this.applyInertia(y, "scrollY");
+							
+							
+						},
+						'drag'     : ( e, touch, descr ) => {//@todo
 							
 							lastPos = lastPos || { ...descr._startPos };
 							
 							let prevent,
-							    axe    = "scrollY",
-							    delta  = lastPos.y - descr._lastPos.y,
-							    oldPos = this._.axes[axe].scrollPos,
-							    newPos = oldPos + (delta) / 10;
+							    x = this._getDim("scrollX"),
+							    y = this._getDim("scrollY");
 							
-							if ( delta && (!this.shouldApplyScroll || this.shouldApplyScroll(newPos, oldPos, axe)) ) {
-								lastPos.y = descr._lastPos.y;
-								if ( this.scrollTo(newPos, 10, axe) )
-									prevent = !(opts.propagateAxes && opts.propagateAxes.scrollX) && prevent;
-							}
-							
-							axe    = "scrollX";
-							oldPos = this._.axes[axe].scrollPos;
-							delta  = lastPos.x - descr._lastPos.x;
-							newPos = oldPos + (delta) / 10;
-							if ( delta && (!this.shouldApplyScroll || this.shouldApplyScroll(newPos, oldPos, axe)) ) {
-								lastPos.x = descr._lastPos.x;
-								if ( this.scrollTo(newPos, 10, axe) )
-									prevent = !(opts.propagateAxes && opts.propagateAxes.scrollX) && prevent;
-							}
-							
-							if ( prevent ) {
-								e.preventDefault();
-								e.stopPropagation();
-							}
+							y.inertia.hold(lastPos.y + -(descr._lastPos.y - descr._startPos.y));
+							x.inertia.hold(lastPos.x + -(descr._lastPos.x - descr._startPos.x));
 							return !prevent;
 						},
-						'dropped': ( e, touch, descr ) => {
-							lastPos = null;
+						'dropped'  : ( e, touch, descr ) => {
+							this._getDim("scrollY").inertia.release();
+							this._getDim("scrollX").inertia.release();
+							//lastPos = null;
 						}
 					}, null,
 					opts.enableMouseDrag
@@ -560,9 +557,8 @@ export default function asTweener( ...argz ) {
 			
 			if ( dim && oldPos !== newPos ) {
 				
-				if ( !newPos ) debugger
-				console.log("dispatch " + newPos);
-				dim.inertia.to(newPos);
+				//console.log("dispatch " + newPos);
+				dim.inertia.dispatch(delta, 100);
 				!dim.inertiaFrame && this.applyInertia(dim, axe);
 				
 				//if ( this.scrollTo(newPos, 0, axe) )

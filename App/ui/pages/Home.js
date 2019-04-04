@@ -23,7 +23,15 @@ import {asTweener, TweenRef}          from "react-rtween";
 var easingFn = require('d3-ease');
 
 @scopeToProps("appState")
-@asTweener
+@asTweener({
+	           axes: {
+		           scrollY: {
+			           inertia: {
+				           stops: [0, 100, 150]
+			           }
+		           }
+	           }
+           })
 export default class Home extends React.Component {
 	state = {};
 	

@@ -42,11 +42,14 @@ export default class Inertia {
 			...opt
 		};
 		
-		this.active = false;
-		_.pos       = opt.value || 0;
-		_.refFPS    = 16;
-		_.size      = 1000;
-		_.inertiaFn = easingFn.easeCircleIn;
+		this.active   = false;
+		_.pos         = opt.value || 0;
+		_.refFPS      = 16;
+		_.min         = 0;
+		_.max         = 100;
+		_.currentStop = 0;
+		_.stops       = _.conf.stops;
+		_.inertiaFn   = easingFn.easePolyOut;
 	}
 	
 	update( at = Date.now() ) {
@@ -57,21 +60,64 @@ export default class Inertia {
 			pos          = _.inertiaFn((at - _.inertiaStartTm) / _.targetDuration) * _.targetDist,
 			delta        = pos - _.lastInertiaPos;
 		_.lastInertiaPos = pos;
-		if ( !delta || at - _.inertiaStartTm >= _.targetDuration ) {
+		if ( (at - _.inertiaStartTm) >= _.targetDuration ) {
 			_.inertia = this.active = false;
 			delta     = 0;
 		}
-		console.log(delta);
+		delta = delta || 0;
+		//console.log(_.pos + delta);
+		
+		
 		return _.pos += delta;
 	}
 	
-	to( pos, tm = 250 ) {
-		!this._.inertia && this.startMove();
-		//this.hold(this._.pos);
-		setTimeout(tm => {
-			this.hold(pos);
-			this.release();
-		}, tm)
+	dispatch( delta, tm = 250 ) {
+		let _       = this._, now = Date.now(), pos;
+		this.active = true;
+		if ( !_.inertia || signOf(delta) !== signOf(_.targetDist) ) {
+			_.inertia        = true;
+			_.lastInertiaPos = 0;
+			_.inertiaStartTm =
+				_.inertiaLastTm = now;
+			
+			_.targetDist     = delta;
+			_.targetDuration = tm;
+		}
+		else {
+			_.targetDist += delta;
+			_.targetDuration += tm;
+		}
+		
+		
+		_.stops && this._doSnapInertia(signOf(delta))
+		//pos =
+		//console.log(_);
+	}
+	
+	_doSnapInertia( forceSnap, maxDuration = 2000 ) {
+		let _   = this._,
+		    pos = _.targetDist + (_.pos - _.lastInertiaPos), target, mid, i
+		;
+		for ( i = 0; i < _.stops.length; i++ )
+			if ( _.stops[i] > pos )
+				break;
+		if ( i == _.stops.length ) {
+			target = _.stops[i - 1];
+		}
+		else if ( i === 0 ) {
+			target = _.stops[0];
+		}
+		else {
+			mid = _.stops[i - 1] + (_.stops[i] - _.stops[i - 1]) / 2;
+			if ( forceSnap )
+				target = forceSnap < 0 ? _.stops[i - 1] : _.stops[i];
+			else
+				target = pos < mid ? _.stops[i - 1] : _.stops[i];
+		}
+		target           = target - (_.pos - _.lastInertiaPos);
+		_.targetDuration = min(maxDuration, abs((_.targetDuration / _.targetDist) * target))
+		_.targetDist     = target;
+		//console.log(_);
 	}
 	
 	startMove() {
@@ -81,6 +127,7 @@ export default class Inertia {
 		_.lastAccel    = 0;
 		_.posDiff      = 0;
 		this.active    = true;
+		_.inertia      = false;
 	}
 	
 	hold( pos ) {
@@ -88,15 +135,21 @@ export default class Inertia {
 		    now          = Date.now() / 1000,//e.timeStamp,
 		    sinceLastPos = (now - _.baseTS),
 		    delta        = pos - _.pos,
-		    iVel         = delta / sinceLastPos,
-		    inc, dist, tmp;
+		    iVel         = delta / sinceLastPos;
 		
-		
-		_.pos           = pos;
+		//console.log(pos);
 		_.lastIVelocity = iVel;
 		_.lastVelocity  = iVel;
 		_.baseTS        = now;
 		
+		if ( pos > _.max ) {
+			pos = _.max + min((pos - _.max) / 10, 10);
+		}
+		else if ( pos < _.min ) {
+			pos = _.min - min((_.min - pos) / 10, 10);
+		}
+		
+		_.pos = pos;
 		
 	}
 	
@@ -104,22 +157,45 @@ export default class Inertia {
 		let _       = this._,
 		    velSign = signOf(_.lastVelocity);
 		
-		// calc momentum distance...
-		// get nb loop needed to get vel < .05
-		_.loopsTarget = floor(Math.log(.05 / abs(_.lastVelocity)) / Math.log(.9));
-		
-		// get velocity sum basing on nb loops needed
-		_.loopsVelSum    = (Math.pow(.9, _.loopsTarget) - abs(_.lastVelocity)) / (.9 - 1);
-		// deduce real dist of momentum
-		_.targetDist     = (_.loopsVelSum * _.refFPS * velSign) / 1000;
-		_.targetDuration = abs(_.loopsTarget * _.refFPS * velSign);
-		
-		console.log(_);
-		_.inertia        = true;
-		_.lastInertiaPos = 0;
-		_.inertiaStartTm =
-			_.inertiaLastTm = Date.now();
-		//_.active = false;
+		if ( _.pos > _.max ) {
+			_.inertia        = true;
+			_.lastInertiaPos = 0;
+			_.inertiaStartTm =
+				_.inertiaLastTm = Date.now();
+			
+			_.targetDist     = _.max - _.pos;
+			_.targetDuration = abs(_.targetDist * 10);
+		}
+		else if ( _.pos < _.min ) {
+			_.inertia        = true;
+			_.lastInertiaPos = 0;
+			_.inertiaStartTm =
+				_.inertiaLastTm = Date.now();
+			
+			_.targetDist     = _.pos - _.min;
+			_.targetDuration = abs(_.targetDist * 10);
+		}
+		else {
+			// calc momentum distance...
+			// get nb loop needed to get vel < .05
+			_.loopsTarget = floor(Math.log(.05 / abs(_.lastVelocity)) / Math.log(.9));
+			
+			// get velocity sum basing on nb loops needed
+			_.loopsVelSum    = (Math.pow(.9, _.loopsTarget) - abs(_.lastVelocity)) / (.9 - 1);
+			// deduce real dist of momentum
+			_.targetDist     = (_.loopsVelSum * _.refFPS * velSign) / 1000 || 0;
+			_.targetDuration = abs(_.loopsTarget * _.refFPS * velSign) || 0;
+			
+			if ( !_.targetDuration )
+				_.targetDuration = 50;
+			
+			//console.log(_);
+			_.inertia        = true;
+			_.lastInertiaPos = 0;
+			_.inertiaStartTm =
+				_.inertiaLastTm = Date.now();
+		}
+		_.stops && this._doSnapInertia(null, 750)
 	}
 	
 	
