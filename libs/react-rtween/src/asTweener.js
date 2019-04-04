@@ -407,7 +407,7 @@ export default function asTweener( ...argz ) {
 			dim.scrollPos      = dim.scrollPos || 0;
 			dim.scrollableArea = dim.scrollableArea || 0;
 			dim.scrollableArea = Math.max(dim.scrollableArea, sl.duration);
-			
+			dim.inertia.setBounds(0, dim.scrollableArea);
 			sl.goTo(dim.scrollPos, this._.tweenRefMaps);
 			this._updateTweenRefs();
 			return sl;
@@ -420,6 +420,7 @@ export default function asTweener( ...argz ) {
 			if ( i != -1 ) {
 				dim.scrollableAnims.splice(i, 1);
 				dim.scrollableArea = Math.max(...dim.scrollableAnims.map(tl => tl.duration), 0);
+				dim.inertia.setBounds(0, dim.scrollableArea || 0);
 				sl.goTo(0, this._.tweenRefMaps)
 				found = true;
 			}
@@ -488,11 +489,9 @@ export default function asTweener( ...argz ) {
 							)
 							) {
 								if (
-									(
-										(e.deltaY < 0 && headTarget.scrollTop !== 0)
-										||
-										(e.deltaY > 0 && headTarget.scrollTop !== (headTarget.scrollHeight - headTarget.offsetHeight))
-									)
+									(e.deltaY < 0 && headTarget.scrollTop !== 0)
+									||
+									(e.deltaY > 0 && headTarget.scrollTop !== (headTarget.scrollHeight - headTarget.offsetHeight))
 								) {
 									return;
 								} // let the node do this scroll
@@ -502,8 +501,8 @@ export default function asTweener( ...argz ) {
 								break;
 						}
 						
-						prevent = this.dispatchScroll(e.deltaY * 5, "scrollY");
-						prevent = this.dispatchScroll(e.deltaX * 5, "scrollX") || prevent;
+						this.dispatchScroll(e.deltaY * 5, "scrollY");
+						this.dispatchScroll(e.deltaX * 5, "scrollX");
 						//
 						//if ( prevent ) {
 						//	e.preventDefault();

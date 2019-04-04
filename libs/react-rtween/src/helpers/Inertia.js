@@ -45,8 +45,8 @@ export default class Inertia {
 		this.active   = false;
 		_.pos         = opt.value || 0;
 		_.refFPS      = 16;
-		_.min         = 0;
-		_.max         = 100;
+		_.min         = opt.min || 0;
+		_.max         = opt.max || 0;
 		_.currentStop = 0;
 		_.stops       = _.conf.stops;
 		_.inertiaFn   = easingFn.easePolyOut;
@@ -121,6 +121,12 @@ export default class Inertia {
 		_.targetDuration = min(maxDuration, abs((_.targetDuration / _.targetDist) * target));
 		_.targetDist     = target;
 		//console.log(_);
+	}
+	
+	setBounds( min, max ) {
+		let _      = this._;
+		_.min = min;
+		_.max = max;
 	}
 	
 	startMove() {
