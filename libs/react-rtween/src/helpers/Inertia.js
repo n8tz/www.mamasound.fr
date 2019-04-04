@@ -84,12 +84,15 @@ export default class Inertia {
 			_.targetDuration = tm;
 		}
 		else {
+			_.inertiaStartTm =
+				_.inertiaLastTm = now;
+			_.lastInertiaPos = 0;
 			_.targetDist += delta;
 			_.targetDuration += tm;
 		}
+		_.stops && this._doSnapInertia(signOf(delta), 750)
 		
 		
-		_.stops && this._doSnapInertia(signOf(delta))
 		//pos =
 		//console.log(_);
 	}
@@ -115,7 +118,7 @@ export default class Inertia {
 				target = pos < mid ? _.stops[i - 1] : _.stops[i];
 		}
 		target           = target - (_.pos - _.lastInertiaPos);
-		_.targetDuration = min(maxDuration, abs((_.targetDuration / _.targetDist) * target))
+		_.targetDuration = min(maxDuration, abs((_.targetDuration / _.targetDist) * target));
 		_.targetDist     = target;
 		//console.log(_);
 	}
@@ -195,8 +198,6 @@ export default class Inertia {
 			_.inertiaStartTm =
 				_.inertiaLastTm = Date.now();
 		}
-		_.stops && this._doSnapInertia(null, 750)
+		_.stops && this._doSnapInertia(null, 500)
 	}
-	
-	
 }

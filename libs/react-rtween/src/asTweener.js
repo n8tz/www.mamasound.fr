@@ -508,7 +508,7 @@ export default function asTweener( ...argz ) {
 							    x = this._getDim("scrollX"),
 							    y = this._getDim("scrollY");
 							
-							y.inertia.hold(lastPos.y + -(descr._lastPos.y - descr._startPos.y));
+							y.inertia.hold(lastPos.y + (-(descr._lastPos.y - descr._startPos.y) / this._.box.y) * y.scrollableArea);
 							x.inertia.hold(lastPos.x + -(descr._lastPos.x - descr._startPos.x));
 							return !prevent;
 						},
