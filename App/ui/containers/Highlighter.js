@@ -109,76 +109,76 @@ export default class Highlighter extends React.Component {
 				className={ "Highlighter container" }
 			>
 				
-				<TweenRef id={ "slider" }
-				          initial={ {
-					          position       : "absolute",
-					          backgroundColor: "yellow",
-					          top            : "0px",
-					          left           : "0px",
-					          width          : "100%",
-					          height         : "20vh",
-					          zIndex         : 1000,
-					          opacity        : 1,
-					
-					          transform: {
-						          //translateZ: '-.2box',
-						          translateY: '-1box',
-					          }
-				          } }
-				          scrollableAnims={ {
-					          scrollY: anims.slideIn(null, 0, 100, "top").anims,
-				          } }
-				>
-					<div onClick={ e => {
-						e.stopPropagation()
-						e.preventDefault()
-					} }>
-						<Slider { ...settings }>
-							{
-								gridItems.map(
-									( item, i ) =>
-										<Comps.FocusedItems record={ item } key={ item._id }/>
-								)
-							}
-						</Slider>
-					</div>
-				</TweenRef>
+				{/*<TweenRef id={ "slider" }*/ }
+				{/*initial={ {*/ }
+				{/*position       : "absolute",*/ }
+				{/*backgroundColor: "yellow",*/ }
+				{/*top            : "0px",*/ }
+				{/*left           : "0px",*/ }
+				{/*width          : "100%",*/ }
+				{/*height         : "20vh",*/ }
+				{/*zIndex         : 1000,*/ }
+				{/*opacity        : 1,*/ }
+				{/**/ }
+				{/*transform: {*/ }
+				{/*//translateZ: '-.2box',*/ }
+				{/*translateY: '-1box',*/ }
+				{/*}*/ }
+				{/*} }*/ }
+				{/*scrollableAnims={ {*/ }
+				{/*scrollY: anims.slideIn(null, 0, 100, "top").anims,*/ }
+				{/*} }*/ }
+				{/*>*/ }
+				{/*<div onClick={ e => {*/ }
+				{/*e.stopPropagation()*/ }
+				{/*e.preventDefault()*/ }
+				{/*} }>*/ }
+				{/*<Slider { ...settings }>*/ }
+				{/*{*/ }
+				{/*gridItems.map(*/ }
+				{/*( item, i ) =>*/ }
+				{/*<Comps.FocusedItems record={ item } key={ item._id }/>*/ }
+				{/*)*/ }
+				{/*}*/ }
+				{/*</Slider>*/ }
+				{/*</div>*/ }
+				{/*</TweenRef>*/ }
 				
-				<TweenRef
-					initial={ {
-						position : "absolute",
-						top      : "0px",
-						left     : "0px",
-						width    : "100%",
-						height   : "100%",
-						transform: {
-							translateY: '-.20box',
-						}
-					} }
-					scrollableAnims={ {
-						scrollY: [
-							{
-								type    : "Tween",
-								from    : 0,
-								duration: 100,
-								apply   : {
-									filter   : {
-										//blur: "5px",
-										//translateY: "-50px",
-									},
-									transform: {
-										translateZ: "50px",
-										//translateY: "-50px",
+				<div className={ "headBackground" }>
+					<TweenRef
+						initial={ {
+							//position : "absolute",
+							//top      : "0px",
+							//left     : "0px",
+							//width    : "100%",
+							//height   : "100%",
+							transform: {
+								translateY: '-50vh',
+							}
+						} }
+						scrollableAnims={ {
+							scrollY: [
+								{
+									type    : "Tween",
+									from    : 0,
+									duration: 100,
+									apply   : {
+										filter   : {
+											//blur: "5px",
+											//translateY: "-50px",
+										},
+										transform: {
+											translateZ: "50px",
+											//translateY: "-20vh",
+										}
 									}
 								}
-							}
-						],
-					} }
-				>
-					<div className={ "headBackground" }>
+							],
+						} }
+					>
 						<img src={ require("App/ui/assets/couvs/test.jpg") }/>
-					</div>
-				</TweenRef>
+					</TweenRef>
+				</div>
 				{/*<div className={ " today" } onClick={ e => e.preventDefault() }>*/ }
 				
 				<TweenRef
@@ -189,9 +189,9 @@ export default class Highlighter extends React.Component {
 						width    : "100%",
 						//height   : "175px",
 						transform: {
-							//opacity   : "1"
-							//scale: '1',
-							//translateY: '-150px',
+							perspective: "200px",
+							translateY : '-10px',
+							rotateX    : "2deg"
 						}
 					} }
 					scrollableAnims={ {
@@ -201,9 +201,11 @@ export default class Highlighter extends React.Component {
 								from    : 0,
 								duration: 100,
 								apply   : {
-									opacity  : "-1",
+									//opacity  : "-1",
 									transform: {
-										translateY: "100px"
+										translateZ : "15px",
+										perspective: "100px",
+										rotateX    : "-2deg"
 									}
 								}
 							}
@@ -223,18 +225,18 @@ export default class Highlighter extends React.Component {
 							}
 							config={
 								{
-									hPositioningFn                    : 'hCentralZoom',
-									predictiveMomentum_maxMomentumJump: 1,
-									predictiveMomentum                : true,
+									hPositioningFn    : 'hCentralZoom',
+									//predictiveMomentum_maxMomentumJump: 1,
+									predictiveMomentum: true,
 									//forceSlotRatio                    : 7 / 5,
 									//infiniteMode                       : false,
-									autoScroll                        : true,
-									autoScrollPeriod                  : 5000,
-									visibleItems                      : 5,
-									//hSlotWidth                        : .85,
-									hSlotHeight                       : 1,
-									listenMouseWheel                  : false,
-									direction                         : 'horizontal',
+									autoScroll        : true,
+									autoScrollPeriod  : 5000,
+									visibleItems      : 3,
+									hSlotWidth        : .85,
+									hSlotHeight       : 1,
+									listenMouseWheel  : false,
+									direction         : 'horizontal',
 									//
 									//itemClicked : function ( item, offset, index, slot, e ) {
 									//

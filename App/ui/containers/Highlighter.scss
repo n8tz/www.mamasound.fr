@@ -14,11 +14,12 @@
 
 .Highlighter {
   touch-action: none;
-  overflow: hidden;
+  //overflow: hidden;
   position: relative;
 
   perspective: 200px;
   height: 100%;
+  z-index: 75;
   @media screen and (max-width: $tablet-landscape-breakpoint) {
     margin: 0 !important;
     padding: 0 !important;
@@ -29,10 +30,16 @@
   @include use_hvCenteredContent();
 
   .headBackground {
-    img {
-      width: 100%;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
 
+    img {
       @include use_hvCenteredAbs();
+      width: 100%;
+      margin: -50%;
+
     }
   }
 
@@ -43,12 +50,13 @@
     @media screen and (max-width: $smartphone-landscape-breakpoint) {
       height: 100px;
     }
+
     .CaipiSlider {
       height: 100%;
       width: 100%;
 
       > div {
-        transform: perspective(200px) rotate3d(10, 0, 0, 2deg) !important;
+        //transform: perspective(200px) rotate3d(10, 0, 0, 2deg) !important;
       }
 
       .CaipiSliderItem {

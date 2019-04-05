@@ -69,13 +69,14 @@ body, html {
     //background: green;
     position: relative;
     //width: calc(100% - 17px);
-    @media (hover: none) {
+    //@media (hover: none) {
       /* ... */
-      //width: 100%;
-    }
+      width: 100%;
+    //}
     //top: 0px;
     //left: 0px;
     z-index: 100;
+    background: white;
 
     &:after {
       @include use_hvCenteredAbs();
