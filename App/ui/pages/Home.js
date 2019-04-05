@@ -112,52 +112,10 @@ const YAxis = [
 
 
 @scopeToProps("appState")
-@asTweener({
-	           axes: {
-		           scrollY: {
-			           inertia: {
-				           stops: [0, 100]
-			           }
-		           }
-	           }
-           })
+@asTweener({})
 export default class Home extends React.Component {
 	state = {};
 	
-	
-	shouldApplyScroll( newPos, oldPos, axe ) {
-		let { $actions, appState } = this.props;
-		let node                   = document.getElementById("endList_" + appState.viewType),
-		    delta                  = Math.abs(newPos - oldPos);
-		
-		node = node && node.parentNode;
-		
-		if ( axe !== "scrollY" )
-			return true;
-		
-		if ( !node )
-			return;
-		
-		if ( newPos > oldPos ) {
-			//if ( (node.scrollTop + node.offsetHeight) > node.scrollHeight - 5 ) {
-			//	//$actions.setPageFocus('page');
-			//	console.log("bot")
-			//	//return true;
-			//}
-			//else
-			if ( appState.currentPageFocus === 'head' )
-				$actions.setPageFocus('events');
-		}
-		else if ( newPos < oldPos ) {
-			if ( node.scrollTop < 25 ) {
-				$actions.setPageFocus('head');
-				console.log("top")
-			}
-			else {
-				$actions.setPageFocus('events');
-			}
-		}
-	}
 	
 	componentDidMount( props = this.props ) {
 		let { appState } = props;
@@ -206,7 +164,7 @@ export default class Home extends React.Component {
 				items={ YAxis }
 				inertia={
 					{
-						stops:[0,100]
+						stops: [0, 100]
 					}
 				}
 			/>
@@ -217,10 +175,11 @@ export default class Home extends React.Component {
 				} }
 			>
 				<header
+					className={"container"}
 					onClick={ e => $actions.setPageFocus("head") }
 					style={ {
 						display: "inline-block",
-						width  : "100%",
+						//width  : "100%",
 						//background: "red",
 					} }>
 					<TweenRef

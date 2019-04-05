@@ -62,19 +62,19 @@ body, html {
   top: 0px;
   left: 0;
   perspective: 200px;
+  text-align: center;
 
   //tr
   header {
     //background: green;
-    position: fixed;
-    width: calc(100% - 17px);
+    position: relative;
+    //width: calc(100% - 17px);
     @media (hover: none) {
       /* ... */
-      width: 100%;
+      //width: 100%;
     }
-    top: 0px;
-    left: 0px;
-    text-align: center;
+    //top: 0px;
+    //left: 0px;
     z-index: 100;
 
     &:after {
@@ -82,9 +82,9 @@ body, html {
       content: ' ';
       position: absolute;
       top: 100%;
-      width: 10000px;
+      width: 100%;
       height: 15%;
-      margin-top: -3px;
+      margin-top: -1px;
       transform: translate3d(-50%, 0, 0);
       background: url("../assets/medias/border2.png") repeat-x;
       background-size: auto 100%;
