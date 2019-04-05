@@ -44,6 +44,9 @@ export default class TweenRef extends React.Component {
 			      .forEach(axe => this._previousTweener.rmScrollableAnim(this._scrollableAnims[axe], axe));
 			
 		}
+		if ( this._previousTweener ) {
+			this._previousTweener.rmTweenRef(this.__tweenableId)
+		}
 		delete this._previousTweener;
 		delete this._previousScrollable;
 	}
@@ -84,6 +87,9 @@ export default class TweenRef extends React.Component {
 							this._scrollableAnims = scrollableAnims &&
 								Object.keys(scrollableAnims)
 								      .reduce(( h, axe ) => (h[axe] = tweener.addScrollableAnim(setTarget(scrollableAnims[axe], id), axe), h), {});
+						
+						if ( this._previousTweener !== tweener )
+							this._previousTweener && this._previousTweener.rmTweenRef(this.__tweenableId)
 						
 						this._previousTweener    = tweener;
 						this._previousScrollable = scrollableAnims;

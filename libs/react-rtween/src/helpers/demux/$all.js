@@ -12,7 +12,7 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-import is           from "is";
+import is from "is";
 
 const
 	unitsRe         = new RegExp(
@@ -39,13 +39,13 @@ function demux( key, tweenable, target, data, box ) {
 	target[key] = data[key] ? floatCut(tweenable[key], 2) + data[key] : floatCut(tweenable[key], 2);
 }
 
-export default ( key, value, target, data, initials ) => {
+export default ( key, value, target, data, initials, forceUnits ) => {
 	
 	let match = is.string(value) ? value.match(unitsRe) : false;
 	
 	initials[key] = defaultValue[key] || 0;
 	if ( match ) {
-		if ( data[key] && data[key] !== match[2] ) {
+		if ( !forceUnits && data[key] && data[key] !== match[2] ) {
 			console.warn("Have != units on prop ! Ignore ", key, "present:" + data[key], "new:" + match[2]);
 			target[key] = 0;
 		}

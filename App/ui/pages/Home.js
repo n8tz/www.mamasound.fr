@@ -17,10 +17,99 @@ import {reScope, scopeToProps, propsToScope} from "rscopes";
 import Blocks                                from 'App/ui/containers/(*).js';
 import ReactDom                              from "react-dom";
 
-import {withStateMap, asRef, asStore} from "rescope-spells";
-import {asTweener, TweenRef}          from "react-rtween";
+import {withStateMap, asRef, asStore}   from "rescope-spells";
+import {asTweener, TweenRef, TweenLine} from "react-rtween";
 
 var easingFn = require('d3-ease');
+
+const YAxis = [
+	{
+		type    : "Tween",
+		target  : "header",
+		from    : 0,
+		duration: 100,
+		apply   : {
+			height: -1,
+		}
+	},
+	{
+		type    : "Tween",
+		target  : "page",
+		from    : 0,
+		duration: 100,
+		apply   : {
+			top: -1,
+		}
+	},
+	{
+		type    : "Tween",
+		target  : "highlighted",
+		from    : 0,
+		duration: 100,
+		apply   : {
+			height: -65,
+		}
+	},
+	{
+		type    : "Tween",
+		target  : "events",
+		from    : 0,
+		duration: 100,
+		apply   : {
+			height: 65,
+		}
+	},
+	//show map
+	{
+		type    : "Tween",
+		target  : "map",
+		from    : 65,
+		duration: 35,
+		apply   : {
+			height: 30,
+		}
+	},
+	{
+		type    : "Tween",
+		target  : "events",
+		from    : 65,
+		duration: 35,
+		apply   : {
+			height: -30,
+		}
+	},
+	//show page
+	{
+		type    : "Tween",
+		target  : "map",
+		from    : 100,
+		duration: 50,
+		apply   : {
+			//height: -10,
+			//marginLeft: "30%",
+			//width     : "-30%",
+		}
+	},
+	{
+		type    : "Tween",
+		target  : "events",
+		from    : 100,
+		duration: 50,
+		apply   : {
+			height: -30,
+		}
+	},
+	{
+		type    : "Tween",
+		target  : "PageBlock",
+		from    : 100,
+		duration: 50,
+		apply   : {
+			height: 40,
+		}
+	}
+];
+
 
 @scopeToProps("appState")
 @asTweener({
@@ -35,93 +124,6 @@ var easingFn = require('d3-ease');
 export default class Home extends React.Component {
 	state = {};
 	
-	static scrollableAnim = [
-		{
-			type    : "Tween",
-			target  : "header",
-			from    : 0,
-			duration: 100,
-			apply   : {
-				height: -1,
-			}
-		},
-		{
-			type    : "Tween",
-			target  : "page",
-			from    : 0,
-			duration: 100,
-			apply   : {
-				top: -1,
-			}
-		},
-		{
-			type    : "Tween",
-			target  : "highlighted",
-			from    : 0,
-			duration: 100,
-			apply   : {
-				height: -65,
-			}
-		},
-		{
-			type    : "Tween",
-			target  : "events",
-			from    : 0,
-			duration: 100,
-			apply   : {
-				height: 65,
-			}
-		},
-		//show map
-		{
-			type    : "Tween",
-			target  : "map",
-			from    : 65,
-			duration: 35,
-			apply   : {
-				height: 30,
-			}
-		},
-		{
-			type    : "Tween",
-			target  : "events",
-			from    : 65,
-			duration: 35,
-			apply   : {
-				height: -30,
-			}
-		},
-		//show page
-		{
-			type    : "Tween",
-			target  : "map",
-			from    : 100,
-			duration: 50,
-			apply   : {
-				//height: -10,
-				//marginLeft: "30%",
-				//width     : "-30%",
-			}
-		},
-		{
-			type    : "Tween",
-			target  : "events",
-			from    : 100,
-			duration: 50,
-			apply   : {
-				height: -30,
-			}
-		},
-		{
-			type    : "Tween",
-			target  : "PageBlock",
-			from    : 100,
-			duration: 50,
-			apply   : {
-				height: 40,
-			}
-		}
-	];
 	
 	shouldApplyScroll( newPos, oldPos, axe ) {
 		let { $actions, appState } = this.props;
@@ -199,6 +201,15 @@ export default class Home extends React.Component {
 			window.$actions = $actions;
 		
 		return <div className={ "Page Home" }>
+			<TweenLine
+				axe={ "scrollY" }
+				items={ YAxis }
+				inertia={
+					{
+						stops:[0,100]
+					}
+				}
+			/>
 			<TweenRef
 				id={ "header" }
 				initial={ {
@@ -208,9 +219,9 @@ export default class Home extends React.Component {
 				<header
 					onClick={ e => $actions.setPageFocus("head") }
 					style={ {
-						display   : "inline-block",
-						width     : "100%",
-						background: "red",
+						display: "inline-block",
+						width  : "100%",
+						//background: "red",
 					} }>
 					<TweenRef
 						id={ "logo" }
@@ -245,8 +256,8 @@ export default class Home extends React.Component {
 					>
 						<div
 							style={ {
-								width     : "100%",
-								background: "blue",
+								width: "100%",
+								//background: "blue",
 							} }>
 							<Blocks.Highlighter/>
 						</div>
@@ -260,9 +271,9 @@ export default class Home extends React.Component {
 					>
 						<div
 							style={ {
-								width     : "100%",
-								background: "green",
-								overflow  : 'hidden'
+								width   : "100%",
+								//background: "green",
+								overflow: 'hidden'
 							} }>
 							<Blocks.EventList/>
 						</div>
@@ -276,8 +287,8 @@ export default class Home extends React.Component {
 					>
 						<div
 							style={ {
-								background: "cyan",
-								overflow  : 'hidden',
+								//background: "cyan",
+								overflow: 'hidden',
 							} }>
 							<Blocks.EventMap
 								day={ appState.currentVisibleDay || appState.curDay }
@@ -292,9 +303,9 @@ export default class Home extends React.Component {
 					>
 						<div
 							style={ {
-								width     : "100%",
-								background: "green",
-								overflow  : 'hidden',
+								width   : "100%",
+								//background: "green",
+								overflow: 'hidden',
 							} }>
 							<Blocks.PageBlock/>
 						</div>
