@@ -21,10 +21,10 @@
   height: 100%;
   z-index: 75;
   padding: 0 !important;
-  @media screen and (max-width: $tablet-landscape-breakpoint) {
-    margin: 0 !important;
-    width: 100% !important;
-  }
+  //@media screen and (max-width: $tablet-landscape-breakpoint) {
+  margin: 0 !important;
+  width: 100% !important;
+  //}
 
   //tr
   header {
@@ -35,6 +35,8 @@
     //@media (hover: none) {
     /* ... */
     width: 100%;
+
+    transform: translate3d(0, 0, 0);
     //}
     //left: 0px;
     //z-index: 100;
@@ -42,6 +44,7 @@
 
     @include withMask();
     padding-bottom: 10px;
+
     .logo {
       @include use_hvCenteredAbs();
       background: url("../assets/medias/LogoVF_MAMA_SOUND.png") no-repeat;
@@ -69,6 +72,8 @@
     position: absolute;
     top: 0;
     left: 0;
+
+    transform: translate3d(0, 0, 0);
     @include withMask();
 
 
@@ -83,7 +88,7 @@
   .slider {
     width: 100%;
     text-align: center;
-    height: 170px;
+    height: 18.5vh;
     margin-bottom: 10px;
     @media screen and (max-width: $smartphone-landscape-breakpoint) {
       height: 100px;

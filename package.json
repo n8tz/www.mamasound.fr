@@ -2,7 +2,6 @@
   "name": "www.mamasound.fr",
   "version": "2.0.0",
   "private": true,
-  "license": "MIT",
   "main": "./dist/App.server.js",
   "author": "Nathan Braun <n8tz.js@gmail.com>",
   "wpInherit": {
