@@ -30395,9 +30395,9 @@ function (_React$Component) {
     value: function componentWillUnmount() {
       var _this2 = this;
 
-      if (this._scrollableAnims) {
-        Object.keys(this._scrollableAnims).forEach(function (axe) {
-          return _this2._previousTweener.rmScrollableAnim(_this2._scrollableAnims[axe], axe);
+      if (this._tweenLines) {
+        Object.keys(this._tweenLines).forEach(function (axe) {
+          return _this2._previousTweener.rmScrollableAnim(_this2._tweenLines[axe], axe);
         });
       }
 
@@ -30418,7 +30418,7 @@ function (_React$Component) {
           pos = _this$props.pos,
           noRef = _this$props.noRef,
           reset = _this$props.reset,
-          scrollableAnims = _this$props.scrollableAnims,
+          tweenLines = _this$props.tweenLines,
           _this$props$onClick = _this$props.onClick,
           onClick = _this$props$onClick === void 0 ? children && children.props && children.props.onClick : _this$props$onClick,
           _this$props$onDoubleC = _this$props.onDoubleClick,
@@ -30435,20 +30435,20 @@ function (_React$Component) {
           }));
         }
 
-        if (_this3._previousTweener !== tweener || _this3._previousScrollable !== scrollableAnims) {
-          if (_this3._scrollableAnims) {
-            Object.keys(_this3._scrollableAnims).forEach(function (axe) {
-              return _this3._previousTweener.rmScrollableAnim(_this3._scrollableAnims[axe], axe);
+        if (_this3._previousTweener !== tweener || _this3._previousScrollable !== tweenLines) {
+          if (_this3._tweenLines) {
+            Object.keys(_this3._tweenLines).forEach(function (axe) {
+              return _this3._previousTweener.rmScrollableAnim(_this3._tweenLines[axe], axe);
             });
           }
 
-          if (scrollableAnims && is__WEBPACK_IMPORTED_MODULE_8___default.a.array(scrollableAnims)) _this3._scrollableAnims = {
-            scrollY: tweener.addScrollableAnim(setTarget(scrollableAnims, id))
-          };else _this3._scrollableAnims = scrollableAnims && Object.keys(scrollableAnims).reduce(function (h, axe) {
-            return h[axe] = tweener.addScrollableAnim(setTarget(scrollableAnims[axe], id), axe), h;
+          if (tweenLines && is__WEBPACK_IMPORTED_MODULE_8___default.a.array(tweenLines)) _this3._tweenLines = {
+            scrollY: tweener.addScrollableAnim(setTarget(tweenLines, id))
+          };else _this3._tweenLines = tweenLines && Object.keys(tweenLines).reduce(function (h, axe) {
+            return h[axe] = tweener.addScrollableAnim(setTarget(tweenLines[axe], id), axe), h;
           }, {});
           _this3._previousTweener = tweener;
-          _this3._previousScrollable = scrollableAnims;
+          _this3._previousScrollable = tweenLines;
         }
 
         return children;
@@ -30959,7 +30959,7 @@ function asTweener() {
             var x = from + easing(pos / max) * length;
 
             if (_this6._.tweenEnabled) {
-              _this6._.axes[axe].scrollableAnims.forEach(function (sl) {
+              _this6._.axes[axe].tweenLines.forEach(function (sl) {
                 return sl.goTo(x);
               });
 
@@ -31008,13 +31008,13 @@ function asTweener() {
         this.makeScrollable(); // init scroll
 
         _.axes[axe] = _.axes[axe] || {
-          scrollableAnims: [],
+          tweenLines: [],
           scrollPos: opts.initialScrollPos && opts.initialScrollPos[axe] || 0,
           targetPos: 0,
           scrollableArea: 0
         };
 
-        _.axes[axe].scrollableAnims.push(sl);
+        _.axes[axe].tweenLines.push(sl);
 
         _.axes[axe].scrollPos = _.axes[axe].scrollPos || 0;
         _.axes[axe].scrollableArea = _.axes[axe].scrollableArea || 0;
@@ -31033,12 +31033,12 @@ function asTweener() {
             found;
 
         if (_.axes) {
-          var i = _.axes[axe].scrollableAnims.indexOf(sl);
+          var i = _.axes[axe].tweenLines.indexOf(sl);
 
           if (i != -1) {
-            _.axes[axe].scrollableAnims.splice(i, 1);
+            _.axes[axe].tweenLines.splice(i, 1);
 
-            _.axes[axe].scrollableArea = Math.max.apply(Math, _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(_.axes[axe].scrollableAnims.map(function (tl) {
+            _.axes[axe].scrollableArea = Math.max.apply(Math, _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(_.axes[axe].tweenLines.map(function (tl) {
               return tl.duration;
             })).concat([0]));
             sl.goTo(0, this._.tweenRefMaps);
@@ -31067,7 +31067,7 @@ function asTweener() {
           this._.axes[axe].targetPos = newPos;
 
           if (!ms) {
-            this._.axes[axe].scrollableAnims.forEach(function (sl) {
+            this._.axes[axe].tweenLines.forEach(function (sl) {
               return sl.goTo(newPos, _this8._.tweenRefMaps);
             });
 
@@ -31092,13 +31092,13 @@ function asTweener() {
           this._.scrollHook = [];
           this._.axes = {
             scrollX: {
-              scrollableAnims: [],
+              tweenLines: [],
               scrollPos: opts.initialScrollPos && opts.initialScrollPos.scrollX || 0,
               targetPos: 0,
               scrollableArea: 0
             },
             scrollY: {
-              scrollableAnims: [],
+              tweenLines: [],
               scrollPos: opts.initialScrollPos && opts.initialScrollPos.scrollY || 0,
               targetPos: 0,
               scrollableArea: 0
@@ -33805,7 +33805,7 @@ function (_React$Component) {
 
           }
         },
-        scrollableAnims: scrollAnims
+        tweenLines: scrollAnims
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
         onClick: function onClick(e) {
           _this2.setState({

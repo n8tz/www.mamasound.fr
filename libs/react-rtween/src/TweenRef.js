@@ -39,9 +39,9 @@ export default class TweenRef extends React.Component {
 	
 	componentWillUnmount() {
 		
-		if ( this._scrollableAnims ) {
-			Object.keys(this._scrollableAnims)
-			      .forEach(axe => this._previousTweener.rmScrollableAnim(this._scrollableAnims[axe], axe));
+		if ( this._tweenLines ) {
+			Object.keys(this._tweenLines)
+			      .forEach(axe => this._previousTweener.rmScrollableAnim(this._tweenLines[axe], axe));
 			
 		}
 		if ( this._previousTweener ) {
@@ -56,7 +56,7 @@ export default class TweenRef extends React.Component {
 			    children,
 			    id            = this.__tweenableId,
 			    style, initial, pos, noRef, reset,
-			    scrollableAnims,
+			    tweenLines,
 			    onClick       = children && children.props && children.props.onClick,
 			    onDoubleClick = children && children.props && children.props.onDoubleClick
 		    } = this.props;
@@ -74,25 +74,25 @@ export default class TweenRef extends React.Component {
 						);
 						
 					}
-					if ( this._previousTweener !== tweener || this._previousScrollable !== scrollableAnims ) {
+					if ( this._previousTweener !== tweener || this._previousScrollable !== tweenLines ) {
 						
-						if ( this._scrollableAnims ) {
-							Object.keys(this._scrollableAnims)
-							      .forEach(axe => this._previousTweener.rmScrollableAnim(this._scrollableAnims[axe], axe));
+						if ( this._tweenLines ) {
+							Object.keys(this._tweenLines)
+							      .forEach(axe => this._previousTweener.rmScrollableAnim(this._tweenLines[axe], axe));
 							
 						}
-						if ( scrollableAnims && is.array(scrollableAnims) )
-							this._scrollableAnims = { scrollY: tweener.addScrollableAnim(setTarget(scrollableAnims, id)) };
+						if ( tweenLines && is.array(tweenLines) )
+							this._tweenLines = { scrollY: tweener.addScrollableAnim(setTarget(tweenLines, id)) };
 						else
-							this._scrollableAnims = scrollableAnims &&
-								Object.keys(scrollableAnims)
-								      .reduce(( h, axe ) => (h[axe] = tweener.addScrollableAnim(setTarget(scrollableAnims[axe], id), axe), h), {});
+							this._tweenLines = tweenLines &&
+								Object.keys(tweenLines)
+								      .reduce(( h, axe ) => (h[axe] = tweener.addScrollableAnim(setTarget(tweenLines[axe], id), axe), h), {});
 						
 						if ( this._previousTweener !== tweener )
 							this._previousTweener && this._previousTweener.rmTweenRef(this.__tweenableId)
 						
 						this._previousTweener    = tweener;
-						this._previousScrollable = scrollableAnims;
+						this._previousScrollable = tweenLines;
 						
 					}
 					return children;

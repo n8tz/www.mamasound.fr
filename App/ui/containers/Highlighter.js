@@ -108,41 +108,31 @@ export default class Highlighter extends React.Component {
 			<div
 				className={ "Highlighter container" }
 			>
-				
-				{/*<TweenRef id={ "slider" }*/ }
-				{/*initial={ {*/ }
-				{/*position       : "absolute",*/ }
-				{/*backgroundColor: "yellow",*/ }
-				{/*top            : "0px",*/ }
-				{/*left           : "0px",*/ }
-				{/*width          : "100%",*/ }
-				{/*height         : "20vh",*/ }
-				{/*zIndex         : 1000,*/ }
-				{/*opacity        : 1,*/ }
-				{/**/ }
-				{/*transform: {*/ }
-				{/*//translateZ: '-.2box',*/ }
-				{/*translateY: '-1box',*/ }
-				{/*}*/ }
-				{/*} }*/ }
-				{/*scrollableAnims={ {*/ }
-				{/*scrollY: anims.slideIn(null, 0, 100, "top").anims,*/ }
-				{/*} }*/ }
-				{/*>*/ }
-				{/*<div onClick={ e => {*/ }
-				{/*e.stopPropagation()*/ }
-				{/*e.preventDefault()*/ }
-				{/*} }>*/ }
-				{/*<Slider { ...settings }>*/ }
-				{/*{*/ }
-				{/*gridItems.map(*/ }
-				{/*( item, i ) =>*/ }
-				{/*<Comps.FocusedItems record={ item } key={ item._id }/>*/ }
-				{/*)*/ }
-				{/*}*/ }
-				{/*</Slider>*/ }
-				{/*</div>*/ }
-				{/*</TweenRef>*/ }
+				<TweenRef
+					id={ "header" }
+					initial={ {
+						height: "2cm",
+						zIndex: "50"
+					} }
+				>
+					<header
+						className={ "container" }
+						onClick={ e => $actions.setPageFocus("head") }
+						style={ {
+							display: "inline-block",
+							//width  : "100%",
+							//background: "red",
+						} }>
+						<TweenRef
+							id={ "logo" }
+							initial={ {
+								height: "100%"
+							} }
+						>
+							<div className={ "logo" }/>
+						</TweenRef>
+					</header>
+				</TweenRef>
 				
 				<div className={ "headBackground" }>
 					<TweenRef
@@ -156,7 +146,7 @@ export default class Highlighter extends React.Component {
 								translateY: '-50vh',
 							}
 						} }
-						scrollableAnims={ {
+						tweenLines={ {
 							scrollY: [
 								{
 									type    : "Tween",
@@ -181,20 +171,21 @@ export default class Highlighter extends React.Component {
 				</div>
 				{/*<div className={ " today" } onClick={ e => e.preventDefault() }>*/ }
 				
+				
 				<TweenRef
 					initial={ {
 						position : "absolute",
 						bottom   : "0px",
 						left     : "0px",
 						width    : "100%",
-						//height   : "175px",
+						zIndex   : "100",
 						transform: {
 							perspective: "200px",
-							translateY : '-10px',
+							translateY : '0px',
 							rotateX    : "2deg"
 						}
 					} }
-					scrollableAnims={ {
+					tweenLines={ {
 						scrollY: [
 							{
 								type    : "Tween",
@@ -204,8 +195,9 @@ export default class Highlighter extends React.Component {
 									//opacity  : "-1",
 									transform: {
 										translateZ : "15px",
+										translateY : "-5px",
 										perspective: "100px",
-										rotateX    : "-2deg"
+										rotateX    : "-4deg"
 									}
 								}
 							}
@@ -232,7 +224,7 @@ export default class Highlighter extends React.Component {
 									//infiniteMode                       : false,
 									autoScroll        : true,
 									autoScrollPeriod  : 5000,
-									visibleItems      : 3,
+									visibleItems      : 5,
 									hSlotWidth        : .85,
 									hSlotHeight       : 1,
 									listenMouseWheel  : false,

@@ -40,9 +40,9 @@ export default class TweenLine extends React.Component {
 	
 	componentWillUnmount() {
 		
-		if ( this._scrollableAnims ) {
-			Object.keys(this._scrollableAnims)
-			      .forEach(axe => this._previousTweener.rmScrollableAnim(this._scrollableAnims[axe], axe));
+		if ( this._tweenLines ) {
+			Object.keys(this._tweenLines)
+			      .forEach(axe => this._previousTweener.rmScrollableAnim(this._tweenLines[axe], axe));
 			
 		}
 		delete this._previousTweener;

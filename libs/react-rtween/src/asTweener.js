@@ -353,7 +353,7 @@ export default function asTweener( ...argz ) {
 					apply   : ( pos, max ) => {
 						let x = (from + (easing(pos / max)) * length);
 						if ( this._.tweenEnabled ) {
-							this._.axes[axe].scrollableAnims.forEach(
+							this._.axes[axe].tweenLines.forEach(
 								sl => sl.goTo(x)
 							);
 							tick && tick(x);
@@ -377,7 +377,7 @@ export default function asTweener( ...argz ) {
 			let _ = this._;
 			
 			_.axes[axe] = _.axes[axe] || {
-				scrollableAnims: [],
+				tweenLines: [],
 				scrollPos      : opts.initialScrollPos && opts.initialScrollPos[axe] || 0,
 				targetPos      : 0,
 				inertia        : new Inertia({
@@ -402,7 +402,7 @@ export default function asTweener( ...argz ) {
 					                                    ...(_inertia || {})
 				                                    })),
 			    nextDescr = {
-				    scrollableAnims: [],
+				    tweenLines: [],
 				    scrollPos,
 				    targetPos,
 				    inertia,
@@ -446,7 +446,7 @@ export default function asTweener( ...argz ) {
 			this.makeScrollable();
 			
 			// init scroll
-			dim.scrollableAnims.push(sl);
+			dim.tweenLines.push(sl);
 			dim.scrollPos      = dim.scrollPos || 0;
 			dim.scrollableArea = dim.scrollableArea || 0;
 			dim.scrollableArea = Math.max(dim.scrollableArea, sl.duration);
@@ -459,10 +459,10 @@ export default function asTweener( ...argz ) {
 		rmScrollableAnim( sl, axe = "scrollY" ) {
 			var _   = this._, found,
 			    dim = this._getDim(axe);
-			let i   = dim.scrollableAnims.indexOf(sl);
+			let i   = dim.tweenLines.indexOf(sl);
 			if ( i != -1 ) {
-				dim.scrollableAnims.splice(i, 1);
-				dim.scrollableArea = Math.max(...dim.scrollableAnims.map(tl => tl.duration), 0);
+				dim.tweenLines.splice(i, 1);
+				dim.scrollableArea = Math.max(...dim.tweenLines.map(tl => tl.duration), 0);
 				dim.inertia.setBounds(0, dim.scrollableArea || 0);
 				sl.goTo(0, this._.tweenRefMaps)
 				found = true;
@@ -486,7 +486,7 @@ export default function asTweener( ...argz ) {
 				this._.axes[axe].targetPos = newPos;
 				
 				if ( !ms ) {
-					this._.axes[axe].scrollableAnims.forEach(
+					this._.axes[axe].tweenLines.forEach(
 						sl => sl.goTo(newPos, this._.tweenRefMaps)
 					);
 					setPos(newPos);

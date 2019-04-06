@@ -32,22 +32,22 @@ const YAxis = [
 			height: -1,
 		}
 	},
-	{
-		type    : "Tween",
-		target  : "page",
-		from    : 0,
-		duration: 100,
-		apply   : {
-			top: -1,
-		}
-	},
+	//{
+	//	type    : "Tween",
+	//	target  : "page",
+	//	from    : 0,
+	//	duration: 100,
+	//	apply   : {
+	//		top: -1,
+	//	}
+	//},
 	{
 		type    : "Tween",
 		target  : "highlighted",
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: -65,
+			height: -60,
 		}
 	},
 	{
@@ -56,7 +56,7 @@ const YAxis = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: 65,
+			height: 60,
 		}
 	},
 	//show map
@@ -168,34 +168,11 @@ export default class Home extends React.Component {
 					}
 				}
 			/>
-			<TweenRef
-				id={ "header" }
-				initial={ {
-					height: "2cm"
-				} }
-			>
-				<header
-					className={"container"}
-					onClick={ e => $actions.setPageFocus("head") }
-					style={ {
-						display: "inline-block",
-						//width  : "100%",
-						//background: "red",
-					} }>
-					<TweenRef
-						id={ "logo" }
-						initial={ {
-							height: "100%"
-						} }
-					>
-						<div className={ "logo" }/>
-					</TweenRef>
-				</header>
-			</TweenRef>
+			
 			<TweenRef
 				id={ "page" }
 				initial={ {
-					top   : "2cm",
+					top   : "0cm",
 					left  : "0px",
 					bottom: "0px",
 					width : "100%",
@@ -207,27 +184,22 @@ export default class Home extends React.Component {
 						position: "absolute",
 						width   : "100%",
 					} }>
-					<TweenRef
-						id={ "highlighted" }
-						initial={ {
-							height: "85%"
-						} }
-					>
-						<div
-							style={ {
-								width: "100%",
-								//background: "blue",
-							} }>
+					
+					<TweenRef id={ "highlighted" } initial={ { height: "85%" } }>
+						<div style={ {
+							width: "100%",
+							//background: "blue",
+						} }>
 							<Blocks.Highlighter/>
 						</div>
 					</TweenRef>
-					<TweenRef
-						id={ "events" }
-						initial={ {
-							position: "relative",
-							height  : "15%"
-						} }
-					>
+					
+					
+					<TweenRef id={ "events" }
+					          initial={ {
+						          position: "relative",
+						          height  : "15%"
+					          } }>
 						<div
 							style={ {
 								width   : "100%",
