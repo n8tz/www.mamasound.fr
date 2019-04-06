@@ -195,7 +195,7 @@ export default class Highlighter extends React.Component {
 									//opacity  : "-1",
 									transform: {
 										translateZ : "15px",
-										translateY : "-5px",
+										translateY : "-10px",
 										perspective: "100px",
 										rotateX    : "-4deg"
 									}
