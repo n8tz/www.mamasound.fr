@@ -15,7 +15,7 @@ import PropTypes                                    from "prop-types";
 import React                                        from "react";
 import {reScope, scopeToProps, propsToScope, Store} from "rscopes";
 import moment                                       from 'moment';
-import Slider                                       from "react-slick";
+//import Slider                                       from "rSlide";
 import anims                                        from 'App/ui/anims/(*).js';
 import Comps                                        from 'App/ui/components/(*).js';
 import {withStateMap, asRef, asStore}               from "rescope-spells";
@@ -205,70 +205,78 @@ export default class Highlighter extends React.Component {
 					} }
 				>
 					<div className={ "slider" }>
-						<CaipiSlideshow
-							showArrow
-							vignets
-							autoSlide={ 10000 }
-							
-							onClick={
-								( e, item ) => {
-									//
-								}
-							}
-							config={
-								{
-									hPositioningFn    : 'hCentralZoom',
-									//predictiveMomentum_maxMomentumJump: 1,
-									predictiveMomentum: true,
-									//forceSlotRatio                    : 7 / 5,
-									//infiniteMode                       : false,
-									autoScroll        : true,
-									autoScrollPeriod  : 5000,
-									visibleItems      : 5,
-									hSlotWidth        : .85,
-									hSlotHeight       : 1,
-									listenMouseWheel  : false,
-									direction         : 'horizontal',
-									//
-									//itemClicked : function ( item, offset, index, slot, e ) {
-									//
-									//	let { App: { history } } = me.context;
-									//	if ( offset ) {
-									//		e.preventDefault();
-									//		e.stopPropagation();
-									//		//
-									//		me.refs.slider._slideShow.goTo(offset);
-									//		return false;
-									//	}
-									//	else {//debugger;
-									//		var item = me.refs.slider.state.items[index].targetEtty;
-									//		var View = require('App/ui/View');
-									//		history.push(db.getRouteTo(item.cls, item.objId));
-									//		return false;
-									//
-									//	}
-									//},
-									//itemTargeted: function ( item, node ) {
-									//	var SlideshowDom = require('App/ui/utils/Dom');
-									//	if ( node && node != me._selected ) {
-									//		var s = me._selected;
-									//		SlideshowDom.addCls(node, "selected");
-									//		me._selected = node;
-									//		setTimeout(function () {
-									//			s && SlideshowDom.rmCls(s, "selected");
-									//		});
-									//
-									//	}
-									//}
-								}
-							}>
+						<Comps.Slider>
 							{
 								gridItems.map(
 									( item, i ) =>
 										<div key={ item._id }><Comps.FocusedItems record={ item }/></div>
 								)
 							}
-						</CaipiSlideshow>
+						</Comps.Slider>
+						{/*<CaipiSlideshow*/ }
+						{/*showArrow*/ }
+						{/*vignets*/ }
+						{/*autoSlide={ 10000 }*/ }
+						{/**/ }
+						{/*onClick={*/ }
+						{/*( e, item ) => {*/ }
+						{/*//*/ }
+						{/*}*/ }
+						{/*}*/ }
+						{/*config={*/ }
+						{/*{*/ }
+						{/*hPositioningFn    : 'hCentralZoom',*/ }
+						{/*//predictiveMomentum_maxMomentumJump: 1,*/ }
+						{/*predictiveMomentum: true,*/ }
+						{/*//forceSlotRatio                    : 7 / 5,*/ }
+						{/*//infiniteMode                       : false,*/ }
+						{/*autoScroll        : true,*/ }
+						{/*autoScrollPeriod  : 5000,*/ }
+						{/*visibleItems      : 5,*/ }
+						{/*hSlotWidth        : .85,*/ }
+						{/*hSlotHeight       : 1,*/ }
+						{/*listenMouseWheel  : false,*/ }
+						{/*direction         : 'horizontal',*/ }
+						{/*//*/ }
+						{/*//itemClicked : function ( item, offset, index, slot, e ) {*/ }
+						{/*//*/ }
+						{/*//	let { App: { history } } = me.context;*/ }
+						{/*//	if ( offset ) {*/ }
+						{/*//		e.preventDefault();*/ }
+						{/*//		e.stopPropagation();*/ }
+						{/*//		//*/ }
+						{/*//		me.refs.slider._slideShow.goTo(offset);*/ }
+						{/*//		return false;*/ }
+						{/*//	}*/ }
+						{/*//	else {//debugger;*/ }
+						{/*//		var item = me.refs.slider.state.items[index].targetEtty;*/ }
+						{/*//		var View = require('App/ui/View');*/ }
+						{/*//		history.push(db.getRouteTo(item.cls, item.objId));*/ }
+						{/*//		return false;*/ }
+						{/*//*/ }
+						{/*//	}*/ }
+						{/*//},*/ }
+						{/*//itemTargeted: function ( item, node ) {*/ }
+						{/*//	var SlideshowDom = require('App/ui/utils/Dom');*/ }
+						{/*//	if ( node && node != me._selected ) {*/ }
+						{/*//		var s = me._selected;*/ }
+						{/*//		SlideshowDom.addCls(node, "selected");*/ }
+						{/*//		me._selected = node;*/ }
+						{/*//		setTimeout(function () {*/ }
+						{/*//			s && SlideshowDom.rmCls(s, "selected");*/ }
+						{/*//		});*/ }
+						{/*//*/ }
+						{/*//	}*/ }
+						{/*//}*/ }
+						{/*}*/ }
+						{/*}>*/ }
+						{/*{*/ }
+						{/*gridItems.map(*/ }
+						{/*( item, i ) =>*/ }
+						{/*<div key={ item._id }><Comps.FocusedItems record={ item }/></div>*/ }
+						{/*)*/ }
+						{/*}*/ }
+						{/*</CaipiSlideshow>*/ }
 					</div>
 				</TweenRef>
 				{/*</div>*/ }

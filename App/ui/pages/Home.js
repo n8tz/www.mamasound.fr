@@ -18,7 +18,7 @@ import Blocks                                from 'App/ui/containers/(*).js';
 import ReactDom                              from "react-dom";
 
 import {withStateMap, asRef, asStore}   from "rescope-spells";
-import {asTweener, TweenRef, TweenLine} from "react-rtween";
+import {asTweener, TweenRef, TweenAxis} from "react-rtween";
 
 var easingFn = require('d3-ease');
 
@@ -159,7 +159,7 @@ export default class Home extends React.Component {
 			window.$actions = $actions;
 		
 		return <div className={ "Page Home" }>
-			<TweenLine
+			<TweenAxis
 				axe={ "scrollY" }
 				items={ YAxis }
 				inertia={
