@@ -13,9 +13,6 @@
  */
 
 import React from 'react';
-const context        = {
-	tweenerById: {}
-	
-};
-const TweenerContext = React.createContext(context);
+
+const TweenerContext = React.createContext(null);
 export default TweenerContext

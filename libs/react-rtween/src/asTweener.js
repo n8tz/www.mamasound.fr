@@ -109,11 +109,10 @@ export default function asTweener( ...argz ) {
 			};
 			this._._rafLoop  = this._rafLoop.bind(this);
 			this.__isTweener = true;
-			this.__isFirst   = !tweenerCount;
+			this.__isFirst   = 0 === tweenerCount;
 			tweenerCount++;
 			
 		}
-		
 		
 		resetTweenable( ...targets ) {
 			targets.forEach(
@@ -392,12 +391,14 @@ export default function asTweener( ...argz ) {
 					                                    ...(_inertia || {})
 				                                    })),
 			    nextDescr = {
+				    ...(_inertia || {}),
 				    tweenLines: dim && dim.tweenLines || [],
 				    scrollPos,
 				    targetPos,
 				    inertia,
 				    scrollableArea
-			    };
+			    }
+			;
 			
 			dim = this._.axes[axe] = nextDescr;
 			(_inertia !== false) && (dim.inertia._.stops = _inertia.stops);
@@ -461,7 +462,7 @@ export default function asTweener( ...argz ) {
 		}
 		
 		scrollTo( newPos, ms = 0, axe = "scrollY" ) {
-			if ( this._.axes ) {
+			if ( this._.axes && this._.axes[axe] ) {
 				let oldPos = this._.axes[axe].targetPos,
 				    setPos = pos => {
 					
@@ -505,8 +506,8 @@ export default function asTweener( ...argz ) {
 		_registerScrollListeners() {
 			if ( this._.rendered ) {
 				let rootNode = ReactDom.findDOMNode(this);
-				
-				this.__isFirst && isBrowserSide && utils.addWheelEvent(
+				console.log("reg ", this.__isFirst, tweenerCount)
+				!this._parentTweener && isBrowserSide && utils.addWheelEvent(
 					rootNode,
 					this._.onScroll = ( e ) => {//@todo
 						
@@ -542,17 +543,14 @@ export default function asTweener( ...argz ) {
 						'drag'     : ( e, touch, descr ) => {//@todo
 							
 							let prevent,
-							    x          = this._getAxis("scrollX"),
-							    y          = this._getAxis("scrollY"),
-							    deltaY     = descr._lastPos.y - descr._startPos.y,
-							    deltaX     = descr._lastPos.x - descr._startPos.x,
-							    headTarget = e.target, style;
+							    x = this._getAxis("scrollX"),
+							    y = this._getAxis("scrollY");
 							
 							lastPos = lastPos || { ...descr._startPos };
 							
 							// check if there scrollable stuff in dom targets
 							//if ( this.isAxisOut("scrollX", deltaX) )
-							x.inertia.hold(lastPos.x + ((descr._lastPos.x - descr._startPos.x) / this._.box.x) * x.scrollableArea);
+							x.inertia.hold(lastPos.x + (-(descr._lastPos.x - descr._startPos.x) / this._.box.x) * x.scrollableArea);
 							//if ( this.isAxisOut("scrollY", -deltaY) )
 							y.inertia.hold(lastPos.y + (-(descr._lastPos.y - descr._startPos.y) / this._.box.y) * y.scrollableArea);
 							
@@ -712,7 +710,7 @@ export default function asTweener( ...argz ) {
 		}
 		
 		getTweenableRef( id ) {
-			return this._.refs[id]&&ReactDom.findDOMNode(this._.refs[id]);
+			return this._.refs[id] && ReactDom.findDOMNode(this._.refs[id]);
 		}
 		
 		_rafLoop() {
@@ -738,19 +736,21 @@ export default function asTweener( ...argz ) {
 		}
 		
 		componentWillUnmount() {
-			let node =ReactDom.findDOMNode(this);
+			let node = ReactDom.findDOMNode(this);
 			if ( this._.tweenEnabled ) {
 				this._.tweenEnabled = false;
 				window.removeEventListener("resize", this._.onResize);
 			}
 			
 			if ( this._.scrollEnabled ) {
+				console.log("unreg ", this.__isFirst, tweenerCount)
 				this._.scrollEnabled = false;
+				
 				//this._.axes          = undefined;
-				node&&utils.rmWheelEvent(
+				node && this._.onScroll && !this._parentTweener && utils.rmWheelEvent(
 					node,
 					this._.onScroll);
-				node&&utils.removeEvent(node
+				node && this._.dragList && utils.removeEvent(node
 					, this._.dragList)
 			}
 			
@@ -821,9 +821,16 @@ export default function asTweener( ...argz ) {
 		
 		render() {
 			//console.log('render', this.constructor.name)
-			return <TweenerContext.Provider value={ this }>
-				{ super.render() }
-			</TweenerContext.Provider>;
+			return <TweenerContext.Consumer>
+				{
+					parentTweener => {
+						this._parentTweener = parentTweener;
+						return <TweenerContext.Provider value={ this }>
+							{ super.render() }
+						</TweenerContext.Provider>;
+					}
+				}
+			</TweenerContext.Consumer>;
 		}
 	}
 }

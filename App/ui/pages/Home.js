@@ -180,6 +180,7 @@ export default class Home extends React.Component {
 				} }
 			>
 				<div
+					className={ "mainPageBlock" }
 					style={ {
 						position: "absolute",
 						width   : "100%",
@@ -243,6 +244,7 @@ export default class Home extends React.Component {
 					</TweenRef>
 				</div>
 			</TweenRef>
+			<Blocks.SearchBar/>
 		</div>
 	}
 }

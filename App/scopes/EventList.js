@@ -28,7 +28,7 @@ export default {
 		viewType: 0,
 		//@asRef
 		//nbDays     : "appState.nbDays",
-		query: {},
+		query   : {},
 		$apply( data, state ) {
 			let {
 				    curDay, nbDays = 0,
@@ -147,6 +147,8 @@ export default {
 	
 	@asStore
 	ActiveTags: {
+		//@asRef
+		//TagManager: "TagManager",
 		@asRef
 		events: "EventList",
 		
@@ -163,20 +165,34 @@ export default {
 					              .forEach(t => (styles[t] = styles[t] || style))
 				}
 			)
-			
-			return {
-				available: Object
+			//this.$scope.mount("TagManager");
+			this.$actions.registerTags(
+				Object
 					.keys(seen)
 					.filter(t => (!!styles[t]))
 					.sort(( a, b ) => (seen[a] < seen[b]
 					                   ? 1
 					                   : -1))
 					.map(tag => ({
-						title: tag,
+						label: tag,
 						style: styles[tag] || {},
 						count: seen[tag]
 					}))
-			};
+			);
+			
+			//return {
+			//	available: Object
+			//		.keys(seen)
+			//		.filter(t => (!!styles[t]))
+			//		.sort(( a, b ) => (seen[a] < seen[b]
+			//		                   ? 1
+			//		                   : -1))
+			//		.map(tag => ({
+			//			title: tag,
+			//			style: styles[tag] || {},
+			//			count: seen[tag]
+			//		}))
+			//};
 		},
 		
 	},

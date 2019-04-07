@@ -130,13 +130,18 @@ export default class Highlighter extends React.Component {
 				<div className={ "headBackground" }>
 					<TweenRef
 						initial={ {
-							//position : "absolute",
+							position       : "absolute",
 							//top      : "0px",
 							//left     : "0px",
 							//width    : "100%",
 							//height   : "100%",
-							transform: {
-								translateY: '-50vh',
+							transformOrigin: "0% 0%",
+							transform      : {
+								
+								perspective: "200px",
+								translateY : '-50%',
+								translateX : '-50%',
+								//translateY: '-50vh',
 							}
 						} }
 						tweenLines={ {
@@ -198,7 +203,7 @@ export default class Highlighter extends React.Component {
 					} }
 				>
 					<div className={ "slider" }>
-						<Comps.Slider>
+						<Comps.Slider autoScroll={ 5000 }>
 							{
 								gridItems.map(
 									( item, i ) =>

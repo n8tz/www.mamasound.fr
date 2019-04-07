@@ -12,10 +12,27 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-.SearchBox {
+@media screen and (max-width: $tablet-landscape-breakpoint) {
+  .mainPageBlock {
+
+    padding-bottom: 50px;
+
+  }
+  .SearchBar {
+    display: block !important;
+  }
+
+}
+
+.SearchBar {
+  //display: none;
   touch-action: none;
-  overflow: hidden;
-  //width: 100%;
-  //height: 100%;
-  position: relative;
+  //overflow: hidden;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 50px;
+  z-index: 1000;
+  background: #1f8de2;
 }

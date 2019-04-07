@@ -104,7 +104,52 @@ export default {
 	Selected: stores.MongoRecords,
 	
 	@asStore
-	widgets: {
+	TagManager: {
+		// initial state
+		selected    : [],
+		selectedTags: {},
+		available   : {},
+		
+		// actions
+		$apply( data, state ) {
+			return {
+				...state,
+				selected: Object.keys(state.selectedTags)
+			}
+		},
+		selectTag( tag ) {
+			return {
+				selectedTags: {
+					...this.nextState.selected,
+					[tag]: true
+				}
+			}
+		},
+		unSelectTag( tag ) {
+			let selectedTags = {
+				...this.nextState.selectedTags
+			};
+			delete selectedTags[tag]
+			return {
+				selectedTags
+			}
+		},
+		registerTags( tags ) {
+			return {
+				available: tags.reduce(
+					( h, tag ) => {
+						h[tag.label] = h[tag.label] || tag;
+						return h;
+					},
+					{
+						...this.nextState.available
+					}
+				)
+			}
+		},
+	},
+	@asStore
+	widgets   : {
 		// initial state
 		items: [],
 		

@@ -20,7 +20,6 @@ import TweenerContext from "./TweenerContext";
 
 const SimpleObjectProto = ({}).constructor;
 
-console.warn("===")
 
 /**
  * asTweener decorator

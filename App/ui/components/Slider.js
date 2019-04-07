@@ -30,10 +30,13 @@ function offsetTweenLine( items, start = 0 ) {
 
 @asTweener({ enableMouseDrag: true })
 export default class Slider extends React.Component {
-	static propTypes = {
-		//day: PropTypes.number,
+	static defaultProps = {
+		
+		defaultIndex: 0,
+		visibleItems: 5,
+		overlaps    : 1 / 4,
 	};
-	state            = {};
+	state               = {};
 	
 	reset = () => {
 		this.setState(
@@ -44,10 +47,35 @@ export default class Slider extends React.Component {
 		
 	}
 	
+	componentDidMount() {
+		let { autoScroll, defaultIndex = 0 } = this.props;
+		if ( autoScroll ) {
+			this._lastIndex = defaultIndex;
+			this._updater   = setInterval(
+				tm => {
+					let {
+						    children, visibleItems,
+						    overlaps = 1 / (visibleItems - (visibleItems % 2))
+					    }           = this.props,
+					    step        = 100 * overlaps;
+					this._lastIndex = (this._lastIndex + 1) % children.length;
+					this.scrollTo(step * this._lastIndex + 100, 250, "scrollX")
+					
+				},
+				autoScroll
+			)
+		}
+	}
+	
+	componentWillUnmount() {
+		clearInterval(this._updater);
+	}
+	
 	render() {
 		let {
 			    defaultIndex    = 0,
-			    overlaps        = .5,
+			    visibleItems    = 5,
+			    overlaps        = 1 / (visibleItems - (visibleItems % 2)),
 			    area            = 1000,
 			    defaultInitial  = {
 				    position : "absolute",
@@ -55,15 +83,20 @@ export default class Slider extends React.Component {
 				    top      : "50%",
 				    left     : "0px",
 				    zIndex   : 50,
-				    //opacity  : 0,
+				    opacity  : 0,
 				    transform: [
 					    {
 						    translateZ: "-10px",
-						    translateX: "0box"
+						    translateX: "1.75box",
+						    //translateY: "-.5box",
+						    //rotateZ   : "-3deg",
+						    rotateX   : "-90deg",
+						    //rotateY   : "6deg"
 					    },
 					    {
-						    translateX: "-50%",
-						    translateY: "-50%"
+						    perspective: "200px",
+						    translateX : "-50%",
+						    translateY : "-50%"
 					    }]
 			    },
 			    defaultEntering = [
@@ -73,10 +106,14 @@ export default class Slider extends React.Component {
 					    duration: 100,
 					    apply   : {
 						    zIndex   : 150,
-						    //opacity  : 1,
+						    opacity  : 1,
 						    transform: {
-							    translateZ: "10px",
-							    translateX: ".5box"
+							    //translateY: ".5box",
+							    translateZ: "20px",
+							    translateX: "-1.25box",
+							    //rotateZ   : "3deg",
+							    rotateX   : "90deg",
+							    //rotateY   : "-6deg"
 						    }
 					    }
 				    },
@@ -90,8 +127,12 @@ export default class Slider extends React.Component {
 						    zIndex   : -150,
 						    opacity  : -1,
 						    transform: {
-							    translateZ: "-10px",
-							    translateX: ".5box"
+							    //translateY: "-.5box",
+							    translateZ: "-20px",
+							    translateX: "-1.25box",
+							    //rotateZ   : "3deg",
+							    rotateX   : "-90deg",
+							    //rotateY   : "-6deg"
 						    }
 					    }
 				    },
@@ -99,17 +140,28 @@ export default class Slider extends React.Component {
 			    children
 		    }                        = this.props,
 		    { index = defaultIndex } = this.state,
-		    step                     = 50;
+		    nbItems                  = children.length,
+		    step                     = 100 * overlaps;
 		return (
 			<div
 				className={ "rSlide slider" }
+				style={
+					{
+						//transformOrigin: "0px -500px"
+					}
+				}
 			>
 				<TweenAxis
 					axe={ "scrollX" }
 					defaultPosition={ 100 }
-					size={ children.length * step + 100 }
+					size={ nbItems * step + 100 }
 					inertia={
 						{
+							//infinite: true,
+							//hookValueUpdate( v ) {
+							//	let size = nbItems * step;
+							//	return 100 + ((size + v - 100) % (size));
+							//},
 							stops: [...children].map(( child, i ) => (100 + i * step))
 						}
 					}
