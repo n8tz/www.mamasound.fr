@@ -15,6 +15,8 @@ import PropTypes                        from "prop-types";
 import React                            from "react";
 import {asTweener, TweenRef, TweenAxis} from "react-rtween";
 
+var easingFn = require('d3-ease');
+
 
 function offsetTweenLine( items, start = 0 ) {
 	return items.map(
@@ -33,7 +35,7 @@ export default class Slider extends React.Component {
 	static defaultProps = {
 		
 		defaultIndex: 0,
-		visibleItems: 5,
+		visibleItems: 10,
 		overlaps    : 1 / 4,
 	};
 	state               = {};
@@ -81,22 +83,26 @@ export default class Slider extends React.Component {
 				    position : "absolute",
 				    height   : "100%",
 				    top      : "50%",
-				    left     : "0px",
+				    left     : "50%",
 				    zIndex   : 50,
 				    opacity  : 0,
 				    transform: [
 					    {
-						    translateZ: "-10px",
-						    translateX: "1.75box",
-						    //translateY: "-.5box",
-						    //rotateZ   : "-3deg",
-						    rotateX   : "-90deg",
-						    //rotateY   : "6deg"
+						    perspective: "1250px",
+						    translateY : "-20000px",
+						    rotate     : "-1.9deg"
 					    },
 					    {
-						    perspective: "200px",
-						    translateX : "-50%",
-						    translateY : "-50%"
+						    translateY: "20000px",
+						    translateZ: "-200px",
+						    //translateX: "1.75box",
+						    //translateY: "-.5box",
+						    //rotateY   : "-3deg",
+						    rotateY   : "-65deg",
+					    },
+					    {
+						    translateX: "-50%",
+						    translateY: "-50%"
 					    }]
 			    },
 			    defaultEntering = [
@@ -104,17 +110,32 @@ export default class Slider extends React.Component {
 					    type    : "Tween",
 					    from    : 0,
 					    duration: 100,
+					    easeFn  : easingFn.easeCubicIn,
 					    apply   : {
-						    zIndex   : 150,
-						    opacity  : 1,
 						    transform: {
-							    //translateY: ".5box",
-							    translateZ: "20px",
-							    translateX: "-1.25box",
-							    //rotateZ   : "3deg",
-							    rotateX   : "90deg",
-							    //rotateY   : "-6deg"
-						    }
+							    //translateX: "-1.25box",
+							    rotate: "1.9deg",
+						    },
+						    zIndex   : 150,
+					    }
+				    },
+				    {
+					    type    : "Tween",
+					    from    : 0,
+					    duration: 35,
+					    apply   : {
+						    opacity: 1,
+					    }
+				    }, {
+					    type    : "Tween",
+					    from    : 55,
+					    duration: 45,
+					    apply   : {
+						    transform: [{}, {
+							    rotateY   : "65deg",
+							    translateZ: "500px",
+							    //rotateX: "-90deg",
+						    }],
 					    }
 				    },
 			    ],
@@ -122,17 +143,33 @@ export default class Slider extends React.Component {
 				    {
 					    type    : "Tween",
 					    from    : 0,
-					    duration: 100,
+					    duration: 45,
 					    apply   : {
-						    zIndex   : -150,
-						    opacity  : -1,
+						    transform: [{}, {
+							    rotateY   : "65deg",
+							    translateZ: "-500px",
+							    //rotateX: "90deg",
+						    }]
+					    }
+				    },
+				    {
+					    type    : "Tween",
+					    from    : 65,
+					    duration: 35,
+					    apply   : {
+						    opacity: -1,
+					    }
+				    }, {
+					    type    : "Tween",
+					    from    : 0,
+					    duration: 100,
+					    easeFn  : easingFn.easeCubicOut,
+					    apply   : {
+						    zIndex: -150,
+						
 						    transform: {
-							    //translateY: "-.5box",
-							    translateZ: "-20px",
-							    translateX: "-1.25box",
-							    //rotateZ   : "3deg",
-							    rotateX   : "-90deg",
-							    //rotateY   : "-6deg"
+							    //translateX: "-1.25box",
+							    rotate: "1.9deg",
 						    }
 					    }
 				    },
@@ -147,7 +184,7 @@ export default class Slider extends React.Component {
 				className={ "rSlide slider" }
 				style={
 					{
-						//transformOrigin: "0px -500px"
+						transformOrigin: "0px 0px"
 					}
 				}
 			>

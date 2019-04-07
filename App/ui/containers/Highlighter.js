@@ -205,11 +205,13 @@ export default class Highlighter extends React.Component {
 					<div className={ "slider" }>
 						<Comps.Slider autoScroll={ 5000 }>
 							{
-								gridItems.map(
+								[...gridItems, ...gridItems, ...gridItems].map(
 									( item, i ) =>
-										<TweenRef key={ item._id }
+										<TweenRef key={ item._id + i }
 										          tweener={ tweener }
 										          initial={ {
+											          top      : "20%",
+											          height   : "80%",
 											          transform: {
 												          perspective: "200px",
 												          //translateY : '0px',
@@ -224,6 +226,8 @@ export default class Highlighter extends React.Component {
 													          duration: 100,
 													          apply   : {
 														          //opacity  : "-1",
+														          height   : 2.5,
+														          top      : -2.5,
 														          transform: {
 															          translateZ: "15px",
 															          rotateX   : "-4deg"
