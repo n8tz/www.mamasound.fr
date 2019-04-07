@@ -34,7 +34,7 @@ const
 	};
 
 function demux( key, tweenable, target, data, box ) {
-	target[key] = data[key] ? floatCut(tweenable[key], 2) + data[key] : floatCut(tweenable[key], 2);
+	target[key] = ~~(data[key] ? tweenable[key] + data[key] : tweenable[key]);
 }
 
 export default ( key, value, target, data, initials, forceUnits ) => {
@@ -53,11 +53,11 @@ export default ( key, value, target, data, initials, forceUnits ) => {
 		}
 		else {
 			data[key]   = match[2];
-			target[key] = parseFloat(match[1]);
+			target[key] = ~~match[1];
 		}
 	}
 	else {
-		target[key] = parseFloat(value);
+		target[key] = ~~value;
 		if ( !data[key] && key in defaultUnits )
 			data[key] = defaultUnits[key];
 	}

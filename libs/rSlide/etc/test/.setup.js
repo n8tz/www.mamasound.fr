@@ -12,30 +12,25 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-/**
- * @author Nathanael BRAUN
- *
- * Date: 08/12/2015
- * Time: 11:50
- */
-'use strict';
+const { JSDOM } = require('jsdom');
 
-import React from "react";
+const jsdom = new JSDOM('<!doctype html><html><body></body></html>');
+const { window } = jsdom;
 
-import {NavLink} from "react-router-dom";
-
-
-export default ( { record } ) =>
-	<div className="FocusedItems">
-		{ record.previewImage &&
-		<div className="preview">
-			<img src={ record.previewImage +"w=420"} draggable="false"/>
-		</div>
-		}
-		<div className="title">
-			{ record.label }
-		</div>
-		{ !/^\s*$/.test(record.resume || '') &&
-		<div className="resume" dangerouslySetInnerHTML={ { __html: record.resume } }/> || '' }
-	</div>
-;
+function copyProps(src, target) {
+    const props = Object.getOwnPropertyNames(src)
+                        .filter(prop => typeof target[prop] === 'undefined')
+                        .reduce((result, prop) => ({
+                            ...result,
+                            [prop]: Object.getOwnPropertyDescriptor(src, prop),
+                        }), {});
+    Object.defineProperties(target, props);
+}
+window.requestAnimationFrame = setTimeout;
+window.cancelAnimationFrame = clearTimeout;
+global.window = window;
+global.document = window.document;
+global.navigator = {
+    userAgent: 'node.js',
+};
+copyProps(window, global);

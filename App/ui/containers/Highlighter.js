@@ -180,9 +180,9 @@ export default class Highlighter extends React.Component {
 						width    : "100%",
 						zIndex   : "100",
 						transform: {
-							perspective: "200px",
-							translateY : '0px',
-							rotateX    : "2deg"
+							//perspective: "200px",
+							//translateY : '0px',
+							//rotateX    : "2deg"
 						}
 					} }
 					tweenLines={ {
@@ -194,10 +194,10 @@ export default class Highlighter extends React.Component {
 								apply   : {
 									//opacity  : "-1",
 									transform: {
-										translateZ : "15px",
-										translateY : "-10px",
-										perspective: "100px",
-										rotateX    : "-4deg"
+										//translateZ : "15px",
+										//translateY : "-10px",
+										//perspective: "100px",
+										//rotateX    : "-4deg"
 									}
 								}
 							}
@@ -209,7 +209,7 @@ export default class Highlighter extends React.Component {
 							{
 								gridItems.map(
 									( item, i ) =>
-										<div key={ item._id }><Comps.FocusedItems record={ item }/></div>
+										<Comps.FocusedItems record={ item } key={ item._id }/>
 								)
 							}
 						</Comps.Slider>

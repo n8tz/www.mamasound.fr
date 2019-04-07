@@ -16,7 +16,7 @@
 import {expandShorthandProperty, isShorthandProperty, isValidDeclaration} from "./utils";
 import * as cssDemuxers                                                   from "./demux/(*).js";
 
-import {number, transforms} from "./demux/typed/(*).js";
+import {number, int, transforms} from "./demux/typed/(*).js";
 
 
 const cssDemux = {
@@ -35,6 +35,7 @@ const cssDemux = {
 	paddingLeft  : number,
 	paddingRight : number,
 	paddingBottom: number,
+	zIndex       : int,
 	//rotate       : transforms,
 	//rotateX      : transforms,
 	//rotateY      : transforms,
@@ -52,6 +53,7 @@ export function muxToCss( tweenable, css, demuxers, data, box ) {
 	Object.keys(demuxers)
 	      .forEach(
 		      ( key ) => {
+			      //if ( key === 'zIndex' ) debugger
 			      demuxers[key](key, tweenable, css, data, box)
 		      }
 	      )

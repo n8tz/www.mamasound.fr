@@ -12,30 +12,8 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-/**
- * @author Nathanael BRAUN
- *
- * Date: 08/12/2015
- * Time: 11:50
- */
-'use strict';
+import React  from 'react';
+import Slider from './Slider';
 
-import React from "react";
-
-import {NavLink} from "react-router-dom";
-
-
-export default ( { record } ) =>
-	<div className="FocusedItems">
-		{ record.previewImage &&
-		<div className="preview">
-			<img src={ record.previewImage +"w=420"} draggable="false"/>
-		</div>
-		}
-		<div className="title">
-			{ record.label }
-		</div>
-		{ !/^\s*$/.test(record.resume || '') &&
-		<div className="resume" dangerouslySetInnerHTML={ { __html: record.resume } }/> || '' }
-	</div>
-;
+export {Slider};
+export default Slider;

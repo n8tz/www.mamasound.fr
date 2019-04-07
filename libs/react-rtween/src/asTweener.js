@@ -503,9 +503,10 @@ export default function asTweener( ...argz ) {
 		
 		
 		_registerScrollListeners() {
-			if ( this._.rendered && this.__isFirst ) {
+			if ( this._.rendered ) {
 				let rootNode = ReactDom.findDOMNode(this);
-				isBrowserSide && utils.addWheelEvent(
+				
+				this.__isFirst && isBrowserSide && utils.addWheelEvent(
 					rootNode,
 					this._.onScroll = ( e ) => {//@todo
 						
@@ -539,6 +540,7 @@ export default function asTweener( ...argz ) {
 							
 						},
 						'drag'     : ( e, touch, descr ) => {//@todo
+							
 							let prevent,
 							    x          = this._getAxis("scrollX"),
 							    y          = this._getAxis("scrollY"),
@@ -547,35 +549,15 @@ export default function asTweener( ...argz ) {
 							    headTarget = e.target, style;
 							
 							lastPos = lastPos || { ...descr._startPos };
+							
 							// check if there scrollable stuff in dom targets
-							while ( headTarget ) {
-								style = getComputedStyle(headTarget, null)
-								
-								if ( /(auto|scroll)/.test(
-									style.getPropertyValue("overflow")
-									+ style.getPropertyValue("overflow-x")
-									+ style.getPropertyValue("overflow-y")
-								)
-								) {
-									if (
-										(
-											(deltaY > 0 && headTarget.scrollTop > 0)
-											||
-											(deltaY < 0 && headTarget.scrollTop < (headTarget.scrollHeight - headTarget.offsetHeight))
-										)
-									) {
-										return;
-									} // let the node do this scroll
-								}
-								headTarget = headTarget.parentNode;
-								if ( headTarget === document || headTarget === rootNode )
-									break;
-							}
-							
-							
+							//if ( this.isAxisOut("scrollX", deltaX) )
+							x.inertia.hold(lastPos.x + ((descr._lastPos.x - descr._startPos.x) / this._.box.x) * x.scrollableArea);
+							//if ( this.isAxisOut("scrollY", -deltaY) )
 							y.inertia.hold(lastPos.y + (-(descr._lastPos.y - descr._startPos.y) / this._.box.y) * y.scrollableArea);
-							x.inertia.hold(lastPos.x + (-(descr._lastPos.x - descr._startPos.x) / this._.box.x) * x.scrollableArea);
-							return !prevent;
+							
+							
+							//return !prevent;
 						},
 						'dropped'  : ( e, touch, descr ) => {
 							this._getAxis("scrollY").inertia.release();
@@ -618,7 +600,7 @@ export default function asTweener( ...argz ) {
 			
 			if ( dim && oldPos !== newPos ) {
 				
-				console.log("dispatch " + newPos, this);
+				console.log("dispatch " + delta, this.constructor.displayName);
 				dim.inertia.dispatch(delta, 100);
 				!dim.inertiaFrame && this.applyInertia(dim, axe);
 				
@@ -637,7 +619,7 @@ export default function asTweener( ...argz ) {
 			return !dim || (pos <= 0 || pos >= dim.scrollableArea);
 		}
 		
-		_shouldDispatch( target, dx, dy, axis ) {
+		_shouldDispatch( target, dx, dy ) {
 			let style, Comp, headTarget = target, complete;
 			// todo optim
 			// check if there scrollable stuff in dom targets
@@ -645,6 +627,7 @@ export default function asTweener( ...argz ) {
 				style = getComputedStyle(headTarget, null)
 				
 				Comp = utils.findReactComponent(headTarget);
+				
 				
 				if ( Comp && Comp.__isTweener ) {
 					if ( !Comp.isAxisOut("scrollX", dx) ) {

@@ -47,18 +47,13 @@ export default class Slider extends React.Component {
 	render() {
 		let {
 			    defaultIndex    = 0,
-			    overlaps        = .5,
-			    area            = 1000,
 			    defaultInitial  = {
 				    position : "absolute",
-				    height   : "100%",
 				    top      : "50%",
 				    left     : "0px",
-				    zIndex   : 50,
-				    //opacity  : 0,
+				    opacity  : 0,
 				    transform: [
 					    {
-						    translateZ: "-10px",
 						    translateX: "0box"
 					    },
 					    {
@@ -72,10 +67,8 @@ export default class Slider extends React.Component {
 					    from    : 0,
 					    duration: 100,
 					    apply   : {
-						    zIndex   : 150,
-						    //opacity  : 1,
+						    opacity  : 1,
 						    transform: {
-							    translateZ: "10px",
 							    translateX: ".5box"
 						    }
 					    }
@@ -87,10 +80,8 @@ export default class Slider extends React.Component {
 					    from    : 0,
 					    duration: 100,
 					    apply   : {
-						    zIndex   : -150,
 						    opacity  : -1,
 						    transform: {
-							    translateZ: "-10px",
 							    translateX: ".5box"
 						    }
 					    }
@@ -98,8 +89,7 @@ export default class Slider extends React.Component {
 			    ],
 			    children
 		    }                        = this.props,
-		    { index = defaultIndex } = this.state,
-		    step                     = 50;
+		    { index = defaultIndex } = this.state;
 		return (
 			<div
 				className={ "rSlide slider" }
@@ -107,10 +97,10 @@ export default class Slider extends React.Component {
 				<TweenAxis
 					axe={ "scrollX" }
 					defaultPosition={ 100 }
-					size={ children.length * step + 100 }
+					size={ children.length * 100 + 100 }
 					inertia={
 						{
-							stops: [...children].map(( child, i ) => (100 + i * step))
+							stops: [...children].map(( child, i ) => (100 + i * 100))
 						}
 					}
 				/>
@@ -131,14 +121,14 @@ export default class Slider extends React.Component {
 												...defaultEntering,
 												...offsetTweenLine(defaultLeaving, 100)
 											],
-											i * step
+											i * 100
 										)
 									}
 								}
 							>
-								<div className={ "slide" }>
-									{ Child }
-								</div>
+								{/*<div>*/ }
+								{ Child }
+								{/*</div>*/ }
 							</TweenRef>
 					)
 				}

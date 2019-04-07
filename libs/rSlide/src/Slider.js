@@ -11,31 +11,55 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-
-/**
- * @author Nathanael BRAUN
- *
- * Date: 08/12/2015
- * Time: 11:50
- */
-'use strict';
-
-import React from "react";
-
-import {NavLink} from "react-router-dom";
+import PropTypes             from "prop-types";
+import React                 from "react";
+import {asTweener, TweenRef} from "react-rtween";
 
 
-export default ( { record } ) =>
-	<div className="FocusedItems">
-		{ record.previewImage &&
-		<div className="preview">
-			<img src={ record.previewImage +"w=420"} draggable="false"/>
-		</div>
-		}
-		<div className="title">
-			{ record.label }
-		</div>
-		{ !/^\s*$/.test(record.resume || '') &&
-		<div className="resume" dangerouslySetInnerHTML={ { __html: record.resume } }/> || '' }
-	</div>
-;
+@asTweener({ enableMouseDrag: true })
+export default class Slider extends React.Component {
+	static propTypes = {
+		//day: PropTypes.number,
+	};
+	state            = {};
+	
+	reset = () => {
+		this.setState(
+			{
+				lastDay: this.props.day
+			})
+		
+		
+	}
+	
+	render() {
+		let {
+			    defaultIndex = 0, children
+		    }                        = this.props,
+		    { index = defaultIndex } = this.state;
+		return (
+			<div
+				className={ "rSlide" }
+			>
+				{
+					children.map(
+						( Child, i ) =>
+							<TweenRef initial={
+								{
+									width   : '100',
+									height  : '100',
+									top     : '0px',
+									left    : (i * 110) + 'px',
+									position: 'absolute',
+								}
+							}>
+								<div>
+									{ Child }
+								</div>
+							</TweenRef>
+					)
+				}
+			</div>
+		);
+	}
+};
