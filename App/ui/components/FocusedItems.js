@@ -22,20 +22,27 @@
 
 import React from "react";
 
-import {NavLink} from "react-router-dom";
+import {NavLink}          from "react-router-dom";
+import moment, {TweenRef} from "./DayBlock";
 
-
-export default ( { record } ) =>
-	<div className="FocusedItems">
-		{ record.previewImage &&
-		<div className="preview">
-			<img src={ record.previewImage +"w=420"} draggable="false"/>
-		</div>
-		}
-		<div className="title">
-			{ record.label }
-		</div>
-		{ !/^\s*$/.test(record.resume || '') &&
-		<div className="resume" dangerouslySetInnerHTML={ { __html: record.resume } }/> || '' }
-	</div>
-;
+export default class FocusedItems extends React.Component {
+	render() {
+		let {
+			    record, style, className
+		    } = this.props;
+		return (
+			<div className="FocusedItems" style={ style }>
+				{ record.previewImage &&
+				<div className="preview">
+					<img src={ record.previewImage + "w=420" } draggable="false"/>
+				</div>
+				}
+				<div className="title">
+					{ record.label }
+				</div>
+				{ !/^\s*$/.test(record.resume || '') &&
+				<div className="resume" dangerouslySetInnerHTML={ { __html: record.resume } }/> || '' }
+			</div>
+		);
+	}
+};

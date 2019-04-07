@@ -28,6 +28,7 @@
       "libsPath": "./libs",
       "vars": {
         "webpackPatch": {
+          "stats": "errors-only",
           "watchOptions": {
             "aggregateTimeout": 300,
             "poll": 1000
@@ -46,6 +47,7 @@
       "vars": {
         "externals": true,
         "webpackPatch": {
+          "stats": "errors-only",
           "devtool": "eval-source-map",
           "watchOptions": {
             "aggregateTimeout": 300,

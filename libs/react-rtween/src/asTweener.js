@@ -712,7 +712,7 @@ export default function asTweener( ...argz ) {
 		}
 		
 		getTweenableRef( id ) {
-			return this._.refs[id];
+			return this._.refs[id]&&ReactDom.findDOMNode(this._.refs[id]);
 		}
 		
 		_rafLoop() {
@@ -738,7 +738,7 @@ export default function asTweener( ...argz ) {
 		}
 		
 		componentWillUnmount() {
-			
+			let node =ReactDom.findDOMNode(this);
 			if ( this._.tweenEnabled ) {
 				this._.tweenEnabled = false;
 				window.removeEventListener("resize", this._.onResize);
@@ -747,11 +747,11 @@ export default function asTweener( ...argz ) {
 			if ( this._.scrollEnabled ) {
 				this._.scrollEnabled = false;
 				//this._.axes          = undefined;
-				utils.rmWheelEvent(
-					ReactDom.findDOMNode(this),
+				node&&utils.rmWheelEvent(
+					node,
 					this._.onScroll);
-				utils.removeEvent(
-					ReactDom.findDOMNode(this), this._.dragList)
+				node&&utils.removeEvent(node
+					, this._.dragList)
 			}
 			
 			super.componentWillUnmount && super.componentWillUnmount(...arguments);

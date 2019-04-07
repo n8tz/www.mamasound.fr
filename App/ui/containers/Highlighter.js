@@ -11,6 +11,7 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
+import is                                           from "is";
 import PropTypes                                    from "prop-types";
 import React                                        from "react";
 import {reScope, scopeToProps, propsToScope, Store} from "rscopes";
@@ -20,15 +21,7 @@ import anims                                        from 'App/ui/anims/(*).js';
 import Comps                                        from 'App/ui/components/(*).js';
 import {withStateMap, asRef, asStore}               from "rescope-spells";
 import stores                                       from 'App/stores/(*).js';
-import {asTweener, TweenRef}                        from "react-rtween";
-
-var CaipiSlideshow
-if ( typeof window !== "undefined" ) {
-	require('slick-carousel/slick/slick.css');
-	require('slick-carousel/slick/slick-theme.css');
-	CaipiSlideshow = require('react-caipi-slider');
-}
-else CaipiSlideshow = 'div';
+import {withTweener, asTweener, TweenRef}           from "react-rtween";
 
 @reScope(
 	{
@@ -79,7 +72,7 @@ else CaipiSlideshow = 'div';
 	}
 )
 @scopeToProps("MountedItems", "Grid")
-//@asTweener({ initialScrollPos: { scrollX: 100 }, propagateAxes: { scrollY: true } })
+@withTweener
 export default class Highlighter extends React.Component {
 	static propTypes = {};
 	state            = {};
@@ -90,7 +83,7 @@ export default class Highlighter extends React.Component {
 	render() {
 		let {
 			    Grid: { items: gridItems = [], layout = [] },
-			    $actions, onSelect, selected
+			    $actions, onSelect, tweener
 		    }          = this.props,
 		    state      = this.state;
 		const settings = {
@@ -180,8 +173,8 @@ export default class Highlighter extends React.Component {
 						width    : "100%",
 						zIndex   : "100",
 						transform: {
-							//perspective: "200px",
-							//translateY : '0px',
+							perspective: "200px",
+							translateY : '0px',
 							//rotateX    : "2deg"
 						}
 					} }
@@ -196,7 +189,7 @@ export default class Highlighter extends React.Component {
 									transform: {
 										//translateZ : "15px",
 										//translateY : "-10px",
-										//perspective: "100px",
+										perspective: "100px",
 										//rotateX    : "-4deg"
 									}
 								}
@@ -209,74 +202,37 @@ export default class Highlighter extends React.Component {
 							{
 								gridItems.map(
 									( item, i ) =>
-										<Comps.FocusedItems record={ item } key={ item._id }/>
+										<TweenRef key={ item._id }
+										          tweener={ tweener }
+										          initial={ {
+											          transform: {
+												          perspective: "200px",
+												          //translateY : '0px',
+												          rotateX    : "2deg"
+											          }
+										          } }
+										          tweenLines={ {
+											          scrollY: [
+												          {
+													          type    : "Tween",
+													          from    : 0,
+													          duration: 100,
+													          apply   : {
+														          //opacity  : "-1",
+														          transform: {
+															          translateZ: "15px",
+															          rotateX   : "-4deg"
+														          }
+													          }
+												          }
+											          ],
+										          } }
+										>
+											<Comps.FocusedItems record={ item }/>
+										</TweenRef>
 								)
 							}
 						</Comps.Slider>
-						{/*<CaipiSlideshow*/ }
-						{/*showArrow*/ }
-						{/*vignets*/ }
-						{/*autoSlide={ 10000 }*/ }
-						{/**/ }
-						{/*onClick={*/ }
-						{/*( e, item ) => {*/ }
-						{/*//*/ }
-						{/*}*/ }
-						{/*}*/ }
-						{/*config={*/ }
-						{/*{*/ }
-						{/*hPositioningFn    : 'hCentralZoom',*/ }
-						{/*//predictiveMomentum_maxMomentumJump: 1,*/ }
-						{/*predictiveMomentum: true,*/ }
-						{/*//forceSlotRatio                    : 7 / 5,*/ }
-						{/*//infiniteMode                       : false,*/ }
-						{/*autoScroll        : true,*/ }
-						{/*autoScrollPeriod  : 5000,*/ }
-						{/*visibleItems      : 5,*/ }
-						{/*hSlotWidth        : .85,*/ }
-						{/*hSlotHeight       : 1,*/ }
-						{/*listenMouseWheel  : false,*/ }
-						{/*direction         : 'horizontal',*/ }
-						{/*//*/ }
-						{/*//itemClicked : function ( item, offset, index, slot, e ) {*/ }
-						{/*//*/ }
-						{/*//	let { App: { history } } = me.context;*/ }
-						{/*//	if ( offset ) {*/ }
-						{/*//		e.preventDefault();*/ }
-						{/*//		e.stopPropagation();*/ }
-						{/*//		//*/ }
-						{/*//		me.refs.slider._slideShow.goTo(offset);*/ }
-						{/*//		return false;*/ }
-						{/*//	}*/ }
-						{/*//	else {//debugger;*/ }
-						{/*//		var item = me.refs.slider.state.items[index].targetEtty;*/ }
-						{/*//		var View = require('App/ui/View');*/ }
-						{/*//		history.push(db.getRouteTo(item.cls, item.objId));*/ }
-						{/*//		return false;*/ }
-						{/*//*/ }
-						{/*//	}*/ }
-						{/*//},*/ }
-						{/*//itemTargeted: function ( item, node ) {*/ }
-						{/*//	var SlideshowDom = require('App/ui/utils/Dom');*/ }
-						{/*//	if ( node && node != me._selected ) {*/ }
-						{/*//		var s = me._selected;*/ }
-						{/*//		SlideshowDom.addCls(node, "selected");*/ }
-						{/*//		me._selected = node;*/ }
-						{/*//		setTimeout(function () {*/ }
-						{/*//			s && SlideshowDom.rmCls(s, "selected");*/ }
-						{/*//		});*/ }
-						{/*//*/ }
-						{/*//	}*/ }
-						{/*//}*/ }
-						{/*}*/ }
-						{/*}>*/ }
-						{/*{*/ }
-						{/*gridItems.map(*/ }
-						{/*( item, i ) =>*/ }
-						{/*<div key={ item._id }><Comps.FocusedItems record={ item }/></div>*/ }
-						{/*)*/ }
-						{/*}*/ }
-						{/*</CaipiSlideshow>*/ }
 					</div>
 				</TweenRef>
 				{/*</div>*/ }
