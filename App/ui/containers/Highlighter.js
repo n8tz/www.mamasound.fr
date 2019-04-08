@@ -131,17 +131,12 @@ export default class Highlighter extends React.Component {
 					<TweenRef
 						initial={ {
 							position       : "absolute",
-							//top      : "0px",
-							//left     : "0px",
-							//width    : "100%",
-							//height   : "100%",
 							transformOrigin: "0% 0%",
 							transform      : {
 								
 								perspective: "200px",
 								translateY : '-50%',
 								translateX : '-50%',
-								//translateY: '-50vh',
 							}
 						} }
 						tweenLines={ {
@@ -190,12 +185,8 @@ export default class Highlighter extends React.Component {
 								from    : 0,
 								duration: 100,
 								apply   : {
-									//opacity  : "-1",
 									transform: {
-										//translateZ : "15px",
-										//translateY : "-10px",
 										perspective: "100px",
-										//rotateX    : "-4deg"
 									}
 								}
 							}
