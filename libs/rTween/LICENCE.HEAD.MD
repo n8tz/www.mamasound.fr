@@ -1,4 +1,4 @@
-react-rtween
+rtween
 Copyright (C) 2019  Nathanael Braun
 
 This program is free software: you can redistribute it and/or modify

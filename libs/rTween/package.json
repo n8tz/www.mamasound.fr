@@ -7,10 +7,7 @@
   "repository": "https://github.com/n8tz/rTween",
   "main": "dist/rTween.js",
   "scripts": {
-    "build": "wpi && wpi :samples",
-    "live": "wpi :staging -w",
-    "dev": "wpi-dev-server :samples --hot",
-    "runBrowser": "start http://localhost:9501"
+    "build": "wpi"
   },
   "wpInherit": {
     "default": {
@@ -18,38 +15,10 @@
       "basedOn": "Component",
       "vars": {
         "rootAlias": "rTween",
-        "production": true,
         "externals": true,
         "webpackPatch": {
           "optimization": {
             "usedExports": true
-          }
-        }
-      },
-      "extend": [
-        "wpi-react-hmr-ssr"
-      ]
-    },
-    "staging": {
-      "rootFolder": "src",
-      "basedOn": "Component",
-      "vars": {
-        "rootAlias": "rTween",
-        "externals": true,
-        "webpackPatch": {}
-      },
-      "extend": [
-        "wpi-react-hmr-ssr"
-      ]
-    },
-    "samples": {
-      "rootFolder": "src",
-      "basedOn": "ComponentSamples",
-      "vars": {
-        "rootAlias": "rTween",
-        "webpackPatch": {
-          "devServer": {
-            "port": 9501
           }
         }
       },
@@ -64,7 +33,7 @@
     "point-at-length": "^1.0.1"
   },
   "devDependencies": {
-    "wpi-react-hmr-ssr": "^1.1.3",
+    "wpi-react-hmr-ssr": "^1.1.6",
     "webpack-inherit": "^1.4.10"
   }
 }

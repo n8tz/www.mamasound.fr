@@ -30,10 +30,10 @@
  * @contact n8tz.js@gmail.com
  * @licence AGPL-3.0
  */
-import is       from "is";
-import easingFN from "d3-ease";
+import is from "is";
 
-const isArray      = is.array,
+const easingFN     = require("d3-ease"),
+      isArray      = is.array,
       isNumber     = is.number,
       isString     = is.string,
       slice        = Array.prototype.slice,
@@ -172,10 +172,10 @@ export default class RTween {
 	 * @param map
 	 */
 	mount( map, scope ) {
-		var i, ln, d = this.duration || 0, p = 0, me = this, max = 0, factory;
+		var i, ln, d = this.duration || 0, p = 0, max = 0, factory;
 		for ( i = 0, ln = map.length; i < ln; i++ ) {
-			if ( isString(map[i].easingFn) )
-				map[i].easingFn = easingFN[map[i].easingFn] || false;
+			if ( isString(map[i].easeFn) )
+					map[i] = { ...map[i], easeFn: easingFN[map[i].easingFn] || false };
 			if ( map[i].type == "Subline" ) {
 				factory = map[i].apply.fork(null, map[i], map[i].easingFn);
 			}
@@ -197,7 +197,7 @@ export default class RTween {
 			
 		}
 		
-		this.duration = d = Math.max(d, max);
+		this.duration = Math.max(d, max);
 		return this;
 	}
 	

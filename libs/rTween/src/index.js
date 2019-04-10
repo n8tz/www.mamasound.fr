@@ -12,60 +12,7 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-import {Scope, Store} from "rscopes";
+import _rTween from "./rTween";
 
-import desktopAnims from "App/ui/anims/responsive/desktop/(*).js";
-import mobileAnims  from "App/ui/anims/responsive/mobile/(*).js";
-
-const isBrowserSide = (new Function("try {return this===window;}catch(e){ return false;}"))();
-
-const breakPts = {
-	desktop: desktopAnims,
-	mobile : mobileAnims
-};
-
-export default class Anims extends Store {
-	static singleton = true;
-	static actions   = {};
-	state            = {
-		currentBrkPts: "desktop",
-	};
-	data             = {
-		...desktopAnims
-	};
-	
-	constructor() {
-		super(...arguments);
-		
-		isBrowserSide && window.addEventListener(
-			"resize",
-			this._onResize = ( e ) => {//@todo
-				let currentBrkPts;
-				if ( window.innerWidth >= 900 )
-					currentBrkPts = "desktop";
-				if ( window.innerWidth <= 900 )
-					currentBrkPts = "mobile";
-				this.setState({ currentBrkPts })
-			});
-	}
-	
-	apply( data, state, { currentBrkPts } ) {
-		
-		if ( currentBrkPts )
-			return { ...breakPts[currentBrkPts] }
-		
-		return data;
-	}
-	
-	destroy() {
-		super.destroy(...arguments);
-		
-		if ( isBrowserSide ) {
-			window.removeEventListener(
-				"resize",
-				this._onResize);
-			delete this._onResize;
-		}
-	}
-	
-}
+export default _rTween;
+export const rTween = _rTween;
