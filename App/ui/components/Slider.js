@@ -17,6 +17,8 @@ import {asTweener, TweenRef, TweenAxis} from "react-rtween";
 
 var easingFn = require('d3-ease');
 
+import {reScope, scopeToProps, propsToScope} from "rscopes";
+import {withStateMap, asRef, asStore}        from "rescope-spells";
 
 function offsetTweenLine( items, start = 0 ) {
 	return items.map(
@@ -30,6 +32,7 @@ function offsetTweenLine( items, start = 0 ) {
 	
 }
 
+@scopeToProps("Anims")
 @asTweener({ enableMouseDrag: true })
 export default class Slider extends React.Component {
 	static defaultProps = {
@@ -75,105 +78,38 @@ export default class Slider extends React.Component {
 	
 	render() {
 		let {
-			    defaultIndex    = 0,
-			    visibleItems    = 5,
-			    overlaps        = 1 / (visibleItems - (visibleItems % 2)),
-			    area            = 1000,
-			    defaultInitial  = {
-				    position : "absolute",
-				    height   : "100%",
-				    top      : "50%",
-				    left     : "50%",
-				    zIndex   : 50,
-				    opacity  : 0,
-				    transform: [
-					    {
-						    perspective: "1250px",
-						    translateY : "-20000px",
-						    rotate     : "-1.9deg"
-					    },
-					    {
-						    translateY: "20000px",
-						    translateZ: "-200px",
-						    //translateX: "1.75box",
-						    //translateY: "-.5box",
-						    //rotateY   : "-3deg",
-						    rotateY   : "-65deg",
-					    },
-					    {
-						    translateX: "-50%",
-						    translateY: "-50%"
-					    }]
-			    },
-			    defaultEntering = [
-				    {
-					    type    : "Tween",
-					    from    : 0,
-					    duration: 100,
-					    easeFn  : easingFn.easeCubicIn,
-					    apply   : {
-						    transform: {
-							    //translateX: "-1.25box",
-							    rotate: "1.9deg",
-						    },
-						    zIndex   : 150,
-					    }
-				    },
-				    {
-					    type    : "Tween",
-					    from    : 0,
-					    duration: 35,
-					    apply   : {
-						    opacity: 1,
-					    }
-				    }, {
-					    type    : "Tween",
-					    from    : 55,
-					    duration: 45,
-					    apply   : {
-						    transform: [{}, {
-							    rotateY   : "65deg",
-							    translateZ: "500px",
-							    //rotateX: "-90deg",
-						    }],
-					    }
-				    },
-			    ],
-			    defaultLeaving  = [
-				    {
-					    type    : "Tween",
-					    from    : 0,
-					    duration: 45,
-					    apply   : {
-						    transform: [{}, {
-							    rotateY   : "65deg",
-							    translateZ: "-500px",
-							    //rotateX: "90deg",
-						    }]
-					    }
-				    },
-				    {
-					    type    : "Tween",
-					    from    : 65,
-					    duration: 35,
-					    apply   : {
-						    opacity: -1,
-					    }
-				    }, {
-					    type    : "Tween",
-					    from    : 0,
-					    duration: 100,
-					    easeFn  : easingFn.easeCubicOut,
-					    apply   : {
-						    zIndex: -150,
-						
-						    transform: {
-							    //translateX: "-1.25box",
-							    rotate: "1.9deg",
-						    }
-					    }
-				    },
-			    ],
+			    defaultIndex = 0,
+			    visibleItems = 5,
+			    overlaps     = 1 / (visibleItems - (visibleItems % 2)),
+			    area         = 1000,
+			    Anims: { MainSlider: { defaultInitial, defaultEntering, defaultLeaving } },
+			    //defaultInitial  = {
+			    //    position : "absolute",
+			    //    height   : "100%",
+			    //    top      : "50%",
+			    //    left     : "50%",
+			    //    zIndex   : 50,
+			    //    opacity  : 0,
+			    //    transform: [
+			    //	    {
+			    //		    perspective: "1250px",
+			    //		    translateY : "-20000px",
+			    //		    rotate     : "-1.9deg"
+			    //	    },
+			    //	    {
+			    //		    translateY: "20000px",
+			    //		    translateZ: "-200px",
+			    //		    //translateX: "1.75box",
+			    //		    //translateY: "-.5box",
+			    //		    //rotateY   : "-3deg",
+			    //		    rotateY   : "-65deg",
+			    //	    },
+			    //	    {
+			    //		    translateX: "-50%",
+			    //		    translateY: "-50%"
+			    //	    }]
+			    //},
+			
 			    children
 		    }                        = this.props,
 		    { index = defaultIndex } = this.state,

@@ -24,9 +24,11 @@ import scopes                         from 'App/scopes/(*).js';
 
 export default {
 	...$super,
+	Anims          : stores.Anims,
 	UserGeoLocation: stores.UserGeoLocation,
+	
 	@asStore
-	appState       : {
+	appState: {
 		
 		currentPageFocus: "head",// head, events, page
 		
