@@ -135,7 +135,7 @@ export default class EventList extends React.Component {
 		let {
 			    record: { position, size } = {},
 			    EventList, appState, disabled,
-			    $actions, onSelect, selected
+			    $actions,
 		    }     = this.props,
 		    state = this.state;
 		return (
