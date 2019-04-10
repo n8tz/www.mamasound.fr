@@ -23,6 +23,7 @@
       },
       "extend": [
         "wpi-forms",
+        "wpi-xsl",
         "wpi-mongo",
         "wpi-react-rs-sass-ssr"
       ]
@@ -47,6 +48,7 @@
       },
       "extend": [
         "wpi-forms",
+        "wpi-xsl",
         "wpi-mongo",
         "wpi-react-rs-sass-ssr"
       ]
@@ -72,6 +74,7 @@
       },
       "extend": [
         "wpi-forms",
+        "wpi-xsl",
         "wpi-mongo",
         "wpi-react-rs-sass-ssr"
       ]
@@ -111,7 +114,6 @@
     "helmet": "^3.16.0",
     "https": "^1.0.0",
     "is": "^3.3.0",
-    "js-file-download": "^0.4.4",
     "knex-schemer": "^0.1.17",
     "leaflet": "^1.4.0",
     "leaflet-pulse-icon": "^0.1.0",
@@ -151,7 +153,6 @@
     "uniforms": "^1.31.1",
     "uniforms-material": "^1.31.1",
     "url-loader": "^1.1.2",
-    "xlsx": "^0.14.1",
     "xxhashjs": "^0.2.2"
   },
   "devDependencies": {

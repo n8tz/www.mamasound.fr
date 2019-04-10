@@ -14,10 +14,6 @@
 
 import {Scope, Store} from "rscopes";
 
-import XLSX      from "xlsx";
-import camelCase from "camelcase";
-import shortId   from "shortid";
-
 import {types, query}                                        from 'App/db';
 import {updateWatchers, clearWatchers, getQueriesFromIdKeys} from './DataProvider';
 

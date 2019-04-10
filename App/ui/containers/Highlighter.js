@@ -127,7 +127,7 @@ export default class Highlighter extends React.Component {
 					</header>
 				</TweenRef>
 				
-				<div className={ "headBackground" }>
+				<div className={ "headBackground container" }>
 					<TweenRef
 						initial={ {
 							position       : "absolute",

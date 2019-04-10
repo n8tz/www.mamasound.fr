@@ -66,14 +66,15 @@
 
   .headBackground {
     height: calc(100% + 10px);
-    width: 100%;
+    //width: 100%;
     background: white;
     //overflow: hidden;
+    transform: translate3d(-50%, 0, 0);
     position: absolute;
     top: 0;
-    left: 0;
+    left: 50%;
 
-    transform: translate3d(0, 0, 0);
+    //transform: translate3d(0, 0, 0);
     @include withMask();
 
 
