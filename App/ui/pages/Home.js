@@ -20,102 +20,11 @@ import ReactDom                              from "react-dom";
 import {withStateMap, asRef, asStore}   from "rescope-spells";
 import {asTweener, TweenRef, TweenAxis} from "react-rtween";
 
-var easingFn = require('d3-ease');
 
-const YAxis = [
-	{
-		type    : "Tween",
-		target  : "header",
-		from    : 0,
-		duration: 100,
-		apply   : {
-			height: -1,
-		}
-	},
-	//{
-	//	type    : "Tween",
-	//	target  : "page",
-	//	from    : 0,
-	//	duration: 100,
-	//	apply   : {
-	//		top: -1,
-	//	}
-	//},
-	{
-		type    : "Tween",
-		target  : "highlighted",
-		from    : 0,
-		duration: 100,
-		apply   : {
-			height: -60,
-		}
-	},
-	{
-		type    : "Tween",
-		target  : "events",
-		from    : 0,
-		duration: 100,
-		apply   : {
-			height: 60,
-		}
-	},
-	//show map
-	{
-		type    : "Tween",
-		target  : "map",
-		from    : 65,
-		duration: 35,
-		apply   : {
-			height: 30,
-		}
-	},
-	{
-		type    : "Tween",
-		target  : "events",
-		from    : 65,
-		duration: 35,
-		apply   : {
-			height: -30,
-		}
-	},
-	//show page
-	{
-		type    : "Tween",
-		target  : "map",
-		from    : 100,
-		duration: 50,
-		apply   : {
-			//height: -10,
-			//marginLeft: "30%",
-			//width     : "-30%",
-		}
-	},
-	{
-		type    : "Tween",
-		target  : "events",
-		from    : 100,
-		duration: 50,
-		apply   : {
-			height: -30,
-		}
-	},
-	{
-		type    : "Tween",
-		target  : "PageBlock",
-		from    : 100,
-		duration: 50,
-		apply   : {
-			height: 40,
-		}
-	}
-];
-
-
-@scopeToProps("appState")
+@scopeToProps("appState", "Anims")
 @asTweener({})
 export default class Home extends React.Component {
 	state = {};
-	
 	
 	componentDidMount( props = this.props ) {
 		let { appState } = props;
@@ -154,14 +63,14 @@ export default class Home extends React.Component {
 	}
 	
 	render() {
-		let { widgets = { items: [] }, appState, $actions } = this.props;
+		let { Anims : { MainYAxis }, appState, $actions } = this.props;
 		if ( typeof window !== "undefined" )
 			window.$actions = $actions;
 		
 		return <div className={ "Page Home" }>
 			<TweenAxis
 				axe={ "scrollY" }
-				items={ YAxis }
+				items={ MainYAxis }
 				inertia={
 					{
 						stops: [0, 100]

@@ -33,7 +33,6 @@ export default class Anims extends Store {
 	data             = {
 		...desktopAnims
 	};
-	
 	constructor() {
 		super(...arguments);
 		

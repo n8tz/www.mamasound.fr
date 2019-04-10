@@ -103,6 +103,781 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "../../node_modules/rtween/dist/lines sync recursive ^\\.\\/.*$":
+/*!*************************************************************************************!*\
+  !*** G:/n8tz/various/www.mamasound.fr/node_modules/rtween/dist/lines sync ^\.\/.*$ ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./Ring": "../../node_modules/rtween/dist/lines/Ring.js",
+	"./Ring.js": "../../node_modules/rtween/dist/lines/Ring.js",
+	"./SVGPath": "../../node_modules/rtween/dist/lines/SVGPath.js",
+	"./SVGPath.js": "../../node_modules/rtween/dist/lines/SVGPath.js",
+	"./Tween": "../../node_modules/rtween/dist/lines/Tween.js",
+	"./Tween.js": "../../node_modules/rtween/dist/lines/Tween.js"
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "../../node_modules/rtween/dist/lines sync recursive ^\\.\\/.*$";
+
+/***/ }),
+
+/***/ "../../node_modules/rtween/dist/lines/Ring.js":
+/*!*******************************************************************************!*\
+  !*** G:/n8tz/various/www.mamasound.fr/node_modules/rtween/dist/lines/Ring.js ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/*
+ * Copyright (c) 2019. Nathanael Braun.  All rights reserved.
+ *
+ * This File is part of Caipi. You can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *  This project is dual licensed under AGPL and Commercial Licence.
+ *
+ * @author : Nathanael Braun
+ * @contact : n8tz.js@gmail.com
+ */
+
+var PI = Math.PI,
+    isNumber = __webpack_require__(/*! is */ "./node_modules/is/index.js").number,
+    sin = Math.sin,
+    cos = Math.cos;
+
+module.exports =
+//function () {
+function (scope, cfg, target) {
+    target && scope && (scope = scope[target] = scope[target] || {}); // !
+
+    var fn = "var _2PI=2*Math.PI,",
+        axe1 = cfg.axes && cfg.axes[0] || 'x',
+        // should factorise....
+    axe2 = cfg.axes && cfg.axes[1] || 'y',
+        factor1 = (cfg.factors && cfg.factors[0] || 1) * cfg.radius,
+        // should factorise....
+    factor2 = (cfg.factors && cfg.factors[1] || 1) * cfg.radius,
+        startPos = (cfg.startPos || 0) * 2 * PI,
+        length = isNumber(cfg.length) ? cfg.length : 1;
+    fn += "pos1=(" + startPos + "+((lastPos+update)*_2PI)*" + length + " )%(_2PI)," + "pos2 = (" + startPos + "+(lastPos)*_2PI*" + length + " )%(_2PI);";
+    fn += "scope." + axe1 + "+=" + factor1 + "*(Math.cos(pos1)-Math.cos(pos2));" + // ! optims
+    "scope." + axe2 + " += " + factor2 + "*(Math.sin(pos1)-Math.sin(pos2));";
+
+    return new Function("lastPos, update, scope, cfg, target", fn);
+};
+module.exports.isFactory = true;
+
+/***/ }),
+
+/***/ "../../node_modules/rtween/dist/lines/SVGPath.js":
+/*!**********************************************************************************!*\
+  !*** G:/n8tz/various/www.mamasound.fr/node_modules/rtween/dist/lines/SVGPath.js ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/*
+ * Copyright (c) 2019. Nathanael Braun.  All rights reserved.
+ *
+ * This File is part of Caipi. You can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *  This project is dual licensed under AGPL and Commercial Licence.
+ *
+ * @author : Nathanael Braun
+ * @contact : n8tz.js@gmail.com
+ */
+
+var cache = {},
+    buildPath,
+    getPoint;
+if (typeof document == "undefined") {
+    buildPath = function buildPath(P) {
+        return cache[P] || __webpack_require__(/*! point-at-length */ "./node_modules/point-at-length/index.js")(P);
+    };
+    getPoint = function getPoint(P, p) {
+
+        return cache[P].at(p);
+    };
+} else {
+    buildPath = function buildPath(P) {
+        var p = cache[P];
+        if (!p) {
+            cache[P] = p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+
+            p.setAttribute('d', P);
+        }
+        ;
+    };
+    getPoint = function getPoint(P, p) {
+        return cache[P].getPointAtLength(p * cache[P].getTotalLength());
+    };
+}
+module.exports = function (_scope, cfg, target) {
+    // @todo incremental path reader
+
+    var axe1 = cfg.axes && cfg.axes[0] || 'x',
+        // should factorise better....
+    axe2 = cfg.axes && cfg.axes[1] || 'y',
+        lastPtsPos,
+        lastPts;
+    buildPath(cfg.path);
+    return function (lastPos, update, scope, cfg, target) {
+        var p1 = lastPtsPos == lastPos ? lastPts : getPoint(cfg.path, cfg.reverse ? 1 - lastPos : lastPos),
+            p2 = lastPts = getPoint(cfg.path, cfg.reverse ? 1 - (lastPos + update) : lastPos + update);
+        lastPtsPos = lastPos + update;
+        scope[axe1] += (p2.x - p1.x) * 4;
+        scope[axe2] += (p2.y - p1.y) * 4;
+    };
+};
+module.exports.isFactory = true;
+
+/***/ }),
+
+/***/ "../../node_modules/rtween/dist/lines/Tween.js":
+/*!********************************************************************************!*\
+  !*** G:/n8tz/various/www.mamasound.fr/node_modules/rtween/dist/lines/Tween.js ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/*
+ * Copyright (c) 2019. Nathanael Braun.  All rights reserved.
+ *
+ * This File is part of Caipi. You can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *  This project is dual licensed under AGPL and Commercial Licence.
+ *
+ * @author : Nathanael Braun
+ * @contact : n8tz.js@gmail.com
+ */
+
+module.exports = function (_scope, cfg, target) {
+	var fn = "";
+
+	target && (fn += "scope = scope['" + target + "'];\n");
+
+	for (var k in cfg.apply) {
+		if (cfg.apply.hasOwnProperty(k)) {
+
+			_scope && (_scope[k] = _scope[k] || 0);
+
+			fn += "scope." + k + "+=(" + (cfg.easeFn ? "cfg.easeFn(lastPos+update)" + "- cfg.easeFn(lastPos)" : "update") + ") * cfg.apply." + k + ";";
+		}
+	}return new Function("lastPos, update, scope, cfg, target", fn);
+};
+module.exports.isFactory = true;
+
+/***/ }),
+
+/***/ "../../node_modules/rtween/dist/rTween.js":
+/*!***************************************************************************!*\
+  !*** G:/n8tz/various/www.mamasound.fr/node_modules/rtween/dist/rTween.js ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/*
+ * Copyright (c) 2019. Nathanael Braun.  All rights reserved.
+ *
+ * This File is part of Caipi. You can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *  This project is dual licensed under AGPL and Commercial Licence.
+ *
+ * @author : Nathanael Braun
+ * @contact : n8tz.js@gmail.com
+ */
+
+/**
+ * # Caipi rTween
+ *
+ * Scalable, multiscope, reversible, delta based, interpolation/tweening engine
+ *
+ * ## rTween what ?
+ *
+ * - Tweening engine allowing to apply forward and backward multiples tweens on same
+ * properties and multiple objects
+ * - Allow live composition of classic tweens, circle tweens, SVG Path tweens, other
+ * rTweens, etc
+ * - Equivalent to the GreenSocks TweenMax/TweenLite objects, minus specialized helpers.
+ * - Purely Abstract, no Dom deps, rTween don't apply the CSS itself
+ * - Work in node & webpack environment
+ *
+ * @author Nathanael BRAUN
+ * @contact caipilabs@gmail.com
+ * @licence AGPL-3.0
+ */
+var is = __webpack_require__(/*! is */ "./node_modules/is/index.js"),
+    isArray = is.array,
+    isFunction = is.fn,
+    isNumber = is.number,
+    isString = is.string,
+    merge = __webpack_require__(/*! merge */ "./node_modules/merge/merge.js"),
+    slice = Array.prototype.slice,
+    push = Array.prototype.push,
+    abs = Math.abs,
+    forkedrTween = function forkedrTween(cfg) {
+	this.__cPos = 0;
+	this.__cIndex = 0;
+	this.onScopeUpdated = false;
+	this.__activeProcess = [];
+	this.__outgoing = [];
+	this.__incoming = [];
+},
+
+// runner
+_live = false,
+    lastTm,
+    _running = [];
+
+var RTween = function () {
+	function RTween(cfg, scope) {
+		_classCallCheck(this, RTween);
+
+		var me = this;
+		this.scope = scope;
+		cfg = cfg || {};
+		this.__marks = [];
+		this.__marksLength = [];
+		this.__marksKeys = [];
+		this.__processors = [];
+		this.__config = [];
+
+		this.__activeForks = [];
+		this.__activeProcess = [];
+
+		this.__activeProcess = [];
+		this.__outgoing = [];
+		this.__incoming = [];
+		this.__cPos = 0;
+		this.__cIndex = 0;
+		this.__cMaxKey = 1;
+		if (isArray(cfg)) {
+			this.localLength = 1;
+			this.mount(cfg, scope);
+		} else {
+			merge(this, cfg);
+			if (cfg.rTween) this.mount(cfg.rTween, scope);
+		}
+	}
+
+	/**
+  * Run this tween line from 0 to his duration using linear
+  * @param target
+  * @param cb
+  * @param tm
+  */
+
+
+	_createClass(RTween, [{
+		key: 'run',
+		value: function run(target, cb, tm) {
+			RTween.Runner.run(this, target, tm || this.duration, cb);
+		}
+
+		/**
+   * Tween this tween line to 'to' during 'tm' ms using easing fn
+   * @param to {int}
+   * @param tm {int} duration in ms
+   * @param easing {function} easing fn
+   * @param tick {function} fn called at each tick
+   * @param cb {function} fn called on complete
+   */
+
+	}, {
+		key: 'runTo',
+		value: function runTo(to, tm) {
+			var easing = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (x) {
+				return x;
+			};
+
+			var _this = this;
+
+			var tick = arguments[3];
+			var cb = arguments[4];
+
+			var from = this.__cPos,
+			    length = to - from;
+
+			_running.push({
+				apply: function apply(pos, max) {
+					var x = from + easing(pos / max) * length;
+					_this.goTo(x);
+					tick && tick(x);
+				},
+				duration: tm,
+				cpos: 0,
+				cb: cb
+			});
+
+			if (!_live) {
+				_live = true;
+				lastTm = Date.now();
+				// console.log("TL runner On");
+				setTimeout(RTween.Runner._tick, 16);
+			}
+		}
+
+		/**
+   * Map process descriptors to get a runnable timeline
+   * @method mount
+   * @param map
+   */
+
+	}, {
+		key: 'mount',
+		value: function mount(map, scope) {
+			var i,
+			    ln,
+			    d = this.duration || 0,
+			    p = 0,
+			    me = this,
+			    max = 0,
+			    factory;
+			for (i = 0, ln = map.length; i < ln; i++) {
+				if (isString(map[i].easingFn)) map[i].easingFn = easingFN[map[i].easingFn] || false;
+				if (map[i].type == "Subline") {
+					factory = map[i].apply.fork(null, map[i], map[i].easingFn);
+				} else {
+					factory = __webpack_require__("../../node_modules/rtween/dist/lines sync recursive ^\\.\\/.*$")("./" + (map[i].type || 'Event'));
+				}
+				if (!factory) {
+					console.log('rTween : Anim not found : ' + map[i].type);
+					continue;
+				}
+				if (!isNumber(map[i].from))
+					// no from so assume it's sync
+					this.addProcess(d, d + map[i].duration, factory, map[i]), d += map[i].duration || 0;else // have from so assume it's async
+					this.addProcess(map[i].from, map[i].from + map[i].duration, factory, map[i]), max = Math.max(max, map[i].from + map[i].duration);
+			}
+
+			this.duration = d = Math.max(d, max);
+			return this;
+		}
+
+		/**
+   * Clone this rTween
+   * @method fork
+   * @param fn
+   * @param ctx
+   * @param easeFn
+   * @returns {forkedrTween}
+   */
+
+	}, {
+		key: 'fork',
+		value: function fork(cfg) {
+			this._masterLine = this._masterLine || this;
+			forkedrTween.prototype = this._masterLine;
+			return new forkedrTween(cfg);
+		}
+
+		/**
+   * Map a process descriptor
+   * @method addProcess
+   * @param from
+   * @param to
+   * @param process
+   * @param cfg
+   * @returns {rTween}
+   */
+
+	}, {
+		key: 'addProcess',
+		value: function addProcess(from, to, process, cfg) {
+			var i = 0,
+			    _ln = process.localLength,
+			    ln = to - from || 0,
+			    key = this.__cMaxKey++,
+			    isTl = process instanceof RTween;
+
+			if (isTl) process = process.fork(null, cfg);
+
+			this.__activeForks[key] = true;
+			this.__processors[key] = process.isFactory ? process(null, cfg, cfg.target) : process;
+			this.__marksLength[key] = ln;
+			this.__config[key] = cfg;
+
+			// put start marker in the ordered marker list
+			while (i <= this.__marks.length && this.__marks[i] < from) {
+				i++;
+			}this.__marks.splice(i, 0, from);
+			this.__marksKeys.splice(i, 0, key);
+
+			// put end marker in the ordered marker list
+			while (i <= this.__marks.length && this.__marks[i] <= to) {
+				i++;
+			}this.__marks.splice(i, 0, to);
+			this.__marksKeys.splice(i, 0, -key);
+			return this;
+		}
+
+		/**
+   *
+   * @param key
+   * @returns {*}
+   * @private
+   */
+
+	}, {
+		key: '_getIndex',
+		value: function _getIndex(key) {
+			return (key = this.__marksKeys.indexOf(key)) !== -1 ? key : false;
+		}
+
+		/**
+   * apply to scope or this.scope the delta of the process mapped from cPos to 'to'
+   * using a rTween length of 1
+   * @method go
+   * @param to
+   * @param scope
+   * @param reset
+   */
+
+	}, {
+		key: 'go',
+		value: function go(to, scope, reset) {
+			this.goTo(to * this.duration, scope, reset);
+			this.__cRPos = to;
+			return scope || this.scope;
+		}
+	}, {
+		key: 'getPosAt',
+		value: function getPosAt(to, scope) {
+
+			this.__activeProcess.length = 0;
+			this.__outgoing.length = 0;
+			this.__incoming.length = 0;
+			this.__cPos = 0;
+			this.__cIndex = 0;
+			return this.go(to, scope);
+		}
+
+		/**
+   * apply to scope or this.scope the delta of the process mapped from cPos to 'to'
+   * using the mapped rTween length
+   * @method goTo
+   * @param to
+   * @param scope
+   * @param reset
+   */
+
+	}, {
+		key: 'goTo',
+		value: function goTo(to, scope, reset) {
+			scope = scope || this.scope;
+			if (this.window) to = this.window.start + to / this.duration * this.window.length;
+
+			if (!this._started) {
+				this._started = true;
+				this.__cIndex = this.__cPos = 0;
+			}
+
+			var i = this.__cIndex,
+			    p,
+			    ln,
+			    outgoing = this.__outgoing,
+			    incoming = this.__incoming,
+			    pos,
+			    _from,
+			    _to,
+			    d,
+			    key,
+			    mLn = this.__marks.length,
+			    diff = to - this.__cPos;
+			if (reset) {
+				this.__activeProcess.length = 0;
+				this.__outgoing.length = 0;
+				this.__incoming.length = 0;
+				// reset forks
+				//console.log('reset ', to);
+				//for ( i = 0, ln = this.__processors.length ; i < ln ; i++ ) {
+				//    if (this.__processors[i] instanceof rTween){
+				//        this.__processors[i].goTo(0,0,true);
+				//    }
+				//}
+			}
+
+			// 1st ajust period, knowing which process are involved / leaving
+			// while my indice target a marker/time period inferior to my pos
+
+			while (i < mLn && to > this.__marks[i] || diff >= 0 && this.__marks[i] == to) {
+
+				// if next marker is ending an active process
+				if ((p = this.__activeProcess.indexOf(-this.__marksKeys[i])) != -1) {
+					this.__activeProcess.splice(p, 1);
+					outgoing.push(this.__marksKeys[i]);
+					//console.log("close " + this.__marksKeys[i]);
+				}
+				// if next marker is process ending a process who just start (direction has
+				// change)
+				else if ((p = this.__activeProcess.indexOf(this.__marksKeys[i])) != -1) {
+						this.__activeProcess.splice(p, 1);
+						outgoing.push(this.__marksKeys[i]);
+						//console.log("close after dir change" + this.__marksKeys[i]);
+					}
+					// if next marker is process ending a process who just start
+					else if ((p = incoming.indexOf(-this.__marksKeys[i])) != -1) {
+							incoming.splice(p, 1);
+							outgoing.push(this.__marksKeys[i]);
+							//console.log("close starting " + this.__marksKeys[i]);
+						} else {
+							incoming.push(this.__marksKeys[i]);
+							//console.log("right say in " + this.__marksKeys[i]);
+						}
+				i++;
+			}
+
+			// while my indice-1 target a marker/time period superior to my pos
+			while (i - 1 >= 0 && (to < this.__marks[i - 1] || diff < 0 && this.__marks[i - 1] == to)) {
+				i--;
+
+				if ((p = this.__activeProcess.indexOf(-this.__marksKeys[i])) != -1) {
+					this.__activeProcess.splice(p, 1);
+					outgoing.push(this.__marksKeys[i]);
+					//console.log("left say out " + this.__marksKeys[i]);
+				} // if next marker is process ending a process who just start (direction has
+				// change)
+				else if ((p = this.__activeProcess.indexOf(this.__marksKeys[i])) != -1) {
+						this.__activeProcess.splice(p, 1);
+						outgoing.push(this.__marksKeys[i]);
+						//console.log("close after dir change" + this.__marksKeys[i]);
+					} else if ((p = incoming.indexOf(-this.__marksKeys[i])) != -1) {
+						incoming.splice(p, 1);
+						outgoing.push(this.__marksKeys[i]);
+						//console.log("left say out from incoming " + this.__marksKeys[i]);
+					} else {
+						//console.log("left say in " + this.__marksKeys[i]);
+						incoming.push(this.__marksKeys[i]);
+					}
+			}
+
+			// now dispatching deltas
+			//console.log(incoming, outgoing, this.__activeProcess);
+
+			this.__cIndex = i;
+			// those leaving subline
+			for (i = 0, ln = outgoing.length; i < ln; i++) {
+				p = this._getIndex(outgoing[i]);
+				key = abs(outgoing[i]);
+				if (outgoing[i] < 0) {
+					_from = Math.min(this.__marks[p], Math.max(this.__cPos, this.__marks[p] - this.__marksLength[key])) - (this.__marks[p] - this.__marksLength[key]);
+					_to = this.__marksLength[key];
+					pos = _from;
+					d = _to - _from;
+					pos = (this.localLength || 1) * pos / this.__marksLength[key];
+					d = (this.localLength || 1) * d / this.__marksLength[key];
+				} else {
+					_from = Math.max(this.__marks[p], Math.min(this.__cPos, this.__marks[p] + this.__marksLength[key])) - this.__marks[p];
+					_to = 0;
+					pos = _from;
+					d = _to - _from;
+
+					pos = (this.localLength || 1) * pos / this.__marksLength[key];
+					d = (this.localLength || 1) * d / this.__marksLength[key];
+				}
+				//
+				//console.log("out " + this.__marksKeys[p] + " " + this.__marksLength[p]+
+				//            '\npos:'+this.__cPos+
+				//            '\nmark:'+this.__marks[p]+
+				//            '\ninnerpos:'+pos+
+				//            '\ndelta:'+d
+				//);
+
+				if (this.__processors[key].go) {
+					this.__processors[key].go(pos + d, scope, reset);
+				} else this.__processors[key](pos, d, scope, this.__config[key], this.__config[key].target || this.__config[key].$target && this.__context && this.__context[this.__config[key].$target]);
+			}
+
+			// those entering subline
+			for (i = 0, ln = incoming.length; i < ln; i++) {
+				p = this._getIndex(incoming[i]);
+				key = abs(incoming[i]);
+
+				if (incoming[i] < 0) {
+
+					_from = this.__marksLength[key];
+					_to = Math.max(this.__marks[p] - this.__marksLength[key], Math.min(this.__cPos + diff, this.__marks[p])) - (this.__marks[p] - this.__marksLength[key]);
+
+					pos = _from;
+					d = _to - _from;
+					pos = (this.localLength || 1) * pos / this.__marksLength[key];
+					d = (this.localLength || 1) * d / this.__marksLength[key];
+				} else {
+					_from = 0;
+					_to = Math.max(this.__marks[p], Math.min(this.__cPos + diff, this.__marks[p] + this.__marksLength[key])) - this.__marks[p];
+					pos = _from;
+					d = _to - _from;
+
+					pos = (this.localLength || 1) * pos / this.__marksLength[key];
+					d = (this.localLength || 1) * d / this.__marksLength[key];
+				}
+
+				//console.log("in " + this.__marksKeys[p] + " " + this.__marksLength[p]+
+				//            '\ndiff:'+diff+
+				//            '\npos:'+this.__cPos+
+				//            '\nmark:'+this.__marks[p]+
+				//            '\n_from:'+_from+
+				//            '\n_to:'+_to+
+				//            '\ninnerpos:'+pos+
+				//            '\ndelta:'+d
+				//);
+
+				if (this.__processors[key].go) {
+					//console.log("in " + pos, d);
+					this.__processors[key].go(pos, 0, true); //reset local fork
+					this.__processors[key].go(pos + d, scope);
+				} else if (!reset) this.__processors[key](pos, d, scope, this.__config[key], this.__config[key].target || this.__config[key].$target && this.__context && this.__context[this.__config[key].$target]);
+			}
+			// and those who where already there
+			//if ( !reset )
+			for (i = 0, ln = this.__activeProcess.length; i < ln; i++) {
+				p = this._getIndex(this.__activeProcess[i]);
+				key = abs(this.__activeProcess[i]);
+
+				//d = (this.__cPos - diff)<this.__marks[p]?this.__cPos-this.__marks[p] : diff;
+				pos = this.__activeProcess[i] < 0 ? this.__cPos - (this.__marks[p] - this.__marksLength[key]) : this.__cPos - this.__marks[p];
+				pos = (this.localLength || 1) * pos / this.__marksLength[key];
+				d = diff * (this.localLength || 1) / this.__marksLength[key];
+				//console.log("active " + p + " " + this.__marksLength[p]
+				//            +'\nto:'+to
+				//            +'\npos:'+this.__cPos
+				//            +'\nmark:'+this.__marks[p]+
+				//            '\ngdiff:'+diff68786k
+				//            +'\ninnerpos:'+(pos * (this.localLength || 1)) /
+				// abs(this.__marksLength[p]) +'\ndelta:'+(diff * (this.localLength || 1)) /
+				// abs(this.__marksLength[p]) );
+				if (this.__processors[key].go) {
+
+					this.__processors[key].go(pos + d, scope);
+				} else if (!reset) this.__processors[key](pos, d, scope, this.__config[key], this.__config[key].target || this.__config[key].$target && this.__context && this.__context[this.__config[key].$target]);
+			}
+
+			push.apply(this.__activeProcess, incoming);
+
+			outgoing.length = 0;
+			incoming.length = 0;
+
+			this.__cPos = to;
+			this.onScopeUpdated && this.onScopeUpdated(to, diff, scope);
+		}
+	}]);
+
+	return RTween;
+}();
+
+RTween.Runner = {
+	run: function run(tl, ctx, duration, cb) {
+		var apply = function apply(pos, size) {
+			return tl.go(pos / size, ctx);
+		};
+		_running.push({ apply: apply, duration: duration, cpos: 0, cb: cb });
+		tl.go(0, ctx, true); //reset tl
+
+		if (!_live) {
+			_live = true;
+			lastTm = Date.now();
+			// console.log("TL runner On");
+			setTimeout(this._tick, 16);
+		}
+	},
+	_tick: function _tick() {
+		var i = 0,
+		    o,
+		    tm = Date.now(),
+		    delta = tm - lastTm;
+		lastTm = tm;
+		for (; i < _running.length; i++) {
+			_running[i].cpos = Math.min(delta + _running[i].cpos, _running[i].duration); //cpos
+			_running[i].apply(_running[i].cpos, _running[i].duration);
+			// console.log("TL runner ",_running[i][3]);
+			if (_running[i].cpos == _running[i].duration) {
+
+				_running[i].cb && setTimeout(_running[i].cb);
+				_running.splice(i, 1), i--;
+			}
+		}
+		if (_running.length) setTimeout(_tick, 16);else {
+			// console.log("TL runner Off");
+			_live = false;
+		}
+	}
+};
+exports.default = RTween;
+module.exports = exports['default'];
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js":
 /*!******************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js ***!
@@ -27533,781 +28308,6 @@ if (false) {} else {
 
 /***/ }),
 
-/***/ "./node_modules/rtween/dist/lines sync recursive ^\\.\\/.*$":
-/*!******************************************************!*\
-  !*** ./node_modules/rtween/dist/lines sync ^\.\/.*$ ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var map = {
-	"./Ring": "./node_modules/rtween/dist/lines/Ring.js",
-	"./Ring.js": "./node_modules/rtween/dist/lines/Ring.js",
-	"./SVGPath": "./node_modules/rtween/dist/lines/SVGPath.js",
-	"./SVGPath.js": "./node_modules/rtween/dist/lines/SVGPath.js",
-	"./Tween": "./node_modules/rtween/dist/lines/Tween.js",
-	"./Tween.js": "./node_modules/rtween/dist/lines/Tween.js"
-};
-
-
-function webpackContext(req) {
-	var id = webpackContextResolve(req);
-	return __webpack_require__(id);
-}
-function webpackContextResolve(req) {
-	if(!__webpack_require__.o(map, req)) {
-		var e = new Error("Cannot find module '" + req + "'");
-		e.code = 'MODULE_NOT_FOUND';
-		throw e;
-	}
-	return map[req];
-}
-webpackContext.keys = function webpackContextKeys() {
-	return Object.keys(map);
-};
-webpackContext.resolve = webpackContextResolve;
-module.exports = webpackContext;
-webpackContext.id = "./node_modules/rtween/dist/lines sync recursive ^\\.\\/.*$";
-
-/***/ }),
-
-/***/ "./node_modules/rtween/dist/lines/Ring.js":
-/*!************************************************!*\
-  !*** ./node_modules/rtween/dist/lines/Ring.js ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/*
- * Copyright (c) 2019. Nathanael Braun.  All rights reserved.
- *
- * This File is part of Caipi. You can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *  This project is dual licensed under AGPL and Commercial Licence.
- *
- * @author : Nathanael Braun
- * @contact : n8tz.js@gmail.com
- */
-
-var PI = Math.PI,
-    isNumber = __webpack_require__(/*! is */ "./node_modules/is/index.js").number,
-    sin = Math.sin,
-    cos = Math.cos;
-
-module.exports =
-//function () {
-function (scope, cfg, target) {
-    target && scope && (scope = scope[target] = scope[target] || {}); // !
-
-    var fn = "var _2PI=2*Math.PI,",
-        axe1 = cfg.axes && cfg.axes[0] || 'x',
-        // should factorise....
-    axe2 = cfg.axes && cfg.axes[1] || 'y',
-        factor1 = (cfg.factors && cfg.factors[0] || 1) * cfg.radius,
-        // should factorise....
-    factor2 = (cfg.factors && cfg.factors[1] || 1) * cfg.radius,
-        startPos = (cfg.startPos || 0) * 2 * PI,
-        length = isNumber(cfg.length) ? cfg.length : 1;
-    fn += "pos1=(" + startPos + "+((lastPos+update)*_2PI)*" + length + " )%(_2PI)," + "pos2 = (" + startPos + "+(lastPos)*_2PI*" + length + " )%(_2PI);";
-    fn += "scope." + axe1 + "+=" + factor1 + "*(Math.cos(pos1)-Math.cos(pos2));" + // ! optims
-    "scope." + axe2 + " += " + factor2 + "*(Math.sin(pos1)-Math.sin(pos2));";
-
-    return new Function("lastPos, update, scope, cfg, target", fn);
-};
-module.exports.isFactory = true;
-
-/***/ }),
-
-/***/ "./node_modules/rtween/dist/lines/SVGPath.js":
-/*!***************************************************!*\
-  !*** ./node_modules/rtween/dist/lines/SVGPath.js ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/*
- * Copyright (c) 2019. Nathanael Braun.  All rights reserved.
- *
- * This File is part of Caipi. You can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *  This project is dual licensed under AGPL and Commercial Licence.
- *
- * @author : Nathanael Braun
- * @contact : n8tz.js@gmail.com
- */
-
-var cache = {},
-    buildPath,
-    getPoint;
-if (typeof document == "undefined") {
-    buildPath = function buildPath(P) {
-        return cache[P] || __webpack_require__(/*! point-at-length */ "./node_modules/point-at-length/index.js")(P);
-    };
-    getPoint = function getPoint(P, p) {
-
-        return cache[P].at(p);
-    };
-} else {
-    buildPath = function buildPath(P) {
-        var p = cache[P];
-        if (!p) {
-            cache[P] = p = document.createElementNS("http://www.w3.org/2000/svg", "path");
-
-            p.setAttribute('d', P);
-        }
-        ;
-    };
-    getPoint = function getPoint(P, p) {
-        return cache[P].getPointAtLength(p * cache[P].getTotalLength());
-    };
-}
-module.exports = function (_scope, cfg, target) {
-    // @todo incremental path reader
-
-    var axe1 = cfg.axes && cfg.axes[0] || 'x',
-        // should factorise better....
-    axe2 = cfg.axes && cfg.axes[1] || 'y',
-        lastPtsPos,
-        lastPts;
-    buildPath(cfg.path);
-    return function (lastPos, update, scope, cfg, target) {
-        var p1 = lastPtsPos == lastPos ? lastPts : getPoint(cfg.path, cfg.reverse ? 1 - lastPos : lastPos),
-            p2 = lastPts = getPoint(cfg.path, cfg.reverse ? 1 - (lastPos + update) : lastPos + update);
-        lastPtsPos = lastPos + update;
-        scope[axe1] += (p2.x - p1.x) * 4;
-        scope[axe2] += (p2.y - p1.y) * 4;
-    };
-};
-module.exports.isFactory = true;
-
-/***/ }),
-
-/***/ "./node_modules/rtween/dist/lines/Tween.js":
-/*!*************************************************!*\
-  !*** ./node_modules/rtween/dist/lines/Tween.js ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/*
- * Copyright (c) 2019. Nathanael Braun.  All rights reserved.
- *
- * This File is part of Caipi. You can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *  This project is dual licensed under AGPL and Commercial Licence.
- *
- * @author : Nathanael Braun
- * @contact : n8tz.js@gmail.com
- */
-
-module.exports = function (_scope, cfg, target) {
-	var fn = "";
-
-	target && (fn += "scope = scope['" + target + "'];\n");
-
-	for (var k in cfg.apply) {
-		if (cfg.apply.hasOwnProperty(k)) {
-
-			_scope && (_scope[k] = _scope[k] || 0);
-
-			fn += "scope." + k + "+=(" + (cfg.easeFn ? "cfg.easeFn(lastPos+update)" + "- cfg.easeFn(lastPos)" : "update") + ") * cfg.apply." + k + ";";
-		}
-	}return new Function("lastPos, update, scope, cfg, target", fn);
-};
-module.exports.isFactory = true;
-
-/***/ }),
-
-/***/ "./node_modules/rtween/dist/rTween.js":
-/*!********************************************!*\
-  !*** ./node_modules/rtween/dist/rTween.js ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/*
- * Copyright (c) 2019. Nathanael Braun.  All rights reserved.
- *
- * This File is part of Caipi. You can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *  This project is dual licensed under AGPL and Commercial Licence.
- *
- * @author : Nathanael Braun
- * @contact : n8tz.js@gmail.com
- */
-
-/**
- * # Caipi rTween
- *
- * Scalable, multiscope, reversible, delta based, interpolation/tweening engine
- *
- * ## rTween what ?
- *
- * - Tweening engine allowing to apply forward and backward multiples tweens on same
- * properties and multiple objects
- * - Allow live composition of classic tweens, circle tweens, SVG Path tweens, other
- * rTweens, etc
- * - Equivalent to the GreenSocks TweenMax/TweenLite objects, minus specialized helpers.
- * - Purely Abstract, no Dom deps, rTween don't apply the CSS itself
- * - Work in node & webpack environment
- *
- * @author Nathanael BRAUN
- * @contact caipilabs@gmail.com
- * @licence AGPL-3.0
- */
-var is = __webpack_require__(/*! is */ "./node_modules/is/index.js"),
-    isArray = is.array,
-    isFunction = is.fn,
-    isNumber = is.number,
-    isString = is.string,
-    merge = __webpack_require__(/*! merge */ "./node_modules/merge/merge.js"),
-    slice = Array.prototype.slice,
-    push = Array.prototype.push,
-    abs = Math.abs,
-    forkedrTween = function forkedrTween(cfg) {
-	this.__cPos = 0;
-	this.__cIndex = 0;
-	this.onScopeUpdated = false;
-	this.__activeProcess = [];
-	this.__outgoing = [];
-	this.__incoming = [];
-},
-
-// runner
-_live = false,
-    lastTm,
-    _running = [];
-
-var RTween = function () {
-	function RTween(cfg, scope) {
-		_classCallCheck(this, RTween);
-
-		var me = this;
-		this.scope = scope;
-		cfg = cfg || {};
-		this.__marks = [];
-		this.__marksLength = [];
-		this.__marksKeys = [];
-		this.__processors = [];
-		this.__config = [];
-
-		this.__activeForks = [];
-		this.__activeProcess = [];
-
-		this.__activeProcess = [];
-		this.__outgoing = [];
-		this.__incoming = [];
-		this.__cPos = 0;
-		this.__cIndex = 0;
-		this.__cMaxKey = 1;
-		if (isArray(cfg)) {
-			this.localLength = 1;
-			this.mount(cfg, scope);
-		} else {
-			merge(this, cfg);
-			if (cfg.rTween) this.mount(cfg.rTween, scope);
-		}
-	}
-
-	/**
-  * Run this tween line from 0 to his duration using linear
-  * @param target
-  * @param cb
-  * @param tm
-  */
-
-
-	_createClass(RTween, [{
-		key: 'run',
-		value: function run(target, cb, tm) {
-			RTween.Runner.run(this, target, tm || this.duration, cb);
-		}
-
-		/**
-   * Tween this tween line to 'to' during 'tm' ms using easing fn
-   * @param to {int}
-   * @param tm {int} duration in ms
-   * @param easing {function} easing fn
-   * @param tick {function} fn called at each tick
-   * @param cb {function} fn called on complete
-   */
-
-	}, {
-		key: 'runTo',
-		value: function runTo(to, tm) {
-			var easing = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (x) {
-				return x;
-			};
-
-			var _this = this;
-
-			var tick = arguments[3];
-			var cb = arguments[4];
-
-			var from = this.__cPos,
-			    length = to - from;
-
-			_running.push({
-				apply: function apply(pos, max) {
-					var x = from + easing(pos / max) * length;
-					_this.goTo(x);
-					tick && tick(x);
-				},
-				duration: tm,
-				cpos: 0,
-				cb: cb
-			});
-
-			if (!_live) {
-				_live = true;
-				lastTm = Date.now();
-				// console.log("TL runner On");
-				setTimeout(RTween.Runner._tick, 16);
-			}
-		}
-
-		/**
-   * Map process descriptors to get a runnable timeline
-   * @method mount
-   * @param map
-   */
-
-	}, {
-		key: 'mount',
-		value: function mount(map, scope) {
-			var i,
-			    ln,
-			    d = this.duration || 0,
-			    p = 0,
-			    me = this,
-			    max = 0,
-			    factory;
-			for (i = 0, ln = map.length; i < ln; i++) {
-				if (isString(map[i].easingFn)) map[i].easingFn = easingFN[map[i].easingFn] || false;
-				if (map[i].type == "Subline") {
-					factory = map[i].apply.fork(null, map[i], map[i].easingFn);
-				} else {
-					factory = __webpack_require__("./node_modules/rtween/dist/lines sync recursive ^\\.\\/.*$")("./" + (map[i].type || 'Event'));
-				}
-				if (!factory) {
-					console.log('rTween : Anim not found : ' + map[i].type);
-					continue;
-				}
-				if (!isNumber(map[i].from))
-					// no from so assume it's sync
-					this.addProcess(d, d + map[i].duration, factory, map[i]), d += map[i].duration || 0;else // have from so assume it's async
-					this.addProcess(map[i].from, map[i].from + map[i].duration, factory, map[i]), max = Math.max(max, map[i].from + map[i].duration);
-			}
-
-			this.duration = d = Math.max(d, max);
-			return this;
-		}
-
-		/**
-   * Clone this rTween
-   * @method fork
-   * @param fn
-   * @param ctx
-   * @param easeFn
-   * @returns {forkedrTween}
-   */
-
-	}, {
-		key: 'fork',
-		value: function fork(cfg) {
-			this._masterLine = this._masterLine || this;
-			forkedrTween.prototype = this._masterLine;
-			return new forkedrTween(cfg);
-		}
-
-		/**
-   * Map a process descriptor
-   * @method addProcess
-   * @param from
-   * @param to
-   * @param process
-   * @param cfg
-   * @returns {rTween}
-   */
-
-	}, {
-		key: 'addProcess',
-		value: function addProcess(from, to, process, cfg) {
-			var i = 0,
-			    _ln = process.localLength,
-			    ln = to - from || 0,
-			    key = this.__cMaxKey++,
-			    isTl = process instanceof RTween;
-
-			if (isTl) process = process.fork(null, cfg);
-
-			this.__activeForks[key] = true;
-			this.__processors[key] = process.isFactory ? process(null, cfg, cfg.target) : process;
-			this.__marksLength[key] = ln;
-			this.__config[key] = cfg;
-
-			// put start marker in the ordered marker list
-			while (i <= this.__marks.length && this.__marks[i] < from) {
-				i++;
-			}this.__marks.splice(i, 0, from);
-			this.__marksKeys.splice(i, 0, key);
-
-			// put end marker in the ordered marker list
-			while (i <= this.__marks.length && this.__marks[i] <= to) {
-				i++;
-			}this.__marks.splice(i, 0, to);
-			this.__marksKeys.splice(i, 0, -key);
-			return this;
-		}
-
-		/**
-   *
-   * @param key
-   * @returns {*}
-   * @private
-   */
-
-	}, {
-		key: '_getIndex',
-		value: function _getIndex(key) {
-			return (key = this.__marksKeys.indexOf(key)) !== -1 ? key : false;
-		}
-
-		/**
-   * apply to scope or this.scope the delta of the process mapped from cPos to 'to'
-   * using a rTween length of 1
-   * @method go
-   * @param to
-   * @param scope
-   * @param reset
-   */
-
-	}, {
-		key: 'go',
-		value: function go(to, scope, reset) {
-			this.goTo(to * this.duration, scope, reset);
-			this.__cRPos = to;
-			return scope || this.scope;
-		}
-	}, {
-		key: 'getPosAt',
-		value: function getPosAt(to, scope) {
-
-			this.__activeProcess.length = 0;
-			this.__outgoing.length = 0;
-			this.__incoming.length = 0;
-			this.__cPos = 0;
-			this.__cIndex = 0;
-			return this.go(to, scope);
-		}
-
-		/**
-   * apply to scope or this.scope the delta of the process mapped from cPos to 'to'
-   * using the mapped rTween length
-   * @method goTo
-   * @param to
-   * @param scope
-   * @param reset
-   */
-
-	}, {
-		key: 'goTo',
-		value: function goTo(to, scope, reset) {
-			scope = scope || this.scope;
-			if (this.window) to = this.window.start + to / this.duration * this.window.length;
-
-			if (!this._started) {
-				this._started = true;
-				this.__cIndex = this.__cPos = 0;
-			}
-
-			var i = this.__cIndex,
-			    p,
-			    ln,
-			    outgoing = this.__outgoing,
-			    incoming = this.__incoming,
-			    pos,
-			    _from,
-			    _to,
-			    d,
-			    key,
-			    mLn = this.__marks.length,
-			    diff = to - this.__cPos;
-			if (reset) {
-				this.__activeProcess.length = 0;
-				this.__outgoing.length = 0;
-				this.__incoming.length = 0;
-				// reset forks
-				//console.log('reset ', to);
-				//for ( i = 0, ln = this.__processors.length ; i < ln ; i++ ) {
-				//    if (this.__processors[i] instanceof rTween){
-				//        this.__processors[i].goTo(0,0,true);
-				//    }
-				//}
-			}
-
-			// 1st ajust period, knowing which process are involved / leaving
-			// while my indice target a marker/time period inferior to my pos
-
-			while (i < mLn && to > this.__marks[i] || diff >= 0 && this.__marks[i] == to) {
-
-				// if next marker is ending an active process
-				if ((p = this.__activeProcess.indexOf(-this.__marksKeys[i])) != -1) {
-					this.__activeProcess.splice(p, 1);
-					outgoing.push(this.__marksKeys[i]);
-					//console.log("close " + this.__marksKeys[i]);
-				}
-				// if next marker is process ending a process who just start (direction has
-				// change)
-				else if ((p = this.__activeProcess.indexOf(this.__marksKeys[i])) != -1) {
-						this.__activeProcess.splice(p, 1);
-						outgoing.push(this.__marksKeys[i]);
-						//console.log("close after dir change" + this.__marksKeys[i]);
-					}
-					// if next marker is process ending a process who just start
-					else if ((p = incoming.indexOf(-this.__marksKeys[i])) != -1) {
-							incoming.splice(p, 1);
-							outgoing.push(this.__marksKeys[i]);
-							//console.log("close starting " + this.__marksKeys[i]);
-						} else {
-							incoming.push(this.__marksKeys[i]);
-							//console.log("right say in " + this.__marksKeys[i]);
-						}
-				i++;
-			}
-
-			// while my indice-1 target a marker/time period superior to my pos
-			while (i - 1 >= 0 && (to < this.__marks[i - 1] || diff < 0 && this.__marks[i - 1] == to)) {
-				i--;
-
-				if ((p = this.__activeProcess.indexOf(-this.__marksKeys[i])) != -1) {
-					this.__activeProcess.splice(p, 1);
-					outgoing.push(this.__marksKeys[i]);
-					//console.log("left say out " + this.__marksKeys[i]);
-				} // if next marker is process ending a process who just start (direction has
-				// change)
-				else if ((p = this.__activeProcess.indexOf(this.__marksKeys[i])) != -1) {
-						this.__activeProcess.splice(p, 1);
-						outgoing.push(this.__marksKeys[i]);
-						//console.log("close after dir change" + this.__marksKeys[i]);
-					} else if ((p = incoming.indexOf(-this.__marksKeys[i])) != -1) {
-						incoming.splice(p, 1);
-						outgoing.push(this.__marksKeys[i]);
-						//console.log("left say out from incoming " + this.__marksKeys[i]);
-					} else {
-						//console.log("left say in " + this.__marksKeys[i]);
-						incoming.push(this.__marksKeys[i]);
-					}
-			}
-
-			// now dispatching deltas
-			//console.log(incoming, outgoing, this.__activeProcess);
-
-			this.__cIndex = i;
-			// those leaving subline
-			for (i = 0, ln = outgoing.length; i < ln; i++) {
-				p = this._getIndex(outgoing[i]);
-				key = abs(outgoing[i]);
-				if (outgoing[i] < 0) {
-					_from = Math.min(this.__marks[p], Math.max(this.__cPos, this.__marks[p] - this.__marksLength[key])) - (this.__marks[p] - this.__marksLength[key]);
-					_to = this.__marksLength[key];
-					pos = _from;
-					d = _to - _from;
-					pos = (this.localLength || 1) * pos / this.__marksLength[key];
-					d = (this.localLength || 1) * d / this.__marksLength[key];
-				} else {
-					_from = Math.max(this.__marks[p], Math.min(this.__cPos, this.__marks[p] + this.__marksLength[key])) - this.__marks[p];
-					_to = 0;
-					pos = _from;
-					d = _to - _from;
-
-					pos = (this.localLength || 1) * pos / this.__marksLength[key];
-					d = (this.localLength || 1) * d / this.__marksLength[key];
-				}
-				//
-				//console.log("out " + this.__marksKeys[p] + " " + this.__marksLength[p]+
-				//            '\npos:'+this.__cPos+
-				//            '\nmark:'+this.__marks[p]+
-				//            '\ninnerpos:'+pos+
-				//            '\ndelta:'+d
-				//);
-
-				if (this.__processors[key].go) {
-					this.__processors[key].go(pos + d, scope, reset);
-				} else this.__processors[key](pos, d, scope, this.__config[key], this.__config[key].target || this.__config[key].$target && this.__context && this.__context[this.__config[key].$target]);
-			}
-
-			// those entering subline
-			for (i = 0, ln = incoming.length; i < ln; i++) {
-				p = this._getIndex(incoming[i]);
-				key = abs(incoming[i]);
-
-				if (incoming[i] < 0) {
-
-					_from = this.__marksLength[key];
-					_to = Math.max(this.__marks[p] - this.__marksLength[key], Math.min(this.__cPos + diff, this.__marks[p])) - (this.__marks[p] - this.__marksLength[key]);
-
-					pos = _from;
-					d = _to - _from;
-					pos = (this.localLength || 1) * pos / this.__marksLength[key];
-					d = (this.localLength || 1) * d / this.__marksLength[key];
-				} else {
-					_from = 0;
-					_to = Math.max(this.__marks[p], Math.min(this.__cPos + diff, this.__marks[p] + this.__marksLength[key])) - this.__marks[p];
-					pos = _from;
-					d = _to - _from;
-
-					pos = (this.localLength || 1) * pos / this.__marksLength[key];
-					d = (this.localLength || 1) * d / this.__marksLength[key];
-				}
-
-				//console.log("in " + this.__marksKeys[p] + " " + this.__marksLength[p]+
-				//            '\ndiff:'+diff+
-				//            '\npos:'+this.__cPos+
-				//            '\nmark:'+this.__marks[p]+
-				//            '\n_from:'+_from+
-				//            '\n_to:'+_to+
-				//            '\ninnerpos:'+pos+
-				//            '\ndelta:'+d
-				//);
-
-				if (this.__processors[key].go) {
-					//console.log("in " + pos, d);
-					this.__processors[key].go(pos, 0, true); //reset local fork
-					this.__processors[key].go(pos + d, scope);
-				} else if (!reset) this.__processors[key](pos, d, scope, this.__config[key], this.__config[key].target || this.__config[key].$target && this.__context && this.__context[this.__config[key].$target]);
-			}
-			// and those who where already there
-			//if ( !reset )
-			for (i = 0, ln = this.__activeProcess.length; i < ln; i++) {
-				p = this._getIndex(this.__activeProcess[i]);
-				key = abs(this.__activeProcess[i]);
-
-				//d = (this.__cPos - diff)<this.__marks[p]?this.__cPos-this.__marks[p] : diff;
-				pos = this.__activeProcess[i] < 0 ? this.__cPos - (this.__marks[p] - this.__marksLength[key]) : this.__cPos - this.__marks[p];
-				pos = (this.localLength || 1) * pos / this.__marksLength[key];
-				d = diff * (this.localLength || 1) / this.__marksLength[key];
-				//console.log("active " + p + " " + this.__marksLength[p]
-				//            +'\nto:'+to
-				//            +'\npos:'+this.__cPos
-				//            +'\nmark:'+this.__marks[p]+
-				//            '\ngdiff:'+diff68786k
-				//            +'\ninnerpos:'+(pos * (this.localLength || 1)) /
-				// abs(this.__marksLength[p]) +'\ndelta:'+(diff * (this.localLength || 1)) /
-				// abs(this.__marksLength[p]) );
-				if (this.__processors[key].go) {
-
-					this.__processors[key].go(pos + d, scope);
-				} else if (!reset) this.__processors[key](pos, d, scope, this.__config[key], this.__config[key].target || this.__config[key].$target && this.__context && this.__context[this.__config[key].$target]);
-			}
-
-			push.apply(this.__activeProcess, incoming);
-
-			outgoing.length = 0;
-			incoming.length = 0;
-
-			this.__cPos = to;
-			this.onScopeUpdated && this.onScopeUpdated(to, diff, scope);
-		}
-	}]);
-
-	return RTween;
-}();
-
-RTween.Runner = {
-	run: function run(tl, ctx, duration, cb) {
-		var apply = function apply(pos, size) {
-			return tl.go(pos / size, ctx);
-		};
-		_running.push({ apply: apply, duration: duration, cpos: 0, cb: cb });
-		tl.go(0, ctx, true); //reset tl
-
-		if (!_live) {
-			_live = true;
-			lastTm = Date.now();
-			// console.log("TL runner On");
-			setTimeout(this._tick, 16);
-		}
-	},
-	_tick: function _tick() {
-		var i = 0,
-		    o,
-		    tm = Date.now(),
-		    delta = tm - lastTm;
-		lastTm = tm;
-		for (; i < _running.length; i++) {
-			_running[i].cpos = Math.min(delta + _running[i].cpos, _running[i].duration); //cpos
-			_running[i].apply(_running[i].cpos, _running[i].duration);
-			// console.log("TL runner ",_running[i][3]);
-			if (_running[i].cpos == _running[i].duration) {
-
-				_running[i].cb && setTimeout(_running[i].cb);
-				_running.splice(i, 1), i--;
-			}
-		}
-		if (_running.length) setTimeout(_tick, 16);else {
-			// console.log("TL runner Off");
-			_live = false;
-		}
-	}
-};
-exports.default = RTween;
-module.exports = exports['default'];
-
-/***/ }),
-
 /***/ "./node_modules/scheduler/cjs/scheduler-tracing.development.js":
 /*!*********************************************************************!*\
   !*** ./node_modules/scheduler/cjs/scheduler-tracing.development.js ***!
@@ -30550,6 +30550,11 @@ function (_React$Component) {
           _this3._previousTweener && _this3._previousTweener.rmScrollableAnim(_this3._lastTL, axe);
           _this3._lastTL = tweener.addScrollableAnim(items, axe, size);
           _this3._previousTweener = tweener;
+          _this3._previousTweens = items;
+        } else if (_this3._previousTweens !== items) {
+          _this3._lastTL && tweener.rmScrollableAnim(_this3._lastTL, axe);
+          _this3._lastTL = tweener.addScrollableAnim(items, axe, size);
+          _this3._previousTweens = items;
         }
 
         return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_6___default.a.Fragment, null);
@@ -30828,10 +30833,7 @@ __webpack_require__.r(__webpack_exports__);
  *  @contact : n8tz.js@gmail.com
  */
 
-var context = {
-  tweenerById: {}
-};
-var TweenerContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext(context);
+var TweenerContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext(null);
 var _default = TweenerContext;
 /* harmony default export */ __webpack_exports__["default"] = (_default);
 ;
@@ -30843,7 +30845,6 @@ var _default = TweenerContext;
     return;
   }
 
-  reactHotLoader.register(context, "context", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\TweenerContext.js");
   reactHotLoader.register(TweenerContext, "TweenerContext", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\TweenerContext.js");
   reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\TweenerContext.js");
 })();
@@ -30895,7 +30896,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./utils */ "./src/utils.js");
 /* harmony import */ var _helpers_Inertia__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./helpers/Inertia */ "./src/helpers/Inertia.js");
 /* harmony import */ var _TweenerContext__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./TweenerContext */ "./src/TweenerContext.js");
-/* harmony import */ var rtween__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! rtween */ "./node_modules/rtween/dist/rTween.js");
+/* harmony import */ var rtween__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! rtween */ "../../node_modules/rtween/dist/rTween.js");
 /* harmony import */ var rtween__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(rtween__WEBPACK_IMPORTED_MODULE_15__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_16__);
@@ -31041,7 +31042,7 @@ function asTweener() {
       };
       _this._._rafLoop = _this._rafLoop.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_this));
       _this.__isTweener = true;
-      _this.__isFirst = !tweenerCount;
+      _this.__isFirst = 0 === tweenerCount;
       tweenerCount++;
       return _this;
     }
@@ -31321,6 +31322,7 @@ function asTweener() {
         var defaultPosition = arguments.length > 3 ? arguments[3] : undefined;
         this.makeTweenable();
         this.makeScrollable();
+
         var _ = this._,
             dim = _.axes[axe],
             scrollPos = dim ? dim.scrollPos : defaultPosition || 0,
@@ -31329,13 +31331,14 @@ function asTweener() {
           // todo mk pure
           value: scrollPos
         }, _inertia || {}))),
-            nextDescr = {
+            nextDescr = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, _inertia || {}, {
           tweenLines: dim && dim.tweenLines || [],
           scrollPos: scrollPos,
           targetPos: targetPos,
           inertia: inertia,
           scrollableArea: scrollableArea
-        };
+        });
+
         dim = this._.axes[axe] = nextDescr;
         _inertia !== false && (dim.inertia._.stops = _inertia.stops);
       }
@@ -31412,7 +31415,7 @@ function asTweener() {
         var ms = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
         var axe = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "scrollY";
 
-        if (this._.axes) {
+        if (this._.axes && this._.axes[axe]) {
           var oldPos = this._.axes[axe].targetPos,
               setPos = function setPos(pos) {
             _this8._.axes[axe].scrollPos = pos;
@@ -31460,7 +31463,8 @@ function asTweener() {
 
         if (this._.rendered) {
           var rootNode = react_dom__WEBPACK_IMPORTED_MODULE_16___default.a.findDOMNode(this);
-          this.__isFirst && isBrowserSide && _utils__WEBPACK_IMPORTED_MODULE_12__["default"].addWheelEvent(rootNode, this._.onScroll = function (e) {
+          console.log("reg ", this.__isFirst, tweenerCount);
+          !this._parentTweener && isBrowserSide && _utils__WEBPACK_IMPORTED_MODULE_12__["default"].addWheelEvent(rootNode, this._.onScroll = function (e) {
             //@todo
             // check if there scrollable stuff in dom targets
             if (_this9._shouldDispatch(e.target, e.deltaX * 5, e.deltaY * 5)) {
@@ -31493,16 +31497,12 @@ function asTweener() {
               //@todo
               var prevent,
                   x = _this9._getAxis("scrollX"),
-                  y = _this9._getAxis("scrollY"),
-                  deltaY = descr._lastPos.y - descr._startPos.y,
-                  deltaX = descr._lastPos.x - descr._startPos.x,
-                  headTarget = e.target,
-                  style;
+                  y = _this9._getAxis("scrollY");
 
               lastPos = lastPos || _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, descr._startPos); // check if there scrollable stuff in dom targets
               //if ( this.isAxisOut("scrollX", deltaX) )
 
-              x.inertia.hold(lastPos.x + (descr._lastPos.x - descr._startPos.x) / _this9._.box.x * x.scrollableArea); //if ( this.isAxisOut("scrollY", -deltaY) )
+              x.inertia.hold(lastPos.x + -(descr._lastPos.x - descr._startPos.x) / _this9._.box.x * x.scrollableArea); //if ( this.isAxisOut("scrollY", -deltaY) )
 
               y.inertia.hold(lastPos.y + -(descr._lastPos.y - descr._startPos.y) / _this9._.box.y * y.scrollableArea); //return !prevent;
             },
@@ -31689,10 +31689,11 @@ function asTweener() {
         }
 
         if (this._.scrollEnabled) {
+          console.log("unreg ", this.__isFirst, tweenerCount);
           this._.scrollEnabled = false; //this._.axes          = undefined;
 
-          node && _utils__WEBPACK_IMPORTED_MODULE_12__["default"].rmWheelEvent(node, this._.onScroll);
-          node && _utils__WEBPACK_IMPORTED_MODULE_12__["default"].removeEvent(node, this._.dragList);
+          node && this._.onScroll && !this._parentTweener && _utils__WEBPACK_IMPORTED_MODULE_12__["default"].rmWheelEvent(node, this._.onScroll);
+          node && this._.dragList && _utils__WEBPACK_IMPORTED_MODULE_12__["default"].removeEvent(node, this._.dragList);
         }
 
         _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(TweenableComp.prototype), "componentWillUnmount", this) && _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(TweenableComp.prototype), "componentWillUnmount", this).apply(this, arguments);
@@ -31758,10 +31759,15 @@ function asTweener() {
     }, {
       key: "render",
       value: function render() {
+        var _this14 = this;
+
         //console.log('render', this.constructor.name)
-        return react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_TweenerContext__WEBPACK_IMPORTED_MODULE_14__["default"].Provider, {
-          value: this
-        }, _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(TweenableComp.prototype), "render", this).call(this));
+        return react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_TweenerContext__WEBPACK_IMPORTED_MODULE_14__["default"].Consumer, null, function (parentTweener) {
+          _this14._parentTweener = parentTweener;
+          return react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_TweenerContext__WEBPACK_IMPORTED_MODULE_14__["default"].Provider, {
+            value: _this14
+          }, _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(TweenableComp.prototype), "render", _this14).call(_this14));
+        });
       }
     }, {
       key: "__reactstandin__regenerateByEval",
@@ -31887,7 +31893,8 @@ function () {
     key: "update",
     value: function update() {
       var at = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Date.now();
-      var _ = this._;
+      var _ = this._,
+          nextValue;
       if (!_.inertia) return _.pos;
 
       var pos = _.inertiaFn((at - _.inertiaStartTm) / _.targetDuration) * _.targetDist,
@@ -31902,7 +31909,10 @@ function () {
 
       delta = delta || 0; //console.log(_.pos + delta);
 
-      return _.pos += delta;
+      nextValue = _.pos + delta;
+      if (_.conf.hookValueUpdate) nextValue = _.conf.hookValueUpdate(nextValue);
+      _.pos = nextValue;
+      return nextValue;
     }
   }, {
     key: "dispatch",
@@ -31952,23 +31962,25 @@ function () {
         } else {
           mid = _.stops[i - 1] + (_.stops[i] - _.stops[i - 1]) / 2;
           if (forceSnap) target = forceSnap < 0 ? _.stops[i - 1] : _.stops[i];else target = pos < mid ? _.stops[i - 1] : _.stops[i];
-        }
+        } //console.log("do snap", i, target);
 
-        console.log("do snap", i, target);
+
         target = target - (_.pos - _.lastInertiaPos);
         _.targetDuration = min(maxDuration, abs(_.targetDuration / _.targetDist * target));
         _.targetDist = target;
       } else {
         target = ~~(_.pos - _.lastInertiaPos);
 
-        if (target > _.max) {
-          target = _.max - target;
-          _.targetDuration = min(maxDuration, abs(_.targetDuration / _.targetDist * target));
-          _.targetDist = target;
-        } else if (target < _.min) {
-          target = _.min - target;
-          _.targetDuration = min(maxDuration, abs(_.targetDuration / _.targetDist * target));
-          _.targetDist = target;
+        if (!_.conf.infinite) {
+          if (target > _.max) {
+            target = _.max - target;
+            _.targetDuration = min(maxDuration, abs(_.targetDuration / _.targetDist * target));
+            _.targetDist = target;
+          } else if (target < _.min) {
+            target = _.min - target;
+            _.targetDuration = min(maxDuration, abs(_.targetDuration / _.targetDist * target));
+            _.targetDist = target;
+          }
         }
       }
     }
@@ -32003,11 +32015,14 @@ function () {
       _.lastIVelocity = iVel;
       _.lastVelocity = iVel;
       _.baseTS = now;
+      if (_.conf.hookValueUpdate) pos = _.conf.hookValueUpdate(pos);
 
-      if (pos > _.max) {
-        pos = _.max + min((pos - _.max) / 10, 10);
-      } else if (pos < _.min) {
-        pos = _.min - min((_.min - pos) / 10, 10);
+      if (!_.conf.infinite) {
+        if (pos > _.max) {
+          pos = _.max + min((pos - _.max) / 10, 10);
+        } else if (pos < _.min) {
+          pos = _.min - min((_.min - pos) / 10, 10);
+        }
       }
 
       _.pos = pos;
@@ -34432,7 +34447,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var SimpleObjectProto = {}.constructor;
-console.warn("===");
 /**
  * asTweener decorator
  * @param argz
