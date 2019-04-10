@@ -17,6 +17,28 @@ import ReactDom              from "react-dom";
 import {asTweener, TweenRef} from "RTween";
 import "./samples.scss";
 
+import kue from "kue";
+
+let queue = kue.createQueue();
+
+
+queue.process(
+	'Disp_applyDealOrder',
+	( { data: TheDealOrder }, done ) => {
+		doTheDbTransaction(TheDealOrder)
+			.then(
+				results => {
+					queue.create('Course_applyDealOrder', TheDealOrder).priority('high').save();
+				}
+			)
+			.catch(
+				why => {
+					TheDealOrder.hasFailed = true;
+					queue.create('Deal_completedDealOrder', TheDealOrder).priority('high').save();
+				}
+			);
+	}
+);
 
 var easingFn = require('d3-ease');
 
