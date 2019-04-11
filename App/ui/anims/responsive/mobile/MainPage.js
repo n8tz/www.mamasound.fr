@@ -11,7 +11,7 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-export const LeftBox = {
+export const LeftBox   = {
 	height    : "50px",
 	left      : "0px",
 	bottom    : "0px",
@@ -23,7 +23,41 @@ export const LeftBox = {
 		//translateY: "1box"
 	}
 };
-export const YAxis   = [
+export const PageBlock = {
+	width    : "100%",
+	//background: "green",
+	overflow : 'hidden',
+	transform: {
+		y: "100%"
+	},
+	height   : "0%"
+};
+export const map       = {
+	width    : "100%",
+	height   : "0%",
+	overflow : 'hidden',
+	transform: {
+		y: "100%"
+	}
+};
+export const page      = {
+	top   : "0cm",
+	left  : "0px",
+	bottom: "0px",
+	width : "100%",
+	//paddingTop: "150px"
+};
+export const events    = {
+	width    : "100%",
+	//background: "green",
+	overflow : 'hidden',
+	position : "absolute",
+	height   : "15%",
+	transform: {
+		y: "85%"
+	}
+};
+export const YAxis     = [
 	{
 		type    : "Tween",
 		target  : "header",

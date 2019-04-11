@@ -81,13 +81,7 @@ export default class Home extends React.Component {
 			
 			<TweenRef
 				id={ "page" }
-				initial={ {
-					top   : "0cm",
-					left  : "0px",
-					bottom: "0px",
-					width : "100%",
-					//paddingTop: "150px"
-				} }
+				initial={ MainPage.page }
 			>
 				<div
 					className={ "mainPageBlock" }
@@ -97,69 +91,27 @@ export default class Home extends React.Component {
 					} }>
 					
 					<TweenRef id={ "highlighted" } initial={ { height: "85%" } }>
-						<div style={ {
-							width: "100%",
-							//background: "blue",
-						} }>
-							<Blocks.Highlighter/>
-						</div>
+						<Blocks.Highlighter/>
 					</TweenRef>
 					
 					
 					<TweenRef id={ "events" }
-					          initial={ {
-						          position : "absolute",
-						          height   : "15%",
-						          transform: {
-							          y: "85%"
-						          }
-					          } }>
-						<div
-							style={ {
-								width   : "100%",
-								//background: "green",
-								overflow: 'hidden'
-							} }>
-							<Blocks.EventList/>
-						</div>
+					          initial={ MainPage.events }>
+						<Blocks.EventList/>
 					</TweenRef>
 					<TweenRef
 						id={ "map" }
-						initial={ {
-							width    : "100%",
-							height   : "0%",
-							transform: {
-								y: "100%"
-							}
-						} }
+						initial={ MainPage.map }
 					>
-						<div
-							style={ {
-								//background: "cyan",
-								overflow: 'hidden',
-							} }>
-							<Blocks.EventMap
-								day={ appState.currentVisibleDay || appState.curDay }
-								viewType={ appState.viewType }/>
-						</div>
+						<Blocks.EventMap
+							day={ appState.currentVisibleDay || appState.curDay }
+							viewType={ appState.viewType }/>
 					</TweenRef>
 					<TweenRef
 						id={ "PageBlock" }
-						initial={ {
-							height: "0%"
-						} }
+						initial={ MainPage.PageBlock }
 					>
-						<div
-							style={ {
-								width    : "100%",
-								//background: "green",
-								overflow : 'hidden',
-								transform: {
-									y: "100%"
-								}
-							} }>
-							<Blocks.PageBlock/>
-						</div>
+						<Blocks.PageBlock/>
 					</TweenRef>
 				</div>
 			</TweenRef>
