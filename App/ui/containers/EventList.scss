@@ -20,12 +20,12 @@
   transform: translate3d(0, 0, 0);
   fontSize: 20px;
   z-index: 50;
-
-  @media screen and (max-width: $tablet-landscape-breakpoint) {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100% !important;
-  }
+  //
+  //@media screen and (max-width: $tablet-landscape-breakpoint) {
+  //  margin: 0 !important;
+  //  padding: 0 !important;
+  //  width: 100% !important;
+  //}
   //-webkit-mask-box-image: url("../assets/medias/border.png") /repeat;
 
   //mask-border: url("../assets/medias/border.svg") 30 repeat;;
@@ -47,14 +47,14 @@
 
   .dayList {
 
-    transform: translate3d(0,0,0);
+    transform: translate3d(0, 0, 0);
     position: absolute;
     top: 0px;
     left: 0px;
     bottom: 0px;
     right: 0%;
     overflow: hidden;
-    margin-left: 75px;
+    margin-left: 0px;
 
     .DayEvents {
       background: #1f8de2;
@@ -79,13 +79,14 @@
       }
     }
 
-    @media screen and (min-width: $tablet-portrait-breakpoint) {
-      margin-left: 300px;
-    }
-
-    @media screen and (max-width: $smartphone-landscape-breakpoint) {
-      margin-left: 40px;
-    }
+    //
+    //@media screen and (min-width: $tablet-portrait-breakpoint) {
+    //  margin-left: 300px;
+    //}
+    //
+    //@media screen and (max-width: $smartphone-landscape-breakpoint) {
+    //  margin-left: 40px;
+    //}
 
     .Event {
       font-size: 16px;
@@ -280,16 +281,16 @@
     position: absolute;
     top: 0px;
     height: 50px;
-    left: 75px;
+    left: 0px;
     background: #ffbcc3;
     z-index: 1000;
     overflow: hidden;
-    @media screen and (min-width: $tablet-portrait-breakpoint) {
-      left: 300px;
-    }
-    @media screen and (max-width: $smartphone-landscape-breakpoint) {
-      left: 40px;
-    }
+    //@media screen and (min-width: $tablet-portrait-breakpoint) {
+    //  left: 300px;
+    //}
+    //@media screen and (max-width: $smartphone-landscape-breakpoint) {
+    //  left: 40px;
+    //}
     right: 17px;
     @media (hover: none), (hover: on-demand) {
       right: 0px;

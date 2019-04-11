@@ -31,55 +31,6 @@ var H = xxhashjs.h64(0)	// seed = 0xABCD
  */
 
 export default class DataProvider extends Store {
-	/**
-	 * The data provider state contain the current API by data type
-	 * {
-	 *      [entity]:{
-	 *          query(query){},
-	 *          update(query){},
-	 *          remove(query){}
-	 *      }
-	 * }
-	 * The query parameter is as follow
-	 * {
-	 *   id:(id of the record)
-	 * }
-	 * or
-	 * {
-	 *   // query filter
-	 *   query:{
-	 *     [field]:(value)
-	 *     // or
-	 *     [field]:{$lt:(int), $gt:(int)}
-	 *   }
-	 *   // optional order of the results
-	 *   order:{
-	 *     [field]:(1 || -1)
-	 *   }
-	 *   // pagination
-	 *   skip:(int)
-	 *   limit:(int)
-	 *
-	 *   // distinct field values (autocomplete)
-	 *   distinct:[field]
-	 * }
-	 *
-	 *
-	 * They return promise with the following results format :
-	 *
-	 * If this was a single record query :
-	 *  {
-	 *   result:{} // record
-	 *  }
-	 * If this was a query :
-	 *  {
-	 *   results:{
-                items : [],   // record
-                length: (int),// returned records length
-                total : (int) // total items that match in database
-	 *   }
-	 *  }
-	 */
 	static singleton = true;
 	static state     = {};
 	
@@ -268,7 +219,7 @@ export default class DataProvider extends Store {
 	 * @param query
 	 */
 	syncRemoteQuery( queryData, hash ) {
-		console.info("! query : ", hash, queryData)
+		//console.info("! query : ", hash, queryData)
 		query(queryData)
 			.then(
 				( data ) => {
@@ -412,7 +363,7 @@ export default class DataProvider extends Store {
 			this.activeRecords[etty][id] = id;
 		}
 		
-		console.info("! watch record : ", id)
+		//console.info("! watch record : ", id)
 		// + socket watch record (debounced)
 		if ( newRequest ) {
 			if ( noData )
@@ -443,7 +394,7 @@ export default class DataProvider extends Store {
 			this.scrapIt(etty, id);
 		}
 		
-		console.info("! unwatch record : ", id)
+		//console.info("! unwatch record : ", id)
 		// - socket watch record if no more watchers
 	}
 	

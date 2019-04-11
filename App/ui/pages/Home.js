@@ -68,61 +68,53 @@ export default class Home extends React.Component {
 		if ( typeof window !== "undefined" )
 			window.$actions = $actions;
 		
-		return <div className={ "Page Home" }>
-			<TweenAxis
-				axe={ "scrollY" }
-				items={ MainPage.YAxis }
-				inertia={
-					{
-						stops: [0, 100]
+		return <TweenRef
+			id={ "page" }
+			initial={ MainPage.page }
+		>
+			<div className={ "Home container" }>
+				
+				<TweenAxis
+					axe={ "scrollY" }
+					items={ MainPage.YAxis }
+					inertia={
+						{
+							stops: [0, 100]
+						}
 					}
-				}
-			/>
-			
-			<TweenRef
-				id={ "page" }
-				initial={ MainPage.page }
-			>
-				<div
-					className={ "mainPageBlock" }
-					style={ {
-						position: "absolute",
-						width   : "100%",
-					} }>
-					
-					<TweenRef id={ "highlighted" } initial={ { height: "85%" } }>
-						<Blocks.Highlighter/>
-					</TweenRef>
-					
-					
-					<TweenRef id={ "events" }
-					          initial={ MainPage.events }>
-						<Blocks.EventList/>
-					</TweenRef>
-					<TweenRef
-						id={ "map" }
-						initial={ MainPage.map }
-					>
-						<Blocks.EventMap
-							day={ appState.currentVisibleDay || appState.curDay }
-							viewType={ appState.viewType }/>
-					</TweenRef>
-					<TweenRef
-						id={ "PageBlock" }
-						initial={ MainPage.PageBlock }
-					>
-						<Blocks.PageBlock/>
-					</TweenRef>
-				</div>
-			</TweenRef>
-			<TweenRef
-				id={ "LeftBox" }
-				initial={ MainPage.LeftBox }
-				reset={ true }
-			>
-				<Blocks.LeftBox/>
-			</TweenRef>
-		</div>
+				/>
+				<TweenRef id={ "Highlighter" } initial={ MainPage.Highlighter }>
+					<Blocks.Highlighter/>
+				</TweenRef>
+				
+				
+				<TweenRef id={ "events" }
+				          initial={ MainPage.events }>
+					<Blocks.EventList/>
+				</TweenRef>
+				<TweenRef
+					id={ "map" }
+					initial={ MainPage.map }
+				>
+					<Blocks.EventMap
+						day={ appState.currentVisibleDay || appState.curDay }
+						viewType={ appState.viewType }/>
+				</TweenRef>
+				<TweenRef
+					id={ "PageBlock" }
+					initial={ MainPage.PageBlock }
+				>
+					<Blocks.PageBlock/>
+				</TweenRef>
+				<TweenRef
+					id={ "LeftBox" }
+					initial={ MainPage.LeftBox }
+					reset={ true }
+				>
+					<Blocks.LeftBox/>
+				</TweenRef>
+			</div>
+		</TweenRef>
 	}
 }
 

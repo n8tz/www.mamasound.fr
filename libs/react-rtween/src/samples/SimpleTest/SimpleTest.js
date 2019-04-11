@@ -14,7 +14,7 @@
 
 import React                 from "react";
 import ReactDom              from "react-dom";
-import {asTweener, TweenRef} from "RTween";
+import {asTweener, TweenRef} from "react-rtween";
 import "./samples.scss";
 
 var easingFn = require('d3-ease');

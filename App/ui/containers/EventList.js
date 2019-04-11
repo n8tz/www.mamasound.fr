@@ -140,7 +140,7 @@ export default class EventList extends React.Component {
 		    state = this.state;
 		return (
 			<div
-				className={ "EventList container" }
+				className={ "EventList" }
 			>
 				<Comps.DayBlock day={ appState.currentVisibleDay || appState.curDay }/>
 				<Tabs

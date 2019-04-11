@@ -19,20 +19,22 @@ import mobileAnims  from "App/ui/anims/responsive/mobile/(*).js";
 
 const isBrowserSide = (new Function("try {return this===window;}catch(e){ return false;}"))();
 
-const breakPts = {
-	desktop: desktopAnims,
-	mobile : mobileAnims
-};
+const breakPts   = {
+	      desktop: desktopAnims,
+	      mobile : mobileAnims
+      },
+      initialPts = isBrowserSide && window.innerWidth >= 900 && "desktop" || "mobile";
 
 export default class Anims extends Store {
 	static singleton = true;
 	static actions   = {};
 	state            = {
-		currentBrkPts: "desktop",
+		currentBrkPts: initialPts,
 	};
 	data             = {
-		...desktopAnims
+		...breakPts[initialPts]
 	};
+	
 	constructor() {
 		super(...arguments);
 		

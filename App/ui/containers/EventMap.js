@@ -140,7 +140,7 @@ export default class EventMap extends React.Component {
 		    state = this.state;
 		return (
 			<div
-				className={ "EventMap container" }
+				className={ "EventMap" }
 			
 			>
 				<Map center={ center } zoom={ zoom }

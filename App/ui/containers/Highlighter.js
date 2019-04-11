@@ -99,7 +99,7 @@ export default class Highlighter extends React.Component {
 		};
 		return (
 			<div
-				className={ "Highlighter container" }
+				className={ "Highlighter" }
 			>
 				<TweenRef
 					id={ "header" }
@@ -127,13 +127,12 @@ export default class Highlighter extends React.Component {
 					</header>
 				</TweenRef>
 				
-				<div className={ "headBackground container" }>
+				<div className={ "headBackground" }>
 					<TweenRef
 						initial={ {
 							position       : "absolute",
 							transformOrigin: "0% 0%",
 							transform      : {
-								
 								perspective: "200px",
 								translateY : '-50%',
 								translateX : '-50%',

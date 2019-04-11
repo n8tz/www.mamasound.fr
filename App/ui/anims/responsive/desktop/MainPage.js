@@ -11,19 +11,19 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-export const LeftBox   = {
-	height    : "20%",
-	left      : "0px",
-	bottom    : "0px",
-	width     : "50px",
-	background: "green",
-	position  : "absolute",
-	overflow  : 'hidden',
-	transform : {
-		//translateY: "1box"
+export const page        = {
+	position: "absolute",
+	top     : "0cm",
+	left    : "50%",
+	bottom  : "0px",
+	
+	transform: {
+		translateX: "-50%"
 	}
+	//width : "100%",
+	//paddingTop: "150px"
 };
-export const PageBlock = {
+export const PageBlock   = {
 	width    : "100%",
 	//background: "green",
 	overflow : 'hidden',
@@ -32,32 +32,55 @@ export const PageBlock = {
 	},
 	height   : "0%"
 };
-export const map       = {
+export const Highlighter = {
+	//background: "green",
+	position : "absolute",
 	width    : "100%",
-	height   : "0%",
-	overflow : 'hidden',
+	height   : "85%",
+	top      : "0%",
+	left     : "0%",
+	//overflow : 'hidden',
 	transform: {
-		y: "100%"
+		//translateY: "1box"
 	}
 };
-export const page    = {
-	top   : "0cm",
-	left  : "0px",
-	bottom: "0px",
-	width : "100%",
-	//paddingTop: "150px"
+export const LeftBox     = {
+	height    : "15%",
+	left      : "0px",
+	top       : "0px",
+	width     : "300px",
+	background: "green",
+	position  : "absolute",
+	overflow  : 'hidden',
+	transform : {
+		translateY: ".85box"
+	}
 };
-export const events    = {
-	width    : "100%",
+export const events      = {
+	right    : "0%",
+	left     : "300px",
+	top      : "0%",
 	//background: "green",
 	overflow : 'hidden',
 	position : "absolute",
 	height   : "15%",
 	transform: {
-		y: "85%"
+		translateY: ".85box"
 	}
 };
-export const YAxis     = [
+export const map         = {
+	//background: "green",
+	position : "absolute",
+	right    : "0%",
+	left     : "0px",
+	height   : "0%",
+	top      : "0%",
+	overflow : 'hidden',
+	transform: {
+		translateY: "1box"
+	}
+};
+export const YAxis       = [
 	{
 		type    : "Tween",
 		target  : "header",
@@ -73,21 +96,15 @@ export const YAxis     = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			width: 350,
+			height   : 30,
+			transform: {
+				translateY: "-.6box"
+			},
 		}
 	},
-	//{
-	//	type    : "Tween",
-	//	target  : "page",
-	//	from    : 0,
-	//	duration: 100,
-	//	apply   : {
-	//		top: -1,
-	//	}
-	//},
 	{
 		type    : "Tween",
-		target  : "highlighted",
+		target  : "Highlighter",
 		from    : 0,
 		duration: 100,
 		apply   : {
@@ -100,28 +117,34 @@ export const YAxis     = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: 60,
+			height   : 30,
+			transform: {
+				translateY: "-.6box"
+			},
 		}
 	},
 	//show map
 	{
 		type    : "Tween",
 		target  : "map",
-		from    : 65,
-		duration: 35,
+		from    : 0,
+		duration: 100,
 		apply   : {
-			height: 30,
+			height   : 30,
+			transform: {
+				translateY: -.30
+			}
 		}
 	},
-	{
-		type    : "Tween",
-		target  : "events",
-		from    : 65,
-		duration: 35,
-		apply   : {
-			height: -30,
-		}
-	},
+	//{
+	//	type    : "Tween",
+	//	target  : "events",
+	//	from    : 65,
+	//	duration: 35,
+	//	apply   : {
+	//		height: -30,
+	//	}
+	//},
 	//show page
 	{
 		type    : "Tween",

@@ -1,5 +1,8 @@
 <h1 align="center">next mamasound.fr website</h1>
 
+
+( not a perfect code & commit show room ;) )
+
 ## How to start
 
 ### using docker-compose

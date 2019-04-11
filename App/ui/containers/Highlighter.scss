@@ -19,11 +19,11 @@
 
   perspective: 200px;
   height: 100%;
-  z-index: 75;
+  z-index: 175;
   padding: 0 !important;
   //@media screen and (max-width: $tablet-landscape-breakpoint) {
-  margin: 0 !important;
-  width: 100% !important;
+  margin-left: -50%;
+  width: 200% !important;
   //}
 
   //tr
@@ -66,7 +66,7 @@
 
   .headBackground {
     height: calc(100% + 10px);
-    //width: 100%;
+    width: 100vw;
     background: white;
     //overflow: hidden;
     transform: translate3d(-50%, 0, 0);
@@ -103,46 +103,46 @@
     //    //transform: perspective(200px) rotate3d(10, 0, 0, 2deg) !important;
     //  }
 
-      //.CaipiSliderItem {
-      //
-      //  //overflow: hidden;
-      //  > div {
-      //
-      //    height: 100%;
-      //    width: 100%;
-      //  }
+    //.CaipiSliderItem {
+    //
+    //  //overflow: hidden;
+    //  > div {
+    //
+    //    height: 100%;
+    //    width: 100%;
+    //  }
 
-        .FocusedItems {
+    .FocusedItems {
+      height: 100%;
+      width: 100%;
+      position: relative;
+
+      .preview {
+        @include use_hvCenteredAbs();
+        height: 100%;
+
+        img {
+          box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.75);
           height: 100%;
-          width: 100%;
-          position: relative;
-
-        .preview {
-          @include use_hvCenteredAbs();
-          height: 100%;
-
-          img {
-            box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.75);
-            height: 100%;
-            border-radius: 5px;
-            touch-action: none;
-          }
+          border-radius: 5px;
+          touch-action: none;
         }
+      }
 
-        .DateItem {
-          .title {
-            margin-top: 1em;
-            font-size: 2em;
-            background: lightgrey;
-          }
+      .DateItem {
+        .title {
+          margin-top: 1em;
+          font-size: 2em;
+          background: lightgrey;
         }
+      }
 
-        //overflow: hidden;
-        cursor: pointer;
-        border: none;
-  }
+      //overflow: hidden;
+      cursor: pointer;
+      border: none;
+    }
 
-      //}
+    //}
     //}
 
     //> * {
