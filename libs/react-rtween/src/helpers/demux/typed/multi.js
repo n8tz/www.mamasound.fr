@@ -1,4 +1,4 @@
-/*!
+/*
  * The MIT License (MIT)
  * Copyright (c) 2019. Wise Wild Web
  *
@@ -12,56 +12,46 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-.LeftBox {
-  @include withMask();
-  .toolbar {
-    width: 100%;
-    text-align: center;
-    //margin-top: 5px;
-    height: 50px;
-    overflow: hidden;
+import is     from "is";
+import number from "./number";
 
-    > button {
-      //@include use_hvCenteredContent();
-      margin-bottom: 5px !important;
-      text-align: center;
+const
+	floatCut = function ( v, l ) {
+		var p = Math.pow(10, l);
+		return Math.round(v * p) / p;
+	},
+	alias    = {
+		top   : '0%',
+		bottom: '100%',
+		center: '50%',
+		left  : '0%',
+		right : '100%'
+	};
 
-      .icon {
-        font-size: 32px;
-        margin: auto;
-        transition: transform 250ms;
-        //color:red;
-      }
+function demux( key, tweenable, target, data, box, offset ) {
+	
+	let count = data[key], v = '';
+	
+	for ( let i = 0; i < count; i++ )
+		v += (
+			data[key + '_' + i]
+			? floatCut(tweenable[key + '_' + i], 2) + data[key + '_' + i]
+			: floatCut(tweenable[key + '_' + i], 2)
+		) + ' ';
+	
+	target[key] = v;
+}
 
-      &:hover {
-        .icon {
-          transform: scale(1.2);
-          //color: black;
-        }
-      }
-    }
-  }
-
-
-  .fbPage {
-
-    @media screen and (max-width: $tablet-portrait-breakpoint) {
-     display: none;
-    }
-
-    width: 100%;
-    height: 100%;
-    min-height: 400px;
-
-    > div {
-      height: 100%;
-      width: 100%;
-    }
-
-    .fb-page {
-
-      height: 100%;
-      width: 100%;
-    }
-  }
+export default ( count ) => ( key, value, target, data, initials ) => {
+	let values = value.split(' '), v;
+	
+	data[key] = count;
+	
+	for ( let i = 0; i < count; i++ ) {
+		v = values[i % values.length];
+		v = is.string(v) && alias[v] || v;
+		number(key + '_' + i, v, target, data, initials)
+	}
+	
+	return demux;
 }

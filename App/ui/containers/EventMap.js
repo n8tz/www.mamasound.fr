@@ -27,7 +27,8 @@ import stores                                from 'App/stores/(*).js';
 import Comps                                 from 'App/ui/components/(*).js';
 import {asTweener, TweenRef}                 from "react-rtween";
 
-import anims from 'App/ui/anims/(*).js';
+import anims       from 'App/ui/anims/(*).js';
+import {TweenAxis} from "../pages/Home";
 
 
 if ( typeof window !== "undefined" ) {
@@ -126,7 +127,7 @@ else {
 		"day:DayEventsQuery.curDay",
 		"viewType:DayEventsQuery.viewType"
 	])
-@scopeToProps("Selected", "Events", "UserGeoLocation")
+@scopeToProps("Selected", "Anims", "Events", "UserGeoLocation")
 export default class EventMap extends React.Component {
 	static propTypes = {};
 	state            = {};
@@ -134,15 +135,12 @@ export default class EventMap extends React.Component {
 	render() {
 		let {
 			    Events: { center = {}, POIs = [], zoom } = {},
-			    Events, UserGeoLocation, Selected,
+			    Anims : { MainPage }, UserGeoLocation, Selected,
 			    $actions, onSelect, selected
 		    }     = this.props,
 		    state = this.state;
 		return (
-			<div
-				className={ "EventMap" }
-			
-			>
+			<div className={ "EventMap" }>
 				<Map center={ center } zoom={ zoom }
 				     scrollWheelZoom={ false }
 				     animate={ true }
@@ -187,6 +185,10 @@ export default class EventMap extends React.Component {
 					
 					</Fab>
 				</div>
+				
+				<TweenRef id={ "EventMap_Gradient" } initial={ MainPage.EventMap_Gradient }>
+					<div className={ "GradientBottom" }/>
+				</TweenRef>
 			</div>
 		);
 	}

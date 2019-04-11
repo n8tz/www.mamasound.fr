@@ -79,7 +79,7 @@ export default class Home extends React.Component {
 					items={ MainPage.YAxis }
 					inertia={
 						{
-							stops: [0, 100]
+							stops: [0, 100, 150, 200]
 						}
 					}
 				/>
@@ -93,8 +93,8 @@ export default class Home extends React.Component {
 					<Blocks.EventList/>
 				</TweenRef>
 				<TweenRef
-					id={ "map" }
-					initial={ MainPage.map }
+					id={ "EventMap" }
+					initial={ MainPage.EventMap }
 				>
 					<Blocks.EventMap
 						day={ appState.currentVisibleDay || appState.curDay }
@@ -112,6 +112,13 @@ export default class Home extends React.Component {
 					reset={ true }
 				>
 					<Blocks.LeftBox/>
+				</TweenRef>
+				<TweenRef
+					id={ "Footer" }
+					initial={ MainPage.Footer }
+					reset={ true }
+				>
+					<Blocks.Footer/>
 				</TweenRef>
 			</div>
 		</TweenRef>

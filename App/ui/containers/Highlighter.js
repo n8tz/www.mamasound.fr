@@ -131,7 +131,7 @@ export default class Highlighter extends React.Component {
 					<TweenRef
 						initial={ {
 							position       : "absolute",
-							transformOrigin: "0% 0%",
+							//transformOrigin: "0% 0%",
 							transform      : {
 								perspective: "200px",
 								translateY : '-50%',

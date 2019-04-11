@@ -11,7 +11,7 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-export const page        = {
+export const page              = {
 	position: "absolute",
 	top     : "0cm",
 	left    : "50%",
@@ -23,7 +23,7 @@ export const page        = {
 	//width : "100%",
 	//paddingTop: "150px"
 };
-export const PageBlock   = {
+export const PageBlock         = {
 	width    : "100%",
 	//background: "green",
 	overflow : 'hidden',
@@ -32,7 +32,7 @@ export const PageBlock   = {
 	},
 	height   : "0%"
 };
-export const Highlighter = {
+export const Highlighter       = {
 	//background: "green",
 	position : "absolute",
 	width    : "100%",
@@ -44,7 +44,7 @@ export const Highlighter = {
 		//translateY: "1box"
 	}
 };
-export const LeftBox     = {
+export const LeftBox           = {
 	height    : "15%",
 	left      : "0px",
 	top       : "0px",
@@ -56,7 +56,19 @@ export const LeftBox     = {
 		translateY: ".85box"
 	}
 };
-export const events      = {
+export const Footer            = {
+	height    : "50px",
+	left      : "0px",
+	top       : "-0px",
+	width     : "100%",
+	background: "green",
+	position  : "absolute",
+	overflow  : 'hidden',
+	transform : {
+		translateY: "1box"
+	}
+};
+export const events            = {
 	right    : "0%",
 	left     : "300px",
 	top      : "0%",
@@ -68,19 +80,30 @@ export const events      = {
 		translateY: ".85box"
 	}
 };
-export const map         = {
+export const EventMap          = {
 	//background: "green",
-	position : "absolute",
-	right    : "0%",
-	left     : "0px",
-	height   : "0%",
-	top      : "0%",
-	overflow : 'hidden',
-	transform: {
-		translateY: "1box"
-	}
+	position       : "absolute",
+	right          : "0%",
+	left           : "0px",
+	height         : "0%",
+	top            : "0%",
+	overflow       : 'hidden',
+	transformOrigin: "center top",
+	transform      : [
+		{
+			perspective: "500px",
+		},
+		{
+			translateY: "1box",
+			//translateZ : "-50px",
+			rotateX   : "-10deg"
+		}
+	]
 };
-export const YAxis       = [
+export const EventMap_Gradient = {
+	opacity: 1
+};
+export const YAxis             = [
 	{
 		type    : "Tween",
 		target  : "header",
@@ -96,7 +119,7 @@ export const YAxis       = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height   : 30,
+			height   : 40,
 			transform: {
 				translateY: "-.6box"
 			},
@@ -117,23 +140,32 @@ export const YAxis       = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height   : 30,
+			height   : 40,
 			transform: {
 				translateY: "-.6box"
 			},
 		}
 	},
+	{
+		type    : "Tween",
+		target  : "Footer",
+		from    : 0,
+		duration: 100,
+		apply   : {
+			top: -50,
+		}
+	},
 	//show map
 	{
 		type    : "Tween",
-		target  : "map",
+		target  : "EventMap",
 		from    : 0,
 		duration: 100,
 		apply   : {
 			height   : 30,
-			transform: {
-				translateY: -.30
-			}
+			transform: [{}, {
+				translateY: -.20
+			}]
 		}
 	},
 	//{
@@ -145,16 +177,39 @@ export const YAxis       = [
 	//		height: -30,
 	//	}
 	//},
-	//show page
+	//full map
+	
 	{
 		type    : "Tween",
-		target  : "map",
+		target  : "EventMap",
 		from    : 100,
 		duration: 50,
 		apply   : {
-			//height: -10,
+			transform: [{}, {
+				rotateX   : 10,
+				translateY: -.10
+			}],
+			//height   : 10,
 			//marginLeft: "30%",
 			//width     : "-30%",
+		}
+	},
+	{
+		type    : "Tween",
+		target  : "LeftBox",
+		from    : 100,
+		duration: 50,
+		apply   : {
+			height: -10,
+		}
+	},
+	{
+		type    : "Tween",
+		target  : "EventMap_Gradient",
+		from    : 100,
+		duration: 50,
+		apply   : {
+			opacity: -1,
 		}
 	},
 	{
@@ -163,16 +218,61 @@ export const YAxis       = [
 		from    : 100,
 		duration: 50,
 		apply   : {
-			height: -30,
+			height: -10,
+		}
+	},
+	//full map
+	
+	{
+		type    : "Tween",
+		target  : "EventMap",
+		from    : 150,
+		duration: 50,
+		apply   : {
+			transform: [{}, {
+				translateY: -.15,
+				//translateZ: "150px"
+			}],
+			//height: 10,
+			//marginLeft: "30%",
+			//width     : "-30%",
 		}
 	},
 	{
 		type    : "Tween",
-		target  : "PageBlock",
-		from    : 100,
+		target  : "Footer",
+		from    : 150,
 		duration: 50,
 		apply   : {
-			height: 40,
+			top   : -100,
+			height: 100,
 		}
-	}
+	},
+	{
+		type    : "Tween",
+		target  : "LeftBox",
+		from    : 150,
+		duration: 50,
+		apply   : {
+			height: -15,
+		}
+	},
+	{
+		type    : "Tween",
+		target  : "events",
+		from    : 150,
+		duration: 50,
+		apply   : {
+			height: -15,
+		}
+	},
+	//{
+	//	type    : "Tween",
+	//	target  : "PageBlock",
+	//	from    : 100,
+	//	duration: 50,
+	//	apply   : {
+	//		height: 40,
+	//	}
+	//}
 ];

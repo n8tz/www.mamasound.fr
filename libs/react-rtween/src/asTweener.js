@@ -96,7 +96,6 @@ export default function asTweener( ...argz ) {
 		
 		constructor() {
 			super(...arguments);
-			let _static      = this.constructor;
 			this._           = {
 				refs       : {},
 				muxByTarget: {},
@@ -145,7 +144,7 @@ export default function asTweener( ...argz ) {
 			if ( !_.tweenRefs[id] )
 				_.tweenRefTargets.push(id);
 			
-			if ( _.tweenRefs[id] ) {
+			if ( _.tweenRefs[id] && (_.iMapOrigin[id] === iMap || mapReset) ) {
 				// hot switch initial values
 				
 				_.iMapOrigin[id] = iMap;

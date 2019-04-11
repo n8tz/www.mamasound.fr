@@ -81,35 +81,7 @@ export default class Slider extends React.Component {
 			    defaultIndex = 0,
 			    visibleItems = 5,
 			    overlaps     = 1 / (visibleItems - (visibleItems % 2)),
-			    area         = 1000,
 			    Anims: { MainSlider: { defaultInitial, defaultEntering, defaultLeaving } },
-			    //defaultInitial  = {
-			    //    position : "absolute",
-			    //    height   : "100%",
-			    //    top      : "50%",
-			    //    left     : "50%",
-			    //    zIndex   : 50,
-			    //    opacity  : 0,
-			    //    transform: [
-			    //	    {
-			    //		    perspective: "1250px",
-			    //		    translateY : "-20000px",
-			    //		    rotate     : "-1.9deg"
-			    //	    },
-			    //	    {
-			    //		    translateY: "20000px",
-			    //		    translateZ: "-200px",
-			    //		    //translateX: "1.75box",
-			    //		    //translateY: "-.5box",
-			    //		    //rotateY   : "-3deg",
-			    //		    rotateY   : "-65deg",
-			    //	    },
-			    //	    {
-			    //		    translateX: "-50%",
-			    //		    translateY: "-50%"
-			    //	    }]
-			    //},
-			
 			    children
 		    }                        = this.props,
 		    { index = defaultIndex } = this.state,
@@ -120,7 +92,7 @@ export default class Slider extends React.Component {
 				className={ "rSlide slider" }
 				style={
 					{
-						transformOrigin: "0px 0px"
+						//transformOrigin: "0px 0px"
 					}
 				}
 			>
