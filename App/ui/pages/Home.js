@@ -19,6 +19,7 @@ import ReactDom                              from "react-dom";
 
 import {withStateMap, asRef, asStore}   from "rescope-spells";
 import {asTweener, TweenRef, TweenAxis} from "react-rtween";
+import SwipeableViews                   from "../containers/EventList";
 
 
 @scopeToProps("appState", "Anims")
@@ -63,14 +64,14 @@ export default class Home extends React.Component {
 	}
 	
 	render() {
-		let { Anims: { MainYAxis }, appState, $actions } = this.props;
+		let { Anims: { MainPage }, appState, $actions } = this.props;
 		if ( typeof window !== "undefined" )
 			window.$actions = $actions;
 		
 		return <div className={ "Page Home" }>
 			<TweenAxis
 				axe={ "scrollY" }
-				items={ MainYAxis }
+				items={ MainPage.YAxis }
 				inertia={
 					{
 						stops: [0, 100]
@@ -162,7 +163,13 @@ export default class Home extends React.Component {
 					</TweenRef>
 				</div>
 			</TweenRef>
-			<Blocks.SearchBar/>
+			<TweenRef
+				id={ "LeftBox" }
+				initial={ MainPage.LeftBox }
+				reset={ true }
+			>
+				<Blocks.LeftBox/>
+			</TweenRef>
 		</div>
 	}
 }

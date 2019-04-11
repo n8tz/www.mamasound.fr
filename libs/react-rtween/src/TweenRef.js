@@ -51,6 +51,9 @@ export default class TweenRef extends React.Component {
 		delete this._previousScrollable;
 	}
 	
+	componentDidUpdate( prevProps, prevState, snapshot ) {
+	}
+	
 	render() {
 		let {
 			    children,

@@ -11,7 +11,19 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-export default [
+export const LeftBox = {
+	height    : "20%",
+	left      : "0px",
+	bottom    : "0px",
+	width     : "50px",
+	background: "green",
+	position  : "absolute",
+	overflow  : 'hidden',
+	transform : {
+		//translateY: "1box"
+	}
+};
+export const YAxis   = [
 	{
 		type    : "Tween",
 		target  : "header",
@@ -19,6 +31,15 @@ export default [
 		duration: 100,
 		apply   : {
 			height: -1,
+		}
+	},
+	{
+		type    : "Tween",
+		target  : "LeftBox",
+		from    : 0,
+		duration: 100,
+		apply   : {
+			width: 350,
 		}
 	},
 	//{
@@ -36,7 +57,7 @@ export default [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: -40,
+			height: -60,
 		}
 	},
 	{
@@ -45,7 +66,7 @@ export default [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: 40,
+			height: 60,
 		}
 	},
 	//show map

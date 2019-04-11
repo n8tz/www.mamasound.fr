@@ -188,7 +188,6 @@ export default class EventList extends React.Component {
 							)
 					}
 				</SwipeableViews>
-				<Blocks.LeftBox/>
 			</div>
 		);
 	}

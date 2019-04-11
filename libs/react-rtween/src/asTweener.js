@@ -145,10 +145,36 @@ export default function asTweener( ...argz ) {
 			    tweenableData = {},
 			    cState        = _static.motionStates && _static.motionStates[this._.curMotionStateId];
 			
+			let initials = {};
 			if ( !this._.tweenRefs[id] )
 				this._.tweenRefTargets.push(id);
 			
-			if ( mapReset || !this._.tweenRefs[id] ) {
+			if ( mapReset && this._.tweenRefs[id] ) {
+				// hot switch initial values
+				
+				iStyle = iStyle || {};
+				iMap   = iMap || {};
+				iStyle = { ...iStyle, ...deMuxTween(iMap, tweenableMap, initials, this._.muxDataByTarget[id], this._.muxByTarget[id], true) };
+				
+				Object.keys(this._.tweenRefOrigin[id])
+				      .forEach(
+					      key => (this._.tweenRefMaps[id][key] -= this._.tweenRefOrigin[id][key])
+				      )
+				Object.keys(initials)
+				      .forEach(
+					      key => (this._.tweenRefMaps[id][key] = this._.tweenRefMaps[id][key] || initials[key])
+				      )
+				Object.keys(tweenableMap)
+				      .forEach(
+					      key => (this._.tweenRefMaps[id][key] += tweenableMap[key])
+				      )
+				
+				this._.tweenRefCSS[id]    = this._.tweenRefCSS[id] || { ...iStyle };
+				this._.tweenRefOrigin[id] = tweenableMap;
+				muxToCss(tweenableMap, iStyle, this._.muxByTarget[id], this._.muxDataByTarget[id], this._.box);
+				
+			}
+			else if ( mapReset || !this._.tweenRefs[id] ) {
 				mapReset = mapReset || !this._.tweenRefs[id];
 				if ( cState && cState.refs && cState.refs[id] ) {
 					iStyle = iStyle || { ...cState.refs[id][0] };
@@ -159,7 +185,6 @@ export default function asTweener( ...argz ) {
 					iMap   = iMap || {};
 				}
 				
-				let initials               = {};
 				this._.tweenRefs[id]       = true;
 				this._.muxByTarget[id]     = this._.muxByTarget[id] || {};
 				this._.muxDataByTarget[id] = this._.muxDataByTarget[id] || {};
