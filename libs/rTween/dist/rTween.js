@@ -528,11 +528,11 @@ function () {
 
       for (i = 0, ln = map.length; i < ln; i++) {
         if (isString(map[i].easeFn)) map[i] = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, map[i], {
-          easeFn: easingFN[map[i].easingFn] || false
+          easeFn: easingFN[map[i].easeFn] || false
         });
 
         if (map[i].type == "Subline") {
-          factory = map[i].apply.fork(null, map[i], map[i].easingFn);
+          factory = map[i].apply.fork(null, map[i], map[i].easeFn);
         } else {
           factory = __webpack_require__("./src/lines sync recursive ^\\.\\/.*$")("./" + (map[i].type || 'Event'));
         }

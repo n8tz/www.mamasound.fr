@@ -42,7 +42,7 @@ export default {
 			type    : "Tween",
 			from    : 0,
 			duration: 100,
-			easeFn  : "easeCircleIn",
+			//easeFn  : "easePolyIn",
 			apply   : {
 				transform: {
 					//translateX: "-1.25box",
@@ -94,7 +94,7 @@ export default {
 			type    : "Tween",
 			from    : 0,
 			duration: 100,
-			easeFn  : "easeCircleOut",
+			//easeFn  : "easePolyOut",
 			apply   : {
 				zIndex: -150,
 				

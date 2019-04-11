@@ -175,9 +175,9 @@ export default class RTween {
 		var i, ln, d = this.duration || 0, p = 0, max = 0, factory;
 		for ( i = 0, ln = map.length; i < ln; i++ ) {
 			if ( isString(map[i].easeFn) )
-					map[i] = { ...map[i], easeFn: easingFN[map[i].easingFn] || false };
+					map[i] = { ...map[i], easeFn: easingFN[map[i].easeFn] || false };
 			if ( map[i].type == "Subline" ) {
-				factory = map[i].apply.fork(null, map[i], map[i].easingFn);
+				factory = map[i].apply.fork(null, map[i], map[i].easeFn);
 			}
 			else {
 				factory = require('./lines/' + (map[i].type || 'Event'));

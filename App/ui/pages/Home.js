@@ -63,7 +63,7 @@ export default class Home extends React.Component {
 	}
 	
 	render() {
-		let { Anims : { MainYAxis }, appState, $actions } = this.props;
+		let { Anims: { MainYAxis }, appState, $actions } = this.props;
 		if ( typeof window !== "undefined" )
 			window.$actions = $actions;
 		
@@ -107,8 +107,11 @@ export default class Home extends React.Component {
 					
 					<TweenRef id={ "events" }
 					          initial={ {
-						          position: "relative",
-						          height  : "15%"
+						          position : "absolute",
+						          height   : "15%",
+						          transform: {
+							          y: "85%"
+						          }
 					          } }>
 						<div
 							style={ {
@@ -122,8 +125,11 @@ export default class Home extends React.Component {
 					<TweenRef
 						id={ "map" }
 						initial={ {
-							width : "100%",
-							height: "0%"
+							width    : "100%",
+							height   : "0%",
+							transform: {
+								y: "100%"
+							}
 						} }
 					>
 						<div
@@ -144,9 +150,12 @@ export default class Home extends React.Component {
 					>
 						<div
 							style={ {
-								width   : "100%",
+								width    : "100%",
 								//background: "green",
-								overflow: 'hidden',
+								overflow : 'hidden',
+								transform: {
+									y: "100%"
+								}
 							} }>
 							<Blocks.PageBlock/>
 						</div>
