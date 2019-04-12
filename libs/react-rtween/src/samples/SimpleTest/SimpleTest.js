@@ -50,7 +50,6 @@ let pushIn        = [
 		type    : "Tween",
 		from    : 250,
 		duration: 500,
-		easeFn  : "easeCircle",
 		apply   : {
 			transform: [{}, {
 				rotateY: 180,

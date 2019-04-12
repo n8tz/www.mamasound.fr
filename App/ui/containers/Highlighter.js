@@ -130,9 +130,9 @@ export default class Highlighter extends React.Component {
 				<div className={ "headBackground" }>
 					<TweenRef
 						initial={ {
-							position       : "absolute",
+							position : "absolute",
 							//transformOrigin: "0% 0%",
-							transform      : {
+							transform: {
 								perspective: "200px",
 								translateY : '-50%',
 								translateX : '-50%',
@@ -158,7 +158,9 @@ export default class Highlighter extends React.Component {
 							],
 						} }
 					>
-						<img src={ require("App/ui/assets/couvs/test.jpg") }/>
+						<div className={ "container" }>
+							<img src={ require("App/ui/assets/couvs/test.jpg") }/>
+						</div>
 					</TweenRef>
 				</div>
 				{/*<div className={ " today" } onClick={ e => e.preventDefault() }>*/ }

@@ -38,7 +38,7 @@ export const Highlighter       = {
 	width    : "100%",
 	height   : "85%",
 	top      : "0%",
-	left     : "0%",
+	//left     : "0%",
 	//overflow : 'hidden',
 	transform: {
 		//translateY: "1box"
@@ -79,6 +79,16 @@ export const events            = {
 	transform: {
 		translateY: ".85box"
 	}
+};
+export const EventNav          = {
+	position: "absolute",
+	right   : "0%",
+	left    : "0px",
+	//paddingLeft: "300px",
+	top     : "0%",
+	//background: "green",
+	//overflow   : 'hidden',
+	height  : "100%",
 };
 export const EventMap          = {
 	//background: "green",
@@ -140,7 +150,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height   : 40,
+			height   : 50,
 			transform: {
 				translateY: "-.6box"
 			},
@@ -164,7 +174,7 @@ export const YAxis             = [
 		apply   : {
 			height   : 30,
 			transform: [{}, {
-				translateY: -.20
+				translateY: -.10
 			}]
 		}
 	},
@@ -187,9 +197,9 @@ export const YAxis             = [
 		apply   : {
 			transform: [{}, {
 				rotateX   : 10,
-				translateY: -.10
+				translateY: -.30
 			}],
-			//height   : 10,
+			height   : 20,
 			//marginLeft: "30%",
 			//width     : "-30%",
 		}
@@ -218,7 +228,7 @@ export const YAxis             = [
 		from    : 100,
 		duration: 50,
 		apply   : {
-			height: -10,
+			height: -30,
 		}
 	},
 	//full map

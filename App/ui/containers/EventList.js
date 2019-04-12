@@ -32,7 +32,7 @@ import SwipeableViews        from 'react-swipeable-views';
 @reScope(
 	{}
 )
-@scopeToProps("appState")
+@scopeToProps("appState", "Anims")
 export default class EventList extends React.Component {
 	static propTypes = {};
 	state            = {};
@@ -133,8 +133,8 @@ export default class EventList extends React.Component {
 	
 	render() {
 		let {
-			    record: { position, size } = {},
-			    EventList, appState, disabled,
+			    record                    : { position, size } = {},
+			    EventList, appState, Anims: { MainPage },
 			    $actions,
 		    }     = this.props,
 		    state = this.state;
@@ -142,52 +142,68 @@ export default class EventList extends React.Component {
 			<div
 				className={ "EventList" }
 			>
-				<Comps.DayBlock day={ appState.currentVisibleDay || appState.curDay }/>
-				<Tabs
-					value={ appState.viewType }
-					onChange={ ( e, v ) => {
-						$actions.setCurStyleTab(v)
-					} }
-					height={ 50 }
-					variant="fullWidth"
-					indicatorColor="primary"
-					textColor="primary"
-					className={ "typeEventsTab" }
+				<TweenRef
+					id={ "EventNav" }
+					initial={ MainPage.EventNav }
 				>
-					<Tab label={ "Tous" }/>
-					<Tab label={ "Concerts" }/>
-					<Tab label={ "Expos" }/>
-					<Tab label={ "Theatre" }/>
-					{/*<Tab label={ "Cinéma" }/>*/ }
-				</Tabs>
-				<SwipeableViews index={ appState.viewType }
-				                onChangeIndex={ $actions.setCurStyleTab }
-				                className={ "dayList" }
-				                onClick={ e => e.preventDefault() }
-				                id={ "scrollableEvents" }>
-					{
-						Array(4)
-							.fill(0)
-							.map(
-								( v, type ) =>
-									<div className={ "slide" } key={ type }>
-										{
-											Array(appState.dayCountByViewType[type])
-												.fill(0)
-												.map(
-													( v, i ) =>
-														<Blocks.DayEvents
-															className={ "dayBlock" }
-															key={ i }
-															day={ moment(appState.curDay).add(i, 'day').unix() * 1000 }
-															viewType={ type }/>
-												)
-										}
-										<div id={ "endList_" + type }>loading...</div>
-									</div>
-							)
-					}
-				</SwipeableViews>
+					<div
+						className={ "EventNav" }
+					>
+						<Comps.DayBlock day={ appState.currentVisibleDay || appState.curDay }/>
+						<Tabs
+							value={ appState.viewType }
+							onChange={ ( e, v ) => {
+								$actions.setCurStyleTab(v)
+							} }
+							height={ 50 }
+							variant="fullWidth"
+							indicatorColor="primary"
+							textColor="primary"
+							className={ "typeEventsTab" }
+						>
+							<Tab label={ "Tous" }/>
+							<Tab label={ "Concerts" }/>
+							<Tab label={ "Expos" }/>
+							<Tab label={ "Theatre" }/>
+							{/*<Tab label={ "Cinéma" }/>*/ }
+						</Tabs>
+						<SwipeableViews index={ appState.viewType }
+						                onChangeIndex={ $actions.setCurStyleTab }
+						                className={ "dayList" }
+						                onClick={ e => e.preventDefault() }
+						                id={ "scrollableEvents" }>
+							{
+								Array(4)
+									.fill(0)
+									.map(
+										( v, type ) =>
+											<div className={ "slide" } key={ type }>
+												{
+													Array(appState.dayCountByViewType[type])
+														.fill(0)
+														.map(
+															( v, i ) =>
+																<Blocks.DayEvents
+																	className={ "dayBlock" }
+																	key={ i }
+																	day={ moment(appState.curDay).add(i, 'day').unix() * 1000 }
+																	viewType={ type }/>
+														)
+												}
+												<div id={ "endList_" + type }>loading...</div>
+											</div>
+									)
+							}
+						</SwipeableViews>
+					</div>
+				</TweenRef>
+				<TweenRef
+					id={ "LeftBox" }
+					initial={ MainPage.LeftBox }
+					reset={ true }
+				>
+					<Blocks.LeftBox/>
+				</TweenRef>
 			</div>
 		);
 	}

@@ -23,6 +23,18 @@ export const page              = {
 	//width : "100%",
 	//paddingTop: "150px"
 };
+export const Highlighter       = {
+	//background: "green",
+	position : "absolute",
+	width    : "100%",
+	height   : "85%",
+	top      : "0%",
+	//left     : "0%",
+	//overflow : 'hidden',
+	transform: {
+		//translateY: "1box"
+	}
+};
 export const PageBlock         = {
 	width    : "100%",
 	//background: "green",
@@ -32,28 +44,16 @@ export const PageBlock         = {
 	},
 	height   : "0%"
 };
-export const Highlighter       = {
-	//background: "green",
-	position : "absolute",
-	width    : "100%",
-	height   : "85%",
-	top      : "0%",
-	left     : "0%",
-	//overflow : 'hidden',
-	transform: {
-		//translateY: "1box"
-	}
-};
 export const LeftBox           = {
-	height    : "15%",
+	height    : "100%",
 	left      : "0px",
 	top       : "0px",
 	width     : "300px",
 	background: "green",
 	position  : "absolute",
-	overflow  : 'hidden',
+	//overflow  : 'hidden',
 	transform : {
-		translateY: ".85box"
+		//translateY: ".85box"
 	}
 };
 export const Footer            = {
@@ -68,12 +68,23 @@ export const Footer            = {
 		translateY: "1box"
 	}
 };
+export const EventNav          = {
+	position: "absolute",
+	right   : "0%",
+	left    : "300px",
+	//paddingLeft: "300px",
+	top     : "0%",
+	//background: "green",
+	//overflow   : 'hidden',
+	height  : "100%",
+};
 export const events            = {
 	right    : "0%",
-	left     : "300px",
+	left     : "0px",
+	//paddingLeft: "300px",
 	top      : "0%",
 	//background: "green",
-	overflow : 'hidden',
+	//overflow   : 'hidden',
 	position : "absolute",
 	height   : "15%",
 	transform: {
@@ -113,18 +124,18 @@ export const YAxis             = [
 			height: -1,
 		}
 	},
-	{
-		type    : "Tween",
-		target  : "LeftBox",
-		from    : 0,
-		duration: 100,
-		apply   : {
-			height   : 40,
-			transform: {
-				translateY: "-.6box"
-			},
-		}
-	},
+	//{
+	//	type    : "Tween",
+	//	target  : "LeftBox",
+	//	from    : 0,
+	//	duration: 100,
+	//	apply   : {
+	//		//height   : 40,
+	//		transform: {
+	//			//translateY: "-.6box"
+	//		},
+	//	}
+	//},
 	{
 		type    : "Tween",
 		target  : "Highlighter",
@@ -194,15 +205,15 @@ export const YAxis             = [
 			//width     : "-30%",
 		}
 	},
-	{
-		type    : "Tween",
-		target  : "LeftBox",
-		from    : 100,
-		duration: 50,
-		apply   : {
-			height: -10,
-		}
-	},
+	//{
+	//	type    : "Tween",
+	//	target  : "LeftBox",
+	//	from    : 100,
+	//	duration: 50,
+	//	apply   : {
+	//		height: -10,
+	//	}
+	//},
 	{
 		type    : "Tween",
 		target  : "EventMap_Gradient",
@@ -248,15 +259,15 @@ export const YAxis             = [
 			height: 100,
 		}
 	},
-	{
-		type    : "Tween",
-		target  : "LeftBox",
-		from    : 150,
-		duration: 50,
-		apply   : {
-			height: -15,
-		}
-	},
+	//{
+	//	type    : "Tween",
+	//	target  : "LeftBox",
+	//	from    : 150,
+	//	duration: 50,
+	//	apply   : {
+	//		height: -15,
+	//	}
+	//},
 	{
 		type    : "Tween",
 		target  : "events",

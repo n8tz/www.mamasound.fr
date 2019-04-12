@@ -107,13 +107,6 @@ export default class Home extends React.Component {
 					<Blocks.PageBlock/>
 				</TweenRef>
 				<TweenRef
-					id={ "LeftBox" }
-					initial={ MainPage.LeftBox }
-					reset={ true }
-				>
-					<Blocks.LeftBox/>
-				</TweenRef>
-				<TweenRef
 					id={ "Footer" }
 					initial={ MainPage.Footer }
 					reset={ true }

@@ -22,8 +22,9 @@
   z-index: 175;
   padding: 0 !important;
   //@media screen and (max-width: $tablet-landscape-breakpoint) {
-  margin-left: -50%;
-  width: 200% !important;
+  margin-left: -50vw;
+  left: 50%;
+  width: 100vw !important;
   //}
 
   //tr
@@ -66,7 +67,7 @@
 
   .headBackground {
     height: calc(100% + 10px);
-    width: 100vw;
+    width: 100%;
     background: white;
     //overflow: hidden;
     transform: translate3d(-50%, 0, 0);
@@ -77,6 +78,18 @@
     //transform: translate3d(0, 0, 0);
     @include withMask();
 
+    > .container {
+      @media screen and (max-width: $tablet-landscape-breakpoint) {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+      }
+      transform: translate3d(0, 0, 0);
+      @include use_hvCenteredAbs();
+      //position: relative;
+      transform-origin: left top;
+      height: 100%;
+    }
 
     img {
       @include use_hvCenteredAbs();
