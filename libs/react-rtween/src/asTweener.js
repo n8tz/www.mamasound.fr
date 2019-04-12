@@ -144,31 +144,34 @@ export default function asTweener( ...argz ) {
 			if ( !_.tweenRefs[id] )
 				_.tweenRefTargets.push(id);
 			
-			if ( _.tweenRefs[id] && (_.iMapOrigin[id] === iMap || mapReset) ) {
+			if ( _.tweenRefs[id] && (_.iMapOrigin[id] !== iMap || mapReset) ) {
 				// hot switch initial values
 				
 				_.iMapOrigin[id] = iMap;
 				iStyle           = iStyle || {};
 				iMap             = iMap || {};
-				iStyle           = { ...iStyle, ...deMuxTween(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true) };
+				deMuxTween(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true);
 				
+				// minus initial values
 				Object.keys(_.tweenRefOrigin[id])
 				      .forEach(
 					      key => (_.tweenRefMaps[id][key] -= _.tweenRefOrigin[id][key])
-				      )
+				      );
+				// set defaults values in case of
 				Object.keys(initials)
 				      .forEach(
 					      key => (_.tweenRefMaps[id][key] = _.tweenRefMaps[id][key] || initials[key])
-				      )
+				      );
+				// add new initial values
 				Object.keys(tweenableMap)
 				      .forEach(
 					      key => (_.tweenRefMaps[id][key] += tweenableMap[key])
 				      )
 				
-				_.tweenRefCSS[id]    = _.tweenRefCSS[id] || { ...iStyle };
 				_.tweenRefOrigin[id] = tweenableMap;
-				muxToCss(tweenableMap, iStyle, _.muxByTarget[id], _.muxDataByTarget[id], _.box);
-				
+				//_.tweenRefCSS[id]    = iStyle = { ...iStyle, ...deMuxTween(iMap, tweenableMap, initials,
+				// _.muxDataByTarget[id], _.muxByTarget[id], true) };
+				muxToCss(_.tweenRefMaps[id], _.tweenRefCSS[id], _.muxByTarget[id], _.muxDataByTarget[id], _.box);
 			}
 			else if ( mapReset || !_.tweenRefs[id] ) {
 				mapReset         = mapReset || !_.tweenRefs[id];
@@ -223,6 +226,7 @@ export default function asTweener( ...argz ) {
 				delete this._.tweenRefs[id];
 				delete this._.muxByTarget[id];
 				delete this._.muxDataByTarget[id];
+				delete this._.iMapOrigin[id];
 				delete this._.tweenRefOrigin[id];
 				delete this._.tweenRefCSS[id];
 				delete this._.tweenRefMaps[id];
@@ -402,19 +406,29 @@ export default function asTweener( ...argz ) {
 			return _.axes[axe];
 		}
 		
-		initAxis( axe, _inertia, scrollableArea = 0, defaultPosition ) {
+		getAxisState() {
+			let _ = this._, state = {};
+			_.axes && Object.keys(_.axes)
+			                .forEach(
+				                axe => (state[axe] = _.axes[axe].targetPos || _.axes[axe].scrollPos)
+			                );
+			return state;
+		}
+		
+		initAxis( axe, _inertia, _scrollableArea = 0, defaultPosition ) {
 			this.makeTweenable();
 			this.makeScrollable();
-			let _         = this._,
-			    dim       = _.axes[axe],
-			    scrollPos = dim ? dim.scrollPos : defaultPosition || 0,
-			    targetPos = dim ? dim.targetPos : scrollPos,
-			    inertia   = _inertia !== false && (
+			let _              = this._,
+			    dim            = _.axes[axe],
+			    scrollPos      = dim ? dim.scrollPos : defaultPosition || 0,
+			    scrollableArea = Math.max(dim && dim.scrollableArea || 0, _scrollableArea),
+			    targetPos      = dim ? dim.targetPos : scrollPos,
+			    inertia        = _inertia !== false && (
 				    dim ? dim.inertia : new Inertia({// todo mk pure
 					                                    value: scrollPos,
 					                                    ...(_inertia || {})
 				                                    })),
-			    nextDescr = {
+			    nextDescr      = {
 				    ...(_inertia || {}),
 				    tweenLines: dim && dim.tweenLines || [],
 				    scrollPos,
@@ -425,7 +439,7 @@ export default function asTweener( ...argz ) {
 			;
 			
 			dim = this._.axes[axe] = nextDescr;
-			(_inertia !== false) && (dim.inertia._.stops = _inertia.stops);
+			(_inertia) && (dim.inertia._.stops = _inertia.stops);
 		}
 		
 		addScrollableAnim( anim, axe = "scrollY", size ) {
@@ -617,6 +631,7 @@ export default function asTweener( ...argz ) {
 				let x = dim.inertia.update();
 				
 				this.scrollTo(x, 0, axe);
+				console.log("scroll at " + x, axe);
 				dim.inertiaFrame = window.requestAnimationFrame(this.applyInertia.bind(this, dim, axe));
 			}
 			else {

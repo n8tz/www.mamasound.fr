@@ -12,61 +12,52 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-import React                 from "react";
-import ReactDom              from "react-dom";
-import {asTweener, TweenRef} from "react-rtween";
+import React                                        from "react";
+import {asTweener, TweenRef, TweenAxis, tweenTools} from "react-rtween";
 import "./samples.scss";
 
-var easingFn = require('d3-ease');
 
-let pushIn        = function ( target ) {
-	return {
-		anims: [
-			{
-				type    : "Tween",
-				target  : target,
-				from    : 0,
-				duration: 500,
-				easeFn  : easingFn.easeCircleIn,
-				apply   : {
-					transform: [{}, {
-						translateZ: "-.2box"
-					}],
-					filter   : {
-						sepia: 100
-					}
-				}
-			},
-			{
-				type    : "Tween",
-				target  : target,
-				from    : 500,
-				duration: 500,
-				easeFn  : easingFn.easeCircleIn,
-				apply   : {
-					transform: [{}, {
-						translateZ: ".2box"
-					}],
-					filter   : {
-						sepia: -100
-					}
-				}
-			},
-			{
-				type    : "Tween",
-				target  : target,
-				from    : 250,
-				duration: 500,
-				easeFn  : easingFn.easeCircle,
-				apply   : {
-					transform: [{}, {
-						rotateY: 180,
-					}],
-				}
+let pushIn        = [
+	{
+		type    : "Tween",
+		from    : 0,
+		duration: 500,
+		easeFn  : "easeCircleIn",
+		apply   : {
+			transform: [{}, {
+				translateZ: "-.2box"
+			}],
+			filter   : {
+				sepia: 100
 			}
-		]
-	};
-};
+		}
+	},
+	{
+		type    : "Tween",
+		from    : 500,
+		duration: 500,
+		easeFn  : "easeCircleIn",
+		apply   : {
+			transform: [{}, {
+				translateZ: ".2box"
+			}],
+			filter   : {
+				sepia: -100
+			}
+		}
+	},
+	{
+		type    : "Tween",
+		from    : 250,
+		duration: 500,
+		easeFn  : "easeCircle",
+		apply   : {
+			transform: [{}, {
+				rotateY: 180,
+			}],
+		}
+	}
+];
 const scrollAnims = {
 	scrollX: [
 		{
@@ -133,32 +124,14 @@ const scrollAnims = {
 		}
 	]
 };
-@asTweener({ initialScrollPos: { scrollX: 100, scrollY: 100 }, enableMouseDrag: true })
+@asTweener({ enableMouseDrag: true })
 export default class Sample extends React.Component {
 	state = {
 		count: 0
 	};
 	
 	componentDidScroll( pos ) {
-		//console.log(pos);
-		this.forceUpdate();
-	}
-	
-	// is in view port ?
-	shouldApplyScroll( pos ) {
-		let node     = ReactDom.findDOMNode(this),
-		    bounding = node.getBoundingClientRect();
-		if (
-			bounding.top >= 0 &&
-			bounding.left >= 0 &&
-			bounding.right <= (window.innerWidth || document.documentElement.clientWidth) &&
-			bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-		) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		this.forceUpdate();// force update to show scroll pos
 	}
 	
 	render() {
@@ -166,8 +139,16 @@ export default class Sample extends React.Component {
 			width : "100%",
 			height: "100%"
 		} }>
+			<TweenAxis
+				axe={ "scrollY" }
+				defaultPosition={ 100 }
+			/>
+			<TweenAxis
+				axe={ "scrollX" }
+				defaultPosition={ 100 }
+			/>
 			hello ! { this.state.count } concurent anims <br/>
-			scrollPos : { this._.scrollPos } / { this._.scrollableArea }
+			scrollPos : <pre>{ JSON.stringify(this.getAxisState(), null, 2) }</pre>
 			<br/>y:
 			<button onClick={ e => this.scrollTo(0, 500) }>( go to 0 )</button>
 			<button onClick={ e => this.scrollTo(200, 500) }>( go to 200 )</button>
@@ -195,7 +176,6 @@ export default class Sample extends React.Component {
 						translateY: "1box",
 						rotateX   : -30,
 						rotateY   : 30,
-						//translateZ: "100px"
 					}
 				} }
 				tweenLines={ scrollAnims }
@@ -203,10 +183,9 @@ export default class Sample extends React.Component {
 				<div
 					onClick={ e => {
 						this.setState({ count: this.state.count + 1 })
-						this.pushAnim(pushIn("testItem"),
+						this.pushAnim(tweenTools.target(pushIn, "testItem"),
 						              () => {
 							              this.setState({ count: this.state.count - 1 })
-							
 						              });
 					} }
 					style={ {} }>click me !

@@ -13,7 +13,7 @@
  */
 
 
-import {expandShorthandProperty, isShorthandProperty, isValidDeclaration} from "./utils";
+import {expandShorthandProperty, isShorthandProperty, isValidDeclaration} from "./cssUtils";
 import * as cssDemuxers                                                   from "./demux/(*).js";
 
 import {number, int, multi} from "./demux/typed/(*).js";

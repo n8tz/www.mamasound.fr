@@ -25,7 +25,7 @@ console.log(Samples);
 
 class App extends React.Component {
 	state = {
-		current: "SimpleHeaderTest"
+		current: "SimpleTest"
 	};
 	
 	render() {

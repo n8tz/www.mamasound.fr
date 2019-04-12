@@ -72,7 +72,7 @@
     "is": "^3.2.1",
     "isfunction": "0.0.6",
     "kebab-case": "^1.0.0",
-    "rtween": "^1.2.0",
+    "rtween": "^1.2.1",
     "taskflows": "^1.0.0"
   },
   "devDependencies": {
