@@ -156,15 +156,15 @@ export const YAxis             = [
 			},
 		}
 	},
-	{
-		type    : "Tween",
-		target  : "Footer",
-		from    : 0,
-		duration: 100,
-		apply   : {
-			top: -50,
-		}
-	},
+	//{
+	//	type    : "Tween",
+	//	target  : "Footer",
+	//	from    : 0,
+	//	duration: 100,
+	//	apply   : {
+	//		top: -50,
+	//	}
+	//},
 	//show map
 	{
 		type    : "Tween",
@@ -248,16 +248,16 @@ export const YAxis             = [
 			//width     : "-30%",
 		}
 	},
-	{
-		type    : "Tween",
-		target  : "Footer",
-		from    : 150,
-		duration: 50,
-		apply   : {
-			top   : -100,
-			height: 100,
-		}
-	},
+	//{
+	//	type    : "Tween",
+	//	target  : "Footer",
+	//	from    : 150,
+	//	duration: 50,
+	//	apply   : {
+	//		top   : -100,
+	//		height: 100,
+	//	}
+	//},
 	{
 		type    : "Tween",
 		target  : "LeftBox",

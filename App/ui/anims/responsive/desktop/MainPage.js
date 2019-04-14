@@ -20,24 +20,18 @@ export const page              = {
 	transform: {
 		translateX: "-50%"
 	}
-	//width : "100%",
-	//paddingTop: "150px"
 };
 export const Highlighter       = {
-	//background: "green",
 	position : "absolute",
 	width    : "100%",
 	height   : "85%",
 	top      : "0%",
-	//left     : "0%",
-	//overflow : 'hidden',
 	transform: {
 		//translateY: "1box"
 	}
 };
 export const PageBlock         = {
 	width    : "100%",
-	//background: "green",
 	overflow : 'hidden',
 	transform: {
 		y: "100%"
@@ -51,7 +45,6 @@ export const LeftBox           = {
 	width     : "300px",
 	background: "green",
 	position  : "absolute",
-	//overflow  : 'hidden',
 	transform : {
 		//translateY: ".85box"
 	}
@@ -72,27 +65,21 @@ export const EventNav          = {
 	position: "absolute",
 	right   : "0%",
 	left    : "300px",
-	//paddingLeft: "300px",
 	top     : "0%",
-	//background: "green",
-	//overflow   : 'hidden',
 	height  : "100%",
 };
 export const events            = {
 	right    : "0%",
-	left     : "0px",
-	//paddingLeft: "300px",
+	//left     : "0px",
 	top      : "0%",
-	//background: "green",
-	//overflow   : 'hidden',
 	position : "absolute",
 	height   : "15%",
 	transform: {
+		translateX: "-50%",
 		translateY: ".85box"
 	}
 };
 export const EventMap          = {
-	//background: "green",
 	position       : "absolute",
 	right          : "0%",
 	left           : "0px",
@@ -124,18 +111,6 @@ export const YAxis             = [
 			height: -1,
 		}
 	},
-	//{
-	//	type    : "Tween",
-	//	target  : "LeftBox",
-	//	from    : 0,
-	//	duration: 100,
-	//	apply   : {
-	//		//height   : 40,
-	//		transform: {
-	//			//translateY: "-.6box"
-	//		},
-	//	}
-	//},
 	{
 		type    : "Tween",
 		target  : "Highlighter",
@@ -157,15 +132,15 @@ export const YAxis             = [
 			},
 		}
 	},
-	{
-		type    : "Tween",
-		target  : "Footer",
-		from    : 0,
-		duration: 100,
-		apply   : {
-			top: -50,
-		}
-	},
+	//{
+	//	type    : "Tween",
+	//	target  : "Footer",
+	//	from    : 0,
+	//	duration: 100,
+	//	apply   : {
+	//		top: -50,
+	//	}
+	//},
 	//show map
 	{
 		type    : "Tween",
@@ -249,16 +224,16 @@ export const YAxis             = [
 			//width     : "-30%",
 		}
 	},
-	{
-		type    : "Tween",
-		target  : "Footer",
-		from    : 150,
-		duration: 50,
-		apply   : {
-			top   : -100,
-			height: 100,
-		}
-	},
+	//{
+	//	type    : "Tween",
+	//	target  : "Footer",
+	//	from    : 150,
+	//	duration: 50,
+	//	apply   : {
+	//		top   : -100,
+	//		height: 100,
+	//	}
+	//},
 	//{
 	//	type    : "Tween",
 	//	target  : "LeftBox",

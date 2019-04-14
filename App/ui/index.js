@@ -15,5 +15,5 @@
 
 export anims   from 'App/ui/anims/(*).js';
 export Comps   from 'App/ui/components/(*).js';
-export Blocks  from 'App/ui/containers/(*).js';
+export Blocks  from 'App/ui/containers/*/(*).js';
 export Widgets from 'App/ui/widgets/(*).js';

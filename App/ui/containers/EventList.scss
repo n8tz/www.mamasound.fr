@@ -13,39 +13,29 @@
  */
 
 .EventList {
+  @include use_hvCenteredAbs();
   touch-action: none;
-  //position: relative;
   height: 100%;
-  position: relative;
-  transform: translate3d(0, 0, 0);
+  width: 100vw;
+  //position: relative;
+  //transform: translate3d(0, 0, 0);
   fontSize: 20px;
   z-index: 50;
-  //
-  //@media screen and (max-width: $tablet-landscape-breakpoint) {
-  //  margin: 0 !important;
-  //  padding: 0 !important;
-  //  width: 100% !important;
-  //}
-  //-webkit-mask-box-image: url("../assets/medias/border.png") /repeat;
-
-  //mask-border: url("../assets/medias/border.svg") 30 repeat;;
-  //mask: url("../assets/medias/border.svg") repeat-x 0 0/100px 1000px;
-  //mask: url("../assets/medias/border.svg") repeat-x bottom  /50px 1000px; /* Élément d'un SVG utilisé comme masque répété horizontalement */
-  //&:after {
-  //  @include use_hvCenteredAbs();
-  //  content: ' ';
-  //  position: absolute;
-  //  top: 100%;
-  //  width: 100%;
-  //  height: 10px;
-  //  margin-top: -10px;
-  //  transform: translate3d(-50%, 0, 0);
-  //  background: url("../assets/medias/border2.png") repeat-x;
-  //  background-size: auto 100%;
-  //
-  //}
+  text-align: center;
 
   @include withMask();
+
+
+  > .content {
+    position: relative;
+    height: 100%;
+    @media screen and (max-width: $tablet-landscape-breakpoint) {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100% !important;
+    }
+  }
+
   .dayList {
 
     transform: translate3d(0, 0, 0);

@@ -26,11 +26,11 @@ export const name          = "Rendering";
 export const priorityLevel = 100000;
 
 export function service( server ) {
-	
-	if ( process.env.NODE_ENV === 'production' ) {
-		let creds = JSON.parse(fs.readFileSync(process.cwd() + '/creds.json'));
-		server.use(basicAuth(creds.user, creds.pass))
-	}
+	//
+	//if ( process.env.NODE_ENV === 'production' ) {
+	//	let creds = JSON.parse(fs.readFileSync(process.cwd() + '/creds.json'));
+	//	server.use(basicAuth(creds.user, creds.pass))
+	//}
 	//
 	server.get(
 		'/',

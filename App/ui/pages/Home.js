@@ -106,13 +106,13 @@ export default class Home extends React.Component {
 				>
 					<Blocks.PageBlock/>
 				</TweenRef>
-				<TweenRef
-					id={ "Footer" }
-					initial={ MainPage.Footer }
-					reset={ true }
-				>
-					<Blocks.Footer/>
-				</TweenRef>
+				{/*<TweenRef*/}
+					{/*id={ "Footer" }*/}
+					{/*initial={ MainPage.Footer }*/}
+					{/*reset={ true }*/}
+				{/*>*/}
+					{/*<Blocks.Footer/>*/}
+				{/*</TweenRef>*/}
 			</div>
 		</TweenRef>
 	}

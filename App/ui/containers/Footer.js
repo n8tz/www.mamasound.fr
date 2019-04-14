@@ -22,6 +22,7 @@ import Comps                                 from 'App/ui/components/(*).js';
 import {asTweener, TweenRef}                 from "react-rtween";
 import Chip                                  from "./SearchBar";
 import {FacebookProvider, Page}              from 'react-facebook';
+import Blocks                                from 'App/ui/containers/(*).js';
 
 @reScope(
 	{
@@ -58,9 +59,7 @@ export default class Footer extends React.Component {
 		return (
 			<div className={ "Footer" }>
 				<div className={ "toolbar" }>
-					<Fab>
-						<div className={ "material-icons icon" }>search</div>
-					</Fab>
+					<Blocks.SearchBar/>
 				</div>
 				{/*{ ActiveTags && ActiveTags.available && ActiveTags.available.map(*/ }
 				{/*tag =>*/ }
