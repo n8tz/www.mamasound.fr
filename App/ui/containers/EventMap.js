@@ -186,9 +186,9 @@ export default class EventMap extends React.Component {
 					</Fab>
 				</div>
 				
-				<TweenRef id={ "EventMap_Gradient" } initial={ MainPage.EventMap_Gradient }>
-					<div className={ "GradientBottom" }/>
-				</TweenRef>
+				{/*<TweenRef id={ "EventMap_Gradient" } initial={ MainPage.EventMap_Gradient }>*/ }
+				{/*<div className={ "GradientBottom" }/>*/ }
+				{/*</TweenRef>*/ }
 			</div>
 		);
 	}

@@ -13,7 +13,6 @@
  */
 
 .LeftBox {
-  @include withMask();
   .toolbar {
     width: 100%;
     text-align: center;
@@ -46,7 +45,7 @@
   .fbPage {
 
     @media screen and (max-width: $tablet-portrait-breakpoint) {
-     display: none;
+      display: none;
     }
 
     width: 100%;

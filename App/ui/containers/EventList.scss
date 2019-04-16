@@ -17,16 +17,17 @@
   touch-action: none;
   height: 100%;
   width: 100vw;
-  //position: relative;
-  //transform: translate3d(0, 0, 0);
   fontSize: 20px;
   z-index: 50;
   text-align: center;
 
+
   @include withMask();
 
+  //@include withMask();
 
-  > .content {
+
+  .content {
     position: relative;
     height: 100%;
     @media screen and (max-width: $tablet-landscape-breakpoint) {

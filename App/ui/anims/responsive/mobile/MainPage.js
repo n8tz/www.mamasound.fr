@@ -20,40 +20,33 @@ export const page              = {
 	transform: {
 		translateX: "-50%"
 	}
-	//width : "100%",
-	//paddingTop: "150px"
+};
+export const Highlighter       = {
+	position : "absolute",
+	width    : "100%",
+	height   : "82%",
+	top      : "0%",
+	transform: {
+		//translateY: "1box"
+	}
 };
 export const PageBlock         = {
 	width    : "100%",
-	//background: "green",
 	overflow : 'hidden',
 	transform: {
 		y: "100%"
 	},
 	height   : "0%"
 };
-export const Highlighter       = {
-	//background: "green",
-	position : "absolute",
-	width    : "100%",
-	height   : "85%",
-	top      : "0%",
-	//left     : "0%",
-	//overflow : 'hidden',
-	transform: {
-		//translateY: "1box"
-	}
-};
 export const LeftBox           = {
-	height    : "15%",
+	height    : "100%",
 	left      : "0px",
 	top       : "0px",
 	width     : "0px",
 	background: "green",
 	position  : "absolute",
-	overflow  : 'hidden',
 	transform : {
-		translateY: ".85box"
+		//translateY: ".85box"
 	}
 };
 export const Footer            = {
@@ -68,34 +61,28 @@ export const Footer            = {
 		translateY: "1box"
 	}
 };
-export const events            = {
-	right    : "0%",
-	left     : "0px",
-	top      : "0%",
-	//background: "green",
-	overflow : 'hidden',
-	position : "absolute",
-	height   : "15%",
-	transform: {
-		translateY: ".85box"
-	}
-};
 export const EventNav          = {
 	position: "absolute",
 	right   : "0%",
 	left    : "0px",
-	//paddingLeft: "300px",
 	top     : "0%",
-	//background: "green",
-	//overflow   : 'hidden',
 	height  : "100%",
 };
+export const events            = {
+	right    : "0%",
+	//left     : "0px",
+	top      : "0%",
+	position : "absolute",
+	height   : "15%",
+	transform: {
+		translateX: "-50%",
+		translateY: ".82box"
+	}
+};
 export const EventMap          = {
-	//background: "green",
 	position       : "absolute",
 	right          : "0%",
-	left           : "0px",
-	height         : "0%",
+	height         : "3%",
 	top            : "0%",
 	overflow       : 'hidden',
 	transformOrigin: "center top",
@@ -104,9 +91,9 @@ export const EventMap          = {
 			perspective: "500px",
 		},
 		{
-			translateY: "1box",
+			translateY: ".98box",
 			//translateZ : "-50px",
-			rotateX   : "-10deg"
+			//rotateX   : "-10deg"
 		}
 	]
 };
@@ -125,23 +112,11 @@ export const YAxis             = [
 	},
 	{
 		type    : "Tween",
-		target  : "LeftBox",
-		from    : 0,
-		duration: 100,
-		apply   : {
-			height   : 40,
-			transform: {
-				translateY: "-.6box"
-			},
-		}
-	},
-	{
-		type    : "Tween",
 		target  : "Highlighter",
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: -60,
+			height: -55,
 		}
 	},
 	{
@@ -150,9 +125,9 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height   : 50,
+			height   : 40,
 			transform: {
-				translateY: "-.6box"
+				translateY: "-.55box"
 			},
 		}
 	},
@@ -174,7 +149,7 @@ export const YAxis             = [
 		apply   : {
 			height   : 30,
 			transform: [{}, {
-				translateY: -.10
+				translateY: -.20
 			}]
 		}
 	},
@@ -196,39 +171,39 @@ export const YAxis             = [
 		duration: 50,
 		apply   : {
 			transform: [{}, {
-				rotateX   : 10,
-				translateY: -.30
+				//rotateX   : 10,
+				translateY: -.10
 			}],
-			height   : 20,
+			//height   : 10,
 			//marginLeft: "30%",
 			//width     : "-30%",
 		}
 	},
-	{
-		type    : "Tween",
-		target  : "LeftBox",
-		from    : 100,
-		duration: 50,
-		apply   : {
-			height: -10,
-		}
-	},
-	{
-		type    : "Tween",
-		target  : "EventMap_Gradient",
-		from    : 100,
-		duration: 50,
-		apply   : {
-			opacity: -1,
-		}
-	},
+	//{
+	//	type    : "Tween",
+	//	target  : "LeftBox",
+	//	from    : 100,
+	//	duration: 50,
+	//	apply   : {
+	//		height: -10,
+	//	}
+	//},
+	//{
+	//	type    : "Tween",
+	//	target  : "EventMap_Gradient",
+	//	from    : 100,
+	//	duration: 50,
+	//	apply   : {
+	//		opacity: -1,
+	//	}
+	//},
 	{
 		type    : "Tween",
 		target  : "events",
 		from    : 100,
 		duration: 50,
 		apply   : {
-			height: -30,
+			height: -10,
 		}
 	},
 	//full map
@@ -243,7 +218,7 @@ export const YAxis             = [
 				translateY: -.15,
 				//translateZ: "150px"
 			}],
-			//height: 10,
+			height   : 15,
 			//marginLeft: "30%",
 			//width     : "-30%",
 		}
@@ -258,15 +233,15 @@ export const YAxis             = [
 	//		height: 100,
 	//	}
 	//},
-	{
-		type    : "Tween",
-		target  : "LeftBox",
-		from    : 150,
-		duration: 50,
-		apply   : {
-			height: -15,
-		}
-	},
+	//{
+	//	type    : "Tween",
+	//	target  : "LeftBox",
+	//	from    : 150,
+	//	duration: 50,
+	//	apply   : {
+	//		height: -15,
+	//	}
+	//},
 	{
 		type    : "Tween",
 		target  : "events",

@@ -24,7 +24,7 @@ export const page              = {
 export const Highlighter       = {
 	position : "absolute",
 	width    : "100%",
-	height   : "85%",
+	height   : "82%",
 	top      : "0%",
 	transform: {
 		//translateY: "1box"
@@ -76,14 +76,13 @@ export const events            = {
 	height   : "15%",
 	transform: {
 		translateX: "-50%",
-		translateY: ".85box"
+		translateY: ".82box"
 	}
 };
 export const EventMap          = {
 	position       : "absolute",
 	right          : "0%",
-	left           : "0px",
-	height         : "0%",
+	height         : "3%",
 	top            : "0%",
 	overflow       : 'hidden',
 	transformOrigin: "center top",
@@ -92,9 +91,9 @@ export const EventMap          = {
 			perspective: "500px",
 		},
 		{
-			translateY: "1box",
+			translateY: ".98box",
 			//translateZ : "-50px",
-			rotateX   : "-10deg"
+			//rotateX   : "-10deg"
 		}
 	]
 };
@@ -117,7 +116,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: -60,
+			height: -55,
 		}
 	},
 	{
@@ -128,7 +127,7 @@ export const YAxis             = [
 		apply   : {
 			height   : 40,
 			transform: {
-				translateY: "-.6box"
+				translateY: "-.55box"
 			},
 		}
 	},
@@ -172,7 +171,7 @@ export const YAxis             = [
 		duration: 50,
 		apply   : {
 			transform: [{}, {
-				rotateX   : 10,
+				//rotateX   : 10,
 				translateY: -.10
 			}],
 			//height   : 10,
@@ -189,15 +188,15 @@ export const YAxis             = [
 	//		height: -10,
 	//	}
 	//},
-	{
-		type    : "Tween",
-		target  : "EventMap_Gradient",
-		from    : 100,
-		duration: 50,
-		apply   : {
-			opacity: -1,
-		}
-	},
+	//{
+	//	type    : "Tween",
+	//	target  : "EventMap_Gradient",
+	//	from    : 100,
+	//	duration: 50,
+	//	apply   : {
+	//		opacity: -1,
+	//	}
+	//},
 	{
 		type    : "Tween",
 		target  : "events",
@@ -219,7 +218,7 @@ export const YAxis             = [
 				translateY: -.15,
 				//translateZ: "150px"
 			}],
-			//height: 10,
+			height: 15,
 			//marginLeft: "30%",
 			//width     : "-30%",
 		}

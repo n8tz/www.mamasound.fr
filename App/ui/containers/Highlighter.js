@@ -109,59 +109,63 @@ export default class Highlighter extends React.Component {
 					} }
 				>
 					<header
-						className={ "container" }
+						className={ "container withMask" }
 						onClick={ e => $actions.setPageFocus("head") }
 						style={ {
 							display: "inline-block",
 							//width  : "100%",
 							//background: "red",
 						} }>
-						<TweenRef
-							id={ "logo" }
-							initial={ {
-								height: "100%"
-							} }
-						>
-							<div className={ "logo" }/>
-						</TweenRef>
+						<div className={ "maskContent" }>
+							<TweenRef
+								id={ "logo" }
+								initial={ {
+									height: "100%"
+								} }
+							>
+								<div className={ "logo" }/>
+							</TweenRef>
+						</div>
 					</header>
 				</TweenRef>
 				
 				<div className={ "headBackground" }>
-					<TweenRef
-						initial={ {
-							position : "absolute",
-							//transformOrigin: "0% 0%",
-							transform: {
-								perspective: "200px",
-								translateY : '-50%',
-								translateX : '-50%',
-							}
-						} }
-						tweenLines={ {
-							scrollY: [
-								{
-									type    : "Tween",
-									from    : 0,
-									duration: 100,
-									apply   : {
-										filter   : {
-											//blur: "5px",
-											//translateY: "-50px",
-										},
-										transform: {
-											translateZ: "50px",
-											//translateY: "-20vh",
+					<div className={ "maskContent" }>
+						<TweenRef
+							initial={ {
+								position : "absolute",
+								//transformOrigin: "0% 0%",
+								transform: {
+									perspective: "200px",
+									translateY : '-50%',
+									translateX : '-50%',
+								}
+							} }
+							tweenLines={ {
+								scrollY: [
+									{
+										type    : "Tween",
+										from    : 0,
+										duration: 100,
+										apply   : {
+											filter   : {
+												//blur: "5px",
+												//translateY: "-50px",
+											},
+											transform: {
+												translateZ: "50px",
+												//translateY: "-20vh",
+											}
 										}
 									}
-								}
-							],
-						} }
-					>
-						<div className={ "container" }>
-							<img src={ require("App/ui/assets/couvs/test.jpg") }/>
-						</div>
-					</TweenRef>
+								],
+							} }
+						>
+							<div className={ "container " }>
+								<img src={ require("App/ui/assets/couvs/test.jpg") }/>
+							</div>
+						</TweenRef>
+					</div>
 				</div>
 				{/*<div className={ " today" } onClick={ e => e.preventDefault() }>*/ }
 				
