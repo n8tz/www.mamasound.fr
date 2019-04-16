@@ -14,7 +14,7 @@
 
 import React                                 from 'react';
 import {reScope, scopeToProps, propsToScope} from "rscopes";
-import Blocks                                from 'App/ui/containers/(*).js';
+import {containers as Blocks}                from 'App/ui';
 import ReactDom                              from "react-dom";
 
 import {withStateMap, asRef, asStore}   from "rescope-spells";

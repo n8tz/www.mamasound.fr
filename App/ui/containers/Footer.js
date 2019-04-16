@@ -22,7 +22,8 @@ import Comps                                 from 'App/ui/components/(*).js';
 import {asTweener, TweenRef}                 from "react-rtween";
 import Chip                                  from "./SearchBar";
 import {FacebookProvider, Page}              from 'react-facebook';
-import Blocks                                from 'App/ui/containers/(*).js';
+
+import {containers as Blocks} from 'App/ui';
 
 @reScope(
 	{

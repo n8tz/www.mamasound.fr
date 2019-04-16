@@ -30967,36 +30967,38 @@ function asTweener() {
             headTarget = target,
             i; // todo optim
         // check if there scrollable stuff in dom targets
+        // get all the parents components & dom node of an dom element ( from fibers )
 
-        while (headTarget) {
-          style = getComputedStyle(headTarget, null);
-          Comps = _utils__WEBPACK_IMPORTED_MODULE_12__["default"].findReactComponents(headTarget);
+        Comps = _utils__WEBPACK_IMPORTED_MODULE_12__["default"].findReactParents(headTarget);
 
-          for (i = 0; i < Comps.length; i++) {
-            if (Comps[i].__isTweener) {
-              if (!Comps[i].isAxisOut("scrollX", dx)) {
-                Comps[i].dispatchScroll(dx, "scrollX");
-                dx = 0;
-              }
-
-              if (!Comps[i].isAxisOut("scrollY", dy)) {
-                Comps[i].dispatchScroll(dy, "scrollY");
-                dy = 0;
-              }
-
-              if (!dx && !dy) return;
+        for (i = 0; i < Comps.length; i++) {
+          // react comp with tweener support
+          if (Comps[i].__isTweener) {
+            if (!Comps[i].isAxisOut("scrollX", dx)) {
+              Comps[i].dispatchScroll(dx, "scrollX");
+              dx = 0;
             }
-          }
 
-          if (/(auto|scroll)/.test(style.getPropertyValue("overflow") + style.getPropertyValue("overflow-x") + style.getPropertyValue("overflow-y"))) {
-            if (dy < 0 && headTarget.scrollTop !== 0 || dy > 0 && headTarget.scrollTop !== headTarget.scrollHeight - headTarget.offsetHeight) {
-              return;
-            } // let the node do this scroll
+            if (!Comps[i].isAxisOut("scrollY", dy)) {
+              Comps[i].dispatchScroll(dy, "scrollY");
+              dy = 0;
+            }
 
-          }
+            if (!dx && !dy) break;
+          } // dom element
+          else if (is__WEBPACK_IMPORTED_MODULE_10___default.a.element(Comps[i])) {
+              style = getComputedStyle(headTarget, null);
 
-          headTarget = headTarget.parentNode;
-          if (headTarget === document || headTarget === target) break;
+              if (/(auto|scroll)/.test(style.getPropertyValue("overflow") + style.getPropertyValue("overflow-x") + style.getPropertyValue("overflow-y"))) {
+                if (dy < 0 && headTarget.scrollTop !== 0 || dy > 0 && headTarget.scrollTop !== headTarget.scrollHeight - headTarget.offsetHeight) {
+                  return;
+                } // let the node do this scroll
+
+              }
+
+              headTarget = headTarget.parentNode;
+              if (headTarget === document || headTarget === target) break;
+            }
         }
       } // ------------------------------------------------------------
       // ------------------ Motion/FSM anims ------------------------
@@ -33903,7 +33905,7 @@ var is = __webpack_require__(/*! is */ "./node_modules/is/index.js"),
    * @param element
    * @returns {[React.Component]}
    */
-  findReactComponents: function findReactComponents(element) {
+  findReactParents: function findReactParents(element) {
     var fiberNode,
         comps = [];
 

@@ -16,12 +16,12 @@ import React            from "react";
 import api              from "./api";
 import {renderToString} from "react-dom/server";
 
-var express    = require("express"),
-    server     = express(),
-    http       = require('http').Server(server),
-    argz       = require('minimist')(process.argv.slice(2)),
-    wpiConf    = require('App/.wpiConfig'),
-    debug      = require('App/console').default("server");
+var express = require("express"),
+    server  = express(),
+    http    = require('http').Server(server),
+    argz    = require('minimist')(process.argv.slice(2)),
+    wpiConf = require('App/.wpiConfig'),
+    debug   = require('App/console').default("server");
 
 process.title = wpiConf.project.name + '::server';
 

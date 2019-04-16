@@ -1,0 +1,389 @@
+/*!
+ * The MIT License (MIT)
+ * Copyright (c) 2019. Wise Wild Web
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *  @author : Nathanael Braun
+ *  @contact : n8tz.js@gmail.com
+ */
+
+.EventList {
+  @include use_hvCenteredAbs();
+  touch-action: none;
+  height: 100%;
+  width: 100vw;
+  fontSize: 20px;
+  z-index: 50;
+  text-align: center;
+
+
+  @include withMask();
+
+  //@include withMask();
+
+
+  .content {
+    position: relative;
+    height: 100%;
+    @media screen and (max-width: $tablet-landscape-breakpoint) {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100% !important;
+    }
+  }
+
+  .dayList {
+
+    transform: translate3d(0, 0, 0);
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    bottom: 0px;
+    right: 0%;
+    overflow: hidden;
+    margin-left: 0px;
+
+    .DayEvents {
+      background: #1f8de2;
+
+      .day {
+        height: 50px;
+      }
+    }
+
+    .react-swipeable-view-container {
+      height: 100%;
+      width: 100%;
+    }
+
+    .slide {
+      height: 100%;
+      width: 100%;
+      overflow: auto;
+
+      .inf {
+        //min-height: 90%;
+      }
+    }
+
+    //
+    //@media screen and (min-width: $tablet-portrait-breakpoint) {
+    //  margin-left: 300px;
+    //}
+    //
+    //@media screen and (max-width: $smartphone-landscape-breakpoint) {
+    //  margin-left: 40px;
+    //}
+
+    .Event {
+      font-size: 16px;
+      @media screen and (max-width: $tablet-landscape-breakpoint) {
+        font-size: 15px;
+      }
+      @media screen and (max-width: $tablet-portrait-breakpoint) {
+        font-size: 15px;
+      }
+      @media screen and (max-width: $smartphone-landscape-breakpoint) {
+        font-size: 10px;
+
+      }
+      height: 3.5em;
+      position: relative;
+      display: block;
+      overflow: hidden;
+      background: rgb(211, 211, 211);
+
+      &:nth-child(2n+1) {
+        background: white;
+      }
+
+      &.selected .title {
+        text-decoration: underline;
+      }
+
+      .title {
+        @include use_hvCenteredContent();
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        right: (6em / 1.25);
+        font-size: 1.25em;
+        position: absolute;
+        top: 0px;
+        height: (3.5em / 1.25);
+        left: (11em / 1.25);
+        text-align: left;
+        padding-top: .1em;
+        display: inline-block;
+      }
+
+      .start {
+        @include use_hvCenteredContent();
+        float: left;
+        height: 100%;
+        padding-top: .1em;
+        padding-left: .2em;
+        padding-right: 1em;
+        width: 3em;
+        font-size: 1.5em;
+
+      }
+
+      .price {
+        position: absolute;
+        bottom: 2px;
+        right: 2px;
+        font-size: .9em;
+      }
+
+      .place {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        font-size: .9em;
+
+        span {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 10em;
+          display: inline-block;
+          margin-top: 3px;
+          vertical-align: bottom;
+        }
+      }
+
+      .icon {
+        @include use_hvCenteredContent();
+        float: left;
+        background: rgb(249, 249, 249);
+
+        padding: .2em;
+        width: 2.5em;
+        height: 2.5em;
+        overflow: hidden;
+        border-radius: 3em;
+        transform: scale(1.8);
+        margin-top: .1em;
+        //background: rgba(249, 249, 249, 0.66);
+        border: solid 1px #b0b0b0;
+
+        img {
+          width: 100%;
+          //height: 100%;
+        }
+      }
+
+      @media screen and (max-width: $smartphone-portrait-breakpoint) {
+        .title {
+          right: (3em / 1.25);
+          font-size: 1.25em;
+          position: absolute;
+          top: .45em;
+          height: (3.5em / 1.25);
+          left: (8.5em / 1.25);
+          text-align: left;
+          padding-top: .1em;
+        }
+
+        .start {
+          @include use_hvCenteredContent();
+          float: left;
+          height: 100%;
+          padding-top: .1em;
+          padding-left: 0em;
+          padding-right: .95em;
+          width: 3em;
+          font-size: 1.25em;
+        }
+
+        .price {
+          position: absolute;
+          bottom: 2px;
+          right: 2px;
+          font-size: .9em;
+        }
+
+        .icon {
+          @include use_hvCenteredContent();
+          padding: .2em;
+          width: 1.75em;
+          height: 1.75em;
+          transform: scale(1.75);
+          margin-top: .5em;
+          margin-left: -.4em;
+        }
+      }
+
+      //&.EventTheatre .icon,
+      &.EventTheatre .start {
+        background: rgba(97, 36, 153, 0.68);
+      }
+
+      //&.EventConcert .icon,
+      &.EventConcert .start {
+        background: rgba(207, 30, 46, 0.67);
+      }
+
+      //&.EventExpo .icon,
+      &.EventExpo .start {
+        background: rgba(1, 199, 151, 0.81);
+      }
+    }
+  }
+
+  .SimpleDay {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    .date {
+      //@include use_hvCenteredAbs();
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      color: black;
+      min-width: 50%;
+      text-align: left;
+      font-size: 2em;
+      font-weight: lighter;
+      font-family: EmPower42;
+      opacity: .9;
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 75px rgba(34, 141, 255, 0.62);
+      padding-top: .15em;
+      padding-left: 25px;
+    }
+
+    img {
+      @include use_hvCenteredAbs();
+      width: 100%;
+      min-height: 100%;
+    }
+  }
+
+  .DayBlock {
+
+    position: absolute;
+    top: 0px;
+    height: 50px;
+    left: 0px;
+    background: #ffbcc3;
+    z-index: 1000;
+    overflow: hidden;
+    //@media screen and (min-width: $tablet-portrait-breakpoint) {
+    //  left: 300px;
+    //}
+    //@media screen and (max-width: $smartphone-landscape-breakpoint) {
+    //  left: 40px;
+    //}
+    right: 17px;
+    @media (hover: none), (hover: on-demand) {
+      right: 0px;
+    }
+
+
+  }
+
+  .typeEventsTab {
+    position: absolute;
+    top: 0px;
+    //right: 0%;
+    height: 52px;
+    width: 300px;
+    text-align: center;
+    z-index: 1001;
+
+    right: 17px;
+    @media (hover: none), (hover: on-demand) {
+      right: 0px;
+    }
+    @media screen and (max-width: $smartphone-landscape-breakpoint) {
+
+      width: 150px;
+      span {
+        font-size: 10px;
+      }
+      button {
+        overflow: visible;
+      }
+      span > span > span {
+        transform: rotate(-48deg);
+        display: inline-block;
+      }
+    }
+
+    button {
+      height: 50px;
+      min-width: auto !important;
+      background: rgba(255, 255, 255, 0.51);
+    }
+
+    div, span {
+      max-height: 52px;
+      padding: 0 !important;
+      color: #000000;
+      font-weight: bold;
+      min-height: 5px;
+    }
+
+    .icon {
+      font-size: 75px;
+      height: 1em;
+      width: auto;
+      margin-top: -25px;
+
+      &.theatre {
+        margin-top: -5px;
+      }
+    }
+  }
+
+
+  .LeftBox {
+
+    position: absolute;
+    background: yellow;
+    top: 0px;
+    left: 0px;
+    width: 300px;
+    bottom: 0px;
+    z-index: 1001;
+    @media screen and (max-width: $tablet-portrait-breakpoint) {
+      width: 75px;
+    }
+
+    @media screen and (max-width: $smartphone-landscape-breakpoint) {
+      width: 40px;
+    }
+  }
+
+  .SearchBar {
+
+    @media screen and (max-width: $tablet-portrait-breakpoint) {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100% !important;
+    }
+
+    > * {
+      margin: 4px;
+      font-size: 1.2em;
+
+      .icon {
+        background: #f9f9f9;
+        margin: 5px;
+        width: 1.2em;
+        height: 1.2em;
+        overflow: hidden;
+        border-radius: 25px;
+      }
+    }
+  }
+}

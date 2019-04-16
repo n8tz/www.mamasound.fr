@@ -1,4 +1,4 @@
-/*
+/*!
  * The MIT License (MIT)
  * Copyright (c) 2019. Wise Wild Web
  *
@@ -12,10 +12,29 @@
  *  @contact : n8tz.js@gmail.com
  */
 
+.PageBlock {
+  position: relative;
 
-import anims      from 'App/ui/anims/(*).js';
-import Comps      from 'App/ui/components/(*).js';
-import containers from 'App/ui/containers/(**).js';
-import Widgets    from 'App/ui/widgets/(*).js';
+  @media screen and (max-width: $tablet-landscape-breakpoint) {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
 
-export {anims, Comps, containers, Widgets};
+  height: 100%;
+
+  .ShareBox {
+    position: absolute;
+    background: violet;
+    top: 0px;
+    right: 0px;
+    width: 150px;
+    height: 100%;
+    min-height: 200px;
+
+    .SocialMediaShareButton {
+      display: inline-block;
+      margin: 2px;
+    }
+  }
+}

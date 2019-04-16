@@ -16,49 +16,77 @@ import React                                 from "react";
 import {reScope, scopeToProps, propsToScope} from "rscopes";
 import {withStateMap, asRef, asStore}        from "rescope-spells";
 import anims                                 from 'App/ui/anims/(*).js';
-
-import {containers as Blocks}                from 'App/ui';
+import Fab                                   from '@material-ui/core/Fab';
 import stores                                from 'App/stores/(*).js';
 import Comps                                 from 'App/ui/components/(*).js';
 import {asTweener, TweenRef}                 from "react-rtween";
+import {FacebookProvider, Page}              from 'react-facebook';
 
-
-//@reScope(
-//	{
-//		//@asStore
-//		//EventsByDay: {
-//		//	@asRef
-//		//	events: "EventList",
-//		//	$apply( data, { events: { items, refs } } ) {
-//		//
-//		//	}
-//		//}
-//	}
-//)
-@scopeToProps("Selected", "EventList", "DataProvider")
-export default class PageBlock extends React.Component {
+@reScope(
+	{
+		@asStore
+		SearchValues: {
+			tags  : [],
+			search: undefined,
+			updateSearch( str ) {
+			
+			},
+			addTag( str ) {
+			
+			},
+			rmTag( str ) {
+			
+			}
+			
+		},
+		
+	}
+)
+@scopeToProps("SearchValues", "ActiveTags")
+export default class LeftBox extends React.Component {
 	static propTypes = {};
 	state            = {};
 	
 	render() {
 		let {
 			    record: { position, size } = {},
-			    Selected, EventList, DataProvider,
+			    Events, children, disabled,
 			    $actions, onSelect, selected
 		    }     = this.props,
 		    state = this.state;
 		return (
 			<div
-				className={ "PageBlock container" }
-				//onClick={ e => $actions.selectEvent(null) }
+				className={ "LeftBox" }
 			>
-				{
-					Selected &&
-					Selected.record &&
-					Selected.record._cls === "Concert" &&
-					<Comps.Event_page record={ Selected && Selected.record } refs={ DataProvider }/>
-				}
-			
+				<div className={ "toolbar" }>
+					<Fab>
+						<div className={ "material-icons icon" }>search</div>
+					</Fab>
+				</div>
+				<div className={ "fbPage" }>
+					<FacebookProvider appId="1191108604284018">
+						<Page href="https://www.facebook.com/mamasound.fr"
+						      smallHeader={ true } tabs="timeline"
+						      adaptContainerWidth={ true }
+						      height={ 350 }
+						      width={ 300 }/>
+					</FacebookProvider>
+				</div>
+				{/*{ ActiveTags && ActiveTags.available && ActiveTags.available.map(*/ }
+				{/*tag =>*/ }
+				{/*<Chip*/ }
+				{/*key={ tag.title }*/ }
+				{/*icon={*/ }
+				{/*//<Badge badgeContent={ tag.count} color="secondary" >*/ }
+				{/*<img alt={ tag.title } src={ tag.style.icon } className={ "icon" }/>*/ }
+				{/*//</Badge>*/ }
+				{/*}*/ }
+				{/*label={ tag.title }*/ }
+				{/*//onClick={handleClick}*/ }
+				{/*//onDelete={handleDelete}*/ }
+				{/*//className={classes.chip}*/ }
+				{/*/>*/ }
+				{/*) }*/ }
 			</div>
 		);
 	}

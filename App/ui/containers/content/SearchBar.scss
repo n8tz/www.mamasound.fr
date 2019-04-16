@@ -1,4 +1,4 @@
-/*
+/*!
  * The MIT License (MIT)
  * Copyright (c) 2019. Wise Wild Web
  *
@@ -12,10 +12,34 @@
  *  @contact : n8tz.js@gmail.com
  */
 
+@media screen and (max-width: $tablet-landscape-breakpoint) {
+  .mainPageBlock {
 
-import anims      from 'App/ui/anims/(*).js';
-import Comps      from 'App/ui/components/(*).js';
-import containers from 'App/ui/containers/(**).js';
-import Widgets    from 'App/ui/widgets/(*).js';
+    padding-bottom: 50px;
 
-export {anims, Comps, containers, Widgets};
+  }
+  .SearchBar {
+    display: block !important;
+  }
+
+}
+
+.SearchBar {
+  //display: none;
+  touch-action: none;
+  //overflow: hidden;
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  //width: 100%;
+  height: 50px;
+  z-index: 1000;
+  background: #1f8de2;
+  transform: translate3d(-50%, 0, 0);
+
+  @media screen and (max-width: $tablet-landscape-breakpoint) {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+}

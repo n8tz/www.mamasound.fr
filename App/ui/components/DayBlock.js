@@ -17,8 +17,8 @@ import {Rnd}                                 from "react-rnd";
 import {reScope, scopeToProps, propsToScope} from "rscopes";
 import {withStateMap, asRef, asStore}        from "rescope-spells";
 import anims                                 from 'App/ui/anims/(*).js';
-import Blocks                                from 'App/ui/containers/(*).js';
 
+import {containers as Blocks}                from 'App/ui';
 import Tabs                  from '@material-ui/core/Tabs';
 import Tab                   from '@material-ui/core/Tab';
 import moment                from "moment";
