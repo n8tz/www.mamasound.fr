@@ -28,7 +28,9 @@
       "vars": {
         "rootAlias": "react-rtween",
         "externals": true,
-        "webpackPatch": {}
+        "webpackPatch": {
+          "devtool": "source-map"
+        }
       },
       "extend": [
         "wpi-react-hmr-ssr"
