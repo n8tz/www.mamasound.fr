@@ -19,7 +19,6 @@ import ReactDom                              from "react-dom";
 
 import {withStateMap, asRef, asStore}   from "rescope-spells";
 import {asTweener, TweenRef, TweenAxis} from "react-rtween";
-import SwipeableViews                   from "../containers/EventList";
 
 
 @scopeToProps("appState", "Anims")
@@ -84,19 +83,19 @@ export default class Home extends React.Component {
 					}
 				/>
 				<TweenRef id={ "Highlighter" } initial={ MainPage.Highlighter }>
-					<Blocks.Highlighter/>
+					<Blocks.content.Highlighter/>
 				</TweenRef>
 				
 				
 				<TweenRef id={ "events" }
 				          initial={ MainPage.events }>
-					<Blocks.EventList/>
+					<Blocks.events.EventList/>
 				</TweenRef>
 				<TweenRef
 					id={ "EventMap" }
 					initial={ MainPage.EventMap }
 				>
-					<Blocks.EventMap
+					<Blocks.events.EventMap
 						day={ appState.currentVisibleDay || appState.curDay }
 						viewType={ appState.viewType }/>
 				</TweenRef>
@@ -104,7 +103,7 @@ export default class Home extends React.Component {
 					id={ "PageBlock" }
 					initial={ MainPage.PageBlock }
 				>
-					<Blocks.PageBlock/>
+					<Blocks.content.PageBlock/>
 				</TweenRef>
 				{/*<TweenRef*/ }
 				{/*id={ "Footer" }*/ }

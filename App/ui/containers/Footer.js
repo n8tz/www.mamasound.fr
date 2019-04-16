@@ -20,7 +20,6 @@ import Fab                                   from '@material-ui/core/Fab';
 import stores                                from 'App/stores/(*).js';
 import Comps                                 from 'App/ui/components/(*).js';
 import {asTweener, TweenRef}                 from "react-rtween";
-import Chip                                  from "./SearchBar";
 import {FacebookProvider, Page}              from 'react-facebook';
 
 import {containers as Blocks} from 'App/ui';
@@ -60,7 +59,7 @@ export default class Footer extends React.Component {
 		return (
 			<div className={ "Footer" }>
 				<div className={ "toolbar" }>
-					<Blocks.SearchBar/>
+					<Blocks.events.SearchBar/>
 				</div>
 				{/*{ ActiveTags && ActiveTags.available && ActiveTags.available.map(*/ }
 				{/*tag =>*/ }

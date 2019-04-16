@@ -186,7 +186,7 @@ export default class EventList extends React.Component {
 																.fill(0)
 																.map(
 																	( v, i ) =>
-																		<Blocks.DayEvents
+																		<Blocks.events.DayEvents
 																			className={ "dayBlock" }
 																			key={ i }
 																			day={ moment(appState.curDay).add(i, 'day').unix() * 1000 }
@@ -201,11 +201,11 @@ export default class EventList extends React.Component {
 							</div>
 						</TweenRef>
 						<TweenRef
-							id={ "LeftBox" }
-							initial={ MainPage.LeftBox }
+							id={ "NavBox" }
+							initial={ MainPage.NavBox }
 							reset={ true }
 						>
-							<Blocks.LeftBox/>
+							<Blocks.NavBox/>
 						</TweenRef>
 					</div>
 				</div>

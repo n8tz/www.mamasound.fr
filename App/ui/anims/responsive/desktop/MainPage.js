@@ -38,7 +38,7 @@ export const PageBlock         = {
 	},
 	height   : "0%"
 };
-export const LeftBox           = {
+export const NavBox           = {
 	height    : "100%",
 	left      : "0px",
 	top       : "0px",
@@ -181,7 +181,7 @@ export const YAxis             = [
 	},
 	//{
 	//	type    : "Tween",
-	//	target  : "LeftBox",
+	//	target  : "NavBox",
 	//	from    : 100,
 	//	duration: 50,
 	//	apply   : {
@@ -235,7 +235,7 @@ export const YAxis             = [
 	//},
 	//{
 	//	type    : "Tween",
-	//	target  : "LeftBox",
+	//	target  : "NavBox",
 	//	from    : 150,
 	//	duration: 50,
 	//	apply   : {

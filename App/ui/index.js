@@ -15,7 +15,7 @@
 
 import anims      from 'App/ui/anims/(*).js';
 import Comps      from 'App/ui/components/(*).js';
-import containers from 'App/ui/containers/(**).js';
+import containers from 'App/ui/containers/(**/*).js';
 import Widgets    from 'App/ui/widgets/(*).js';
 
 export {anims, Comps, containers, Widgets};
