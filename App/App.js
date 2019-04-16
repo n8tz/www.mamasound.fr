@@ -14,7 +14,7 @@
 
 import React                                      from 'react';
 import moment                                     from 'moment';
-import Widget                                     from 'App/ui/containers/Widget.js';
+import Widget                                     from 'App/ui/components/Widget.js';
 import allWidgets                                 from "App/ui/widgets/(*).js";
 import Home                                       from './ui/pages/Home';
 import {BrowserRouter, StaticRouter, Route, Link} from "react-router-dom";

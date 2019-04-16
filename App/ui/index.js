@@ -13,9 +13,17 @@
  */
 
 
-import anims      from 'App/ui/anims/(*).js';
-import Comps      from 'App/ui/components/(*).js';
+import anims      from 'App/ui/anims/(**/*).js';
+import components from 'App/ui/components/(**/*).js';
 import containers from 'App/ui/containers/(**/*).js';
-import Widgets    from 'App/ui/widgets/(*).js';
+import widgets    from 'App/ui/widgets/(**/*).js';
 
-export {anims, Comps, containers, Widgets};
+export {
+	anims,
+	components,
+	components as Comps,
+	containers,
+	containers as Blocks,
+	widgets,
+	widgets as Widgets
+};

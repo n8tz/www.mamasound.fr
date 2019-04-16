@@ -13,19 +13,13 @@
  */
 import PropTypes                             from "prop-types";
 import React                                 from "react";
-import {Rnd}                                 from "react-rnd";
 import {reScope, scopeToProps, propsToScope} from "rscopes";
 import {withStateMap, asRef, asStore}        from "rescope-spells";
 import anims                                 from 'App/ui/anims/(*).js';
 
-import {containers as Blocks}                from 'App/ui';
-import Tabs                  from '@material-ui/core/Tabs';
-import Tab                   from '@material-ui/core/Tab';
 import moment                from "moment";
-import stores                from 'App/stores/(*).js';
-import Comps                 from 'App/ui/components/(*).js';
+import {Comps}               from 'App/ui';
 import {asTweener, TweenRef} from "react-rtween";
-import scopes                from 'App/scopes/(*).js';
 
 
 //@scopeToProps("EventList", "appState")

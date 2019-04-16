@@ -22,7 +22,7 @@ import Comps                                 from 'App/ui/components/(*).js';
 import {asTweener, TweenRef}                 from "react-rtween";
 import {FacebookProvider, Page}              from 'react-facebook';
 
-import {containers as Blocks} from 'App/ui';
+import {Blocks} from 'App/ui';
 
 @reScope(
 	{

@@ -18,7 +18,7 @@ import {reScope, scopeToProps, propsToScope} from "rscopes";
 import {withStateMap, asRef, asStore}        from "rescope-spells";
 import anims                                 from 'App/ui/anims/(*).js';
 
-import {containers as Blocks}                from 'App/ui';
+import {Blocks}                from 'App/ui';
 
 import Tabs                  from '@material-ui/core/Tabs';
 import Tab                   from '@material-ui/core/Tab';

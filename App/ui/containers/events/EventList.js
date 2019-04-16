@@ -11,17 +11,17 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-import PropTypes             from "prop-types";
-import React                 from "react";
+import PropTypes from "prop-types";
+import React     from "react";
 import {
 	reScope, scopeToProps, propsToScope
-}                            from "rscopes";
+}                from "rscopes";
 import {
 	withStateMap, asRef, asStore
-}                            from "rescope-spells";
-import anims                 from 'App/ui/anims/(*).js';
+}                from "rescope-spells";
+import anims     from 'App/ui/anims/(*).js';
 
-import {containers as Blocks}                from 'App/ui';
+import {Blocks}              from 'App/ui';
 import Tabs                  from '@material-ui/core/Tabs';
 import Tab                   from '@material-ui/core/Tab';
 import moment                from "moment";

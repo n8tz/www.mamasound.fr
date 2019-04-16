@@ -14,7 +14,7 @@
 
 import React                                 from 'react';
 import {reScope, scopeToProps, propsToScope} from "rscopes";
-import {containers as Blocks}                from 'App/ui';
+import {Blocks}                              from 'App/ui';
 import ReactDom                              from "react-dom";
 
 import {withStateMap, asRef, asStore}   from "rescope-spells";
@@ -85,7 +85,6 @@ export default class Home extends React.Component {
 				<TweenRef id={ "Highlighter" } initial={ MainPage.Highlighter }>
 					<Blocks.content.Highlighter/>
 				</TweenRef>
-				
 				
 				<TweenRef id={ "events" }
 				          initial={ MainPage.events }>
