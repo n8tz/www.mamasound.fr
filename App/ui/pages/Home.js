@@ -27,6 +27,13 @@ export default class Home extends React.Component {
 	state = {};
 	
 	componentDidMount( props = this.props ) {
+		window.addEventListener("load", function () {
+			// Set a timeout...
+			setTimeout(function () {
+				// Hide the address bar!
+				window.scrollTo(0, 1);
+			}, 0);
+		});
 		let { appState } = props;
 		switch ( appState.currentPageFocus ) {
 			case 'head' :

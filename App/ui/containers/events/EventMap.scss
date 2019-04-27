@@ -21,7 +21,8 @@
   margin-left: -50vw;
   left: 50%;
   width: 100vw !important;
-
+  z-index: 250;
+  @include withMaskTop();
   .GradientBottom {
     position: absolute;
     top: 0px;

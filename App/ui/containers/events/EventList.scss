@@ -18,11 +18,10 @@
   height: 100%;
   width: 100vw;
   fontSize: 20px;
-  z-index: 50;
   text-align: center;
+  z-index: 150;
 
-
-  @include withMask();
+  @include withMaskTop();
 
   //@include withMask();
 

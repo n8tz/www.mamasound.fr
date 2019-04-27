@@ -133,54 +133,57 @@ export default class EventMap extends React.Component {
 		    state = this.state;
 		return (
 			<div className={ "EventMap" }>
-				<Map center={ center } zoom={ zoom }
-				     scrollWheelZoom={ false }
-				     animate={ true }
-				     useFlyTo={ true }
-				     dragging={ false }
-				>
-					<TileLayer
-						url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-						attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-					/>
+				<div className={ "maskContent" }>
 					
-					{
-						POIs.map(
-							( { geoPoint, event } ) =>
-								<Marker position={ { lat: geoPoint[1], lng: geoPoint[0] } } key={ event._id }>
-									<Popup
-										open={ Selected.record && (Selected.record._id === event._id) }>{ event.title }</Popup>
-								</Marker>
-						)
-					}
-					{
-						UserGeoLocation.pos &&
-						<Marker
-							icon={
-								Leaflet.icon.pulse({ iconSize: [12, 12], color: 'red' })
-							}
-							position={ { lat: UserGeoLocation.pos.latitude, lng: UserGeoLocation.pos.longitude } }/>
-					}
-				</Map>
-				<div
-					className={ "EventMapTools" }
-				>
-					<Fab aria-label="edit" className={ "newBtn button" }
-					     onClick={ $actions.toggleUserGeoLocation }>
+					<Map center={ center } zoom={ zoom }
+					     scrollWheelZoom={ false }
+					     animate={ true }
+					     useFlyTo={ true }
+					     dragging={ false }
+					>
+						<TileLayer
+							url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+							attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+						/>
+						
 						{
-							UserGeoLocation.activating &&
-							<GpsNoFixedIcon/> ||
-							UserGeoLocation.active &&
-							<GpsFixedIcon/> ||
-							<GpsOffIcon/>
+							POIs.map(
+								( { geoPoint, event } ) =>
+									<Marker position={ { lat: geoPoint[1], lng: geoPoint[0] } } key={ event._id }>
+										<Popup
+											open={ Selected.record && (Selected.record._id === event._id) }>{ event.title }</Popup>
+									</Marker>
+							)
 						}
+						{
+							UserGeoLocation.pos &&
+							<Marker
+								icon={
+									Leaflet.icon.pulse({ iconSize: [12, 12], color: 'red' })
+								}
+								position={ { lat: UserGeoLocation.pos.latitude, lng: UserGeoLocation.pos.longitude } }/>
+						}
+					</Map>
+					<div
+						className={ "EventMapTools" }
+					>
+						<Fab aria-label="edit" className={ "newBtn button" }
+						     onClick={ $actions.toggleUserGeoLocation }>
+							{
+								UserGeoLocation.activating &&
+								<GpsNoFixedIcon/> ||
+								UserGeoLocation.active &&
+								<GpsFixedIcon/> ||
+								<GpsOffIcon/>
+							}
+						
+						</Fab>
+					</div>
 					
-					</Fab>
+					{/*<TweenRef id={ "EventMap_Gradient" } initial={ MainPage.EventMap_Gradient }>*/ }
+					{/*<div className={ "GradientBottom" }/>*/ }
+					{/*</TweenRef>*/ }
 				</div>
-				
-				{/*<TweenRef id={ "EventMap_Gradient" } initial={ MainPage.EventMap_Gradient }>*/ }
-				{/*<div className={ "GradientBottom" }/>*/ }
-				{/*</TweenRef>*/ }
 			</div>
 		);
 	}
