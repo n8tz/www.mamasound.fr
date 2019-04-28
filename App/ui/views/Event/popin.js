@@ -1,4 +1,4 @@
-/*!
+/*
  * The MIT License (MIT)
  * Copyright (c) 2019. Wise Wild Web
  *
@@ -11,13 +11,26 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-@import "Mixins.scss";
-@import "Vars.scss";
-@import "Page.scss";
-@import "Fonts.scss";
-@import "flexboxgrid.scss";
-@import "./components/*.scss";
-//@import "../containers/*.scss";
-@import "../components/**/*.scss";
-@import "../containers/**/*.scss";
-@import "../pages/*.scss";
+
+'use strict';
+
+import React, {Component} from "react";
+
+
+export default ( { record, record: { title, place, category }, onClose, refs, className, style, ref } ) =>
+	(
+		<div className={ "Popin " + (className || '') } style={ { ...(style || {}) } } ref={ ref }>
+			<div className="closeBtn" onClick={ onClose }/>
+			<div className="topBlock">
+				<img className="logo"
+				     src={ refs[place.objId].previewImage || refs[category.objId].icon }/>
+				<div className="name">
+					{ title }&nbsp;au { refs[place.objId].label }
+				</div>
+			</div>
+			<div className="address">
+				{ refs[record.place.objId] && refs[place.objId].address.address },<br/>
+			</div>
+		</div>
+	);
+	

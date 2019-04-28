@@ -98,7 +98,7 @@ export default ( server, http ) => {
 							var db  = client.db("mamasound_fr"),
 							    rid = _record._id;
 							aliasAPI.rmAlias(
-								"Event_" + _record._alias,
+								"Event." + _record._alias,
 								db,
 								function () {
 									

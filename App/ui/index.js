@@ -14,16 +14,15 @@
 
 
 import anims      from 'App/ui/anims/(**/*).js';
+import Views      from 'App/ui/views/(**/*).js';
 import components from 'App/ui/components/(**/*).js';
-import containers from 'App/ui/containers/(**/*).js';
 import widgets    from 'App/ui/widgets/(**/*).js';
 
 export {
 	anims,
+	Views,
 	components,
 	components as Comps,
-	containers,
-	containers as Blocks,
 	widgets,
 	widgets as Widgets
 };

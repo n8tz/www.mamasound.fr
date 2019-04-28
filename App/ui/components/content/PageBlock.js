@@ -17,10 +17,9 @@ import {reScope, scopeToProps, propsToScope} from "rscopes";
 import {withStateMap, asRef, asStore}        from "rescope-spells";
 import anims                                 from 'App/ui/anims/(*).js';
 
-import {Blocks}                from 'App/ui';
-import stores                                from 'App/stores/(*).js';
-import Comps                                 from 'App/ui/components/(*).js';
-import {asTweener, TweenRef}                 from "react-rtween";
+import stores                from 'App/stores/(*).js';
+import {Views}               from 'App/ui';
+import {asTweener, TweenRef} from "react-rtween";
 
 
 //@reScope(
@@ -54,9 +53,9 @@ export default class PageBlock extends React.Component {
 			>
 				{
 					Selected &&
-					Selected.record &&
-					Selected.record._cls === "Concert" &&
-					<Comps.Event_page record={ Selected && Selected.record } refs={ DataProvider }/>
+					Selected.Event &&
+					Selected.Event._cls === "Concert" &&
+					<Views.Event.page record={ Selected && Selected.Event } refs={ DataProvider }/>
 				}
 			
 			</div>

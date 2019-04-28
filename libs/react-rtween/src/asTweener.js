@@ -610,11 +610,11 @@ export default function asTweener( ...argz ) {
 											deltaX = (-(descr._lastPos.x - descr._startPos.x) / tweener._.box.x) * x.scrollableArea;
 											deltaY = (-(descr._lastPos.y - descr._startPos.y) / tweener._.box.y) * y.scrollableArea;
 											if ( !xDispatched && !tweener.isAxisOut("scrollX", deltaX) ) {
+												console.log(tweener.constructor.displayName, deltaX)
 												x.inertia.hold(lastPos.x + deltaX);
 												xDispatched = true;
 											}
 											if ( !yDispatched && !tweener.isAxisOut("scrollY", deltaY) ) {
-												console.log(tweener.constructor.displayName, dY)
 												y.inertia.hold(lastPos.y + deltaY);
 												yDispatched = true;
 											}

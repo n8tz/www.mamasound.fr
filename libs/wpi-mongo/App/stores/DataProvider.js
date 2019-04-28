@@ -39,67 +39,67 @@ export default class DataProvider extends Store {
 			this.flushAndReload()
 		},
 		data_create( etty, record, cb ) {
-			if ( !this.nextState[etty] )
+			if ( !this.nextState )
 				return console.error("DataProvider: Unknown data type '" + etty + "'")
 			
-			if ( !this.nextState[etty].remove )
+			if ( !this.nextState.remove )
 				return console.error("DataProvider: no create api for data type '" + etty + "'")
 			
-			this.state[etty]
-				.create({ record })
-				.then(
-					( data ) => {
-						cb && cb(null, data.result);
-						this.flushAndReload(etty)
-					},
-					( err ) => {
-						if ( err ) {
-							cb && cb(err)
-						}
-					}
-				);
+			this.state
+			    .create({ record })
+			    .then(
+				    ( data ) => {
+					    cb && cb(null, data.result);
+					    this.flushAndReload(etty)
+				    },
+				    ( err ) => {
+					    if ( err ) {
+						    cb && cb(err)
+					    }
+				    }
+			    );
 		},
 		data_save( etty, record, cb ) {
-			if ( !this.nextState[etty] )
+			if ( !this.nextState )
 				return console.error("DataProvider: Unknown data type '" + etty + "'")
 			
-			if ( !this.nextState[etty].save )
+			if ( !this.nextState.save )
 				return console.error("DataProvider: no save api for data type '" + etty + "'")
 			
-			this.state[etty]
-				.save({ id: record.id, record })
-				.then(
-					( data ) => {
-						cb && cb(null, data.result);
-						this.flushAndReload(etty)
-					},
-					( err ) => {
-						if ( err ) {
-							cb && cb(err)
-						}
-					}
-				);
+			this.state
+			    .save({ id: record.id, record })
+			    .then(
+				    ( data ) => {
+					    cb && cb(null, data.result);
+					    this.flushAndReload(etty)
+				    },
+				    ( err ) => {
+					    if ( err ) {
+						    cb && cb(err)
+					    }
+				    }
+			    );
 		},
 		data_remove( etty, query, cb ) {
-			if ( !this.nextState[etty] )
+			if ( !this.nextState )
 				return console.error("DataProvider: Unknown data type '" + etty + "'")
 			
-			if ( !this.nextState[etty].remove )
+			if ( !this.nextState.remove )
 				return console.error("DataProvider: no remove api for data type '" + etty + "'")
 			
-			this.state[etty]
-				.remove(query)
-				.then(
-					( data ) => {
-						cb && cb(null, data.result || true);
-						this.flushAndReload(etty)
-					},
-					( err ) => {
-						if ( err ) {
-							cb && cb(err)
-						}
-					}
-				);
+			this.state
+			    .remove(query)
+			    .then(
+				    ( data ) => {
+					    cb && cb(null, data.result || true);
+					    this.flushAndReload(etty)
+				    },
+				    ( err ) => {
+					    if ( err ) {
+						    cb && cb(err)
+					    }
+				    }
+			    );
 		}
 	};
 	
@@ -125,8 +125,8 @@ export default class DataProvider extends Store {
 	 * @returns {*}
 	 */
 	getRecord( etty, id ) {
-		return this.data[etty]
-			&& this.data[etty][id];
+		return this.data
+			&& this.data[id];
 	}
 	
 	/**
@@ -136,8 +136,8 @@ export default class DataProvider extends Store {
 	 */
 	getQuery( query ) {
 		let hash = JSON.stringify(query)
-		return query && this.data["__queries"]
-			&& this.data["__queries"][hash];
+		return query && this.data
+			&& this.data[hash];
 	}
 	
 	/**
@@ -147,10 +147,8 @@ export default class DataProvider extends Store {
 	 * @param rec
 	 */
 	pushRemoteRecord( etty, id, rec ) {
-		this.data[etty]               = this.data[etty] || {};
-		this.data[etty][id]           = rec;
-		this.updatedRecords[etty]     = this.data[etty] || {};
-		this.updatedRecords[etty][id] = rec;
+		this.data[id]           = rec;
+		this.updatedRecords[id] = rec;
 		
 		this.dispatchUpdates();
 	}
@@ -164,10 +162,8 @@ export default class DataProvider extends Store {
 	pushRemoteQuery( etty, query, results, hash ) {
 		hash = hash || H.update(JSON.stringify(query)).digest().toString(32);
 		
-		this.data["__queries"]                 = this.data["__queries"] || {};
-		this.data["__queries"][hash]           = results;
-		this.updatedRecords["__queries"]       = this.data["__queries"] || {};
-		this.updatedRecords["__queries"][hash] = results;
+		this.data[hash]           = results;
+		this.updatedRecords[hash] = results;
 		
 		results.items.forEach(
 			record => this.pushRemoteRecord(record._cls, record._id, record)
@@ -189,11 +185,11 @@ export default class DataProvider extends Store {
 	 * @param id
 	 */
 	syncRemoteRecord( etty, id ) {
-		//if ( !this.state[etty] ) {
+		//if ( !this.state ) {
 		//	this.pushRemoteRecord(etty, id, {})
 		//	return console.error("DataProvider: Unknown data type '" + etty + "'")
 		//}
-		//if ( !this.state[etty].query ) {
+		//if ( !this.state.query ) {
 		//	this.pushRemoteRecord(etty, id, {})
 		//	return console.error("DataProvider: No query API for data type '" + etty + "'")
 		//}
@@ -253,8 +249,8 @@ export default class DataProvider extends Store {
 		types.forEach(
 			etty => {
 				if ( etty !== "__queries" )
-					this.activeRecords[etty] &&
-					Object.keys(this.activeRecords[etty])
+					this.activeRecords &&
+					Object.keys(this.activeRecords)
 					      .map(
 						      id => this.syncRemoteRecord(etty, id)
 					      )
@@ -279,13 +275,13 @@ export default class DataProvider extends Store {
 			.forEach(
 				etty => {
 					Object
-						.keys(updates[etty])
+						.keys(updates)
 						.forEach(
 							id => {
-								if ( watchers[etty] && watchers[etty][id] )
-									watchers[etty][id]
+								if ( watchers && watchers[id] )
+									watchers[id]
 										.forEach(
-											watcher => watcher(updates[etty][id])
+											watcher => watcher(updates[id])
 										)
 							}
 						)
@@ -321,12 +317,12 @@ export default class DataProvider extends Store {
 		
 		while ( toClean.length ) {
 			item = toClean[0];
-			if ( watchers[item.etty][item.id]
-				&& watchers[item.etty][item.id].length )// was put in scrap then réused, remove from scrap list
+			if ( watchers[item.id]
+				&& watchers[item.id].length )// was put in scrap then réused, remove from scrap list
 				toClean.shift()
 			else if ( item.dt < dtLimit ) {// timeout: delete it
 				//console.log("clean", item)
-				delete data[item.etty][item.id];
+				delete data[item.id];
 				toClean.shift()
 			}
 			else break;
@@ -350,17 +346,17 @@ export default class DataProvider extends Store {
 	 */
 	bindRecord( etty, id, watcher ) {
 		let refs   = this.watchersByEttyId, newRequest,
-		    noData = !this.data[etty] || !this.data[etty][id];
+		    noData = !this.data || !this.data[id];
 		
-		refs[etty]     = refs[etty] || {};
-		newRequest     = !refs[etty][id];
-		refs[etty][id] = refs[etty][id] || [];
+		refs       = refs || {};
+		newRequest = !refs[id];
+		refs[id]   = refs[id] || [];
 		
-		refs[etty][id].push(watcher);
+		refs[id].push(watcher);
 		
 		if ( newRequest ) {
-			this.activeRecords[etty]     = this.activeRecords[etty] || {};
-			this.activeRecords[etty][id] = id;
+			this.activeRecords     = this.activeRecords || {};
+			this.activeRecords[id] = id;
 		}
 		
 		//console.info("! watch record : ", id)
@@ -369,10 +365,10 @@ export default class DataProvider extends Store {
 			if ( noData )
 				this.syncRemoteRecord(etty, id);
 			else
-				watcher(this.data[etty][id])
+				watcher(this.data[id])
 		}
 		else
-			!noData && watcher(this.data[etty][id])
+			!noData && watcher(this.data[id])
 		
 		return etty + "." + id;
 	}
@@ -380,17 +376,17 @@ export default class DataProvider extends Store {
 	unBindRecord( etty, id, watcher ) {
 		let refs = this.watchersByEttyId;
 		
-		refs[etty]     = refs[etty] || {};
-		refs[etty][id] = refs[etty][id] || [];
+		refs     = refs || {};
+		refs[id] = refs[id] || [];
 		
-		let i = refs[etty][id].indexOf(watcher);
+		let i = refs[id].indexOf(watcher);
 		if ( i != -1 )
-			refs[etty][id].splice(i, 1);
+			refs[id].splice(i, 1);
 		
-		if ( !refs[etty][id].length ) {
-			delete refs[etty][id];
-			if ( this.activeRecords[etty] )
-				delete this.activeRecords[etty][id];
+		if ( !refs[id].length ) {
+			delete refs[id];
+			if ( this.activeRecords )
+				delete this.activeRecords[id];
 			this.scrapIt(etty, id);
 		}
 		
@@ -409,17 +405,17 @@ export default class DataProvider extends Store {
 		    hash   = H.update(JSON.stringify(query)).digest().toString(32),
 		    etty   = query.etty,
 		    newRequest,
-		    noData = !this.data["__queries"] || !this.data["__queries"][hash];
+		    noData = !this.data || !this.data[hash];
 		
-		refs["__queries"]       = refs["__queries"] || {};
-		newRequest              = !refs["__queries"][hash];
-		refs["__queries"][hash] = refs["__queries"][hash] || [];
+		refs       = refs || {};
+		newRequest = !refs[hash];
+		refs[hash] = refs[hash] || [];
 		
-		refs["__queries"][hash].push(watcher);
+		refs[hash].push(watcher);
 		
 		if ( newRequest ) {
-			this.activeQueries["__queries"]       = this.activeQueries["__queries"] || {};
-			this.activeQueries["__queries"][hash] = query;
+			this.activeQueries       = this.activeQueries || {};
+			this.activeQueries[hash] = query;
 		}
 		
 		// + socket watch / sync query record (debounced)
@@ -428,10 +424,10 @@ export default class DataProvider extends Store {
 			if ( noData )
 				this.syncRemoteQuery(query, hash);
 			else
-				watcher(this.data["__queries"][hash])
+				watcher(this.data[hash])
 		}
 		else
-			!noData && watcher(this.data["__queries"][hash])
+			!noData && watcher(this.data[hash])
 		
 		return hash;
 	}
@@ -441,16 +437,15 @@ export default class DataProvider extends Store {
 		    hash = JSON.stringify(query),
 		    etty = "__queries";
 		
-		refs[etty]       = refs[etty] || {};
-		refs[etty][hash] = refs[etty][hash] || [];
+		refs[hash] = refs[hash] || [];
 		
-		let i = refs[etty][hash].indexOf(watcher);
+		let i = refs[hash].indexOf(watcher);
 		if ( i != -1 )
-			refs[etty][hash].splice(i, 1);
+			refs[hash].splice(i, 1);
 		
-		if ( !refs[etty][hash].length ) {
-			delete refs[etty][hash];
-			delete this.activeQueries[etty][hash];
+		if ( !refs[hash].length ) {
+			delete refs[hash];
+			delete this.activeQueries[hash];
 			this.scrapIt(etty, hash);
 		}
 		

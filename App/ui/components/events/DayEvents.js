@@ -18,13 +18,13 @@ import {reScope, scopeToProps, propsToScope} from "rscopes";
 import {withStateMap, asRef, asStore}        from "rescope-spells";
 import anims                                 from 'App/ui/anims/(*).js';
 
-import {Blocks}                from 'App/ui';
+import {Comps}                from 'App/ui';
 
 import Tabs                  from '@material-ui/core/Tabs';
 import Tab                   from '@material-ui/core/Tab';
 import moment                from "moment";
 import stores                from 'App/stores/(*).js';
-import Comps                 from 'App/ui/components/(*).js';
+import {Views}                 from 'App/ui';
 import {asTweener, TweenRef} from "react-rtween";
 import scopes                from 'App/scopes/(*).js';
 
@@ -61,12 +61,12 @@ export default class DayEvents extends React.Component {
 				data-dt={ moment(day).valueOf() }
 			>
 				<div className={ "day" }>
-					<Comps.SimpleDay day={ day }/>
+					<Views.SimpleDay day={ day }/>
 				</div>
 				{
 					EventList && EventList.items && EventList.items.map(
 						( item, i ) => {
-							return <Comps.Event_item
+							return <Views.Event.item
 								onClick={ e => $actions.selectEvent(item, moment(day).valueOf(), true) }
 								key={ item._id }
 								day={ day }

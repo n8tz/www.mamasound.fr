@@ -23,7 +23,7 @@ import MenuItem                              from '@material-ui/core/MenuItem';
 import CancelIcon                            from '@material-ui/icons/Cancel';
 import {emphasize}                           from '@material-ui/core/styles/colorManipulator';
 import stores                                from 'App/stores/(*).js';
-import Comps                                 from 'App/ui/components/(*).js';
+import Views                                 from 'App/ui/components/(*).js';
 import {asTweener, TweenRef}                 from "react-rtween";
 import Fab                                   from '@material-ui/core/Fab';
 

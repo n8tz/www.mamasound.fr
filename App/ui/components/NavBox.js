@@ -18,7 +18,7 @@ import {withStateMap, asRef, asStore}        from "rescope-spells";
 import anims                                 from 'App/ui/anims/(*).js';
 import Fab                                   from '@material-ui/core/Fab';
 import stores                                from 'App/stores/(*).js';
-import Comps                                 from 'App/ui/components/(*).js';
+import Views                                 from 'App/ui/components/(*).js';
 import {asTweener, TweenRef}                 from "react-rtween";
 import {FacebookProvider, Page}              from 'react-facebook';
 

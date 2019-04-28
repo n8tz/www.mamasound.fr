@@ -18,11 +18,11 @@ import {withStateMap, asRef, asStore}        from "rescope-spells";
 import anims                                 from 'App/ui/anims/(*).js';
 import Fab                                   from '@material-ui/core/Fab';
 import stores                                from 'App/stores/(*).js';
-import Comps                                 from 'App/ui/components/(*).js';
+import Views                                 from 'App/ui/components/(*).js';
 import {asTweener, TweenRef}                 from "react-rtween";
 import {FacebookProvider, Page}              from 'react-facebook';
 
-import {Blocks} from 'App/ui';
+import {Comps} from 'App/ui';
 
 @reScope(
 	{
@@ -59,7 +59,7 @@ export default class Footer extends React.Component {
 		return (
 			<div className={ "Footer" }>
 				<div className={ "toolbar" }>
-					<Blocks.events.SearchBar/>
+					<Comps.events.SearchBar/>
 				</div>
 				{/*{ ActiveTags && ActiveTags.available && ActiveTags.available.map(*/ }
 				{/*tag =>*/ }

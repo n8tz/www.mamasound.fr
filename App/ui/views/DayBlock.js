@@ -18,7 +18,7 @@ import {withStateMap, asRef, asStore}        from "rescope-spells";
 import anims                                 from 'App/ui/anims/(*).js';
 
 import moment                from "moment";
-import {Comps}               from 'App/ui';
+import {Views}               from 'App/ui';
 import {asTweener, TweenRef} from "react-rtween";
 
 
@@ -110,7 +110,7 @@ export default class DayBlock extends React.Component {
 					          }
 				          }>
 					<div>
-						<Comps.SimpleDay day={ curDay }/>
+						<Views.SimpleDay day={ curDay }/>
 					</div>
 				</TweenRef>
 				<TweenRef id={ "to" }
@@ -126,7 +126,7 @@ export default class DayBlock extends React.Component {
 					          }
 				          }>
 					<div>
-						<Comps.SimpleDay day={ nextDay }/>
+						<Views.SimpleDay day={ nextDay }/>
 					</div>
 				</TweenRef>
 				

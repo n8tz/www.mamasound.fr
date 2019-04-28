@@ -22,7 +22,7 @@
 
 import React  from "react";
 import moment from "moment";
-import ShareBox from "./ShareBox";
+import ShareBox from "App/ui/components/ShareBox";
 
 import {NavLink} from "react-router-dom";
 
@@ -33,11 +33,10 @@ export default (
 		refs,
 		selected,
 		place = record.place
-		&& refs[record.place.cls]
-		&& refs[record.place.cls][record.place.objId],
+		&& refs
+		&& refs[record.place.objId],
 		category = record.category
-		&& refs[record.category.cls]
-		&& refs[record.category.cls][record.category.objId]
+		&& refs[record.category.objId]
 	}
 ) => {
 	//debugger;

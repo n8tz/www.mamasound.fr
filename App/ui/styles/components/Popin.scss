@@ -1,0 +1,130 @@
+/*!
+ * The MIT License (MIT)
+ * Copyright (c) 2019. Wise Wild Web
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *  @author : Nathanael Braun
+ *  @contact : n8tz.js@gmail.com
+ */
+
+.leaflet-popup-content {
+  width: 250px;
+  height: 180px;
+}
+
+.leaflet-popup-content-wrapper {
+  margin-left: 5px;
+
+}
+
+.leaflet-popup-close-button {
+  display: none !important;
+}
+
+.Popin {
+  height: 110px;
+  width: 230px;
+  //background-color: #063249;
+  //text-align: center;
+  margin-top: 35px;
+  margin-bottom: 45px;
+  position: relative;
+
+  .closeBtn {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -15px;
+    margin-top: -53px;
+    width: 38px;
+    height: 38px;
+    background-color: $secondaryBackColor;
+
+    border-radius: 25px;
+    cursor: pointer;
+    -webkit-box-shadow: $boxShadows;
+    -moz-box-shadow: $boxShadows;
+    box-shadow: $boxShadows;
+    transition: box-shadow .5s;
+  }
+
+  .closeBtn:hover {
+    -webkit-box-shadow: $boxShadows;
+    -moz-box-shadow: $boxShadows;
+    box-shadow: $boxShadows;
+  }
+
+  .closeBtn::after {
+    content: 'X';
+    position: absolute;
+    top: 2px;
+    left: 3px;
+    height: 32px;
+    width: 32px;
+    //background-color: rgba(255, 255, 255, 0.51);
+    //background-image: url('../medias/images/close.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+
+  .contactBtn {
+    display: none;
+
+    color: $mainBackColor;
+  }
+
+  .topBlock {
+    position: relative;
+    height: 72px;
+    //overflow: hidden;
+    .logo {
+      width: 72px;
+      height: 72px;
+      margin: 5px;
+      //border: 5px solid white;
+      display: inline-block;
+      //border-radius: 50px;
+      float: left;
+      vertical-align: text-bottom;
+    }
+
+    .name {
+      word-break: break-word;
+      //margin-top: 1em;
+      //color: white;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      display: inline-block;
+      color: $mainBackColor;
+
+      vertical-align: text-bottom;
+      font-family: $mainFontFamily;
+      font-weight: bold;
+      font-size: 1.2em;
+      float: right;
+      width: 137px;
+
+    }
+  }
+
+  .address {
+
+    clear: both;
+    font-family: $mainFontFamily;
+    font-weight: bold;
+    height: 88px;
+    //font-size: 1.2em;
+    //font-weight: bold;
+    //font-size: .75em;
+    //border-bottom: 1px solid lightgrey;
+    padding-bottom: 20px;
+    padding-top: 20px;
+  }
+}
+

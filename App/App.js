@@ -26,6 +26,15 @@ import SettingsIcon                               from '@material-ui/icons/Setti
 import "./ui/styles/index.scss"
 import {reScope, scopeToProps, propsToScope}      from "rscopes";
 
+let hookedRCE       = React.createElement;
+React.createElement = function ( type, ...argz ) {
+	if ( !type ) {
+		console.error("Invalid TagName passed to CreateElement");
+		debugger
+		return <div className="error">Invalid TagName passed to CreateElement, </div>;
+	}
+	return hookedRCE.apply(this, arguments);
+}
 moment.locale('fr');
 
 @scopeToProps("widgets", "appState")

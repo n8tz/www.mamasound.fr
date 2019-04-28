@@ -66,7 +66,7 @@ export default (
 				id => {
 					let ShareLink = shareStuff[id + "ShareButton"],
 					    ShareIcon = shareStuff[id + "Icon"];
-					return <ShareLink url={ "http://www.mamasound.fr" }>
+					return <ShareLink url={ "http://www.mamasound.fr" } key={ id }>
 						<ShareIcon
 							size={ 32 }
 							round/>

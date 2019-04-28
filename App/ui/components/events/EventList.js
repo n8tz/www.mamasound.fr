@@ -21,19 +21,16 @@ import {
 }                from "rescope-spells";
 import anims     from 'App/ui/anims/(*).js';
 
-import {Blocks}              from 'App/ui';
+import {Comps}               from 'App/ui';
 import Tabs                  from '@material-ui/core/Tabs';
 import Tab                   from '@material-ui/core/Tab';
 import moment                from "moment";
 import stores                from 'App/stores/(*).js';
-import Comps                 from 'App/ui/components/(*).js';
+import {Views}               from 'App/ui';
 import {asTweener, TweenRef} from "react-rtween";
 import SwipeableViews        from 'react-swipeable-views';
 
 
-@reScope(
-	{}
-)
 @scopeToProps("appState", "Anims")
 export default class EventList extends React.Component {
 	static propTypes = {};
@@ -152,7 +149,7 @@ export default class EventList extends React.Component {
 							<div
 								className={ "EventNav" }
 							>
-								<Comps.DayBlock day={ appState.currentVisibleDay || appState.curDay }/>
+								<Views.DayBlock day={ appState.currentVisibleDay || appState.curDay }/>
 								<Tabs
 									value={ appState.viewType }
 									onChange={ ( e, v ) => {
@@ -186,7 +183,7 @@ export default class EventList extends React.Component {
 																.fill(0)
 																.map(
 																	( v, i ) =>
-																		<Blocks.events.DayEvents
+																		<Comps.events.DayEvents
 																			className={ "dayBlock" }
 																			key={ i }
 																			day={ moment(appState.curDay).add(i, 'day').unix() * 1000 }
@@ -205,7 +202,7 @@ export default class EventList extends React.Component {
 							initial={ MainPage.NavBox }
 							reset={ true }
 						>
-							<Blocks.NavBox/>
+							<Comps.NavBox/>
 						</TweenRef>
 					</div>
 				</div>

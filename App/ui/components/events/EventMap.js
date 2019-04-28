@@ -21,6 +21,7 @@ import GpsFixedIcon                          from '@material-ui/icons/GpsFixed';
 import GpsOffIcon                            from '@material-ui/icons/GpsOff';
 import scopes                                from 'App/scopes/(*).js';
 import {asTweener, TweenRef}                 from "react-rtween";
+import {Views}                               from 'App/ui';
 
 
 if ( typeof window !== "undefined" ) {
@@ -119,7 +120,7 @@ else {
 		"day:DayEventsQuery.curDay",
 		"viewType:DayEventsQuery.viewType"
 	])
-@scopeToProps("Selected", "Anims", "Events", "UserGeoLocation")
+@scopeToProps("Selected", "Anims", "Events", "UserGeoLocation", "DataProvider")
 export default class EventMap extends React.Component {
 	static propTypes = {};
 	state            = {};
@@ -128,7 +129,7 @@ export default class EventMap extends React.Component {
 		let {
 			    Events: { center = {}, POIs = [], zoom } = {},
 			    Anims : { MainPage }, UserGeoLocation, Selected,
-			    $actions, onSelect, selected
+			    $actions, DataProvider, selected
 		    }     = this.props,
 		    state = this.state;
 		return (
@@ -149,9 +150,15 @@ export default class EventMap extends React.Component {
 						{
 							POIs.map(
 								( { geoPoint, event } ) =>
-									<Marker position={ { lat: geoPoint[1], lng: geoPoint[0] } } key={ event._id }>
-										<Popup
-											open={ Selected.record && (Selected.record._id === event._id) }>{ event.title }</Popup>
+									<Marker
+										//icon={
+										//	(Selected.Event && (Selected.Event._id === event._id)) &&
+										//	Leaflet.icon.pulse({
+										//		                   iconSize: [12, 12],
+										//		                   color   : 'red'
+										//	                   }) || Leaflet.Icon.Default
+										//}
+										position={ { lat: geoPoint[1], lng: geoPoint[0] } } key={ event._id }>
 									</Marker>
 							)
 						}
@@ -163,6 +170,30 @@ export default class EventMap extends React.Component {
 								}
 								position={ { lat: UserGeoLocation.pos.latitude, lng: UserGeoLocation.pos.longitude } }/>
 						}
+						<LayerGroup ref="PopupsLayer">
+							{
+								Selected.Event && DataProvider[Selected.Event.place.objId]
+								&& <Popup
+									position={ [...DataProvider[Selected.Event.place.objId].address.geoPoint].reverse() }
+									key={ Selected.Event.place._id }
+									style={ { marginBottom: '50px' } }
+									offset={ Leaflet.point(0, -25) }
+								>
+									<Views.Event.popin
+										$scope={ this.props.$scope }
+										record={ Selected.Event }
+										refs={ DataProvider }
+										onClose={ ( e ) => {
+											//this.state.selectedMarkerIcon &&
+											//this.state.selectedMarkerIcon.classList.remove("active");
+											//this.setState({ selectedPOI: null, selectedMarkerIcon: null });
+											
+										} }
+									/>
+								</Popup>
+								|| ''
+							}
+						</LayerGroup>
 					</Map>
 					<div
 						className={ "EventMapTools" }

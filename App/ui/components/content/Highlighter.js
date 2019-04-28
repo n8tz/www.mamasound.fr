@@ -18,7 +18,7 @@ import {reScope, scopeToProps, propsToScope, Store} from "rscopes";
 import moment                                       from 'moment';
 //import Slider                                       from "rSlide";
 import anims                                        from 'App/ui/anims/(*).js';
-import Comps                                        from 'App/ui/components/(*).js';
+import {Comps, Views}                                      from 'App/ui';
 import {withStateMap, asRef, asStore}               from "rescope-spells";
 import stores                                       from 'App/stores/(*).js';
 import {withTweener, asTweener, TweenRef}           from "react-rtween";
@@ -84,19 +84,8 @@ export default class Highlighter extends React.Component {
 		let {
 			    Grid: { items: gridItems = [], layout = [] },
 			    $actions, onSelect, tweener
-		    }          = this.props,
-		    state      = this.state;
-		const settings = {
-			className    : "center",
-			centerMode   : true,
-			infinite     : true,
-			centerPadding: "60px",
-			slidesToShow : 1,
-			variableWidth: true,
-			autoplay     : true,
-			autoplaySpeed: 5000,
-			speed        : 500
-		};
+		    }     = this.props,
+		    state = this.state;
 		return (
 			<div
 				className={ "Highlighter" }
@@ -233,7 +222,7 @@ export default class Highlighter extends React.Component {
 											          ],
 										          } }
 										>
-											<Comps.FocusedItems record={ item }/>
+											<Views.FocusedItems record={ item }/>
 										</TweenRef>
 								)
 							}

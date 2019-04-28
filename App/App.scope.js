@@ -100,7 +100,7 @@ export default {
 	@withStateMap(
 		{
 			@asRef
-			record: "appState.selectedEvent"
+			Event: "appState.selectedEvent"
 		}
 	)
 	Selected: stores.MongoRecords,

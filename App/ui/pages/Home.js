@@ -14,12 +14,11 @@
 
 import React                                 from 'react';
 import {reScope, scopeToProps, propsToScope} from "rscopes";
-import {Blocks}                              from 'App/ui';
+import {Comps}                              from 'App/ui';
 import ReactDom                              from "react-dom";
 
 import {withStateMap, asRef, asStore}   from "rescope-spells";
 import {asTweener, TweenRef, TweenAxis} from "react-rtween";
-
 
 @scopeToProps("appState", "Anims")
 @asTweener({})
@@ -90,18 +89,18 @@ export default class Home extends React.Component {
 					}
 				/>
 				<TweenRef id={ "Highlighter" } initial={ MainPage.Highlighter }>
-					<Blocks.content.Highlighter/>
+					<Comps.content.Highlighter/>
 				</TweenRef>
 				
 				<TweenRef id={ "events" }
 				          initial={ MainPage.events }>
-					<Blocks.events.EventList/>
+					<Comps.events.EventList/>
 				</TweenRef>
 				<TweenRef
 					id={ "EventMap" }
 					initial={ MainPage.EventMap }
 				>
-					<Blocks.events.EventMap
+					<Comps.events.EventMap
 						day={ appState.currentVisibleDay || appState.curDay }
 						viewType={ appState.viewType }/>
 				</TweenRef>
@@ -109,14 +108,14 @@ export default class Home extends React.Component {
 					id={ "PageBlock" }
 					initial={ MainPage.PageBlock }
 				>
-					<Blocks.content.PageBlock/>
+					<Comps.content.PageBlock/>
 				</TweenRef>
 				{/*<TweenRef*/ }
 				{/*id={ "Footer" }*/ }
 				{/*initial={ MainPage.Footer }*/ }
 				{/*reset={ true }*/ }
 				{/*>*/ }
-				{/*<Blocks.Footer/>*/ }
+				{/*<Comps.Footer/>*/ }
 				{/*</TweenRef>*/ }
 			</div>
 		</TweenRef>
