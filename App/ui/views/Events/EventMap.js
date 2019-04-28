@@ -134,9 +134,10 @@ export default class EventMap extends React.Component {
 		    state = this.state;
 		return (
 			<div className={ "EventMap" }>
-				<div className={ "maskContent" }>
+				<div className={ "maskContent " }>
 					
 					<Map center={ center } zoom={ zoom }
+					     className={ "container" }
 					     scrollWheelZoom={ false }
 					     animate={ true }
 					     useFlyTo={ true }

@@ -36,12 +36,7 @@
 
   .leaflet-container {
 
-    position: absolute;
-    background: yellow;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-
+    @include use_hvCenteredAbs();
     height: 100%;
     min-height: 200px;
   }

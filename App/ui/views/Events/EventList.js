@@ -11,16 +11,15 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-import PropTypes from "prop-types";
-import React     from "react";
+import PropTypes             from "prop-types";
+import React                 from "react";
 import {
 	reScope, scopeToProps, propsToScope
-}                from "rscopes";
+}                            from "rscopes";
 import {
 	withStateMap, asRef, asStore
-}                from "rescope-spells";
-import anims     from 'App/ui/anims/(*).js';
-
+}                            from "rescope-spells";
+import anims                 from 'App/ui/anims/(*).js';
 import {Comps}               from 'App/ui';
 import Tabs                  from '@material-ui/core/Tabs';
 import Tab                   from '@material-ui/core/Tab';
@@ -58,7 +57,7 @@ export default class EventList extends React.Component {
 			this._running = true;
 			$actions.oneMoreDay(appState.viewType)
 		}
-	}
+	};
 	/**
 	 * scrollTo selected
 	 */
@@ -78,7 +77,7 @@ export default class EventList extends React.Component {
 				                behavior: 'smooth',
 			                });
 		}
-	}
+	};
 	/**
 	 * watchCurrentDayFromScroll
 	 */
@@ -108,7 +107,7 @@ export default class EventList extends React.Component {
 				}
 			)
 		}
-	}
+	};
 	
 	componentDidMount() {
 		this.isBotListIsInViewport()
@@ -183,7 +182,7 @@ export default class EventList extends React.Component {
 																.fill(0)
 																.map(
 																	( v, i ) =>
-																		<Comps.events.DayEvents
+																		<Views.Events.DayEvents
 																			className={ "dayBlock" }
 																			key={ i }
 																			day={ moment(appState.curDay).add(i, 'day').unix() * 1000 }
@@ -200,7 +199,6 @@ export default class EventList extends React.Component {
 						<TweenRef
 							id={ "NavBox" }
 							initial={ MainPage.NavBox }
-							reset={ true }
 						>
 							<Comps.NavBox/>
 						</TweenRef>

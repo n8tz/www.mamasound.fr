@@ -610,7 +610,7 @@ export default function asTweener( ...argz ) {
 											deltaX = (-(descr._lastPos.x - descr._startPos.x) / tweener._.box.x) * x.scrollableArea;
 											deltaY = (-(descr._lastPos.y - descr._startPos.y) / tweener._.box.y) * y.scrollableArea;
 											if ( !xDispatched && !tweener.isAxisOut("scrollX", deltaX) ) {
-												console.log(tweener.constructor.displayName, deltaX)
+												//console.log(tweener.constructor.displayName, deltaX)
 												x.inertia.hold(lastPos.x + deltaX);
 												xDispatched = true;
 											}
@@ -729,7 +729,7 @@ export default function asTweener( ...argz ) {
 			// check if there scrollable stuff in dom targets
 			// get all the parents components & dom node of an dom element ( from fibers )
 			Comps = utils.findReactParents(headTarget);
-			console.log("dispatching ", dx, dy, Comps);
+			//console.log("dispatching ", dx, dy, Comps);
 			for ( i = 0; i < Comps.length; i++ ) {
 				// react comp with tweener support
 				if ( Comps[i].__isTweener ) {

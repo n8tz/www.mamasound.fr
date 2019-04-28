@@ -14,7 +14,7 @@
 
 import React                                 from 'react';
 import {reScope, scopeToProps, propsToScope} from "rscopes";
-import {Comps}                              from 'App/ui';
+import {Comps, Views}                        from 'App/ui';
 import ReactDom                              from "react-dom";
 
 import {withStateMap, asRef, asStore}   from "rescope-spells";
@@ -52,7 +52,7 @@ export default class Home extends React.Component {
 		let { appState } = this.props;
 		console.warn(appState === props.appState)
 		if ( props.appState.currentPageFocus !== appState.currentPageFocus ) {
-			console.log(appState.currentPageFocus);
+			//console.log(appState.currentPageFocus);
 			switch ( appState.currentPageFocus ) {
 				case 'head' :
 					setTimeout(tm => this.scrollTo(0, 300), 50);
@@ -89,18 +89,18 @@ export default class Home extends React.Component {
 					}
 				/>
 				<TweenRef id={ "Highlighter" } initial={ MainPage.Highlighter }>
-					<Comps.content.Highlighter/>
+					<Views.Block.Highlighter/>
 				</TweenRef>
 				
 				<TweenRef id={ "events" }
 				          initial={ MainPage.events }>
-					<Comps.events.EventList/>
+					<Views.Events.EventList/>
 				</TweenRef>
 				<TweenRef
 					id={ "EventMap" }
 					initial={ MainPage.EventMap }
 				>
-					<Comps.events.EventMap
+					<Views.Events.EventMap
 						day={ appState.currentVisibleDay || appState.curDay }
 						viewType={ appState.viewType }/>
 				</TweenRef>
@@ -108,7 +108,7 @@ export default class Home extends React.Component {
 					id={ "PageBlock" }
 					initial={ MainPage.PageBlock }
 				>
-					<Comps.content.PageBlock/>
+					<Views.Block.PageBlock/>
 				</TweenRef>
 				{/*<TweenRef*/ }
 				{/*id={ "Footer" }*/ }
