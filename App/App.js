@@ -15,14 +15,9 @@
 import React                                      from 'react';
 import moment                                     from 'moment';
 import Widget                                     from 'App/ui/components/Widget.js';
-import allWidgets                                 from "App/ui/widgets/(*).js";
-import Home                                       from './ui/pages/Home';
+import {Views}                                    from "App/ui";
 import {BrowserRouter, StaticRouter, Route, Link} from "react-router-dom";
 import {ContextMenu}                              from 'react-inheritable-contextmenu';
-import Toolbar                                    from '@material-ui/core/Toolbar';
-import IconButton                                 from '@material-ui/core/IconButton';
-import Typography                                 from '@material-ui/core/Typography';
-import SettingsIcon                               from '@material-ui/icons/Settings';
 import "./ui/styles/index.scss"
 import {reScope, scopeToProps, propsToScope}      from "rscopes";
 
@@ -59,7 +54,7 @@ export default class App extends React.Component {
 				{
 					widgets.items.map(
 						widget => {
-							let WidgetComp = allWidgets[widget.type] || 'div';
+							let WidgetComp = Views.Widget[widget.type] || 'div';
 							return <Widget key={ widget._id } record={ widget }
 							               onSelect={ e => $actions.selectWidget(widget._id) }
 							               selected={ widget._id == appState.selectedWidgetId }>
@@ -69,7 +64,7 @@ export default class App extends React.Component {
 					)
 				}
 				
-				<Route path="/" exact component={ Home }/>
+				<Route path="/" exact component={ Views.Page.Home }/>
 			</React.Fragment>
 		</Router>
 	}

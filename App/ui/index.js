@@ -16,13 +16,10 @@
 import anims      from 'App/ui/anims/(**/*).js';
 import Views      from 'App/ui/views/(**/*).js';
 import components from 'App/ui/components/(**/*).js';
-import widgets    from 'App/ui/widgets/(**/*).js';
 
 export {
 	anims,
 	Views,
 	components,
 	components as Comps,
-	widgets,
-	widgets as Widgets
 };
