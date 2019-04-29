@@ -11,32 +11,16 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-import PropTypes                        from "prop-types";
-import React                            from "react";
-import {asTweener, TweenRef, TweenAxis} from "react-rtween";
-
-var easingFn = require('d3-ease');
-
-import {reScope, scopeToProps, propsToScope} from "rscopes";
-import {withStateMap, asRef, asStore}        from "rescope-spells";
-
-function offsetTweenLine( items, start = 0 ) {
-	return items.map(
-		item => (
-			{
-				...item,
-				from: item.from + start
-			}
-		)
-	)
-	
-}
+import PropTypes                                    from "prop-types";
+import React                                        from "react";
+import {asTweener, TweenRef, TweenAxis, tweenTools} from "react-rtween";
+import {reScope, scopeToProps, propsToScope}        from "rscopes";
+import {withStateMap, asRef, asStore}               from "rescope-spells";
 
 @scopeToProps("Anims")
 @asTweener({ enableMouseDrag: true })
 export default class Slider extends React.Component {
 	static defaultProps = {
-		
 		defaultIndex: 0,
 		visibleItems: 10,
 		overlaps    : 1 / 4,
@@ -48,8 +32,6 @@ export default class Slider extends React.Component {
 			{
 				lastDay: this.props.day
 			})
-		
-		
 	}
 	
 	componentDidMount() {
@@ -123,10 +105,10 @@ export default class Slider extends React.Component {
 								}
 								tweenLines={
 									{
-										scrollX: offsetTweenLine(
+										scrollX: tweenTools.offset(
 											[
 												...defaultEntering,
-												...offsetTweenLine(defaultLeaving, 100)
+												...tweenTools.offset(defaultLeaving, 100)
 											],
 											i * step
 										)

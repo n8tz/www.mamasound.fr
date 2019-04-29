@@ -18,7 +18,7 @@ import {reScope, scopeToProps, propsToScope, Store} from "rscopes";
 import moment                                       from 'moment';
 //import Slider                                       from "rSlide";
 import anims                                        from 'App/ui/anims/(*).js';
-import {Comps, Views}                                      from 'App/ui';
+import {Comps, Views}                               from 'App/ui';
 import {withStateMap, asRef, asStore}               from "rescope-spells";
 import stores                                       from 'App/stores/(*).js';
 import {withTweener, asTweener, TweenRef}           from "react-rtween";

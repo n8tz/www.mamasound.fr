@@ -28,7 +28,7 @@ import {deMuxTween, muxToCss, deMuxLine} from "./helpers";
  */
 
 
-var isBrowserSide           = (new Function("try {return this===window;}catch(e){ return false;}"))(),
+let isBrowserSide           = (new Function("try {return this===window;}catch(e){ return false;}"))(),
     isArray                 = is.array,
     _live, lastTm, _running = [];
 
@@ -70,7 +70,6 @@ const Runner = {
 			_live = false;
 		}
 	},
-	
 };
 
 
@@ -592,11 +591,8 @@ export default function asTweener( ...argz ) {
 										}
 										
 									}
-									lastPos.x = x.scrollPos;
-									lastPos.y = y.scrollPos;
 								},
 								'drag'     : ( e, touch, descr ) => {//@todo
-									
 									let tweener,
 									    x, deltaX, dX, xDispatched,
 									    y, deltaY, dY, yDispatched,
@@ -614,12 +610,11 @@ export default function asTweener( ...argz ) {
 											deltaX = (-(descr._lastPos.x - descr._startPos.x) / tweener._.box.x) * x.scrollableArea;
 											deltaY = (-(descr._lastPos.y - descr._startPos.y) / tweener._.box.y) * y.scrollableArea;
 											if ( !xDispatched && !tweener.isAxisOut("scrollX", deltaX) ) {
-												//console.log(tweener.constructor.displayName, deltaX)
-												x.inertia.hold(parentsState[i].x + lastPos.x + deltaX);
+												x.inertia.hold(parentsState[i].x + deltaX);
 												xDispatched = true;
 											}
 											if ( !yDispatched && !tweener.isAxisOut("scrollY", deltaY) ) {
-												y.inertia.hold(parentsState[i].y + lastPos.y + deltaY);
+												y.inertia.hold(parentsState[i].y + deltaY);
 												yDispatched = true;
 											}
 										}
@@ -648,11 +643,10 @@ export default function asTweener( ...argz ) {
 									let tweener,
 									    i;
 									
-									lastPos = lastPos || { ...descr._startPos };
 									for ( i = 0; i < parents.length; i++ ) {
 										tweener = parents[i];
 										// react comp with tweener support
-										if ( tweener.__isTweener ) {
+										if ( tweener.__isTweener && tweener._.scrollEnabled ) {
 											tweener._getAxis("scrollY").inertia.release();
 											tweener._getAxis("scrollX").inertia.release();
 										}
@@ -798,14 +792,6 @@ export default function asTweener( ...argz ) {
 			this._.tweenRefCSS[target] = this._.tweenRefCSS[target] || {};
 			Object.assign(this._.tweenRefCSS[target], style);
 		}
-		
-		//
-		//shouldApplyScroll( to, from ) {
-		//	return this._.scrollHook.reduce(( r, hook ) => (!r
-		//	                                                ? false
-		//	                                                : hook(to, from)), true)
-		//		|| super.shouldApplyScroll && super.shouldApplyScroll(to, from);
-		//}
 		
 		_updateBox() {
 			var node = this.getRootNode();
