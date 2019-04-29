@@ -561,7 +561,8 @@ export default function asTweener( ...argz ) {
 						);
 					
 					let lastPos = {},
-					    parents;
+					    parents,
+					    parentsState;
 					if ( !rootNode )
 						console.warn("fail registering drag listener !! ")
 					else
@@ -572,7 +573,8 @@ export default function asTweener( ...argz ) {
 									    x,
 									    y, i;
 									
-									parents = utils.findReactParents(e.target);
+									parents      = utils.findReactParents(e.target);
+									parentsState = [];
 									for ( i = 0; i < parents.length; i++ ) {
 										tweener = parents[i];
 										// react comp with tweener support
@@ -581,8 +583,12 @@ export default function asTweener( ...argz ) {
 											y = tweener._getAxis("scrollY");
 											x.inertia.startMove();
 											y.inertia.startMove();
+											parentsState[i] = { x: x.scrollPos, y: y.scrollPos };
 											!x.inertiaFrame && tweener.applyInertia(x, "scrollX");
 											!y.inertiaFrame && tweener.applyInertia(y, "scrollY");
+										}
+										else if ( is.element(tweener) ) {
+											parentsState[i] = getComputedStyle(tweener, null);
 										}
 										
 									}
@@ -596,8 +602,6 @@ export default function asTweener( ...argz ) {
 									    y, deltaY, dY, yDispatched,
 									    style, i;
 									
-									//parents = utils.findReactParents(rootNode);
-									lastPos = lastPos || { ...descr._startPos };
 									for ( i = 0; i < parents.length; i++ ) {
 										tweener = parents[i];
 										dX      = -(descr._lastPos.x - descr._startPos.x);
@@ -611,16 +615,16 @@ export default function asTweener( ...argz ) {
 											deltaY = (-(descr._lastPos.y - descr._startPos.y) / tweener._.box.y) * y.scrollableArea;
 											if ( !xDispatched && !tweener.isAxisOut("scrollX", deltaX) ) {
 												//console.log(tweener.constructor.displayName, deltaX)
-												x.inertia.hold(lastPos.x + deltaX);
+												x.inertia.hold(parentsState[i].x + lastPos.x + deltaX);
 												xDispatched = true;
 											}
 											if ( !yDispatched && !tweener.isAxisOut("scrollY", deltaY) ) {
-												y.inertia.hold(lastPos.y + deltaY);
+												y.inertia.hold(parentsState[i].y + lastPos.y + deltaY);
 												yDispatched = true;
 											}
 										}
 										else if ( is.element(tweener) ) {
-											style = getComputedStyle(tweener, null)
+											style = parentsState[i];
 											if ( /(auto|scroll)/.test(
 												style.getPropertyValue("overflow")
 												+ style.getPropertyValue("overflow-x")
@@ -639,28 +643,22 @@ export default function asTweener( ...argz ) {
 										}
 										
 									}
-									
-									//return !prevent;
 								},
 								'dropped'  : ( e, touch, descr ) => {
-									
 									let tweener,
-									    x, deltaX,
-									    y, deltaY,
 									    i;
 									
-									parents = utils.findReactParents(rootNode);
 									lastPos = lastPos || { ...descr._startPos };
 									for ( i = 0; i < parents.length; i++ ) {
 										tweener = parents[i];
 										// react comp with tweener support
-										if ( parents[i].__isTweener ) {
+										if ( tweener.__isTweener ) {
 											tweener._getAxis("scrollY").inertia.release();
 											tweener._getAxis("scrollX").inertia.release();
 										}
 										
 									}
-									//lastPos = null;
+									parents = parentsState = null;
 								}
 							}, null,
 							opts.enableMouseDrag
@@ -926,11 +924,9 @@ export default function asTweener( ...argz ) {
 				         );
 			}
 			super.componentDidUpdate && super.componentDidUpdate(...arguments);
-			// return;
 		}
 		
 		render() {
-			//console.log('render', this.constructor.name)
 			return <TweenerContext.Consumer>
 				{
 					parentTweener => {
