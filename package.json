@@ -89,14 +89,14 @@
     "dev-api": "wpi :api -w",
     "start-dev": "wpi :api&&concurrently \"wpi-dev-server :devClient --hot --host 0.0.0.0 \" \"wpi :api -w\" \"sleep 3&&nodemon -L --watch ./dist/App.server.js --inspect=[::]:9229 ./dist/App.server.js  -p 9701\"",
     "start": "node ./dist/App.server.js  -p 80",
-    "runBrowser": "start http://localhost:8080",
-    "docker_start": "start docker-compose up&",
+    "runBrowser": "opener http://localhost:8080",
+    "docker_start": "opener docker-compose up&",
     "docker_down": "docker-compose down",
     "docker_kill": "docker-compose kill",
-    "docker_ash": "start docker-compose exec app ash -c \"cd /home/app&&ash\"&",
-    "docker_build": "start docker-compose exec app ash -c \"cd /home/app&&npm run build\"&",
-    "docker_restoreDb": "start docker-compose exec app ash -c \"cd /home/app&&mongorestore --uri ${mongoUrl}\"&",
-    "docker_runBrowser": "start http://mamasound.localhost&"
+    "docker_ash": "opener docker-compose exec app ash -c \"cd /home/app&&ash\"&",
+    "docker_build": "opener docker-compose exec app ash -c \"cd /home/app&&npm run build\"&",
+    "docker_restoreDb": "opener docker-compose exec app ash -c \"cd /home/app&&mongorestore --uri ${mongoUrl}\"&",
+    "docker_runBrowser": "opener http://mamasound.localhost&"
   },
   "dependencies": {
     "@material-ui/core": "^3.9.2",
@@ -130,6 +130,7 @@
     "multer": "^1.4.1",
     "node-watch": "^0.6.0",
     "nodemon": "^1.18.7",
+    "opener": "^1.5.1",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-add-to-calendar": "^0.1.5",

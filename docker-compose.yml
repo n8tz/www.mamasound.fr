@@ -45,7 +45,7 @@ services:
       #      - ../../libs/rScopes:/home/app/libs
     expose:
       - "8080"
-    port:
+    ports:
       - "${APP_DOCKER_DEBUG_PORT:-9229}:9229"
     networks:
       - app_network
