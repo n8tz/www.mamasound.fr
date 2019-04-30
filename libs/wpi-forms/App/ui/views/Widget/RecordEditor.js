@@ -25,37 +25,39 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import IconButton  from '@material-ui/core/IconButton';
 
 
-@reScope(
-	{
-		//@withStateMap(
-		//	{
-		//		@asRef
-		//		items  : "Exportable.items",
-		//		docName: "NewEvents",
-		//	}
-		//)
-		//Exporter: XlsExporter,
-		
-	}
-)
-//@scopeToProps("MamaXls", "appState", "Importer", "Exporter")
+//@reScope(
+//	{
+//		//@withStateMap(
+//		//	{
+//		//		@asRef
+//		//		items  : "Exportable.items",
+//		//		docName: "NewEvents",
+//		//	}
+//		//)
+//		//Exporter: XlsExporter,
+//
+//	}
+//)
+@scopeToProps("DataProvider")
 export default class RecordEditor extends React.Component {
 	static propTypes = {
-		type  : PropTypes.string,
-		record: PropTypes.object,
+		//type  : PropTypes.string,
+		//record: PropTypes.object,
 	};
 	state            = {};
 	
 	render() {
-		let { $actions, }
+		let { $actions, id, DataProvider }
 			    = this.props,
 		    { showUploader } = this.state
 		;
 		
 		return (
 			<div className={ "RecordEditor" }
-			     onDragEnter={ this.showUploader }
 			>
+				<pre>
+					{ JSON.stringify(DataProvider[id], null, 2) }
+				</pre>
 				<div className={ "controls" }>
 					<IconButton onClick={ e => $actions.updateQueries() } title={ "Update styles & places" }>
 						<RefreshIcon/>

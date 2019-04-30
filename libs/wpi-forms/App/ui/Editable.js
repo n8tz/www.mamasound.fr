@@ -17,19 +17,23 @@
  */
 
 'use strict';
-import React, {Component} from "react";
-import ReactDOM           from 'react-dom'
-import {ContextMenu}      from "react-inheritable-contextmenu";
+import React, {Component}                           from "react";
+import ReactDOM                                     from 'react-dom'
+import {ContextMenu}                                from "react-inheritable-contextmenu";
+import {reScope, Store, scopeToProps, propsToScope} from "rscopes";
 
+
+@scopeToProps("DataProvider")
 export default class Editable extends Component {
 	
 	static defaultProps = {}
 	
 	render() {
+		let { $actions, id, DataProvider } = this.props;
 		return (
 			<ContextMenu>
-				<div className={ "record_edit_menu" }>
-					{ this.props.id }
+				<div className={ "record_edit_menu" } onClick={ e => $actions.newWidget("RecordEditor", { id }) }>
+					Edit "{ DataProvider[id] && DataProvider[id]._alias || id }"
 				</div>
 			</ContextMenu>
 		);

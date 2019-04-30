@@ -141,7 +141,7 @@
     "react-facebook": "^8.0.4",
     "react-grid-layout": "^0.16.6",
     "react-infinite-scroller": "^1.2.4",
-    "react-inheritable-contextmenu": "^1.5.0",
+    "react-inheritable-contextmenu": "^1.5.1",
     "react-leaflet": "^2.2.1",
     "react-rescope": "^16.0.8",
     "react-rnd": "^9.0.4",

@@ -26,7 +26,7 @@
 
 import React     from "react";
 import moment    from "moment";
-import {Comps}   from "App/ui";
+import Editable  from "App/ui/Editable";
 import {NavLink} from "react-router-dom";
 
 
@@ -40,7 +40,7 @@ export default ( { record, refs, selected, onClick } ) =>
 	     onClick={ onClick }
 	
 	>
-		<Comps.Editable id={ record._id }/>
+		<Editable id={ record._id }/>
 		<div className="start">
 			{ moment(record.startTM).format("H:mm") }
 		</div>
