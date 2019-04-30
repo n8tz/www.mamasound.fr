@@ -24,11 +24,11 @@ function mkSchema( schema ) {
 	const validator = new Ajv({ allErrors: true, useDefaults: true }).compile(schema);
 	
 	const schemaValidator = model => {
-		validator(model);
+		//validator(model);
 		
-		if ( validator.errors && validator.errors.length ) {
-			throw { details: validator.errors };
-		}
+		//if ( validator.errors && validator.errors.length ) {
+		//	throw { details: validator.errors };
+		//}
 	};
 	return new JSONSchemaBridge(schema, schemaValidator)
 }
@@ -41,7 +41,7 @@ Object.keys(entities)
       .map(
 	      etty => {
 		      allForms[etty] = ( props ) => <AutoForm
-			      schema={ mkSchema(entities[etty]) } { ...props }/>;
+			      schema={ mkSchema(entities[etty].fields || entities[etty]) } { ...props }/>;
 	      }
       )
 

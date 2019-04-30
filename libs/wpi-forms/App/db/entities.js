@@ -13,5 +13,5 @@
  */
 
 
-export *         from './entities/(*).js';
-export {default} from './entities/(*).js';
+export *         from './entities/**/(*).js';
+export {default} from './entities/**/(*).js';
