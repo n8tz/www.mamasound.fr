@@ -35,6 +35,10 @@
       "vars": {
         "webpackPatch": {
           "stats": "errors-only",
+          "devServer": {
+            "compress": true,
+            "disableHostCheck": true
+          },
           "resolve": {
             "alias": {
               "material-ui": "@material-ui/core"
@@ -91,7 +95,8 @@
     "docker_kill": "docker-compose kill",
     "docker_ash": "start docker-compose exec app ash -c \"cd /home/app&&ash\"&",
     "docker_build": "start docker-compose exec app ash -c \"cd /home/app&&npm run build\"&",
-    "docker_restoreDb": "start docker-compose exec app ash -c \"cd /home/app&&mongorestore --uri ${mongoUrl}\"&"
+    "docker_restoreDb": "start docker-compose exec app ash -c \"cd /home/app&&mongorestore --uri ${mongoUrl}\"&",
+    "docker_runBrowser": "start http://mamasound.localhost&"
   },
   "dependencies": {
     "@material-ui/core": "^3.9.2",

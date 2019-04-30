@@ -5,12 +5,28 @@ volumes:
 networks:
   app_network:
 services:
+  traefik:
+    image: traefik
+    command: --web --docker --docker.domain=docker.localhost --logLevel=DEBUG
+    ports:
+      - "${APP_DOCKER_PORT:-80}:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.toml:/traefik.toml
+      - ./etc/cert/:/cert/
+    networks:
+      - app_network
   app:
     restart: always
     build:
       context: .
     working_dir: /home/app
     command: bash -c "npm i&&npm run start-dev"
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.protocol=http'
+      - "traefik.frontend.rule=Host:mamasound.localhost"
     environment:
       - mongoUrl=mongodb://mongodb:27017
       - redisUrl=redis://redis:6379
@@ -26,9 +42,10 @@ services:
       - ./docker/dist:/home/app/dist
       - ./docker/logs:/home/app/logs
       - ./dump:/home/app/dump
-    #      - ../../libs/rScopes:/home/app/libs
-    ports:
-      - "${APP_DOCKER_PORT:-8080}:8080"
+      #      - ../../libs/rScopes:/home/app/libs
+    expose:
+      - "8080"
+    port:
       - "${APP_DOCKER_DEBUG_PORT:-9229}:9229"
     networks:
       - app_network
