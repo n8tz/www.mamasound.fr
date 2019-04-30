@@ -96,6 +96,7 @@
     "docker_ash": "opener docker-compose exec app ash -c \"cd /home/app&&ash\"&",
     "docker_build": "opener docker-compose exec app ash -c \"cd /home/app&&npm run build\"&",
     "docker_restoreDb": "opener docker-compose exec app ash -c \"cd /home/app&&mongorestore --uri ${mongoUrl}\"&",
+    "docker_clear": "docker-compose down -v",
     "docker_runBrowser": "opener http://mamasound.localhost&"
   },
   "dependencies": {
