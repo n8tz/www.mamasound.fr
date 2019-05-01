@@ -16,7 +16,6 @@ import PropTypes                                    from "prop-types";
 import React                                        from "react";
 import TableGrid                                    from 'App/ui/components/TableGrid.js';
 import PopAnywhere                                  from 'App/ui/components/PopAnywhere.js';
-import {types}                                      from 'App/db';
 import {DropzoneComponent}                          from "react-dropzone-component";
 import Select                                       from 'react-select';
 import {reScope, Store, scopeToProps, propsToScope} from "rscopes";
@@ -32,6 +31,22 @@ import stores                                       from 'App/stores/(*).js';
 
 if ( typeof window !== "undefined" )
 	require('react-dropzone-component/styles/filepicker.css');
+
+
+const types = {
+	number : {
+		"type": "number",
+	},
+	string : {
+		"type": "string",
+	},
+	boolean: {
+		"type"      : "number",
+		"renderType": "bool",
+		maximum     : 1,
+		minimum     : 0
+	}
+}
 
 @scopeToProps("allQueries")
 class PlaceRenderer extends React.Component {

@@ -23,7 +23,6 @@ import {asFieldType}    from "App/ui/spells";
 
 @asFieldType
 export default class Switch extends React.Component {
-	
 	render() {
 		return (
 			<Switcher
@@ -33,6 +32,5 @@ export default class Switch extends React.Component {
 			/>
 		);
 	}
-	
 }
 ;

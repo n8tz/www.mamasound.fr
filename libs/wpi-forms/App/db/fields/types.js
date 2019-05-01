@@ -194,7 +194,7 @@ export default {
 		label       : label
 	}),
 	descriptions   : ( label ) => ({
-		renderer    : textEditorField,
+		renderer    : "Html",
 		defaultProps: {},
 		"type"      : "string",
 		label       : label || "Description",
