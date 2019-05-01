@@ -17,7 +17,7 @@
  */
 
 import React             from "react";
-import {types, validate} from "App/db/field";
+import {types, validate} from "App/db/fields";
 
 export default {
 	labelField      : "label",

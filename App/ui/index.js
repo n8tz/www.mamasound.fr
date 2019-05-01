@@ -14,12 +14,18 @@
 
 
 import anims      from 'App/ui/anims/(**/*).js';
-import Views      from 'App/ui/views/(**/*).js';
+import views      from 'App/ui/views/(**/*).js';
+import fields     from 'App/ui/fields/(**/*).js';
+import forms      from 'App/ui/forms/(**/*).js';
 import components from 'App/ui/components/(**/*).js';
 
 export {
 	anims,
-	Views,
+	views,
+	forms,
+	forms as Forms,
+	fields,
+	views as Views,
 	components,
 	components as Comps,
 };

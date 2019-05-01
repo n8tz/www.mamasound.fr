@@ -25,7 +25,7 @@
 import React from 'react';
 
 
-import {types, validate} from 'App/db/field';
+import {types, validate} from 'App/db/fields';
 export default {
     ...require("../Event").default,
     disallowCreate   : false,//Can't create pure events so we must enable editing when inheriting...

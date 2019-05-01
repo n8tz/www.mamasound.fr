@@ -23,7 +23,7 @@
  * Time: 19:18
  */
 import React from "react";
-import {types, validate} from "App/db/field";
+import {types, validate} from "App/db/fields";
 export default {
     ...require("../Event").default,
     label            : "Expositions",

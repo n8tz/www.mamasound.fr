@@ -20,7 +20,8 @@
  */
 'use strict';
 
-import React from "react";
+import React    from "react";
+import Editable from "App/ui/Editable";
 
 import {NavLink}          from "react-router-dom";
 import moment, {TweenRef} from "./DayBlock";
@@ -32,6 +33,8 @@ export default class FocusedItems extends React.Component {
 		    } = this.props;
 		return (
 			<div className="FocusedItems" style={ style }>
+				<Editable id={ record._id }/>
+				
 				{ record.previewImage &&
 				<div className="preview">
 					<img src={ record.previewImage + "w=420" } draggable="false"/>
