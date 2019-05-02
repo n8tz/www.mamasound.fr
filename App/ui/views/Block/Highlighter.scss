@@ -18,7 +18,7 @@
 
   perspective: 200px;
   height: 100%;
-  z-index: 100;
+  z-index: 150;
   padding: 0 !important;
   margin-left: -50vw;
   left: 50%;
@@ -61,7 +61,7 @@
     top: 0;
     left: 50%;
 
-    //@include withMask();
+    @include withMask();
 
     .container {
       @media screen and (max-width: $tablet-landscape-breakpoint) {
@@ -90,7 +90,7 @@
   .slider {
     width: 100%;
     text-align: center;
-    height: 18.5vh;
+    height: 15vh;
     margin-bottom: 10px;
     //@media screen and (max-width: $smartphone-landscape-breakpoint) {
     //  height: 100px;

@@ -133,6 +133,7 @@ export default {
 		}
 	)
 	Queries  : stores.MongoQueries,
+	
 	@withStateMap(
 		{
 			@asRef

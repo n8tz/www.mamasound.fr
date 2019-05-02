@@ -190,7 +190,7 @@ export default class Highlighter extends React.Component {
 					<div className={ "slider" }>
 						<Comps.Slider autoScroll={ 5000 }>
 							{
-								[...gridItems, ...gridItems, ...gridItems].map(
+								gridItems.map(
 									( item, i ) =>
 										<TweenRef key={ item._id + i }
 										          tweener={ tweener }

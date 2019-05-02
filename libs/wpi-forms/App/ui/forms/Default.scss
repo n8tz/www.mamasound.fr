@@ -34,7 +34,14 @@ $labelsWidth: 120px;
     overflow: hidden;
     pointer-events: none;
   }
+  >.editor_btn{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0px;
 
+
+  }
   > .form {
     position: absolute;
     top: 0;

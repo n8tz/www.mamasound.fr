@@ -51,9 +51,10 @@ if ( typeof window !== "undefined" ) {
 	                                  });
 	
 	Leaflet.Marker.prototype.options.icon = Leaflet.icon({
+		                                                     ...Leaflet.Marker.prototype.options.icon,
 		                                                     //iconSize:     [16, 24],
 		                                                     ////shadowSize:   [50, 64],
-		                                                     //iconAnchor:   [8, 24],
+		                                                     //iconAnchor:   [0, 40],
 		                                                     //shadowAnchor: [4, 0],
 		                                                     //popupAnchor:  [-3, -76],
 		                                                     //iconRetinaUrl: require(
@@ -136,13 +137,77 @@ export default class EventMap extends React.Component {
 	static propTypes = {};
 	state            = {};
 	
+	onPoiClicked = ( e ) => {
+		let {
+			    appParams: { poiClickMinZoom },
+		    }          = this.props,
+		    map        = this.refs.map && this.refs.map.leafletElement,
+		    poi        = e.target.options.poi,
+		    targetZoom = poiClickMinZoom >= map.getZoom() ? 6 : map.getZoom();
+		
+		if ( this.state.selectedPOI === poi )
+			return this.setState({ selectedPOI: null, selectedMarkerIcon: null });
+		
+		this.setState({
+			              selectedPOI       : null,
+			              selectedMarkerIcon: null
+		              },
+		              s => {
+			              let wasFired,
+			                  panningDone = e => {
+				                  if ( wasFired )
+					                  return;
+				                  wasFired = true;
+				                  this.setState({
+					                                selectedPOI       : poi,
+					                                selectedMarkerIcon: map._icon
+				                                });
+				                  map && this.props.$actions.updateHashPassive({ cBBox: map.getBounds().toBBoxString() })
+				                  this.props.$stores.bboxInfos.setState(
+					                  {
+						                  bbox       : map.getBounds().toBBoxString(),
+						                  zoom       : map.getZoom(),
+						                  selectedPOI: this.state.selectedPOI
+					                  })
+			                  };
+			
+			              e.target._icon.classList.add('active');
+			              map.setView(
+				              map.unproject(
+					              map.project(poi, targetZoom)
+					                 .subtract([0, 150]),
+					              targetZoom
+				              ),
+				              targetZoom, { animate: true, duration: .25 }
+			              ).once('moveend',// not triggered if no panning is done
+			                     panningDone
+			              ); // zoom
+			              setTimeout(panningDone, 300)
+		              }
+		);
+	};
+	
 	render() {
 		let {
 			    Events: { center = {}, POIs = [], zoom } = {},
 			    Anims : { MainPage }, UserGeoLocation, Selected,
 			    $actions, DataProvider, selected
-		    }     = this.props,
-		    state = this.state;
+		    }           = this.props,
+		    state       = this.state,
+		    map         = this.refs.map && this.refs.map.leafletElement,
+		    selectedPOI = Selected.Event && Selected.Event.place && DataProvider[Selected.Event.place.objId],
+		    selectedPos = selectedPOI && (selectedPOI.address.geoPoint
+			    &&
+			    [...selectedPOI.address.geoPoint].reverse()
+			    || selectedPOI.address);
+		
+		if ( map && selectedPos ) {
+			center = map.unproject(
+				map.project(selectedPos, map.getZoom())
+				   .subtract([0, 150]),
+				map.getZoom()
+			)
+		}
 		return (
 			<div className={ "EventMap" }>
 				<div className={ "maskContent " }>
@@ -152,6 +217,7 @@ export default class EventMap extends React.Component {
 					     scrollWheelZoom={ false }
 					     animate={ true }
 					     useFlyTo={ true }
+					     ref={ "map" }
 						//dragging={ false }
 					>
 						<TileLayer
@@ -161,17 +227,17 @@ export default class EventMap extends React.Component {
 						
 						<LayerGroup ref="PopupsLayer">
 							{
-								Selected.Event && Selected.Event.place && DataProvider[Selected.Event.place.objId]
+								selectedPOI
 								&& <Popup
 									position={
-										DataProvider[Selected.Event.place.objId].address.geoPoint
+										selectedPOI.address.geoPoint
 										&&
-										[...DataProvider[Selected.Event.place.objId].address.geoPoint].reverse()
-										|| DataProvider[Selected.Event.place.objId].address
+										[...selectedPOI.address.geoPoint].reverse()
+										|| selectedPOI.address
 									}
 									key={ Selected.Event.place._id }
 									//style={ { marginBottom: '50px' } }
-									//offset={ Leaflet.point(0, -25) }
+									offset={ Leaflet.point(13, 20) }
 								>
 									<Views.Event.popin
 										$scope={ this.props.$scope }

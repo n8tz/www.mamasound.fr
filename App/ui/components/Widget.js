@@ -11,23 +11,27 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-import PropTypes                             from "prop-types";
-import React                                 from "react";
-import {Rnd}                                 from "react-rnd";
-import {reScope, scopeToProps, propsToScope} from "rscopes";
-import CloseIcon                             from '@material-ui/icons/Close';
-import CardHeader                            from '@material-ui/core/CardHeader';
-import IconButton                            from '@material-ui/core/IconButton';
+import PropTypes                                      from "prop-types";
+import React                                          from "react";
+import {Rnd}                                          from "react-rnd";
+import {reScope, scopeToProps, propsToScope, asStore} from "rscopes";
+import CloseIcon                                      from '@material-ui/icons/Close';
+import CardHeader                                     from '@material-ui/core/CardHeader';
+import IconButton                                     from '@material-ui/core/IconButton';
 
 
 @reScope(
 	{
-		@asStateMap
-		widget:{
-		
+		@asStore
+		widget: {
+			widgetClose() {
+				this.$actions.rmWidget(this.state.record._id)
+			}
 		}
 	}
 )
+@propsToScope('record:widget.record')
+@scopeToProps('widget')
 export default class Widget extends React.Component {
 	static propTypes = {
 		selected: PropTypes.bool,
@@ -94,7 +98,7 @@ export default class Widget extends React.Component {
 				<CardHeader
 					className={ "handle widgetHead" }
 					action={
-						<IconButton onClick={ e => $actions.rmWidget(record._id) }>
+						<IconButton onClick={ e => $actions.widgetClose() }>
 							<CloseIcon/>
 						</IconButton>
 					}

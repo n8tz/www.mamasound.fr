@@ -25,11 +25,11 @@ export default ( { record, record: { title, place, category }, onClose, refs, cl
 				<img className="logo"
 				     src={ refs[place.objId].previewImage || refs[category.objId].icon }/>
 				<div className="name">
-					{ title }&nbsp;au { refs[place.objId].label }
+					{ refs[place.objId].label }
 				</div>
-			</div>
-			<div className="address">
-				{ refs[record.place.objId] && refs[place.objId].address.address },<br/>
+				<div className="address">
+					{ refs[record.place.objId] && refs[place.objId].address.address },<br/>
+				</div>
 			</div>
 		</div>
 	);

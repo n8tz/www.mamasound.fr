@@ -19,11 +19,11 @@
   width: 100vw;
   fontSize: 20px;
   text-align: center;
-  z-index: 150;
+  z-index: 125;
 
-  @include withMaskTop();
+  //@include withMaskTop();
 
-  //@include withMask();
+  @include withMask();
 
 
   .content {
