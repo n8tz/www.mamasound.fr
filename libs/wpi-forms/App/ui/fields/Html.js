@@ -36,24 +36,6 @@ import {asFieldType} from "App/ui/spells";
 @asFieldType
 export default class Html extends Component {
 	
-	constructor( ...argz ) {
-		super(...argz);
-		this.state = {
-			showEditorModal: false,
-			value          : this.props.defaultValue || this.props.value
-		};
-	}
-	
-	//
-	//componentDidMount() {
-	//	if ( this._willMountCk ) {
-	//		clearTimeout(this._willMountCk);
-	//	}
-	//	//this._willMountCk = setTimeout(this.initCK.bind(this), 200);
-	//
-	//}
-	//
-	
 	onChange( v ) {//todo: skip some..
 		//debugger;
 		//this.props.value = v;
@@ -67,7 +49,7 @@ export default class Html extends Component {
 	}
 	
 	render() {
-		let { value, defaultValue } = this.props;
+		let { defaultValue, value = defaultValue } = this.props;
 		//console.log(this.props);
 		return (
 			<React.Fragment>

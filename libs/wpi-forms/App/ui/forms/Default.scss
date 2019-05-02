@@ -1,0 +1,90 @@
+/*!
+ *
+ * Copyright (C) 2019 Nathanael Braun
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+$labelsWidth: 120px;
+.form_Default {
+  > .title {
+    @include use_hvCenteredContent();
+    height: 30px;
+    background: rgba(214, 214, 214, 0.48);
+    //border-bottom: solid 1px black;
+    font-size: 1.2em;
+    position: fixed;
+    top: 5px;
+    left: 5px;
+    border-radius: 5px;
+    padding: 5px;
+    width: calc(100% - 64px);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  > .form {
+    text-align: left;
+    overflow: hidden;
+
+    .field {
+      position: relative;
+      width: 100%;
+      background: #fbfbfb;
+
+      &:nth-child(2n+1) {
+        background: #e7e7e7;
+      }
+
+      .label {
+        @include use_hvCenteredAbs();
+        left: 0;
+        transform: translate(0, -50%);
+        text-align: left;
+        display: inline-block;
+        width: $labelsWidth;
+        font-size: 1.1em;
+        padding: 0 10px;
+        //height: 100%;
+      }
+
+      .input {
+        position: relative;
+        display: inline-block;
+        width: calc(100% - #{$labelsWidth} - 30px);
+        //margin: 0 10px;
+        padding-left: $labelsWidth+20px;
+      }
+
+      &.field_Text {
+        .input {
+          *, input {
+            width: 100%;
+          }
+        }
+      }
+
+      &.field_Html {
+        .ck-editor__editable {
+          max-height: 200px;
+          //display: inline-block;
+          //position: relative;
+          //width: 100%;
+        }
+      }
+    }
+
+  }
+}

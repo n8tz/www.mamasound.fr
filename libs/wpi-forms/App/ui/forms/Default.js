@@ -173,7 +173,7 @@ export default class RecordEditor extends React.Component {
 				let key      = etty + "_" + name,
 				    renderer = recordDef.fields[name].renderer,
 				    Tag      = is.string(renderer) ? fields[renderer] : renderer,
-				    def      = this.props.record && this.props.record[name] || recordDef.fields[name].defaultProps.defaultValue
+				    def      = record && record[name] || recordDef.fields[name].defaultProps.defaultValue
 					    || '';
 				if ( !Tag ) throw "This fields doesn't exist : " + recordDef.fields[name].renderer;
 				form.push([<Tag {
@@ -182,7 +182,7 @@ export default class RecordEditor extends React.Component {
 						                autoFocus   : (key === this._cfocus ? true : false),
 						                key,
 						                name,
-						                record      : this.state.record,
+						                record      : record,
 						                label       : recordDef.fields[name].label,
 						                defaultValue: def,
 						                onChange    : this.bindChange.bind(this),
@@ -204,7 +204,7 @@ export default class RecordEditor extends React.Component {
 		;
 		
 		return (
-			<div className={ "RecordEditor" }
+			<div className={ "form_Default form_" + record._cls }
 			>
 				<div className="title">
 					Edition : { entities[record._cls] && entities[record._cls].label }

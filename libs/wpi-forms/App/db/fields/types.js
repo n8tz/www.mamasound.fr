@@ -16,17 +16,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Checkbox        from '@material-ui/core/TextField';
-import textEditorField from '@material-ui/core/TextField';
-import inputField      from '@material-ui/core/TextField';
-import {fields}        from 'App/ui';
+import inputField from '@material-ui/core/TextField';
 
 export default {
 	indexes        : {
 		"index": true
 	},
 	hidden         : {
-		renderer    : inputField,
+		renderer    : "Text",
 		defaultProps: {
 			type: "text"
 		},
@@ -34,7 +31,7 @@ export default {
 		test        : /^[\w_\-\d]+$/
 	},
 	url            : ( label ) => ({
-		renderer    : inputField,
+		renderer    : "Text",
 		defaultProps: {
 			type: "text"
 		},
@@ -170,7 +167,7 @@ export default {
 		};
 	},
 	address        : ( cfg, label ) => ({
-		//renderer    : require('App/ui/fields/addressField'),
+		renderer    : 'Address',
 		defaultProps: Object.assign({
 			                            //allowedType : etty
 		                            }, cfg || {}),
@@ -183,7 +180,6 @@ export default {
 			                            //allowedType : etty
 		                            }, cfg || {}),
 		label       : label,
-		"type"      : "string",
 		test        : /^[\w_\-\d]+$/
 	}),
 	json           : ( label, props ) => ({

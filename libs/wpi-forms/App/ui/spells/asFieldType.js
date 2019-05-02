@@ -69,12 +69,9 @@ export default function asFieldType( ...argz ) {
 		}
 		
 		render() {
-			return <div style={ this.props.style } className={ (this.props.className || '') + " field_" + compName }>
-				<FormControlLabel
-					labelPlacement={ 'start' }
-					label={ this.props.label }
-					control={ super.render() }
-				/>
+			return <div style={ this.props.style } className={ (this.props.className || '') + "field field_" + compName }>
+				<span className={ "label" }>{ this.props.label }</span>
+				<span className={ "input" }>{ super.render() }</span>
 			</div>
 		}
 	}

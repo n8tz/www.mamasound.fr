@@ -24,7 +24,7 @@ export default class RecordEditor extends React.Component {
 	
 	render() {
 		return (
-			<Forms._generic { ...this.props }/>
+			<Forms.Default { ...this.props }/>
 		);
 	}
 	

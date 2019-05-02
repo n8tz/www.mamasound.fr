@@ -24,10 +24,12 @@ import {asFieldType}    from "App/ui/spells";
 @asFieldType
 export default class Switch extends React.Component {
 	render() {
+		let { defaultValue, value = defaultValue } = this.props;
+		
 		return (
 			<Switcher
 				className={ this.props.className }
-				defaultChecked={ this.state.value }
+				defaultChecked={ value }
 				onChange={ this.onChange }
 			/>
 		);

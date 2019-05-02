@@ -24,10 +24,12 @@ import {asFieldType}    from "App/ui/spells";
 @asFieldType
 export default class Text extends React.Component {
 	render() {
+		let { defaultValue, value = defaultValue } = this.props;
+		
 		return (
 			<TextField
 				className={ this.props.className }
-				value={ this.state.value }
+				defaultValue={ value }
 				onChange={ this.onChange }
 			/>
 		);
