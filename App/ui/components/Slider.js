@@ -43,10 +43,14 @@ export default class Slider extends React.Component {
 					let {
 						    children, visibleItems,
 						    overlaps = 1 / (visibleItems - (visibleItems % 2))
-					    }           = this.props,
-					    step        = 100 * overlaps;
-					this._lastIndex = (this._lastIndex + 1) % children.length;
-					this.scrollTo(step * this._lastIndex + 100, 250, "scrollX")
+					    }         = this.props,
+					    step      = 100 * overlaps,
+					    dec       = children.length * step,
+					    nextIndex = (this._lastIndex + 1) % children.length;
+					if ( this._lastIndex > nextIndex )
+						this.scrollTo(dec + 100 - step, 0, "scrollX");
+					this._lastIndex = nextIndex;
+					this.scrollTo(dec + step * this._lastIndex + 100, 250, "scrollX")
 					
 				},
 				autoScroll
@@ -67,8 +71,10 @@ export default class Slider extends React.Component {
 			    children
 		    }                        = this.props,
 		    { index = defaultIndex } = this.state,
-		    nbItems                  = children.length,
-		    step                     = 100 * overlaps;
+		    allItems                 = [...children, ...children, ...children].map(( elem, i ) => React.cloneElement(elem, { key: i })),
+		    nbItems                  = allItems.length,
+		    step                     = 100 * overlaps,
+		    dec                      = children.length * step;
 		return (
 			<div
 				className={ "rSlide slider" }
@@ -80,21 +86,21 @@ export default class Slider extends React.Component {
 			>
 				<TweenAxis
 					axe={ "scrollX" }
-					defaultPosition={ 100 }
+					defaultPosition={ 100 + dec }
 					size={ nbItems * step + 100 }
 					inertia={
 						{
-							//infinite: true,
-							//hookValueUpdate( v ) {
-							//	let size = nbItems * step;
-							//	return 100 + ((size + v - 100) % (size));
-							//},
-							stops: [...children].map(( child, i ) => (100 + i * step))
+							infinite: true,
+							hookValueUpdate( v ) {
+								let size = nbItems * step;
+								return 100 + dec + ((size + v - 100) % (size));
+							},
+							stops   : [...allItems].map(( child, i ) => (100 + i * step))
 						}
 					}
 				/>
 				{
-					children.map(
+					allItems.map(
 						( Child, i ) =>
 							<TweenRef
 								key={ i }

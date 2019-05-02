@@ -42,6 +42,8 @@ export default function asFieldType( ...argz ) {
 	}
 	const compName = BaseComponent.displayName || BaseComponent.name;
 	return class Field extends BaseComponent {
+		static displayName = compName;
+		
 		constructor( props ) {
 			super(...arguments);
 			this.state = {
@@ -69,7 +71,8 @@ export default function asFieldType( ...argz ) {
 		}
 		
 		render() {
-			return <div style={ this.props.style } className={ (this.props.className || '') + "field field_" + compName }>
+			return <div style={ this.props.style }
+			            className={ (this.props.className || '') + "field field_" + compName }>
 				<span className={ "label" }>{ this.props.label }</span>
 				<span className={ "input" }>{ super.render() }</span>
 			</div>

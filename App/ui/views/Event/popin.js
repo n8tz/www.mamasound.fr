@@ -20,10 +20,10 @@ import React, {Component} from "react";
 export default ( { record, record: { title, place, category }, onClose, refs, className, style, ref } ) =>
 	(
 		<div className={ "Popin " + (className || '') } style={ { ...(style || {}) } } ref={ ref }>
-			<div className="closeBtn" onClick={ onClose }/>
+			{/*<div className="closeBtn" onClick={ onClose }/>*/ }
 			<div className="topBlock">
 				<img className="logo"
-				     src={ refs[place.objId].previewImage || refs[category.objId].icon }/>
+				     src={ "http://static.mamasound.fr/" + (refs[place.objId].previewImage || refs[category.objId].icon) }/>
 				<div className="name">
 					{ refs[place.objId].label }
 				</div>

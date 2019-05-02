@@ -35,6 +35,7 @@ import {asFieldType} from "App/ui/spells";
 
 @asFieldType
 export default class Html extends Component {
+	static displayName = "Html";
 	
 	onChange( v ) {//todo: skip some..
 		//debugger;

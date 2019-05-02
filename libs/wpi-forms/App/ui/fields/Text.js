@@ -23,6 +23,8 @@ import {asFieldType}    from "App/ui/spells";
 
 @asFieldType
 export default class Text extends React.Component {
+	static displayName = "Text";
+	
 	render() {
 		let { defaultValue, value = defaultValue } = this.props;
 		

@@ -19,10 +19,6 @@ import PropTypes                             from "prop-types";
 import React                                 from "react";
 import {reScope, scopeToProps, propsToScope} from "rscopes";
 import {withStateMap, asRef, asStore}        from "rescope-spells";
-import Fab                                   from '@material-ui/core/Fab';
-import GpsNoFixedIcon                        from '@material-ui/icons/GpsNotFixed';
-import GpsFixedIcon                          from '@material-ui/icons/GpsFixed';
-import GpsOffIcon                            from '@material-ui/icons/GpsOff';
 import scopes                                from 'App/scopes/(*).js';
 import {asTweener, TweenRef}                 from "react-rtween";
 import {Views}                               from 'App/ui';
@@ -204,7 +200,7 @@ export default class EventMap extends React.Component {
 		if ( map && selectedPos ) {
 			center = map.unproject(
 				map.project(selectedPos, map.getZoom())
-				   .subtract([0, 150]),
+				   .subtract([0, 125]),
 				map.getZoom()
 			)
 		}
@@ -278,21 +274,6 @@ export default class EventMap extends React.Component {
 								position={ { lat: UserGeoLocation.pos.latitude, lng: UserGeoLocation.pos.longitude } }/>
 						}
 					</Map>
-					<div
-						className={ "EventMapTools" }
-					>
-						<Fab aria-label="edit" className={ "newBtn button" }
-						     onClick={ $actions.toggleUserGeoLocation }>
-							{
-								UserGeoLocation.activating &&
-								<GpsNoFixedIcon/> ||
-								UserGeoLocation.active &&
-								<GpsFixedIcon/> ||
-								<GpsOffIcon/>
-							}
-						
-						</Fab>
-					</div>
 					
 					{/*<TweenRef id={ "EventMap_Gradient" } initial={ MainPage.EventMap_Gradient }>*/ }
 					{/*<div className={ "GradientBottom" }/>*/ }

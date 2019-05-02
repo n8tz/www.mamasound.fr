@@ -59,7 +59,7 @@ export default class Footer extends React.Component {
 		return (
 			<div className={ "Footer" }>
 				<div className={ "toolbar" }>
-					<Comps.events.SearchBar/>
+					<Comps.SearchBar/>
 				</div>
 				{/*{ ActiveTags && ActiveTags.available && ActiveTags.available.map(*/ }
 				{/*tag =>*/ }

@@ -23,6 +23,7 @@ import {asFieldType}    from "App/ui/spells";
 
 @asFieldType
 export default class Switch extends React.Component {
+	static displayName = "Switch";
 	render() {
 		let { defaultValue, value = defaultValue } = this.props;
 		

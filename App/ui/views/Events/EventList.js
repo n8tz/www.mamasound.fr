@@ -29,8 +29,12 @@ import {Views}               from 'App/ui';
 import {asTweener, TweenRef} from "react-rtween";
 import SwipeableViews        from 'react-swipeable-views';
 
+import Fab            from '@material-ui/core/Fab';
+import GpsNoFixedIcon from '@material-ui/icons/GpsNotFixed';
+import GpsFixedIcon   from '@material-ui/icons/GpsFixed';
+import GpsOffIcon     from '@material-ui/icons/GpsOff';
 
-@scopeToProps("appState", "Anims")
+@scopeToProps("appState", "Anims", "UserGeoLocation")
 export default class EventList extends React.Component {
 	static propTypes = {};
 	state            = {};
@@ -46,7 +50,7 @@ export default class EventList extends React.Component {
 		if ( !element )
 			return console.warn('Not found infinite loader');
 		
-		var parent       = element.parentNode,
+		let parent       = element.parentNode,
 		    parentHeight = parent.offsetHeight,
 		    parentPos    = parent.scrollTop,
 		    scrollHeight = parent.scrollHeight;
@@ -132,7 +136,7 @@ export default class EventList extends React.Component {
 	render() {
 		let {
 			    record                    : { position, size } = {},
-			    EventList, appState, Anims: { MainPage },
+			    UserGeoLocation, appState, Anims: { MainPage },
 			    $actions,
 		    }     = this.props,
 		    state = this.state;
@@ -203,6 +207,22 @@ export default class EventList extends React.Component {
 							<Comps.NavBox/>
 						</TweenRef>
 					</div>
+				</div>
+				
+				<div
+					className={ "NavTools container" }
+				>
+					<Fab aria-label="edit" className={ "newBtn button" }
+					     onClick={ $actions.toggleUserGeoLocation }>
+						{
+							UserGeoLocation.activating &&
+							<GpsNoFixedIcon/> ||
+							UserGeoLocation.active &&
+							<GpsFixedIcon/> ||
+							<GpsOffIcon/>
+						}
+					
+					</Fab>
 				</div>
 			</div>
 		);
