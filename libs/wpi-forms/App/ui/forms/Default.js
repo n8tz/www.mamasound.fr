@@ -221,8 +221,8 @@ export default class RecordEditor extends React.Component {
 					{ this.buildForm() }
 				</div>
 				<div className={ "editor_btn" }>
-					{/*<Button onClick={ $widget_close }>Cancel</Button>*/ }
-					{/*<Button onClick={ this.validate.bind(this) }>Save</Button>*/ }
+					<Button onClick={ $widget_close }>Cancel</Button>
+					<Button onClick={ this.validate.bind(this) }>Save</Button>
 				</div>
 				<ContextMenu native/>
 			</div>

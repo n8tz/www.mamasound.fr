@@ -36,8 +36,14 @@ $labelsWidth: 120px;
   }
 
   > .form {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+
     text-align: left;
-    overflow: hidden;
+    overflow: auto;
 
     .field {
       position: relative;

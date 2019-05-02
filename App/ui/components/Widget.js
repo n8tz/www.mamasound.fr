@@ -20,7 +20,14 @@ import CardHeader                            from '@material-ui/core/CardHeader'
 import IconButton                            from '@material-ui/core/IconButton';
 
 
-@reScope
+@reScope(
+	{
+		@asStateMap
+		widget:{
+		
+		}
+	}
+)
 export default class Widget extends React.Component {
 	static propTypes = {
 		selected: PropTypes.bool,
