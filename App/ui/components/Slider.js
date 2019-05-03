@@ -95,6 +95,7 @@ export default class Slider extends React.Component {
 								let size = nbItems * step;
 								return 100 + dec + ((size + v - 100) % (size));
 							},
+							value   : 100 + dec,
 							stops   : [...allItems].map(( child, i ) => (100 + i * step))
 						}
 					}

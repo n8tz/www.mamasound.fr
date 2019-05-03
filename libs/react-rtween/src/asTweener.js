@@ -425,8 +425,8 @@ export default function asTweener( ...argz ) {
 			    targetPos      = dim ? dim.targetPos : scrollPos,
 			    inertia        = _inertia !== false && (
 				    dim ? dim.inertia : new Inertia({// todo mk pure
-					                                    value: scrollPos,
-					                                    ...(_inertia || {})
+					                                    ...(_inertia || {}),
+					                                    value: scrollPos
 				                                    })),
 			    nextDescr      = {
 				    ...(_inertia || {}),

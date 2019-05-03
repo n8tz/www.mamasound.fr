@@ -44,8 +44,8 @@ export default class MamaConverter extends Store {
 						row.dt        = row.dt.replace(/^\w+\s(.*)$/, "$1");
 						row.timestamp = moment(row.dt, "DD/MM/YYYY HH[h]mm").valueOf();
 						row.date      = moment(row.timestamp).format("DD/MM/YY HH[h]mm");
-						let rstyle    = new RegExp(".*" + row.style.replace(/[^\w]/g, '.*') + ".*", 'i');
-						let rplace    = new RegExp(".*" + row.lieu.replace(/[^\w]/g, '.*') + ".*", 'i');
+						let rstyle    = new RegExp("(?:\\s|^)" + row.style.replace(/[^\w]/g, '.') + "(?:\\s.*|$)", 'i');
+						let rplace    = new RegExp("(?:\\s|^)" + row.lieu.replace(/[^\w]/g, '.') + "(?:\\s.*|$)", 'i');
 						
 						let lieu  = mustMatch.Places.items.find(place => rplace.test(place.label)),
 						    style = mustMatch.EventCategories.items.find(style => rstyle.test(style.name));

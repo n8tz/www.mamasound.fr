@@ -45,6 +45,7 @@ export default ( server, http ) => {
 								    _cls    : 'Concert',
 								    title   : _record.groupe,
 								    startTM : _record.timestamp,
+								    price   : _record.prix,
 								    place   : {
 									    cls  : "Place",
 									    objId: _record.lieuId
