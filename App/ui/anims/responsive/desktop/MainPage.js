@@ -218,16 +218,27 @@ export const YAxis             = [
 		}
 	},
 	//page
+	//page
+	
 	{
 		type    : "Tween",
 		target  : "PageBlock",
 		from    : 150,
-		duration: 100,
+		duration: 50,
 		apply   : {
-			height   : .8,
+			height   : 1,
 			transform: [{}, {
 				translateY: -1
 			}],
+		}
+	},
+	{
+		type    : "Tween",
+		target  : "PageBlock",
+		from    : 200,
+		duration: 50,
+		apply   : {
+			height: -.2,
 		}
 	},
 	{
@@ -236,16 +247,16 @@ export const YAxis             = [
 		from    : 150,
 		duration: 50,
 		apply   : {
-			height   : -.25,
+			height   : -.30,
 			transform: [{}, {
-				translateY: -.25
+				translateY: -.30
 			}],
 		}
 	},
 	{
 		type    : "Tween",
 		target  : "events",
-		from    : 200,
+		from    : 249,
 		duration: 1,
 		apply   : {
 			zIndex   : -100,
@@ -258,7 +269,7 @@ export const YAxis             = [
 		type    : "Tween",
 		target  : "EventMap",
 		from    : 150,
-		duration: 100,
+		duration: 50,
 		apply   : {
 			height   : -.25,
 			transform: [{}, {
@@ -295,7 +306,7 @@ export const YAxis             = [
 		duration: 50,
 		apply   : {
 			transform: [{}, {
-				translateY: -.20
+				translateY: -.22
 			}],
 		}
 	},
@@ -322,7 +333,7 @@ export const YAxis             = [
 		apply   : {
 			height   : .60,
 			transform: [{}, {
-				translateY: -.80
+				translateY: -.78
 			}],
 		}
 	},
@@ -332,9 +343,9 @@ export const YAxis             = [
 		from    : 250,
 		duration: 100,
 		apply   : {
-			height   : .05,
+			height   : .1,
 			transform: [{}, {
-				translateY: -.15
+				translateY: -.1
 			}],
 		}
 	},
