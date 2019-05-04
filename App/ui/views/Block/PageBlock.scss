@@ -13,15 +13,27 @@
  */
 
 .PageBlock {
+  touch-action: none;
   position: relative;
 
-  @media screen and (max-width: $tablet-landscape-breakpoint) {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100% !important;
-  }
-
+  perspective: 200px;
   height: 100%;
+  z-index: 150;
+  padding: 0 !important;
+  margin-left: -50vw;
+  left: 50%;
+  width: 100vw !important;
+  //@media screen and (max-width: $tablet-landscape-breakpoint) {
+  //  margin: 0 !important;
+  //  padding: 0 !important;
+  //  width: 100% !important;
+  //}
+
+  @include withMask();
+
+  .maskContent {
+    background: #1f8de2;
+  }
 
   .ShareBox {
     position: absolute;

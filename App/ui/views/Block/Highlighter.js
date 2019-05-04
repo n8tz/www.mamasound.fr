@@ -90,33 +90,6 @@ export default class Highlighter extends React.Component {
 			<div
 				className={ "Highlighter" }
 			>
-				<TweenRef
-					id={ "header" }
-					initial={ {
-						height: "2cm",
-						zIndex: "50"
-					} }
-				>
-					<header
-						className={ "container withMask" }
-						onClick={ e => $actions.setPageFocus("head") }
-						style={ {
-							display: "inline-block",
-							//width  : "100%",
-							//background: "red",
-						} }>
-						<div className={ "maskContent" }>
-							<TweenRef
-								id={ "logo" }
-								initial={ {
-									height: "100%"
-								} }
-							>
-								<div className={ "logo" }/>
-							</TweenRef>
-						</div>
-					</header>
-				</TweenRef>
 				
 				<div className={ "headBackground" }>
 					<div className={ "maskContent" }>
@@ -132,21 +105,21 @@ export default class Highlighter extends React.Component {
 							} }
 							tweenLines={ {
 								scrollY: [
-									{
-										type    : "Tween",
-										from    : 0,
-										duration: 100,
-										apply   : {
-											filter   : {
-												//blur: "5px",
-												//translateY: "-50px",
-											},
-											transform: {
-												translateZ: "50px",
-												//translateY: "-20vh",
-											}
-										}
-									}
+									//{
+									//	type    : "Tween",
+									//	from    : 0,
+									//	duration: 100,
+									//	apply   : {
+									//		filter   : {
+									//			//blur: "5px",
+									//			//translateY: "-50px",
+									//		},
+									//		transform: {
+									//			translateZ: "50px",
+									//			//translateY: "-20vh",
+									//		}
+									//	}
+									//}
 								],
 							} }
 						>
@@ -169,7 +142,7 @@ export default class Highlighter extends React.Component {
 						zIndex   : "100",
 						transform: {
 							perspective: "200px",
-							translateY: '0px',
+							translateY : '0px',
 							//rotateX    : "2deg"
 						}
 					} }
@@ -201,7 +174,7 @@ export default class Highlighter extends React.Component {
 											          transform: {
 												          perspective: "200px",
 												          //translateY : '0px',
-												          rotateX: "2deg"
+												          rotateX    : "2deg"
 											          }
 										          } }
 										          tweenLines={ {

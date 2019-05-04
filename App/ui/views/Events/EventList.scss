@@ -13,24 +13,28 @@
  */
 
 .EventList {
-  @include use_hvCenteredAbs();
   touch-action: none;
+  position: relative;
+
+  perspective: 200px;
   height: 100%;
-  width: 100vw;
-  fontSize: 20px;
-  text-align: center;
-  z-index: 125;
+  z-index: 150;
+  padding: 0 !important;
+  margin-left: -50vw;
+  left: 50%;
+  width: 100vw !important;
 
   //@include withMaskTop();
 
-  //@include withMask();
+  @include withMask();
 
-  .maskContent {
-    overflow: hidden;
-    height: 100%;
-  }
+  //.maskContent {
+  //  overflow: hidden;
+  //  height: 100%;
+  //}
 
   .NavTools {
+    display: none;
     @include use_hvCenteredAbs();
     position: absolute;
     top: auto;

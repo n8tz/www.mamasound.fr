@@ -51,13 +51,15 @@ export default class PageBlock extends React.Component {
 				className={ "PageBlock container" }
 				//onClick={ e => $actions.selectEvent(null) }
 			>
-				{
-					Selected &&
-					Selected.Event &&
-					Selected.Event._cls === "Concert" &&
-					<Views.Event.page record={ Selected && Selected.Event } refs={ DataProvider }/>
-				}
-			
+				<div className={ "maskContent" }>
+					{
+						Selected &&
+						Selected.Event &&
+						Selected.Event._cls === "Concert" &&
+						<Views.Event.page record={ Selected && Selected.Event } refs={ DataProvider }/>
+					}
+				
+				</div>
 			</div>
 		);
 	}

@@ -84,10 +84,40 @@ export default class Home extends React.Component {
 					items={ MainPage.YAxis }
 					inertia={
 						{
-							stops: [0, 100, 150, 200]
+							infinite: true,
+							hookValueUpdate( v ) {
+								//debugger
+								return ((v + 1) % 350) - 1;
+							},
+							stops   : [0, 100, 150, 250, 350]
 						}
 					}
 				/>
+				<TweenRef
+					id={ "header" }
+					initial={ MainPage.header }
+				>
+					<header
+						//className={ "container withMask" }
+						//onClick={ e => $actions.setPageFocus("head") }
+						style={ {
+							zIndex : 5000,
+							display: "inline-block",
+							//width  : "100%",
+							//background: "red",
+						} }>
+						<div className={ "maskContent" }>
+							<TweenRef
+								id={ "logo" }
+								initial={ {
+									height: "100%"
+								} }
+							>
+								<div className={ "logo" }/>
+							</TweenRef>
+						</div>
+					</header>
+				</TweenRef>
 				<TweenRef id={ "Highlighter" } initial={ MainPage.Highlighter }>
 					<Views.Block.Highlighter/>
 				</TweenRef>
@@ -113,7 +143,6 @@ export default class Home extends React.Component {
 				<TweenRef
 					id={ "Footer" }
 					initial={ MainPage.Footer }
-					reset={ true }
 				>
 					<Comps.Footer/>
 				</TweenRef>

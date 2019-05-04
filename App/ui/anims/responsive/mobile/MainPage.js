@@ -11,6 +11,8 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
+import {tweenTools} from "react-rtween";
+
 export const page              = {
 	position: "absolute",
 	top     : "0cm",
@@ -21,22 +23,43 @@ export const page              = {
 		translateX: "-50%"
 	}
 };
-export const Highlighter       = {
+export const header            = {
 	position : "absolute",
-	width    : "100%",
-	height   : ".8box",
+	//right    : "0%",
+	//left     : "0%",
+	height   : "2cm",
 	top      : "0%",
-	transform: {
-		//translateY: "1box"
-	}
+	zIndex   : 200,
+	transform: [
+		{
+			//perspective: "500px",
+		},
+		{
+			//translateX: "-50%",
+			translateY: "0box",
+			//translateZ : "-50px",
+			//rotateX   : "-10deg"
+		}
+	]
 };
-export const PageBlock         = {
-	width    : "100%",
-	overflow : 'hidden',
-	transform: {
-		y: "100%"
-	},
-	height   : "0%"
+export const Highlighter       = {
+	position       : "absolute",
+	right          : "0%",
+	height         : ".80box",
+	top            : "0%",
+	//overflow       : 'hidden',
+	transformOrigin: "center top",
+	zIndex         : 175,
+	transform      : [
+		{
+			perspective: "500px",
+		},
+		{
+			translateY: "0box",
+			//translateZ : "-50px",
+			//rotateX   : "-10deg"
+		}
+	]
 };
 export const NavBox            = {
 	height    : "100%",
@@ -69,22 +92,31 @@ export const EventNav          = {
 	height  : "100%",
 };
 export const events            = {
-	right    : "0%",
-	//left     : "0px",
-	top      : "0%",
-	position : "absolute",
-	height   : ".15box",
-	transform: {
-		translateX: "-50%",
-		translateY: ".8box"
-	}
+	position       : "absolute",
+	right          : "0%",
+	height         : ".15box",
+	top            : "0%",
+	zIndex         : 150,
+	//overflow       : 'hidden',
+	transformOrigin: "center top",
+	transform      : [
+		{
+			perspective: "500px",
+		},
+		{
+			translateY: ".8box",
+			//translateZ : "-50px",
+			//rotateX   : "-10deg"
+		}
+	]
 };
 export const EventMap          = {
 	position       : "absolute",
 	right          : "0%",
 	height         : ".05box",
 	top            : "0%",
-	overflow       : 'hidden',
+	zIndex         : 125,
+	//overflow       : 'hidden',
 	transformOrigin: "center top",
 	transform      : [
 		{
@@ -92,6 +124,26 @@ export const EventMap          = {
 		},
 		{
 			translateY: ".95box",
+			//translateZ : "-50px",
+			//rotateX   : "-10deg"
+		}
+	]
+};
+export const PageBlock         = {
+	
+	position       : "absolute",
+	right          : "0%",
+	height         : ".0box",
+	top            : "0%",
+	//overflow       : 'hidden',
+	transformOrigin: "center top",
+	zIndex         : 100,
+	transform      : [
+		{
+			perspective: "500px",
+		},
+		{
+			translateY: "1box",
 			//translateZ : "-50px",
 			//rotateX   : "-10deg"
 		}
@@ -131,133 +183,203 @@ export const YAxis             = [
 			},
 		}
 	},
-	//{
-	//	type    : "Tween",
-	//	target  : "Footer",
-	//	from    : 0,
-	//	duration: 100,
-	//	apply   : {
-	//		top: -50,
-	//	}
-	//},
-	//show map
 	{
 		type    : "Tween",
 		target  : "EventMap",
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height   : .30,
+			height   : .15,
 			transform: [{}, {
-				translateY: -.20
+				translateY: -.15
 			}]
 		}
 	},
-	//{
-	//	type    : "Tween",
-	//	target  : "events",
-	//	from    : 65,
-	//	duration: 35,
-	//	apply   : {
-	//		height: -30,
-	//	}
-	//},
 	//full map
-	
-	{
-		type    : "Tween",
-		target  : "EventMap",
-		from    : 100,
-		duration: 50,
-		apply   : {
-			transform: [{}, {
-				//rotateX   : 10,
-				translateY: -.10
-			}],
-			//height   : 10,
-			//marginLeft: "30%",
-			//width     : "-30%",
-		}
-	},
-	//{
-	//	type    : "Tween",
-	//	target  : "NavBox",
-	//	from    : 100,
-	//	duration: 50,
-	//	apply   : {
-	//		height: -10,
-	//	}
-	//},
-	//{
-	//	type    : "Tween",
-	//	target  : "EventMap_Gradient",
-	//	from    : 100,
-	//	duration: 50,
-	//	apply   : {
-	//		opacity: -1,
-	//	}
-	//},
 	{
 		type    : "Tween",
 		target  : "events",
 		from    : 100,
 		duration: 50,
 		apply   : {
-			height: -.10,
+			height: -.25,
 		}
 	},
-	//full map
-	
 	{
 		type    : "Tween",
 		target  : "EventMap",
-		from    : 150,
+		from    : 100,
 		duration: 50,
 		apply   : {
+			height   : .25,
 			transform: [{}, {
-				translateY: -.15,
-				//translateZ: "150px"
+				translateY: -.25
 			}],
-			height   : .15,
-			//marginLeft: "30%",
-			//width     : "-30%",
 		}
 	},
-	//{
-	//	type    : "Tween",
-	//	target  : "Footer",
-	//	from    : 150,
-	//	duration: 50,
-	//	apply   : {
-	//		top   : -100,
-	//		height: 100,
-	//	}
-	//},
-	//{
-	//	type    : "Tween",
-	//	target  : "NavBox",
-	//	from    : 150,
-	//	duration: 50,
-	//	apply   : {
-	//		height: -15,
-	//	}
-	//},
+	//page
+	{
+		type    : "Tween",
+		target  : "PageBlock",
+		from    : 150,
+		duration: 100,
+		apply   : {
+			height   : .8,
+			transform: [{}, {
+				translateY: -1
+			}],
+		}
+	},
 	{
 		type    : "Tween",
 		target  : "events",
 		from    : 150,
 		duration: 50,
 		apply   : {
-			height: -.15,
+			height   : -.25,
+			transform: [{}, {
+				translateY: -.25
+			}],
 		}
 	},
-	//{
-	//	type    : "Tween",
-	//	target  : "PageBlock",
-	//	from    : 100,
-	//	duration: 50,
-	//	apply   : {
-	//		height: 40,
-	//	}
-	//}
+	{
+		type    : "Tween",
+		target  : "events",
+		from    : 200,
+		duration: 1,
+		apply   : {
+			zIndex   : -100,
+			transform: [{}, {
+				translateY: 1
+			}],
+		}
+	},
+	{
+		type    : "Tween",
+		target  : "EventMap",
+		from    : 150,
+		duration: 100,
+		apply   : {
+			height   : -.25,
+			transform: [{}, {
+				translateY: -.55
+			}],
+		}
+	},
+	{
+		type    : "Tween",
+		target  : "Highlighter",
+		from    : 150,
+		duration: 50,
+		apply   : {
+			transform: [{}, {
+				translateY: -.20
+			}],
+		}
+	}, {
+		type    : "Tween",
+		target  : "Highlighter",
+		from    : 200,
+		duration: 1,
+		apply   : {
+			zIndex   : -100,
+			transform: [{}, {
+				translateY: 1.2
+			}],
+		}
+	},
+	{
+		type    : "Tween",
+		target  : "Highlighter",
+		from    : 200,
+		duration: 50,
+		apply   : {
+			transform: [{}, {
+				translateY: -.20
+			}],
+		}
+	},
+	
+	// reset to header
+	
+	{
+		type    : "Tween",
+		target  : "PageBlock",
+		from    : 250,
+		duration: 100,
+		apply   : {
+			//height   : .8,
+			transform: [{}, {
+				translateY: -.8
+			}],
+		}
+	},
+	{
+		type    : "Tween",
+		target  : "Highlighter",
+		from    : 250,
+		duration: 100,
+		apply   : {
+			height   : .60,
+			transform: [{}, {
+				translateY: -.80
+			}],
+		}
+	},
+	{
+		type    : "Tween",
+		target  : "events",
+		from    : 250,
+		duration: 100,
+		apply   : {
+			height   : .05,
+			transform: [{}, {
+				translateY: -.15
+			}],
+		}
+	},
+	{
+		type    : "Tween",
+		target  : "EventMap",
+		from    : 250,
+		duration: 50,
+		apply   : {
+			height   : -.15,
+			transform: [{}, {
+				translateY: -.15
+			}],
+		}
+	},
+	{
+		type    : "Tween",
+		target  : "EventMap",
+		from    : 300,
+		duration: 1,
+		apply   : {
+			zIndex   : -100,
+			transform: [{}, {
+				translateY: 1.15
+			}],
+		}
+	},
+	{
+		type    : "Tween",
+		target  : "EventMap",
+		from    : 300,
+		duration: 50,
+		apply   : {
+			transform: [{}, {
+				translateY: -.05
+			}],
+		}
+	},
+	{
+		type    : "Tween",
+		target  : "header",
+		from    : 300,
+		duration: 50,
+		apply   : {
+			height: 1,
+		}
+	},
 ];
