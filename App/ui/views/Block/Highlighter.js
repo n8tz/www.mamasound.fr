@@ -165,10 +165,11 @@ export default class Highlighter extends React.Component {
 						bottom   : "0px",
 						left     : "0px",
 						width    : "100%",
+						//height   : "calc(20% - 50px)",
 						zIndex   : "100",
 						transform: {
 							perspective: "200px",
-							translateY : '0px',
+							translateY: '0px',
 							//rotateX    : "2deg"
 						}
 					} }
@@ -188,19 +189,19 @@ export default class Highlighter extends React.Component {
 					} }
 				>
 					<div className={ "slider" }>
-						<Comps.Slider autoScroll={ 5000 }>
+						<Comps.Slider autoScroll={ 10 * 1000 }>
 							{
 								gridItems.map(
 									( item, i ) =>
 										<TweenRef key={ item._id + i }
 										          tweener={ tweener }
 										          initial={ {
-											          top      : "20%",
-											          height   : "80%",
+											          top      : "0%",
+											          height   : "100%",
 											          transform: {
 												          perspective: "200px",
 												          //translateY : '0px',
-												          rotateX    : "2deg"
+												          rotateX: "2deg"
 											          }
 										          } }
 										          tweenLines={ {
@@ -211,8 +212,8 @@ export default class Highlighter extends React.Component {
 													          duration: 100,
 													          apply   : {
 														          //opacity  : "-1",
-														          height   : 2.5,
-														          top      : -2.5,
+														          //height   : 2.5,
+														          //top      : -2.5,
 														          transform: {
 															          translateZ: "15px",
 															          rotateX   : "-4deg"

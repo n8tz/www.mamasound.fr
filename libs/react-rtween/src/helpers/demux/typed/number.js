@@ -17,11 +17,11 @@ import is from "is";
 const
 	unitsRe      = new RegExp(
 		"([+-]?(?:[0-9]*[.])?[0-9]+)\\s*(" +
-		['em', 'ex', '%', 'px', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'rem', 'vh', 'vw', 'vmin', 'vmax'].join('|')
+		['box', 'em', 'ex', '%', 'px', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'rem', 'vh', 'vw', 'vmin', 'vmax'].join('|')
 		+ ")"
 	),
 	floatCut     = function ( v, l ) {
-		var p = Math.pow(10, l);
+		let p = Math.pow(10, l);
 		return Math.round(v * p) / p;
 	},
 	defaultUnits = {
@@ -31,20 +31,32 @@ const
 		bottom: 'px',
 		width : 'px',
 		height: 'px',
+	},
+	defaultBox   = {
+		left  : 'x',
+		right : 'x',
+		top   : 'y',
+		bottom: 'y',
+		width : 'x',
+		height: 'y',
 	};
 
 function demux( key, tweenable, target, data, box ) {
-	target[key] = data[key] ? floatCut(tweenable[key], 2) + data[key] : floatCut(tweenable[key], 2);
+	let value = floatCut(tweenable[key], 2),
+	    unit  = data[key];
+	
+	if ( unit === 'box' ) {
+		value = value * (box[defaultBox[key]] || box.x);
+		unit  = 'px';
+	}
+	
+	target[key] = unit ? value + unit : value;
 }
 
 function muxer( key, value, target, data, initials, forceUnits ) {
 	
 	
-	//if ( cssAnimProps.canAnimate(key) ) {
-	let match = is.string(value) ? value.match(unitsRe) : false;
-	
-	//let how = cssAnimProps.getProperty(key);
-	//console.log(how);
+	let match     = is.string(value) ? value.match(unitsRe) : false;
 	initials[key] = 0;
 	if ( match ) {
 		if ( !forceUnits && data[key] && data[key] !== match[2] ) {
@@ -61,11 +73,6 @@ function muxer( key, value, target, data, initials, forceUnits ) {
 		if ( !data[key] && key in defaultUnits )
 			data[key] = defaultUnits[key];
 	}
-	//}
-	//else {
-	//	// just do nothing
-	//	//data[key]=
-	//}
 	
 	return demux;
 };

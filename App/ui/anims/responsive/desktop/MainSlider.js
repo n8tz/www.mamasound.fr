@@ -11,6 +11,9 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
+
+let stepAngle = "3deg";
+
 export const defaultInitial  = {
 	position : "absolute",
 	height   : "100%",
@@ -22,11 +25,11 @@ export const defaultInitial  = {
 		{
 			perspective: "1250px",
 			translateY : "-20000px",
-			rotate     : "-1.9deg"
+			rotate     : "-" + stepAngle
 		},
 		{
 			translateY: "20000px",
-			translateZ: "-200px",
+			translateZ: "-500px",
 			//translateX: "1.75box",
 			//translateY: "-.5box",
 			//rotateY   : "-3deg",
@@ -42,11 +45,11 @@ export const defaultEntering = [
 		type    : "Tween",
 		from    : 0,
 		duration: 100,
-		easeFn  : "easeCubicIn",
+		easeFn  : "easeSinIn",
 		apply   : {
 			transform: {
 				//translateX: "-1.25box",
-				rotate: "1.9deg",
+				rotate: stepAngle,
 			},
 			zIndex   : 150,
 		}
@@ -95,13 +98,13 @@ export const defaultLeaving  = [
 		type    : "Tween",
 		from    : 0,
 		duration: 100,
-		easeFn  : "easeCubicOut",
+		easeFn  : "easeSinOut",
 		apply   : {
 			zIndex: -150,
 			
 			transform: {
 				//translateX: "-1.25box",
-				rotate: "1.9deg",
+				rotate: stepAngle,
 			}
 		}
 	}]

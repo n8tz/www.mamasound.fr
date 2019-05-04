@@ -32882,7 +32882,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-var unitsRe = new RegExp("([+-]?(?:[0-9]*[.])?[0-9]+)\\s*(" + ['em', 'ex', '%', 'px', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'rem', 'vh', 'vw', 'vmin', 'vmax'].join('|') + ")"),
+var unitsRe = new RegExp("([+-]?(?:[0-9]*[.])?[0-9]+)\\s*(" + ['box', 'em', 'ex', '%', 'px', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'rem', 'vh', 'vw', 'vmin', 'vmax'].join('|') + ")"),
     floatCut = function floatCut(v, l) {
   var p = Math.pow(10, l);
   return Math.round(v * p) / p;
@@ -32894,17 +32894,30 @@ var unitsRe = new RegExp("([+-]?(?:[0-9]*[.])?[0-9]+)\\s*(" + ['em', 'ex', '%', 
   bottom: 'px',
   width: 'px',
   height: 'px'
+},
+    defaultBox = {
+  left: 'x',
+  right: 'x',
+  top: 'y',
+  bottom: 'y',
+  width: 'x',
+  height: 'y'
 };
 
 function demux(key, tweenable, target, data, box) {
-  target[key] = data[key] ? floatCut(tweenable[key], 2) + data[key] : floatCut(tweenable[key], 2);
+  var value = floatCut(tweenable[key], 2),
+      unit = data[key];
+
+  if (unit === 'box') {
+    value = value * (box[defaultBox[key]] || box.x);
+    unit = 'px';
+  }
+
+  target[key] = unit ? value + unit : value;
 }
 
 function muxer(key, value, target, data, initials, forceUnits) {
-  //if ( cssAnimProps.canAnimate(key) ) {
-  var match = is__WEBPACK_IMPORTED_MODULE_0___default.a.string(value) ? value.match(unitsRe) : false; //let how = cssAnimProps.getProperty(key);
-  //console.log(how);
-
+  var match = is__WEBPACK_IMPORTED_MODULE_0___default.a.string(value) ? value.match(unitsRe) : false;
   initials[key] = 0;
 
   if (match) {
@@ -32918,12 +32931,7 @@ function muxer(key, value, target, data, initials, forceUnits) {
   } else {
     target[key] = parseFloat(value);
     if (!data[key] && key in defaultUnits) data[key] = defaultUnits[key];
-  } //}
-  //else {
-  //	// just do nothing
-  //	//data[key]=
-  //}
-
+  }
 
   return demux;
 }
@@ -32944,6 +32952,7 @@ var _default = muxer;
   reactHotLoader.register(unitsRe, "unitsRe", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\typed\\number.js");
   reactHotLoader.register(floatCut, "floatCut", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\typed\\number.js");
   reactHotLoader.register(defaultUnits, "defaultUnits", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\typed\\number.js");
+  reactHotLoader.register(defaultBox, "defaultBox", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\typed\\number.js");
   reactHotLoader.register(demux, "demux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\typed\\number.js");
   reactHotLoader.register(muxer, "muxer", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\typed\\number.js");
   reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\demux\\typed\\number.js");

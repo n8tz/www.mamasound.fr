@@ -24,7 +24,7 @@ export const page              = {
 export const Highlighter       = {
 	position : "absolute",
 	width    : "100%",
-	height   : "82%",
+	height   : ".8box",
 	top      : "0%",
 	transform: {
 		//translateY: "1box"
@@ -38,7 +38,7 @@ export const PageBlock         = {
 	},
 	height   : "0%"
 };
-export const NavBox           = {
+export const NavBox            = {
 	height    : "100%",
 	left      : "0px",
 	top       : "0px",
@@ -73,16 +73,16 @@ export const events            = {
 	//left     : "0px",
 	top      : "0%",
 	position : "absolute",
-	height   : "15%",
+	height   : ".15box",
 	transform: {
 		translateX: "-50%",
-		translateY: ".82box"
+		translateY: ".8box"
 	}
 };
 export const EventMap          = {
 	position       : "absolute",
 	right          : "0%",
-	height         : "3%",
+	height         : ".05box",
 	top            : "0%",
 	overflow       : 'hidden',
 	transformOrigin: "center top",
@@ -91,7 +91,7 @@ export const EventMap          = {
 			perspective: "500px",
 		},
 		{
-			translateY: ".98box",
+			translateY: ".95box",
 			//translateZ : "-50px",
 			//rotateX   : "-10deg"
 		}
@@ -116,7 +116,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: -55,
+			height: -.6,
 		}
 	},
 	{
@@ -125,9 +125,9 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height   : 40,
+			height   : .45,
 			transform: {
-				translateY: "-.55box"
+				translateY: "-.6box"
 			},
 		}
 	},
@@ -147,7 +147,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height   : 30,
+			height   : .30,
 			transform: [{}, {
 				translateY: -.20
 			}]
@@ -203,7 +203,7 @@ export const YAxis             = [
 		from    : 100,
 		duration: 50,
 		apply   : {
-			height: -10,
+			height: -.10,
 		}
 	},
 	//full map
@@ -218,7 +218,7 @@ export const YAxis             = [
 				translateY: -.15,
 				//translateZ: "150px"
 			}],
-			height: 15,
+			height   : .15,
 			//marginLeft: "30%",
 			//width     : "-30%",
 		}
@@ -248,7 +248,7 @@ export const YAxis             = [
 		from    : 150,
 		duration: 50,
 		apply   : {
-			height: -15,
+			height: -.15,
 		}
 	},
 	//{

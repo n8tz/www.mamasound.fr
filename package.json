@@ -127,6 +127,7 @@
     "leaflet": "^1.4.0",
     "leaflet-pulse-icon": "^0.1.0",
     "material-ui-chip-input": "^1.0.0-beta.15",
+    "memoize-one": "^5.0.4",
     "minimist": "^1.2.0",
     "moment": "^2.23.0",
     "mongodb": "^2.2.36",

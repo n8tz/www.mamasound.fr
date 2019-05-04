@@ -16,6 +16,7 @@ import React                                        from "react";
 import {asTweener, TweenRef, TweenAxis, tweenTools} from "react-rtween";
 import {reScope, scopeToProps, propsToScope}        from "rscopes";
 import {withStateMap, asRef, asStore}               from "rescope-spells";
+import memoize                                      from "memoize-one";
 
 @scopeToProps("Anims")
 @asTweener({ enableMouseDrag: true })
@@ -37,29 +38,70 @@ export default class Slider extends React.Component {
 	componentDidMount() {
 		let { autoScroll, defaultIndex = 0 } = this.props;
 		if ( autoScroll ) {
-			this._lastIndex = defaultIndex;
-			this._updater   = setInterval(
-				tm => {
-					let {
-						    children, visibleItems,
-						    overlaps = 1 / (visibleItems - (visibleItems % 2))
-					    }         = this.props,
-					    step      = 100 * overlaps,
-					    dec       = children.length * step,
-					    nextIndex = (this._lastIndex + 1) % children.length;
-					if ( this._lastIndex > nextIndex )
-						this.scrollTo(dec + 100 - step, 0, "scrollX");
-					this._lastIndex = nextIndex;
-					this.scrollTo(dec + step * this._lastIndex + 100, 250, "scrollX")
-					
-				},
+			this._updater = setTimeout(
+				tm => this.goNext(),
 				autoScroll
 			)
 		}
 	}
 	
+	goNext() {
+		let {
+			    children, visibleItems,
+			    overlaps = 1 / (visibleItems - (visibleItems % 2))
+		    }             = this.props,
+		    { step, dec } = this.state,
+		    nextIndex     = (this.state.index + 1) % children.length;
+		
+		if ( this.state.index > nextIndex )
+			this.scrollTo(dec + 100 - step, 0, "scrollX");
+		
+		this.setState({ index: nextIndex })
+	}
+	
+	componentDidUpdate( prevProps, prevState, snapshot ) {
+		let { autoScroll, defaultIndex = 0 }               = this.props,
+		    { index = this.props.defaultIndex, step, dec } = this.state;
+		
+		if ( prevState.dec !== this.state.dec ) {
+			this.scrollTo(this._getAxis("scrollX").scrollPos + this.state.dec - prevState.dec, 0, "scrollX");
+		}
+		if ( prevState.index !== index ) {
+			this.scrollTo(dec + step * index + 100, 500, "scrollX");
+			if ( autoScroll ) {
+				clearTimeout(this._updater);
+				this._updater = setTimeout(
+					tm => this.goNext(),
+					autoScroll
+				)
+			}
+		}
+	}
+	
 	componentWillUnmount() {
-		clearInterval(this._updater);
+		clearTimeout(this._updater);
+	}
+	
+	static getDerivedStateFromProps( props, state ) {
+		let {
+			    defaultIndex = 0,
+			    visibleItems = 5,
+			    overlaps     = 1 / (visibleItems - (visibleItems % 2)),
+			    children
+		    }                        = props,
+		    { index = defaultIndex } = state,
+		    allItems                 = [...children, ...children, ...children].map(( elem, i ) => React.cloneElement(elem, { key: i })),
+		    nbItems                  = allItems.length,
+		    step                     = 100 * overlaps,
+		    dec                      = children.length * step;
+		
+		return {
+			allItems,
+			nbItems,
+			step,
+			dec,
+			index
+		}
 	}
 	
 	render() {
@@ -69,12 +111,9 @@ export default class Slider extends React.Component {
 			    overlaps     = 1 / (visibleItems - (visibleItems % 2)),
 			    Anims: { MainSlider: { defaultInitial, defaultEntering, defaultLeaving } },
 			    children
-		    }                        = this.props,
-		    { index = defaultIndex } = this.state,
-		    allItems                 = [...children, ...children, ...children].map(( elem, i ) => React.cloneElement(elem, { key: i })),
-		    nbItems                  = allItems.length,
-		    step                     = 100 * overlaps,
-		    dec                      = children.length * step;
+		    }                                                      = this.props,
+		    { index = defaultIndex, allItems, nbItems, step, dec } = this.state;
+		
 		return (
 			<div
 				className={ "rSlide slider" }
@@ -86,7 +125,7 @@ export default class Slider extends React.Component {
 			>
 				<TweenAxis
 					axe={ "scrollX" }
-					defaultPosition={ 100 + dec }
+					defaultPosition={ 100 + index * step }
 					size={ nbItems * step + 100 }
 					inertia={
 						{

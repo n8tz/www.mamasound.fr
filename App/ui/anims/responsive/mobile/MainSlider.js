@@ -11,98 +11,101 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-export default {
-	defaultInitial    : {
-		position : "absolute",
-		height   : "100%",
-		top      : "50%",
-		left     : "50%",
-		zIndex   : 50,
-		opacity  : 0,
-		transform: [
-			{
-				perspective: "1250px",
-				translateY : "-20000px",
-				rotate     : "-1.9deg"
-			},
-			{
-				translateY: "20000px",
-				translateZ: "-200px",
-				//translateX: "1.75box",
-				//translateY: "-.5box",
-				//rotateY   : "-3deg",
-				rotateY   : "-65deg",
-			},
-			{
-				translateX: "-50%",
-				translateY: "-50%"
-			}]
-	}, defaultEntering: [
+
+let stepAngle = "2.5deg";
+
+export const defaultInitial  = {
+	position : "absolute",
+	height   : "100%",
+	top      : "50%",
+	left     : "50%",
+	zIndex   : 50,
+	opacity  : 0,
+	transform: [
 		{
-			type    : "Tween",
-			from    : 0,
-			duration: 100,
-			//easeFn  : "easePolyIn",
-			apply   : {
-				transform: {
-					//translateX: "-1.25box",
-					rotate: "1.9deg",
-				},
-				zIndex   : 150,
-			}
+			perspective: "1250px",
+			translateY : "-20000px",
+			rotate     : "-" + stepAngle
 		},
 		{
-			type    : "Tween",
-			from    : 0,
-			duration: 35,
-			apply   : {
-				opacity: 1,
-			}
-		}, {
-			type    : "Tween",
-			from    : 55,
-			duration: 45,
-			apply   : {
-				transform: [{}, {
-					rotateY   : "65deg",
-					translateZ: "200px",
-					//rotateX: "-90deg",
-				}],
-			}
-		},
-	], defaultLeaving : [
-		{
-			type    : "Tween",
-			from    : 0,
-			duration: 45,
-			apply   : {
-				transform: [{}, {
-					rotateY   : "65deg",
-					translateZ: "-200px",
-					//rotateX: "90deg",
-				}]
-			}
+			translateY: "20000px",
+			translateZ: "-500px",
+			//translateX: "1.75box",
+			//translateY: "-.5box",
+			//rotateY   : "-3deg",
+			rotateY   : "-65deg",
 		},
 		{
-			type    : "Tween",
-			from    : 65,
-			duration: 35,
-			apply   : {
-				opacity: -1,
-			}
-		}, {
-			type    : "Tween",
-			from    : 0,
-			duration: 100,
-			//easeFn  : "easePolyOut",
-			apply   : {
-				zIndex: -150,
-				
-				transform: {
-					//translateX: "-1.25box",
-					rotate: "1.9deg",
-				}
-			}
-		},
-	]
+			translateX: "-50%",
+			translateY: "-50%"
+		}]
 };
+export const defaultEntering = [
+	{
+		type    : "Tween",
+		from    : 0,
+		duration: 100,
+		//easeFn  : "easePolyIn",
+		apply   : {
+			transform: {
+				//translateX: "-1.25box",
+				rotate: stepAngle,
+			},
+			zIndex   : 150,
+		}
+	},
+	{
+		type    : "Tween",
+		from    : 0,
+		duration: 35,
+		apply   : {
+			opacity: 1,
+		}
+	}, {
+		type    : "Tween",
+		from    : 55,
+		duration: 45,
+		apply   : {
+			transform: [{}, {
+				rotateY   : "65deg",
+				translateZ: "500px",
+				//rotateX: "-90deg",
+			}],
+		}
+	},
+];
+export const defaultLeaving  = [
+	{
+		type    : "Tween",
+		from    : 0,
+		duration: 45,
+		apply   : {
+			transform: [{}, {
+				rotateY   : "65deg",
+				translateZ: "-500px",
+				//rotateX: "90deg",
+			}]
+		}
+	},
+	{
+		type    : "Tween",
+		from    : 65,
+		duration: 35,
+		apply   : {
+			opacity: -1,
+		}
+	}, {
+		type    : "Tween",
+		from    : 0,
+		duration: 100,
+		//easeFn  : "easePolyOut",
+		apply   : {
+			zIndex: -150,
+			
+			transform: {
+				//translateX: "-1.25box",
+				rotate: stepAngle,
+			}
+		}
+	}]
+;

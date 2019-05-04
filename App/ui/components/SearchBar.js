@@ -67,7 +67,7 @@ export default class SearchBar extends React.Component {
 			      TagManager, children, disabled,
 			      $actions, onSelect, selected, classes, theme
 		      } = this.props;
-		console.log(Object.keys(TagManager.available).map(t => TagManager.available[t]))
+		//console.log(Object.keys(TagManager.available).map(t => TagManager.available[t]))
 		return (
 			<div
 				className={ "SearchBar container" }
