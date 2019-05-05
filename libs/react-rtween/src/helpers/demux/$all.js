@@ -43,7 +43,7 @@ export default ( key, value, target, data, initials, forceUnits ) => {
 	
 	let match = is.string(value) ? value.match(unitsRe) : false;
 	
-	initials[key] = defaultValue[key] || 0;
+	initials[key] = is.number(initials[key]) ? initials[key] : defaultValue[key] || 0;
 	if ( match ) {
 		if ( !forceUnits && data[key] && data[key] !== match[2] ) {
 			console.warn("Have != units on prop ! Ignore ", key, "present:" + data[key], "new:" + match[2]);

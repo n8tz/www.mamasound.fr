@@ -54,7 +54,7 @@ export default class Inertia {
 	}
 	
 	update( at = Date.now() ) {
-		let _ = this._, nextValue;
+		let _ = this._, nextValue, loop;
 		if ( !_.inertia )
 			return _.pos;
 		let
@@ -69,12 +69,27 @@ export default class Inertia {
 		//console.log(_.pos + delta);
 		nextValue = _.pos + delta;
 		
-		if ( _.conf.hookValueUpdate )
-			nextValue = _.conf.hookValueUpdate(nextValue);
+		if ( _.conf.shouldLoop ) {
+			
+			while ( (loop = _.conf.shouldLoop(nextValue)) ) {
+				//console.warn("loop", loop);
+				nextValue += loop;
+				this.teleport(loop);
+			}
+		}
 		
 		_.pos = nextValue;
 		
 		return nextValue;
+	}
+	
+	teleport( loopDist ) {
+		let _ = this._, nextValue;
+		if ( !_.inertia )
+			return _.pos += loopDist;
+		
+		_.lastInertiaPos += loopDist;
+		_.pos += loopDist
 	}
 	
 	dispatch( delta, tm = 250 ) {
@@ -126,6 +141,10 @@ export default class Inertia {
 					target = pos < mid ? _.stops[i - 1] : _.stops[i];
 			}
 			
+			if ( _.conf.willSnap ) {
+				_.conf.willSnap(i, target)
+			}
+			
 			//console.log("do snap", i, target);
 			target           = target - (_.pos - _.lastInertiaPos);
 			_.targetDuration = min(maxDuration, abs((_.targetDuration / _.targetDist) * target));
@@ -171,17 +190,22 @@ export default class Inertia {
 		    now          = Date.now() / 1000,//e.timeStamp,
 		    sinceLastPos = (now - _.baseTS),
 		    delta        = pos - _.pos,
-		    iVel         = delta / sinceLastPos;
+		    iVel         = delta / sinceLastPos,
+		    loop;
 		
 		//console.log(pos);
 		_.lastIVelocity = iVel;
 		_.lastVelocity  = iVel;
 		_.baseTS        = now;
 		
-		if ( _.conf.hookValueUpdate )
-			pos = _.conf.hookValueUpdate(pos);
-		
-		if ( !_.conf.infinite ) {
+		if ( _.conf.shouldLoop ) {
+			while ( (loop = _.conf.shouldLoop(pos)) ) {
+				//console.warn("loop", loop);
+				pos += loop;
+				this.teleport(loop);
+			}
+		}
+		else if ( !_.conf.infinite ) {
 			if ( pos > _.max ) {
 				pos = _.max + min((pos - _.max) / 10, 10);
 			}

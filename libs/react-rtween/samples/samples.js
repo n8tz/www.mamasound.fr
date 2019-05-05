@@ -31583,7 +31583,8 @@ function asTweener() {
               'dragstart': function dragstart(e, touch, descr) {
                 //@todo
                 var tweener, x, y, i;
-                parents = _utils__WEBPACK_IMPORTED_MODULE_12__["default"].findReactParents(e.target);
+                parents = _utils__WEBPACK_IMPORTED_MODULE_12__["default"].findReactParents(e.target); //console.log(parents)
+
                 parentsState = [];
 
                 for (i = 0; i < parents.length; i++) {
@@ -31621,6 +31622,7 @@ function asTweener() {
                     deltaY = -(descr._lastPos.y - descr._startPos.y) / tweener._.box.y * y.scrollableArea;
 
                     if (!xDispatched && !tweener.isAxisOut("scrollX", deltaX)) {
+                      console.log(_this8.constructor.displayName, "scrollX", deltaX);
                       x.inertia.hold(parentsState[i].x + deltaX);
                       xDispatched = true;
                     }
@@ -32110,6 +32112,10 @@ function () {
         } else {
           mid = _.stops[i - 1] + (_.stops[i] - _.stops[i - 1]) / 2;
           if (forceSnap) target = forceSnap < 0 ? _.stops[i - 1] : _.stops[i];else target = pos < mid ? _.stops[i - 1] : _.stops[i];
+        }
+
+        if (_.conf.willSnap) {
+          _.conf.willSnap(i, target);
         } //console.log("do snap", i, target);
 
 

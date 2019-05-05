@@ -105,21 +105,36 @@ export default class Highlighter extends React.Component {
 							} }
 							tweenLines={ {
 								scrollY: [
-									//{
-									//	type    : "Tween",
-									//	from    : 0,
-									//	duration: 100,
-									//	apply   : {
-									//		filter   : {
-									//			//blur: "5px",
-									//			//translateY: "-50px",
-									//		},
-									//		transform: {
-									//			translateZ: "50px",
-									//			//translateY: "-20vh",
-									//		}
-									//	}
-									//}
+									{
+										type    : "Tween",
+										from    : 0,
+										duration: 100,
+										apply   : {
+											filter   : {
+												//blur: "5px",
+												//translateY: "-50px",
+											},
+											transform: {
+												translateZ: "50px",
+												//translateY: "-20vh",
+											}
+										}
+									},
+									{
+										type    : "Tween",
+										from    : 250,
+										duration: 100,
+										apply   : {
+											filter   : {
+												//blur: "5px",
+												//translateY: "-50px",
+											},
+											transform: {
+												translateZ: "-50px",
+												//translateY: "-20vh",
+											}
+										}
+									}
 								],
 							} }
 						>
@@ -157,6 +172,16 @@ export default class Highlighter extends React.Component {
 										perspective: "100px",
 									}
 								}
+							},
+							{
+								type    : "Tween",
+								from    : 150,
+								duration: 100,
+								apply   : {
+									transform: {
+										perspective: "-100px",
+									}
+								}
 							}
 						],
 					} }
@@ -166,38 +191,7 @@ export default class Highlighter extends React.Component {
 							{
 								gridItems.map(
 									( item, i ) =>
-										<TweenRef key={ item._id + i }
-										          tweener={ tweener }
-										          initial={ {
-											          top      : "0%",
-											          height   : "100%",
-											          transform: {
-												          perspective: "200px",
-												          //translateY : '0px',
-												          rotateX    : "2deg"
-											          }
-										          } }
-										          tweenLines={ {
-											          scrollY: [
-												          {
-													          type    : "Tween",
-													          from    : 0,
-													          duration: 100,
-													          apply   : {
-														          //opacity  : "-1",
-														          //height   : 2.5,
-														          //top      : -2.5,
-														          transform: {
-															          translateZ: "15px",
-															          rotateX   : "-4deg"
-														          }
-													          }
-												          }
-											          ],
-										          } }
-										>
-											<Views.FocusedItems record={ item }/>
-										</TweenRef>
+										<Views.FocusedItems record={ item }/>
 								)
 							}
 						</Comps.Slider>

@@ -21,7 +21,7 @@ import {withStateMap, asRef, asStore}   from "rescope-spells";
 import {asTweener, TweenRef, TweenAxis} from "react-rtween";
 
 @scopeToProps("appState", "Anims")
-@asTweener({})
+@asTweener({ enableMouseDrag: true, dragDirectionLock: true })
 export default class Home extends React.Component {
 	state = {};
 	
@@ -84,12 +84,12 @@ export default class Home extends React.Component {
 					items={ MainPage.YAxis }
 					inertia={
 						{
-							infinite: true,
-							hookValueUpdate( v ) {
-								//debugger
-								return ((v + 1) % 350) - 1;
+							infinite  : true,
+							shouldLoop: ( v ) => {
+								if ( (v + 1) > (350) )
+									return -350;
 							},
-							stops   : [0, 100, 150, 250, 350]
+							stops     : [0, 100, 150, 250, 350]
 						}
 					}
 				/>

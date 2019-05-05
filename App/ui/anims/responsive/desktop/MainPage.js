@@ -218,15 +218,13 @@ export const YAxis             = [
 		}
 	},
 	//page
-	//page
-	
 	{
 		type    : "Tween",
 		target  : "PageBlock",
 		from    : 150,
-		duration: 50,
+		duration: 100,
 		apply   : {
-			height   : 1,
+			height   : .8,
 			transform: [{}, {
 				translateY: -1
 			}],
@@ -234,18 +232,9 @@ export const YAxis             = [
 	},
 	{
 		type    : "Tween",
-		target  : "PageBlock",
-		from    : 200,
-		duration: 50,
-		apply   : {
-			height: -.2,
-		}
-	},
-	{
-		type    : "Tween",
 		target  : "events",
 		from    : 150,
-		duration: 50,
+		duration: 100,
 		apply   : {
 			height   : -.30,
 			transform: [{}, {
@@ -256,7 +245,16 @@ export const YAxis             = [
 	{
 		type    : "Tween",
 		target  : "events",
-		from    : 249,
+		from    : 247,
+		duration: 1,
+		apply   : {
+			opacity: -1
+		}
+	},
+	{
+		type    : "Tween",
+		target  : "events",
+		from    : 248,
 		duration: 1,
 		apply   : {
 			zIndex   : -100,
@@ -267,9 +265,18 @@ export const YAxis             = [
 	},
 	{
 		type    : "Tween",
+		target  : "events",
+		from    : 249,
+		duration: 1,
+		apply   : {
+			opacity: 1
+		}
+	},
+	{
+		type    : "Tween",
 		target  : "EventMap",
 		from    : 150,
-		duration: 50,
+		duration: 100,
 		apply   : {
 			height   : -.25,
 			transform: [{}, {
@@ -287,7 +294,17 @@ export const YAxis             = [
 				translateY: -.20
 			}],
 		}
-	}, {
+	},
+	{
+		type    : "Tween",
+		target  : "Highlighter",
+		from    : 199,
+		duration: 1,
+		apply   : {
+			opacity: -1
+		}
+	},
+	{
 		type    : "Tween",
 		target  : "Highlighter",
 		from    : 200,
@@ -297,6 +314,15 @@ export const YAxis             = [
 			transform: [{}, {
 				translateY: 1.2
 			}],
+		}
+	},
+	{
+		type    : "Tween",
+		target  : "Highlighter",
+		from    : 201,
+		duration: 1,
+		apply   : {
+			opacity: 1
 		}
 	},
 	{
@@ -355,9 +381,9 @@ export const YAxis             = [
 		from    : 250,
 		duration: 50,
 		apply   : {
-			height   : -.15,
+			height   : -.1,
 			transform: [{}, {
-				translateY: -.15
+				translateY: -.1
 			}],
 		}
 	},
@@ -380,7 +406,7 @@ export const YAxis             = [
 		duration: 50,
 		apply   : {
 			transform: [{}, {
-				translateY: -.05
+				translateY: -.1
 			}],
 		}
 	},

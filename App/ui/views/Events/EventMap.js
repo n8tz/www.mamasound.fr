@@ -189,7 +189,6 @@ export default class EventMap extends React.Component {
 			    Anims : { MainPage }, UserGeoLocation, Selected,
 			    $actions, DataProvider, selected
 		    }           = this.props,
-		    state       = this.state,
 		    map         = this.refs.map && this.refs.map.leafletElement,
 		    selectedPOI = Selected.Event && Selected.Event.place && DataProvider[Selected.Event.place.objId],
 		    selectedPos = selectedPOI && (selectedPOI.address.geoPoint
@@ -204,17 +203,19 @@ export default class EventMap extends React.Component {
 				map.getZoom()
 			)
 		}
+		
 		return (
 			<div className={ "EventMap" }>
 				<div className={ "maskContent " }>
 					
-					<Map center={ center } zoom={ zoom }
+					<Map center={ center }
+					     zoom={ zoom }
 					     className={ "container" }
 					     scrollWheelZoom={ false }
 					     animate={ true }
 					     useFlyTo={ true }
 					     ref={ "map" }
-						//dragging={ false }
+					     dragging={ false }
 					>
 						<TileLayer
 							url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

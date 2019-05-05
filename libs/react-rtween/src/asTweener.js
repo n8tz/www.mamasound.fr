@@ -560,6 +560,7 @@ export default function asTweener( ...argz ) {
 						);
 					
 					let lastPos = {},
+					    cLock,
 					    parents,
 					    parentsState;
 					if ( !rootNode )
@@ -573,6 +574,7 @@ export default function asTweener( ...argz ) {
 									    y, i;
 									
 									parents      = utils.findReactParents(e.target);
+									//console.log(parents)
 									parentsState = [];
 									for ( i = 0; i < parents.length; i++ ) {
 										tweener = parents[i];
@@ -598,18 +600,31 @@ export default function asTweener( ...argz ) {
 									    y, deltaY, dY, yDispatched,
 									    style, i;
 									
+									dX = -(descr._lastPos.x - descr._startPos.x);
+									dY = -(descr._lastPos.y - descr._startPos.y);
+									
+									if ( opts.dragDirectionLock ) {
+										if ( cLock === "Y" || !cLock && Math.abs(dY * .5) > Math.abs(dX) ) {
+											cLock = "Y";
+											dX    = 0;
+										}
+										else if ( cLock === "X" || !cLock && Math.abs(dX * .5) > Math.abs(dY) ) {
+											cLock = "X";
+											dY    = 0;
+										}
+									}
+									
 									for ( i = 0; i < parents.length; i++ ) {
 										tweener = parents[i];
-										dX      = -(descr._lastPos.x - descr._startPos.x);
-										dY      = -(descr._lastPos.y - descr._startPos.y);
 										// react comp with tweener support
 										if ( tweener.__isTweener && tweener._.scrollEnabled ) {
 											
 											x      = tweener._getAxis("scrollX");
 											y      = tweener._getAxis("scrollY");
-											deltaX = (-(descr._lastPos.x - descr._startPos.x) / tweener._.box.x) * x.scrollableArea;
-											deltaY = (-(descr._lastPos.y - descr._startPos.y) / tweener._.box.y) * y.scrollableArea;
+											deltaX = (dX / tweener._.box.x) * x.scrollableArea;
+											deltaY = (dY / tweener._.box.y) * y.scrollableArea;
 											if ( !xDispatched && !tweener.isAxisOut("scrollX", deltaX) ) {
+												//console.log(this.constructor.displayName, "scrollX", deltaX);
 												x.inertia.hold(parentsState[i].x + deltaX);
 												xDispatched = true;
 											}
@@ -642,7 +657,7 @@ export default function asTweener( ...argz ) {
 								'dropped'  : ( e, touch, descr ) => {
 									let tweener,
 									    i;
-									
+									cLock = undefined;
 									for ( i = 0; i < parents.length; i++ ) {
 										tweener = parents[i];
 										// react comp with tweener support

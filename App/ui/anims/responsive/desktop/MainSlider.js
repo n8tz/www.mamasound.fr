@@ -20,19 +20,16 @@ export const defaultInitial  = {
 	top      : "50%",
 	left     : "50%",
 	zIndex   : 50,
-	opacity  : 0,
+	opacity  : 0.1,
 	transform: [
 		{
 			perspective: "1250px",
-			translateY : "-20000px",
+			translateY : "-18000px",
 			rotate     : "-" + stepAngle
 		},
 		{
-			translateY: "20000px",
+			translateY: "18000px",
 			translateZ: "-500px",
-			//translateX: "1.75box",
-			//translateY: "-.5box",
-			//rotateY   : "-3deg",
 			rotateY   : "-65deg",
 		},
 		{
@@ -48,7 +45,6 @@ export const defaultEntering = [
 		easeFn  : "easeSinIn",
 		apply   : {
 			transform: {
-				//translateX: "-1.25box",
 				rotate: stepAngle,
 			},
 			zIndex   : 150,
@@ -59,7 +55,7 @@ export const defaultEntering = [
 		from    : 0,
 		duration: 35,
 		apply   : {
-			opacity: 1,
+			opacity: .5,
 		}
 	}, {
 		type    : "Tween",
@@ -83,7 +79,6 @@ export const defaultLeaving  = [
 			transform: [{}, {
 				rotateY   : "65deg",
 				translateZ: "-500px",
-				//rotateX: "90deg",
 			}]
 		}
 	},
@@ -92,7 +87,7 @@ export const defaultLeaving  = [
 		from    : 65,
 		duration: 35,
 		apply   : {
-			opacity: -1,
+			opacity: -.5,
 		}
 	}, {
 		type    : "Tween",
@@ -103,7 +98,6 @@ export const defaultLeaving  = [
 			zIndex: -150,
 			
 			transform: {
-				//translateX: "-1.25box",
 				rotate: stepAngle,
 			}
 		}
