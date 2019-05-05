@@ -131,22 +131,22 @@ export default class Slider extends React.Component {
 					size={ nbGhostItems * step + 100 }
 					inertia={
 						{
-							//shouldLoop: ( v ) => {
-							//	let { windowSize } = this.state;
-							//	if ( v > (100 + windowSize * 2) )
-							//		return -windowSize;
-							//
-							//	if ( v < (100 + windowSize) )
-							//		return windowSize;
-							//},
-							//willSnap  : ( i, v ) => {
-							//	let { nbItems }   = this.state;
-							//	this._wasUserSnap = true;
-							//	this.setState({ index: (i) % nbItems })
-							//	console.log(i % nbItems, v)
-							//},
-							value: 100 + dec + index * step,
-							stops: allItems.map(( child, i ) => (100 + i * step))
+							shouldLoop: ( v ) => {
+								let { windowSize } = this.state;
+								if ( v > (100 + windowSize * 2) )
+									return -windowSize;
+								
+								if ( v < (100 + windowSize) )
+									return windowSize;
+							},
+							willSnap  : ( i, v ) => {
+								let { nbItems }   = this.state;
+								this._wasUserSnap = true;
+								this.setState({ index: (i) % nbItems })
+								console.log(i % nbItems, v)
+							},
+							value     : 100 + dec + index * step,
+							stops     : allItems.map(( child, i ) => (100 + i * step))
 						}
 					}
 				/>
@@ -156,9 +156,7 @@ export default class Slider extends React.Component {
 							<TweenRef
 								key={ i }
 								initial={
-									{
-										...defaultInitial
-									}
+									defaultInitial
 								}
 								tweenLines={
 									{

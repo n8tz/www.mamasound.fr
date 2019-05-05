@@ -20,7 +20,7 @@ export const defaultInitial  = {
 	top      : "50%",
 	left     : "50%",
 	zIndex   : 50,
-	opacity  : 0.1,
+	opacity  : 0,
 	transform: [
 		{
 			perspective: "1250px",
@@ -55,7 +55,7 @@ export const defaultEntering = [
 		from    : 0,
 		duration: 35,
 		apply   : {
-			opacity: .5,
+			opacity: 1,
 		}
 	}, {
 		type    : "Tween",
@@ -87,7 +87,7 @@ export const defaultLeaving  = [
 		from    : 65,
 		duration: 35,
 		apply   : {
-			opacity: -.5,
+			opacity: -1,
 		}
 	}, {
 		type    : "Tween",

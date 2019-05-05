@@ -191,7 +191,52 @@ export default class Highlighter extends React.Component {
 							{
 								gridItems.map(
 									( item, i ) =>
-										<Views.FocusedItems record={ item }/>
+										<TweenRef key={ item._id + i }
+										          tweener={ tweener }
+										          initial={ {
+											          top      : "0%",
+											          height   : "100%",
+											          transform: {
+												          perspective: "200px",
+												          //translateY : '0px',
+												          rotateX    : "2deg"
+											          }
+										          } }
+										          tweenLines={ {
+											          scrollY: [
+												          {
+													          type    : "Tween",
+													          from    : 0,
+													          duration: 100,
+													          apply   : {
+														          //opacity  : "-1",
+														          //height   : 2.5,
+														          //top      : -2.5,
+														          transform: {
+															          translateZ: "15px",
+															          rotateX   : "-4deg"
+														          }
+													          }
+												          },
+												          {
+													          type    : "Tween",
+													          from    : 150,
+													          duration: 100,
+													          apply   : {
+														          //opacity  : "-1",
+														          //height   : 2.5,
+														          //top      : -2.5,
+														          transform: {
+															          translateZ: "-15px",
+															          rotateX   : "4deg"
+														          }
+													          }
+												          }
+											          ],
+										          } }
+										>
+											<Views.FocusedItems record={ item }/>
+										</TweenRef>
 								)
 							}
 						</Comps.Slider>

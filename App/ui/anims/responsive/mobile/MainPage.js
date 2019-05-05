@@ -152,6 +152,7 @@ export const PageBlock         = {
 export const EventMap_Gradient = {
 	opacity: 1
 };
+
 export const YAxis             = [
 	{
 		type    : "Tween",
@@ -177,7 +178,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height   : .45,
+			height   : .44,
 			transform: {
 				translateY: "-.6box"
 			},
@@ -189,9 +190,9 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height   : .15,
+			height   : .21,
 			transform: [{}, {
-				translateY: -.15
+				translateY: -.20
 			}]
 		}
 	},
@@ -278,7 +279,7 @@ export const YAxis             = [
 		from    : 150,
 		duration: 100,
 		apply   : {
-			height   : -.25,
+			height   : -.26,
 			transform: [{}, {
 				translateY: -.55
 			}],
@@ -331,8 +332,9 @@ export const YAxis             = [
 		from    : 200,
 		duration: 50,
 		apply   : {
+			height   : .02,
 			transform: [{}, {
-				translateY: -.22
+				translateY: -.23
 			}],
 		}
 	},
@@ -357,9 +359,9 @@ export const YAxis             = [
 		from    : 250,
 		duration: 100,
 		apply   : {
-			height   : .60,
+			height   : .58,
 			transform: [{}, {
-				translateY: -.78
+				translateY: -.77
 			}],
 		}
 	},

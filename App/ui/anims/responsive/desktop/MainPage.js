@@ -94,7 +94,7 @@ export const EventNav          = {
 export const events            = {
 	position       : "absolute",
 	right          : "0%",
-	height         : ".15box",
+	height         : ".21box",
 	top            : "0%",
 	zIndex         : 150,
 	//overflow       : 'hidden',
@@ -113,7 +113,7 @@ export const events            = {
 export const EventMap          = {
 	position       : "absolute",
 	right          : "0%",
-	height         : ".05box",
+	height         : "0box",
 	top            : "0%",
 	zIndex         : 125,
 	//overflow       : 'hidden',
@@ -123,7 +123,7 @@ export const EventMap          = {
 			perspective: "500px",
 		},
 		{
-			translateY: ".95box",
+			translateY: "1box",
 			//translateZ : "-50px",
 			//rotateX   : "-10deg"
 		}
@@ -177,7 +177,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height   : .45,
+			height   : .44,
 			transform: {
 				translateY: "-.6box"
 			},
@@ -189,9 +189,9 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height   : .15,
+			height   : .21,
 			transform: [{}, {
-				translateY: -.15
+				translateY: -.20
 			}]
 		}
 	},
@@ -278,7 +278,7 @@ export const YAxis             = [
 		from    : 150,
 		duration: 100,
 		apply   : {
-			height   : -.25,
+			height   : -.26,
 			transform: [{}, {
 				translateY: -.55
 			}],
@@ -331,8 +331,9 @@ export const YAxis             = [
 		from    : 200,
 		duration: 50,
 		apply   : {
+			height   : .02,
 			transform: [{}, {
-				translateY: -.22
+				translateY: -.23
 			}],
 		}
 	},
@@ -357,9 +358,9 @@ export const YAxis             = [
 		from    : 250,
 		duration: 100,
 		apply   : {
-			height   : .60,
+			height   : .58,
 			transform: [{}, {
-				translateY: -.78
+				translateY: -.77
 			}],
 		}
 	},
