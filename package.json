@@ -123,6 +123,8 @@
     "helmet": "^3.16.0",
     "https": "^1.0.0",
     "is": "^3.3.0",
+    "jmespath": "^0.15.0",
+    "json-query": "^2.2.2",
     "knex-schemer": "^0.1.17",
     "leaflet": "^1.4.0",
     "leaflet-pulse-icon": "^0.1.0",

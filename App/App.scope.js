@@ -192,5 +192,43 @@ export default {
 				           )
 			}
 		}
-	}
+	},
+	
+	
+	@withStateMap(
+		{
+			query: ":byId(mediaUrl)",
+			data : [
+				{
+					_id     : "test1",
+					mediaUrl: require("App/ui/assets/couvs/test.jpg")
+				},
+				{
+					_id     : "test2",
+					mediaUrl: require("App/ui/assets/couvs/test2.jpg")
+				},
+				{
+					_id     : "test3",
+					mediaUrl: require("App/ui/assets/couvs/chat-ninja-photos-hisakata-hiroyuki-4.jpg")
+				}
+			]
+		}
+	)
+	BackgroundLib: stores.assetsLoader,
+	
+	@asStore
+	HighlighterBackground: {
+		@asRef
+		BackgroundLib: "BackgroundLib",
+		current      : "test2",
+		$apply( url, { BackgroundLib, current } ) {
+			return current && BackgroundLib[current] || url;
+		},
+		changeHighlighterBackground( id ) {
+			let lib = Object.keys(this.state.BackgroundLib);
+			return {
+				current: id || lib[~~(Math.random() * lib.length)]
+			}
+		},
+	},
 }

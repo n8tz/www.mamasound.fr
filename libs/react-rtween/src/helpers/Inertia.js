@@ -55,8 +55,14 @@ export default class Inertia {
 	
 	update( at = Date.now() ) {
 		let _ = this._, nextValue, loop;
-		if ( !_.inertia )
+		if ( !_.inertia ) {
+			if ( _.conf.shouldLoop ) {
+				while ( (loop = _.conf.shouldLoop(_.pos)) ) {
+					this.teleport(loop);
+				}
+			}
 			return _.pos;
+		}
 		let
 			pos          = _.inertiaFn((at - _.inertiaStartTm) / _.targetDuration) * _.targetDist,
 			delta        = pos - _.lastInertiaPos;

@@ -69,9 +69,10 @@ import {withTweener, asTweener, TweenRef}           from "react-rtween";
 			layout: "GridLayout.HomeGridLayout.layout",
 		},
 		
+		
 	}
 )
-@scopeToProps("MountedItems", "Grid")
+@scopeToProps("MountedItems", "Grid", "HighlighterBackground")
 @withTweener
 export default class Highlighter extends React.Component {
 	static propTypes = {};
@@ -83,7 +84,7 @@ export default class Highlighter extends React.Component {
 	render() {
 		let {
 			    Grid: { items: gridItems = [], layout = [] },
-			    $actions, onSelect, tweener
+			    $actions, HighlighterBackground, tweener
 		    }     = this.props,
 		    state = this.state;
 		return (
@@ -139,7 +140,7 @@ export default class Highlighter extends React.Component {
 							} }
 						>
 							<div className={ "container " }>
-								<img src={ require("App/ui/assets/couvs/test.jpg") }/>
+								<img src={ HighlighterBackground }/>
 							</div>
 						</TweenRef>
 					</div>
@@ -187,7 +188,10 @@ export default class Highlighter extends React.Component {
 					} }
 				>
 					<div className={ "slider" }>
-						<Comps.Slider autoScroll={ 10 * 1000 }>
+						<Comps.Slider
+						
+							//autoScroll={ 10 * 1000 }
+						>
 							{
 								gridItems.map(
 									( item, i ) =>

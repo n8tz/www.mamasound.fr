@@ -86,8 +86,10 @@ export default class Home extends React.Component {
 						{
 							infinite  : true,
 							shouldLoop: ( v ) => {
-								if ( (v + 1) > (350) )
+								if ( (v + 1) > (350) ) {
+									$actions.changeHighlighterBackground();
 									return -350;
+								}
 							},
 							stops     : [0, 100, 150, 250, 350]
 						}
@@ -98,6 +100,7 @@ export default class Home extends React.Component {
 					initial={ MainPage.header }
 				>
 					<header
+						//onClick={ e => $actions.changeHighlighterBackground() }
 						//className={ "container withMask" }
 						//onClick={ e => $actions.setPageFocus("head") }
 						style={ {

@@ -89,6 +89,11 @@ export default function asTweener( ...argz ) {
 		}
 	}
 	
+	opts = {
+		...opts,
+		wheelRatio: 5,
+		
+	}
 	
 	return class TweenableComp extends BaseComponent {
 		static displayName = (BaseComponent.displayName || BaseComponent.name) + " (tweener)";
@@ -544,7 +549,11 @@ export default function asTweener( ...argz ) {
 			let _static = this.constructor,
 			    _       = this._;
 			if ( this._.rendered ) {
-				let rootNode = this.getRootNode();
+				let rootNode   = this.getRootNode(),
+				    debounceTm = 0,
+				    debounceTr = 0,
+				    scrollLoad = { x: 0, y: 0 },
+				    lastScrollEvt;
 				if ( !this._parentTweener && isBrowserSide ) {
 					
 					if ( !rootNode )
@@ -553,9 +562,38 @@ export default function asTweener( ...argz ) {
 						utils.addWheelEvent(
 							rootNode,
 							this._.onScroll = ( e ) => {//@todo
-								
+								let now       = Date.now();
+								scrollLoad.y += e.deltaY;
+								scrollLoad.x += e.deltaX;
+								lastScrollEvt = e.originalEvent;
+								debounceTm    = debounceTm || now;
+								if ( debounceTr && debounceTm + 500 < now ) {
+									
+									clearTimeout(debounceTr)
+									this._doDispatch(document.elementFromPoint(lastScrollEvt.clientX, lastScrollEvt.clientY), scrollLoad.x * 5, scrollLoad.y * 5)
+									scrollLoad.y = 0;
+									scrollLoad.x = 0;
+									debounceTm   = 0;
+									//debounceTm = now;
+									return;
+								}
+								clearTimeout(debounceTr)
+								//debounceTm = now;
+								debounceTr = setTimeout(
+									tm => {
+										//debugger
+										this._doDispatch(document.elementFromPoint(lastScrollEvt.clientX, lastScrollEvt.clientY), scrollLoad.x * 5, scrollLoad.y * 5)
+										scrollLoad.y = 0;
+										scrollLoad.x = 0;
+										debounceTm   = 0;
+										debounceTr   = lastScrollEvt = undefined;
+									},
+									250
+								)
 								// check if there scrollable stuff in dom targets
-								this._doDispatch(e.target, e.deltaX * 5, e.deltaY * 5);
+								;
+								
+								
 							}
 						);
 					
