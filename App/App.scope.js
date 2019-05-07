@@ -36,6 +36,7 @@ export default {
 		
 		currentPageFocus: "head",// head, events, page
 		
+		selectedPage      : { id: "Page.SkxesB7ugG", etty: 'Page' },
 		selectedEvent     : undefined,
 		selectedEventId   : undefined,
 		selectedEventDT   : undefined,
@@ -76,14 +77,22 @@ export default {
 		},
 		selectEvent( selectedEvent, selectedEventDT, showPageBlock ) {
 			let { currentPageFocus } = this.nextState;
-			currentPageFocus         = showPageBlock ? "page" : currentPageFocus;
-			if ( !selectedEvent && currentPageFocus === 'page' )
+			if ( selectedEvent )
 				currentPageFocus = 'events';
 			return {
 				selectedEventId: selectedEvent && selectedEvent._id,
 				selectedEventDT,
 				currentPageFocus,
-				selectedEvent  : selectedEvent && { id: selectedEvent._id, etty: selectedEvent._cls } || null
+				selectedPage   : selectedEvent && { id: selectedEvent._id, etty: selectedEvent._cls } || null
+			};
+		},
+		selectPage( selectedPage ) {
+			let { currentPageFocus } = this.nextState;
+			if ( selectedPage )
+				currentPageFocus = 'page';
+			return {
+				currentPageFocus,
+				selectedPage: selectedPage && { id: selectedPage, etty: "Page" } || null
 			};
 		},
 		selectWidget( selectedWidgetId ) {
@@ -104,7 +113,9 @@ export default {
 	@withStateMap(
 		{
 			@asRef
-			Event: "appState.selectedEvent"
+			Event: "appState.selectedEvent",
+			@asRef
+			Page : "appState.selectedPage"
 		}
 	)
 	Selected: stores.MongoRecords,

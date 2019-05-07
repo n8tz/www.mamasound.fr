@@ -23,6 +23,11 @@ import {withStateMap, asRef, asStore}               from "rescope-spells";
 import stores                                       from 'App/stores/(*).js';
 import {withTweener, asTweener, TweenRef}           from "react-rtween";
 
+let Tetris = 'div';
+if ( typeof window !== "undefined" ) {
+	Tetris = require('react-tetris');
+}
+
 @reScope(
 	{
 		@withStateMap(
@@ -189,8 +194,7 @@ export default class Highlighter extends React.Component {
 				>
 					<div className={ "slider" }>
 						<Comps.Slider
-						
-							//autoScroll={ 10 * 1000 }
+							autoScroll={ 10 * 1000 }
 						>
 							{
 								gridItems.map(
@@ -238,8 +242,12 @@ export default class Highlighter extends React.Component {
 												          }
 											          ],
 										          } }
+										
 										>
-											<Views.FocusedItems record={ item }/>
+											<Views.FocusedItems record={ item }
+											                    onClick={
+												                    e => $actions.selectPage(item.targetEtty.objId)
+											                    }/>
 										</TweenRef>
 								)
 							}

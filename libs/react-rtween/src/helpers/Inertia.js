@@ -43,14 +43,15 @@ export default class Inertia {
 			...opt
 		};
 		
-		this.active   = false;
-		_.pos         = opt.value || 0;
-		_.refFPS      = 16;
-		_.min         = opt.min || 0;
-		_.max         = opt.max || 0;
-		_.currentStop = 0;
-		_.stops       = _.conf.stops;
-		_.inertiaFn   = easingFn.easePolyOut;
+		this.active      = false;
+		_.pos            = opt.value || 0;
+		_.refFPS         = 16;
+		_.min            = opt.min || 0;
+		_.max            = opt.max || 0;
+		_.currentStop    = 0;
+		_.lastInertiaPos = 0;
+		_.stops          = _.conf.stops;
+		_.inertiaFn      = easingFn.easePolyOut;
 	}
 	
 	update( at = Date.now() ) {
@@ -126,7 +127,7 @@ export default class Inertia {
 	
 	_doSnap( forceSnap, maxDuration = 2000 ) {
 		let _   = this._,
-		    pos = _.targetDist + (_.pos - _.lastInertiaPos), target, mid, i
+		    pos = _.targetDist + (_.pos - (_.lastInertiaPos || 0)), target, mid, i
 		;
 		
 		if ( _.stops && _.stops.length ) {
@@ -151,9 +152,10 @@ export default class Inertia {
 				_.conf.willSnap(i, target)
 			}
 			
-			//console.log("do snap", i, target);
+			_.lastInertiaPos = _.lastInertiaPos || 0;
+			console.log("do snap", i, target);
 			target           = target - (_.pos - _.lastInertiaPos);
-			_.targetDuration = min(maxDuration, abs((_.targetDuration / _.targetDist) * target));
+			_.targetDuration = min(maxDuration, abs((_.targetDuration / _.targetDist) * target)) || 0;
 			_.targetDist     = target;
 		}
 		else {

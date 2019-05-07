@@ -224,9 +224,9 @@ export const YAxis             = [
 		from    : 150,
 		duration: 100,
 		apply   : {
-			height   : .8,
+			height   : .6,
 			transform: [{}, {
-				translateY: -1
+				translateY: -.8
 			}],
 		}
 	},

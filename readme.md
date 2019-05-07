@@ -1,7 +1,8 @@
-<h1 align="center">next mamasound.fr website</h1>
+<h1 align="center">work in progress next mamasound.fr website</h1>
 
 
-( not a perfect code & commit show room ;) )
+tmp url : http://mamasound.wiseways.me/
+
 
 ## How to start
 

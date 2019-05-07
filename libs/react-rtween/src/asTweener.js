@@ -374,6 +374,7 @@ export default function asTweener( ...argz ) {
 					apply   : ( pos, max ) => {
 						let x = (from + (easing(pos / max)) * length);
 						if ( this._.tweenEnabled ) {
+							console.log('TweenableComp::setPos:514: ', x);
 							this._.axes[axe].tweenLines.forEach(
 								sl => sl.goTo(x)
 							);
@@ -509,7 +510,12 @@ export default function asTweener( ...argz ) {
 				let oldPos = this._.axes[axe].targetPos,
 				    setPos = pos => {
 					
+					    //console.log('TweenableComp::setPos:514: ', pos);
 					    this._.axes[axe].scrollPos = pos;
+					    if ( this._.axes[axe].inertia ) {
+						    //this._.axes[axe].inertia.active = false;
+						    this._.axes[axe].inertia._.pos = pos;
+					    }
 					    this.componentDidScroll && this.componentDidScroll(~~pos);
 					    this._updateTweenRefs()
 				    }
@@ -727,6 +733,9 @@ export default function asTweener( ...argz ) {
 			if ( dim.inertia.active ) {
 				let x = dim.inertia.update();
 				
+				//this._.axes[axe].tweenLines.forEach(
+				//	sl => sl.goTo(x, this._.tweenRefMaps)
+				//);
 				this.scrollTo(x, 0, axe);
 				//console.log("scroll at " + x, axe);
 				dim.inertiaFrame = window.requestAnimationFrame(this.applyInertia.bind(this, dim, axe));
@@ -750,9 +759,7 @@ export default function asTweener( ...argz ) {
 				dim.inertia.dispatch(delta, 100);
 				!dim.inertiaFrame && this.applyInertia(dim, axe);
 				
-				//if ( this.scrollTo(newPos, 0, axe) )
-				//	prevent = !(opts.propagateAxes && opts.propagateAxes[axe]);
-				prevent = true;
+				//this.scrollTo(newPos, 0, axe)
 			}
 			
 			return prevent;

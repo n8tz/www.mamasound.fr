@@ -20,6 +20,15 @@ import ReactDom                              from "react-dom";
 import {withStateMap, asRef, asStore}   from "rescope-spells";
 import {asTweener, TweenRef, TweenAxis} from "react-rtween";
 
+const wayPoints = [
+	{
+		head  : 0,
+		event : 100,
+		events: 150,
+		page  : 250
+	}
+]
+
 @scopeToProps("appState", "Anims")
 @asTweener({ enableMouseDrag: true, dragDirectionLock: true })
 export default class Home extends React.Component {
@@ -38,11 +47,14 @@ export default class Home extends React.Component {
 			case 'head' :
 				this.scrollTo(0);
 				break;
-			case 'events' :
+			case 'event' :
 				this.scrollTo(100);
 				break;
-			case 'page' :
+			case 'events' :
 				this.scrollTo(150);
+				break;
+			case 'page' :
+				this.scrollTo(250);
 				break;
 			
 		}
@@ -55,13 +67,16 @@ export default class Home extends React.Component {
 			//console.log(appState.currentPageFocus);
 			switch ( appState.currentPageFocus ) {
 				case 'head' :
-					setTimeout(tm => this.scrollTo(0, 300), 50);
+					this.scrollTo(0, 500);
+					break;
+				case 'event' :
+					this.scrollTo(100, 500);
 					break;
 				case 'events' :
-					setTimeout(tm => this.scrollTo(100, 300), 50);
+					this.scrollTo(150, 500);
 					break;
 				case 'page' :
-					this.scrollTo(150, 250);
+					this.scrollTo(250, 500);
 					break;
 				
 			}
@@ -82,6 +97,7 @@ export default class Home extends React.Component {
 				<TweenAxis
 					axe={ "scrollY" }
 					items={ MainPage.YAxis }
+					defaultPosition={ wayPoints[appState.currentPageFocus] }
 					inertia={
 						{
 							infinite  : true,

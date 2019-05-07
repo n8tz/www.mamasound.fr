@@ -49,7 +49,7 @@ export default class Image extends React.Component {
 	render() {
 		return <img { ...{
 			...this.props,
-			src: this.getSrc(),
+			src: getSrc(this.props.src, this.props),
 		} }/>;
 	}
 	

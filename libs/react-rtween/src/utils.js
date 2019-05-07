@@ -602,7 +602,7 @@ var
 					return comps;
 				}
 			}
-			return comps;
+			return element.parentNode && this.findReactParents(element.parentNode);
 		}
 		
 	};

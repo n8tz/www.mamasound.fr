@@ -29,10 +29,10 @@ import moment, {TweenRef} from "./DayBlock";
 export default class FocusedItems extends React.Component {
 	render() {
 		let {
-			    record, style, className
+			    record, style, className, onClick
 		    } = this.props;
 		return (
-			<div className="FocusedItems" style={ style }>
+			<div className="FocusedItems" style={ style } onClick={onClick}>
 				<Editable id={ record._id }/>
 				
 				{ record.previewImage &&

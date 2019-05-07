@@ -54,9 +54,15 @@ export default class PageBlock extends React.Component {
 				<div className={ "maskContent" }>
 					{
 						Selected &&
-						Selected.Event &&
-						Selected.Event._cls === "Concert" &&
-						<Views.Event.page record={ Selected && Selected.Event } refs={ DataProvider }/>
+						Selected.Page &&
+						(
+							Selected.Page._cls === "Concert" &&
+							Selected.Page.place &&
+							DataProvider[Selected.Page.place.objId] &&
+							<Views.Place.page record={ DataProvider[Selected.Page.place.objId] } refs={ DataProvider }/>
+							||
+							<Views.Page.page record={ Selected && Selected.Page } refs={ DataProvider }/>
+						)
 					}
 				
 				</div>

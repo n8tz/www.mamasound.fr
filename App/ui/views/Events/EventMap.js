@@ -190,7 +190,7 @@ export default class EventMap extends React.Component {
 			    $actions, DataProvider, selected
 		    }           = this.props,
 		    map         = this.refs.map && this.refs.map.leafletElement,
-		    selectedPOI = Selected.Event && Selected.Event.place && DataProvider[Selected.Event.place.objId],
+		    selectedPOI = Selected.Page && Selected.Page.place && DataProvider[Selected.Page.place.objId],
 		    selectedPos = selectedPOI && (selectedPOI.address.geoPoint
 			    &&
 			    [...selectedPOI.address.geoPoint].reverse()
@@ -232,20 +232,18 @@ export default class EventMap extends React.Component {
 										[...selectedPOI.address.geoPoint].reverse()
 										|| selectedPOI.address
 									}
-									key={ Selected.Event.place._id }
+									key={ Selected.Page.place._id }
 									//style={ { marginBottom: '50px' } }
 									offset={ Leaflet.point(13, 20) }
 								>
 									<Views.Event.popin
 										$scope={ this.props.$scope }
-										record={ Selected.Event }
+										record={ Selected.Page }
 										refs={ DataProvider }
-										onClose={ ( e ) => {
-											//this.state.selectedMarkerIcon &&
-											//this.state.selectedMarkerIcon.classList.remove("active");
-											//this.setState({ selectedPOI: null, selectedMarkerIcon: null });
+										onClick={
+											e => $actions.selectPage(Selected.Page._id)
 											
-										} }
+										}
 									/>
 								</Popup>
 								|| ''
