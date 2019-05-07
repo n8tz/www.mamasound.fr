@@ -26,6 +26,9 @@ export default ( server, http ) => {
 		'/upload',
 		uploader,
 		( req, res, next ) => {
+			if ( !(req.user && req.user.isAdmin) )
+				return res.json({ success: false, error: "Auth required" });
+			
 			let results = [];
 			if ( req.files.file )
 				Promise.all(

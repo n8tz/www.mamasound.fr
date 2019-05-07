@@ -12,24 +12,12 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-import superagent   from "superagent";
+
+import $super       from "$super";
 import DataProvider from "App/stores/DataProvider";
-
-import rscopes, {
-	spells
-} from "rscopes";
-
-let { withStateMap, asRef } = spells;
 
 
 export default {
-	//@withStateMap(
-	//	{
-	//		api: {
-	//			get  : "/db/get",
-	//			query: "/db/query"
-	//		}
-	//	}
-	//)
+	...$super,
 	DataProvider: DataProvider
 }

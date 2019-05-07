@@ -35,7 +35,8 @@ export function service( server ) {
 	server.get(
 		'/',
 		function ( req, res, next ) {
-			console.warn(req.url)
+			
+			console.warn(req.url, req.user)
 			App.renderSSR(
 				{
 					location: req.url,

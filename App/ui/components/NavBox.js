@@ -21,6 +21,8 @@ import stores                                from 'App/stores/(*).js';
 import Views                                 from 'App/ui/components/(*).js';
 import {asTweener, TweenRef}                 from "react-rtween";
 import {FacebookProvider, Page}              from 'react-facebook';
+import {ContextMenu}                         from "../../App";
+import {Comps}                               from "../index";
 
 @reScope(
 	{
@@ -63,6 +65,8 @@ export default class NavBox extends React.Component {
 						<div className={ "material-icons icon" }>search</div>
 					</Fab>
 				</div>
+				
+				<Comps.LoginBox/>
 				<div className={ "fbPage" }>
 					<FacebookProvider appId="1191108604284018">
 						<Page href="https://www.facebook.com/mamasound.fr"
