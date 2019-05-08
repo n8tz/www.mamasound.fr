@@ -401,14 +401,15 @@ export default function asTweener( ...argz ) {
 			let _ = this._;
 			
 			_.axes[axe] = _.axes[axe] || {
-				tweenLines    : [],
-				scrollPos     : opts.initialScrollPos && opts.initialScrollPos[axe] || 0,
-				targetPos     : 0,
-				scrollableArea: 0,
-				inertia       : new Inertia({
-					                            value: opts.initialScrollPos && opts.initialScrollPos[axe] || 0,
-					                            ...(opts.axes && opts.axes[axe] && opts.axes[axe].inertia || {})
-				                            }),
+				tweenLines      : [],
+				scrollPos       : opts.initialScrollPos && opts.initialScrollPos[axe] || 0,
+				targetPos       : 0,
+				scrollableWindow: 0,
+				scrollableArea  : 0,
+				inertia         : new Inertia({
+					                              value: opts.initialScrollPos && opts.initialScrollPos[axe] || 0,
+					                              ...(opts.axes && opts.axes[axe] && opts.axes[axe].inertia || {})
+				                              }),
 			};
 			
 			return _.axes[axe];
@@ -423,25 +424,27 @@ export default function asTweener( ...argz ) {
 			return state;
 		}
 		
-		initAxis( axe, _inertia, _scrollableArea = 0, defaultPosition ) {
+		initAxis( axe, _inertia, _scrollableArea = 0, _scrollableWindow, defaultPosition ) {
 			this.makeTweenable();
 			this.makeScrollable();
-			let _              = this._,
-			    dim            = _.axes[axe],
-			    scrollPos      = dim ? dim.scrollPos : defaultPosition || 0,
-			    scrollableArea = Math.max(dim && dim.scrollableArea || 0, _scrollableArea),
-			    targetPos      = dim ? dim.targetPos : scrollPos,
-			    inertia        = _inertia !== false && (
+			let _                = this._,
+			    dim              = _.axes[axe],
+			    scrollPos        = dim ? dim.scrollPos : defaultPosition || 0,
+			    scrollableArea   = Math.max(dim && dim.scrollableArea || 0, _scrollableArea),
+			    scrollableWindow = Math.max(dim && dim.scrollableWindow || 0, _scrollableWindow),
+			    targetPos        = dim ? dim.targetPos : scrollPos,
+			    inertia          = _inertia !== false && (
 				    dim ? dim.inertia : new Inertia({// todo mk pure
 					                                    ...(_inertia || {}),
 					                                    value: scrollPos
 				                                    })),
-			    nextDescr      = {
+			    nextDescr        = {
 				    ...(_inertia || {}),
 				    tweenLines: dim && dim.tweenLines || [],
 				    scrollPos,
 				    targetPos,
 				    inertia,
+				    scrollableWindow,
 				    scrollableArea
 			    }
 			;
@@ -675,9 +678,8 @@ export default function asTweener( ...argz ) {
 												!x.inertiaFrame && tweener.applyInertia(x, "scrollX");
 												!y.inertiaFrame && tweener.applyInertia(y, "scrollY");
 											}
-											
-											deltaX = (dX / tweener._.box.x) * x.scrollableArea;
-											deltaY = (dY / tweener._.box.y) * y.scrollableArea;
+											deltaX = (dX / tweener._.box.x) * (x.scrollableWindow || x.scrollableArea);
+											deltaY = (dY / tweener._.box.y) * (y.scrollableWindow || y.scrollableArea);
 											if ( !xDispatched && !tweener.isAxisOut("scrollX", parentsState[i].x + deltaX, true) ) {
 												x.inertia.hold(parentsState[i].x + deltaX);
 												xDispatched = true;

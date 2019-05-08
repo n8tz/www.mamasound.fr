@@ -22,12 +22,12 @@ import is                                           from "is";
 @asTweener({ enableMouseDrag: true })
 export default class Slider extends React.Component {
 	static defaultProps = {
-		defaultIndex: 0,
-		visibleItems: 10,
-		overlaps    : 1 / 4,
-		defaultInitial:{},
-		defaultEntering:[],
-		defaultLeaving:[]
+		defaultIndex   : 0,
+		visibleItems   : 10,
+		overlaps       : 1 / 4,
+		defaultInitial : {},
+		defaultEntering: [],
+		defaultLeaving : []
 	};
 	state               = {};
 	
@@ -143,6 +143,7 @@ export default class Slider extends React.Component {
 					axe={ "scrollX" }
 					defaultPosition={ 100 + dec + index * step }
 					size={ nbGhostItems * step + 100 }
+					scrollableWindow={ 2 * step }
 					inertia={
 						{
 							shouldLoop: ( v ) => {

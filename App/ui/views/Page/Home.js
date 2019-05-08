@@ -97,6 +97,7 @@ export default class Home extends React.Component {
 				<TweenAxis
 					axe={ "scrollY" }
 					items={ MainPage.YAxis }
+					scrollableWindow={ 120 }
 					defaultPosition={ wayPoints[appState.currentPageFocus] }
 					inertia={
 						{
@@ -117,7 +118,7 @@ export default class Home extends React.Component {
 									at: 150,
 									id: "event"
 								},
-								{ at: 250, id: "page" },
+								{ at: 250, id: "page", stop: true },
 								{ at: 350 }
 							],
 						}
