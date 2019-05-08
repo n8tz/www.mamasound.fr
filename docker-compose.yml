@@ -52,7 +52,7 @@ services:
   mongodb:
     image: mongo
     restart: always
-    command: --smallfiles
+    command: --quiet --smallfiles
     environment:
       - MONGO_DATA_DIR=/data/db
     volumes:

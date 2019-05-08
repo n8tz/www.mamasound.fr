@@ -30941,22 +30941,22 @@ __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return asTweener; });
 /* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "./node_modules/@babel/runtime/helpers/toConsumableArray.js");
 /* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/objectSpread */ "./node_modules/@babel/runtime/helpers/objectSpread.js");
-/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js");
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime/helpers/get */ "./node_modules/@babel/runtime/helpers/get.js");
-/* harmony import */ var _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js");
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime/helpers/get */ "./node_modules/@babel/runtime/helpers/get.js");
+/* harmony import */ var _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @babel/runtime/helpers/objectSpread */ "./node_modules/@babel/runtime/helpers/objectSpread.js");
+/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var is__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! is */ "./node_modules/is/index.js");
@@ -31088,17 +31088,20 @@ function asTweener() {
     };
   }
 
+  opts = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, opts, {
+    wheelRatio: 5
+  });
   return _temp = _class =
   /*#__PURE__*/
   function (_BaseComponent) {
-    _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_8___default()(TweenableComp, _BaseComponent);
+    _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_7___default()(TweenableComp, _BaseComponent);
 
     function TweenableComp() {
       var _this;
 
-      _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2___default()(this, TweenableComp);
+      _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default()(this, TweenableComp);
 
-      _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(TweenableComp).apply(this, arguments));
+      _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(TweenableComp).apply(this, arguments));
       _this._ = {
         refs: {},
         muxByTarget: {}
@@ -31108,12 +31111,12 @@ function asTweener() {
         y: 100,
         z: 800
       };
-      _this._._rafLoop = _this._rafLoop.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_this));
+      _this._._rafLoop = _this._rafLoop.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_this));
       _this.__isTweener = true;
       return _this;
     }
 
-    _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3___default()(TweenableComp, [{
+    _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default()(TweenableComp, [{
       key: "resetTweenable",
       value: function resetTweenable() {
         var _this2 = this;
@@ -31125,7 +31128,7 @@ function asTweener() {
         targets.forEach(function (t) {
           // delete this._.tweenRefs[t];
           // delete this._.tweenRefCSS[t];
-          _this2._.tweenRefMaps[t] = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, _this2._.tweenRefOrigin[t]);
+          _this2._.tweenRefMaps[t] = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, _this2._.tweenRefOrigin[t]);
         });
 
         this._updateTweenRefs();
@@ -31181,8 +31184,8 @@ function asTweener() {
           _.iMapOrigin[id] = iMap;
 
           if (cState && cState.refs && cState.refs[id]) {
-            iStyle = iStyle || _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, cState.refs[id][0]);
-            iMap = iMap || _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, cState.refs[id][1]);
+            iStyle = iStyle || _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, cState.refs[id][0]);
+            iMap = iMap || _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, cState.refs[id][1]);
           } else {
             iStyle = iStyle || {};
             iMap = iMap || {};
@@ -31191,11 +31194,11 @@ function asTweener() {
           _.tweenRefs[id] = true;
           _.muxByTarget[id] = _.muxByTarget[id] || {};
           _.muxDataByTarget[id] = _.muxDataByTarget[id] || {};
-          iStyle = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, iStyle, Object(_helpers__WEBPACK_IMPORTED_MODULE_17__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true)); //_.tweenRefUnits[id] = extractUnits(iMap);
+          iStyle = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, iStyle, Object(_helpers__WEBPACK_IMPORTED_MODULE_17__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true)); //_.tweenRefUnits[id] = extractUnits(iMap);
           //}
 
           _.tweenRefOrigin[id] = tweenableMap;
-          _.tweenRefCSS[id] = _.tweenRefCSS[id] || _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, iStyle);
+          _.tweenRefCSS[id] = _.tweenRefCSS[id] || _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, iStyle);
           if (mapReset) Object.assign(_.tweenRefCSS[id], iStyle);
           _.tweenRefCSS[id] = iStyle; // init / reset or get the tweenable view
 
@@ -31204,9 +31207,9 @@ function asTweener() {
         }
 
         if (noref) return {
-          style: _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, _.tweenRefCSS[id])
+          style: _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, _.tweenRefCSS[id])
         };else return {
-          style: _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, _.tweenRefCSS[id]),
+          style: _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, _.tweenRefCSS[id]),
           ref: function ref(node) {
             return _.refs[id] = node;
           } // __tweenMap : this._.tweenRefMaps[id],
@@ -31268,7 +31271,7 @@ function asTweener() {
           sl = Object(_helpers__WEBPACK_IMPORTED_MODULE_17__["deMuxLine"])(sl, initials, this._.muxDataByTarget, this._.muxByTarget);
           sl = new rtween__WEBPACK_IMPORTED_MODULE_15___default.a(sl, this._.tweenRefMaps);
           Object.keys(initials).forEach(function (id) {
-            return Object.assign(_this3._.tweenRefMaps[id], _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, initials[id], _this3._.tweenRefMaps[id]));
+            return Object.assign(_this3._.tweenRefMaps[id], _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, initials[id], _this3._.tweenRefMaps[id]));
           });
         } // console.warn("Should start anim ", sl);
 
@@ -31372,6 +31375,7 @@ function asTweener() {
             var x = from + easing(pos / max) * length;
 
             if (_this5._.tweenEnabled) {
+              //console.log('TweenableComp::setPos:514: ', x);
               _this5._.axes[axe].tweenLines.forEach(function (sl) {
                 return sl.goTo(x);
               });
@@ -31401,7 +31405,7 @@ function asTweener() {
           scrollPos: opts.initialScrollPos && opts.initialScrollPos[axe] || 0,
           targetPos: 0,
           scrollableArea: 0,
-          inertia: new _helpers_Inertia__WEBPACK_IMPORTED_MODULE_13__["default"](_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({
+          inertia: new _helpers_Inertia__WEBPACK_IMPORTED_MODULE_13__["default"](_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({
             value: opts.initialScrollPos && opts.initialScrollPos[axe] || 0
           }, opts.axes && opts.axes[axe] && opts.axes[axe].inertia || {}))
         };
@@ -31431,10 +31435,10 @@ function asTweener() {
             scrollPos = dim ? dim.scrollPos : defaultPosition || 0,
             scrollableArea = Math.max(dim && dim.scrollableArea || 0, _scrollableArea),
             targetPos = dim ? dim.targetPos : scrollPos,
-            inertia = _inertia !== false && (dim ? dim.inertia : new _helpers_Inertia__WEBPACK_IMPORTED_MODULE_13__["default"](_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, _inertia || {}, {
+            inertia = _inertia !== false && (dim ? dim.inertia : new _helpers_Inertia__WEBPACK_IMPORTED_MODULE_13__["default"](_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, _inertia || {}, {
           value: scrollPos
         }))),
-            nextDescr = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, _inertia || {}, {
+            nextDescr = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, _inertia || {}, {
           tweenLines: dim && dim.tweenLines || [],
           scrollPos: scrollPos,
           targetPos: targetPos,
@@ -31469,7 +31473,7 @@ function asTweener() {
           sl = Object(_helpers__WEBPACK_IMPORTED_MODULE_17__["deMuxLine"])(sl, initials, this._.muxDataByTarget, this._.muxByTarget);
           sl = new rtween__WEBPACK_IMPORTED_MODULE_15___default.a(sl, _.tweenRefMaps);
           Object.keys(initials).forEach(function (id) {
-            _this6._.tweenRefMaps[id] = _this6._.tweenRefMaps[id] || {}, Object.assign(_this6._.tweenRefMaps[id], _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_1___default()({}, initials[id], _this6._.tweenRefMaps[id]));
+            _this6._.tweenRefMaps[id] = _this6._.tweenRefMaps[id] || {}, Object.assign(_this6._.tweenRefMaps[id], _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, initials[id], _this6._.tweenRefMaps[id]));
           });
         }
 
@@ -31521,7 +31525,14 @@ function asTweener() {
         if (this._.axes && this._.axes[axe]) {
           var oldPos = this._.axes[axe].targetPos,
               setPos = function setPos(pos) {
+            //console.log('TweenableComp::setPos:514: ', pos);
             _this7._.axes[axe].scrollPos = pos;
+
+            if (_this7._.axes[axe].inertia) {
+              //this._.axes[axe].inertia.active = false;
+              _this7._.axes[axe].inertia._.pos = pos;
+            }
+
             _this7.componentDidScroll && _this7.componentDidScroll(~~pos);
 
             _this7._updateTweenRefs();
@@ -31568,15 +31579,51 @@ function asTweener() {
             _ = this._;
 
         if (this._.rendered) {
-          var rootNode = this.getRootNode();
+          var rootNode = this.getRootNode(),
+              debounceTm = 0,
+              debounceTr = 0,
+              scrollLoad = {
+            x: 0,
+            y: 0
+          },
+              lastScrollEvt;
 
           if (!this._parentTweener && isBrowserSide) {
             if (!rootNode) console.warn("fail registering scroll listener !! ");else _utils__WEBPACK_IMPORTED_MODULE_12__["default"].addWheelEvent(rootNode, this._.onScroll = function (e) {
               //@todo
-              // check if there scrollable stuff in dom targets
-              _this8._doDispatch(e.target, e.deltaX * 5, e.deltaY * 5);
+              var now = Date.now();
+              scrollLoad.y += e.deltaY;
+              scrollLoad.x += e.deltaX;
+              lastScrollEvt = e.originalEvent;
+              debounceTm = debounceTm || now;
+
+              if (debounceTr && debounceTm + 500 < now) {
+                clearTimeout(debounceTr);
+
+                _this8._doDispatch(document.elementFromPoint(lastScrollEvt.clientX, lastScrollEvt.clientY), scrollLoad.x * 5, scrollLoad.y * 5);
+
+                scrollLoad.y = 0;
+                scrollLoad.x = 0;
+                debounceTm = 0; //debounceTm = now;
+
+                return;
+              }
+
+              clearTimeout(debounceTr); //debounceTm = now;
+
+              debounceTr = setTimeout(function (tm) {
+                //debugger
+                _this8._doDispatch(document.elementFromPoint(lastScrollEvt.clientX, lastScrollEvt.clientY), scrollLoad.x * 5, scrollLoad.y * 5);
+
+                scrollLoad.y = 0;
+                scrollLoad.x = 0;
+                debounceTm = 0;
+                debounceTr = lastScrollEvt = undefined;
+              }, 250) // check if there scrollable stuff in dom targets
+              ;
             });
             var lastPos = {},
+                cLock,
                 parents,
                 parentsState;
             if (!rootNode) console.warn("fail registering drag listener !! ");else _utils__WEBPACK_IMPORTED_MODULE_12__["default"].addEvent(rootNode, this._.dragList = {
@@ -31609,20 +31656,30 @@ function asTweener() {
               'drag': function drag(e, touch, descr) {
                 //@todo
                 var tweener, x, deltaX, dX, xDispatched, y, deltaY, dY, yDispatched, style, i;
+                dX = -(descr._lastPos.x - descr._startPos.x);
+                dY = -(descr._lastPos.y - descr._startPos.y);
+
+                if (opts.dragDirectionLock) {
+                  if (cLock === "Y" || !cLock && Math.abs(dY * .5) > Math.abs(dX)) {
+                    cLock = "Y";
+                    dX = 0;
+                  } else if (cLock === "X" || !cLock && Math.abs(dX * .5) > Math.abs(dY)) {
+                    cLock = "X";
+                    dY = 0;
+                  }
+                }
 
                 for (i = 0; i < parents.length; i++) {
-                  tweener = parents[i];
-                  dX = -(descr._lastPos.x - descr._startPos.x);
-                  dY = -(descr._lastPos.y - descr._startPos.y); // react comp with tweener support
+                  tweener = parents[i]; // react comp with tweener support
 
                   if (tweener.__isTweener && tweener._.scrollEnabled) {
                     x = tweener._getAxis("scrollX");
                     y = tweener._getAxis("scrollY");
-                    deltaX = -(descr._lastPos.x - descr._startPos.x) / tweener._.box.x * x.scrollableArea;
-                    deltaY = -(descr._lastPos.y - descr._startPos.y) / tweener._.box.y * y.scrollableArea;
+                    deltaX = dX / tweener._.box.x * x.scrollableArea;
+                    deltaY = dY / tweener._.box.y * y.scrollableArea;
 
                     if (!xDispatched && !tweener.isAxisOut("scrollX", deltaX)) {
-                      console.log(_this8.constructor.displayName, "scrollX", deltaX);
+                      //console.log(this.constructor.displayName, "scrollX", deltaX);
                       x.inertia.hold(parentsState[i].x + deltaX);
                       xDispatched = true;
                     }
@@ -31645,6 +31702,7 @@ function asTweener() {
               },
               'dropped': function dropped(e, touch, descr) {
                 var tweener, i;
+                cLock = undefined;
 
                 for (i = 0; i < parents.length; i++) {
                   tweener = parents[i]; // react comp with tweener support
@@ -31673,7 +31731,10 @@ function asTweener() {
       key: "applyInertia",
       value: function applyInertia(dim, axe) {
         if (dim.inertia.active) {
-          var x = dim.inertia.update();
+          var x = dim.inertia.update(); //this._.axes[axe].tweenLines.forEach(
+          //	sl => sl.goTo(x, this._.tweenRefMaps)
+          //);
+
           this.scrollTo(x, 0, axe); //console.log("scroll at " + x, axe);
 
           dim.inertiaFrame = window.requestAnimationFrame(this.applyInertia.bind(this, dim, axe));
@@ -31694,10 +31755,7 @@ function asTweener() {
         if (dim && oldPos !== newPos) {
           //console.log("dispatch " + delta, this.constructor.displayName);
           dim.inertia.dispatch(delta, 100);
-          !dim.inertiaFrame && this.applyInertia(dim, axe); //if ( this.scrollTo(newPos, 0, axe) )
-          //	prevent = !(opts.propagateAxes && opts.propagateAxes[axe]);
-
-          prevent = true;
+          !dim.inertiaFrame && this.applyInertia(dim, axe); //this.scrollTo(newPos, 0, axe)
         }
 
         return prevent;
@@ -31846,7 +31904,7 @@ function asTweener() {
           node && this._.dragList && _utils__WEBPACK_IMPORTED_MODULE_12__["default"].removeEvent(node, this._.dragList);
         }
 
-        _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(TweenableComp.prototype), "componentWillUnmount", this) && _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(TweenableComp.prototype), "componentWillUnmount", this).apply(this, arguments);
+        _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(TweenableComp.prototype), "componentWillUnmount", this) && _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(TweenableComp.prototype), "componentWillUnmount", this).apply(this, arguments);
       }
     }, {
       key: "componentDidMount",
@@ -31880,7 +31938,7 @@ function asTweener() {
           this._.doRegister = false;
         }
 
-        _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(TweenableComp.prototype), "componentDidMount", this) && _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(TweenableComp.prototype), "componentDidMount", this).apply(this, arguments);
+        _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(TweenableComp.prototype), "componentDidMount", this) && _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(TweenableComp.prototype), "componentDidMount", this).apply(this, arguments);
       }
     }, {
       key: "componentDidUpdate",
@@ -31904,7 +31962,7 @@ function asTweener() {
           }, this);
         }
 
-        _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(TweenableComp.prototype), "componentDidUpdate", this) && _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(TweenableComp.prototype), "componentDidUpdate", this).apply(this, arguments);
+        _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(TweenableComp.prototype), "componentDidUpdate", this) && _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(TweenableComp.prototype), "componentDidUpdate", this).apply(this, arguments);
       }
     }, {
       key: "render",
@@ -31915,7 +31973,7 @@ function asTweener() {
           _this13._parentTweener = parentTweener;
           return react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_TweenerContext__WEBPACK_IMPORTED_MODULE_14__["default"].Provider, {
             value: _this13
-          }, _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(TweenableComp.prototype), "render", _this13).call(_this13));
+          }, _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(TweenableComp.prototype), "render", _this13).call(_this13));
         });
       }
     }, {
@@ -32035,6 +32093,7 @@ function () {
     _.min = opt.min || 0;
     _.max = opt.max || 0;
     _.currentStop = 0;
+    _.lastInertiaPos = 0;
     _.stops = _.conf.stops;
     _.inertiaFn = easingFn.easePolyOut;
   }
@@ -32044,8 +32103,18 @@ function () {
     value: function update() {
       var at = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Date.now();
       var _ = this._,
-          nextValue;
-      if (!_.inertia) return _.pos;
+          nextValue,
+          loop;
+
+      if (!_.inertia) {
+        if (_.conf.shouldLoop) {
+          while (loop = _.conf.shouldLoop(_.pos)) {
+            this.teleport(loop);
+          }
+        }
+
+        return _.pos;
+      }
 
       var pos = _.inertiaFn((at - _.inertiaStartTm) / _.targetDuration) * _.targetDist,
           delta = pos - _.lastInertiaPos;
@@ -32060,9 +32129,26 @@ function () {
       delta = delta || 0; //console.log(_.pos + delta);
 
       nextValue = _.pos + delta;
-      if (_.conf.hookValueUpdate) nextValue = _.conf.hookValueUpdate(nextValue);
+
+      if (_.conf.shouldLoop) {
+        while (loop = _.conf.shouldLoop(nextValue)) {
+          //console.warn("loop", loop);
+          nextValue += loop;
+          this.teleport(loop);
+        }
+      }
+
       _.pos = nextValue;
       return nextValue;
+    }
+  }, {
+    key: "teleport",
+    value: function teleport(loopDist) {
+      var _ = this._,
+          nextValue;
+      if (!_.inertia) return _.pos += loopDist;
+      _.lastInertiaPos += loopDist;
+      _.pos += loopDist;
     }
   }, {
     key: "dispatch",
@@ -32095,7 +32181,7 @@ function () {
     value: function _doSnap(forceSnap) {
       var maxDuration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2000;
       var _ = this._,
-          pos = _.targetDist + (_.pos - _.lastInertiaPos),
+          pos = _.targetDist + (_.pos - (_.lastInertiaPos || 0)),
           target,
           mid,
           i;
@@ -32116,11 +32202,12 @@ function () {
 
         if (_.conf.willSnap) {
           _.conf.willSnap(i, target);
-        } //console.log("do snap", i, target);
+        }
 
-
+        _.lastInertiaPos = _.lastInertiaPos || 0;
+        console.log("do snap", i, target);
         target = target - (_.pos - _.lastInertiaPos);
-        _.targetDuration = min(maxDuration, abs(_.targetDuration / _.targetDist * target));
+        _.targetDuration = min(maxDuration, abs(_.targetDuration / _.targetDist * target)) || 0;
         _.targetDist = target;
       } else {
         target = ~~(_.pos - _.lastInertiaPos);
@@ -32164,14 +32251,20 @@ function () {
           //e.timeStamp,
       sinceLastPos = now - _.baseTS,
           delta = pos - _.pos,
-          iVel = delta / sinceLastPos; //console.log(pos);
+          iVel = delta / sinceLastPos,
+          loop; //console.log(pos);
 
       _.lastIVelocity = iVel;
       _.lastVelocity = iVel;
       _.baseTS = now;
-      if (_.conf.hookValueUpdate) pos = _.conf.hookValueUpdate(pos);
 
-      if (!_.conf.infinite) {
+      if (_.conf.shouldLoop) {
+        while (loop = _.conf.shouldLoop(pos)) {
+          //console.warn("loop", loop);
+          pos += loop;
+          this.teleport(loop);
+        }
+      } else if (!_.conf.infinite) {
         if (pos > _.max) {
           pos = _.max + min((pos - _.max) / 10, 10);
         } else if (pos < _.min) {
@@ -32927,7 +33020,7 @@ function demux(key, tweenable, target, data, box) {
 
 var _default = function _default(key, value, target, data, initials, forceUnits) {
   var match = is__WEBPACK_IMPORTED_MODULE_0___default.a.string(value) ? value.match(unitsRe) : false;
-  initials[key] = defaultValue[key] || 0;
+  initials[key] = is__WEBPACK_IMPORTED_MODULE_0___default.a.number(initials[key]) ? initials[key] : defaultValue[key] || 0;
 
   if (match) {
     if (!forceUnits && data[key] && data[key] !== match[2]) {
@@ -35557,7 +35650,7 @@ var is = __webpack_require__(/*! is */ "./node_modules/is/index.js"),
       }
     }
 
-    return comps;
+    return element.parentNode && this.findReactParents(element.parentNode);
   }
 };
 

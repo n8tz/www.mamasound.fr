@@ -62,8 +62,8 @@ export default class Home extends React.Component {
 	
 	componentDidUpdate( props ) {
 		let { appState } = this.props;
-		console.warn(appState === props.appState)
-		if ( props.appState.currentPageFocus !== appState.currentPageFocus ) {
+		//console.warn(appState === props.appState)
+		if ( appState.doFocus && props.appState.currentPageFocus !== appState.currentPageFocus ) {
 			//console.log(appState.currentPageFocus);
 			switch ( appState.currentPageFocus ) {
 				case 'head' :
@@ -103,11 +103,23 @@ export default class Home extends React.Component {
 							infinite  : true,
 							shouldLoop: ( v ) => {
 								if ( (v + 1) > (350) ) {
-									$actions.changeHighlighterBackground();
+									//$actions.changeHighlighterBackground();
 									return -350;
 								}
 							},
-							stops     : [0, 100, 150, 250, 350]
+							willSnap  : ( i, v ) => {
+								//$actions.setPageFocus(v.id || "head")
+							},
+							wayPoints : [
+								{ at: 0, id: "head" },
+								{ at: 100, id: "events" },
+								{
+									at: 150,
+									id: "event"
+								},
+								{ at: 250, id: "page" },
+								{ at: 350 }
+							],
 						}
 					}
 				/>

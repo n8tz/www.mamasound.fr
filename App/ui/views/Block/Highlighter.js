@@ -77,7 +77,7 @@ if ( typeof window !== "undefined" ) {
 		
 	}
 )
-@scopeToProps("MountedItems", "Grid", "HighlighterBackground")
+@scopeToProps("MountedItems", "Selected", "HighlighterBackground", "Anims", "DataProvider")
 @withTweener
 export default class Highlighter extends React.Component {
 	static propTypes = {};
@@ -88,7 +88,8 @@ export default class Highlighter extends React.Component {
 	
 	render() {
 		let {
-			    Grid: { items: gridItems = [], layout = [] },
+			    MountedItems: { items: gridItems = [], layout = [] },
+			    Anims, Selected, DataProvider,
 			    $actions, HighlighterBackground, tweener
 		    }     = this.props,
 		    state = this.state;
@@ -100,49 +101,8 @@ export default class Highlighter extends React.Component {
 				<div className={ "headBackground" }>
 					<div className={ "maskContent" }>
 						<TweenRef
-							initial={ {
-								position : "absolute",
-								//transformOrigin: "0% 0%",
-								transform: {
-									perspective: "200px",
-									translateY : '-50%',
-									translateX : '-50%',
-								}
-							} }
-							tweenLines={ {
-								scrollY: [
-									{
-										type    : "Tween",
-										from    : 0,
-										duration: 100,
-										apply   : {
-											filter   : {
-												//blur: "5px",
-												//translateY: "-50px",
-											},
-											transform: {
-												translateZ: "50px",
-												//translateY: "-20vh",
-											}
-										}
-									},
-									{
-										type    : "Tween",
-										from    : 250,
-										duration: 100,
-										apply   : {
-											filter   : {
-												//blur: "5px",
-												//translateY: "-50px",
-											},
-											transform: {
-												translateZ: "-50px",
-												//translateY: "-20vh",
-											}
-										}
-									}
-								],
-							} }
+							initial={ Anims.Highlighter.background }
+							tweenLines={ Anims.Highlighter.backgroundScroll }
 						>
 							<div className={ "container " }>
 								<img src={ HighlighterBackground }/>
@@ -150,103 +110,37 @@ export default class Highlighter extends React.Component {
 						</TweenRef>
 					</div>
 				</div>
-				{/*<div className={ " today" } onClick={ e => e.preventDefault() }>*/ }
+				<TweenRef
+					initial={ Anims.Highlighter.focused }
+					tweenLines={ Anims.Highlighter.focusedScroll }
+				>
+					<div className={ "focusedContent " }>
+						<Comps.ViewSwitcher target={ Selected && Selected.Focused }
+						                    { ...Anims.Focused }/>
+					</div>
+				</TweenRef>
 				
 				
 				<TweenRef
-					initial={ {
-						position : "absolute",
-						bottom   : "0px",
-						left     : "0px",
-						width    : "100%",
-						//height   : "calc(20% - 50px)",
-						zIndex   : "100",
-						transform: {
-							perspective: "200px",
-							translateY : '0px',
-							//rotateX    : "2deg"
-						}
-					} }
-					tweenLines={ {
-						scrollY: [
-							{
-								type    : "Tween",
-								from    : 0,
-								duration: 100,
-								apply   : {
-									transform: {
-										perspective: "100px",
-									}
-								}
-							},
-							{
-								type    : "Tween",
-								from    : 150,
-								duration: 100,
-								apply   : {
-									transform: {
-										perspective: "-100px",
-									}
-								}
-							}
-						],
-					} }
+					initial={ Anims.Highlighter.slider }
+					tweenLines={ Anims.Highlighter.sliderScroll }
 				>
 					<div className={ "slider" }>
 						<Comps.Slider
-							autoScroll={ 10 * 1000 }
+							{ ...Anims.MainSlider }
+							//autoScroll={ 10 * 1000 }
 						>
 							{
+								gridItems.length &&
 								gridItems.map(
 									( item, i ) =>
 										<TweenRef key={ item._id + i }
 										          tweener={ tweener }
-										          initial={ {
-											          top      : "0%",
-											          height   : "100%",
-											          transform: {
-												          perspective: "200px",
-												          //translateY : '0px',
-												          rotateX    : "2deg"
-											          }
-										          } }
-										          tweenLines={ {
-											          scrollY: [
-												          {
-													          type    : "Tween",
-													          from    : 0,
-													          duration: 100,
-													          apply   : {
-														          //opacity  : "-1",
-														          //height   : 2.5,
-														          //top      : -2.5,
-														          transform: {
-															          translateZ: "15px",
-															          rotateX   : "-4deg"
-														          }
-													          }
-												          },
-												          {
-													          type    : "Tween",
-													          from    : 150,
-													          duration: 100,
-													          apply   : {
-														          //opacity  : "-1",
-														          //height   : 2.5,
-														          //top      : -2.5,
-														          transform: {
-															          translateZ: "-15px",
-															          rotateX   : "4deg"
-														          }
-													          }
-												          }
-											          ],
-										          } }
-										
-										>
+										          initial={ Anims.Highlighter.slide }
+										          tweenLines={ Anims.Highlighter.slideScroll }>
 											<Views.FocusedItems record={ item }
 											                    onClick={
-												                    e => $actions.selectPage(item.targetEtty.objId)
+												                    e => $actions.selectFocus(item.targetEtty.objId)
 											                    }/>
 										</TweenRef>
 								)

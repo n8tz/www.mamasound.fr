@@ -39,7 +39,9 @@
 
     @include use_hvCenteredAbs();
     height: 100%;
-    min-height: 200px;
+    width: 100%;
+    min-height: 900px;
+    min-width: 900px;
 
     @media screen and (max-width: $tablet-landscape-breakpoint) {
       margin: 0 !important;

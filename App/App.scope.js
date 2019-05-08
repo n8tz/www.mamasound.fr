@@ -36,6 +36,7 @@ export default {
 		
 		currentPageFocus: "head",// head, events, page
 		
+		selectedFocus     : { id: "Page.SkxesB7ugG", etty: 'Page' },
 		selectedPage      : { id: "Page.SkxesB7ugG", etty: 'Page' },
 		selectedEvent     : undefined,
 		selectedEventId   : undefined,
@@ -60,12 +61,12 @@ export default {
 			dayCountByViewType[viewType]++;
 			return { dayCountByViewType: [...dayCountByViewType] };
 		},
-		setPageFocus( _currentPageFocus ) {
+		setPageFocus( _currentPageFocus, doFocus ) {
 			let { currentPageFocus, selectedEventId } = this.nextState;
 			if ( _currentPageFocus !== currentPageFocus ) {
 				if ( selectedEventId && _currentPageFocus === 'events' )
 					this.$actions.selectEvent();
-				return { currentPageFocus: _currentPageFocus };
+				return { currentPageFocus: _currentPageFocus, doFocus };
 			}
 		},
 		updateCurrentDay( _currentVisibleDay ) {
@@ -83,6 +84,7 @@ export default {
 				selectedEventId: selectedEvent && selectedEvent._id,
 				selectedEventDT,
 				currentPageFocus,
+				doFocus        : true,
 				selectedPage   : selectedEvent && { id: selectedEvent._id, etty: selectedEvent._cls } || null
 			};
 		},
@@ -92,7 +94,18 @@ export default {
 				currentPageFocus = 'page';
 			return {
 				currentPageFocus,
+				doFocus     : true,
 				selectedPage: selectedPage && { id: selectedPage, etty: "Page" } || null
+			};
+		},
+		selectFocus( selectedFocus ) {
+			let { currentPageFocus } = this.nextState;
+			if ( selectedFocus )
+				currentPageFocus = 'head';
+			return {
+				currentPageFocus,
+				doFocus      : true,
+				selectedFocus: selectedFocus && { id: selectedFocus, etty: "Page" } || null
 			};
 		},
 		selectWidget( selectedWidgetId ) {
@@ -113,9 +126,11 @@ export default {
 	@withStateMap(
 		{
 			@asRef
-			Event: "appState.selectedEvent",
+			Focused: "appState.selectedFocus",
 			@asRef
-			Page : "appState.selectedPage"
+			Event  : "appState.selectedEvent",
+			@asRef
+			Page   : "appState.selectedPage"
 		}
 	)
 	Selected: stores.MongoRecords,
@@ -231,7 +246,7 @@ export default {
 	HighlighterBackground: {
 		@asRef
 		BackgroundLib: "BackgroundLib",
-		current      : "test2",
+		current      : "test3",
 		$apply( url, { BackgroundLib, current } ) {
 			return current && BackgroundLib[current] || url;
 		},

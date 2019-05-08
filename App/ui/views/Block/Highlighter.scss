@@ -57,6 +57,12 @@ header {
   //tr
 
   //@include use_hvCenteredContent();
+  .ViewSwitcher {
+    > * {
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 20px;
+    }
+  }
 
   .headBackground {
     height: calc(100% + 10px);

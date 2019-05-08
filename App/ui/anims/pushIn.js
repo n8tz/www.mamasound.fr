@@ -11,11 +11,43 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-let baseDomain = "mamasound.wiseways.me"
-export default {
-	STATIC_URL      : "static.mamasound.fr",
-	PUBLIC_URL      : "mamasound.fr",
-	ROOT_DOMAIN     : "mamasound.wiseways.me",
-	SESSION_CHECK_TM: 60000,
-	...require('$super')
+
+var easingFn = require('d3-ease');
+var keys     = {
+	top  : 'translateY',
+	bot  : 'translateY',
+	right: 'translateX',
+	left : 'translateX'
+}, dirs      = {
+	top  : 1,
+	bot  : -1,
+	right: 1,
+	left : -1
+};
+export default function ( target, tmStart = 0, duration = 500, dir = "bot" ) {
+	
+	
+	return {
+		initial: {
+			[target]: {
+				transform: {
+					[keys[dir]]: -1 * dirs[dir] + 'box'
+				},
+			}
+		},
+		anims  : [
+			{
+				type    : "Tween",
+				target,
+				from    : tmStart,
+				duration: duration,
+				easeFn  : easingFn.easeSinOut,
+				apply   : {
+					transform: {
+						[keys[dir]]: dirs[dir] + 'box'
+					}
+				}
+			}
+		]
+	}
 };

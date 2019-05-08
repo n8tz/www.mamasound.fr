@@ -114,7 +114,7 @@ export default class EventList extends React.Component {
 	};
 	
 	componentDidMount() {
-		this.isBotListIsInViewport()
+		//this.isBotListIsInViewport()
 		this.watchCurrentDayFromScroll()
 	}
 	
@@ -124,7 +124,7 @@ export default class EventList extends React.Component {
 	}
 	
 	componentWillUnmount() {
-		clearTimeout(this._infinite)
+		//clearTimeout(this._infinite)
 		
 		let element = document.querySelector(".EventList *[aria-hidden=false] .slide");
 		

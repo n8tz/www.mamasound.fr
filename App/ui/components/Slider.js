@@ -16,7 +16,7 @@ import React                                        from "react";
 import {asTweener, TweenRef, TweenAxis, tweenTools} from "react-rtween";
 import {reScope, scopeToProps, propsToScope}        from "rscopes";
 import {withStateMap, asRef, asStore}               from "rescope-spells";
-import memoize                                      from "memoize-one";
+import is                                           from "is";
 
 @scopeToProps("Anims")
 @asTweener({ enableMouseDrag: true })
@@ -25,6 +25,9 @@ export default class Slider extends React.Component {
 		defaultIndex: 0,
 		visibleItems: 10,
 		overlaps    : 1 / 4,
+		defaultInitial:{},
+		defaultEntering:[],
+		defaultLeaving:[]
 	};
 	state               = {};
 	
@@ -89,8 +92,10 @@ export default class Slider extends React.Component {
 			    defaultIndex = 0,
 			    visibleItems = 5,
 			    overlaps     = 1 / (visibleItems - (visibleItems % 2)),
-			    children
+			    children: _childs,
+			    defaultEntering, defaultLeaving
 		    }                        = props,
+		    children                 = is.array(_childs) ? _childs : [],
 		    { index = defaultIndex } = state,
 		    allItems                 = [...children, ...children, ...children].map(( elem, i ) => React.cloneElement(elem, { key: i })),
 		    nbGhostItems             = allItems.length,
@@ -103,6 +108,15 @@ export default class Slider extends React.Component {
 			nbItems   : children.length,
 			step,
 			dec,
+			tweenLines: allItems.map(( e, i ) => ({
+				scrollX: tweenTools.offset(
+					[
+						...defaultEntering,
+						...tweenTools.offset(defaultLeaving, 100)
+					],
+					i * step
+				)
+			})),
 			windowSize: children.length * step,
 			index
 		}
@@ -111,9 +125,9 @@ export default class Slider extends React.Component {
 	render() {
 		let {
 			    defaultIndex = 0,
-			    Anims: { MainSlider: { defaultInitial, defaultEntering, defaultLeaving } },
+			    defaultInitial,
 		    }                                                                       = this.props,
-		    { index = defaultIndex, allItems, nbGhostItems, step, dec, windowSize } = this.state;
+		    { index = defaultIndex, allItems, nbGhostItems, step, dec, tweenLines } = this.state;
 		
 		console.log("render", index)
 		return (
@@ -146,7 +160,7 @@ export default class Slider extends React.Component {
 								console.log(i % nbItems, v)
 							},
 							value     : 100 + dec + index * step,
-							stops     : allItems.map(( child, i ) => (100 + i * step))
+							wayPoints : allItems.map(( child, i ) => ({ at: 100 + i * step }))
 						}
 					}
 				/>
@@ -159,15 +173,7 @@ export default class Slider extends React.Component {
 									defaultInitial
 								}
 								tweenLines={
-									{
-										scrollX: tweenTools.offset(
-											[
-												...defaultEntering,
-												...tweenTools.offset(defaultLeaving, 100)
-											],
-											i * step
-										)
-									}
+									tweenLines[i]
 								}
 							>
 								<div className={ "slide" }>

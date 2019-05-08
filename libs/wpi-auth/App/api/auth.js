@@ -56,7 +56,6 @@ let express         = require("express"),
 	    );
     };
 
-console.log(cfg);
 let sessionMid =
 	    session(
 		    {
@@ -102,7 +101,6 @@ passport.use(new LocalStrategy(
 	}
 ));
 
-
 passport.serializeUser(function ( user, done ) {
 	done(null, user._id);
 });
@@ -127,17 +125,6 @@ export function service( server, http ) {
 		passportSession
 	);
 	
-	
-	//server.use(
-	//	function ( req, res, next ) {
-	//		//console.warn("-----------------------------------------------------------------------------\n",
-	// req.user, // req.sessionID || "no_session", req.session) req.AppDB = db.su(req.user || { login: "anonymous" },
-	// req.sessionID || "no_session"); next(req, res) } )
-
-
-//authAPI.use(
-//    commonServer
-//);
 	server.post(
 		"/login",
 		( req, res, next ) => {

@@ -51,12 +51,15 @@ export default class Inertia {
 		_.currentStop    = 0;
 		_.lastInertiaPos = 0;
 		_.stops          = _.conf.stops;
+		_.wayPoints      = _.conf.wayPoints;
 		_.inertiaFn      = easingFn.easePolyOut;
 	}
 	
 	update( at = Date.now() ) {
 		let _ = this._, nextValue, loop;
 		if ( !_.inertia ) {
+			//_.inertia = this.active = false;
+			
 			if ( _.conf.shouldLoop ) {
 				while ( (loop = _.conf.shouldLoop(_.pos)) ) {
 					this.teleport(loop);
@@ -99,7 +102,7 @@ export default class Inertia {
 		_.pos += loopDist
 	}
 	
-	dispatch( delta, tm = 250 ) {
+	dispatch( delta, tm = 500 ) {
 		let _       = this._, now = Date.now(), pos;
 		this.active = true;
 		if ( !_.inertia || signOf(delta) !== signOf(_.targetDist) ) {
@@ -119,10 +122,6 @@ export default class Inertia {
 			_.targetDuration += tm;
 		}
 		this._doSnap(signOf(delta), 750)
-		
-		
-		//pos =
-		//console.log(_);
 	}
 	
 	_doSnap( forceSnap, maxDuration = 2000 ) {
@@ -130,32 +129,32 @@ export default class Inertia {
 		    pos = _.targetDist + (_.pos - (_.lastInertiaPos || 0)), target, mid, i
 		;
 		
-		if ( _.stops && _.stops.length ) {
-			for ( i = 0; i < _.stops.length; i++ )
-				if ( _.stops[i] > pos )
+		if ( _.wayPoints && _.wayPoints.length ) {
+			for ( i = 0; i < _.wayPoints.length; i++ )
+				if ( _.wayPoints[i].at > pos )
 					break;
-			if ( i == _.stops.length ) {
-				target = _.stops[i - 1];
+			if ( i == _.wayPoints.length ) {
+				target = _.wayPoints[i - 1].at;
 			}
 			else if ( i === 0 ) {
-				target = _.stops[0];
+				target = _.wayPoints[0].at;
 			}
 			else {
-				mid = _.stops[i - 1] + (_.stops[i] - _.stops[i - 1]) / 2;
+				mid = _.wayPoints[i - 1].at + (_.wayPoints[i].at - _.wayPoints[i - 1].at) / 2;
 				if ( forceSnap )
-					target = forceSnap < 0 ? _.stops[i - 1] : _.stops[i];
+					target = forceSnap < 0 ? _.wayPoints[i - 1].at : _.wayPoints[i].at;
 				else
-					target = pos < mid ? _.stops[i - 1] : _.stops[i];
+					target = pos < mid ? _.wayPoints[i - 1].at : _.wayPoints[i].at;
 			}
 			
 			if ( _.conf.willSnap ) {
-				_.conf.willSnap(i, target)
+				_.conf.willSnap(i, _.wayPoints[i]);
 			}
 			
 			_.lastInertiaPos = _.lastInertiaPos || 0;
-			console.log("do snap", i, target);
 			target           = target - (_.pos - _.lastInertiaPos);
-			_.targetDuration = min(maxDuration, abs((_.targetDuration / _.targetDist) * target)) || 0;
+			_.targetDuration = max(50, min(maxDuration, abs((_.targetDuration / _.targetDist) * target))) || 0;
+			//console.log("do snap", i, target, _.targetDist, _.targetDuration);
 			_.targetDist     = target;
 		}
 		else {
@@ -190,6 +189,7 @@ export default class Inertia {
 		_.lastAccel    = 0;
 		_.posDiff      = 0;
 		this.active    = true;
+		this.holding   = true;
 		_.inertia      = false;
 	}
 	
@@ -227,10 +227,11 @@ export default class Inertia {
 	}
 	
 	release() {
-		let _       = this._,
-		    velSign = signOf(_.lastVelocity);
-		
+		let _        = this._,
+		    velSign  = signOf(_.lastVelocity);
+		this.holding = false;
 		if ( _.pos > _.max ) {
+			this.active      = true;
 			_.inertia        = true;
 			_.lastInertiaPos = 0;
 			_.inertiaStartTm =
@@ -240,6 +241,7 @@ export default class Inertia {
 			_.targetDuration = abs(_.targetDist * 10);
 		}
 		else if ( _.pos < _.min ) {
+			this.active      = true;
 			_.inertia        = true;
 			_.lastInertiaPos = 0;
 			_.inertiaStartTm =
@@ -263,6 +265,7 @@ export default class Inertia {
 				_.targetDuration = 50;
 			
 			//console.log(_);
+			this.active      = true;
 			_.inertia        = true;
 			_.lastInertiaPos = 0;
 			_.inertiaStartTm =

@@ -119,7 +119,9 @@ export default function asTweener( ...argz ) {
 				( t ) => {
 					// delete this._.tweenRefs[t];
 					// delete this._.tweenRefCSS[t];
-					this._.tweenRefMaps[t] = { ...this._.tweenRefOrigin[t] };
+					//this._.tweenRefMaps[t] = Object.fromEntries(Object.entries(this._.tweenRefMaps[t]).map(( obj ) =>
+					// ([obj[0], obj[1] - obj[1]])))
+					this._.tweenRefMaps[t] = { opacity: 1, ...this._.tweenRefOrigin[t] };
 				}
 			)
 			this._updateTweenRefs();
@@ -374,9 +376,9 @@ export default function asTweener( ...argz ) {
 					apply   : ( pos, max ) => {
 						let x = (from + (easing(pos / max)) * length);
 						if ( this._.tweenEnabled ) {
-							console.log('TweenableComp::setPos:514: ', x);
+							//console.log('TweenableComp::setPos:514: ', x);
 							this._.axes[axe].tweenLines.forEach(
-								sl => sl.goTo(x)
+								sl => sl.goTo(x, this._.tweenRefMaps)
 							);
 							tick && tick(x);
 						}
@@ -510,7 +512,7 @@ export default function asTweener( ...argz ) {
 				let oldPos = this._.axes[axe].targetPos,
 				    setPos = pos => {
 					
-					    //console.log('TweenableComp::setPos:514: ', pos);
+					    //console.log('TweenableComp::setPos:514: ', this.constructor.displayName);
 					    this._.axes[axe].scrollPos = pos;
 					    if ( this._.axes[axe].inertia ) {
 						    //this._.axes[axe].inertia.active = false;
@@ -572,30 +574,23 @@ export default function asTweener( ...argz ) {
 								scrollLoad.y += e.deltaY;
 								scrollLoad.x += e.deltaX;
 								lastScrollEvt = e.originalEvent;
-								debounceTm    = debounceTm || now;
-								if ( debounceTr && debounceTm + 500 < now ) {
-									
-									clearTimeout(debounceTr)
-									this._doDispatch(document.elementFromPoint(lastScrollEvt.clientX, lastScrollEvt.clientY), scrollLoad.x * 5, scrollLoad.y * 5)
-									scrollLoad.y = 0;
-									scrollLoad.x = 0;
-									debounceTm   = 0;
-									//debounceTm = now;
-									return;
-								}
-								clearTimeout(debounceTr)
-								//debounceTm = now;
-								debounceTr = setTimeout(
-									tm => {
-										//debugger
-										this._doDispatch(document.elementFromPoint(lastScrollEvt.clientX, lastScrollEvt.clientY), scrollLoad.x * 5, scrollLoad.y * 5)
-										scrollLoad.y = 0;
-										scrollLoad.x = 0;
-										debounceTm   = 0;
-										debounceTr   = lastScrollEvt = undefined;
-									},
-									250
-								)
+								//debounceTm    = debounceTm || now;
+								//if ( debounceTr && debounceTm + 500 < now ) {
+								//
+								//	clearTimeout(debounceTr)
+								//	this._doDispatch(document.elementFromPoint(lastScrollEvt.clientX,
+								// lastScrollEvt.clientY), scrollLoad.x * 5, scrollLoad.y * 5) scrollLoad.y = 0;
+								// scrollLoad.x = 0; debounceTm   = 0; //debounceTm = now; return; }
+								// clearTimeout(debounceTr) //debounceTm = now; debounceTr = setTimeout( tm => {
+								// debugger
+								this._doDispatch(document.elementFromPoint(lastScrollEvt.clientX, lastScrollEvt.clientY), scrollLoad.x * 5, scrollLoad.y * 5)
+								scrollLoad.y = 0;
+								scrollLoad.x = 0;
+								debounceTm   = 0;
+								debounceTr   = lastScrollEvt = undefined;
+								//	},
+								//	50
+								//)
 								// check if there scrollable stuff in dom targets
 								;
 								
@@ -603,9 +598,9 @@ export default function asTweener( ...argz ) {
 							}
 						);
 					
-					let lastPos = {},
-					    cLock,
-					    parents,
+					let lastStartTm,
+					    cLock, dX,
+					    parents, dY,
 					    parentsState;
 					if ( !rootNode )
 						console.warn("fail registering drag listener !! ")
@@ -619,6 +614,9 @@ export default function asTweener( ...argz ) {
 									
 									parents      = utils.findReactParents(e.target);
 									//console.log(parents)
+									lastStartTm  = Date.now();
+									dX           = 0;
+									dY           = 0;
 									parentsState = [];
 									for ( i = 0; i < parents.length; i++ ) {
 										tweener = parents[i];
@@ -626,11 +624,11 @@ export default function asTweener( ...argz ) {
 										if ( tweener.__isTweener && tweener._.scrollEnabled ) {
 											x = tweener._getAxis("scrollX");
 											y = tweener._getAxis("scrollY");
-											x.inertia.startMove();
-											y.inertia.startMove();
-											parentsState[i] = { x: x.scrollPos, y: y.scrollPos };
-											!x.inertiaFrame && tweener.applyInertia(x, "scrollX");
-											!y.inertiaFrame && tweener.applyInertia(y, "scrollY");
+											//x.inertia.startMove();
+											//y.inertia.startMove();
+											//parentsState[i] = { x: x.scrollPos, y: y.scrollPos };
+											//!x.inertiaFrame && tweener.applyInertia(x, "scrollX");
+											//!y.inertiaFrame && tweener.applyInertia(y, "scrollY");
 										}
 										else if ( is.element(tweener) ) {
 											parentsState[i] = getComputedStyle(tweener, null);
@@ -640,12 +638,15 @@ export default function asTweener( ...argz ) {
 								},
 								'drag'     : ( e, touch, descr ) => {//@todo
 									let tweener,
-									    x, deltaX, dX, xDispatched,
-									    y, deltaY, dY, yDispatched,
+									    x, deltaX, xDispatched,
+									    y, deltaY, yDispatched,
 									    style, i;
 									
-									dX = -(descr._lastPos.x - descr._startPos.x);
-									dY = -(descr._lastPos.y - descr._startPos.y);
+									dX += -(descr._lastPos.x - descr._startPos.x);
+									dY += -(descr._lastPos.y - descr._startPos.y);
+									
+									if ( lastStartTm > Date.now() - 250 && Math.abs(dY) < 10 && Math.abs(dX) < 10 )// skip tap & click
+										return;
 									
 									if ( opts.dragDirectionLock ) {
 										if ( cLock === "Y" || !cLock && Math.abs(dY * .5) > Math.abs(dX) ) {
@@ -658,21 +659,30 @@ export default function asTweener( ...argz ) {
 										}
 									}
 									
+									//console.log("drag", dY);
 									for ( i = 0; i < parents.length; i++ ) {
 										tweener = parents[i];
 										// react comp with tweener support
 										if ( tweener.__isTweener && tweener._.scrollEnabled ) {
 											
-											x      = tweener._getAxis("scrollX");
-											y      = tweener._getAxis("scrollY");
+											x = tweener._getAxis("scrollX");
+											y = tweener._getAxis("scrollY");
+											
+											if ( !parentsState[i] ) {
+												parentsState[i] = { x: x.scrollPos, y: y.scrollPos };
+												x.inertia.startMove();
+												y.inertia.startMove();
+												!x.inertiaFrame && tweener.applyInertia(x, "scrollX");
+												!y.inertiaFrame && tweener.applyInertia(y, "scrollY");
+											}
+											
 											deltaX = (dX / tweener._.box.x) * x.scrollableArea;
 											deltaY = (dY / tweener._.box.y) * y.scrollableArea;
-											if ( !xDispatched && !tweener.isAxisOut("scrollX", deltaX) ) {
-												//console.log(this.constructor.displayName, "scrollX", deltaX);
+											if ( !xDispatched && !tweener.isAxisOut("scrollX", parentsState[i].x + deltaX, true) ) {
 												x.inertia.hold(parentsState[i].x + deltaX);
 												xDispatched = true;
 											}
-											if ( !yDispatched && !tweener.isAxisOut("scrollY", deltaY) ) {
+											if ( !yDispatched && !tweener.isAxisOut("scrollY", parentsState[i].y + deltaY, true) ) {
 												y.inertia.hold(parentsState[i].y + deltaY);
 												yDispatched = true;
 											}
@@ -697,6 +707,8 @@ export default function asTweener( ...argz ) {
 										}
 										
 									}
+									dX = 0;
+									dY = 0;
 								},
 								'dropped'  : ( e, touch, descr ) => {
 									let tweener,
@@ -705,7 +717,7 @@ export default function asTweener( ...argz ) {
 									for ( i = 0; i < parents.length; i++ ) {
 										tweener = parents[i];
 										// react comp with tweener support
-										if ( tweener.__isTweener && tweener._.scrollEnabled ) {
+										if ( tweener.__isTweener && tweener._.scrollEnabled && parentsState[i] ) {
 											tweener._getAxis("scrollY").inertia.release();
 											tweener._getAxis("scrollX").inertia.release();
 										}
@@ -730,20 +742,35 @@ export default function asTweener( ...argz ) {
 		
 		
 		applyInertia( dim, axe ) {
-			if ( dim.inertia.active ) {
-				let x = dim.inertia.update();
-				
-				//this._.axes[axe].tweenLines.forEach(
-				//	sl => sl.goTo(x, this._.tweenRefMaps)
-				//);
-				this.scrollTo(x, 0, axe);
-				//console.log("scroll at " + x, axe);
-				dim.inertiaFrame = window.requestAnimationFrame(this.applyInertia.bind(this, dim, axe));
+			let x = dim.inertia.update();
+			
+			this._.axes[axe].tweenLines.forEach(
+				sl => {
+					this._.axes[axe].scrollPos = x;
+					sl.goTo(x, this._.tweenRefMaps)
+				}
+			);
+			//console.log("scroll at " + x, axe, dim.inertia.active || dim.inertia.holding);
+			//this.scrollTo(x, 0, axe);
+			this._updateTweenRefs()
+			if ( dim.inertia.active || dim.inertia.holding ) {
+				dim.inertiaFrame = setTimeout(this.applyInertia.bind(this, dim, axe));
 			}
 			else {
 				dim.inertiaFrame = null;
-				console.log("complete");
+				//console.log("complete");
 			}
+		}
+		
+		
+		isInertiaActive() {//todo
+			let _ = this._, active = false;
+			_.axes &&
+			Object.keys(_.axes)
+			      .forEach(
+				      axe => (active = active || _.axes[axe] && _.axes[axe].inertia.active)
+			      );
+			return active;
 		}
 		
 		
@@ -765,10 +792,10 @@ export default function asTweener( ...argz ) {
 			return prevent;
 		}
 		
-		isAxisOut( axis, v ) {
+		isAxisOut( axis, v, abs ) {
 			let _   = this._,
 			    dim = _.axes && _.axes[axis],
-			    pos = dim && (dim.scrollPos + v);
+			    pos = abs ? v : dim && (dim.scrollPos + v);
 			return !dim || (pos <= 0 || pos >= dim.scrollableArea);
 		}
 		
@@ -834,6 +861,7 @@ export default function asTweener( ...argz ) {
 		}
 		
 		updateRefStyle( target, style, postPone ) {
+			let _ = this._, initials = {}, map = {};
 			if ( isArray(target) && isArray(style) )
 				return target.map(( m, i ) => this.updateRefStyle(m, style[i], postPone));
 			if ( isArray(target) )
@@ -842,15 +870,10 @@ export default function asTweener( ...argz ) {
 			if ( !this._.tweenRefCSS )
 				this.makeTweenable();
 			
-			if ( !postPone && this.refs[target] ) {
-				var node = this.refs[target] instanceof Element
-				           ? this.refs[target]
-				           : ReactDom.findDOMNode(
-						this.refs[target]);
-				node && Object.assign(node.style, style);
-			}
-			this._.tweenRefCSS[target] = this._.tweenRefCSS[target] || {};
-			Object.assign(this._.tweenRefCSS[target], style);
+			deMuxTween(style, _.tweenRefMaps[target], initials, _.muxDataByTarget[target], _.muxByTarget[target], true);
+			this._updateTweenRefs();
+			//Object.assign(initials, _.tweenRefCSS[target]);
+			//_.tweenRefCSS[target] = initials;
 		}
 		
 		_updateBox() {
@@ -872,15 +895,20 @@ export default function asTweener( ...argz ) {
 		
 		_rafLoop() {
 			this._updateTweenRefs();
-			if ( this._.runningAnims.length )
+			if ( this._.runningAnims.length ) {
 				requestAnimationFrame(this._._rafLoop);
+			}
 			else {
+				//this._.live && console.log("RAF off", this.constructor.displayName);
 				this._.live = false;
 			}
 		}
 		
 		_updateTweenRefs() {
 			if ( this._.tweenEnabled ) {
+				//let now = Date.now();
+				//console.log(now - this._lf)
+				//this._lf = now;
 				for ( let i = 0, target, node; i < this._.tweenRefTargets.length; i++ ) {
 					target = this._.tweenRefTargets[i];
 					muxToCss(this._.tweenRefMaps[target], this._.tweenRefCSS[target], this._.muxByTarget[target], this._.muxDataByTarget[target], this._.box);
