@@ -26,38 +26,38 @@ export const background       = {
 	}
 };
 export const backgroundScroll = {
-	//scrollY: [
-	//	{
-	//		type    : "Tween",
-	//		from    : 0,
-	//		duration: 100,
-	//		apply   : {
-	//			filter   : {
-	//				//blur: "5px",
-	//				//translateY: "-50px",
-	//			},
-	//			transform: {
-	//				//translateZ: "50px",
-	//				//translateY: "-20vh",
-	//			}
-	//		}
-	//	},
-	//	{
-	//		type    : "Tween",
-	//		from    : 250,
-	//		duration: 100,
-	//		apply   : {
-	//			filter   : {
-	//				//blur: "5px",
-	//				//translateY: "-50px",
-	//			},
-	//			transform: {
-	//				//translateZ: "-50px",
-	//				//translateY: "-20vh",
-	//			}
-	//		}
-	//	}
-	//],
+	scrollY: [
+		{
+			type    : "Tween",
+			from    : 0,
+			duration: 100,
+			apply   : {
+				filter   : {
+					//blur: "5px",
+					//translateY: "-50px",
+				},
+				transform: {
+					translateZ: "50px",
+					//translateY: "-20vh",
+				}
+			}
+		},
+		{
+			type    : "Tween",
+			from    : 250,
+			duration: 100,
+			apply   : {
+				filter   : {
+					//blur: "5px",
+					//translateY: "-50px",
+				},
+				transform: {
+					translateZ: "-50px",
+					//translateY: "-20vh",
+				}
+			}
+		}
+	],
 }
 export const slider           = {
 	position : "absolute",
@@ -140,7 +140,7 @@ export const slideScroll      = {
 export const focused          = {
 	position : "absolute",
 	//backgroundColor: "red",
-	top      : "50%",
+	top      : "45%",
 	left     : "50%",
 	width    : "90vw",
 	height   : "50vh",
@@ -150,7 +150,7 @@ export const focused          = {
 		translateY: "-50%",
 		//perspective: "200px",
 		//rotateX    : "2deg"
-	}, { translateY: '-1cm' }]
+	}, {}, { translateY: '1cm' }]
 };
 export const focusedScroll    = {
 	scrollY: [

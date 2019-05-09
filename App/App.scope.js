@@ -43,7 +43,7 @@ export default {
 		selectedEventDT   : undefined,
 		curDay            : undefined,
 		viewType          : 0,
-		dayCountByViewType: [3, 1, 1, 1, 0],
+		dayCountByViewType: [2, 1, 1, 1, 0],
 		curTags           : undefined,
 		
 		$apply( data, state ) {
@@ -104,8 +104,8 @@ export default {
 				currentPageFocus = 'head';
 			return {
 				currentPageFocus,
-				doFocus      : true,
-				selectedFocus: selectedFocus && { id: selectedFocus, etty: "Page" } || null
+				doFocus      : !!selectedFocus,
+				selectedFocus: { id: selectedFocus || "Page.SkxesB7ugG", etty: "Page" }
 			};
 		},
 		selectWidget( selectedWidgetId ) {

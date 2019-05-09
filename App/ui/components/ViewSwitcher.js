@@ -144,6 +144,7 @@ export default class ViewSwitcher extends React.Component {
 				          initial={ tweenTools.addCss(
 					          tweenTools.extractCss(showAnim, true)
 					          , defaultInitial
+					          , { opacity: 1, pointerEvents: 'none' }
 				          ) }>
 					<div>
 						{/*{ nextTarget && nextTarget._id }*/ }

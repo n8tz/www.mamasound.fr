@@ -152,7 +152,7 @@ export default class EventList extends React.Component {
 							<div
 								className={ "EventNav" }
 							>
-								<Views.DayBlock day={ appState.currentVisibleDay || appState.curDay }/>
+								{/*<Views.DayBlock day={ appState.currentVisibleDay || appState.curDay }/>*/}
 								<Tabs
 									value={ appState.viewType }
 									onChange={ ( e, v ) => {

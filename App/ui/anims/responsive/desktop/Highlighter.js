@@ -138,19 +138,19 @@ export const slideScroll      = {
 	],
 }
 export const focused          = {
-	position       : "absolute",
+	position : "absolute",
 	//backgroundColor: "red",
-	top            : "45%",
-	left           : "50%",
-	width          : "90vw",
-	height         : "50vh",
+	top      : "45%",
+	left     : "50%",
+	//width          : "90vw",
+	height   : "50vh",
 	//overflow       : "hidden",
-	transform      : {
+	transform: [{
 		translateX: "-50%",
 		translateY: "-50%",
 		//perspective: "200px",
 		//rotateX    : "2deg"
-	}
+	},{}, { translateY: '0cm' }]
 };
 export const focusedScroll    = {
 	scrollY: [

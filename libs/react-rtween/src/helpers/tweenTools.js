@@ -86,8 +86,8 @@ export function reverse( items ) {
 	)
 }
 
-export function addCss( target, source ) {
-	
+export function addCss( target, ...sources ) {
+	let source = sources.shift();
 	for ( const key in source ) {
 		if ( !source.hasOwnProperty(key) )
 			continue;
@@ -109,7 +109,7 @@ export function addCss( target, source ) {
 		}
 	}
 	
-	return target;
+	return sources.length && addCss(target, ...sources) || target;
 }
 
 function addAllType( v1, v2 ) {
@@ -134,10 +134,12 @@ export function extractCss( items, inverse ) {
 			addCss(css, item.apply)
 		}
 	);
-	
 	if ( inverse )
 		css = inverseValues(css);
 	
+	
+	//if ( inverse && css.hasOwnProperty('opacity') )
+	//	css.opacity -= 1;
 	return css;
 }
 

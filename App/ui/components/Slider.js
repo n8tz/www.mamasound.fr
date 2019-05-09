@@ -129,7 +129,7 @@ export default class Slider extends React.Component {
 		    }                                                                       = this.props,
 		    { index = defaultIndex, allItems, nbGhostItems, step, dec, tweenLines } = this.state;
 		
-		console.log("render", index)
+		//console.log("render", index)
 		return (
 			<div
 				className={ "rSlide slider" }
@@ -158,7 +158,7 @@ export default class Slider extends React.Component {
 								let { nbItems }   = this.state;
 								this._wasUserSnap = true;
 								this.setState({ index: (i) % nbItems })
-								console.log(i % nbItems, v)
+								//console.log(i % nbItems, v)
 							},
 							value     : 100 + dec + index * step,
 							wayPoints : allItems.map(( child, i ) => ({ at: 100 + i * step }))

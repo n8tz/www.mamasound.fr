@@ -87,7 +87,7 @@ export default class Home extends React.Component {
 		let { Anims: { MainPage }, appState, $actions } = this.props;
 		if ( typeof window !== "undefined" )
 			window.$actions = $actions;
-		
+		console.log('render snap', appState.currentPageFocus)
 		return <TweenRef
 			id={ "page" }
 			initial={ MainPage.page }
@@ -101,17 +101,23 @@ export default class Home extends React.Component {
 					defaultPosition={ wayPoints[appState.currentPageFocus] }
 					inertia={
 						{
-							infinite  : true,
-							shouldLoop: ( v ) => {
+							infinite    : true,
+							shouldLoop  : ( v ) => {
 								if ( (v + 1) > (350) ) {
 									//$actions.changeHighlighterBackground();
 									return -350;
 								}
 							},
-							willSnap  : ( i, v ) => {
-								//$actions.setPageFocus(v.id || "head")
+							onInertiaEnd: ( i, v ) => {
+								if ( v ) {
+									
+									if ( this.props.appState.currentPageFocus === "head" && v.id !== "head" )
+										$actions.selectFocus()
+									$actions.setPageFocus(v.id || "head")
+								}
+								
 							},
-							wayPoints : [
+							wayPoints   : [
 								{ at: 0, id: "head" },
 								{ at: 100, id: "events" },
 								{

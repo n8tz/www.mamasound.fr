@@ -58,8 +58,6 @@ export default class Inertia {
 	update( at = Date.now() ) {
 		let _ = this._, nextValue, loop;
 		if ( !_.inertia ) {
-			//_.inertia = this.active = false;
-			
 			if ( _.conf.shouldLoop ) {
 				while ( (loop = _.conf.shouldLoop(_.pos)) ) {
 					this.teleport(loop);
@@ -74,6 +72,10 @@ export default class Inertia {
 		if ( (at - _.inertiaStartTm) >= _.targetDuration ) {
 			_.inertia        = this.active = false;
 			_.lastInertiaPos = delta = 0;
+			
+			if ( _.conf.onInertiaEnd ) {
+				_.conf.onInertiaEnd(_.pos, _.targetWayPoint)
+			}
 		}
 		delta     = delta || 0;
 		//console.log(_.pos + delta);
@@ -141,10 +143,9 @@ export default class Inertia {
 			}
 			else {
 				mid = _.wayPoints[i - 1].at + (_.wayPoints[i].at - _.wayPoints[i - 1].at) / 2;
-				if ( forceSnap )
-					target = forceSnap < 0 ? _.wayPoints[i - 1].at : _.wayPoints[i].at;
-				else
-					target = pos < mid ? _.wayPoints[i - 1].at : _.wayPoints[i].at;
+				if ( forceSnap ) forceSnap < 0 && i--;
+				else if ( pos < mid ) i--;
+				target = _.wayPoints[i].at;
 			}
 			
 			if ( _.conf.willSnap ) {
@@ -156,6 +157,7 @@ export default class Inertia {
 			_.targetDuration = max(50, min(maxDuration, abs((_.targetDuration / _.targetDist) * target))) || 0;
 			//console.log("do snap", i, target, _.targetDist, _.targetDuration);
 			_.targetDist     = target;
+			_.targetWayPoint = _.wayPoints[i];
 		}
 		else {
 			target = ~~(_.pos - _.lastInertiaPos);
