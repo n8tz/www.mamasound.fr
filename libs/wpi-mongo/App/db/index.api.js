@@ -122,8 +122,6 @@ export function query( req ) {
 export function remove( req ) {
 	return new Promise(
 		( resolve, reject ) => {
-			if ( !(req.user && req.user.isAdmin) )
-				return reject({ success: false, error: "Auth required" });
 			
 			let { query: _query, etty, limit = 1000, skip, orderby, mountKeys = [] } = req;
 			pushDbTask(
@@ -132,7 +130,7 @@ export function remove( req ) {
 					db.collection(etty)
 					  .deleteMany(_query || {}).then(function ( r ) {
 						resolve(r.result)
-					}).catch(e => reject(e));
+					}).catch(e => reject(e + ""));
 					
 				}
 			)
