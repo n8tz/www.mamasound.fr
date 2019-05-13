@@ -19,7 +19,7 @@
 import React                                      from 'react';
 import moment                                     from 'moment';
 import Widget                                     from 'App/ui/components/Widget.js';
-import {Views, Comps}                                    from "App/ui";
+import {Views, Comps}                             from "App/ui";
 import {BrowserRouter, StaticRouter, Route, Link} from "react-router-dom";
 import {ContextMenu}                              from 'react-inheritable-contextmenu';
 import "./ui/styles/index.scss"
@@ -50,8 +50,12 @@ export default class App extends React.Component {
 			<React.Fragment>
 				<ContextMenu>
 					<div
-						onClick={ () => $actions.newWidget('MamaImporter') }>
+						onClick={ () => $actions.newWidget('MamaImporter', { title: "Importer d'events" }) }>
 						New Importer
+					</div>
+					<div
+						onClick={ () => $actions.newWidget('DBQuery', { title: "Db query & delete" }) }>
+						New DBQuery
 					</div>
 				</ContextMenu>
 				

@@ -12,7 +12,7 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-let stepAngle = "2.5deg";
+let stepAngle = "1.8deg";
 
 export const defaultInitial  = {
 	position : "absolute",

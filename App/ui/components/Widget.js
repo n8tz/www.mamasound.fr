@@ -58,7 +58,7 @@ export default class Widget extends React.Component {
 		let {
 			    record: { position, size } = {},
 			    record, children, disabled,
-			    $actions, onSelect, selected
+			    $actions, onSelect, selected, title
 		    }     = this.props,
 		    state = this.state;
 		return (
@@ -102,7 +102,7 @@ export default class Widget extends React.Component {
 							<CloseIcon/>
 						</IconButton>
 					}
-					title={ record.label }
+					title={ title || record.props && record.props.title }
 					//subheader={ record && record.label }
 				/>
 				<div className={ " content" } onClick={ e => e.preventDefault() }>

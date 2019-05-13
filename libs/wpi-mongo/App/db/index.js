@@ -49,3 +49,16 @@ export function query( query ) {
 		}
 	);
 };
+
+export function remove( query ) {
+	return new Promise(
+		( resolve, reject ) => {
+			superagent.post('/db/remove', query)
+			          .then(
+				          res => {
+					          resolve(res.body)
+				          }
+			          ).catch(reject)
+		}
+	);
+};

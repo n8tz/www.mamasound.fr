@@ -66,6 +66,7 @@ export default {
 			if ( _currentPageFocus !== currentPageFocus ) {
 				if ( selectedEventId && _currentPageFocus === 'events' )
 					this.$actions.selectEvent();
+				console.log(_currentPageFocus)
 				return { currentPageFocus: _currentPageFocus, doFocus };
 			}
 		},
@@ -94,18 +95,22 @@ export default {
 				currentPageFocus = 'page';
 			return {
 				currentPageFocus,
-				doFocus     : true,
-				selectedPage: selectedPage && { id: selectedPage, etty: "Page" } || null
+				doFocus        : true,
+				selectedEventId: null,
+				selectedPage   : selectedPage && { id: selectedPage, etty: "Page" } || null
 			};
 		},
 		selectFocus( selectedFocus ) {
 			let { currentPageFocus } = this.nextState;
-			if ( selectedFocus )
+			if ( selectedFocus && currentPageFocus === 'page' )
+				currentPageFocus = "loop";
+			else if ( selectedFocus )
 				currentPageFocus = 'head';
 			return {
 				currentPageFocus,
-				doFocus      : !!selectedFocus,
-				selectedFocus: { id: selectedFocus || "Page.SkxesB7ugG", etty: "Page" }
+				selectedEventId: null,
+				doFocus        : !!selectedFocus,
+				selectedFocus  : { id: selectedFocus || "Page.SkxesB7ugG", etty: "Page" }
 			};
 		},
 		selectWidget( selectedWidgetId ) {

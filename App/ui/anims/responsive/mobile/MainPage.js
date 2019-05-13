@@ -27,7 +27,7 @@ export const header            = {
 	position : "absolute",
 	//right    : "0%",
 	//left     : "0%",
-	height   : "2cm",
+	height   : "1.5cm",
 	top      : "0%",
 	zIndex   : 200,
 	transform: [
@@ -153,14 +153,14 @@ export const EventMap_Gradient = {
 	opacity: 1
 };
 
-export const YAxis             = [
+export const YAxis = [
 	{
 		type    : "Tween",
 		target  : "header",
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: -1,
+			height: -.5,
 		}
 	},
 	{

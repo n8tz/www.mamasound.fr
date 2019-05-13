@@ -70,13 +70,16 @@ export default class Home extends React.Component {
 					this.scrollTo(0, 500);
 					break;
 				case 'event' :
-					this.scrollTo(100, 500);
+					this.scrollTo(100, 500, undefined, "easeBackIn");
 					break;
 				case 'events' :
-					this.scrollTo(150, 500);
+					this.scrollTo(150, 500, undefined, "easeBackIn");
 					break;
 				case 'page' :
-					this.scrollTo(250, 500);
+					this.scrollTo(250, 500, undefined, "easeBackIn");
+					break;
+				case 'loop' :
+					this.scrollTo(350, 500, "scrollY", ).then(e => this.scrollTo(0));
 					break;
 				
 			}
@@ -97,17 +100,19 @@ export default class Home extends React.Component {
 				<TweenAxis
 					axe={ "scrollY" }
 					items={ MainPage.YAxis }
-					scrollableWindow={ 120 }
+					scrollableWindow={ 175 }
 					defaultPosition={ wayPoints[appState.currentPageFocus] }
 					inertia={
 						{
-							infinite    : true,
-							shouldLoop  : ( v ) => {
-								if ( (v + 1) > (350) ) {
-									//$actions.changeHighlighterBackground();
-									return -350;
-								}
-							},
+							//infinite    : true,
+							maxJump     : 1,
+							//shouldLoop  : ( v ) => {
+							//	if ( (v + 1) > (350) ) {
+							//		//$actions.changeHighlighterBackground();
+							//		//$actions.setPageFocus("head")
+							//		return -350;
+							//	}
+							//},
 							onInertiaEnd: ( i, v ) => {
 								if ( v ) {
 									
@@ -124,8 +129,8 @@ export default class Home extends React.Component {
 									at: 150,
 									id: "event"
 								},
-								{ at: 250, id: "page", stop: true },
-								{ at: 350 }
+								{ at: 250, id: "page" },
+								{ at: 350, id: "loop" }
 							],
 						}
 					}

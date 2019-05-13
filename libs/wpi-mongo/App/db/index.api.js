@@ -118,3 +118,22 @@ export function query( req ) {
 		}
 	);
 };
+
+export function remove( req ) {
+	return new Promise(
+		( resolve, reject ) => {
+			
+			let { query: _query, etty, limit = 1000, skip, orderby, mountKeys = [] } = req;
+			pushDbTask(
+				( client, dbRelease ) => {
+					var db = client.db("mamasound_fr");
+					db.collection(etty)
+					  .deleteMany(_query || {}).then(function ( r ) {
+						resolve(r.result)
+					}).catch(e => reject(e));
+					
+				}
+			)
+		}
+	);
+};

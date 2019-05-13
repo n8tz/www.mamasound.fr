@@ -65,6 +65,7 @@
     //opacity: .35;
     filter: drop-shadow(0px 7px 1px rgba(0, 0, 0, 0.2));
     animation: shadowFun 15s infinite;
+    pointer-events: none;
   }
   .maskContent {
     position: absolute;
@@ -89,6 +90,7 @@
       background: url("../assets/medias/border.svg") bottom center repeat-x/4000px;
       opacity: .9;
       z-index: 100000;
+      pointer-events: none;
       //background-position: bottom;
     }
   }

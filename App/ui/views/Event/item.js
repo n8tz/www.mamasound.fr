@@ -38,7 +38,6 @@ let defaultPreview = {
 export default ( { record, refs, selected, onClick } ) =>
 	<div className={ "Event Event" + record._cls + ' ' + (selected ? "selected" : "") }
 	     onClick={ onClick }
-	
 	>
 		<Editable id={ record._id }/>
 		<div className="start">

@@ -27,7 +27,6 @@ var H = xxhashjs.h64(0)	// seed = 0xABCD
  * base data provider
  *  - centralize record update & dispatch
  *
- *  @todo : rewrite !!!!
  */
 
 export default class DataProvider extends Store {
@@ -246,19 +245,19 @@ export default class DataProvider extends Store {
 			)
 			|| Object.keys(this.data);
 		
-		types.forEach(
-			etty => {
-				if ( etty !== "__queries" )
-					this.activeRecords &&
-					Object.keys(this.activeRecords)
-					      .map(
-						      id => this.syncRemoteRecord(etty, id)
-					      )
-			}
-		)
-		Object.keys(this.activeQueries.__queries).forEach(
+		//types.forEach(
+		//	etty => {
+		//		if ( etty !== "__queries" )
+		//			this.activeRecords &&
+		//			Object.keys(this.activeRecords)
+		//			      .map(
+		//				      id => this.syncRemoteRecord(etty, id)
+		//			      )
+		//	}
+		//)
+		Object.keys(this.activeQueries).forEach(
 			id => {
-				this.syncRemoteQuery(this.activeQueries.__queries[id], id)
+				this.syncRemoteQuery(this.activeQueries[id], id)
 			}
 		)
 	}

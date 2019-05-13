@@ -140,9 +140,9 @@ export const slideScroll      = {
 export const focused          = {
 	position : "absolute",
 	//backgroundColor: "red",
-	top      : "45%",
+	top      : "50%",
 	left     : "50%",
-	width    : "90vw",
+	width          : "90vw",
 	height   : "50vh",
 	//overflow       : "hidden",
 	transform: [{
@@ -150,7 +150,7 @@ export const focused          = {
 		translateY: "-50%",
 		//perspective: "200px",
 		//rotateX    : "2deg"
-	}, {}, { translateY: '1cm' }]
+	}, {}, { translateY: '0px' }]
 };
 export const focusedScroll    = {
 	scrollY: [
@@ -162,6 +162,9 @@ export const focusedScroll    = {
 				opacity  : "-1",
 				//height   : 2.5,
 				//top      : -2.5,
+				filter   : {
+					sepia: 100
+				},
 				transform: [{
 					rotateX: "4deg"
 				}, {
@@ -172,15 +175,34 @@ export const focusedScroll    = {
 		{
 			type    : "Tween",
 			from    : 150,
-			duration: 100,
+			duration: 1,
 			apply   : {
 				//opacity  : "-1",
 				//height   : 2.5,
 				//top      : -2.5,
-				transform: {
-					//translateZ: "-15px",
-					//rotateX   : "4deg"
-				}
+				transform: [{
+					rotateX: "-2deg"
+				}, {
+					translateY: "100vh",
+				}]
+			}
+		},
+		{
+			type    : "Tween",
+			from    : 250,
+			duration: 100,
+			apply   : {
+				opacity  : 1,
+				//height   : 2.5,
+				//top      : -2.5,
+				filter   : {
+					sepia: -100
+				},
+				transform: [{
+					rotateX: "-2deg"
+				}, {
+					translateY: "-50vh",
+				}]
 			}
 		}
 	],

@@ -29,6 +29,13 @@ export default ( server, http ) => {
 		}
 	);
 	server.post(
+		'/db/remove',
+		function ( req, res, next ) {
+			db.remove(req.body).then(data => res.json(data)).catch(err => res.json({ error: err + '' }, 500))
+			
+		}
+	);
+	server.post(
 		'/db/get',
 		function ( req, res, next ) {
 			let { objId, cls } = req.body;
