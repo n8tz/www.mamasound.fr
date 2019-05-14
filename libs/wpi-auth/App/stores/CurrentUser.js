@@ -25,7 +25,7 @@ import cfg        from "App/config";
 
 export default class CurrentUser extends Store {
 	static singleton = true;
-	static state     = {
+	state            = {
 		user: null
 	};
 	static actions   = {
@@ -79,7 +79,7 @@ export default class CurrentUser extends Store {
 		return superagent.get("http://" + cfg.ROOT_DOMAIN + '/session')
 		                 .then(( r ) => {
 			                 let user  = r.body.result && r.body.result._id,
-			                     cuser = this.state.user && this.state.user._id;
+			                     cuser = this.data && this.data._id;
 			                 if ( user !== cuser )
 				                 this.setState({ user: r.body.result })
 		                 });
