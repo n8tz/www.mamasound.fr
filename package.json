@@ -16,8 +16,7 @@
             "material-ui": "@material-ui/core"
           }
         },
-        "webpackPatch": {
-        }
+        "webpackPatch": {}
       },
       "extend": [
         "wpi-auth",
@@ -183,6 +182,7 @@
   },
   "devDependencies": {
     "wpi-react-rs-sass-ssr": "^1.0.5",
+    "wpi-react-hmr-ssr": "^1.1.12",
     "webpack-inherit": "^1.5.2"
   }
 }
