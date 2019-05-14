@@ -23,9 +23,10 @@ import scopes                                from 'App/scopes/(*).js';
 import {asTweener, TweenRef}                 from "react-rtween";
 import {Views}                               from 'App/ui';
 
+let isBrowser = false;
 
 if ( typeof window !== "undefined" ) {
-	
+	isBrowser      = true;
 	var LeafletCss = require('leaflet/dist/leaflet.css');
 	var Leaflet    = require('leaflet');
 	var {
@@ -61,8 +62,8 @@ if ( typeof window !== "undefined" ) {
 	                                                     });
 }
 else {
-	let Map, Marker, TileLayer, Popup;
-	Popup = Map = Marker = TileLayer = 'div'
+	let Map, Marker, TileLayer, Popup, LayerGroup;
+	Popup = Map = Marker = TileLayer = LayerGroup = 'div'
 }
 
 
@@ -203,7 +204,8 @@ export default class EventMap extends React.Component {
 				map.getZoom()
 			)
 		}
-		
+		if (!isBrowser)
+			return <div className={ "EventMap" }/>
 		return (
 			<div className={ "EventMap" }>
 				<div className={ "maskContent " }>

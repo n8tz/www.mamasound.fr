@@ -18,7 +18,6 @@ import React            from "react";
 import {renderToString} from "react-dom/server";
 import {Scope, reScope} from "react-rescope";
 
-
 const ctrl = {
 	renderTo( node, state ) {
 		let cScope      = new Scope(AppScope, {
@@ -27,7 +26,10 @@ const ctrl = {
 		    }),
 		    App         = reScope(cScope)(require('./App').default);
 		window.contexts = Scope.scopes;
-		localStorage.mama && cScope.restore(JSON.parse(localStorage.mama));
+		if ( localStorage.mama )
+			cScope.restore(JSON.parse(localStorage.mama));
+		else if ( __STATE__ )
+			cScope.restore(__STATE__);
 		ReactDom.render(<App/>, node);
 		
 		if ( process.env.NODE_ENV !== 'production' && module.hot ) {
@@ -56,13 +58,15 @@ const ctrl = {
 		    }), App = reScope(cScope)(require('./App').default);
 		
 		cfg.state && cScope.restore(cfg.state, { alias: "App" });
+		
 		let html,
 		    appHtml = renderToString(<App location={ cfg.location }/>),
 		    stable  = cScope.isStableTree();
-		
+		console.log('ctrl::renderSSR:65: ', cfg.location, _attempts);
 		cScope.onceStableTree(state => {
 			let nstate = cScope.serialize({ alias: "App" });
-			if ( !stable && _attempts < 0 ) {
+			if ( !stable && _attempts < 3 ) {
+				cfg.state = nstate;
 				ctrl.renderSSR(cfg, cb, ++_attempts);
 			}
 			else {
@@ -70,7 +74,8 @@ const ctrl = {
 					html = cfg.tpl.render(
 						{
 							app  : appHtml,
-							state: JSON.stringify(cfg.state)
+							state: JSON.stringify(nstate),
+							css  : cfg.css
 						}
 					);
 				} catch ( e ) {

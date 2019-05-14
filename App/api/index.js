@@ -40,6 +40,9 @@ export function service( server ) {
 			App.renderSSR(
 				{
 					location: req.url,
+					css     : fs.existsSync(process.cwd() + "/dist/App.css")
+					          ? fs.readFileSync(process.cwd() + "/dist/App.css")
+					          : "/* ... */",
 					//state   : currentState,
 					tpl
 				},

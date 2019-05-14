@@ -135,7 +135,7 @@ export default class EventList extends React.Component {
 	
 	render() {
 		let {
-			    record                    : { position, size } = {},
+			    record                          : { position, size } = {},
 			    UserGeoLocation, appState, Anims: { MainPage },
 			    $actions,
 		    }     = this.props,
@@ -152,31 +152,32 @@ export default class EventList extends React.Component {
 							<div
 								className={ "EventNav" }
 							>
-								{/*<Views.DayBlock day={ appState.currentVisibleDay || appState.curDay }/>*/}
-								<Tabs
-									value={ appState.viewType }
-									onChange={ ( e, v ) => {
-										$actions.setCurStyleTab(v)
-									} }
-									height={ 50 }
-									variant="fullWidth"
-									indicatorColor="primary"
-									textColor="primary"
-									className={ "typeEventsTab" }
-								>
-									<Tab label={ "Tous" }/>
-									<Tab label={ "Concerts" }/>
-									<Tab label={ "Expos" }/>
-									<Tab label={ "Theatre" }/>
-									{/*<Tab label={ "Cinéma" }/>*/ }
-								</Tabs>
-								<SwipeableViews index={ appState.viewType }
-								                onChangeIndex={ $actions.setCurStyleTab }
-								                className={ "dayList" }
-								                onClick={ e => e.preventDefault() }
-								                id={ "scrollableEvents" }>
+								{/*<Views.DayBlock day={ appState.currentVisibleDay || appState.curDay }/>*/ }
+								{/*<Tabs*/ }
+								{/*value={ appState.viewType }*/ }
+								{/*onChange={ ( e, v ) => {*/ }
+								{/*$actions.setCurStyleTab(v)*/ }
+								{/*} }*/ }
+								{/*height={ 50 }*/ }
+								{/*variant="fullWidth"*/ }
+								{/*indicatorColor="primary"*/ }
+								{/*textColor="primary"*/ }
+								{/*className={ "typeEventsTab" }*/ }
+								{/*>*/ }
+								{/*<Tab label={ "Tous" }/>*/ }
+								{/*<Tab label={ "Concerts" }/>*/ }
+								{/*<Tab label={ "Expos" }/>*/ }
+								{/*<Tab label={ "Theatre" }/>*/ }
+								{/*/!*<Tab label={ "Cinéma" }/>*/ }*/}
+								{/*</Tabs>*/ }
+								{/*<SwipeableViews index={ appState.viewType }*/ }
+								{/*onChangeIndex={ $actions.setCurStyleTab }*/ }
+								{/*className={ "dayList" }*/ }
+								{/*onClick={ e => e.preventDefault() }*/ }
+								{/*id={ "scrollableEvents" }>*/ }
+								<div className={ "dayList" }>
 									{
-										Array(4)
+										Array(1)
 											.fill(0)
 											.map(
 												( v, type ) =>
@@ -197,7 +198,8 @@ export default class EventList extends React.Component {
 													</div>
 											)
 									}
-								</SwipeableViews>
+									{/*</SwipeableViews>*/ }
+								</div>
 							</div>
 						</TweenRef>
 						<TweenRef

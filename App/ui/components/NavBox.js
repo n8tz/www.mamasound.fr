@@ -68,13 +68,13 @@ export default class NavBox extends React.Component {
 				
 				<Comps.LoginBox/>
 				<div className={ "fbPage" }>
-					<FacebookProvider appId="1191108604284018">
-						<Page href="https://www.facebook.com/mamasound.fr"
-						      smallHeader={ true } tabs="timeline"
-						      adaptContainerWidth={ true }
-						      height={ 350 }
-						      width={ 300 }/>
-					</FacebookProvider>
+					{/*<FacebookProvider appId="1191108604284018">*/}
+						{/*<Page href="https://www.facebook.com/mamasound.fr"*/}
+						      {/*smallHeader={ true } tabs="timeline"*/}
+						      {/*adaptContainerWidth={ true }*/}
+						      {/*height={ 350 }*/}
+						      {/*width={ 300 }/>*/}
+					{/*</FacebookProvider>*/}
 				</div>
 				{/*{ ActiveTags && ActiveTags.available && ActiveTags.available.map(*/ }
 				{/*tag =>*/ }

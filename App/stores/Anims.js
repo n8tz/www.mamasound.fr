@@ -35,6 +35,9 @@ export default class Anims extends Store {
 		...breakPts[initialPts]
 	};
 	
+	shouldSerialize() {
+		return false;
+	}
 	constructor() {
 		super(...arguments);
 		

@@ -13,7 +13,7 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-#      - ./traefik.toml:/traefik.toml
+      #      - ./traefik.toml:/traefik.toml
       - ./etc/cert/:/cert/
     networks:
       - app_network
@@ -59,6 +59,8 @@ services:
       - ./docker/db:/data
     expose:
       - 27017
+    ports:
+      - "27017"
     networks:
       - app_network
   redis:

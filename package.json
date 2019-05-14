@@ -9,6 +9,7 @@
       "rootFolder": "App",
       "libsPath": "./libs",
       "vars": {
+        "extractCss": true,
         "production": true,
         "resolve": {
           "alias": {
@@ -16,9 +17,6 @@
           }
         },
         "webpackPatch": {
-          "optimization": {
-            "usedExports": true
-          }
         }
       },
       "extend": [
@@ -34,6 +32,7 @@
       "basedOn": "default",
       "libsPath": "./libs",
       "vars": {
+        "extractCss": true,
         "webpackPatch": {
           "stats": "errors-only",
           "devServer": {
@@ -123,6 +122,7 @@
     "express-basic-auth": "^1.1.6",
     "express-session": "^1.16.1",
     "extract-hoc": "0.0.5",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "geolib": "^2.0.24",
     "greenlock-express": "^2.6.8",
     "helmet": "^3.16.0",
@@ -135,6 +135,7 @@
     "leaflet-pulse-icon": "^0.1.0",
     "material-ui-chip-input": "^1.0.0-beta.15",
     "memoize-one": "^5.0.4",
+    "mini-css-extract-plugin": "^0.6.0",
     "minimist": "^1.2.0",
     "moment": "^2.23.0",
     "mongodb": "^2.2.36",
@@ -142,6 +143,7 @@
     "node-watch": "^0.6.0",
     "nodemon": "^1.18.7",
     "opener": "^1.5.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "prop-types": "^15.6.0",
@@ -159,7 +161,7 @@
     "react-rnd": "^9.0.4",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-rtween": "^1.5.3",
+    "react-rtween": "^1.5.4",
     "react-select": "^2.4.1",
     "react-share": "^2.4.0",
     "react-slick": "^0.23.2",
@@ -173,6 +175,7 @@
     "slick-carousel": "^1.8.1",
     "speakingurl": "^14.0.1",
     "superagent": "^3.8.2",
+    "terser-webpack-plugin": "^1.2.3",
     "uniforms": "^1.31.1",
     "uniforms-material": "^1.31.1",
     "url-loader": "^1.1.2",

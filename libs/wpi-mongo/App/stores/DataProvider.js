@@ -133,8 +133,8 @@ export default class DataProvider extends Store {
 	 * @param query
 	 * @returns {*}
 	 */
-	getQuery( query ) {
-		let hash = JSON.stringify(query)
+	getQuery( query, hash ) {
+		hash = hash || H.update(JSON.stringify(query)).digest().toString(32);
 		return query && this.data
 			&& this.data[hash];
 	}
@@ -193,14 +193,17 @@ export default class DataProvider extends Store {
 		//	return console.error("DataProvider: No query API for data type '" + etty + "'")
 		//}
 		//this.dispatch('setLoading');
+		this.wait();
 		get(etty, id)
 			.then(
 				( data ) => {
 					this.pushRemoteRecord(etty, id, data)
 					//this.dispatch('setLoaded');
+					this.release()
 				},
 				( err ) => {
 					//this.dispatch('setLoaded');
+					this.release()
 					if ( err ) {
 						this.pushRemoteRecord(etty, id, {})
 						return console.error("DataProvider: query fail '", etty, err);
@@ -215,14 +218,15 @@ export default class DataProvider extends Store {
 	 */
 	syncRemoteQuery( queryData, hash ) {
 		//console.info("! query : ", hash, queryData)
+		this.wait()
 		query(queryData)
 			.then(
 				( data ) => {
 					this.pushRemoteQuery(queryData.etty, queryData, data, hash)
-					//this.dispatch('setLoaded');
+					this.release()
 				},
 				( err ) => {
-					//this.dispatch('setLoaded');
+					this.release()
 					if ( err ) {
 						this.pushRemoteQuery(queryData.etty, queryData, { items: [], total: 0, length: 0 })
 						return console.error("DataProvider: query fail '", queryData.etty, err);
