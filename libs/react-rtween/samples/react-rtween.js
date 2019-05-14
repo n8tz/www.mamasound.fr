@@ -30290,6 +30290,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var easingFn = __webpack_require__(/*! d3-ease */ "./node_modules/d3-ease/src/index.js");
+
+
 
 
 
@@ -30844,44 +30847,45 @@ function asTweener() {
 
         var ms = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
         var axe = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "scrollY";
+        var ease = arguments.length > 3 ? arguments[3] : undefined;
+        return new Promise(function (resolve, reject) {
+          if (_this7._.axes && _this7._.axes[axe]) {
+            var oldPos = _this7._.axes[axe].targetPos,
+                setPos = function setPos(pos) {
+              //console.log('TweenableComp::setPos:514: ', this.constructor.displayName);
+              _this7._.axes[axe].targetPos = _this7._.axes[axe].scrollPos = pos;
 
-        if (this._.axes && this._.axes[axe]) {
-          var oldPos = this._.axes[axe].targetPos,
-              setPos = function setPos(pos) {
-            //console.log('TweenableComp::setPos:514: ', this.constructor.displayName);
-            _this7._.axes[axe].targetPos = _this7._.axes[axe].scrollPos = pos;
+              if (_this7._.axes[axe].inertia) {
+                _this7._.axes[axe].inertia._.pos = pos;
+              }
 
-            if (_this7._.axes[axe].inertia) {
-              //this._.axes[axe].inertia.active = false;
-              _this7._.axes[axe].inertia._.pos = pos;
+              _this7.componentDidScroll && _this7.componentDidScroll(~~pos, axe);
+
+              _this7._updateTweenRefs();
+            };
+
+            newPos = Math.max(0, newPos);
+            newPos = Math.min(newPos, _this7._.axes[axe].scrollableArea || 0);
+            _this7._.axes[axe].targetPos = newPos;
+
+            if (!ms) {
+              _this7._.axes[axe].tweenLines.forEach(function (sl) {
+                return sl.goTo(newPos, _this7._.tweenRefMaps);
+              });
+
+              setPos(newPos);
+              resolve();
+            } else {
+              _this7._runScrollGoTo(axe, newPos, ms, easingFn[ease], setPos, resolve);
             }
 
-            _this7.componentDidScroll && _this7.componentDidScroll(~~pos, axe);
+            if (!_this7._.live) {
+              _this7._.live = true;
+              requestAnimationFrame(_this7._._rafLoop);
+            } //return !(oldPos - newPos);
 
-            _this7._updateTweenRefs();
-          };
-
-          newPos = Math.max(0, newPos);
-          newPos = Math.min(newPos, this._.axes[axe].scrollableArea || 0);
-          this._.axes[axe].targetPos = newPos;
-
-          if (!ms) {
-            this._.axes[axe].tweenLines.forEach(function (sl) {
-              return sl.goTo(newPos, _this7._.tweenRefMaps);
-            });
-
-            setPos(newPos);
-          } else {
-            this._runScrollGoTo(axe, newPos, ms, undefined, setPos);
           }
-
-          if (!this._.live) {
-            this._.live = true;
-            requestAnimationFrame(this._._rafLoop);
-          }
-
-          return !(oldPos - newPos);
-        }
+        });
       }
     }, {
       key: "makeScrollable",
@@ -30949,9 +30953,8 @@ function asTweener() {
                 lastStartTm = Date.now();
                 dX = 0;
                 dY = 0;
-                parentsState = [];
-                document.body.style.touchAction = 'none';
-                document.body.style.userSelect = 'none';
+                parentsState = []; //document.body.style.touchAction = 'none';
+                //document.body.style.userSelect  = 'none';
 
                 for (i = 0; i < parents.length; i++) {
                   tweener = parents[i]; // react comp with tweener support
@@ -31043,9 +31046,8 @@ function asTweener() {
               'dropped': function dropped(e, touch, descr) {
                 var tweener, i;
                 cLock = undefined; //lastStartTm                     = undefined;
-
-                document.body.style.userSelect = '';
-                document.body.style.touchAction = '';
+                //document.body.style.userSelect  = '';
+                //document.body.style.touchAction = '';
 
                 for (i = 0; i < parents.length; i++) {
                   tweener = parents[i]; // react comp with tweener support
@@ -31465,6 +31467,7 @@ function () {
     _.stops = _.conf.stops;
     _.wayPoints = _.conf.wayPoints;
     _.inertiaFn = easingFn.easePolyOut;
+    _.targetWayPointIndex = 0;
   }
 
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default()(Inertia, [{
@@ -31555,7 +31558,8 @@ function () {
           pos = _.targetDist + (_.pos - (_.lastInertiaPos || 0)),
           target,
           mid,
-          i;
+          i,
+          i2;
 
       if (_.wayPoints && _.wayPoints.length) {
         for (i = 0; i < _.wayPoints.length; i++) {
@@ -31563,14 +31567,25 @@ function () {
         }
 
         if (i == _.wayPoints.length) {
-          target = _.wayPoints[i - 1].at;
+          i--;
         } else if (i === 0) {
-          target = _.wayPoints[0].at;
+          i = 0;
         } else {
           mid = _.wayPoints[i - 1].at + (_.wayPoints[i].at - _.wayPoints[i - 1].at) / 2;
           if (forceSnap) forceSnap < 0 && i--;else if (pos < mid) i--;
-          target = _.wayPoints[i].at;
         }
+
+        if (_.conf.maxJump && is.number(_.targetWayPointIndex)) {
+          var d = i - _.targetWayPointIndex; //console.log('Inertia::_doSnap:154: ', i);
+
+          if (d) {
+            i -= d;
+            i += _.conf.maxJump * (d / abs(d));
+          } //console.log('Inertia::_doSnap:154: ', i);
+
+        }
+
+        target = _.wayPoints[i].at;
 
         if (_.conf.willSnap) {
           _.conf.willSnap(i, _.wayPoints[i]);
@@ -31582,6 +31597,7 @@ function () {
 
         _.targetDist = target;
         _.targetWayPoint = _.wayPoints[i];
+        _.targetWayPointIndex = i;
       } else {
         target = ~~(_.pos - _.lastInertiaPos);
 

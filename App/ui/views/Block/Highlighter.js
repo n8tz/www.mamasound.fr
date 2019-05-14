@@ -128,7 +128,13 @@ export default class Highlighter extends React.Component {
 					<div className={ "slider" }>
 						<Comps.Slider
 							{ ...Anims.MainSlider }
-							//autoScroll={ 10 * 1000 }
+							autoScroll={ 10 * 1000 }
+							onClick={
+								( e, i, slider ) => {
+									$actions.selectFocus(gridItems[i].targetEtty.objId);
+									slider.goTo(i);
+								}
+							}
 						>
 							{
 								gridItems.length &&
@@ -140,7 +146,7 @@ export default class Highlighter extends React.Component {
 										          tweenLines={ Anims.Highlighter.slideScroll }>
 											<Views.FocusedItems record={ item }
 											                    onClick={
-												                    e => $actions.selectFocus(item.targetEtty.objId)
+												                    e => $actions.selectFocus(item.targetEtty.objId, i)
 											                    }/>
 										</TweenRef>
 								)

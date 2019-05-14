@@ -1,24 +1,24 @@
 /*
- * The MIT License (MIT)
- * Copyright (c) 2019. Wise Wild Web
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * Copyright (C) 2019 Nathanael Braun
  *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
  *
- *  @author : Nathanael Braun
- *  @contact : n8tz.js@gmail.com
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import PropTypes                                    from "prop-types";
 import React                                        from "react";
 import {asTweener, TweenRef, TweenAxis, tweenTools} from "react-rtween";
-import {reScope, scopeToProps, propsToScope}        from "rscopes";
-import {withStateMap, asRef, asStore}               from "rescope-spells";
 import is                                           from "is";
 
-@scopeToProps("Anims")
 @asTweener({ enableMouseDrag: true })
 export default class Slider extends React.Component {
 	static defaultProps = {
@@ -30,13 +30,6 @@ export default class Slider extends React.Component {
 		defaultLeaving : []
 	};
 	state               = {};
-	
-	reset = () => {
-		this.setState(
-			{
-				lastDay: this.props.day
-			})
-	}
 	
 	componentDidMount() {
 		let { autoScroll, defaultIndex = 0 } = this.props;
@@ -149,7 +142,7 @@ export default class Slider extends React.Component {
 					axe={ "scrollX" }
 					defaultPosition={ 100 + dec + index * step }
 					size={ nbGhostItems * step + 100 }
-					scrollableWindow={ 2 * step }
+					scrollableWindow={ 4 * step }
 					inertia={
 						{
 							shouldLoop: ( v ) => {
@@ -183,7 +176,7 @@ export default class Slider extends React.Component {
 									tweenLines[i]
 								}
 							>
-								<div className={ "slide" } onClick={ e => onClick(e, i % nbItems, this) }>
+								<div className={ "slide" } onClick={ onClick && (e => onClick(e, i % nbItems, this)) }>
 									{ Child }
 								</div>
 							</TweenRef>
