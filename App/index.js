@@ -40,47 +40,47 @@ const ctrl = {
 			});
 		}
 	},
-	renderSSR( cfg, cb, _attempts = 0 ) {
-		let html = cfg.tpl.render(
-			{
-				app: "",
-			}
-		);
-		cb(null, html)
-	},
 	//renderSSR( cfg, cb, _attempts = 0 ) {
-	//	let rid     = shortid.generate(),
-	//	    cScope  = new Scope(AppScope, {
-	//		    id         : rid,
-	//		    autoDestroy: false
-	//	    }), App = reScope(cScope)(require('./App').default);
-	//
-	//	cfg.state && cScope.restore(cfg.state, { alias: "App" });
-	//	//
-	//	let html,
-	//	    appHtml = renderToString(<App location={ cfg.location }/>),
-	//	    stable  = cScope.isStableTree();
-	//
-	//	cScope.onceStableTree(state => {
-	//		let nstate = cScope.serialize({ alias: "App" });
-	//		if ( !stable && _attempts < 0 ) {
-	//			ctrl.renderSSR(cfg, cb, ++_attempts);
+	//	let html = cfg.tpl.render(
+	//		{
+	//			app: "",
 	//		}
-	//		else {
-	//			try {
-	//				html = cfg.tpl.render(
-	//					{
-	//						app  : appHtml,
-	//						state: JSON.stringify(cfg.state)
-	//					}
-	//				);
-	//			} catch ( e ) {
-	//				return cb(e)
-	//			}
-	//			cb(null, html)
-	//		}
-	//		cScope.destroy()
-	//	})
-	//}
+	//	);
+	//	cb(null, html)
+	//},
+	renderSSR( cfg, cb, _attempts = 0 ) {
+		let rid     = shortid.generate(),
+		    cScope  = new Scope(AppScope, {
+			    id         : rid,
+			    autoDestroy: false
+		    }), App = reScope(cScope)(require('./App').default);
+		
+		cfg.state && cScope.restore(cfg.state, { alias: "App" });
+		//
+		let html,
+		    appHtml = renderToString(<App location={ cfg.location }/>),
+		    stable  = cScope.isStableTree();
+		
+		cScope.onceStableTree(state => {
+			let nstate = cScope.serialize({ alias: "App" });
+			if ( !stable && _attempts < 0 ) {
+				ctrl.renderSSR(cfg, cb, ++_attempts);
+			}
+			else {
+				try {
+					html = cfg.tpl.render(
+						{
+							app  : appHtml,
+							state: JSON.stringify(cfg.state)
+						}
+					);
+				} catch ( e ) {
+					return cb(e)
+				}
+				cb(null, html)
+			}
+			cScope.destroy()
+		})
+	}
 }
 export default ctrl;

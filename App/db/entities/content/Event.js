@@ -54,7 +54,7 @@ export default {
 	},
 	fields          : {
 		"_id"         : types.indexes,
-		"_public"     : types.boolean("Publier :", false),
+		//"_public"     : types.boolean("Publier :", false),
 		"title"       : types.labels(),
 		"previewImage": types.media({ allowedTypes: "Image" }, "Preview :"),
 		"artists"     : types.collection(["Artist"], {}, "Groupes / artistes :"),

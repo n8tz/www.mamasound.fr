@@ -84,10 +84,10 @@ export default class assetsLoader extends Store {
 	}
 	
 	apply( lastData = {}, nextState, { query, data, remaining = nextState.remaining } ) {
-		if ( query || data ) {
+		if ( isBrowserSide && (query || data) ) {
 			let _urls  = this.parseQuery(nextState.query, nextState.data),
 			    urls   = is.array(_urls) ? _urls.reduce(
-				    ( map, item ) => (map[item[key]] = item[key], map),
+				    ( map, item ) => (map[item._id] = item, map),
 				    {}
 			    ) : _urls,
 			    URL    = window.URL || window.webkitURL,
@@ -105,7 +105,7 @@ export default class assetsLoader extends Store {
 					    else if ( req.status === 404 ) {
 						    urlMap[id] = "about:error";
 					    }
-					    this.push({...urlMap})
+					    this.push({ ...urlMap })
 					    this.release();
 				    };
 				    req.onerror = () => {

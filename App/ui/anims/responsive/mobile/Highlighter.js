@@ -142,7 +142,7 @@ export const focused          = {
 	//backgroundColor: "red",
 	top      : "50%",
 	left     : "50%",
-	width          : "90vw",
+	width    : "90vw",
 	height   : "50vh",
 	//overflow       : "hidden",
 	transform: [{
@@ -162,9 +162,9 @@ export const focusedScroll    = {
 				opacity  : "-1",
 				//height   : 2.5,
 				//top      : -2.5,
-				filter   : {
-					sepia: 100
-				},
+				//filter   : {
+				//	sepia: 100
+				//},
 				transform: [{
 					rotateX: "4deg"
 				}, {
@@ -195,9 +195,9 @@ export const focusedScroll    = {
 				opacity  : 1,
 				//height   : 2.5,
 				//top      : -2.5,
-				filter   : {
-					sepia: -100
-				},
+				//filter   : {
+				//	sepia: -100
+				//},
 				transform: [{
 					rotateX: "-2deg"
 				}, {

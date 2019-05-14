@@ -150,7 +150,7 @@ export const focused          = {
 		translateY: "-50%",
 		//perspective: "200px",
 		//rotateX    : "2deg"
-	}, {}, { translateY: '0cm' }]
+	}, {}, { translateY: '0vh' }]
 };
 export const focusedScroll    = {
 	scrollY: [
@@ -177,9 +177,6 @@ export const focusedScroll    = {
 				//opacity  : "-1",
 				//height   : 2.5,
 				//top      : -2.5,
-				filter   : {
-					sepia: 100
-				},
 				transform: [{
 					rotateX: "-2deg"
 				}, {
@@ -195,9 +192,6 @@ export const focusedScroll    = {
 				opacity  : 1,
 				//height   : 2.5,
 				//top      : -2.5,
-				filter   : {
-					sepia: -100
-				},
 				transform: [{
 					rotateX: "-2deg"
 				}, {

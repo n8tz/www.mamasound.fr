@@ -79,7 +79,7 @@ export default class Home extends React.Component {
 					this.scrollTo(250, 500, undefined, "easeBackIn");
 					break;
 				case 'loop' :
-					this.scrollTo(350, 500, "scrollY", ).then(e => this.scrollTo(0));
+					this.scrollTo(350, 500, "scrollY").then(e => this.scrollTo(0));
 					break;
 				
 			}
@@ -106,13 +106,13 @@ export default class Home extends React.Component {
 						{
 							//infinite    : true,
 							maxJump     : 1,
-							//shouldLoop  : ( v ) => {
-							//	if ( (v + 1) > (350) ) {
-							//		//$actions.changeHighlighterBackground();
-							//		//$actions.setPageFocus("head")
-							//		return -350;
-							//	}
-							//},
+							shouldLoop  : ( v ) => {
+								if ( (v + 1) > (350) ) {
+									//$actions.changeHighlighterBackground();
+									//$actions.setPageFocus("head")
+									return -350;
+								}
+							},
 							onInertiaEnd: ( i, v ) => {
 								if ( v ) {
 									

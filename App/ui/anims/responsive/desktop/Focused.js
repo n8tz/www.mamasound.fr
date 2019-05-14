@@ -30,9 +30,9 @@ export const defaultInitial = {
 	//opacity        : 1,
 	transform      : [
 		{
-			translateX: "-50%",
-			translateY: "-50%"
-			//perspective: "1250px",
+			translateX : "-50%",
+			translateY : "-50%",
+			perspective: "250px",
 			//translateY : "-18000px",
 		},
 		{
@@ -48,33 +48,34 @@ export const defaultInitial = {
 export const showAnim       = [
 	{
 		type    : "Tween",
-		from    : 100,
-		duration: 400,
-		easeFn  : "easeSinIn",
+		from    : 200,
+		duration: 500,
+		//easeFn  : "easeSinIn",
+		easeFn  : "easeBackOut",
 		apply   : {
 			opacity  : 1,
 			transform: [{}, {
 				//rotate: stepAngle,
 				//}, {
-				//translateZ: "-250px",
-				translateX: "-250px",
+				translateZ: "-50px",
+				translateY: "-200px",
 			}]
 		}
-	}
+	},
 ];
 export const hideAnim       = [
 	{
 		type    : "Tween",
 		from    : 0,
-		duration: 500,
-		easeFn  : "easeSinOut",
+		duration: 700,
 		apply   : {
 			opacity  : -1,
 			transform: [{}, {
 				//rotate: stepAngle,
 				//}, {
 				//translateZ: "-250px",
-				translateX: "-250px",
+				translateZ: "-20px",
+				translateY: "-250px",
 			}]
 		}
 	}]
