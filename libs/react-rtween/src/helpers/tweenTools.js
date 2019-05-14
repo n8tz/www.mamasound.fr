@@ -52,7 +52,7 @@ function inverseValues( v ) {
 	if ( is.number(v) )
 		return -v;
 	if ( is.object(v) )
-		return Object.fromEntries(Object.entries(v).map(( [key, v] ) => ([key, inverseValues(v)])));
+		return Object.keys(v).reduce(( h, key ) => (h[key] = inverseValues(v[key]), h), {});
 	if ( is.array(v) )
 		return v.map(( item ) => (inverseValues(item)));
 	
