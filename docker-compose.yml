@@ -23,7 +23,7 @@ services:
       context: .
     working_dir: /home/app
     command: bash -c "npm i&&npm run start-dev"
-#    command: bash -c "npm i&&npm run build&&npm run start"
+    #    command: bash -c "npm i&&npm run build&&npm run start"
 
     labels:
       - 'traefik.enable=true'
@@ -61,8 +61,8 @@ services:
       - ./docker/db:/data
     expose:
       - 27017
-#    ports:
-#      - "27017"
+    #    ports:
+    #      - "27017"
     networks:
       - app_network
   redis:
