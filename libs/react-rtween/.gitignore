@@ -30,6 +30,5 @@ $RECYCLE.BIN/
 .tmp
 node_modules
 .idea
-/dist
 /upload
 /public

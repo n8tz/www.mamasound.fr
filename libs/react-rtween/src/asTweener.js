@@ -14,7 +14,6 @@
 
 import React                             from "react";
 import is                                from "is";
-import taskflow                          from "taskflows";
 import utils                             from "./utils";
 import Inertia                           from './helpers/Inertia';
 

@@ -19,7 +19,7 @@ import {updateWatchers, clearWatchers, getQueriesFromIdKeys} from './DataProvide
 
 
 export default class MongoQueries extends Store {
-	//static use = ["DataProvider"];
+	static use   = ["DataProvider"];
 	static state = {};
 	
 	
@@ -30,7 +30,7 @@ export default class MongoQueries extends Store {
 				dataRefs: Object.keys(this.__queryWatchers)
 				                .reduce(
 					                ( h, k ) => {
-						                h[k] = "DataProvider.__queries." + this.__queryWatchers[k].key;
+						                h[k] = "DataProvider." + this.__queryWatchers[k].key;
 						                return h;
 					                },
 					                {}
@@ -42,8 +42,7 @@ export default class MongoQueries extends Store {
 	
 	restore( snapshot, immediate ) {
 		
-		super.restore(
-			snapshot, immediate);
+		super.restore(snapshot, immediate);
 		
 		updateWatchers(this, this.scope.DataProvider, this.state, this.state, true)
 	}
@@ -52,6 +51,7 @@ export default class MongoQueries extends Store {
 		let DataProvider = this.scope.DataProvider,
 		    hasChanges, update,
 		    curState     = this.nextState;
+		
 		if ( !DataProvider )
 			throw new Error("No DataProvider found !!");
 		

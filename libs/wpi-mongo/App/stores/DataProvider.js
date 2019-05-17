@@ -101,6 +101,7 @@ export default class DataProvider extends Store {
 			    );
 		}
 	};
+	data           = {};
 	
 	constructor() {
 		super(...arguments);
@@ -113,7 +114,7 @@ export default class DataProvider extends Store {
 	// recently updated records & queries
 	updatedRecords = {};
 	
-	apply( data = {}, state, changes ) {
+	apply( data, state, changes ) {
 		return data;
 	}
 	
