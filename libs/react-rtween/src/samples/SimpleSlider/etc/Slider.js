@@ -27,7 +27,8 @@ export default class Slider extends React.Component {
 		overlaps       : 1 / 4,
 		defaultInitial : {},
 		defaultEntering: [],
-		defaultLeaving : []
+		defaultLeaving : [],
+		scrollY        : []
 	};
 	state               = {};
 	
@@ -91,7 +92,7 @@ export default class Slider extends React.Component {
 			    visibleItems = 5,
 			    overlaps     = 1 / (visibleItems - (visibleItems % 2)),
 			    children: _childs,
-			    defaultEntering, defaultLeaving
+			    defaultEntering, defaultLeaving, scrollY
 		    }                        = props,
 		    children                 = is.array(_childs) ? _childs : [],
 		    { index = defaultIndex } = state,
@@ -113,7 +114,8 @@ export default class Slider extends React.Component {
 						...tweenTools.offset(defaultLeaving, 100)
 					],
 					i * step
-				)
+				),
+				scrollY
 			})),
 			windowSize: children.length * step,
 			index
@@ -134,6 +136,8 @@ export default class Slider extends React.Component {
 				className={ "rSlide slider" }
 				style={
 					{
+						width     : "100%",
+						height    : "100%",
 						userSelect: "none"
 					}
 				}
@@ -163,6 +167,11 @@ export default class Slider extends React.Component {
 							wayPoints : allItems.map(( child, i ) => ({ at: 100 + i * step }))
 						}
 					}
+				/>
+				<TweenAxis
+					axe={ "scrollY" }
+					size={ 1000 }
+					defaultPosition={ 500 }
 				/>
 				{
 					allItems.map(

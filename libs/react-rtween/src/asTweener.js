@@ -1,27 +1,30 @@
 /*
- * The MIT License (MIT)
- * Copyright (c) 2019. Wise Wild Web
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * Copyright (C) 2019 Nathanael Braun
  *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
  *
- *  @author : Nathanael Braun
- *  @contact : n8tz.js@gmail.com
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 import React                             from "react";
 import is                                from "is";
 import utils                             from "./utils";
 import Inertia                           from './helpers/Inertia';
-
-var easingFn = require('d3-ease');
 import TweenerContext                    from "./TweenerContext";
-import rtween                            from "rtween";
+import rTween                            from "rtween";
+import * as easingFn                     from "d3-ease";
 import ReactDom                          from "react-dom";
-import {deMuxTween, muxToCss, deMuxLine} from "./helpers";
+import {deMuxTween, muxToCss, deMuxLine} from "./helpers/css";
 
 /**
  * @todo : clean & comments
@@ -83,7 +86,7 @@ export default function asTweener( ...argz ) {
 	let BaseComponent = (!argz[0] || argz[0].prototype instanceof React.Component || argz[0] === React.Component) && argz.shift(),
 	    opts          = (!argz[0] || argz[0] instanceof SimpleObjectProto) && argz.shift() || {};
 	
-	if ( !(BaseComponent && (BaseComponent.prototype instanceof React.Component || BaseComponent === React.Component)) ) {
+	if ( !BaseComponent ) {
 		return function ( BaseComponent ) {
 			return asTweener(BaseComponent, opts)
 		}
@@ -92,11 +95,10 @@ export default function asTweener( ...argz ) {
 	opts = {
 		...opts,
 		wheelRatio: 5,
-		
 	}
 	
 	return class TweenableComp extends BaseComponent {
-		static displayName = (BaseComponent.displayName || BaseComponent.name) + " (tweener)";
+		static displayName = (BaseComponent.displayName || BaseComponent.name);
 		
 		constructor() {
 			super(...arguments);
@@ -290,7 +292,7 @@ export default function asTweener( ...argz ) {
 		 * @param anim
 		 * @param then
 		 * @param skipInit
-		 * @returns {rtween}
+		 * @returns {rTween}
 		 */
 		pushAnim( anim, then, skipInit ) {
 			var sl, initial, muxed, initials = {};
@@ -302,10 +304,10 @@ export default function asTweener( ...argz ) {
 				initial = anim.initial;
 			}
 			
-			if ( !(sl instanceof rtween) ) {
+			if ( !(sl instanceof rTween) ) {
 				// tweenLine, initials, data, demuxers
 				sl = deMuxLine(sl, initials, this._.muxDataByTarget, this._.muxByTarget);
-				sl = new rtween(sl, this._.tweenRefMaps);
+				sl = new rTween(sl, this._.tweenRefMaps);
 				Object.keys(initials)
 				      .forEach(
 					      id => (
@@ -348,20 +350,20 @@ export default function asTweener( ...argz ) {
 		
 		registerPropChangeAnim( propId, propValue, anims ) {
 			this._.rtweensByProp                    = this._.rtweensByProp || {};
-			this._.rtween                           = this._.rtween || new rtween();
+			this._.rtween                           = this._.rtween || new rTween();
 			this._.rtweensByProp[propId]            = this._.rtweensByProp[propId] || {};
 			this._.rtweensByProp[propId][propValue] = this._.rtweensByProp[propId][propValue] ||
-				new rtween();
+				new rTween();
 			
 			this._.rtweensByProp[propId][propValue].mount(anims);
 		}
 		
 		registerStateChangeAnim( propId, propValue, anims ) {
 			this._.rtweensByStateProp                    = this._.rtweensByStateProp || {};
-			this._.rtween                                = this._.rtween || new rtween();
+			this._.rtween                                = this._.rtween || new rTween();
 			this._.rtweensByStateProp[propId]            = this._.rtweensByStateProp[propId] || {};
 			this._.rtweensByStateProp[propId][propValue] = this._.rtweensByStateProp[propId][propValue] ||
-				new rtween();
+				new rTween();
 			
 			this._.rtweensByStateProp[propId][propValue].mount(anims);
 		}
@@ -462,7 +464,7 @@ export default function asTweener( ...argz ) {
 			return state;
 		}
 		
-		initAxis( axe, _inertia, _scrollableArea = 0, _scrollableWindow, defaultPosition ) {
+		initAxis( axe, { inertia: _inertia, scrollableArea: _scrollableArea = 0, scrollableWindow: _scrollableWindow, defaultPosition, scrollFirst } ) {
 			this.makeTweenable();
 			this.makeScrollable();
 			let _                = this._,
@@ -478,6 +480,7 @@ export default function asTweener( ...argz ) {
 				                                    })),
 			    nextDescr        = {
 				    ...(_inertia || {}),
+				    scrollFirst,
 				    tweenLines: dim && dim.tweenLines || [],
 				    scrollPos,
 				    targetPos,
@@ -505,9 +508,9 @@ export default function asTweener( ...argz ) {
 				size = anim.length;
 			}
 			
-			if ( !(sl instanceof rtween) ) {
+			if ( !(sl instanceof rTween) ) {
 				sl = deMuxLine(sl, initials, this._.muxDataByTarget, this._.muxByTarget);
-				sl = new rtween(sl, _.tweenRefMaps);
+				sl = new rTween(sl, _.tweenRefMaps);
 				Object.keys(initials)
 				      .forEach(
 					      id => {
@@ -598,6 +601,16 @@ export default function asTweener( ...argz ) {
 			}
 		}
 		
+		getScrollableNodes( node ) {
+			let scrollable = utils.findReactParents(node);
+			scrollable     = this.hookScrollableTargets && this.hookScrollableTargets(scrollable) || scrollable;
+			
+			return scrollable.map(
+				id => (is.string(id)
+				       ? this._.refs[id] && ReactDom.findDOMNode(this._.refs[id]) || this.refs[id] || document.getElementById(id)
+				       : id));
+		}
+		
 		_registerScrollListeners() {
 			let _static = this.constructor,
 			    _       = this._;
@@ -615,7 +628,7 @@ export default function asTweener( ...argz ) {
 						utils.addWheelEvent(
 							rootNode,
 							this._.onScroll = ( e ) => {//@todo
-								let now       = Date.now();
+								let now       = Date.now(), prevent;
 								scrollLoad.y += e.deltaY;
 								scrollLoad.x += e.deltaX;
 								lastScrollEvt = e.originalEvent;
@@ -628,11 +641,15 @@ export default function asTweener( ...argz ) {
 								// scrollLoad.x = 0; debounceTm   = 0; //debounceTm = now; return; }
 								// clearTimeout(debounceTr) //debounceTm = now; debounceTr = setTimeout( tm => {
 								// debugger
-								this._doDispatch(document.elementFromPoint(lastScrollEvt.clientX, lastScrollEvt.clientY), scrollLoad.x * 5, scrollLoad.y * 5)
+								prevent      = this._doDispatch(document.elementFromPoint(lastScrollEvt.clientX, lastScrollEvt.clientY), scrollLoad.x * 5, scrollLoad.y * 5)
 								scrollLoad.y = 0;
 								scrollLoad.x = 0;
 								debounceTm   = 0;
 								debounceTr   = lastScrollEvt = undefined;
+								if ( prevent ) {
+									e.originalEvent.stopPropagation();
+									e.originalEvent.preventDefault();
+								}
 								//	},
 								//	50
 								//)
@@ -657,7 +674,7 @@ export default function asTweener( ...argz ) {
 									    x,
 									    y, i;
 									
-									parents      = utils.findReactParents(e.target);
+									parents      = this.getScrollableNodes(e.target);
 									//console.log(parents)
 									lastStartTm  = Date.now();
 									dX           = 0;
@@ -696,24 +713,26 @@ export default function asTweener( ...argz ) {
 									    y, deltaY, yDispatched,
 									    style, i;
 									
-									dX += -(descr._lastPos.x - descr._startPos.x);
-									dY += -(descr._lastPos.y - descr._startPos.y);
+									dX = -(descr._lastPos.x - descr._startPos.x);
+									dY = -(descr._lastPos.y - descr._startPos.y);
 									
 									if ( lastStartTm > Date.now() - 150 && Math.abs(dY) < 10 && Math.abs(dX) < 10 )// skip tap & click
 										return;
 									
 									if ( opts.dragDirectionLock ) {
 										if ( cLock === "Y" || !cLock && Math.abs(dY * .5) > Math.abs(dX) ) {
-											cLock = "Y";
-											dX    = 0;
+											cLock       = "Y";
+											dX          = 0;
+											xDispatched = true;
 										}
 										else if ( cLock === "X" || !cLock && Math.abs(dX * .5) > Math.abs(dY) ) {
-											cLock = "X";
-											dY    = 0;
+											cLock       = "X";
+											dY          = 0;
+											yDispatched = true;
 										}
 									}
 									
-									//console.log("drag", dY);
+									//console.log("drag", dX, dY, cLock, opts.dragDirectionLock);
 									for ( i = 0; i < parents.length; i++ ) {
 										tweener = parents[i];
 										// react comp with tweener support
@@ -729,15 +748,22 @@ export default function asTweener( ...argz ) {
 												!x.inertiaFrame && tweener.applyInertia(x, "scrollX");
 												!y.inertiaFrame && tweener.applyInertia(y, "scrollY");
 											}
-											deltaX = (dX / tweener._.box.x) * (x.scrollableWindow || x.scrollableArea);
-											deltaY = (dY / tweener._.box.y) * (y.scrollableWindow || y.scrollableArea);
+											deltaX = dX && (dX / tweener._.box.x) * (x.scrollableWindow || x.scrollableArea) || 0;
+											deltaY = dY && (dY / tweener._.box.y) * (y.scrollableWindow || y.scrollableArea) || 0;
 											if ( !xDispatched && !tweener.isAxisOut("scrollX", parentsState[i].x + deltaX, true) ) {
 												x.inertia.hold(parentsState[i].x + deltaX);
 												xDispatched = true;
 											}
+											//console.log("scrollY", tweener.isAxisOut("scrollY", parentsState[i].y +
+											// deltaY, true));
 											if ( !yDispatched && !tweener.isAxisOut("scrollY", parentsState[i].y + deltaY, true) ) {
 												y.inertia.hold(parentsState[i].y + deltaY);
 												yDispatched = true;
+											}
+											if ( yDispatched && xDispatched ) {
+												e.stopPropagation();
+												e.preventDefault();
+												return;
 											}
 										}
 										else if ( is.element(tweener) ) {
@@ -760,8 +786,8 @@ export default function asTweener( ...argz ) {
 										}
 										
 									}
-									dX = 0;
-									dY = 0;
+									//dX = 0;
+									//dY = 0;
 								},
 								'dropped'  : ( e, touch, descr ) => {
 									let tweener,
@@ -865,7 +891,8 @@ export default function asTweener( ...argz ) {
 			
 			// check if there scrollable stuff in dom targets
 			// get all the parents components & dom node of an dom element ( from fibers )
-			Comps = utils.findReactParents(headTarget);
+			
+			Comps = this.getScrollableNodes(headTarget);
 			//console.log("dispatching ", dx, dy, Comps);
 			for ( i = 0; i < Comps.length; i++ ) {
 				// react comp with tweener support
@@ -879,11 +906,11 @@ export default function asTweener( ...argz ) {
 						dy = 0;
 					}
 					if ( !dx && !dy )
-						break;
+						return true;
 				}
 				// dom element
 				else if ( is.element(Comps[i]) ) {
-					style = getComputedStyle(headTarget, null)
+					style = getComputedStyle(Comps[i], null)
 					if ( /(auto|scroll)/.test(
 						style.getPropertyValue("overflow")
 						+ style.getPropertyValue("overflow-x")
@@ -891,17 +918,17 @@ export default function asTweener( ...argz ) {
 					)
 					) {
 						if (
-							(dy < 0 && headTarget.scrollTop !== 0)
+							(dy < 0 && Comps[i].scrollTop !== 0)
 							||
-							(dy > 0 && headTarget.scrollTop !== (headTarget.scrollHeight - headTarget.offsetHeight))
+							(dy > 0 && Comps[i].scrollTop !== (Comps[i].scrollHeight - Comps[i].offsetHeight))
 						) {
 							return;
 						} // let the node do this scroll
 					}
 					
-					headTarget = headTarget.parentNode;
-					if ( headTarget === document || headTarget === target )
-						break;
+					//headTarget = headTarget.parentNode;
+					//if ( headTarget === document || headTarget === target )
+					//	break;
 				}
 			}
 		}

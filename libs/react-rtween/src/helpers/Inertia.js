@@ -1,39 +1,42 @@
 /*
- * The MIT License (MIT)
- * Copyright (c) 2019. Wise Wild Web
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * Copyright (C) 2019 Nathanael Braun
  *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
  *
- *  @author : Nathanael Braun
- *  @contact : n8tz.js@gmail.com
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var
-	signOf = function sign( x ) {
+const
+	is       = require('is'),
+	easingFn = require('d3-ease'),
+	signOf   = function sign( x ) {
 		return typeof x === 'number' ? x ? x < 0 ? -1 : 1 : x === x ? x : NaN : NaN;
 	},
-	abs    = Math.abs,
-	floor  = Math.floor,
-	round  = Math.round,
-	min    = Math.min,
-	max    = Math.max,
-	consts = {
+	abs      = Math.abs,
+	floor    = Math.floor,
+	round    = Math.round,
+	min      = Math.min,
+	max      = Math.max,
+	consts   = {
 		velocityResetTm: 150,
 		clickTm        : 250
 	};
 
-var is       = require('is');
-var easingFn = require('d3-ease');
 /**
- * Main slideshow class
+ * Main inertia class
  * @class Caipi slideshow
  * @type {module.exports}
  */
-
 export default class Inertia {
 	
 	constructor( opt ) {
@@ -108,6 +111,7 @@ export default class Inertia {
 	dispatch( delta, tm = 500 ) {
 		let _       = this._, now = Date.now(), pos;
 		this.active = true;
+		//console.log("dispatch", delta);
 		if ( !_.inertia || signOf(delta) !== signOf(_.targetDist) ) {
 			_.inertia        = true;
 			_.lastInertiaPos = 0;
@@ -208,26 +212,30 @@ export default class Inertia {
 	}
 	
 	hold( pos ) {
-		let _            = this._,
-		    now          = Date.now() / 1000,//e.timeStamp,
-		    sinceLastPos = (now - _.baseTS),
-		    delta        = pos - _.pos,
-		    iVel         = delta / sinceLastPos,
+		let _ = this._,
 		    loop;
-		
-		//console.log(pos);
-		_.lastIVelocity = iVel;
-		_.lastVelocity  = iVel;
-		_.baseTS        = now;
-		
 		if ( _.conf.shouldLoop ) {
 			while ( (loop = _.conf.shouldLoop(pos)) ) {
 				//console.warn("loop", loop);
 				pos += loop;
-				this.teleport(loop);
+			}
+			while ( (loop = _.conf.shouldLoop(_.pos)) ) {
+				//console.warn("loop", loop);
+				_.pos += loop;
 			}
 		}
-		else if ( !_.conf.infinite ) {
+		let now          = Date.now() / 1000,//e.timeStamp,
+		    sinceLastPos = (now - _.baseTS),
+		    delta        = pos - _.pos,
+		    iVel         = delta / sinceLastPos;
+		//if (is.nan(pos))
+		//	debugger
+		//console.log("hold", pos, _.pos);
+		_.lastIVelocity = iVel;
+		_.lastVelocity  = iVel;
+		_.baseTS        = now;
+		
+		if ( !_.conf.infinite ) {
 			if ( pos > _.max ) {
 				pos = _.max + min((pos - _.max) / 10, 10);
 			}
