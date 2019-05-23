@@ -188,7 +188,7 @@ export default class EventMap extends React.Component {
 		let {
 			    Events: { center = {}, POIs = [], zoom } = {},
 			    Anims : { MainPage }, UserGeoLocation, Selected,
-			    $actions, DataProvider, selected
+			    $actions, DataProvider, style
 		    }           = this.props,
 		    map         = this.refs.map && this.refs.map.leafletElement,
 		    selectedPOI = Selected.Page && Selected.Page.place && DataProvider[Selected.Page.place.objId],
@@ -207,7 +207,7 @@ export default class EventMap extends React.Component {
 		if (!isBrowser)
 			return <div className={ "EventMap" }/>
 		return (
-			<div className={ "EventMap" }>
+			<div className={ "EventMap" } style={ style }>
 				<div className={ "maskContent " }>
 					
 					<Map center={ center }

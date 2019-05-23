@@ -43,7 +43,7 @@ export default {
 		selectedEventDT   : undefined,
 		curDay            : undefined,
 		viewType          : 0,
-		dayCountByViewType: [2, 1, 1, 1, 0],
+		dayCountByViewType: [4, 1, 1, 1, 0],
 		curTags           : undefined,
 		
 		$apply( data, state ) {

@@ -43,12 +43,12 @@ export default class PageBlock extends React.Component {
 		let {
 			    record: { position, size } = {},
 			    Selected, EventList, DataProvider,
-			    $actions, onSelect, selected
+			    $actions, style, selected
 		    }     = this.props,
 		    state = this.state;
 		return (
-			<div
-				className={ "PageBlock container" }
+			<div style={ style }
+			     className={ "PageBlock container" }
 				//onClick={ e => $actions.selectEvent(null) }
 			>
 				<div className={ "maskContent" }>

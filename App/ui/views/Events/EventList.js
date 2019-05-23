@@ -73,7 +73,7 @@ export default class EventList extends React.Component {
 		    element = document.querySelector(".EventList *[aria-hidden=false] .selected");
 		if ( element ) {
 			let
-				parent       = document.querySelector(".EventList *[aria-hidden=false] .slide"),
+				parent       = document.querySelector(".EventList *[aria-hidden=false] .EventNav"),
 				elemPos      = element.offsetTop,
 				scrollHeight = parent.scrollHeight;
 			parent.scrollTo({
@@ -90,7 +90,7 @@ export default class EventList extends React.Component {
 			    $actions,
 			    appState, $scope
 		    }       = this.props,
-		    element = document.querySelector(".EventList *[aria-hidden=false] .slide");
+		    element = document.querySelector(".EventList .EventNav");
 		
 		if ( element ) {
 			this._scrollList && element.removeEventListener("scroll", this._scrollList);
@@ -98,7 +98,7 @@ export default class EventList extends React.Component {
 			element.addEventListener(
 				"scroll",
 				this._scrollList = e => {
-					let allDays = document.querySelectorAll(".EventList *[aria-hidden=false] .slide .DayEvents"),
+					let allDays = document.querySelectorAll(".EventList  .EventNav .DayEvents"),
 					    cDay,
 					    cPos    = element.scrollTop;
 					
@@ -119,14 +119,14 @@ export default class EventList extends React.Component {
 	}
 	
 	componentDidUpdate() {
-		this.scrollToSelected();
+		//this.scrollToSelected();
 		this.watchCurrentDayFromScroll();
 	}
 	
 	componentWillUnmount() {
 		//clearTimeout(this._infinite)
 		
-		let element = document.querySelector(".EventList *[aria-hidden=false] .slide");
+		let element = document.querySelector(".EventList *[aria-hidden=false] .EventNav");
 		
 		if ( element ) {
 			this._scrollList && element.removeEventListener("scroll", this._scrollList);
@@ -137,12 +137,12 @@ export default class EventList extends React.Component {
 		let {
 			    record                          : { position, size } = {},
 			    UserGeoLocation, appState, Anims: { MainPage },
-			    $actions,
+			    $actions, style
 		    }     = this.props,
 		    state = this.state;
-		
+		//console.log("evt")
 		return (
-			<div className={ "EventList" }>
+			<div className={ "EventList" } style={ style }>
 				<div className={ "maskContent" }>
 					<div className={ "content container" }>
 						<TweenRef
@@ -152,36 +152,13 @@ export default class EventList extends React.Component {
 							<div
 								className={ "EventNav" }
 							>
-								{/*<Views.DayBlock day={ appState.currentVisibleDay || appState.curDay }/>*/ }
-								{/*<Tabs*/ }
-								{/*value={ appState.viewType }*/ }
-								{/*onChange={ ( e, v ) => {*/ }
-								{/*$actions.setCurStyleTab(v)*/ }
-								{/*} }*/ }
-								{/*height={ 50 }*/ }
-								{/*variant="fullWidth"*/ }
-								{/*indicatorColor="primary"*/ }
-								{/*textColor="primary"*/ }
-								{/*className={ "typeEventsTab" }*/ }
-								{/*>*/ }
-								{/*<Tab label={ "Tous" }/>*/ }
-								{/*<Tab label={ "Concerts" }/>*/ }
-								{/*<Tab label={ "Expos" }/>*/ }
-								{/*<Tab label={ "Theatre" }/>*/ }
-								{/*/!*<Tab label={ "Cinéma" }/>*/ }*/}
-								{/*</Tabs>*/ }
-								{/*<SwipeableViews index={ appState.viewType }*/ }
-								{/*onChangeIndex={ $actions.setCurStyleTab }*/ }
-								{/*className={ "dayList" }*/ }
-								{/*onClick={ e => e.preventDefault() }*/ }
-								{/*id={ "scrollableEvents" }>*/ }
 								<div className={ "dayList" }>
 									{
 										Array(1)
 											.fill(0)
 											.map(
 												( v, type ) =>
-													<div className={ "slide" } key={ type }>
+													<div className={ "dayItem" } key={ type }>
 														{
 															Array(appState.dayCountByViewType[type])
 																.fill(0)
@@ -198,7 +175,6 @@ export default class EventList extends React.Component {
 													</div>
 											)
 									}
-									{/*</SwipeableViews>*/ }
 								</div>
 							</div>
 						</TweenRef>

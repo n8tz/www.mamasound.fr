@@ -49,7 +49,7 @@ export default class Slider extends React.Component {
 		if ( this.state.index > nextIndex )
 			this.scrollTo(dec + 100 - step, 0, "scrollX");
 		
-		console.log(nextIndex)
+		//console.log(nextIndex)
 		this.setState({ index: nextIndex })
 	}
 	
@@ -149,6 +149,7 @@ export default class Slider extends React.Component {
 					scrollableWindow={ 4 * step }
 					inertia={
 						{
+							//maxJump   : 1,
 							shouldLoop: ( v ) => {
 								let { windowSize } = this.state;
 								if ( v > (100 + windowSize * 2) )

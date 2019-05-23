@@ -90,12 +90,12 @@ export default class Highlighter extends React.Component {
 		let {
 			    MountedItems: { items: gridItems = [], layout = [] },
 			    Anims, Selected, DataProvider,
-			    $actions, HighlighterBackground, tweener
+			    $actions, HighlighterBackground, tweener, style
 		    }     = this.props,
 		    state = this.state;
 		return (
-			<div
-				className={ "Highlighter" }
+			<div style={ style }
+			     className={ "Highlighter" }
 			>
 				
 				<div className={ "headBackground" }>

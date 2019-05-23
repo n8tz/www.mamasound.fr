@@ -19,6 +19,7 @@ import {renderToString} from "react-dom/server";
 import {Scope, reScope} from "react-rescope";
 
 const ctrl = {
+	
 	renderTo( node, state ) {
 		let cScope      = new Scope(AppScope, {
 			    id         : "App",
@@ -75,7 +76,7 @@ const ctrl = {
 						{
 							app  : appHtml,
 							state: JSON.stringify(nstate),
-							css  : cfg.css
+							//css  : cfg.css
 						}
 					);
 				} catch ( e ) {

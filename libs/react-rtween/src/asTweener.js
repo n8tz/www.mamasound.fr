@@ -562,7 +562,8 @@ export default function asTweener( ...argz ) {
 							    //console.log('TweenableComp::setPos:514: ', this.constructor.displayName);
 							    this._.axes[axe].targetPos = this._.axes[axe].scrollPos = pos;
 							    if ( this._.axes[axe].inertia ) {
-								    this._.axes[axe].inertia._.pos = pos;
+								    this._.axes[axe].inertia.setPos(pos);
+								    //this._.axes[axe].inertia._doSnap()
 							    }
 							    this.componentDidScroll && this.componentDidScroll(~~pos, axe);
 							    this._updateTweenRefs()
@@ -700,15 +701,15 @@ export default function asTweener( ...argz ) {
 											if ( /(auto|scroll)/.test(
 												style.getPropertyValue("overflow")
 												+ style.getPropertyValue("overflow-x")
-												+ style.getPropertyValue("overflow-y")) )
-												
+												+ style.getPropertyValue("overflow-y")) ) {
 												parentsState[i] = {
-													y      : tweener.scrollTop,
-													x      : tweener.scrollLeft,
-													inertia: this._activateNodeInertia(tweener)
+													y: tweener.scrollTop,
+													x: tweener.scrollLeft,
+													//inertia: this._activateNodeInertia(tweener)
 												};
-											parentsState[i].inertia.x.startMove();
-											parentsState[i].inertia.y.startMove();
+												//parentsState[i].inertia.x.startMove();
+												//parentsState[i].inertia.y.startMove();
+											}
 										}
 										
 									}
@@ -717,7 +718,7 @@ export default function asTweener( ...argz ) {
 									//e.preventDefault();
 								},
 								'click'    : ( e, touch, descr ) => {//@todo
-									if ( lastStartTm && !(lastStartTm > Date.now() - 150 && Math.abs(dY) < 10 && Math.abs(dX) < 10) )// skip tap & click
+									if ( lastStartTm && !(lastStartTm > Date.now() - 350 && Math.abs(dY) < 10 && Math.abs(dX) < 10) )// skip tap & click
 									{
 										e.preventDefault();
 										e.stopPropagation();
@@ -732,7 +733,7 @@ export default function asTweener( ...argz ) {
 									dX = -(descr._lastPos.x - descr._startPos.x);
 									dY = -(descr._lastPos.y - descr._startPos.y);
 									
-									if ( lastStartTm > Date.now() - 150 && Math.abs(dY) < 10 && Math.abs(dX) < 10 )// skip tap & click
+									if ( lastStartTm > Date.now() - 350 && Math.abs(dY) < 10 && Math.abs(dX) < 10 )// skip tap & click
 										return;
 									
 									xDispatched = !dX;
@@ -796,9 +797,10 @@ export default function asTweener( ...argz ) {
 													//	                 //behavior: 'smooth'
 													//                 })
 													//tweener.dispatchEvent(e)
-													cState.inertia.y.hold(cState.y + dY)
+													//cState.inertia.y.hold(cState.y + dY)
 													//tweener.scrollTop = cState.y + dY;
-													yDispatched = true;
+													//yDispatched = true;
+													return;
 												} // let the node do this scroll
 												if ( !xDispatched &&
 													((dX < 0 && tweener.scrollLeft !== 0)
@@ -812,7 +814,7 @@ export default function asTweener( ...argz ) {
 													//                 })
 													//tweener.dispatchEvent(e)
 													//tweener.scrollTo(style.x + dX)
-													cState.inertia.x.hold(cState.x + dX)
+													//cState.inertia.x.hold(cState.x + dX)
 													//tweener.scrollLeft = cState.x + dX;
 													xDispatched = true;
 												} // let the node do this scroll
@@ -820,12 +822,12 @@ export default function asTweener( ...argz ) {
 											
 										}
 										
-										//if ( yDispatched && xDispatched ) {
-										//return;
-										//}
 									}
-									e.stopPropagation();
-									e.preventDefault();
+									if ( yDispatched && xDispatched ) {
+										e.stopPropagation();
+										e.preventDefault();
+										//return;
+									}
 									//dX = 0;
 									//dY = 0;
 								}
@@ -849,13 +851,13 @@ export default function asTweener( ...argz ) {
 											tweener._getAxis("scrollY").inertia.release();
 											tweener._getAxis("scrollX").inertia.release();
 										}
-										else if ( is.element(tweener) ) {
-											cState = parentsState[i];
-											if ( cState ) {
-												cState.inertia.x.release();
-												cState.inertia.y.release();
-											}
-										}
+										//else if ( is.element(tweener) ) {
+										//	cState = parentsState[i];
+										//	if ( cState ) {
+										//		cState.inertia.x.release();
+										//		cState.inertia.y.release();
+										//	}
+										//}
 										
 									}
 									parents = parentsState = null;
@@ -937,10 +939,10 @@ export default function asTweener( ...argz ) {
 			for ( let i = 0; ln > i; i++ ) {
 				current = _.activeInertia[i];
 				if ( current.inertia.x.active || current.inertia.x.holding ) {
-					current.target.scrollLeft = current.inertia.x.update()
+					current.target.scrollLeft = ~~current.inertia.x.update()
 				}
 				if ( current.inertia.y.active || current.inertia.y.holding ) {
-					current.target.scrollTop = current.inertia.y.update()
+					current.target.scrollTop = ~~current.inertia.y.update()
 				}
 				
 				if ( !current.inertia.x.active && !current.inertia.y.active && !current.inertia.x.holding && !current.inertia.y.holding ) {
@@ -983,6 +985,7 @@ export default function asTweener( ...argz ) {
 			let style,
 			    Comps,
 			    headTarget = target,
+			    nodeInertia,
 			    i;
 			
 			// check if there scrollable stuff in dom targets
@@ -1001,8 +1004,6 @@ export default function asTweener( ...argz ) {
 						Comps[i].dispatchScroll(dy, "scrollY", holding);
 						dy = 0;
 					}
-					if ( !dx && !dy )
-						return true;
 				}
 				// dom element
 				else if ( is.element(Comps[i]) ) {
@@ -1019,14 +1020,25 @@ export default function asTweener( ...argz ) {
 							(dy > 0 && Comps[i].scrollTop !== (Comps[i].scrollHeight - Comps[i].offsetHeight))
 						) {
 							return;
+							//nodeInertia.y.dispatch(dy * 10)
+							//dy = 0;
 						} // let the node do this scroll
+						//if ( nodeInertia.x.isOutbound(dx) ) {
+						//	nodeInertia.x.dispatch(dx * 10)
+						//	dx = 0;
+						//} // let the node do this scroll
 					}
 					
 					//headTarget = headTarget.parentNode;
 					//if ( headTarget === document || headTarget === target )
 					//	break;
 				}
+				if ( !dx && !dy )
+					break;
 			}
+			this._updateNodeInertia();
+			if ( !dx && !dy )
+				return true;
 		}
 
 // ------------------------------------------------------------

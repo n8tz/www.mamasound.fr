@@ -34,6 +34,21 @@ const wayPoints = [
 export default class Home extends React.Component {
 	state = {};
 	
+	//hookScrollableTargets( targets, dir ) {
+	//	return [this, "EventNav"];
+	//}
+	
+	componentShouldScroll( axis, delta ) {
+		let { appState } = this.props,
+		    EventNav     = this.getTweenableRef("EventNav");
+		if ( appState.currentPageFocus === "events" && delta < 0 && (EventNav.scrollTop !== 0) )
+			return false;
+		//if ( appState.currentPageFocus === "events" && delta > 0 && (EventNav.scrollTop !== (EventNav.scrollHeight -
+		// EventNav.offsetHeight)) ) return false; if ( appState.currentPageFocus === "event" && delta > 0 &&
+		// (EventNav.scrollTop !== (EventNav.scrollHeight - EventNav.offsetHeight)) ) return false;
+		return true;
+	}
+	
 	componentDidMount( props = this.props ) {
 		window.addEventListener("load", function () {
 			// Set a timeout...
@@ -61,7 +76,7 @@ export default class Home extends React.Component {
 	}
 	
 	componentDidUpdate( props ) {
-		let { appState } = this.props;
+		let { appState, $actions } = this.props;
 		//console.warn(appState === props.appState)
 		if ( appState.doFocus && props.appState.currentPageFocus !== appState.currentPageFocus ) {
 			//console.log(appState.currentPageFocus);
@@ -79,7 +94,10 @@ export default class Home extends React.Component {
 					this.scrollTo(250, 500, undefined, "easeBackIn");
 					break;
 				case 'loop' :
-					this.scrollTo(350, 500, "scrollY").then(e => this.scrollTo(0));
+					this.scrollTo(350, 500, "scrollY").then(e => {
+						//this.scrollTo(0)
+						//$actions.setPageFocus("head")
+					});
 					break;
 				
 			}
@@ -90,7 +108,7 @@ export default class Home extends React.Component {
 		let { Anims: { MainPage }, appState, $actions } = this.props;
 		if ( typeof window !== "undefined" )
 			window.$actions = $actions;
-		console.log('render snap', appState.currentPageFocus)
+		//console.log('render snap', appState.currentPageFocus)
 		return <TweenRef
 			id={ "page" }
 			initial={ MainPage.page }
@@ -100,36 +118,52 @@ export default class Home extends React.Component {
 				<TweenAxis
 					axe={ "scrollY" }
 					items={ MainPage.YAxis }
-					scrollableWindow={ 175 }
+					scrollableWindow={ 225 }
 					defaultPosition={ wayPoints[appState.currentPageFocus] }
 					inertia={
 						{
 							//infinite    : true,
 							maxJump     : 1,
-							shouldLoop  : ( v ) => {
-								if ( (v + 1) > (350) ) {
-									//$actions.changeHighlighterBackground();
-									//$actions.setPageFocus("head")
-									return -350;
-								}
-							},
+							//shouldLoop  : ( v ) => {
+							//	if ( (v + 1) > (350) ) {
+							//		return -350;
+							//	}
+							//},
 							onInertiaEnd: ( i, v ) => {
 								if ( v ) {
 									
-									if ( this.props.appState.currentPageFocus === "head" && v.id !== "head" )
-										$actions.selectFocus()
+									//if ( this.props.appState.currentPageFocus === "head" && v.id !== "head" )
+									//	$actions.selectFocus()
+									//if ( v.id === "loop" ) {
+									//	this.scrollTo(0)
+									//	$actions.setPageFocus("head")
+									//}
+									//else
 									$actions.setPageFocus(v.id || "head")
 								}
 								
 							},
 							wayPoints   : [
 								{ at: 0, id: "head" },
-								{ at: 100, id: "events" },
+								{
+									direction   : 1,
+									at          : 100,
+									id          : "events",
+									stopDuration: 1000
+								},
+								{
+									direction: -1,
+									at       : 100,
+									id       : "events"
+								},
 								{
 									at: 150,
 									id: "event"
 								},
-								{ at: 250, id: "page" },
+								{
+									at          : 250, id: "page",
+									stopDuration: 1000
+								},
 								{ at: 350, id: "loop" }
 							],
 						}

@@ -36,7 +36,7 @@ export const header            = {
 		},
 		{
 			//translateX: "-50%",
-			translateY: "0box",
+			translateY: "0%",
 			//translateZ : "-50px",
 			//rotateX   : "-10deg"
 		}
@@ -45,7 +45,7 @@ export const header            = {
 export const Highlighter       = {
 	position       : "absolute",
 	right          : "0%",
-	height         : ".80box",
+	height         : "80%",
 	top            : "0%",
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
@@ -55,7 +55,7 @@ export const Highlighter       = {
 			perspective: "500px",
 		},
 		{
-			translateY: "0box",
+			translateY: "0%",
 			//translateZ : "-50px",
 			//rotateX   : "-10deg"
 		}
@@ -69,19 +69,19 @@ export const NavBox            = {
 	background: "green",
 	position  : "absolute",
 	transform : {
-		//translateY: ".85box"
+		//translateY: "85%"
 	}
 };
 export const Footer            = {
 	height    : "50px",
 	left      : "0px",
-	top       : "-0px",
+	top       : "100%",
 	width     : "100%",
 	background: "green",
 	position  : "absolute",
 	overflow  : 'hidden',
 	transform : {
-		translateY: "1box"
+		//translateY: "100%"
 	}
 };
 export const EventNav          = {
@@ -90,12 +90,13 @@ export const EventNav          = {
 	left    : "300px",
 	top     : "0%",
 	height  : "100%",
+	overflow: "auto"
 };
 export const events            = {
 	position       : "absolute",
 	right          : "0%",
-	height         : ".21box",
-	top            : "0%",
+	height         : "21%",
+	top            : "80%",
 	zIndex         : 150,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
@@ -104,7 +105,7 @@ export const events            = {
 			perspective: "500px",
 		},
 		{
-			translateY: ".8box",
+			//translateY: "80%",
 			//translateZ : "-50px",
 			//rotateX   : "-10deg"
 		}
@@ -113,28 +114,18 @@ export const events            = {
 export const EventMap          = {
 	position       : "absolute",
 	right          : "0%",
-	height         : "0box",
-	top            : "0%",
+	height         : "0%",
 	zIndex         : 125,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
-	transform      : [
-		{
-			perspective: "500px",
-		},
-		{
-			translateY: "1box",
-			//translateZ : "-50px",
-			//rotateX   : "-10deg"
-		}
-	]
+	top            : "100%",
 };
 export const PageBlock         = {
 	
 	position       : "absolute",
 	right          : "0%",
-	height         : ".0box",
-	top            : "0%",
+	height         : "0%",
+	top            : "100%",
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
 	zIndex         : 100,
@@ -143,7 +134,7 @@ export const PageBlock         = {
 			perspective: "500px",
 		},
 		{
-			translateY: "1box",
+			//translateY: "100%",
 			//translateZ : "-50px",
 			//rotateX   : "-10deg"
 		}
@@ -168,7 +159,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: -.6,
+			height: -60,
 		}
 	},
 	{
@@ -177,10 +168,8 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height   : .44,
-			transform: {
-				translateY: "-.6box"
-			},
+			height: 44,
+			top   : -60
 		}
 	},
 	{
@@ -189,10 +178,8 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height   : .21,
-			transform: [{}, {
-				translateY: -.20
-			}]
+			height: 21,
+			top   : -20
 		}
 	},
 	//full map
@@ -202,7 +189,7 @@ export const YAxis             = [
 		from    : 100,
 		duration: 50,
 		apply   : {
-			height: -.25,
+			height: -25,
 		}
 	},
 	{
@@ -211,10 +198,8 @@ export const YAxis             = [
 		from    : 100,
 		duration: 50,
 		apply   : {
-			height   : .25,
-			transform: [{}, {
-				translateY: -.25
-			}],
+			height: 25,
+			top   : -25
 		}
 	},
 	//page
@@ -224,10 +209,8 @@ export const YAxis             = [
 		from    : 150,
 		duration: 100,
 		apply   : {
-			height   : .6,
-			transform: [{}, {
-				translateY: -.8
-			}],
+			height: 60,
+			top   : -80
 		}
 	},
 	{
@@ -236,10 +219,8 @@ export const YAxis             = [
 		from    : 150,
 		duration: 100,
 		apply   : {
-			height   : -.30,
-			transform: [{}, {
-				translateY: -.30
-			}],
+			height: -30,
+			top   : -30
 		}
 	},
 	{
@@ -257,10 +238,8 @@ export const YAxis             = [
 		from    : 248,
 		duration: 1,
 		apply   : {
-			zIndex   : -100,
-			transform: [{}, {
-				translateY: 1
-			}],
+			zIndex: -100,
+			top   : 100
 		}
 	},
 	{
@@ -278,10 +257,8 @@ export const YAxis             = [
 		from    : 150,
 		duration: 100,
 		apply   : {
-			height   : -.26,
-			transform: [{}, {
-				translateY: -.55
-			}],
+			height: -26,
+			top   : -55
 		}
 	},
 	{
@@ -290,9 +267,7 @@ export const YAxis             = [
 		from    : 150,
 		duration: 50,
 		apply   : {
-			transform: [{}, {
-				translateY: -.20
-			}],
+			top: -20
 		}
 	},
 	{
@@ -310,10 +285,8 @@ export const YAxis             = [
 		from    : 200,
 		duration: 1,
 		apply   : {
-			zIndex   : -100,
-			transform: [{}, {
-				translateY: 1.2
-			}],
+			zIndex: -100,
+			top   : 120
 		}
 	},
 	{
@@ -331,10 +304,8 @@ export const YAxis             = [
 		from    : 200,
 		duration: 50,
 		apply   : {
-			height   : .02,
-			transform: [{}, {
-				translateY: -.23
-			}],
+			height: 2,
+			top   : -23
 		}
 	},
 	
@@ -346,10 +317,8 @@ export const YAxis             = [
 		from    : 250,
 		duration: 100,
 		apply   : {
-			//height   : .8,
-			transform: [{}, {
-				translateY: -.8
-			}],
+			//height   : 80,
+			top: -80
 		}
 	},
 	{
@@ -358,10 +327,8 @@ export const YAxis             = [
 		from    : 250,
 		duration: 100,
 		apply   : {
-			height   : .58,
-			transform: [{}, {
-				translateY: -.77
-			}],
+			height: 58,
+			top   : -77
 		}
 	},
 	{
@@ -370,10 +337,8 @@ export const YAxis             = [
 		from    : 250,
 		duration: 100,
 		apply   : {
-			height   : .1,
-			transform: [{}, {
-				translateY: -.1
-			}],
+			height: 10,
+			top   : -10
 		}
 	},
 	{
@@ -382,10 +347,8 @@ export const YAxis             = [
 		from    : 250,
 		duration: 50,
 		apply   : {
-			height   : -.1,
-			transform: [{}, {
-				translateY: -.1
-			}],
+			height: -1,
+			top   : -1
 		}
 	},
 	{
@@ -394,10 +357,8 @@ export const YAxis             = [
 		from    : 300,
 		duration: 1,
 		apply   : {
-			zIndex   : -100,
-			transform: [{}, {
-				translateY: 1.15
-			}],
+			zIndex: -100,
+			top   : 115
 		}
 	},
 	{
@@ -406,9 +367,7 @@ export const YAxis             = [
 		from    : 300,
 		duration: 50,
 		apply   : {
-			transform: [{}, {
-				translateY: -.1
-			}],
+			top: -10
 		}
 	},
 	{

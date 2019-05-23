@@ -77,12 +77,12 @@
   .dayList {
 
     transform: translate3d(0, 0, 0);
-    position: absolute;
-    top: 10px;
-    left: 0px;
-    bottom: 0px;
-    right: 0%;
-    overflow: hidden;
+    //position: absolute;
+    padding-top: 10px;
+    //left: 0px;
+    //bottom: 0px;
+    //right: 0%;
+    //overflow: hidden;
     margin-left: 0px;
 
     .DayEvents {
@@ -99,9 +99,9 @@
     }
 
     .slide {
-      height: 100%;
-      width: 100%;
-      overflow: auto;
+      //height: 100%;
+      //width: 100%;
+      //overflow: hidden;
 
       .inf {
         //min-height: 90%;
