@@ -95,7 +95,7 @@ export default function asTweener( ...argz ) {
 	opts = {
 		...opts,
 		wheelRatio: 5,
-	}
+	};
 	
 	return class TweenableComp extends BaseComponent {
 		static displayName = (BaseComponent.displayName || BaseComponent.name);

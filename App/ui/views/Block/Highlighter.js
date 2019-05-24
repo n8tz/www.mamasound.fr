@@ -16,7 +16,7 @@ import PropTypes                                    from "prop-types";
 import React                                        from "react";
 import {reScope, scopeToProps, propsToScope, Store} from "rscopes";
 import moment                                       from 'moment';
-//import Slider                                       from "rSlide";
+import BackgroundVideo                              from "react-background-video-player";
 import anims                                        from 'App/ui/anims/(*).js';
 import {Comps, Views}                               from 'App/ui';
 import {withStateMap, asRef, asStore}               from "rescope-spells";
@@ -105,7 +105,12 @@ export default class Highlighter extends React.Component {
 							tweenLines={ Anims.Highlighter.backgroundScroll }
 						>
 							<div className={ "container " }>
-								<img src={ HighlighterBackground }/>
+								<BackgroundVideo src="/test.mp4"
+								                 style={ { width: '100%', height: '100%', filter:"blur(5px)" } }
+								                 startTime={ 20 }
+								                 autoPlay={ true }
+								                 volume={ 0 }/>
+								{/*<img src={ HighlighterBackground }/>*/ }
 							</div>
 						</TweenRef>
 					</div>
