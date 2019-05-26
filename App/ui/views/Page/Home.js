@@ -122,7 +122,6 @@ export default class Home extends React.Component {
 					defaultPosition={ wayPoints[appState.currentPageFocus] }
 					inertia={
 						{
-							//infinite    : true,
 							maxJump     : 1,
 							//shouldLoop  : ( v ) => {
 							//	if ( (v + 1) > (350) ) {
@@ -142,6 +141,10 @@ export default class Home extends React.Component {
 									$actions.setPageFocus(v.id || "head")
 								}
 								
+							},
+							willSnap    : ( i, v ) => {
+								$actions.setPageFocus(v.id)
+								//console.log(i % nbItems, v)
 							},
 							wayPoints   : [
 								{ at: 0, id: "head" },

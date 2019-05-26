@@ -77,7 +77,7 @@ if ( typeof window !== "undefined" ) {
 		
 	}
 )
-@scopeToProps("MountedItems", "Selected", "HighlighterBackground", "Anims", "DataProvider")
+@scopeToProps("MountedItems", "Selected", "HighlighterBackground", "Anims", "DataProvider", "appState")
 @withTweener
 export default class Highlighter extends React.Component {
 	static propTypes = {};
@@ -89,7 +89,7 @@ export default class Highlighter extends React.Component {
 	render() {
 		let {
 			    MountedItems: { items: gridItems = [], layout = [] },
-			    Anims, Selected, DataProvider,
+			    Anims, Selected, appState,
 			    $actions, HighlighterBackground, tweener, style
 		    }     = this.props,
 		    state = this.state;
@@ -105,12 +105,16 @@ export default class Highlighter extends React.Component {
 							tweenLines={ Anims.Highlighter.backgroundScroll }
 						>
 							<div className={ "container " }>
-								<BackgroundVideo src="/test.mp4"
-								                 style={ { width: '100%', height: '100%', filter:"blur(5px)" } }
-								                 startTime={ 20 }
-								                 autoPlay={ true }
-								                 volume={ 0 }/>
-								{/*<img src={ HighlighterBackground }/>*/ }
+								{
+									appState.currentPageFocus === "head"
+									&&
+									<BackgroundVideo src="/test.mp4"
+									                 style={ { width: '100%', height: '100%', filter: "blur(5px)" } }
+									                 startTime={ 20 }
+									                 autoPlay={ true }
+									                 volume={ 0 }/>
+									|| <img src={ HighlighterBackground }/>
+								}
 							</div>
 						</TweenRef>
 					</div>
