@@ -111,8 +111,7 @@ export default class Home extends React.Component {
 		//console.log('render snap', appState.currentPageFocus)
 		return <TweenRef
 			id={ "page" }
-			initial={ MainPage.page }
-		>
+			initial={ MainPage.page }>
 			<div className={ "Home container" }>
 				
 				<TweenAxis

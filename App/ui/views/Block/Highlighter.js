@@ -95,8 +95,7 @@ export default class Highlighter extends React.Component {
 		    state = this.state;
 		return (
 			<div style={ style }
-			     className={ "Highlighter" }
-			>
+			     className={ "Highlighter" }>
 				
 				<div className={ "headBackground" }>
 					<div className={ "maskContent" }>
