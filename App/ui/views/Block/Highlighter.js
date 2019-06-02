@@ -105,14 +105,15 @@ export default class Highlighter extends React.Component {
 						>
 							<div className={ "container " }>
 								{
-									appState.currentPageFocus === "head"
-									&&
-									<BackgroundVideo src="/test.mp4"
-									                 style={ { width: '100%', height: '100%', filter: "blur(5px)" } }
-									                 startTime={ 20 }
-									                 autoPlay={ true }
-									                 volume={ 0 }/>
-									|| <img src={ HighlighterBackground }/>
+									//appState.currentPageFocus === "head"
+									//&&
+									//<BackgroundVideo src="/test.mp4"
+									//                 style={ { width: '100%', height: '100%', filter: "blur(5px)" } }
+									//                 startTime={ 20 }
+									//                 autoPlay={ true }
+									//                 volume={ 0 }/>
+									//||
+									<img src={ HighlighterBackground }/>
 								}
 							</div>
 						</TweenRef>
