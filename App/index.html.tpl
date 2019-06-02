@@ -43,6 +43,7 @@
     <meta name="theme-color" content="#ffffff">
     <title>MamaSound</title>
     <script>window.__STATE__  ={{=it.state || "{}"}};</script>
+    <script src="/jwplayer/jwplayer.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
@@ -55,7 +56,7 @@
 <body>
 <div id="app">{{=it.app || ''}}</div>
 
-<script src="./App.vendors.js"></script>
-<script src="./App.js"></script>
+<script src="/App.vendors.js"></script>
+<script src="/App.js"></script>
 </body>
 </html>

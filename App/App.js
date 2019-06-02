@@ -36,7 +36,7 @@ React.createElement = function ( type, ...argz ) {
 }
 moment.locale('fr');
 
-@scopeToProps("widgets", "appState")
+@scopeToProps("widgets", "appState", "FacebookPage")
 export default class App extends React.Component {
 	state = {};
 	

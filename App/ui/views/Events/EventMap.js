@@ -204,7 +204,7 @@ export default class EventMap extends React.Component {
 				map.getZoom()
 			)
 		}
-		if (!isBrowser)
+		if ( !isBrowser )
 			return <div className={ "EventMap" }/>
 		return (
 			<div className={ "EventMap" } style={ style }>
