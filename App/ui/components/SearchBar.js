@@ -17,13 +17,6 @@ import {withStateMap, asRef, asStore}        from "rescope-spells";
 import Select                                from 'react-select';
 import Typography                            from '@material-ui/core/Typography';
 import TextField                             from '@material-ui/core/TextField';
-import Paper                                 from '@material-ui/core/Paper';
-import Chip                                  from '@material-ui/core/Chip';
-import MenuItem                              from '@material-ui/core/MenuItem';
-import CancelIcon                            from '@material-ui/icons/Cancel';
-import {emphasize}                           from '@material-ui/core/styles/colorManipulator';
-import stores                                from 'App/stores/(*).js';
-import Views                                 from 'App/ui/components/(*).js';
 import {asTweener, TweenRef}                 from "react-rtween";
 import Fab                                   from '@material-ui/core/Fab';
 
