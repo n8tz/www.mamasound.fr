@@ -98,7 +98,7 @@ export default function asTweener( ...argz ) {
 	};
 	
 	return class TweenableComp extends BaseComponent {
-		static displayName = (BaseComponent.displayName || BaseComponent.name);
+		static displayName = String.fromCharCode(0xD83E, 0xDDD9) + (BaseComponent.displayName || BaseComponent.name);
 		
 		constructor() {
 			super(...arguments);
@@ -120,20 +120,9 @@ export default function asTweener( ...argz ) {
 			let _ = this._;
 			targets.forEach(
 				( t ) => {
-					// delete this._.tweenRefs[t];
-					// delete this._.tweenRefCSS[t];
-					//this._.tweenRefMaps[t] = Object.fromEntries(Object.entries(this._.tweenRefMaps[t]).map(( obj ) =>
-					//let newCss        = {};
-					//_.tweenRefMaps[t] = { ..._.tweenRefOrigin[t] };
-					//Object.keys(_.tweenRefCSS[t])
-					//      .forEach(
-					//	      key => (newCss[key] = '')
-					//      );
-					//Object.assign(newCss, _.tweenRefOriginCss[t]);
-					//_.tweenRefCSS[t] = newCss;
 					this.tweenRef(t, _.tweenRefOriginCss[t], _.iMapOrigin[t], null, null, true)
 				}
-			)
+			);
 			this._updateTweenRefs();
 		}
 		
@@ -178,13 +167,6 @@ export default function asTweener( ...argz ) {
 						                         _.muxDataByTarget[id], _.muxByTarget[id], true)
 					};
 					Object.assign(_.tweenRefCSS[id], _.tweenRefOriginCss[id]);
-					//Object.keys(_.tweenRefMaps[id])// unset
-					//      .forEach(
-					//	      key => (
-					//		      tweenableMap.hasOwnProperty(key)
-					//		      ? _.tweenRefMaps[id][key] = tweenableMap[key] : delete _.tweenRefMaps[id][key]
-					//	      )
-					//      );
 				}
 				else {
 					//_.muxByTarget[id]     = {};
@@ -1206,4 +1188,5 @@ export default function asTweener( ...argz ) {
 			</TweenerContext.Consumer>;
 		}
 	}
+	
 }

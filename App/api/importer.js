@@ -88,6 +88,8 @@ export default ( server, http ) => {
 	server.post(
 		'/delete',
 		function ( req, res, next ) {
+			if ( !(req.user && req.user.isAdmin) )
+				return res.json({ success: false, error: "Auth required" });
 			let items   = req.body,
 			    running = 0,
 			    fails   = 0,

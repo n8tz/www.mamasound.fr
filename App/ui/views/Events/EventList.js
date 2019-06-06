@@ -140,7 +140,7 @@ export default class EventList extends React.Component {
 			    $actions, style
 		    }     = this.props,
 		    state = this.state;
-		//console.log("evt")
+		console.log("evt")
 		return (
 			<div className={ "EventList" } style={ style }>
 				<div className={ "maskContent" }>
