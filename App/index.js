@@ -63,7 +63,7 @@ const ctrl = {
 		let html,
 		    appHtml = renderToString(<App location={ cfg.location }/>),
 		    stable  = cScope.isStableTree();
-		console.log('ctrl::renderSSR:65: ', cfg.location, _attempts);
+		//console.log('ctrl::renderSSR:65: ', cfg.location, _attempts);
 		cScope.onceStableTree(state => {
 			let nstate = cScope.serialize({ alias: "App" });
 			if ( !stable && _attempts < 3 ) {
