@@ -3,6 +3,7 @@
 
 tmp url : http://mamasound.wiseways.me/
 
+_* personal & probono project using experimental libs_
 
 ## How to start
 
