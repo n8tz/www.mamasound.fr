@@ -142,7 +142,7 @@ export default class Home extends React.Component {
 								
 							},
 							willSnap    : ( i, v ) => {
-								$actions.setPageFocus(v.id)
+								//$actions.setPageFocus(v.id)// do not trigger redraw just before inertia
 								//console.log(i % nbItems, v)
 							},
 							wayPoints   : [

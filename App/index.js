@@ -52,41 +52,40 @@ const ctrl = {
 	//	cb(null, html)
 	//},
 	renderSSR( cfg, cb, _attempts = 0 ) {
-		//let rid     = shortid.generate(),
-		//    cScope  = new Scope(AppScope, {
-		//	    id         : rid,
-		//	    autoDestroy: false
-		//    }), App = reScope(cScope)(require('./App').default);
+		let rid     = shortid.generate(),
+		    cScope  = new Scope(AppScope, {
+			    id         : rid,
+			    autoDestroy: false
+		    }), App = reScope(cScope)(require('./App').default);
 		
-		//cfg.state && cScope.restore(cfg.state, { alias: "App" });
-		//
-		//let html,
-		//    appHtml = renderToString(<App location={ cfg.location }/>),
-		//    stable  = cScope.isStableTree();
-		//console.log('ctrl::renderSSR:65: ', cfg.location, _attempts);
-		//cScope.onceStableTree(state => {
-		//	let nstate = cScope.serialize({ alias: "App" });
-		//	if ( !stable && _attempts < 3 ) {
-		//		cfg.state = nstate;
-		//		ctrl.renderSSR(cfg, cb, ++_attempts);
-		//	}
-		//	else {
-		//		try {
-		let html;
+		cfg.state && cScope.restore(cfg.state, { alias: "App" });
+		
+		let html,
+		    appHtml = renderToString(<App location={ cfg.location }/>),
+		    stable  = cScope.isStableTree();
+		console.log('ctrl::renderSSR:65: ', cfg.location, _attempts);
+		cScope.onceStableTree(state => {
+			let nstate = cScope.serialize({ alias: "App" });
+			if ( !stable && _attempts < 3 ) {
+				cfg.state = nstate;
+				ctrl.renderSSR(cfg, cb, ++_attempts);
+			}
+			else {
+				try {
 					html = cfg.tpl.render(
 						{
-							app  : "",
-							//state: JSON.stringify(nstate),
+							app  : appHtml,
+							state: JSON.stringify(nstate),
 							//css  : cfg.css
 						}
 					);
-			//	} catch ( e ) {
-			//		return cb(e)
-			//	}
+				} catch ( e ) {
+					return cb(e)
+				}
 				cb(null, html)
-			//}
-			//cScope.destroy()
-		//})
+			}
+			cScope.destroy()
+		})
 	}
 }
 export default ctrl;
