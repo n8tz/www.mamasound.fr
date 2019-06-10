@@ -50,6 +50,7 @@
         "webpackPatch": {
           "stats": "errors-only",
           "devServer": {
+            "public": "mamasound.localhost",
             "compress": true,
             "disableHostCheck": true
           },

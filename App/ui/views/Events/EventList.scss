@@ -26,19 +26,20 @@
 
   //@include withMaskTop();
 
-  @include withMask();
+  //@include withMask();
 
-  //.maskContent {
-  //  overflow: hidden;
-  //  height: 100%;
-  //}
+  .maskContent {
+    overflow: hidden;
+    height: 100%;
+  }
 
   .NavTools {
-    display: none;
+    //display: none;
     @include use_hvCenteredAbs();
     position: absolute;
     top: auto;
     bottom: -32px;
+    //width: 100vw;
     //left: 0px;
     //right: 0px;
     height: 32px;
