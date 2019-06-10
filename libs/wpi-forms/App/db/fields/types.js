@@ -110,7 +110,7 @@ export default {
 		test        : /^[\w_\-\d]+$/
 	}),
 	media          : ( cfg, label ) => ({
-		//renderer    : require('App/ui/fields/Media'),
+		renderer    : "Media",
 		defaultProps: { ...cfg },
 		label       : label || "Media Url",
 		test        : /^[\w_\-\d]+$/

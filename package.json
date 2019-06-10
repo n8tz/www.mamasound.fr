@@ -36,6 +36,7 @@
       "extend": [
         "wpi-auth",
         "wpi-forms",
+        "wpi-medias",
         "wpi-xsl",
         "wpi-mongo",
         "wpi-react-rs-sass-ssr"
@@ -68,6 +69,7 @@
       "extend": [
         "wpi-auth",
         "wpi-forms",
+        "wpi-medias",
         "wpi-xsl",
         "wpi-mongo",
         "wpi-react-rs-sass-ssr"
@@ -95,6 +97,7 @@
       "extend": [
         "wpi-auth",
         "wpi-forms",
+        "wpi-medias",
         "wpi-xsl",
         "wpi-mongo",
         "wpi-react-rs-sass-ssr"
@@ -122,6 +125,7 @@
       "extend": [
         "wpi-auth",
         "wpi-forms",
+        "wpi-medias",
         "wpi-xsl",
         "wpi-mongo",
         "wpi-react-rs-sass-ssr"
@@ -151,6 +155,7 @@
     "ag-grid": "^18.1.2",
     "ag-grid-community": "^20.1.0",
     "ag-grid-react": "^20.1.0",
+    "audio-extensions": "0.0.0",
     "autoresponsive-react": "^1.1.31",
     "basic-auth-connect": "^1.0.0",
     "body-parser": "^1.18.2",
@@ -165,10 +170,12 @@
     "express-session": "^1.16.1",
     "extract-hoc": "0.0.5",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-formats": "0.0.12",
     "geolib": "^2.0.24",
     "greenlock-express": "^2.6.8",
     "helmet": "^3.16.0",
     "https": "^1.0.0",
+    "image-extensions": "^1.1.0",
     "is": "^3.3.0",
     "jmespath": "^0.15.0",
     "js-file-download": "^0.4.7",
@@ -227,6 +234,7 @@
     "uniforms": "^1.31.1",
     "uniforms-material": "^1.31.1",
     "url-loader": "^1.1.2",
+    "video-extensions": "^1.1.0",
     "xlsx": "^0.14.3",
     "xxhashjs": "^0.2.2"
   },

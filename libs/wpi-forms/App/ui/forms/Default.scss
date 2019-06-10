@@ -34,7 +34,8 @@ $labelsWidth: 120px;
     overflow: hidden;
     pointer-events: none;
   }
-  >.editor_btn{
+
+  > .editor_btn {
     position: absolute;
     left: 0;
     right: 0;
@@ -42,6 +43,7 @@ $labelsWidth: 120px;
 
 
   }
+
   > .form {
     position: absolute;
     top: 0;
@@ -77,8 +79,9 @@ $labelsWidth: 120px;
         position: relative;
         display: inline-block;
         width: calc(100% - #{$labelsWidth} - 30px);
+        //float: right;
         //margin: 0 10px;
-        padding-left: $labelsWidth+20px;
+        padding-left: $labelsWidth + 20px;
       }
 
       &.field_Text {

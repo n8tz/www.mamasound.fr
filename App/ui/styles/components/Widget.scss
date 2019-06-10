@@ -19,7 +19,8 @@
   background: white;
   z-index: 100000;
   text-align: left;
-  .widgetHead {
+
+  > .widgetHead {
     padding: 7px;
     //margin: 5px;
     //padding-right: 15px;
@@ -30,7 +31,7 @@
     right: 0px;
   }
 
-  .content {
+  > .content {
     position: absolute;
     top: 50px;
     bottom: 5px;
