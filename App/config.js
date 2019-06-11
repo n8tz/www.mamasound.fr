@@ -15,8 +15,8 @@ let baseDomain = "mamasound.wiseways.me"
 export default {
 	STATIC_URL      : "static.mamasound.fr",
 	PUBLIC_URL      : "mamasound.fr",
-	ROOT_DOMAIN     : "mamasound.localhost",
-	UPLOAD_URL      : "mamasound.localhost/upload",
+	ROOT_DOMAIN     : "mamasound.wiseways.me",
+	UPLOAD_URL      : "mamasound.wiseways.me/upload",
 	SESSION_CHECK_TM: 60000,
 	...require('$super')
 };

@@ -16,23 +16,49 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-.field_Picker {
-  > .input {
-    min-height: 150px;
-    @include use_hvCenteredContent();
+.DefaultItem {
+  @include use_hvCenteredContent();
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  padding: 5px;
+  background: lightgrey;
+  margin-bottom: 1px;
+  overflow: hidden;
+  text-align: left;
 
-    .field {
-      display: inline-block;
-      width: auto;
+  .type {
+    color: darkgray;
+    font-style: italic;
+
+    &:after {
+      content: ' :';
     }
+  }
 
-    .DefaultPreview {
-      height: 150px;
+  > * {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+
+  > .date {
+    font-style: italic;
+    //float: right;
+  }
+
+  > .lastModifiedDate {
+    font-size: .8em;
+    font-style: italic;
+    //float: right;
+    //clear: both;
+  }
+
+  > .toolbar {
+    float: right;
+    //clear: both;
+    button {
+      padding: 5px;
     }
-
-    //pre {
-    //  min-height: 150px;
-    //  background: red;
-    //}
   }
 }

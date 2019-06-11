@@ -1,4 +1,4 @@
-/*!
+/*
  *
  * Copyright (C) 2019 Nathanael Braun
  *
@@ -16,23 +16,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-.field_Picker {
-  > .input {
-    min-height: 150px;
-    @include use_hvCenteredContent();
+'use strict';
 
-    .field {
-      display: inline-block;
-      width: auto;
-    }
+import React from 'react';
 
-    .DefaultPreview {
-      height: 150px;
-    }
 
-    //pre {
-    //  min-height: 150px;
-    //  background: red;
-    //}
-  }
+import Image from 'App/ui/components/Image';
+
+
+export default class DefaultPreview extends React.Component {
+	
+	render() {
+		let record     = this.props.record,
+		    background = record.previewUrl;
+		
+		return <div className={"DefaultPreview"}>
+			{
+				background &&
+				<Image src={background} w={250} h={250}
+				       className="preview"/> || ''
+			}
+			<div className="type" style={{ opacity: background ? .5 : .9 }}>
+				{record._cls}
+			</div>
+			<pre style={{ opacity: background ? .5 : .9 }}>
+                    {JSON.stringify(record, null, 2)}
+            </pre>
+			<div className="title">
+				{record.label}
+			</div>
+		</div>
+	}
+	
 }

@@ -24,6 +24,7 @@ import Text                                                                     
 import {asFieldType}                                                                from "App/ui/spells";
 import {reScope, scopeToProps, asScope, withStateMap, asRef, asStore, propsToScope} from "rscopes";
 import RS                                                                           from "rscopes";
+import {Views}                                                                      from 'App/ui';
 import stores                                                                       from 'App/stores/(*).js';
 import entities                                                                     from 'App/db/entities';
 
@@ -68,7 +69,7 @@ import entities                                                                 
 			@withStateMap(
 				{
 					@asRef
-					Query: "SelectedQuery",
+					data: "SelectedQuery",
 				}
 			)
 			Query        : stores.MongoQueries,
@@ -124,16 +125,16 @@ export default class Picker extends React.Component {
 						$actions.Picker.updateSearch(e.target.value)
 					}}
 				/>
-				<pre>
-					{
-						JSON.stringify(Selected, null, 2)
-					}
-				</pre>
-				<pre>
-					{
-						JSON.stringify(Query, null, 2)
-					}
-				</pre>
+				{
+					Selected && Selected.record
+					&& <Views.DefaultPreview record={Selected.record}/>
+				}
+				{
+					Query
+					&& Query.data
+					&& Query.data.items
+					&& Query.data.items.map(record => <Views.DefaultItem record={record}/>)
+				}
 			</>
 		);
 	}
