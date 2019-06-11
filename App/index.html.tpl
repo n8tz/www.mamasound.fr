@@ -47,8 +47,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-    <!--link href="/App.css"
-      rel="stylesheet"-->
+    <link href="/App.css"
+      rel="stylesheet">
     <style type="text/css"> /* pre-built style */
     {{=it.css || "/* no css */"}}
     </style>
