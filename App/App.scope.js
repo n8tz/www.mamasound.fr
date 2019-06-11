@@ -190,7 +190,7 @@ export default {
 		// initial state
 		items: [{
 			"_id"     : "FfseOEKpm",
-			"size"    : { "width": 600, "height": 400 },
+			"size"    : { "width": 600, "height": 800 },
 			"type"    : "RecordEditor",
 			"props"   : { "record": { id: "FocusedItems.-f8m8skoA2", "etty": "FocusedItems" } },
 			"position": { "x": 198, "y": 65 }

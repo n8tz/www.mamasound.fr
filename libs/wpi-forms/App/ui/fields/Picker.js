@@ -16,45 +16,79 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React                                                          from "react";
-import FormControlLabel                                               from '@material-ui/core/FormControlLabel';
-import TextField                                                      from '@material-ui/core/TextField';
-import {asFieldType}                                                  from "App/ui/spells";
-import {reScope, scopeToProps, asScope, withStateMap, asRef, asStore} from "rscopes";
-import RS                                                             from "rscopes";
-import stores                                                         from 'App/stores/(*).js';
+import React                                                                        from "react";
+import FormControlLabel
+                                                                                    from '@material-ui/core/FormControlLabel';
+import TextField                                                                    from '@material-ui/core/TextField';
+import {asFieldType}                                                                from "App/ui/spells";
+import {reScope, scopeToProps, asScope, withStateMap, asRef, asStore, propsToScope} from "rscopes";
+import RS                                                                           from "rscopes";
+import stores                                                                       from 'App/stores/(*).js';
 
 @reScope(
 	{
 		@asScope
-		Query: {
+		Picker: {
+			@asStore
+			SelectedQuery: {
+				$apply( data, { selectedType, types } ) {
+					return {
+						etty : selectedType || types && types[0],
+						query: {},
+						limit: 3,
+					}
+				}
+			},
 			@withStateMap(
 				{
-					Query: {
-						etty : 'Article',
-						query: {},
-						limit: 10000000,
-					},
+					@asRef
+					Query: "SelectedQuery",
 					updateQuery( Query ) {
 						return { Query }
 					}
 				}
 			)
-			Query: stores.MongoQueries,
+			Query        : stores.MongoQueries,
+			@asStore
+			SelectedRef  : {
+				$apply( data, { ref: { objId, cls } = {} } ) {
+					return { id: objId, etty: cls }
+				}
+			},
+			@withStateMap(
+				{
+					@asRef
+					record: "SelectedRef",
+					updateQuery( Query ) {
+						return { Query }
+					}
+				}
+			)
+			Selected     : stores.MongoRecords,
 		},
 		
 	}
 )
-@scopeToProps("Query.Query")
+@propsToScope(
+	"defaultValue:Picker.SelectedRef.ref",
+	"allowTypeSelection:Picker.SelectedQuery.types",
+	"defaultValue.cls:Picker.SelectedQuery.selectedType"
+)
+@scopeToProps("Picker.Query", "Picker.Selected")
 @asFieldType
 export default class Picker extends React.Component {
 	static displayName = "Picker";
 	
 	render() {
-		let { defaultValue, value = defaultValue, Query } = this.props;
-		debugger
+		let { defaultValue, value = defaultValue, Query, Selected, allowTypeSelection } = this.props;
+		//debugger
 		return (
 			<>
+				<pre>
+					{
+						JSON.stringify(Selected, null, 2)
+					}
+				</pre>
 				<pre>
 					{
 						JSON.stringify(Query, null, 2)

@@ -27,10 +27,10 @@ const ctrl = {
 		    }),
 		    App         = reScope(cScope)(require('./App').default);
 		window.contexts = Scope.scopes;
-		if ( localStorage.mama )
-			cScope.restore(JSON.parse(localStorage.mama));
-		else if ( __STATE__ )
-			cScope.restore(__STATE__);
+		//if ( localStorage.mama )
+		//	cScope.restore(JSON.parse(localStorage.mama));
+		//else if ( __STATE__ )
+		//	cScope.restore(__STATE__);
 		ReactDom.render(<App/>, node);
 		
 		if ( process.env.NODE_ENV !== 'production' && module.hot ) {
