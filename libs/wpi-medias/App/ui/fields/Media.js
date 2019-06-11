@@ -180,24 +180,24 @@ export default class Media extends React.Component {
 						!disallowSelect &&
 						_value &&
 						<Button title="Selectionner"
-						        color={ viewmode == "select" && "primary" }
+						        //color={ viewmode == "select" && "primary" }
 						        onClick={ e => this.setMode("select") }>Selectionner</Button>
 					}
 					
 					<Button onClick={ e => this.setMode("preview") }
-					        color={ viewmode == "preview" && "primary" }
+					        //color={ viewmode == "preview" && "primary" }
 					        title="Aperçu">Aperçu</Button>
 					
 					<Button
 						title="Upload"
-						color={ viewmode == "upload" && "primary" }
+						//color={ viewmode == "upload" && "primary" }
 						onClick={ e => this.setMode("upload") }>
 						Uploader un fichier
 					</Button>
 					
 					<Button
 						title="Modifier l'url"
-						color={ viewmode == "input" && "primary" }
+						//color={ viewmode == "input" && "primary" }
 						onClick={ e => this.setMode("input") }>
 						Modifier l'url
 					</Button>
@@ -206,7 +206,7 @@ export default class Media extends React.Component {
 						!disallowNone &&
 						<Button
 							title="none"
-							color={ viewmode == "none" && "primary" }
+							//color={ viewmode == "none" && "primary" }
 							onClick={ e => this.setMode("none") }>
 							Aucun(e)
 						</Button>
@@ -241,7 +241,7 @@ export default class Media extends React.Component {
 						// /^[^\s]+\.i?(jpeg|jpg|png|gif|bmp)(\?.*)?$/.test(_value.toLowerCase())
 						// &&
 						<div className=" use_mBox">
-							<Image ref="preview" src={ _value } responsive thumbnail
+							<Image ref="preview" src={ _value }
 							       style={ { maxHeight: "300px" } }
 							       w={ 250 } h={ 250 }/>
 						</div>

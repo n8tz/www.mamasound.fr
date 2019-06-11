@@ -21,6 +21,13 @@ import {updateWatchers, clearWatchers, getQueriesFromIdKeys} from './DataProvide
 export default class MongoQueries extends Store {
 	static state = {};
 	
+	constructor() {
+		super(...arguments);
+		let scope = this.scope;
+		while ( scope.$parent && !scope.DataProvider )
+			scope = scope.$parent.stores;
+		this._dataProvider = scope.DataProvider;
+	}
 	
 	serialize( cfg = {}, output = {} ) {
 		return super.serialize(
@@ -43,11 +50,11 @@ export default class MongoQueries extends Store {
 		
 		super.restore(snapshot, immediate);
 		
-		updateWatchers(this, this.scope.DataProvider, this.state, this.state, true)
+		updateWatchers(this, this._dataProvider, this.state, this.state, true)
 	}
 	
 	shouldApply( changes ) {
-		let DataProvider = this.scope.DataProvider,
+		let DataProvider = this._dataProvider,
 		    hasChanges, update,
 		    curState     = this.nextState;
 		
@@ -73,7 +80,7 @@ export default class MongoQueries extends Store {
 	}
 	
 	destroy() {
-		let DataProvider = this.scope.DataProvider,
+		let DataProvider = this._dataProvider,
 		    curState     = this.state;
 		
 		// stop watching the injected records

@@ -52,7 +52,7 @@ export default class Picker extends React.Component {
 	
 	render() {
 		let { defaultValue, value = defaultValue, Query } = this.props;
-		//debugger
+		debugger
 		return (
 			<>
 				<pre>
