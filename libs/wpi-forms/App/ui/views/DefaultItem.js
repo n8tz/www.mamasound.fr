@@ -16,32 +16,40 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React            from "react";
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switcher         from '@material-ui/core/Switch';
-import {asFieldType}    from "App/ui/spells";
+'use strict';
 
-@asFieldType
-export default class Switch extends React.Component {
-	static displayName = "Switch";
-	getValue( s, p ) {
-		s = s || this.state;
-		p = p || this.props;
-		return {
-			name : p.name,
-			value: s.checked
-		};
-	}
+import React from 'react';
+
+import Time from 'react-time'
+
+import Image from 'App/ui/components/Image';
+
+
+export default class DefaultItem extends React.Component {
+	
 	render() {
-		let { defaultValue, value = defaultValue } = this.props;
+		let record     = this.props.record,
+		    background = record.previewUrl;
 		
-		return (
-			<Switcher
-				className={ this.props.className }
-				defaultChecked={ value }
-				onChange={ this.onChange }
-			/>
-		);
+		return <div className={"DefaultItem"}>
+			{
+				background &&
+				<Image src={background} w={250} h={250}
+				       className="preview"/> || ''
+			}
+			<div className="toolbar">
+				{this.props.children}
+			</div>
+			<div className="type">
+				{record._cls}
+			</div>
+			<div className="title">
+				{record.label}
+			</div>
+			<div className="lastModifiedDate">
+				<Time value={new Date(record.updated)} format="DD/MM/YYYY HH:mm"/>
+			</div>
+		</div>
 	}
+	
 }
-;

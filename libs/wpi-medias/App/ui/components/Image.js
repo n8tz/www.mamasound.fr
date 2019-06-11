@@ -47,10 +47,11 @@ function getSrc( src, dims ) {
 export default class Image extends React.Component {
 	
 	render() {
-		return <img { ...{
-			...this.props,
-			src: getSrc(this.props.src, this.props),
-		} }/>;
+		return <img {...{
+			style    : this.props.style,
+			className: this.props.className,
+			src      : getSrc(this.props.src, this.props),
+		}}/>;
 	}
 	
 	

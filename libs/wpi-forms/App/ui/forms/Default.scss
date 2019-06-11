@@ -41,7 +41,6 @@ $labelsWidth: 120px;
     right: 0;
     bottom: 0px;
 
-
   }
 
   > .form {
@@ -54,7 +53,7 @@ $labelsWidth: 120px;
     text-align: left;
     overflow: auto;
 
-    .field {
+    > .field {
       position: relative;
       width: 100%;
       background: #fbfbfb;
@@ -63,7 +62,7 @@ $labelsWidth: 120px;
         background: #e7e7e7;
       }
 
-      .label {
+      > .label {
         @include use_hvCenteredAbs();
         left: 0;
         transform: translate(0, -50%);
@@ -75,7 +74,7 @@ $labelsWidth: 120px;
         //height: 100%;
       }
 
-      .input {
+      > .input {
         position: relative;
         display: inline-block;
         width: calc(100% - #{$labelsWidth} - 30px);
@@ -85,7 +84,7 @@ $labelsWidth: 120px;
       }
 
       &.field_Text {
-        .input {
+        > .input {
           *, input {
             width: 100%;
           }

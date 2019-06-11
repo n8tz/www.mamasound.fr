@@ -19,7 +19,7 @@
 import React               from "react";
 import Image               from "App/ui/components/Image";
 import Player              from "App/ui/components/Player";
-//import Select              from "App/ui/fields/Select";
+import cfg                 from "App/config";
 import Input               from "App/ui/fields/Text";
 //import Paper               from "App/ui/kit/Paper";
 //import audioExtensions     from "audio-extensions";
@@ -87,7 +87,7 @@ export default class Media extends React.Component {
 			maxFiles        : 1,
 			iconFiletypes   : this.state.fileTypes,
 			showFiletypeIcon: true,
-			postUrl         : "http://" + require('App/config').UPLOAD_URL//+"?map=1"
+			postUrl         : "http://" + cfg.UPLOAD_URL//+"?map=1"
 		};
 		this.lists           = {
 			addedfile: ( file, result, xhr ) => {
@@ -143,10 +143,14 @@ export default class Media extends React.Component {
 	
 	uploadSuccess( file, result, xhr ) {
 		this.refs.dropzone.dropzone.removeAllFiles();
-		this.setState({ value: result.result.url, viewmode: "preview" });
-		this.props.onChange &&
-		this.props.onChange({ target: this.getValue() });
-		//me.setState({});
+		if ( result.result && result.result[0] ) {
+			this.setState({ value: result.result[0].url, viewmode: "preview" });
+			this.props.onChange &&
+			this.props.onChange({ target: this.getValue() });
+		}
+		else {
+			alert("Fail uploading, please log in")
+		}
 	}
 	
 	setMode( viewmode ) {
@@ -162,7 +166,6 @@ export default class Media extends React.Component {
 	};
 	hideUploader = ( e ) => {
 		if ( e.target.classList.contains("dropzone") ) {
-			console.log('Media::hideUploader:161: ');
 			this.setState({ showUploader: false })
 		}
 	};
@@ -173,32 +176,32 @@ export default class Media extends React.Component {
 		    fileTypes                                             = [],
 		    _value                                                = this.state.value || value || defaultValue;
 		return (
-			<div className={ "content" }
-			     onDragEnter={ this.showUploader }>
+			<div className={"content"}
+			     onDragEnter={this.showUploader}>
 				<div className="controls">
 					{
 						!disallowSelect &&
 						_value &&
 						<Button title="Selectionner"
-						        color={ viewmode == "select" && "primary" }
-						        onClick={ e => this.setMode("select") }>Selectionner</Button>
+							//color={ viewmode == "select" && "primary" }
+							    onClick={e => this.setMode("select")}>Selectionner</Button>
 					}
 					
-					<Button onClick={ e => this.setMode("preview") }
-					        color={ viewmode == "preview" && "primary" }
-					        title="Aperçu">Aperçu</Button>
+					<Button onClick={e => this.setMode("preview")}
+						//color={ viewmode == "preview" && "primary" }
+						    title="Aperçu">Aperçu</Button>
 					
 					<Button
 						title="Upload"
-						color={ viewmode == "upload" && "primary" }
-						onClick={ e => this.setMode("upload") }>
+						//color={ viewmode == "upload" && "primary" }
+						onClick={e => this.setMode("upload")}>
 						Uploader un fichier
 					</Button>
 					
 					<Button
 						title="Modifier l'url"
-						color={ viewmode == "input" && "primary" }
-						onClick={ e => this.setMode("input") }>
+						//color={ viewmode == "input" && "primary" }
+						onClick={e => this.setMode("input")}>
 						Modifier l'url
 					</Button>
 					
@@ -206,8 +209,8 @@ export default class Media extends React.Component {
 						!disallowNone &&
 						<Button
 							title="none"
-							color={ viewmode == "none" && "primary" }
-							onClick={ e => this.setMode("none") }>
+							//color={ viewmode == "none" && "primary" }
+							onClick={e => this.setMode("none")}>
 							Aucun(e)
 						</Button>
 					}
@@ -219,8 +222,8 @@ export default class Media extends React.Component {
 						(
 							<Input label="Url du media:" type="text" placeholder="Url du media"
 							       name="url"
-							       onChange={ this.onChange.bind(this) }
-							       defaultValue={ _value }/>
+							       onChange={this.onChange.bind(this)}
+							       defaultValue={_value}/>
 						
 						)
 						||
@@ -234,37 +237,37 @@ export default class Media extends React.Component {
 							|| /youtube/.test(_value)
 						)
 						&& <div className=" use_mBox">
-							<Player item={ { mediaUrl: _value, visible: true } }/>
+							<Player item={{ mediaUrl: _value, visible: true }}/>
 						</div>
 						||
 						(viewmode === "preview") &&
 						// /^[^\s]+\.i?(jpeg|jpg|png|gif|bmp)(\?.*)?$/.test(_value.toLowerCase())
 						// &&
 						<div className=" use_mBox">
-							<Image ref="preview" src={ _value } responsive thumbnail
-							       style={ { maxHeight: "300px" } }
-							       w={ 250 } h={ 250 }/>
+							<Image ref="preview" src={_value}
+							       style={{ maxHeight: "300px" }}
+							       w={250} h={250}/>
 						</div>
 						//||
 						///soundcloud/.test(_value)
 						//&& <PlayerSC item={{mediaUrl: _value, visible:true}}/>
 						||
 						<div
-							onClick={ e => this.setMode("select") }>
+							onClick={e => this.setMode("select")}>
 							"Aucun media selectionné"
 						</div>
 						
 					}
-					<div className={ "dropContainer" + (!showUploader && (viewmode !== "upload") ? " hidden" : "") }
-					     onDragLeave={ this.hideUploader }>
+					<div className={"dropContainer" + (!showUploader && (viewmode !== "upload") ? " hidden" : "")}
+					     onDragLeave={this.hideUploader}>
 						<DropzoneComponent
 							ref="dropzone"
-							style={ {
+							style={{
 								//display   :"none" || "block",
-							} }
-							config={ this.componentConfig }
-							djsConfig={ { withCredentials: true } }
-							eventHandlers={ this.lists }/>
+							}}
+							config={this.componentConfig}
+							djsConfig={{ withCredentials: true }}
+							eventHandlers={this.lists}/>
 					</div>
 				</div>
 			</div>

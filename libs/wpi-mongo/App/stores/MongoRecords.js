@@ -25,6 +25,14 @@ export default class MongoRecords extends Store {
 	//
 	//};
 	
+	constructor() {
+		super(...arguments);
+		let scope = this.scope;
+		while ( scope.$parent && !scope.DataProvider )
+			scope = scope.$parent.stores;
+		this._dataProvider = scope.DataProvider;
+	}
+	
 	serialize( cfg = {}, output = {} ) {
 		return super.serialize(
 			{
@@ -47,11 +55,11 @@ export default class MongoRecords extends Store {
 		super.restore(
 			snapshot, immediate);
 		
-		updateWatchers(this, this.scope.DataProvider, this.state, this.state)
+		updateWatchers(this, this._dataProvider, this.state, this.state)
 	}
 	
 	shouldApply( changes ) {
-		let DataProvider = this.scope.DataProvider,
+		let DataProvider = this._dataProvider,
 		    hasChanges, update,
 		    curState     = this.nextState;
 		if ( !DataProvider )
@@ -76,7 +84,7 @@ export default class MongoRecords extends Store {
 	}
 	
 	destroy() {
-		let DataProvider = this.scope.DataProvider,
+		let DataProvider = this._dataProvider,
 		    curState     = this.nextState;
 		
 		// stop watching the injected records

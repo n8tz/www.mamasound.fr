@@ -219,6 +219,7 @@
     "react-slick": "^0.23.2",
     "react-swipeable-views": "^0.13.1",
     "react-tetris": "^0.1.0",
+    "react-time": "^4.3.0",
     "redis": "^2.8.0",
     "request": "^2.85.0",
     "rescope": "^4.3.12",

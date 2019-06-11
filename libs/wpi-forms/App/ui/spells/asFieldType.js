@@ -62,19 +62,21 @@ export default function asFieldType( ...argz ) {
 		}
 		
 		getValue( s, p ) {
+			if ( super.getValue )
+				return super.getValue(s, p);
 			s = s || this.state;
 			p = p || this.props;
 			return {
 				name : p.name,
-				value: s.checked
+				value: s.value
 			};
 		}
 		
 		render() {
-			return <div style={ this.props.style }
-			            className={ (this.props.className || '') + "field field_" + compName }>
-				<span className={ "label" }>{ this.props.label }</span>
-				<span className={ "input" }>{ super.render() }</span>
+			return <div style={this.props.style}
+			            className={(this.props.className || '') + "field field_" + compName}>
+				<span className={"label"}>{this.props.label}</span>
+				<span className={"input"}>{super.render()}</span>
 			</div>
 		}
 	}

@@ -16,50 +16,124 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React                                                          from "react";
-import FormControlLabel                                               from '@material-ui/core/FormControlLabel';
-import TextField                                                      from '@material-ui/core/TextField';
-import {asFieldType}                                                  from "App/ui/spells";
-import {reScope, scopeToProps, asScope, withStateMap, asRef, asStore} from "rscopes";
-import RS                                                             from "rscopes";
-import stores                                                         from 'App/stores/(*).js';
+import React                                                                        from "react";
+import FormControlLabel
+                                                                                    from '@material-ui/core/FormControlLabel';
+import Select                                                                       from './Select';
+import Text                                                                         from './Text';
+import {asFieldType}                                                                from "App/ui/spells";
+import {reScope, scopeToProps, asScope, withStateMap, asRef, asStore, propsToScope} from "rscopes";
+import {Views}                                                                      from 'App/ui';
+import stores                                                                       from 'App/stores/(*).js';
+import entities                                                                     from 'App/db/entities';
 
 @reScope(
 	{
 		@asScope
-		Query: {
+		Picker: {
+			@asStore
+			SelectedQuery: {
+				$apply( data, { search, defaultType, types, selectedType = defaultType || types && types[0] } ) {
+					let query = {}, etty = selectedType;
+					while ( entities[etty].targetCollection ) {
+						etty = entities[etty].targetCollection;
+					}
+					if ( search ) {
+						let fields = entities[selectedType].searchableFields ||
+							['name', 'label', 'desc'], re;
+						re         = {
+							$regex  : ".*" + search.replace(/([^\w\d])/g, "\\$1") + ".*",
+							$options: 'gi'
+						};
+						query.$or  = fields.map(
+							( f ) => ({ [f]: re, _cls: selectedType }))
+					}
+					else {
+						query._cls = selectedType;
+					}
+					
+					return {
+						etty,
+						query,
+						limit: 3,
+					}
+				},
+				updateSearch( search ) {
+					return { search };
+				},
+				updateQuery( selectedType ) {
+					return { selectedType };
+				}
+			},
 			@withStateMap(
 				{
-					Query: {
-						etty : 'Article',
-						query: {},
-						limit: 10000000,
-					},
-					updateQuery( Query ) {
-						return { Query }
-					}
+					@asRef
+					data: "SelectedQuery",
 				}
 			)
-			Query: stores.MongoQueries,
+			Query        : stores.MongoQueries,
+			@asStore
+			SelectedRef  : {
+				$apply( data, { ref: { objId, cls } = {} } ) {
+					return { id: objId, etty: cls }
+				}
+			},
+			@withStateMap(
+				{
+					@asRef
+					record: "SelectedRef",
+				}
+			)
+			Selected     : stores.MongoRecords,
 		},
 		
 	}
 )
-@scopeToProps("Query.Query")
+@propsToScope(
+	"defaultValue:Picker.SelectedRef.ref",
+	"allowTypeSelection:Picker.SelectedQuery.types",
+	"defaultValue.cls:Picker.SelectedQuery.defaultType"
+)
+@scopeToProps("Picker.Query", "Picker.Selected", "SelectedQuery")
 @asFieldType
 export default class Picker extends React.Component {
-	static displayName = "Picker";
+	static displayName  = "Picker";
+	static defaultProps = {
+		allowTypeSelection: Object.keys(entities)
+	}
+	state               = {};
 	
 	render() {
-		let { defaultValue, value = defaultValue, Query } = this.props;
+		let { defaultValue, value = defaultValue, Query, Selected, allowTypeSelection, SelectedQuery = {}, $actions } = this.props,
+		    { currentType = SelectedQuery.etty || allowTypeSelection[0], currentSearch = "" }                         = this.state;
 		//debugger
 		return (
 			<>
-				<pre>
-					{
-						JSON.stringify(Query, null, 2)
-					}
-				</pre>
+				<Select options={allowTypeSelection.map(etty => ({ label: etty, value: etty }))}
+				        value={currentType}
+				        onChange={e => {
+					        this.setState({ currentType: e.target.value })
+					        $actions.Picker.updateQuery(e.target.value)
+				        }}
+				/>
+				<Text
+					placeholder={"Search"}
+					value={currentSearch}
+					onChange={e => {
+						this.setState({ currentSearch: e.target.value })
+						$actions.Picker.updateSearch(e.target.value)
+					}}
+				/>
+				{
+					Selected && Selected.record
+					&& <Views.DefaultPreview record={Selected.record}/>
+				}
+				{
+					Query
+					&& Query.data
+					&& Query.data.items
+					&& Query.data.items.map(record => <Views.DefaultItem record={record}/>)
+				}
 			</>
 		);
 	}

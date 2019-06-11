@@ -55,11 +55,6 @@ export default class RecordEditor extends React.Component {
 			...(this.state || {}),
 			errors: {}
 		};
-		
-		//this.state.record = this.state.record || props.record &&
-		//	{ ...props.record };
-		
-		// this.state.nextPage = Auth.state.AdminNextPage;
 	}
 	
 	shouldComponentUpdate( nextProps, nextState ) {
