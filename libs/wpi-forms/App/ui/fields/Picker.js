@@ -23,7 +23,6 @@ import Select                                                                   
 import Text                                                                         from './Text';
 import {asFieldType}                                                                from "App/ui/spells";
 import {reScope, scopeToProps, asScope, withStateMap, asRef, asStore, propsToScope} from "rscopes";
-import RS                                                                           from "rscopes";
 import {Views}                                                                      from 'App/ui';
 import stores                                                                       from 'App/stores/(*).js';
 import entities                                                                     from 'App/db/entities';
