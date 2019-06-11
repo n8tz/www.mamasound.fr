@@ -32,7 +32,13 @@ export default class Editable extends Component {
 		let { $actions, id, DataProvider } = this.props;
 		return (
 			<ContextMenu>
-				<div className={ "record_edit_menu" } onClick={ e => $actions.newWidget("RecordEditor", { id }) }>
+				<div className={ "record_edit_menu" }
+				     onClick={ e => $actions.newWidget("RecordEditor", {
+					     record: {
+						     id,
+						     etty: DataProvider[id]&&DataProvider[id]._cls
+					     }
+				     }) }>
 					Edit "{ DataProvider[id] && DataProvider[id]._alias || id }"
 				</div>
 			</ContextMenu>

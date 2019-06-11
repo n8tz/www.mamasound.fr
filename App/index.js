@@ -61,11 +61,13 @@ const ctrl = {
 		cfg.state && cScope.restore(cfg.state, { alias: "App" });
 		
 		let html,
-		    appHtml = renderToString(<App location={ cfg.location }/>),
-		    stable  = cScope.isStableTree();
+		    appHtml     = renderToString(<App location={cfg.location}/>),
+		    stable      = cScope.isStableTree();
+		global.contexts = Scope.scopes;
 		//console.log('ctrl::renderSSR:65: ', cfg.location, _attempts);
 		cScope.onceStableTree(state => {
 			let nstate = cScope.serialize({ alias: "App" });
+			cScope.destroy()
 			if ( !stable && _attempts < 3 ) {
 				cfg.state = nstate;
 				ctrl.renderSSR(cfg, cb, ++_attempts);
@@ -84,7 +86,6 @@ const ctrl = {
 				}
 				cb(null, html)
 			}
-			cScope.destroy()
 		})
 	}
 }

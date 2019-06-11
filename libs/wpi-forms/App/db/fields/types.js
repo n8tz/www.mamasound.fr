@@ -160,7 +160,7 @@ export default {
 		});
 		
 		return {
-			//renderer    : require('App/ui/fields/RecordRef'),
+			renderer    : "Picker",
 			defaultProps: p,
 			label       : label || ("Sélectionner : " + etty),
 			test        : /^[\w_\-\d]+$/

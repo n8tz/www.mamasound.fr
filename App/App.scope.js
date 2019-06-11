@@ -188,7 +188,13 @@ export default {
 	@asStore
 	widgets   : {
 		// initial state
-		items: [],
+		items: [{
+			"_id"     : "FfseOEKpm",
+			"size"    : { "width": 600, "height": 400 },
+			"type"    : "RecordEditor",
+			"props"   : { "record": { id: "FocusedItems.-f8m8skoA2", "etty": "FocusedItems" } },
+			"position": { "x": 198, "y": 65 }
+		}],
 		
 		// actions
 		newWidget( type, props = {} ) {

@@ -23,17 +23,25 @@ import {Forms, fields} from "App/ui";
 import {reScope, Store, scopeToProps, propsToScope} from "rscopes";
 import {withStateMap, asRef, asStore}               from "rescope-spells";
 
-import ImportIcon  from '@material-ui/icons/CloudUploadOutlined';
-import ExportIcon  from '@material-ui/icons/Delete';
-import RefreshIcon from '@material-ui/icons/Refresh';
-import IconButton  from '@material-ui/core/IconButton';
+import stores from 'App/stores/(*).js';
 
 
 import entities      from 'App/db/entities';
 import {ContextMenu} from 'react-inheritable-contextmenu';
 import Button        from '@material-ui/core/Button';
 
-@scopeToProps("DataProvider")
+@reScope(
+	{
+		@withStateMap(
+			{
+				record: undefined
+			}
+		)
+		data: stores.MongoRecords,
+	}
+)
+@propsToScope("record:data.record")
+@scopeToProps("data.record")
 export default class RecordEditor extends React.Component {
 	static defaultProps = {
 		whenDone: () => {
@@ -154,9 +162,8 @@ export default class RecordEditor extends React.Component {
 	}
 	
 	buildForm() {
-		let { $actions, id, DataProvider }
+		let { record, id, DataProvider }
 			    = this.props,
-		    record    = DataProvider[id],
 		    etty      = record._cls,
 		    recordDef = entities[etty],
 		    errors    = this.state.errors,
@@ -165,7 +172,7 @@ export default class RecordEditor extends React.Component {
 		    key       = 0;
 		
 		if ( !recordDef )
-			return <div>Entity not found '{ etty }'</div>
+			return <div>Entity not found '{etty}'</div>
 		Object.keys(recordDef.fields).map(
 			( name ) => {
 				if ( !recordDef.fields[name].renderer || recordDef.fields[name].hidden )
@@ -187,42 +194,43 @@ export default class RecordEditor extends React.Component {
 						                defaultValue: def,
 						                onChange    : this.bindChange.bind(this),
 						                bsStyle     : errors[key] && errors[name].length && "error"
-					                } } />,
+					                }} />,
 					          errors[key] && errors[key].map(( e ) => <div className="formError">
-						          <strong>Erreur:</strong> { e }</div>) ||
+						          <strong>Erreur:</strong> {e}</div>) ||
 					          '']);
 			});
 		return form;
 	}
 	
 	render() {
-		let { $actions, id, DataProvider }
+		let { $actions, id, DataProvider, record }
 			    = this.props,
-		    { showUploader } = this.state,
-		    record           = DataProvider[id],
-		    Form             = Forms[DataProvider[id]._cls]
+		    {}  = this.state
 		;
+		if ( !record || !record._cls ) {
+			return <div></div>;
+		}
 		
 		return (
-			<div className={ "form_Default form_" + record._cls }
+			<div className={"form_Default form_" + record._cls}
 			>
 				<div className="title">
-					Edition : { entities[record._cls] && entities[record._cls].label }
+					Edition : {entities[record._cls] && entities[record._cls].label}
 					{
 						id &&
 						(
 							<a //href={ this.getUrlTo() }
-								target="_blank">{ record._alias || id }</a>
+								target="_blank">{record._alias || id}</a>
 						) || ''
 					}
 				</div>
 				
 				<div className="form">
-					{ this.buildForm() }
+					{record && record._cls && this.buildForm()}
 				</div>
-				<div className={ "editor_btn" }>
-					<Button onClick={ $actions.widgetClose }>Cancel</Button>
-					<Button onClick={ this.validate.bind(this) }>Save</Button>
+				<div className={"editor_btn"}>
+					<Button onClick={$actions.widgetClose}>Cancel</Button>
+					<Button onClick={this.validate.bind(this)}>Save</Button>
 				</div>
 				<ContextMenu native/>
 			</div>

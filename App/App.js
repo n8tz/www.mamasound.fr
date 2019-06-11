@@ -46,15 +46,15 @@ export default class App extends React.Component {
 		
 		if ( this.props.location )
 			Router = StaticRouter;
-		return <Router location={ this.props.location }>
+		return <Router location={this.props.location}>
 			<React.Fragment>
 				<ContextMenu>
 					<div
-						onClick={ () => $actions.newWidget('MamaImporter', { title: "Importer d'events" }) }>
+						onClick={() => $actions.newWidget('MamaImporter', { title: "Importer d'events" })}>
 						New Importer
 					</div>
 					<div
-						onClick={ () => $actions.newWidget('DBQuery', { title: "Db query & delete" }) }>
+						onClick={() => $actions.newWidget('DBQuery', { title: "Db query & delete" })}>
 						New DBQuery
 					</div>
 				</ContextMenu>
@@ -63,16 +63,17 @@ export default class App extends React.Component {
 					widgets.items.map(
 						widget => {
 							let WidgetComp = Views.Widget[widget.type] || 'div';
-							return <Widget key={ widget._id } record={ widget }
-							               onSelect={ e => $actions.selectWidget(widget._id) }
-							               selected={ widget._id === appState.selectedWidgetId }>
-								<WidgetComp record={ widget } { ...widget.props }/>
+							return <Widget key={widget._id} record={widget}
+							               onSelect={e => $actions.selectWidget(widget._id)}
+							               selected={widget._id === appState.selectedWidgetId}>
+								<WidgetComp record={widget} {...widget.props}/>
 							</Widget>
 						}
 					)
 				}
 				
-				<Route path="/" exact component={ Views.Page.Home }/>
+				<Route path="/" exact component={Views.Page.Home}/>
+				{/*<Route path="/" exact component={ Views.Page.Admin }/>*/}
 			</React.Fragment>
 		</Router>
 	}
