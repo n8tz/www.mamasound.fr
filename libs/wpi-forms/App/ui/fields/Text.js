@@ -26,13 +26,14 @@ export default class Text extends React.Component {
 	static displayName = "Text";
 	
 	render() {
-		let { defaultValue, value = defaultValue } = this.props;
+		let { defaultValue, value = defaultValue, placeholder } = this.props;
 		
 		return (
 			<TextField
-				className={ this.props.className }
-				defaultValue={ value }
-				onChange={ this.onChange }
+				placeholder={this.props.placeholder}
+				className={this.props.className}
+				defaultValue={value}
+				onChange={this.onChange}
 			/>
 		);
 	}

@@ -149,19 +149,16 @@ export default {
 		label       : label || ("Liste de " + etty),
 		test        : /^[\w_\-\d]+$/
 	}),
-	picker         : function ( etty, defaultProps, label ) {
-		var p = {
-			allowTypeSelection: (typeof etty == 'string') ? [etty] : etty,
-			defaultValue      : false,
-			disallowId        : true
-		};
-		defaultProps && Object.keys(defaultProps).forEach(( v ) => {
-			p[v] = defaultProps[v];
-		});
-		
+	picker         : function ( etty, defaultProps = {}, label ) {
 		return {
 			renderer    : "Picker",
-			defaultProps: p,
+			defaultProps: {
+				defaultValue      : false,
+				disallowId        : true,
+				allowTypeSelection: (typeof etty === 'string') ? [etty] : undefined,
+				...defaultProps,
+				
+			},
 			label       : label || ("Sélectionner : " + etty),
 			test        : /^[\w_\-\d]+$/
 		};

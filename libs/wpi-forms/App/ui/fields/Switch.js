@@ -24,6 +24,14 @@ import {asFieldType}    from "App/ui/spells";
 @asFieldType
 export default class Switch extends React.Component {
 	static displayName = "Switch";
+	getValue( s, p ) {
+		s = s || this.state;
+		p = p || this.props;
+		return {
+			name : p.name,
+			value: s.checked
+		};
+	}
 	render() {
 		let { defaultValue, value = defaultValue } = this.props;
 		

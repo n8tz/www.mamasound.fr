@@ -61,7 +61,7 @@ export default {
 		"previewImage": types.media({ allowedTypes: "Image" }, "Background :"),
 		"resume"      : types.descriptions('Resumé'), // TODO refactor as "summary"
 		"targetEtty"  : types.picker(true, {
-			allowTypeSelection: ["Concert", "Theatre", "Expo", "Article", "Collection", "Video", "Page"],
+			//allowTypeSelection: ["Concert", "Theatre", "Expo", "Event", "Article", "Collection", "Video", "Page"],
 			storeTypedItem    : true,
 		}, "Contenu cible :"),
 		//

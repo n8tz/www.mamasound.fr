@@ -19,6 +19,12 @@
 .field_Picker {
   > .input {
     min-height: 150px;
+    @include use_hvCenteredContent();
+
+    .field {
+      display: inline-block;
+      width: auto;
+    }
 
     pre {
       min-height: 150px;

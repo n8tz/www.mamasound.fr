@@ -19,11 +19,13 @@
 import React                                                                        from "react";
 import FormControlLabel
                                                                                     from '@material-ui/core/FormControlLabel';
-import TextField                                                                    from '@material-ui/core/TextField';
+import Select                                                                       from './Select';
+import Text                                                                         from './Text';
 import {asFieldType}                                                                from "App/ui/spells";
 import {reScope, scopeToProps, asScope, withStateMap, asRef, asStore, propsToScope} from "rscopes";
 import RS                                                                           from "rscopes";
 import stores                                                                       from 'App/stores/(*).js';
+import entities                                                                     from 'App/db/entities';
 
 @reScope(
 	{
@@ -31,21 +33,42 @@ import stores                                                                   
 		Picker: {
 			@asStore
 			SelectedQuery: {
-				$apply( data, { selectedType, types } ) {
+				$apply( data, { search, defaultType, types, selectedType = defaultType || types && types[0] } ) {
+					let query = {}, etty = selectedType;
+					while ( entities[etty].targetCollection ) {
+						etty = entities[etty].targetCollection;
+					}
+					if ( search ) {
+						let fields = entities[selectedType].searchableFields ||
+							['name', 'label', 'desc'], re;
+						re         = {
+							$regex  : ".*" + search.replace(/([^\w\d])/g, "\\$1") + ".*",
+							$options: 'gi'
+						};
+						query.$or  = fields.map(
+							( f ) => ({ [f]: re, _cls: selectedType }))
+					}
+					else {
+						query._cls = selectedType;
+					}
+					
 					return {
-						etty : selectedType || types && types[0],
-						query: {},
+						etty,
+						query,
 						limit: 3,
 					}
+				},
+				updateSearch( search ) {
+					return { search };
+				},
+				updateQuery( selectedType ) {
+					return { selectedType };
 				}
 			},
 			@withStateMap(
 				{
 					@asRef
 					Query: "SelectedQuery",
-					updateQuery( Query ) {
-						return { Query }
-					}
 				}
 			)
 			Query        : stores.MongoQueries,
@@ -59,9 +82,6 @@ import stores                                                                   
 				{
 					@asRef
 					record: "SelectedRef",
-					updateQuery( Query ) {
-						return { Query }
-					}
 				}
 			)
 			Selected     : stores.MongoRecords,
@@ -72,18 +92,38 @@ import stores                                                                   
 @propsToScope(
 	"defaultValue:Picker.SelectedRef.ref",
 	"allowTypeSelection:Picker.SelectedQuery.types",
-	"defaultValue.cls:Picker.SelectedQuery.selectedType"
+	"defaultValue.cls:Picker.SelectedQuery.defaultType"
 )
-@scopeToProps("Picker.Query", "Picker.Selected")
+@scopeToProps("Picker.Query", "Picker.Selected", "SelectedQuery")
 @asFieldType
 export default class Picker extends React.Component {
-	static displayName = "Picker";
+	static displayName  = "Picker";
+	static defaultProps = {
+		allowTypeSelection: Object.keys(entities)
+	}
+	state               = {};
 	
 	render() {
-		let { defaultValue, value = defaultValue, Query, Selected, allowTypeSelection } = this.props;
+		let { defaultValue, value = defaultValue, Query, Selected, allowTypeSelection, SelectedQuery = {}, $actions } = this.props,
+		    { currentType = SelectedQuery.etty || allowTypeSelection[0], currentSearch = "" }                         = this.state;
 		//debugger
 		return (
 			<>
+				<Select options={allowTypeSelection.map(etty => ({ label: etty, value: etty }))}
+				        value={currentType}
+				        onChange={e => {
+					        this.setState({ currentType: e.target.value })
+					        $actions.Picker.updateQuery(e.target.value)
+				        }}
+				/>
+				<Text
+					placeholder={"Search"}
+					value={currentSearch}
+					onChange={e => {
+						this.setState({ currentSearch: e.target.value })
+						$actions.Picker.updateSearch(e.target.value)
+					}}
+				/>
 				<pre>
 					{
 						JSON.stringify(Selected, null, 2)

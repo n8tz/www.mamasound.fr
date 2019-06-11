@@ -16,6 +16,7 @@ export default {
 	STATIC_URL      : "static.mamasound.fr",
 	PUBLIC_URL      : "mamasound.fr",
 	ROOT_DOMAIN     : "mamasound.localhost",
+	UPLOAD_URL      : "mamasound.localhost/upload",
 	SESSION_CHECK_TM: 60000,
 	...require('$super')
 };
