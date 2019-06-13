@@ -144,7 +144,7 @@ export default class Slider extends React.Component {
 			>
 				<TweenAxis
 					axe={ "scrollX" }
-					defaultPosition={ 100 + dec + index * step }
+					defaultPosition={ 100 + dec }
 					size={ nbGhostItems * step + 100 }
 					scrollableWindow={ 4 * step }
 					inertia={
@@ -164,7 +164,7 @@ export default class Slider extends React.Component {
 								this.setState({ index: (i) % nbItems })
 								//console.log(i % nbItems, v)
 							},
-							value     : 100 + dec + index * step,
+							//value     : 100 + dec + index * step,
 							wayPoints : allItems.map(( child, i ) => ({ at: 100 + i * step }))
 						}
 					}

@@ -29880,11 +29880,18 @@ function asTweener() {
 
           _.tweenRefOrigin[id] = tweenableMap;
           _.tweenRefOriginCss[id] = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, iStyle);
-          _.tweenRefCSS[id] = iStyle; // init / reset or get the tweenable view
+          _.tweenRefCSS[id] = iStyle;
+          _.tweenRefMaps[id] = _.tweenRefMaps[id] || {}; // init / reset or get the tweenable view
 
-          tweenableMap = _.tweenRefMaps[id] = Object.assign(_.tweenRefMaps[id] || {}, initials, tweenableMap || {});
+          tweenableMap = Object.assign(_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, _.tweenRefMaps[id]), initials, tweenableMap || {}); // add new initial values
+
+          Object.keys(tweenableMap).forEach(function (key) {
+            return _.tweenRefMaps[id][key] = (_.tweenRefMaps[id][key] || 0) + tweenableMap[key];
+          });
+          tweenableMap = _.tweenRefMaps[id];
           Object(_helpers_css__WEBPACK_IMPORTED_MODULE_17__["muxToCss"])(tweenableMap, iStyle, _.muxByTarget[id], _.muxDataByTarget[id], _.box);
-        }
+        } //console.log('tweenRef::tweenRef:519: ', id, _.tweenRefCSS[id], tweenableMap);
+
 
         if (noref) return {
           style: _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, _.tweenRefCSS[id])

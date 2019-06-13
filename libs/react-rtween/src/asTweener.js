@@ -147,6 +147,7 @@ export default function asTweener( ...argz ) {
 			if ( !_.tweenRefs[id] )
 				_.tweenRefTargets.push(id);
 			
+			
 			if ( _.tweenRefs[id] && (_.iMapOrigin[id] !== iMap || mapReset) ) {
 				// hot switch initial values
 				
@@ -226,13 +227,20 @@ export default function asTweener( ...argz ) {
 				_.tweenRefOrigin[id]    = tweenableMap;
 				_.tweenRefOriginCss[id] = { ...iStyle };
 				_.tweenRefCSS[id]       = iStyle;
+				_.tweenRefMaps[id]      = _.tweenRefMaps[id] || {};
 				// init / reset or get the tweenable view
-				tweenableMap            = _.tweenRefMaps[id] = Object.assign(_.tweenRefMaps[id] || {}, initials, tweenableMap || {});
-				
+				tweenableMap            = Object.assign({ ..._.tweenRefMaps[id] }, initials, tweenableMap || {});
+				// add new initial values
+				Object.keys(tweenableMap)
+				      .forEach(
+					      key => (_.tweenRefMaps[id][key] = (_.tweenRefMaps[id][key] || 0) + tweenableMap[key])
+				      );
+				tweenableMap = _.tweenRefMaps[id];
 				muxToCss(tweenableMap, iStyle, _.muxByTarget[id], _.muxDataByTarget[id], _.box);
 				
 				
 			}
+			//console.log('tweenRef::tweenRef:519: ', id, _.tweenRefCSS[id], tweenableMap);
 			if ( noref )
 				return {
 					style: { ..._.tweenRefCSS[id] }
@@ -1180,8 +1188,8 @@ export default function asTweener( ...argz ) {
 				{
 					parentTweener => {
 						this._parentTweener = parentTweener;
-						return <TweenerContext.Provider value={ this }>
-							{ super.render() }
+						return <TweenerContext.Provider value={this}>
+							{super.render()}
 						</TweenerContext.Provider>;
 					}
 				}

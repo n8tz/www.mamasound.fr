@@ -22,11 +22,11 @@ var express = require("express"),
     argz    = require('minimist')(process.argv.slice(2)),
     wpiConf = require('App/.wpiConfig'),
     debug   = require('App/console').default("server");
-
 process.title = wpiConf.project.name + '::server';
 
 debug.warn("process.env.DEBUG : ", process.env.DEBUG);
 
+//server.use(compression());
 server.use(express.json());       // to support JSON-encoded bodies
 server.use(express.urlencoded()); // to support URL-encoded bodies
 

@@ -16,11 +16,12 @@
 import App              from "App/index.js";
 import {renderToString} from "react-dom/server";
 
-const wpiConf   = require('App/.wpiConfig.json'),
-      fs        = require('fs'),
-      express   = require('express'),
-      tpl       = require('../index.html.tpl');
-const basicAuth = require('basic-auth-connect')
+const wpiConf     = require('App/.wpiConfig.json'),
+      fs          = require('fs'),
+      express     = require('express'),
+      tpl         = require('../index.html.tpl'),
+      compression = require('compression');
+const compressor  = compression();
 
 export const name          = "Rendering";
 export const priorityLevel = 100000;
@@ -35,19 +36,23 @@ export function service( server ) {
 	server.get(
 		'/',
 		function ( req, res, next ) {
-			
-			console.warn(req.url, req.user)
-			App.renderSSR(
-				{
-					location: req.url,
-					css     : fs.existsSync(process.cwd() + "/dist/App.css")
-					          ? fs.readFileSync(process.cwd() + "/dist/App.css")
-					          : "/* ... */",
-					//state   : currentState,
-					tpl
-				},
-				( err, html, nstate ) => {
-					res.send(200, html)
+			compressor(
+				req, res,
+				(  ) => {
+					console.warn(req.url, req.user)
+					App.renderSSR(
+						{
+							location: req.url,
+							css     : fs.existsSync(process.cwd() + "/dist/App.css")
+							          ? fs.readFileSync(process.cwd() + "/dist/App.css")
+							          : "/* ... */",
+							//state   : currentState,
+							tpl
+						},
+						( err, html, nstate ) => {
+							res.send(200, html)
+						}
+					)
 				}
 			)
 		}

@@ -27,12 +27,13 @@ const ctrl = {
 		    }),
 		    App         = reScope(cScope)(require('./App').default);
 		window.contexts = Scope.scopes;
+		window.ctrl     = this;
 		if ( localStorage.mama )
 			cScope.restore(JSON.parse(localStorage.mama));
 		else if ( __STATE__ )
 			cScope.restore(__STATE__);
 		ReactDom.render(<App/>, node);
-		
+
 		if ( process.env.NODE_ENV !== 'production' && module.hot ) {
 			module.hot.accept('App/App', () => {
 				//ReactDom.render(<App/>, node)
@@ -43,50 +44,50 @@ const ctrl = {
 			});
 		}
 	},
-	//renderSSR( cfg, cb, _attempts = 0 ) {
-	//	let html = cfg.tpl.render(
-	//		{
-	//			app: "",
-	//		}
-	//	);
-	//	cb(null, html)
-	//},
 	renderSSR( cfg, cb, _attempts = 0 ) {
-		let rid     = shortid.generate(),
-		    cScope  = new Scope(AppScope, {
-			    id         : rid,
-			    autoDestroy: false
-		    }), App = reScope(cScope)(require('./App').default);
-		
-		cfg.state && cScope.restore(cfg.state, { alias: "App" });
-		
-		let html,
-		    appHtml     = renderToString(<App location={cfg.location}/>),
-		    stable      = cScope.isStableTree();
-		global.contexts = Scope.scopes;
-		//console.log('ctrl::renderSSR:65: ', cfg.location, _attempts);
-		cScope.onceStableTree(state => {
-			let nstate = cScope.serialize({ alias: "App" });
-			cScope.destroy()
-			if ( !stable && _attempts < 3 ) {
-				cfg.state = nstate;
-				ctrl.renderSSR(cfg, cb, ++_attempts);
+		let html = cfg.tpl.render(
+			{
+				app: "",
 			}
-			else {
-				try {
-					html = cfg.tpl.render(
-						{
-							app  : appHtml,
-							state: JSON.stringify(nstate),
-							css  : cfg.css
-						}
-					);
-				} catch ( e ) {
-					return cb(e)
-				}
-				cb(null, html)
-			}
-		})
-	}
+		);
+		cb(null, html)
+	},
+	//renderSSR( cfg, cb, _attempts = 0 ) {
+	//	let rid     = shortid.generate(),
+	//	    cScope  = new Scope(AppScope, {
+	//		    id         : rid,
+	//		    autoDestroy: false
+	//	    }), App = reScope(cScope)(require('./App').default);
+	//
+	//	cfg.state && cScope.restore(cfg.state, { alias: "App" });
+	//
+	//	let html,
+	//	    appHtml     = renderToString(<App location={cfg.location}/>),
+	//	    stable      = cScope.isStableTree();
+	//	global.contexts = Scope.scopes;
+	//	//console.log('ctrl::renderSSR:65: ', cfg.location, _attempts);
+	//	cScope.onceStableTree(state => {
+	//		let nstate = cScope.serialize({ alias: "App" });
+	//		cScope.destroy()
+	//		if ( !stable && _attempts < 3 ) {
+	//			cfg.state = nstate;
+	//			ctrl.renderSSR(cfg, cb, ++_attempts);
+	//		}
+	//		else {
+	//			try {
+	//				html = cfg.tpl.render(
+	//					{
+	//						app  : appHtml,
+	//						state: JSON.stringify(nstate),
+	//						css  : cfg.css
+	//					}
+	//				);
+	//			} catch ( e ) {
+	//				return cb(e)
+	//			}
+	//			cb(null, html)
+	//		}
+	//	})
+	//}
 }
 export default ctrl;

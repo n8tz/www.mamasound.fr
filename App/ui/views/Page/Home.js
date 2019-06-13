@@ -22,10 +22,10 @@ import {asTweener, TweenRef, TweenAxis} from "react-rtween";
 
 const wayPoints = [
 	{
-		head  : 0,
-		event : 100,
-		events: 150,
-		page  : 250
+		page  : 0,
+		head  : 100,
+		event : 200,
+		events: 250
 	}
 ]
 
@@ -49,79 +49,80 @@ export default class Home extends React.Component {
 		return true;
 	}
 	
-	componentDidMount( props = this.props ) {
-		window.addEventListener("load", function () {
-			// Set a timeout...
-			setTimeout(function () {
-				// Hide the address bar!
-				window.scrollTo(0, 1);
-			}, 0);
-		});
-		let { appState } = props;
-		switch ( appState.currentPageFocus ) {
-			case 'head' :
-				this.scrollTo(0);
-				break;
-			case 'event' :
-				this.scrollTo(100);
-				break;
-			case 'events' :
-				this.scrollTo(150);
-				break;
-			case 'page' :
-				this.scrollTo(250);
-				break;
-			
-		}
-	}
-	
-	componentDidUpdate( props ) {
-		let { appState, $actions } = this.props;
-		//console.warn(appState === props.appState)
-		if ( appState.doFocus && props.appState.currentPageFocus !== appState.currentPageFocus ) {
-			//console.log(appState.currentPageFocus);
-			switch ( appState.currentPageFocus ) {
-				case 'head' :
-					this.scrollTo(0, 500);
-					break;
-				case 'event' :
-					this.scrollTo(100, 500, undefined, "easeBackIn");
-					break;
-				case 'events' :
-					this.scrollTo(150, 500, undefined, "easeBackIn");
-					break;
-				case 'page' :
-					this.scrollTo(250, 500, undefined, "easeBackIn");
-					break;
-				case 'loop' :
-					this.scrollTo(350, 500, "scrollY").then(e => {
-						//this.scrollTo(0)
-						//$actions.setPageFocus("head")
-					});
-					break;
-				
-			}
-		}
-	}
-	
+	//componentDidMount( props = this.props ) {
+	//	window.addEventListener("load", function () {
+	//		// Set a timeout...
+	//		setTimeout(function () {
+	//			// Hide the address bar!
+	//			window.scrollTo(0, 1);
+	//		}, 0);
+	//	});
+	//	let { appState } = props;
+	//	switch ( appState.currentPageFocus ) {
+	//		case 'head' :
+	//			this.scrollTo(0);
+	//			break;
+	//		case 'event' :
+	//			this.scrollTo(100);
+	//			break;
+	//		case 'events' :
+	//			this.scrollTo(150);
+	//			break;
+	//		case 'page' :
+	//			this.scrollTo(250);
+	//			break;
+	//
+	//	}
+	//}
+	//
+	//componentDidUpdate( props ) {
+	//	let { appState, $actions } = this.props;
+	//	//console.warn(appState === props.appState)
+	//	if ( appState.doFocus && props.appState.currentPageFocus !== appState.currentPageFocus ) {
+	//		//console.log(appState.currentPageFocus);
+	//		switch ( appState.currentPageFocus ) {
+	//			case 'head' :
+	//				this.scrollTo(0, 500);
+	//				break;
+	//			case 'event' :
+	//				this.scrollTo(100, 500, undefined, "easeBackIn");
+	//				break;
+	//			case 'events' :
+	//				this.scrollTo(150, 500, undefined, "easeBackIn");
+	//				break;
+	//			case 'page' :
+	//				this.scrollTo(250, 500, undefined, "easeBackIn");
+	//				break;
+	//			case 'loop' :
+	//				this.scrollTo(350, 500, "scrollY").then(e => {
+	//					//this.scrollTo(0)
+	//					//$actions.setPageFocus("head")
+	//				});
+	//				break;
+	//
+	//		}
+	//	}
+	//}
+	//
 	render() {
 		let { Anims: { MainPage }, appState, $actions } = this.props;
 		if ( typeof window !== "undefined" )
 			window.$actions = $actions;
-		//console.log('render snap', appState.currentPageFocus)
+		console.log('render snap', appState.currentPageFocus)
 		return <TweenRef
-			id={ "page" }
-			initial={ MainPage.page }>
-			<div className={ "Home container" }>
+			id={"page"}
+			initial={MainPage.page}>
+			<div className={"Home container"}>
 				
 				<TweenAxis
-					axe={ "scrollY" }
-					items={ MainPage.YAxis }
-					scrollableWindow={ 225 }
-					defaultPosition={ wayPoints[appState.currentPageFocus] }
+					axe={"scrollY"}
+					items={MainPage.YAxis}
+					//scrollableWindow={225}
+					defaultPosition={100}
 					inertia={
 						{
 							maxJump     : 1,
+							//value       : 100,
 							//shouldLoop  : ( v ) => {
 							//	if ( (v + 1) > (350) ) {
 							//		return -350;
@@ -172,56 +173,56 @@ export default class Home extends React.Component {
 					}
 				/>
 				<TweenRef
-					id={ "header" }
-					initial={ MainPage.header }
+					id={"header"}
+					initial={MainPage.header}
 				>
 					<header
 						//onClick={ e => $actions.changeHighlighterBackground() }
 						//className={ "container withMask" }
 						//onClick={ e => $actions.setPageFocus("head") }
-						style={ {
+						style={{
 							zIndex : 5000,
 							display: "inline-block",
 							//width  : "100%",
 							//background: "red",
-						} }>
-						<div className={ "maskContent" }>
+						}}>
+						<div className={"maskContent"}>
 							<TweenRef
-								id={ "logo" }
-								initial={ {
+								id={"logo"}
+								initial={{
 									height: "100%"
-								} }
+								}}
 							>
-								<div className={ "logo" }/>
+								<div className={"logo"}/>
 							</TweenRef>
 						</div>
 					</header>
 				</TweenRef>
-				<TweenRef id={ "Highlighter" } initial={ MainPage.Highlighter }>
+				<TweenRef id={"Highlighter"} initial={MainPage.Highlighter}>
 					<Views.Block.Highlighter/>
 				</TweenRef>
 				
-				<TweenRef id={ "events" }
-				          initial={ MainPage.events }>
+				<TweenRef id={"events"}
+				          initial={MainPage.events}>
 					<Views.Events.EventList/>
 				</TweenRef>
 				<TweenRef
-					id={ "EventMap" }
-					initial={ MainPage.EventMap }
+					id={"EventMap"}
+					initial={MainPage.EventMap}
 				>
 					<Views.Events.EventMap
-						day={ appState.currentVisibleDay || appState.curDay }
-						viewType={ appState.viewType }/>
+						day={appState.currentVisibleDay || appState.curDay}
+						viewType={appState.viewType}/>
 				</TweenRef>
 				<TweenRef
-					id={ "PageBlock" }
-					initial={ MainPage.PageBlock }
+					id={"PageBlock"}
+					initial={MainPage.PageBlock}
 				>
 					<Views.Block.PageBlock/>
 				</TweenRef>
 				<TweenRef
-					id={ "Footer" }
-					initial={ MainPage.Footer }
+					id={"Footer"}
+					initial={MainPage.Footer}
 				>
 					<Comps.Footer/>
 				</TweenRef>
