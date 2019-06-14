@@ -23,15 +23,8 @@ import {
 import {
 	withStateMap, asRef, asStore
 }                            from "rescope-spells";
-import anims                 from 'App/ui/anims/(*).js';
 import {Comps}               from 'App/ui';
-import Tabs                  from '@material-ui/core/Tabs';
-import Tab                   from '@material-ui/core/Tab';
-import moment                from "moment";
-import stores                from 'App/stores/(*).js';
 import {Views}               from 'App/ui';
-import {asTweener, TweenRef} from "react-rtween";
-import SwipeableViews        from 'react-swipeable-views';
 
 import ReactJWPlayer from 'react-jw-player';
 

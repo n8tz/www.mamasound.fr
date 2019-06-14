@@ -27,7 +27,6 @@ import moment                from "moment";
 import stores                from 'App/stores/(*).js';
 import {Views}               from 'App/ui';
 import {asTweener, TweenRef} from "react-rtween";
-import SwipeableViews        from 'react-swipeable-views';
 
 import Fab            from '@material-ui/core/Fab';
 import GpsNoFixedIcon from '@material-ui/icons/GpsNotFixed';
