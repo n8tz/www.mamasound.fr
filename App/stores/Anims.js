@@ -23,7 +23,7 @@ const breakPts   = {
 	      desktop: desktopAnims,
 	      mobile : mobileAnims
       },
-      initialPts = isBrowserSide && window.innerWidth >= 900 && "desktop" || "mobile";
+      initialPts = "desktop";
 
 export default class Anims extends Store {
 	static singleton = true;
@@ -38,6 +38,7 @@ export default class Anims extends Store {
 	shouldSerialize() {
 		return false;
 	}
+	
 	constructor() {
 		super(...arguments);
 		

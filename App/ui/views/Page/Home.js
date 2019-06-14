@@ -20,14 +20,13 @@ import ReactDom                              from "react-dom";
 import {withStateMap, asRef, asStore}   from "rescope-spells";
 import {asTweener, TweenRef, TweenAxis} from "react-rtween";
 
-const wayPoints = [
-	{
-		page  : 0,
-		head  : 100,
-		event : 200,
-		events: 250
-	}
-]
+const wayPoints =
+	      {
+		      page  : 0,
+		      head  : 100,
+		      event : 200,
+		      events: 250
+	      };
 
 @scopeToProps("appState", "Anims")
 @asTweener({ enableMouseDrag: true, dragDirectionLock: true })
@@ -74,7 +73,7 @@ export default class Home extends React.Component {
 	//
 	//	}
 	//}
-	//
+	
 	//componentDidUpdate( props ) {
 	//	let { appState, $actions } = this.props;
 	//	//console.warn(appState === props.appState)
@@ -108,7 +107,7 @@ export default class Home extends React.Component {
 		let { Anims: { MainPage }, appState, $actions } = this.props;
 		if ( typeof window !== "undefined" )
 			window.$actions = $actions;
-		console.log('render snap', appState.currentPageFocus)
+		console.log('render snap', appState.currentPageFocus, wayPoints[appState.currentPageFocus])
 		return <TweenRef
 			id={"page"}
 			initial={MainPage.page}>
@@ -117,8 +116,9 @@ export default class Home extends React.Component {
 				<TweenAxis
 					axe={"scrollY"}
 					items={MainPage.YAxis}
-					//scrollableWindow={225}
-					defaultPosition={100}
+					//scrollableWindow={ 225 }
+					defaultPosition={ wayPoints[appState.currentPageFocus] }
+					//defaultPosition={100}
 					inertia={
 						{
 							maxJump     : 1,

@@ -11,8 +11,7 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-
-let stepAngle = "3deg";
+let stepAngle = "4deg";
 
 export const defaultInitial  = {
 	position : "absolute",

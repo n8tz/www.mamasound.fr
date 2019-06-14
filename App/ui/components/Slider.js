@@ -130,10 +130,10 @@ export default class Slider extends React.Component {
 		    }                                                                                = this.props,
 		    { index = defaultIndex, allItems, nbGhostItems, step, dec, tweenLines, nbItems } = this.state;
 		
-		//console.log("render", index)
+		//console.log("render slider", nbItems, 100 + dec + index * step)
 		return (
 			<div
-				className={ "rSlide slider" }
+				className={"rSlide slider"}
 				style={
 					{
 						width     : "100%",
@@ -143,10 +143,10 @@ export default class Slider extends React.Component {
 				}
 			>
 				<TweenAxis
-					axe={ "scrollX" }
-					defaultPosition={ 100 + dec }
-					size={ nbGhostItems * step + 100 }
-					scrollableWindow={ 4 * step }
+					axe={"scrollX"}
+					defaultPosition={100 + dec + index * step}
+					size={nbGhostItems * step + 100}
+					scrollableWindow={4 * step}
 					inertia={
 						{
 							//maxJump   : 1,
@@ -170,15 +170,16 @@ export default class Slider extends React.Component {
 					}
 				/>
 				<TweenAxis
-					axe={ "scrollY" }
-					size={ 1000 }
-					defaultPosition={ 500 }
+					axe={"scrollY"}
+					size={1000}
+					defaultPosition={500}
 				/>
 				{
 					allItems.map(
 						( Child, i ) =>
 							<TweenRef
-								key={ i }
+								key={i}
+								id={"slider_" + i}
 								initial={
 									defaultInitial
 								}
@@ -186,8 +187,8 @@ export default class Slider extends React.Component {
 									tweenLines[i]
 								}
 							>
-								<div className={ "slide" } onClick={ onClick && (e => onClick(e, i % nbItems, this)) }>
-									{ Child }
+								<div className={"slide"} onClick={onClick && (e => onClick(e, i % nbItems, this))}>
+									{Child}
 								</div>
 							</TweenRef>
 					)

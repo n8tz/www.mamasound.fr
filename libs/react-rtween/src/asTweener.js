@@ -228,8 +228,20 @@ export default function asTweener( ...argz ) {
 				_.tweenRefOriginCss[id] = { ...iStyle };
 				_.tweenRefCSS[id]       = iStyle;
 				_.tweenRefMaps[id]      = _.tweenRefMaps[id] || {};
+				
+				
+				//Object.keys(initials)
+				//      .forEach(
+				//	      key => (_.tweenRefMaps[id][key] = is.number(_.tweenRefMaps[id][key])
+				//	                                        ? _.tweenRefMaps[id][key]
+				//	                                        : initials[key])
+				//      );
+				if ( tweenableMap.hasOwnProperty("opacity") && _.tweenRefMaps[id].hasOwnProperty("opacity") ) {
+					_.tweenRefMaps[id].opacity -= 1;
+				}
 				// init / reset or get the tweenable view
-				tweenableMap            = Object.assign({ ..._.tweenRefMaps[id] }, initials, tweenableMap || {});
+				tweenableMap = Object.assign({ ..._.tweenRefMaps[id] }, initials, tweenableMap || {});
+				// set defaults values in case of
 				// add new initial values
 				Object.keys(tweenableMap)
 				      .forEach(
@@ -481,6 +493,7 @@ export default function asTweener( ...argz ) {
 			;
 			
 			dim = this._.axes[axe] = nextDescr;
+			//console.log('TweenableComp::initAxis:519: ', axe, dim.scrollPos);
 			(_inertia) && (dim.inertia._.wayPoints = _inertia.wayPoints);
 		}
 		
@@ -524,6 +537,7 @@ export default function asTweener( ...argz ) {
 			dim.inertia.setBounds(0, dim.scrollableArea);
 			sl.goTo(dim.scrollPos, this._.tweenRefMaps);
 			this._updateTweenRefs();
+			//console.log('TweenableComp::addScrollableAnim:519: ', axe, dim.scrollPos);
 			return sl;
 		}
 		

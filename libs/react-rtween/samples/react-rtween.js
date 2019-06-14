@@ -29432,17 +29432,6 @@ function (_React$Component) {
         //@todo : should use didmount ?
         parentTweener = tweener || parentTweener;
 
-        if (react__WEBPACK_IMPORTED_MODULE_6___default.a.isValidElement(children)) {
-          children = react__WEBPACK_IMPORTED_MODULE_6___default.a.cloneElement(children, _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_5___default()({}, parentTweener.tweenRef(id, style || children.props.style, initial, pos, noRef, reset), {
-            onDoubleClick: onDoubleClick && function (e) {
-              return onDoubleClick(e, parentTweener);
-            },
-            onClick: onClick && function (e) {
-              return onClick(e, parentTweener);
-            }
-          }));
-        }
-
         if (_this3._previousTweener !== parentTweener || _this3._previousScrollable !== tweenLines) {
           if (_this3._tweenLines) {
             Object.keys(_this3._tweenLines).forEach(function (axe) {
@@ -29464,6 +29453,17 @@ function (_React$Component) {
 
           _this3._previousTweener = parentTweener;
           _this3._previousScrollable = tweenLines;
+        }
+
+        if (react__WEBPACK_IMPORTED_MODULE_6___default.a.isValidElement(children)) {
+          children = react__WEBPACK_IMPORTED_MODULE_6___default.a.cloneElement(children, _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_5___default()({}, parentTweener.tweenRef(id, style || children.props.style, initial, pos, noRef, reset), {
+            onDoubleClick: onDoubleClick && function (e) {
+              return onDoubleClick(e, parentTweener);
+            },
+            onClick: onClick && function (e) {
+              return onClick(e, parentTweener);
+            }
+          }));
         }
 
         return children;
@@ -30142,7 +30142,8 @@ function asTweener() {
           scrollableArea: scrollableArea
         });
 
-        dim = this._.axes[axe] = nextDescr;
+        dim = this._.axes[axe] = nextDescr; //console.log('TweenableComp::initAxis:519: ', axe, dim.scrollPos);
+
         _inertia && (dim.inertia._.wayPoints = _inertia.wayPoints);
       }
     }, {
@@ -30183,7 +30184,8 @@ function asTweener() {
         dim.inertia.setBounds(0, dim.scrollableArea);
         sl.goTo(dim.scrollPos, this._.tweenRefMaps);
 
-        this._updateTweenRefs();
+        this._updateTweenRefs(); //console.log('TweenableComp::addScrollableAnim:519: ', axe, dim.scrollPos);
+
 
         return sl;
       }
