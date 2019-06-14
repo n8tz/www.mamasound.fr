@@ -19,7 +19,7 @@
 import React                                      from 'react';
 import moment                                     from 'moment';
 import Widget                                     from 'App/ui/components/Widget.js';
-import {Views, Comps}                             from "App/ui";
+import {Views, Pages}                             from "App/ui";
 import {BrowserRouter, StaticRouter, Route, Link} from "react-router-dom";
 import {ContextMenu}                              from 'react-inheritable-contextmenu';
 import "./ui/styles/index.scss"
@@ -72,7 +72,7 @@ export default class App extends React.Component {
 					)
 				}
 				
-				<Route path="/" exact component={Views.Page.Home}/>
+				<Route path="/" exact component={Pages.Home}/>
 				{/*<Route path="/" exact component={ Views.Page.Admin }/>*/}
 			</React.Fragment>
 		</Router>

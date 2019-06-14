@@ -217,7 +217,6 @@
     "react-select": "^2.4.1",
     "react-share": "^2.4.0",
     "react-slick": "^0.23.2",
-    "react-swipeable-views": "^0.13.1",
     "react-tetris": "^0.1.0",
     "react-time": "^4.3.0",
     "redis": "^2.8.0",
@@ -226,7 +225,6 @@
     "rscopes": "^16.0.2",
     "rtween": "^1.2.1",
     "shortid": "^2.2.14",
-    "slick-carousel": "^1.8.1",
     "speakingurl": "^14.0.1",
     "superagent": "^3.8.2",
     "terser-webpack-plugin": "^1.2.3",
@@ -234,13 +232,12 @@
     "uniforms": "^1.31.1",
     "uniforms-material": "^1.31.1",
     "url-loader": "^1.1.2",
-    "video-extensions": "^1.1.0",
     "xlsx": "^0.14.3",
     "xxhashjs": "^0.2.2"
   },
   "devDependencies": {
-    "webpack-inherit": "^1.5.3",
-    "wpi-react-hmr-ssr": "^1.1.14",
+    "webpack-inherit": "^1.5.5",
+    "wpi-react-hmr-ssr": "^1.1.15",
     "wpi-react-rs-sass-ssr": "^1.0.5"
   }
 }

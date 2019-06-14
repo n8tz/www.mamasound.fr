@@ -21,28 +21,28 @@ import {Scope, reScope} from "react-rescope";
 const ctrl = {
 	
 	renderTo( node, state ) {
-		let cScope      = new Scope(AppScope, {
-			    id         : "App",
-			    autoDestroy: true
-		    }),
-		    App         = reScope(cScope)(require('./App').default);
-		window.contexts = Scope.scopes;
-		window.ctrl     = this;
-		if ( localStorage.mama )
-			cScope.restore(JSON.parse(localStorage.mama));
-		else if ( __STATE__ )
-			cScope.restore(__STATE__);
-		ReactDom.render(<App/>, node);
-
-		if ( process.env.NODE_ENV !== 'production' && module.hot ) {
-			module.hot.accept('App/App', () => {
-				//ReactDom.render(<App/>, node)
-				ctrl.renderTo(node, state)
-			});
-			module.hot.accept('App/App.scope', () => {
-				cScope.register(AppScope)
-			});
-		}
+		//let cScope      = new Scope(AppScope, {
+		//	    id         : "App",
+		//	    autoDestroy: true
+		//    }),
+		//    App         = reScope(cScope)(require('./App').default);
+		//window.contexts = Scope.scopes;
+		//window.ctrl     = this;
+		//if ( localStorage.mama )
+		//	cScope.restore(JSON.parse(localStorage.mama));
+		//else if ( __STATE__ )
+		//	cScope.restore(__STATE__);
+		//ReactDom.render(<App/>, node);
+		//
+		//if ( process.env.NODE_ENV !== 'production' && module.hot ) {
+		//	module.hot.accept('App/App', () => {
+		//		//ReactDom.render(<App/>, node)
+		//		ctrl.renderTo(node, state)
+		//	});
+		//	module.hot.accept('App/App.scope', () => {
+		//		cScope.register(AppScope)
+		//	});
+		//}
 	},
 	//renderSSR( cfg, cb, _attempts = 0 ) {
 	//	let html = cfg.tpl.render(
@@ -65,7 +65,7 @@ const ctrl = {
 		    appHtml     = renderToString(<App location={cfg.location}/>),
 		    stable      = cScope.isStableTree();
 		global.contexts = Scope.scopes;
-		//console.log('ctrl::renderSSR:65: ', cfg.location, _attempts);
+		console.log('ctrl::renderSSR:65: ', cfg.location, _attempts);
 		cScope.onceStableTree(state => {
 			let nstate = cScope.serialize({ alias: "App" });
 			cScope.destroy()

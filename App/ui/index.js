@@ -18,9 +18,12 @@ import views      from 'App/ui/views/(**/*).js';
 import fields     from 'App/ui/fields/(**/*).js';
 import forms      from 'App/ui/forms/(**/*).js';
 import components from 'App/ui/components/(**/*).js';
+import pages      from 'App/ui/pages/(**/*).js';
 
 export {
 	anims,
+	pages,
+	pages as Pages,
 	views,
 	forms,
 	forms as Forms,
