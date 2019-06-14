@@ -44,7 +44,7 @@ const ctrl = {
 				cScope.register(AppScope)
 			});
 		}
-		
+		//
 	},
 	
 	renderSSRTo( node, state, _attempts = 0 ) {

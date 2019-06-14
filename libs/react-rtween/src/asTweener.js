@@ -235,9 +235,9 @@ export default function asTweener( ...argz ) {
 				//	                                        ? _.tweenRefMaps[id][key]
 				//	                                        : initials[key])
 				//      );
-				if ( tweenableMap.hasOwnProperty("opacity") && _.tweenRefMaps[id].hasOwnProperty("opacity") ) {
-					_.tweenRefMaps[id].opacity -= initials.opacity;
-				}
+				//if ( tweenableMap.hasOwnProperty("opacity") && _.tweenRefMaps[id].hasOwnProperty("opacity") ) {
+				//	_.tweenRefMaps[id].opacity -= initials.opacity;
+				//}
 				// init / reset or get the tweenable view
 				tweenableMap = Object.assign({ ..._.tweenRefMaps[id] }, initials, tweenableMap || {});
 				// set defaults values in case of
@@ -1056,7 +1056,7 @@ export default function asTweener( ...argz ) {
 		}
 		
 		updateRefStyle( target, style, postPone ) {
-			let _ = this._, initials = {}, map = {};
+			let _ = this._, initials = {};
 			if ( isArray(target) && isArray(style) )
 				return target.map(( m, i ) => this.updateRefStyle(m, style[i], postPone));
 			if ( isArray(target) )
@@ -1066,7 +1066,7 @@ export default function asTweener( ...argz ) {
 				this.makeTweenable();
 			
 			deMuxTween(style, _.tweenRefMaps[target], initials, _.muxDataByTarget[target], _.muxByTarget[target], true);
-			this._updateTweenRefs();
+			this._updateTweenRef(target);
 			//Object.assign(initials, _.tweenRefCSS[target]);
 			//_.tweenRefCSS[target] = initials;
 		}
@@ -1101,16 +1101,20 @@ export default function asTweener( ...argz ) {
 		
 		_updateTweenRefs() {
 			if ( this._.tweenEnabled ) {
-				//let now = Date.now();
-				//console.log(now - this._lf)
-				//this._lf = now;
-				for ( let i = 0, target, node; i < this._.tweenRefTargets.length; i++ ) {
+				for ( let i = 0, target, node, style; i < this._.tweenRefTargets.length; i++ ) {
 					target = this._.tweenRefTargets[i];
-					muxToCss(this._.tweenRefMaps[target], this._.tweenRefCSS[target], this._.muxByTarget[target], this._.muxDataByTarget[target], this._.box);
-					node = this.getTweenableRef(target);
-					node && Object.assign(node.style, this._.tweenRefCSS[target]);
+					style  = this._updateTweenRef(target);
 				}
 			}
+		}
+		
+		_updateTweenRef( target ) {
+			let node;
+			this._.tweenRefCSS[target] &&
+			muxToCss(this._.tweenRefMaps[target], this._.tweenRefCSS[target], this._.muxByTarget[target], this._.muxDataByTarget[target], this._.box);
+			node = this.getTweenableRef(target);
+			node && Object.assign(node.style, this._.tweenRefCSS[target]);
+			return this._.tweenRefCSS[target];
 		}
 		
 		componentWillUnmount() {

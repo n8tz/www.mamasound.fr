@@ -26,11 +26,11 @@
 
   //@include withMaskTop();
 
-  //@include withMask();
+  @include withMask();
 
   .maskContent {
-    overflow: hidden;
-    height: 100%;
+    //overflow: hidden;
+    //height: 100%;
   }
 
   .NavTools {
@@ -65,15 +65,15 @@
     }
   }
 
-  .content {
-    position: relative;
-    height: 100%;
-    @media screen and (max-width: $tablet-landscape-breakpoint) {
-      margin: 0 !important;
-      padding: 0 !important;
-      width: 100% !important;
-    }
-  }
+  //.content {
+  //  position: relative;
+  //  height: 100%;
+  //  @media screen and (max-width: $tablet-landscape-breakpoint) {
+  //    margin: 0 !important;
+  //    padding: 0 !important;
+  //    width: 100% !important;
+  //  }
+  //}
 
   .dayList {
 

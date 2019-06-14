@@ -23,7 +23,7 @@ import is                                           from "is";
 export default class Slider extends React.Component {
 	static defaultProps = {
 		defaultIndex   : 0,
-		visibleItems   : 7,
+		visibleItems   : 4,
 		//overlaps       : 1 / 6,
 		defaultInitial : {},
 		defaultEntering: [],

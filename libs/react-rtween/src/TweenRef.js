@@ -30,8 +30,7 @@ function setTarget( anims, target ) {
 
 export default class TweenRef extends React.Component {
 	
-	static propTypes = {
-	};
+	static propTypes = {};
 	state            = {};
 	__tweenableId    = shortid.generate();
 	
@@ -70,6 +69,8 @@ export default class TweenRef extends React.Component {
 					
 					parentTweener = tweener || parentTweener;
 					
+					let twRef = parentTweener.tweenRef(id, style || children.props && children.props.style, initial, pos, noRef, reset);
+					
 					if ( this._previousTweener !== parentTweener || this._previousScrollable !== tweenLines ) {
 						
 						if ( this._tweenLines ) {
@@ -87,6 +88,7 @@ export default class TweenRef extends React.Component {
 						if ( this._previousTweener !== parentTweener )
 							this._previousTweener && this._previousTweener.rmTweenRef(this.__tweenableId)
 						
+						twRef.style = { ...parentTweener._updateTweenRef(id) };
 						
 						if ( this.props.hasOwnProperty("isRoot") ) {
 							this._previousTweener && this._previousTweener.setRootRef(undefined);
@@ -101,7 +103,7 @@ export default class TweenRef extends React.Component {
 						children = React.cloneElement(
 							children,
 							{
-								...parentTweener.tweenRef(id, style || children.props.style, initial, pos, noRef, reset),
+								...twRef,
 								onDoubleClick: onDoubleClick && (e => onDoubleClick(e, parentTweener)),
 								onClick      : onClick && (e => onClick(e, parentTweener))
 							}
