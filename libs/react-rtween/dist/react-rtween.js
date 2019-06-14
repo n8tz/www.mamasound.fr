@@ -893,7 +893,7 @@ function asTweener() {
           //      );
 
           if (tweenableMap.hasOwnProperty("opacity") && _.tweenRefMaps[id].hasOwnProperty("opacity")) {
-            _.tweenRefMaps[id].opacity -= 1;
+            _.tweenRefMaps[id].opacity -= initials.opacity;
           } // init / reset or get the tweenable view
 
 

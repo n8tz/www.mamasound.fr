@@ -86,9 +86,9 @@ const ctrl = {
 			    id         : rid,
 			    autoDestroy: false
 		    }), App = reScope(cScope)(require('./App').default);
-		
+
 		cfg.state && cScope.restore(cfg.state, { alias: "App" });
-		
+
 		let html,
 		    appHtml     = renderToString(<App location={cfg.location}/>),
 		    stable      = cScope.isStableTree();

@@ -11,7 +11,8 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-let stepAngle = "5deg";
+let lrAngle   = "1.8deg";
+let stepAngle = "65deg";
 
 export const defaultInitial  = {
 	position : "absolute",
@@ -23,15 +24,15 @@ export const defaultInitial  = {
 	transform: [
 		{
 			perspective: "1250px",
-			translateY : "-18000px",
-			rotate     : "-" + stepAngle
+			translateY : "-18000px"
 		},
 		{
+			rotate    : "-" + lrAngle,
 			translateY: "18000px",
-			translateZ: "-500px",
-			rotateY   : "-65deg",
 		},
 		{
+			rotateY   : "-" + stepAngle,
+			translateZ: "-500px",
 			translateX: "-50%",
 			translateY: "-50%"
 		}]
@@ -41,18 +42,18 @@ export const defaultEntering = [
 		type    : "Tween",
 		from    : 0,
 		duration: 100,
-		easeFn  : "easeSinIn",
+		easeFn  : "easeCircleIn",
 		apply   : {
-			transform: {
-				rotate: stepAngle,
-			},
+			transform: [{}, {
+				rotate: lrAngle,
+			}],
 			zIndex   : 150,
 		}
 	},
 	{
 		type    : "Tween",
 		from    : 0,
-		duration: 35,
+		duration: 80,
 		apply   : {
 			opacity: 1,
 		}
@@ -61,8 +62,8 @@ export const defaultEntering = [
 		from    : 55,
 		duration: 45,
 		apply   : {
-			transform: [{}, {
-				rotateY   : "65deg",
+			transform: [{}, {}, {
+				rotateY   : stepAngle,
 				translateZ: "500px",
 				//rotateX: "-90deg",
 			}],
@@ -75,16 +76,16 @@ export const defaultLeaving  = [
 		from    : 0,
 		duration: 45,
 		apply   : {
-			transform: [{}, {
-				rotateY   : "65deg",
+			transform: [{}, {}, {
+				rotateY   : stepAngle,
 				translateZ: "-500px",
 			}]
 		}
 	},
 	{
 		type    : "Tween",
-		from    : 65,
-		duration: 35,
+		from    : 20,
+		duration: 80,
 		apply   : {
 			opacity: -1,
 		}
@@ -92,13 +93,13 @@ export const defaultLeaving  = [
 		type    : "Tween",
 		from    : 0,
 		duration: 100,
-		easeFn  : "easeSinOut",
+		easeFn  : "easeCircleOut",
 		apply   : {
 			zIndex: -150,
 			
-			transform: {
-				rotate: stepAngle,
-			}
+			transform: [{}, {
+				rotate: lrAngle,
+			}],
 		}
 	}]
 ;

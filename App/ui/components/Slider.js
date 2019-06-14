@@ -23,8 +23,8 @@ import is                                           from "is";
 export default class Slider extends React.Component {
 	static defaultProps = {
 		defaultIndex   : 0,
-		visibleItems   : 10,
-		overlaps       : 1 / 4,
+		visibleItems   : 7,
+		//overlaps       : 1 / 6,
 		defaultInitial : {},
 		defaultEntering: [],
 		defaultLeaving : [],
@@ -164,7 +164,7 @@ export default class Slider extends React.Component {
 								this.setState({ index: (i) % nbItems })
 								//console.log(i % nbItems, v)
 							},
-							//value     : 100 + dec + index * step,
+							value     : 100 + dec + index * step,
 							wayPoints : allItems.map(( child, i ) => ({ at: 100 + i * step }))
 						}
 					}
@@ -179,7 +179,7 @@ export default class Slider extends React.Component {
 						( Child, i ) =>
 							<TweenRef
 								key={i}
-								id={"slider_" + i}
+								//id={"slider_" + i}
 								initial={
 									defaultInitial
 								}
