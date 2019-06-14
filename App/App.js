@@ -18,8 +18,9 @@
 
 import React                                      from 'react';
 import moment                                     from 'moment';
+import Pages                                      from "App/ui/pages/(*).js";
 import Widget                                     from 'App/ui/components/Widget.js';
-import {Views, Pages}                             from "App/ui";
+import {Views}                                    from "App/ui";
 import {BrowserRouter, StaticRouter, Route, Link} from "react-router-dom";
 import {ContextMenu}                              from 'react-inheritable-contextmenu';
 import "./ui/styles/index.scss"

@@ -20,7 +20,8 @@ import {Scope, reScope} from "react-rescope";
 
 const ctrl = {
 	
-	renderTo( node, state ) {
+	renderTo( node, _state ) {
+		//return this.renderSSRTo(...arguments)
 		let cScope      = new Scope(AppScope, {
 			    id         : "App",
 			    autoDestroy: true
@@ -43,6 +44,33 @@ const ctrl = {
 				cScope.register(AppScope)
 			});
 		}
+		
+	},
+	
+	renderSSRTo( node, state, _attempts = 0 ) {
+		
+		let rid     = shortid.generate(),
+		    cScope  = new Scope(AppScope, {
+			    id         : rid,
+			    autoDestroy: false
+		    }), App = reScope(cScope)(require('./App').default);
+		
+		
+		state && cScope.restore(state, { alias: "App" });
+		let html,
+		    appHtml = renderToString(<App location={"/"}/>),
+		    stable  = cScope.isStableTree();
+		//console.log('ctrl::renderSSR:65: ', cfg.location, _attempts);
+		cScope.onceStableTree(s => {
+			state=cScope.serialize({ alias: "App" });
+			//debugger
+			cScope.destroy()
+			if ( !stable && _attempts < 2 ) {
+				ctrl.renderSSRTo(node, state, ++_attempts);
+			}
+			node.innerHTML = appHtml;
+		})
+		
 	},
 	//renderSSR( cfg, cb, _attempts = 0 ) {
 	//	let html = cfg.tpl.render(
@@ -65,11 +93,12 @@ const ctrl = {
 		    appHtml     = renderToString(<App location={cfg.location}/>),
 		    stable      = cScope.isStableTree();
 		global.contexts = Scope.scopes;
-		console.log('ctrl::renderSSR:65: ', cfg.location, _attempts);
-		cScope.onceStableTree(state => {
+		//console.log('ctrl::renderSSR:65: ', cfg.location, _attempts);
+		cScope.on("stableTree",state => {
 			let nstate = cScope.serialize({ alias: "App" });
+			//cb(null, JSON.stringify(nstate,null,2))
 			cScope.destroy()
-			if ( !stable && _attempts < 3 ) {
+			if ( !_attempts || !stable && _attempts < 3 ) {
 				cfg.state = nstate;
 				ctrl.renderSSR(cfg, cb, ++_attempts);
 			}

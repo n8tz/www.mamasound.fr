@@ -24,7 +24,6 @@ import {
 	withStateMap, asRef, asStore
 }                            from "rescope-spells";
 import {Comps}               from 'App/ui';
-import {Views}               from 'App/ui';
 
 import ReactJWPlayer from 'react-jw-player';
 
