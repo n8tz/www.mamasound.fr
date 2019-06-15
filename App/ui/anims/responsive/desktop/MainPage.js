@@ -215,8 +215,8 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			height: "40%",
-			top   : "-60%"
+			height: "35%",
+			top   : "-55%"
 		}
 	},
 	{

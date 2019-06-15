@@ -18,17 +18,17 @@
 export const selected       = {
 	position : "absolute",
 	//backgroundColor: "red",
-	top      : "40%",
+	top      : "45%",
 	left     : "50%",
 	//width          : "90vw",
-	height   : "60vh",
+	height   : "50vh",
 	//overflow       : "hidden",
 	transform: [{
 		translateX: "-50%",
 		translateY: "-50%",
-		//perspective: "200px",
+		perspective: "600px",
 		//rotateX    : "2deg"
-	}, {}, { translateY: '0vh' }]
+	}, {}, {  }]
 };
 export const selectedScroll = {
 	scrollY: [
@@ -40,42 +40,17 @@ export const selectedScroll = {
 				opacity  : "-1",
 				//height   : 2.5,
 				//top      : -2.5,
-				transform: [{
-					rotateX: "4deg"
-				}, {
-					translateY: "-50vh",
-				}]
+				transform: [
+					{
+						//perspective:'500px'
+					},
+					{
+						rotateX: "-6deg"
+					}, {
+						translateY: "150px",
+						translateZ: "50px",
+					}]
 			}
 		},
-		{
-			type    : "Tween",
-			from    : 150,
-			duration: 1,
-			apply   : {
-				//opacity  : "-1",
-				//height   : 2.5,
-				//top      : -2.5,
-				transform: [{
-					rotateX: "-2deg"
-				}, {
-					translateY: "100vh",
-				}]
-			}
-		},
-		{
-			type    : "Tween",
-			from    : 250,
-			duration: 100,
-			apply   : {
-				opacity  : 1,
-				//height   : 2.5,
-				//top      : -2.5,
-				transform: [{
-					rotateX: "-2deg"
-				}, {
-					translateY: "-50vh",
-				}]
-			}
-		}
 	],
 }

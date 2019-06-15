@@ -89,7 +89,6 @@ export default class Home extends React.Component {
 					inertia={
 						{
 							maxJump     : 1,
-							//value       : 100,
 							//shouldLoop  : ( v ) => {
 							//	if ( (v + 1) > (350) ) {
 							//		return -350;

@@ -31,6 +31,10 @@
   .maskContent {
     //overflow: hidden;
     //height: 100%;
+    >.content{
+      position: relative;
+      height: 100%;
+    }
   }
 
   .NavTools {

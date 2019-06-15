@@ -123,8 +123,10 @@ export default class Inertia {
 		_.lastInertiaPos = 0;
 		_.targetDist     = 0;
 		_.pos            = pos;
-		_.pos            = max(_.pos, _.max);
-		_.pos            = min(_.pos, _.min);
+		if ( _.conf.bounds ) {
+			_.pos = max(_.pos, _.max);
+			_.pos = min(_.pos, _.min);
+		}
 	}
 	
 	teleport( loopDist ) {
@@ -276,7 +278,7 @@ export default class Inertia {
 		_.lastVelocity  = iVel;
 		_.baseTS        = now;
 		
-		if ( !_.conf.infinite ) {
+		if ( _.conf.bounds ) {
 			if ( pos > _.max ) {
 				pos = _.max + min((pos - _.max) / 10, 10);
 			}
@@ -293,25 +295,27 @@ export default class Inertia {
 		let _        = this._,
 		    velSign  = signOf(_.lastVelocity);
 		this.holding = false;
-		if ( _.pos > _.max ) {
-			this.active      = true;
-			_.inertia        = true;
-			_.lastInertiaPos = 0;
-			_.inertiaStartTm =
-				_.inertiaLastTm = Date.now();
-			
-			_.targetDist     = _.max - _.pos;
-			_.targetDuration = abs(_.targetDist * 10);
-		}
-		else if ( _.pos < _.min ) {
-			this.active      = true;
-			_.inertia        = true;
-			_.lastInertiaPos = 0;
-			_.inertiaStartTm =
-				_.inertiaLastTm = Date.now();
-			
-			_.targetDist     = _.pos - _.min;
-			_.targetDuration = abs(_.targetDist * 10);
+		if ( _.conf.bounds ) {
+			if ( _.pos > _.max ) {
+				this.active      = true;
+				_.inertia        = true;
+				_.lastInertiaPos = 0;
+				_.inertiaStartTm =
+					_.inertiaLastTm = Date.now();
+				
+				_.targetDist     = _.max - _.pos;
+				_.targetDuration = abs(_.targetDist * 10);
+			}
+			else if ( _.pos < _.min ) {
+				this.active      = true;
+				_.inertia        = true;
+				_.lastInertiaPos = 0;
+				_.inertiaStartTm =
+					_.inertiaLastTm = Date.now();
+				
+				_.targetDist     = _.pos - _.min;
+				_.targetDuration = abs(_.targetDist * 10);
+			}
 		}
 		else {
 			// calc momentum distance...

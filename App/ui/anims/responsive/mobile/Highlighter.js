@@ -27,36 +27,21 @@ export const background       = {
 };
 export const backgroundScroll = {
 	scrollY: [
-		{
-			type    : "Tween",
-			from    : 0,
-			duration: 100,
-			apply   : {
-				filter   : {
-					//blur: "5px",
-					//translateY: "-50px",
-				},
-				transform: {
-					translateZ: "50px",
-					//translateY: "-20vh",
-				}
-			}
-		},
-		{
-			type    : "Tween",
-			from    : 250,
-			duration: 100,
-			apply   : {
-				filter   : {
-					//blur: "5px",
-					//translateY: "-50px",
-				},
-				transform: {
-					translateZ: "-50px",
-					//translateY: "-20vh",
-				}
-			}
-		}
+		//{
+		//	type    : "Tween",
+		//	from    : 100,
+		//	duration: 100,
+		//	apply   : {
+		//		filter   : {
+		//			//blur: "5px",
+		//			//translateY: "-50px",
+		//		},
+		//		transform: {
+		//			translateZ: "50px",
+		//			//translateY: "-20vh",
+		//		}
+		//	}
+		//},
 	],
 }
 export const slider           = {
@@ -77,7 +62,7 @@ export const sliderScroll     = {
 	scrollY: [
 		{
 			type    : "Tween",
-			from    : 0,
+			from    : 100,
 			duration: 100,
 			apply   : {
 				transform: {
@@ -85,16 +70,6 @@ export const sliderScroll     = {
 				}
 			}
 		},
-		{
-			type    : "Tween",
-			from    : 150,
-			duration: 100,
-			apply   : {
-				transform: {
-					perspective: "-100px",
-				}
-			}
-		}
 	],
 }
 export const slide            = {
@@ -109,38 +84,25 @@ export const slideScroll      = {
 	scrollY: [
 		{
 			type    : "Tween",
-			from    : 0,
+			from    : 100,
 			duration: 100,
 			apply   : {
 				//opacity  : "-1",
 				//height   : 2.5,
 				//top      : -2.5,
 				transform: {
-					translateZ: "15px",
+					translateY: "-10px",
+					translateZ: "25px",
 					rotateX   : "-4deg"
 				}
 			}
 		},
-		{
-			type    : "Tween",
-			from    : 150,
-			duration: 100,
-			apply   : {
-				//opacity  : "-1",
-				//height   : 2.5,
-				//top      : -2.5,
-				transform: {
-					translateZ: "-15px",
-					rotateX   : "4deg"
-				}
-			}
-		}
 	],
 }
 export const focused          = {
 	position : "absolute",
 	//backgroundColor: "red",
-	top      : "50%",
+	top      : "45%",
 	left     : "50%",
 	width    : "90vw",
 	height   : "50vh",
@@ -150,21 +112,18 @@ export const focused          = {
 		translateY: "-50%",
 		//perspective: "200px",
 		//rotateX    : "2deg"
-	}, {}, { translateY: '0px' }]
+	}, {}, { translateY: '0vh' }]
 };
 export const focusedScroll    = {
 	scrollY: [
 		{
 			type    : "Tween",
-			from    : 0,
+			from    : 100,
 			duration: 100,
 			apply   : {
 				opacity  : "-1",
 				//height   : 2.5,
 				//top      : -2.5,
-				//filter   : {
-				//	sepia: 100
-				//},
 				transform: [{
 					rotateX: "4deg"
 				}, {
@@ -172,38 +131,5 @@ export const focusedScroll    = {
 				}]
 			}
 		},
-		{
-			type    : "Tween",
-			from    : 150,
-			duration: 1,
-			apply   : {
-				//opacity  : "-1",
-				//height   : 2.5,
-				//top      : -2.5,
-				transform: [{
-					rotateX: "-2deg"
-				}, {
-					translateY: "100vh",
-				}]
-			}
-		},
-		{
-			type    : "Tween",
-			from    : 250,
-			duration: 100,
-			apply   : {
-				opacity  : 1,
-				//height   : 2.5,
-				//top      : -2.5,
-				//filter   : {
-				//	sepia: -100
-				//},
-				transform: [{
-					rotateX: "-2deg"
-				}, {
-					translateY: "-50vh",
-				}]
-			}
-		}
 	],
 }

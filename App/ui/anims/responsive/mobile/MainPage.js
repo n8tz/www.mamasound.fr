@@ -31,8 +31,27 @@ export const header            = {
 	position : "absolute",
 	//right    : "0%",
 	//left     : "0%",
-	height   : "1.5cm",
+	height   : "82%",
 	top      : "0%",
+	zIndex   : 200,
+	transform: [
+		{
+			//perspective: "500px",
+		},
+		{
+			//translateX: "-50%",
+			translateY: "0%",
+			//translateZ : "-50px",
+			//rotateX   : "-10deg"
+		}
+	]
+};
+export const logo              = {
+	position : "absolute",
+	width    : "40%",
+	left     : "55%",
+	height   : "70px",
+	bottom   : "5%",
 	zIndex   : 200,
 	transform: [
 		{
@@ -49,8 +68,8 @@ export const header            = {
 export const Highlighter       = {
 	position       : "absolute",
 	right          : "0%",
-	height         : "80%",
-	top            : "0%",
+	height         : "20%",
+	top            : "78%",
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
 	zIndex         : 175,
@@ -99,8 +118,8 @@ export const EventNav          = {
 export const events            = {
 	position       : "absolute",
 	right          : "0%",
-	height         : "21%",
-	top            : "80%",
+	height         : "0%",
+	top            : "100%",
 	zIndex         : 150,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
@@ -148,239 +167,319 @@ export const EventMap_Gradient = {
 	opacity: 1
 };
 export const YAxis             = [
+	// header page to main highlighter
 	{
-		type    : "Tween",
+		target  : "logo",
+		from    : 0,
+		duration: 100,
+		apply   : {
+			left: "-55%",
+			width: "60%",
+		}
+	},
+	{
 		target  : "header",
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: -.5,
+			height: "-75%",
 		}
 	},
 	{
-		type    : "Tween",
 		target  : "Highlighter",
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: -60,
+			top   : "-78%",
+			height: "60%",
+			//opacity:-.5
 		}
 	},
 	{
-		type    : "Tween",
 		target  : "events",
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: 34,
-			top   : -60
+			height: "20%",
+			top   : "-20%"
+		}
+	},
+	// highlighter to events
+	{
+		target  : "Highlighter",
+		from    : 100,
+		duration: 100,
+		apply   : {
+			height: "-55%",
+			//opacity:-.5
+		}
+	},
+	{
+		target  : "events",
+		from    : 100,
+		duration: 100,
+		apply   : {
+			height: "35%",
+			top   : "-55%"
 		}
 	},
 	{
 		type    : "Tween",
 		target  : "EventMap",
-		from    : 0,
+		from    : 100,
 		duration: 100,
-		apply   : {
-			height: 26,
-			top   : -25
-		}
-	},
-	//full map
-	{
-		type    : "Tween",
-		target  : "events",
-		from    : 100,
-		duration: 50,
-		apply   : {
-			height: -20,
-		}
-	},
-	{
-		type    : "Tween",
-		target  : "EventMap",
-		from    : 100,
-		duration: 50,
 		apply   : {
 			height: 20,
 			top   : -20
 		}
 	},
-	//page
+	// events to map
 	{
-		type    : "Tween",
-		target  : "PageBlock",
-		from    : 150,
+		target  : "events",
+		from    : 200,
 		duration: 100,
 		apply   : {
-			height: 60,
-			top   : -80
+			height: "-30%"
 		}
 	},
 	{
 		type    : "Tween",
-		target  : "events",
-		from    : 150,
+		target  : "EventMap",
+		from    : 200,
 		duration: 100,
 		apply   : {
-			height: -30,
+			height: 30,
 			top   : -30
 		}
 	},
-	{
-		type    : "Tween",
-		target  : "events",
-		from    : 247,
-		duration: 1,
-		apply   : {
-			opacity: -1
-		}
-	},
-	{
-		type    : "Tween",
-		target  : "events",
-		from    : 248,
-		duration: 1,
-		apply   : {
-			zIndex: -100,
-			top   : 100
-		}
-	},
-	{
-		type    : "Tween",
-		target  : "events",
-		from    : 249,
-		duration: 1,
-		apply   : {
-			opacity: 1
-		}
-	},
-	{
-		type    : "Tween",
-		target  : "EventMap",
-		from    : 150,
-		duration: 100,
-		apply   : {
-			height: -26,
-			top   : -55
-		}
-	},
-	{
-		type    : "Tween",
-		target  : "Highlighter",
-		from    : 150,
-		duration: 50,
-		apply   : {
-			top: -20
-		}
-	},
-	{
-		type    : "Tween",
-		target  : "Highlighter",
-		from    : 199,
-		duration: 1,
-		apply   : {
-			opacity: -1
-		}
-	},
-	{
-		type    : "Tween",
-		target  : "Highlighter",
-		from    : 200,
-		duration: 1,
-		apply   : {
-			zIndex: -100,
-			top   : 120
-		}
-	},
-	{
-		type    : "Tween",
-		target  : "Highlighter",
-		from    : 201,
-		duration: 1,
-		apply   : {
-			opacity: 1
-		}
-	},
-	{
-		type    : "Tween",
-		target  : "Highlighter",
-		from    : 200,
-		duration: 50,
-		apply   : {
-			height: 2,
-			top   : -23
-		}
-	},
-	
-	// reset to header
-	
-	{
-		type    : "Tween",
-		target  : "PageBlock",
-		from    : 250,
-		duration: 100,
-		apply   : {
-			//height   : 80,
-			top: -80
-		}
-	},
-	{
-		type    : "Tween",
-		target  : "Highlighter",
-		from    : 250,
-		duration: 100,
-		apply   : {
-			height: 58,
-			top   : -77
-		}
-	},
-	{
-		type    : "Tween",
-		target  : "events",
-		from    : 250,
-		duration: 100,
-		apply   : {
-			height: 10,
-			top   : -10
-		}
-	},
-	{
-		type    : "Tween",
-		target  : "EventMap",
-		from    : 250,
-		duration: 50,
-		apply   : {
-			height: -1,
-			top   : -1
-		}
-	},
-	{
-		type    : "Tween",
-		target  : "EventMap",
-		from    : 300,
-		duration: 1,
-		apply   : {
-			zIndex: -100,
-			top   : 115
-		}
-	},
-	{
-		type    : "Tween",
-		target  : "EventMap",
-		from    : 300,
-		duration: 50,
-		apply   : {
-			top: -10
-		}
-	},
-	{
-		type    : "Tween",
-		target  : "header",
-		from    : 300,
-		duration: 50,
-		apply   : {
-			height: 1,
-		}
-	},
+	//...tweenTools.offset(
+	//	[
+	//		{
+	//			type    : "Tween",
+	//			target  : "header",
+	//			from    : 0,
+	//			duration: 100,
+	//			apply   : {
+	//				height: -1,
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "events",
+	//			from    : 0,
+	//			duration: 100,
+	//			apply   : {
+	//				height: "44%",
+	//				top   : "-60%"
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "EventMap",
+	//			from    : 0,
+	//			duration: 100,
+	//			apply   : {
+	//				height: 21,
+	//				top   : -20
+	//			}
+	//		},
+	//		//full map
+	//		{
+	//			type    : "Tween",
+	//			target  : "events",
+	//			from    : 100,
+	//			duration: 50,
+	//			apply   : {
+	//				height: -25,
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "EventMap",
+	//			from    : 100,
+	//			duration: 50,
+	//			apply   : {
+	//				height: 25,
+	//				top   : -25
+	//			}
+	//		},
+	//		//page
+	//		{
+	//			type    : "Tween",
+	//			target  : "PageBlock",
+	//			from    : 150,
+	//			duration: 100,
+	//			apply   : {
+	//				height: 60,
+	//				top   : -80
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "events",
+	//			from    : 150,
+	//			duration: 100,
+	//			apply   : {
+	//				height: -30,
+	//				top   : -30
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "events",
+	//			from    : 247,
+	//			duration: 1,
+	//			apply   : {
+	//				opacity: -1
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "events",
+	//			from    : 248,
+	//			duration: 1,
+	//			apply   : {
+	//				zIndex: -100,
+	//				top   : 100
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "events",
+	//			from    : 249,
+	//			duration: 1,
+	//			apply   : {
+	//				opacity: 1
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "EventMap",
+	//			from    : 150,
+	//			duration: 100,
+	//			apply   : {
+	//				height: -26,
+	//				top   : -55
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "Highlighter",
+	//			from    : 150,
+	//			duration: 50,
+	//			apply   : {
+	//				top: -20
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "Highlighter",
+	//			from    : 199,
+	//			duration: 1,
+	//			apply   : {
+	//				opacity: -1
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "Highlighter",
+	//			from    : 200,
+	//			duration: 1,
+	//			apply   : {
+	//				zIndex: -100,
+	//				top   : 120
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "Highlighter",
+	//			from    : 201,
+	//			duration: 1,
+	//			apply   : {
+	//				opacity: 1
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "Highlighter",
+	//			from    : 200,
+	//			duration: 50,
+	//			apply   : {
+	//				height: 2,
+	//				top   : -23
+	//			}
+	//		},
+	//
+	//		// reset to header
+	//
+	//		{
+	//			type    : "Tween",
+	//			target  : "PageBlock",
+	//			from    : 250,
+	//			duration: 100,
+	//			apply   : {
+	//				//height   : 80,
+	//				top: -80
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "Highlighter",
+	//			from    : 250,
+	//			duration: 100,
+	//			apply   : {
+	//				height: 58,
+	//				top   : -77
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "events",
+	//			from    : 250,
+	//			duration: 100,
+	//			apply   : {
+	//				height: 10,
+	//				top   : -10
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "EventMap",
+	//			from    : 250,
+	//			duration: 50,
+	//			apply   : {
+	//				height: -1,
+	//				top   : -1
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "EventMap",
+	//			from    : 0,
+	//			duration: 1,
+	//			apply   : {
+	//				zIndex: -100,
+	//				top   : 115
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "EventMap",
+	//			from    : 300,
+	//			duration: 50,
+	//			apply   : {
+	//				top: -10
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "header",
+	//			from    : 300,
+	//			duration: 50,
+	//			apply   : {
+	//				height: 1,
+	//			}
+	//		},
+	//	], 0
+	//)
 ];

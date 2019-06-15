@@ -116,7 +116,21 @@ export default class assetsLoader extends Store {
 				    req.send();
 			    };
 			
-			isBrowserSide && Object.entries(urls).forEach(dld);
+			Object.entries(urls).forEach(dld);
+			return urlMap;
+		}
+		else if ( !isBrowserSide ) {
+			let _urls  = this.parseQuery(nextState.query, nextState.data),
+			    urls   = is.array(_urls) ? _urls.reduce(
+				    ( map, item ) => (map[item._id] = item, map),
+				    {}
+			    ) : _urls,
+			    urlMap = {};
+			
+			
+			Object.entries(urls).forEach(( [id, url], i ) => {
+				urlMap[id] = url;
+			});
 			return urlMap;
 		}
 		return lastData;

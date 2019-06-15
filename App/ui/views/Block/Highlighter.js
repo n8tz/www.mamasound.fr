@@ -94,50 +94,52 @@ export default class Highlighter extends React.Component {
 		    }     = this.props,
 		    state = this.state;
 		return (
-			<div style={ style }
-			     className={ "Highlighter" }>
+			<div style={style}
+			     className={"Highlighter"}>
 				
-				<div className={ "headBackground" }>
-					<div className={ "maskContent" }>
+				<div className={"headBackground"}>
+					<div className={"maskContent"}>
 						<TweenRef
-							initial={ Anims.Highlighter.background }
-							tweenLines={ Anims.Highlighter.backgroundScroll }
+							initial={Anims.Highlighter.background}
+							tweenLines={Anims.Highlighter.backgroundScroll}
 						>
-							<div className={ "container " }>
-								{
-									//appState.currentPageFocus === "head"
-									//&&
-									//<BackgroundVideo src="/test.mp4"
-									//                 style={ { width: '100%', height: '100%', filter: "blur(5px)" } }
-									//                 startTime={ 20 }
-									//                 autoPlay={ true }
-									//                 volume={ 0 }/>
-									//||
-									<img src={ HighlighterBackground }/>
-								}
+							<div className={"container "}>
+								{/*{*/}
+								{/*	//appState.currentPageFocus === "head"*/}
+								{/*	//&&*/}
+								{/*	//<BackgroundVideo src="/test.mp4"*/}
+								{/*	//                 style={ { width: '100%', height: '100%', filter: "blur(5px)" } }*/}
+								{/*	//                 startTime={ 20 }*/}
+								{/*	//                 autoPlay={ true }*/}
+								{/*	//                 volume={ 0 }/>*/}
+								{/*	//||*/}
+								<img src={HighlighterBackground} className={"leftGhost"}/>
+								<img src={HighlighterBackground} className={"rightGhost"}/>
+								<img src={HighlighterBackground}/>
+								{/*}*/}
 							</div>
 						</TweenRef>
 					</div>
 				</div>
 				<TweenRef
-					initial={ Anims.Highlighter.focused }
-					tweenLines={ Anims.Highlighter.focusedScroll }
+					initial={Anims.Highlighter.focused}
+					tweenLines={Anims.Highlighter.focusedScroll}
 				>
-					<div className={ "focusedContent container" }>
-						<Comps.ViewSwitcher target={ Selected && Selected.Focused }
-						                    { ...Anims.Focused }/>
+					<div className={"focusedContent container"}>
+						<Comps.ViewSwitcher target={Selected && Selected.Focused}
+						                    {...Anims.Focused}/>
 					</div>
 				</TweenRef>
 				
 				
 				<TweenRef
-					initial={ Anims.Highlighter.slider }
-					tweenLines={ Anims.Highlighter.sliderScroll }
+					initial={Anims.Highlighter.slider}
+					tweenLines={Anims.Highlighter.sliderScroll}
 				>
-					<div className={ "slider" }>
+					<div className={"slider"}>
 						<Comps.Slider
-							{ ...Anims.MainSlider }
-							autoScroll={ 10 * 1000 }
+							{...Anims.MainSlider}
+							autoScroll={10 * 1000}
 							onClick={
 								( e, i, slider ) => {
 									$actions.selectFocus(gridItems[i].targetEtty.objId);
@@ -149,11 +151,11 @@ export default class Highlighter extends React.Component {
 								gridItems.length &&
 								gridItems.map(
 									( item, i ) =>
-										<TweenRef key={ item._id + i }
-										          tweener={ tweener }
-										          initial={ Anims.Highlighter.slide }
-										          tweenLines={ Anims.Highlighter.slideScroll }>
-											<Views.FocusedItems record={ item }
+										<TweenRef key={item._id + i}
+										          tweener={tweener}
+										          initial={Anims.Highlighter.slide}
+										          tweenLines={Anims.Highlighter.slideScroll}>
+											<Views.FocusedItems record={item}
 											                    onClick={
 												                    e => $actions.selectFocus(item.targetEtty.objId, i)
 											                    }/>
@@ -163,7 +165,7 @@ export default class Highlighter extends React.Component {
 						</Comps.Slider>
 					</div>
 				</TweenRef>
-				{/*</div>*/ }
+				{/*</div>*/}
 			</div>
 		);
 	}
