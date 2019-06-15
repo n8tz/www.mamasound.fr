@@ -22,10 +22,10 @@ import {asTweener, TweenRef, TweenAxis} from "react-rtween";
 
 const wayPoints =
 	      {
-		      page  : 0,
-		      head  : 100,
-		      event : 200,
-		      events: 250
+		      page : 0,
+		      head : 100,
+		      event: 200,
+		      map  : 300
 	      };
 
 @scopeToProps("appState", "Anims")
@@ -48,60 +48,27 @@ export default class Home extends React.Component {
 		return true;
 	}
 	
-	//componentDidMount( props = this.props ) {
-	//	window.addEventListener("load", function () {
-	//		// Set a timeout...
-	//		setTimeout(function () {
-	//			// Hide the address bar!
-	//			window.scrollTo(0, 1);
-	//		}, 0);
-	//	});
-	//	let { appState } = props;
-	//	switch ( appState.currentPageFocus ) {
-	//		case 'head' :
-	//			this.scrollTo(0);
-	//			break;
-	//		case 'event' :
-	//			this.scrollTo(100);
-	//			break;
-	//		case 'events' :
-	//			this.scrollTo(150);
-	//			break;
-	//		case 'page' :
-	//			this.scrollTo(250);
-	//			break;
-	//
-	//	}
-	//}
+	componentDidMount( props = this.props ) {
+		window.addEventListener("load", function () {
+			// Set a timeout...
+			setTimeout(function () {
+				// Hide the address bar!
+				window.scrollTo(0, 1);
+			}, 0);
+		});
+		let { appState } = props;
+		this.scrollTo(wayPoints[appState.currentPageFocus]);
+	}
 	
-	//componentDidUpdate( props ) {
-	//	let { appState, $actions } = this.props;
-	//	//console.warn(appState === props.appState)
-	//	if ( appState.doFocus && props.appState.currentPageFocus !== appState.currentPageFocus ) {
-	//		//console.log(appState.currentPageFocus);
-	//		switch ( appState.currentPageFocus ) {
-	//			case 'head' :
-	//				this.scrollTo(0, 500);
-	//				break;
-	//			case 'event' :
-	//				this.scrollTo(100, 500, undefined, "easeBackIn");
-	//				break;
-	//			case 'events' :
-	//				this.scrollTo(150, 500, undefined, "easeBackIn");
-	//				break;
-	//			case 'page' :
-	//				this.scrollTo(250, 500, undefined, "easeBackIn");
-	//				break;
-	//			case 'loop' :
-	//				this.scrollTo(350, 500, "scrollY").then(e => {
-	//					//this.scrollTo(0)
-	//					//$actions.setPageFocus("head")
-	//				});
-	//				break;
-	//
-	//		}
-	//	}
-	//}
+	componentDidUpdate( props ) {
+		let { appState, $actions } = this.props;
+		//console.warn(appState === props.appState)
+		if ( appState.doFocus && props.appState.currentPageFocus !== appState.currentPageFocus ) {
+			//console.log(appState.currentPageFocus);
+			this.scrollTo(wayPoints[appState.currentPageFocus], 500, undefined, "easeBackIn");
+		}
+	}
+	
 	//
 	render() {
 		let { Anims: { MainPage }, appState, $actions } = this.props;
@@ -117,7 +84,7 @@ export default class Home extends React.Component {
 					axe={"scrollY"}
 					items={MainPage.YAxis}
 					//scrollableWindow={ 225 }
-					defaultPosition={ wayPoints[appState.currentPageFocus] }
+					defaultPosition={wayPoints[appState.currentPageFocus]}
 					//defaultPosition={100}
 					inertia={
 						{
@@ -147,27 +114,22 @@ export default class Home extends React.Component {
 								//console.log(i % nbItems, v)
 							},
 							wayPoints   : [
-								{ at: 0, id: "head" },
+								{ at: 0, id: "page" },
 								{
-									direction   : 1,
+									//direction   : 1,
 									at          : 100,
-									id          : "events",
+									id          : "head",
 									stopDuration: 1000
 								},
 								{
-									direction: -1,
-									at       : 100,
-									id       : "events"
+									//direction: -1,
+									at: 200,
+									id: "events"
 								},
 								{
-									at: 150,
-									id: "event"
+									at: 300,
+									id: "map"
 								},
-								{
-									at          : 250, id: "page",
-									stopDuration: 1000
-								},
-								{ at: 350, id: "loop" }
 							],
 						}
 					}
@@ -177,25 +139,21 @@ export default class Home extends React.Component {
 					initial={MainPage.header}
 				>
 					<header
-						//onClick={ e => $actions.changeHighlighterBackground() }
-						//className={ "container withMask" }
-						//onClick={ e => $actions.setPageFocus("head") }
 						style={{
 							zIndex : 5000,
 							display: "inline-block",
 							//width  : "100%",
 							//background: "red",
 						}}>
-						<div className={"maskContent"}>
+						<Views.Block.PageBlock>
 							<TweenRef
 								id={"logo"}
-								initial={{
-									height: "100%"
-								}}
+								initial={MainPage.logo}
 							>
 								<div className={"logo"}/>
 							</TweenRef>
-						</div>
+						</Views.Block.PageBlock>
+					
 					</header>
 				</TweenRef>
 				<TweenRef id={"Highlighter"} initial={MainPage.Highlighter}>
@@ -213,12 +171,6 @@ export default class Home extends React.Component {
 					<Views.Events.EventMap
 						day={appState.currentVisibleDay || appState.curDay}
 						viewType={appState.viewType}/>
-				</TweenRef>
-				<TweenRef
-					id={"PageBlock"}
-					initial={MainPage.PageBlock}
-				>
-					<Views.Block.PageBlock/>
 				</TweenRef>
 				<TweenRef
 					id={"Footer"}

@@ -18,7 +18,7 @@ import {withStateMap, asRef, asStore}        from "rescope-spells";
 import anims                                 from 'App/ui/anims/(*).js';
 
 import stores                from 'App/stores/(*).js';
-import {Views}               from 'App/ui';
+import {Comps, Views}        from 'App/ui';
 import {asTweener, TweenRef} from "react-rtween";
 
 
@@ -34,7 +34,7 @@ import {asTweener, TweenRef} from "react-rtween";
 //		//}
 //	}
 //)
-@scopeToProps("Selected", "EventList", "DataProvider")
+@scopeToProps("Selected", "Anims", "DataProvider")
 export default class PageBlock extends React.Component {
 	static propTypes = {};
 	state            = {};
@@ -42,29 +42,38 @@ export default class PageBlock extends React.Component {
 	render() {
 		let {
 			    record: { position, size } = {},
-			    Selected, EventList, DataProvider,
-			    $actions, style, selected
+			    Selected, children, DataProvider,
+			    $actions, style, Anims
 		    }     = this.props,
 		    state = this.state;
 		return (
-			<div style={ style }
-			     className={ "PageBlock container" }
+			<div style={style}
+			     className={"PageBlock container"}
 				//onClick={ e => $actions.selectEvent(null) }
 			>
-				<div className={ "maskContent" }>
-					{
-						Selected &&
-						Selected.Page &&
-						(
-							Selected.Page._cls === "Concert" &&
-							Selected.Page.place &&
-							DataProvider[Selected.Page.place.objId] &&
-							<Views.Place.page record={ DataProvider[Selected.Page.place.objId] } refs={ DataProvider }/>
-							||
-							<Views.Page.page record={ Selected && Selected.Page } refs={ DataProvider }/>
-						)
-					}
-				
+				<div className={"maskContent"}>
+					
+					{children}
+					<TweenRef
+						initial={Anims.Page.selected}
+						tweenLines={Anims.Page.selectedScroll}
+					>
+						<div className={"selectedPage container"}>
+							{
+								Selected &&
+								Selected.Page &&
+								(
+									Selected.Page._cls === "Concert" &&
+									Selected.Page.place &&
+									DataProvider[Selected.Page.place.objId] &&
+									<Views.Place.page record={DataProvider[Selected.Page.place.objId]}
+									                  refs={DataProvider}/>
+									||
+									<Views.Page.page record={Selected && Selected.Page} refs={DataProvider}/>
+								)
+							}
+						</div>
+					</TweenRef>
 				</div>
 			</div>
 		);

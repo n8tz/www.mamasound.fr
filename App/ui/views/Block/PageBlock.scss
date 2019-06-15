@@ -31,8 +31,14 @@
 
   @include withMask();
 
+  .selectedPage {
+    border: 1px solid darkgray;
+    border-radius: 5px;
+    z-index: 2;
+  }
+
   .maskContent {
-    background: #1f8de2;
+    //background: #1f8de2;
   }
 
   .ShareBox {
