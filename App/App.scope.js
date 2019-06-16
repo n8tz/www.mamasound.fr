@@ -80,7 +80,7 @@ export default {
 		selectEvent( selectedEvent, selectedEventDT, showPageBlock ) {
 			let { currentPageFocus } = this.nextState;
 			if ( selectedEvent )
-				currentPageFocus = 'events';
+				currentPageFocus = 'map';
 			return {
 				selectedEventId: selectedEvent && selectedEvent._id,
 				selectedEventDT,
