@@ -34,7 +34,7 @@ const ctrl = {
 		else if ( __STATE__ )
 			cScope.restore(__STATE__);
 		ReactDom.render(<App/>, node);
-
+		
 		if ( process.env.NODE_ENV !== 'production' && module.hot ) {
 			module.hot.accept('App/App', () => {
 				//ReactDom.render(<App/>, node)
@@ -62,7 +62,7 @@ const ctrl = {
 		    stable  = cScope.isStableTree();
 		//console.log('ctrl::renderSSR:65: ', cfg.location, _attempts);
 		cScope.onceStableTree(s => {
-			state=cScope.serialize({ alias: "App" });
+			state = cScope.serialize({ alias: "App" });
 			//debugger
 			cScope.destroy()
 			if ( !stable && _attempts < 2 ) {
@@ -86,15 +86,15 @@ const ctrl = {
 			    id         : rid,
 			    autoDestroy: false
 		    }), App = reScope(cScope)(require('./App').default);
-
+		
 		cfg.state && cScope.restore(cfg.state, { alias: "App" });
-
+		
 		let html,
 		    appHtml     = renderToString(<App location={cfg.location}/>),
 		    stable      = cScope.isStableTree();
 		global.contexts = Scope.scopes;
 		//console.log('ctrl::renderSSR:65: ', cfg.location, _attempts);
-		cScope.on("stableTree",state => {
+		cScope.onceStableTree(state => {
 			let nstate = cScope.serialize({ alias: "App" });
 			//cb(null, JSON.stringify(nstate,null,2))
 			cScope.destroy()

@@ -18,24 +18,25 @@
 
 let stepAngle = "1deg";
 
-export const defaultInitial = {
+export const defaultInitial        = {
 	position       : "absolute",
-	height         : "100%",
-	width          : "100%",
-	top            : "50%",
-	left           : "50%",
+	bottom         : "0%",
+	right          : "0%",
+	top            : "150px",
+	left           : "0px",
 	zIndex         : 50,
 	overflow       : "hidden",
 	transformOrigin: "50% 50%",
-	//opacity        : 1,
+	opacity        : 1,
 	transform      : [
 		{
-			translateX : "-50%",
-			translateY : "-50%",
+			//translateX : "-50%",
+			//translateY : "-50%",
 			perspective: "250px",
-			//translateY : "-18000px",
 		},
 		{
+			//translateX: "-200px",
+			//translateY : "-18000px",
 			//rotate: 0
 		},
 		{
@@ -45,25 +46,69 @@ export const defaultInitial = {
 		},
 		{}]
 };
-export const showAnim       = [
+export const defaultPreviewInitial = {
+	position       : "absolute",
+	height         : "140px",
+	width          : "100%",
+	top            : "5px",
+	left           : "0px",
+	zIndex         : 50,
+	overflow       : "hidden",
+	transformOrigin: "50% 50%",
+	opacity        : 1,
+	transform      : [
+		{
+			//translateX : "-50%",
+			//translateY : "-50%",
+			perspective: "250px",
+		},
+		{
+			//translateY: "-200px",
+			//translateY : "-18000px",
+			//rotate: 0
+		},
+		{
+			//translateY: "18000px",
+			//translateZ: "0px",
+			//rotateY   : "-65deg",
+		},
+		{}]
+};
+export const showAnim              = [
 	{
-		type    : "Tween",
-		from    : 200,
-		duration: 500,
-		//easeFn  : "easeSinIn",
-		easeFn  : "easeBackOut",
+		from    : 0,
+		duration: 800,
+		easeFn  : "easeSinIn",
+		//easeFn  : "easeBackOut",
 		apply   : {
 			opacity  : 1,
 			transform: [{}, {
 				//rotate: stepAngle,
 				//}, {
-				translateZ: "-50px",
+				//translateZ: "-50px",
+				translateX: "-200px",
+			}]
+		}
+	},
+];
+export const showPreviewAnim       = [
+	{
+		from    : 0,
+		duration: 800,
+		easeFn  : "easeSinIn",
+		//easeFn  : "easeBackOut",
+		apply   : {
+			opacity  : 1,
+			transform: [{}, {
+				//rotate: stepAngle,
+				//}, {
+				//translateZ: "-50px",
 				translateY: "-200px",
 			}]
 		}
 	},
 ];
-export const hideAnim       = [
+export const hideAnim              = [
 	{
 		type    : "Tween",
 		from    : 0,
@@ -74,8 +119,25 @@ export const hideAnim       = [
 				//rotate: stepAngle,
 				//}, {
 				//translateZ: "-250px",
-				translateZ: "-20px",
-				translateY: "-250px",
+				translateX: "-200px",
+				//translateX: "-250px",
+			}]
+		}
+	}]
+;
+export const hidePreviewAnim       = [
+	{
+		type    : "Tween",
+		from    : 0,
+		duration: 700,
+		apply   : {
+			opacity  : -1,
+			transform: [{}, {
+				//rotate: stepAngle,
+				//}, {
+				//translateZ: "-250px",
+				translateY: "-200px",
+				//translateX: "-250px",
 			}]
 		}
 	}]

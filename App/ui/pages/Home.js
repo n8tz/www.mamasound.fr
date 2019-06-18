@@ -37,17 +37,17 @@ export default class Home extends React.Component {
 	//	return [this, "EventNav"];
 	//}
 	
-	componentShouldScroll( axis, delta ) {
-		let { appState } = this.props,
-		    EventNav     = this.getTweenableRef("EventNav");
-		if ( appState.currentPageFocus === "events" && delta < 0 && (EventNav.scrollTop !== 0) )
-			return false;
-		//if ( appState.currentPageFocus === "events" && delta > 0 && (EventNav.scrollTop !== (EventNav.scrollHeight -
-		// EventNav.offsetHeight)) ) return false; if ( appState.currentPageFocus === "event" && delta > 0 &&
-		// (EventNav.scrollTop !== (EventNav.scrollHeight - EventNav.offsetHeight)) ) return false;
-		return true;
-	}
-	
+	//componentShouldScroll( axis, delta ) {
+	//	let { appState } = this.props,
+	//	    EventNav     = this.getTweenableRef("EventNav");
+	//	if ( appState.currentPageFocus === "events" && delta < 0 && (EventNav.scrollTop !== 0) )
+	//		return false;
+	//	//if ( appState.currentPageFocus === "events" && delta > 0 && (EventNav.scrollTop !== (EventNav.scrollHeight -
+	//	// EventNav.offsetHeight)) ) return false; if ( appState.currentPageFocus === "event" && delta > 0 &&
+	//	// (EventNav.scrollTop !== (EventNav.scrollHeight - EventNav.offsetHeight)) ) return false;
+	//	return true;
+	//}
+	//
 	componentDidMount( props = this.props ) {
 		window.addEventListener("load", function () {
 			// Set a timeout...

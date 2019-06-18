@@ -220,7 +220,7 @@ export default function asTweener( ...argz ) {
 				_.muxDataByTarget[id] = _.muxDataByTarget[id] || {};
 				
 				
-				iStyle = { ...iStyle, ...deMuxTween(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true) };
+				iStyle = { ...iStyle, ...deMuxTween(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true, true) };
 				//_.tweenRefUnits[id] = extractUnits(iMap);
 				//}
 				_.tweenRefOrigin[id]    = tweenableMap;
@@ -229,17 +229,17 @@ export default function asTweener( ...argz ) {
 				_.tweenRefMaps[id]      = _.tweenRefMaps[id] || {};
 				
 				
-				//Object.keys(initials)
-				//      .forEach(
-				//	      key => (_.tweenRefMaps[id][key] = is.number(_.tweenRefMaps[id][key])
-				//	                                        ? _.tweenRefMaps[id][key]
-				//	                                        : initials[key])
-				//      );
-				//if ( tweenableMap.hasOwnProperty("opacity") && _.tweenRefMaps[id].hasOwnProperty("opacity") ) {
-				//	_.tweenRefMaps[id].opacity -= initials.opacity;
-				//}
+				// if this ref was initialized by its scroll anims we minus initial values
+				Object.keys(tweenableMap)
+				      .forEach(
+					      key => {
+						      if ( _.tweenRefMaps[id].hasOwnProperty(key) )
+							      _.tweenRefMaps[id][key] -= initials[key];
+					      }
+				      );
+				//
 				// init / reset or get the tweenable view
-				tweenableMap = Object.assign({ ..._.tweenRefMaps[id] }, initials, tweenableMap || {});
+				tweenableMap = Object.assign({}, initials, tweenableMap || {});
 				// set defaults values in case of
 				// add new initial values
 				Object.keys(tweenableMap)
@@ -250,7 +250,7 @@ export default function asTweener( ...argz ) {
 				muxToCss(tweenableMap, iStyle, _.muxByTarget[id], _.muxDataByTarget[id], _.box);
 				
 			}
-			//console.log('tweenRef::tweenRef:519: ', id, _.tweenRefCSS[id], tweenableMap);
+			//console.log('tweenRef::tweenRef:519: ', id, { ...tweenableMap });
 			if ( noref )
 				return {
 					style: { ..._.tweenRefCSS[id] }
@@ -802,8 +802,12 @@ export default function asTweener( ...argz ) {
 													//tweener.dispatchEvent(e)
 													//cState.inertia.y.hold(cState.y + dY)
 													//tweener.scrollTop = cState.y + dY;
-													//yDispatched = true;
-													return;
+													if ( opts.dragDirectionLock && cLock === "Y" )
+														return;
+													else if ( !opts.dragDirectionLock ) {
+														return;
+													}
+													yDispatched = true;
 												} // let the node do this scroll
 												if ( !xDispatched &&
 													((dX < 0 && tweener.scrollLeft !== 0)

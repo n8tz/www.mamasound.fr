@@ -89,7 +89,7 @@ export default class Highlighter extends React.Component {
 	render() {
 		let {
 			    MountedItems: { items: gridItems = [], layout = [] },
-			    Anims, Selected, appState,
+			    Anims, Selected, DataProvider,
 			    $actions, HighlighterBackground, tweener, style
 		    }     = this.props,
 		    state = this.state;
@@ -127,7 +127,12 @@ export default class Highlighter extends React.Component {
 				>
 					<div className={"focusedContent container"}>
 						<Comps.ViewSwitcher target={Selected && Selected.Focused}
-						                    {...Anims.Focused}/>
+						                    {...Anims.Focused} View={Views.Page.page}
+						                    getNextTarget={rec => {
+							                    let next = (gridItems[(gridItems.findIndex(ref => (rec && ref.targetEtty && ref.targetEtty.objId === rec._id)) + 1) % gridItems.length]);
+							                    return next && next.targetEtty && DataProvider[next.targetEtty.objId];
+						                    }}
+						/>
 					</div>
 				</TweenRef>
 				
