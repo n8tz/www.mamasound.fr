@@ -36,7 +36,7 @@ export default {
 		
 		currentPageFocus: "head",// head, events, page
 		
-		selectedFocus     : { id: "Page.SkxesB7ugG", etty: 'Page' },
+		//selectedFocus     : { id: "Page.SkxesB7ugG", etty: 'Page' },
 		selectedPage      : { id: "Page.SkxesB7ugG", etty: 'Page' },
 		selectedEvent     : undefined,
 		selectedEventId   : undefined,

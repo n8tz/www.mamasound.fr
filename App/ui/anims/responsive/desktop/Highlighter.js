@@ -113,7 +113,7 @@ export const focused          = {
 		translateY: "-50%",
 		//perspective: "200px",
 		//rotateX    : "2deg"
-	}, {}, { translateY: '0vh' }]
+	}, {}, { translateY: '0%' }]
 };
 export const focusedScroll    = {
 	scrollY: [

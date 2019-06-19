@@ -41,7 +41,7 @@ export default (
 	}
 ) => {
 	//debugger;
-	return <div className={"Page Page_" + record._cls}>
+	return <div className={"Page FocusedItems_preview type_" + target._cls}>
 		{
 			previewImage &&
 			<div className="preview">

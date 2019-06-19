@@ -38,6 +38,8 @@
     z-index: 2;
 
     overflow: auto;
+    overflow-y: scroll;
+    overflow-x: hidden;
 
     @media screen and (max-width: $tablet-landscape-breakpoint) {
       margin: 0 !important;
