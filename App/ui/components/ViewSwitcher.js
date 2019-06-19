@@ -73,7 +73,6 @@ export default class ViewSwitcher extends React.Component {
 			maxJump     : 1,
 			onInertiaEnd: ( i, wp ) => {
 				let { curTarget, prevTarget, nextTarget = this.props.getNextTarget(curTarget), history } = this.state;
-				console.log(history)
 				if ( wp.at === 0 ) {
 					let nHisto = [...history];
 					this.setState(
@@ -95,7 +94,6 @@ export default class ViewSwitcher extends React.Component {
 					this.setState(
 						{
 							prevTarget: curTarget,
-							curTarget : nextTarget,
 						},
 						s => {
 							this.scrollTo(100, 0, "scrollX");
@@ -162,12 +160,11 @@ export default class ViewSwitcher extends React.Component {
 			//console.log("tween new", curTarget, nextTarget, this.props.target)
 			this.setState(
 				{
-					curTarget : curTarget || this.props.target,
 					nextTarget: this.props.target
 				}
 				,
 				(( s ) => {
-					this.scrollTo(200, 750, "scrollX")
+					this.scrollTo(200, 450, "scrollX")
 					    .then(
 						    v => {
 							    this.setState(

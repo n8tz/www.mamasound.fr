@@ -63,7 +63,7 @@ export default {
 		},
 		setPageFocus( _currentPageFocus, doFocus ) {
 			let { currentPageFocus, selectedEventId } = this.nextState;
-			if ( _currentPageFocus !== currentPageFocus ) {
+			if ( _currentPageFocus !== currentPageFocus || doFocus ) {
 				if ( selectedEventId && _currentPageFocus === 'events' )
 					this.$actions.selectEvent();
 				console.log(_currentPageFocus)

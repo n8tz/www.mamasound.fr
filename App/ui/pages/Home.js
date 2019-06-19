@@ -22,10 +22,10 @@ import {asTweener, TweenRef, TweenAxis} from "react-rtween";
 
 const wayPoints =
 	      {
-		      page : 0,
-		      head : 100,
-		      event: 200,
-		      map  : 300
+		      page  : 0,
+		      head  : 100,
+		      events: 200,
+		      map   : 300
 	      };
 
 @scopeToProps("appState", "Anims")
@@ -54,7 +54,7 @@ export default class Home extends React.Component {
 		let { appState, $actions } = this.props;
 		//console.warn(appState === props.appState)
 		if ( appState.doFocus && props.appState.currentPageFocus !== appState.currentPageFocus ) {
-			//console.log(appState.currentPageFocus);
+			console.log(appState.currentPageFocus);
 			this.scrollTo(wayPoints[appState.currentPageFocus], 500, undefined, "easeBackIn");
 		}
 	}
@@ -151,7 +151,8 @@ export default class Home extends React.Component {
 				
 				<TweenRef id={"events"}
 				          initial={MainPage.events}>
-					<Views.Events.EventList/>
+					<Views.Events.EventList
+						activeScroll={appState.currentPageFocus !== "map" && appState.currentPageFocus !== "events"}/>
 				</TweenRef>
 				<TweenRef
 					id={"EventMap"}
@@ -161,12 +162,12 @@ export default class Home extends React.Component {
 						day={appState.currentVisibleDay || appState.curDay}
 						viewType={appState.viewType}/>
 				</TweenRef>
-				<TweenRef
-					id={"Footer"}
-					initial={MainPage.Footer}
-				>
-					<Comps.Footer/>
-				</TweenRef>
+				{/*<TweenRef*/}
+				{/*	id={"Footer"}*/}
+				{/*	initial={MainPage.Footer}*/}
+				{/*>*/}
+				{/*	<Comps.Footer/>*/}
+				{/*</TweenRef>*/}
 			</div>
 		</TweenRef>
 	}

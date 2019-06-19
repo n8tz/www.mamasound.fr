@@ -35,29 +35,30 @@ let defaultPreview = {
 	Theatre: require("App/ui/assets/medias/mmt.png"),
 	Expo   : require("App/ui/assets/medias/mme.png")
 };
-export default ( { record, refs, selected, onClick } ) =>
-	<div className={ "Event Event" + record._cls + ' ' + (selected ? "selected" : "") }
-	     onClick={ onClick }
+export default ( { record, refs, selected, onClick, onTap } ) =>
+	<div className={"Event Event" + record._cls + ' ' + (selected ? "selected" : "")}
+	     onTap={onTap}
+	     onClick={onClick}
 	>
-		<Editable id={ record._id }/>
+		<Editable id={record._id}/>
 		<div className="start">
-			{ moment(record.startTM).format("H:mm") }
+			{moment(record.startTM).format("H:mm")}
 		</div>
 		<div className="icon">
 			{
 				record.category && refs[record.category.objId] &&
-				<img src={ refs[record.category.objId].icon }/>
+				<img src={refs[record.category.objId].icon}/>
 				||
-				<img src={ defaultPreview[record._cls] } style={ { transform: "scale(.8)" } }/>
+				<img src={defaultPreview[record._cls]} style={{ transform: "scale(.8)" }}/>
 			}
 		</div>
-		{/*{ record.previewImage &&*/ }
-		{/*<div className="preview">*/ }
-		{/*<img src={ record.previewImage }/>*/ }
-		{/*</div>*/ }
-		{/*}*/ }
+		{/*{ record.previewImage &&*/}
+		{/*<div className="preview">*/}
+		{/*<img src={ record.previewImage }/>*/}
+		{/*</div>*/}
+		{/*}*/}
 		<div className="title">
-			{ record.title }
+			{record.title}
 		</div>
 		
 		<div className="price">
@@ -68,11 +69,11 @@ export default ( { record, refs, selected, onClick } ) =>
 		{
 			record.place && refs[record.place.objId] &&
 			<div className="place">
-				( <span>{ refs[record.place.objId].label }</span> )
+				( <span>{refs[record.place.objId].label}</span> )
 			</div>
 		}
 		
-		{ !/^\s*$/.test(record.resume || '') &&
-		<div className="resume" dangerouslySetInnerHTML={ { __html: record.resume } }/> || '' }
+		{!/^\s*$/.test(record.resume || '') &&
+		<div className="resume" dangerouslySetInnerHTML={{ __html: record.resume }}/> || ''}
 	</div>
 ;

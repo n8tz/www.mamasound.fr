@@ -24,12 +24,12 @@ const breakPts   = {
 	      tablet : phoneAnims,
 	      phone  : phoneAnims
       },
-      initialPts = (!isBrowserSide || window.innerWidth >= 700) && "desktop" || "phone";
+      initialPts = (!isBrowserSide || window.innerWidth >= 800) && "desktop" || "phone";
 
 export default class Anims extends Store {
 	//static singleton = true;
-	static actions   = {};
-	state            = {
+	static actions = {};
+	state          = {
 		currentBrkPts: initialPts,
 	};
 	//data             = {
@@ -47,12 +47,13 @@ export default class Anims extends Store {
 			"resize",
 			this._onResize = ( e ) => {//@todo
 				let currentBrkPts;
-				if ( window.innerWidth >= 700 )
+				if ( window.innerWidth >= 800 )
 					currentBrkPts = "desktop";
-				if ( window.innerWidth <= 700 )
+				if ( window.innerWidth <= 800 )
 					currentBrkPts = "phone";
 				this.setState({ currentBrkPts })
 			});
+		isBrowserSide && setTimeout(tm => this._onResize())
 	}
 	
 	apply( data, state, { currentBrkPts } ) {

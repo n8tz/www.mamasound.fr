@@ -27,21 +27,20 @@ export const background       = {
 };
 export const backgroundScroll = {
 	scrollY: [
-		//{
-		//	type    : "Tween",
-		//	from    : 100,
-		//	duration: 100,
-		//	apply   : {
-		//		filter   : {
-		//			//blur: "5px",
-		//			//translateY: "-50px",
-		//		},
-		//		transform: {
-		//			translateZ: "50px",
-		//			//translateY: "-20vh",
-		//		}
-		//	}
-		//},
+		{
+			from    : 0,
+			duration: 100,
+			apply   : {
+				opacity: 1,
+			}
+		},
+		{
+			from    : 100,
+			duration: 100,
+			apply   : {
+				opacity: -1,
+			}
+		},
 	],
 }
 export const slider           = {

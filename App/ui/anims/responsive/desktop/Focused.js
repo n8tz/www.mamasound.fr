@@ -20,7 +20,7 @@ let stepAngle = "1deg";
 
 export const defaultInitial        = {
 	position       : "absolute",
-	height         : "100%",
+	bottom         : "0%",
 	right          : "0%",
 	top            : "0%",
 	left           : "300px",

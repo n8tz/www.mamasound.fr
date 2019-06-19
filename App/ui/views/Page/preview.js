@@ -45,19 +45,19 @@ export default (
 ) => {
 	//debugger;
 	return <div className={"Page Page_" + record._cls + ' ' + (selected ? "selected" : "")}>
-		<div className="title">
-			{record.title}
-		</div>
-		{/*{*/}
-		{/*	record.previewImage &&*/}
-		{/*	<div className="preview">*/}
-		{/*		<Comps.Image src={record.previewImage} w={500}/>*/}
-		{/*	</div>*/}
-		{/*}*/}
+		{/*<div className="title">*/}
+		{/*	{record.title}*/}
+		{/*</div>*/}
 		{
-			!/^\s*$/.test(record.text || '') &&
-			<div className="resume" dangerouslySetInnerHTML={{ __html: record.text }}/> || ''
+			record.previewImage &&
+			<div className="preview">
+				<Comps.Image src={record.previewImage} w={500}/>
+			</div>
 		}
+		{/*{*/}
+		{/*	!/^\s*$/.test(record.text || '') &&*/}
+		{/*	<div className="resume" dangerouslySetInnerHTML={{ __html: record.text }}/> || ''*/}
+		{/*}*/}
 	</div>
 }
 ;

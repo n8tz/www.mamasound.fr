@@ -34,29 +34,18 @@ import {NavLink} from "react-router-dom";
 export default (
 	{
 		record,
-		refs,
-		selected,
-		place = record.place
-		&& refs
-		&& refs[record.place.objId],
-		category = record.category
-		&& refs[record.category.objId]
+		refs = {},
+		target = record.targetEtty && refs[record.targetEtty.objId] || record,
 	}
 ) => {
 	//debugger;
-	return <div className={"Page Page_" + record._cls + ' ' + (selected ? "selected" : "")}>
+	return <div className={"Page Page_" + target._cls}>
 		<div className="title">
-			{record.title}
+			{target && target.title}
 		</div>
-		{/*{*/}
-		{/*	record.previewImage &&*/}
-		{/*	<div className="preview">*/}
-		{/*		<Comps.Image src={record.previewImage} w={500}/>*/}
-		{/*	</div>*/}
-		{/*}*/}
 		{
-			!/^\s*$/.test(record.text || '') &&
-			<div className="resume" dangerouslySetInnerHTML={{ __html: record.text }}/> || ''
+			target && !/^\s*$/.test(target.text || '') &&
+			<div className="resume" dangerouslySetInnerHTML={{ __html: target.text }}/> || ''
 		}
 	</div>
 }
