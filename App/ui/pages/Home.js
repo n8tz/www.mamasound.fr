@@ -36,26 +36,16 @@ export default class Home extends React.Component {
 	//hookScrollableTargets( targets, dir ) {
 	//	return [this, "EventNav"];
 	//}
-	
-	//componentShouldScroll( axis, delta ) {
-	//	let { appState } = this.props,
-	//	    EventNav     = this.getTweenableRef("EventNav");
-	//	if ( appState.currentPageFocus === "events" && delta < 0 && (EventNav.scrollTop !== 0) )
-	//		return false;
-	//	//if ( appState.currentPageFocus === "events" && delta > 0 && (EventNav.scrollTop !== (EventNav.scrollHeight -
-	//	// EventNav.offsetHeight)) ) return false; if ( appState.currentPageFocus === "event" && delta > 0 &&
-	//	// (EventNav.scrollTop !== (EventNav.scrollHeight - EventNav.offsetHeight)) ) return false;
-	//	return true;
-	//}
-	//
 	componentDidMount( props = this.props ) {
-		window.addEventListener("load", function () {
-			// Set a timeout...
-			setTimeout(function () {
-				// Hide the address bar!
-				window.scrollTo(0, 1);
-			}, 0);
-		});
+		setTimeout(
+			tm => window.addEventListener("load", function () {
+				// Set a timeout...
+				setTimeout(function () {
+					// Hide the address bar!
+					window.scrollTo(0, 1);
+				}, 0);
+			})
+		)
 		let { appState } = props;
 		this.scrollTo(wayPoints[appState.currentPageFocus]);
 	}

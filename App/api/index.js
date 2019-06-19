@@ -20,8 +20,9 @@ const wpiConf     = require('App/.wpiConfig.json'),
       fs          = require('fs'),
       express     = require('express'),
       tpl         = require('../index.html.tpl'),
-      compression = require('compression');
-const compressor  = compression();
+      compression = require('compression'),
+      device      = require('express-device'),
+      compressor  = compression();
 
 export const name          = "Rendering";
 export const priorityLevel = 100000;
@@ -33,15 +34,18 @@ export function service( server ) {
 	//	server.use(basicAuth(creds.user, creds.pass))
 	//}
 	//
+	
+	server.use(device.capture());
 	server.get(
 		'/',
 		function ( req, res, next ) {
 			compressor(
 				req, res,
-				(  ) => {
-					console.warn(req.url, req.user)
+				() => {
+					console.warn(req.url, req.user, req.device)
 					App.renderSSR(
 						{
+							device  : req.device.type,
 							location: req.url,
 							css     : fs.existsSync(process.cwd() + "/dist/App.css")
 							          ? fs.readFileSync(process.cwd() + "/dist/App.css")

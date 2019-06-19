@@ -58,20 +58,10 @@ export const defaultPreviewInitial = {
 	opacity        : 1,
 	transform      : [
 		{
-			//translateX : "-50%",
-			//translateY : "-50%",
-			perspective: "250px",
+			perspective: "700px",
 		},
-		{
-			//translateY: "-200px",
-			//translateY : "-18000px",
-			//rotate: 0
-		},
-		{
-			//translateY: "18000px",
-			//translateZ: "0px",
-			//rotateY   : "-65deg",
-		},
+		{},
+		{},
 		{}]
 };
 export const showAnim              = [
@@ -83,10 +73,8 @@ export const showAnim              = [
 		apply   : {
 			opacity  : 1,
 			transform: [{}, {
-				//rotate: stepAngle,
-				//}, {
-				//translateZ: "-50px",
-				translateX: "-200px",
+				translateZ: "-20px",
+				translateX: "-100%",
 			}]
 		}
 	},
@@ -94,51 +82,70 @@ export const showAnim              = [
 export const showPreviewAnim       = [
 	{
 		from    : 0,
-		duration: 800,
-		easeFn  : "easeSinIn",
-		//easeFn  : "easeBackOut",
+		duration: 1,
 		apply   : {
-			opacity  : 1,
 			transform: [{}, {
-				//rotate: stepAngle,
-				//}, {
-				//translateZ: "-50px",
-				translateY: "-200px",
+				rotateY: "270deg",
 			}]
 		}
 	},
+	{
+		from    : 50,
+		duration: 50,
+		apply   : {
+			transform: [{}, {
+				rotateY: "90deg",
+			}]
+		}
+	},
+	{
+		from    : 50,
+		duration: 1,
+		apply   : {
+			opacity: 1,
+		}
+	}
 ];
 export const hideAnim              = [
 	{
-		type    : "Tween",
 		from    : 0,
 		duration: 700,
+		easeFn  : "easeSinOut",
 		apply   : {
 			opacity  : -1,
 			transform: [{}, {
-				//rotate: stepAngle,
-				//}, {
-				//translateZ: "-250px",
-				translateX: "-200px",
+				translateZ: "-40px",
+				translateX: "-100%",
 				//translateX: "-250px",
 			}]
 		}
 	}]
 ;
 export const hidePreviewAnim       = [
-	{
-		type    : "Tween",
-		from    : 0,
-		duration: 700,
-		apply   : {
-			opacity  : -1,
-			transform: [{}, {
-				//rotate: stepAngle,
-				//}, {
-				//translateZ: "-250px",
-				translateY: "-200px",
-				//translateX: "-250px",
-			}]
-		}
-	}]
+	       {
+		       from    : 0,
+		       duration: 50,
+		       apply   : {
+			       transform: [{}, {
+				       rotateY: "90deg",
+				       //translateY: "-200px",
+				       //translateX: "-250px",
+			       }]
+		       }
+	       },
+	       {
+		       from    : 50,
+		       duration: 1,
+		       apply   : {
+			       opacity: -1,
+		       }
+	       },
+	       {
+		       from    : 50,
+		       duration: 50,
+		       apply   : {
+			       //opacity: 1,
+		       }
+	       },
+       ]
 ;

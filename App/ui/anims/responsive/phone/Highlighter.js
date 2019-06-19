@@ -49,7 +49,7 @@ export const slider           = {
 	bottom   : "0px",
 	left     : "0px",
 	width    : "100%",
-	//height   : "calc(20% - 50px)",
+	height   : "15vh",
 	zIndex   : "100",
 	transform: {
 		perspective: "200px",
@@ -91,7 +91,7 @@ export const slideScroll      = {
 				//height   : 2.5,
 				//top      : -2.5,
 				transform: {
-					translateY: "-10px",
+					//translateY: "-10px",
 					translateZ: "25px",
 					rotateX   : "-4deg"
 				}

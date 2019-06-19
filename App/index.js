@@ -34,7 +34,7 @@ const ctrl = {
 		else if ( __STATE__ )
 			cScope.restore(__STATE__);
 		ReactDom.render(<App/>, node);
-		
+
 		if ( process.env.NODE_ENV !== 'production' && module.hot ) {
 			module.hot.accept('App/App', () => {
 				//ReactDom.render(<App/>, node)
@@ -87,7 +87,12 @@ const ctrl = {
 			    autoDestroy: false
 		    }), App = reScope(cScope)(require('./App').default);
 		
-		cfg.state && cScope.restore(cfg.state, { alias: "App" });
+		if ( cfg.state ) {
+			cScope.restore(cfg.state, { alias: "App" });
+		}
+		else {
+			cScope.state.Anims = { currentBrkPts: cfg.device };
+		}
 		
 		let html,
 		    appHtml     = renderToString(<App location={cfg.location}/>),
@@ -100,7 +105,7 @@ const ctrl = {
 			cScope.destroy()
 			if ( !_attempts || !stable && _attempts < 3 ) {
 				cfg.state = nstate;
-				ctrl.renderSSR(cfg, cb, ++_attempts);
+				ctrl.renderSSR(cfg, cb,  ++_attempts);
 			}
 			else {
 				try {

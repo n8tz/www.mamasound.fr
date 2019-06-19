@@ -64,7 +64,7 @@ export const slider           = {
 	bottom   : "0px",
 	left     : "0px",
 	width    : "100%",
-	//height   : "calc(20% - 50px)",
+	height   : "15vh",
 	zIndex   : "100",
 	transform: {
 		perspective: "200px",

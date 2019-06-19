@@ -21,6 +21,7 @@
   z-index: 150;
   padding: 0 !important;
   margin-left: -50vw;
+  min-height: 40px;
   left: 50%;
   width: 100vw !important;
   //@media screen and (max-width: $tablet-landscape-breakpoint) {
@@ -35,6 +36,14 @@
     border: 1px solid darkgray;
     border-radius: 5px;
     z-index: 2;
+
+    overflow: auto;
+
+    @media screen and (max-width: $tablet-landscape-breakpoint) {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 96vw !important;
+    }
   }
 
   .maskContent {

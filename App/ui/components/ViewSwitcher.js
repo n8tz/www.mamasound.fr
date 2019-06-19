@@ -66,20 +66,81 @@ export default class ViewSwitcher extends React.Component {
 		showPreviewAnim: [],
 		hidePreviewAnim: []
 	};
-	state               = {};
 	
-	reset = () => {
-		this.setState(
-			{
-				lastDay: this.props.day
-			})
+	constructor() {
+		super(...arguments);
+		this._inertia = {
+			maxJump     : 1,
+			onInertiaEnd: ( i, wp ) => {
+				let { curTarget, prevTarget, nextTarget = this.props.getNextTarget(curTarget), history } = this.state;
+				console.log(history)
+				if ( wp.at === 0 ) {
+					let nHisto = [...history];
+					this.setState(
+						{
+							curTarget : prevTarget,
+							nextTarget: curTarget
+						},
+						s => {
+							this.scrollTo(100, 0, "scrollX");
+							this.setState(
+								{
+									prevTarget: nHisto.pop(),
+									history   : nHisto,
+								})
+						}
+					)
+				}
+				if ( wp.at === 200 ) {
+					this.setState(
+						{
+							prevTarget: curTarget,
+							curTarget : nextTarget,
+						},
+						s => {
+							this.scrollTo(100, 0, "scrollX");
+							this.setState(
+								{
+									history   : prevTarget && [...history, prevTarget] || history,
+									prevTarget: curTarget,
+									curTarget : nextTarget,
+									nextTarget: undefined
+								})
+						}
+					)
+				}
+			},
+			wayPoints   : [{ at: 0 }, { at: 100 }, { at: 200 }]
+		}
 	}
+	
+	state = {
+		history: []
+	};
 	
 	static getDerivedStateFromProps( props, state ) {
 		return {
-			curTarget      : state.curTarget || props.target,
+			curTarget         : state.curTarget || props.target,
 			...props,
-			scrollableAnims: [
+			initialPrev       : props.defaultInitial,
+			initialPreviewPrev: props.defaultPreviewInitial,
+			initialCur        : tweenTools.addCss(
+				tweenTools.extractCss(props.showAnim, true)
+				, props.defaultInitial
+			),
+			initialPreviewCur : tweenTools.addCss(
+				tweenTools.extractCss(props.showPreviewAnim, true)
+				, props.defaultPreviewInitial
+			),
+			initialNext       : tweenTools.addCss(
+				tweenTools.extractCss(props.showAnim, true)
+				, props.defaultInitial
+			),
+			initialPreviewNext: tweenTools.addCss(
+				tweenTools.extractCss(props.showPreviewAnim, true)
+				, props.defaultPreviewInitial
+			),
+			scrollableAnims   : [
 				...tweenTools.scale(tweenTools.target(props.hideAnim, 'prev'), 100),
 				...tweenTools.scale(tweenTools.target(props.hidePreviewAnim, 'prevPreview'), 100),
 				...tweenTools.scale(tweenTools.target(props.showAnim, 'from'), 100),
@@ -96,7 +157,7 @@ export default class ViewSwitcher extends React.Component {
 	}
 	
 	componentDidUpdate( prevProps, prevState, nextContext ) {
-		let { curTarget, nextTarget, hideAnim, showAnim } = this.state;
+		let { curTarget, nextTarget, prevTarget, history } = this.state;
 		if ( prevProps.target !== this.props.target && (!nextTarget && this.props.target._id !== curTarget._id || nextTarget && this.props.target._id !== nextTarget._id) ) {
 			//console.log("tween new", curTarget, nextTarget, this.props.target)
 			this.setState(
@@ -111,6 +172,7 @@ export default class ViewSwitcher extends React.Component {
 						    v => {
 							    this.setState(
 								    {
+									    history   : prevTarget && [...history, prevTarget] || history,
 									    prevTarget: curTarget,
 									    curTarget : nextTarget,
 									    nextTarget: undefined
@@ -145,48 +207,9 @@ export default class ViewSwitcher extends React.Component {
 					axe={"scrollX"}
 					defaultPosition={100}
 					items={scrollableAnims}
-					scrollableWindow={60}
+					scrollableWindow={100}
 					inertia={
-						{
-							maxJump     : 1,
-							onInertiaEnd: ( i, wp ) => {
-								let { curTarget, prevTarget, nextTarget = getNextTarget(curTarget) } = this.state;
-								if ( wp.at === 0 ) {
-									this.setState(
-										{
-											prevTarget,
-											curTarget : prevTarget,
-											nextTarget: curTarget
-										},
-										s => {
-											this.scrollTo(100, 0, "scrollX");
-											this.setState(
-												{
-													prevTarget: undefined,
-												})
-										}
-									)
-								}
-								if ( wp.at === 200 ) {
-									this.setState(
-										{
-											prevTarget: curTarget,
-											curTarget : nextTarget,
-										},
-										s => {
-											this.scrollTo(100, 0, "scrollX");
-											this.setState(
-												{
-													prevTarget: curTarget,
-													curTarget : nextTarget,
-													nextTarget: undefined
-												})
-										}
-									)
-								}
-							},
-							wayPoints   : [{ at: 0 }, { at: 100 }, { at: 200 }]
-						}
+						this._inertia
 					}
 				/>
 				<TweenRef id={"prev"}
@@ -208,10 +231,7 @@ export default class ViewSwitcher extends React.Component {
 					</div>
 				</TweenRef>
 				<TweenRef id={"from"}
-				          initial={tweenTools.addCss(
-					          tweenTools.extractCss(showAnim, true)
-					          , defaultInitial
-				          )}>
+				          initial={this.state.initialCur}>
 					<div>
 						{
 							curTarget &&
@@ -220,10 +240,7 @@ export default class ViewSwitcher extends React.Component {
 					</div>
 				</TweenRef>
 				<TweenRef id={"fromPreview"}
-				          initial={tweenTools.addCss(
-					          tweenTools.extractCss(showPreviewAnim, true)
-					          , defaultPreviewInitial
-				          )}>
+				          initial={this.state.initialPreviewCur}>
 					<div>
 						{
 							curTarget &&
@@ -232,11 +249,7 @@ export default class ViewSwitcher extends React.Component {
 					</div>
 				</TweenRef>
 				<TweenRef id={"to"}
-				          initial={tweenTools.addCss(
-					          tweenTools.extractCss(showAnim, true)
-					          , defaultInitial
-					          , { pointerEvents: 'none' }
-				          )}>
+				          initial={this.state.initialNext}>
 					<div>
 						{
 							nextTarget &&
@@ -245,11 +258,7 @@ export default class ViewSwitcher extends React.Component {
 					</div>
 				</TweenRef>
 				<TweenRef id={"toPreview"}
-				          initial={tweenTools.addCss(
-					          tweenTools.extractCss(showPreviewAnim, true)
-					          , defaultPreviewInitial
-					          , { pointerEvents: 'none' }
-				          )}>
+				          initial={this.state.initialPreviewNext}>
 					<div>
 						{
 							nextTarget &&
