@@ -192,7 +192,7 @@ export const YAxis             = [
 		duration: 100,
 		apply   : {
 			top   : "-78%",
-			height: "60%",
+			height: "65%",
 			//opacity:-.5
 		}
 	},
@@ -201,8 +201,8 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: "20%",
-			top   : "-20%"
+			height: "15%",
+			top   : "-15%"
 		}
 	},
 	// highlighter to events

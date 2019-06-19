@@ -26,15 +26,16 @@
   width: 100vw !important;
   //overflow: hidden;
   //tr
-  .focusedContent{
+  .focusedContent {
 
-    @media screen and (max-width: $tablet-landscape-breakpoint) {
+    @media screen and (max-width: $tablet-portrait-breakpoint) {
       margin: 0 !important;
       padding: 0 !important;
-      width: 96vw !important;
+      width: 100vw !important;
     }
   }
-    //@include use_hvCenteredContent();
+
+  //@include use_hvCenteredContent();
   .ViewSwitcher {
     position: absolute;
     top: 0;
@@ -43,21 +44,94 @@
     height: 100%;
     user-select: none;
 
-    > * {
-      background: rgba(255, 255, 255, 0.6);
-      border-radius: 20px;
-      overflow: auto !important;
-      overflow-x: hidden !important;
-      overflow-y: scroll !important;
+    .BestEvents {
+      @include use_hvCenteredAbs();
+      transform: translate(-50%, -50%) translateY(-100px);
+
+      @media screen and (min-width: $tablet-portrait-breakpoint) {
+        transform: translate(-50%, -50%) translateX(-150px);
+      }
+    }
+
+    .FocusedItems_preview {
+      //background: #1f8de2;
+      width: 100%;
+      height: 100%;
+
+      .preview {
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        img {
+          @media screen and (max-width: $tablet-portrait-breakpoint) {
+            @include withTranspaMask();
+          }
+          //height: 100%;
+          max-width: 100%;
+        }
+      }
+    }
+
+    .FocusedItems_page {
+      background: rgba(255, 255, 255, 0.7);
+      //border-radius: 20px;
       text-align: left;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      //padding-top: 2em;
+
+      @media screen and (min-width: $tablet-portrait-breakpoint) {
+        border-radius: 10px;
+      }
+
+      .title {
+        @media screen and (min-width: $tablet-portrait-breakpoint) {
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+
+        background: rgba(255, 255, 255, 0.6);
+        text-align: center;
+        font-size: 2em;
+        font-weight: lighter;
+        font-family: EmPower42;
+        //border-top:solid 1px grey;
+        border-bottom: solid 1px lightgrey;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%
+      }
+
+      .resume {
+        @include withScrollBar();
+
+        position: absolute;
+        top: 3em;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: auto !important;
+        overflow-x: hidden !important;
+        overflow-y: scroll !important;
+        margin: 5px;
+      }
+
       //touch-action: auto;
-      *{
+      * {
         max-width: 100%;
         overflow: hidden;
       }
+
       img {
         max-width: 40vw;
-
+        touch-action: none;
+        pointer-events: none;
         height: auto !important;
         //max-height: 60%;
       }
@@ -78,7 +152,7 @@
 
     .container {
       @include use_hvCenteredAbs();
-      @media screen and (max-width: $tablet-landscape-breakpoint) {
+      @media screen and (max-width: $tablet-portrait-breakpoint) {
         margin: 0 !important;
         padding: 0 !important;
         width: 100% !important;

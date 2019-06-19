@@ -83,12 +83,27 @@ export default class Highlighter extends React.Component {
 	static propTypes = {};
 	state            = {};
 	
-	onLayoutChange = ( layout ) => {
+	selectFocus     =
+		( e, i, slider ) => {
+			let {
+				    MountedItems: { items = [] },
+				    $actions
+			    }     = this.props,
+			    state = this.state;
+			$actions.selectFocus(items[i]._id);
+			slider.goTo(i);
+		}
+	pickNextFocused = rec => {
+		let {
+			    MountedItems: { items = [] },
+		    }     = this.props,
+		    state = this.state;
+		return (items[(items.findIndex(ref => (rec && ref && rec._id === ref._id)) + 1) % items.length]);
 	}
 	
 	render() {
 		let {
-			    MountedItems: { items: gridItems = [], layout = [] },
+			    MountedItems: { items = [], layout = [] },
 			    Anims, Selected, DataProvider,
 			    $actions, HighlighterBackground, tweener, style
 		    }     = this.props,
@@ -128,12 +143,10 @@ export default class Highlighter extends React.Component {
 					<div className={"focusedContent container"}>
 						<Comps.ViewSwitcher target={Selected && Selected.Focused}
 						                    {...Anims.Focused}
+						                    DefaultView={Views.Events.BestEvents}
 						                    View={Views.FocusedItems.page}
 						                    ViewPreview={Views.FocusedItems.preview}
-						                    getNextTarget={rec => {
-							                    let next = (gridItems[(gridItems.findIndex(ref => (rec._id === ref._id)) + 1) % gridItems.length]);
-							                    return next;
-						                    }}
+						                    getNextTarget={this.pickNextFocused}
 						/>
 					</div>
 				</TweenRef>
@@ -147,17 +160,11 @@ export default class Highlighter extends React.Component {
 						<Comps.Slider
 							{...Anims.MainSlider}
 							autoScroll={10 * 1000}
-							onClick={
-								( e, i, slider ) => {
-									//debugger
-									$actions.selectFocus(gridItems[i]._id);
-									slider.goTo(i);
-								}
-							}
+							onClick={this.selectFocus}
 						>
 							{
-								gridItems.length &&
-								gridItems.map(
+								items.length &&
+								items.map(
 									( item, i ) =>
 										<TweenRef key={item._id + i}
 										          tweener={tweener}

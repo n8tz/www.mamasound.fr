@@ -846,9 +846,10 @@ function asTweener() {
             iStyle = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, iStyle, Object(_helpers_css__WEBPACK_IMPORTED_MODULE_17__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true));
             Object.assign(_.tweenRefCSS[id], _.tweenRefOriginCss[id]);
           } else {
-            //_.muxByTarget[id]     = {};
-            delete _.muxDataByTarget[id].transform_head;
-            iStyle = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, iStyle, Object(_helpers_css__WEBPACK_IMPORTED_MODULE_17__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true)); // minus initial values
+            _.muxByTarget[id] = {};
+            _.muxDataByTarget[id] = {}; //delete _.muxDataByTarget[id].transform_head;
+
+            iStyle = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, iStyle, Object(_helpers_css__WEBPACK_IMPORTED_MODULE_17__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true, true)); // minus initial values
 
             Object.keys(_.tweenRefOrigin[id]).forEach(function (key) {
               return _.tweenRefMaps[id][key] -= _.tweenRefOrigin[id][key];
@@ -883,7 +884,7 @@ function asTweener() {
           _.tweenRefs[id] = true;
           _.muxByTarget[id] = _.muxByTarget[id] || {};
           _.muxDataByTarget[id] = _.muxDataByTarget[id] || {};
-          iStyle = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, iStyle, Object(_helpers_css__WEBPACK_IMPORTED_MODULE_17__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true, true)); //_.tweenRefUnits[id] = extractUnits(iMap);
+          iStyle = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, iStyle, Object(_helpers_css__WEBPACK_IMPORTED_MODULE_17__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true)); //_.tweenRefUnits[id] = extractUnits(iMap);
           //}
 
           _.tweenRefOrigin[id] = tweenableMap;
@@ -1353,14 +1354,13 @@ function asTweener() {
               'dragstart': function dragstart(e, touch, descr) {
                 //@todo
                 var tweener, x, y, i, style;
-                parents = _this9.getScrollableNodes(e.target);
-                console.log("start");
+                parents = _this9.getScrollableNodes(e.target); //console.log("start")
+
                 lastStartTm = Date.now();
                 dX = 0;
                 dY = 0;
                 parentsState = []; //document.body.style.touchAction = 'none';
-
-                document.body.style.userSelect = 'none';
+                //document.body.style.userSelect  = 'none';
 
                 for (i = 0; i < parents.length; i++) {
                   tweener = parents[i]; // react comp with tweener support
@@ -1464,7 +1464,7 @@ function asTweener() {
                       cState = parentsState[i];
 
                       if (cState) {
-                        if (!yDispatched && cState.scrollY && (dY < 0 && tweener.scrollTop !== 0 || dY > 0 && tweener.scrollTop !== tweener.scrollHeight - tweener.offsetHeight)) {
+                        if (!yDispatched && cState.scrollY && (dY < 0 && tweener.scrollTop !== 0 || dY > 0 && tweener.scrollTop !== tweener.scrollHeight - tweener.clientHeight)) {
                           //cState.lastY = cState.y + dY;
                           //
                           //tweener.scrollTo({
@@ -1482,7 +1482,7 @@ function asTweener() {
                         } // let the node do this scroll
 
 
-                        if (!xDispatched && cState.scrollX && (dX < 0 && tweener.scrollLeft !== 0 || dX > 0 && tweener.scrollLeft !== tweener.scrollWidth - tweener.offsetWidth)) {
+                        if (!xDispatched && cState.scrollX && (dX < 0 && tweener.scrollLeft !== 0 || dX > 0 && tweener.scrollLeft !== tweener.scrollWidth - tweener.clientWidth)) {
                           //cState.lastX = cState.x + dX;
                           //tweener.scrollTo({
                           //	                 left: cState.x + dX,
@@ -1509,15 +1509,9 @@ function asTweener() {
               },
               'dropped': function dropped(e, touch, descr) {
                 var tweener, x, deltaX, xDispatched, vX, y, deltaY, yDispatched, vY, cState, i;
-
-                if (lastStartTm && lastStartTm > Date.now() - opts.maxClickTm && Math.abs(dY) < opts.maxClickOffset && Math.abs(dX) < opts.maxClickOffset) // skip tap & click
-                  {
-                    return;
-                  }
-
                 cLock = undefined; //lastStartTm                     = undefined;
-
-                document.body.style.userSelect = ''; //document.body.style.touchAction = '';
+                //document.body.style.userSelect  = '';
+                //document.body.style.touchAction = '';
 
                 lastStartTm = 0;
 
@@ -1536,7 +1530,10 @@ function asTweener() {
                   //	}
                   //}
 
-                }
+                } //if ( lastStartTm && ((lastStartTm > Date.now() - opts.maxClickTm) && Math.abs(dY)
+                // < opts.maxClickOffset && Math.abs(dX) < opts.maxClickOffset) )// skip tap &
+                // click { return; }
+
 
                 parents = parentsState = null;
               }
@@ -1649,7 +1646,8 @@ function asTweener() {
             i; // check if there scrollable stuff in dom targets
         // get all the parents components & dom node of an dom element ( from fibers )
 
-        Comps = this.getScrollableNodes(headTarget); //console.log("dispatching ", dx, dy, Comps);
+        Comps = this.getScrollableNodes(headTarget);
+        console.log("dispatching ", dx, dy, Comps);
 
         for (i = 0; i < Comps.length; i++) {
           // react comp with tweener support
@@ -1668,7 +1666,7 @@ function asTweener() {
               style = getComputedStyle(Comps[i], null);
 
               if (/(auto|scroll)/.test(style.getPropertyValue("overflow") + style.getPropertyValue("overflow-x") + style.getPropertyValue("overflow-y"))) {
-                if (dy < 0 && Comps[i].scrollTop !== 0 || dy > 0 && Comps[i].scrollTop !== Comps[i].scrollHeight - Comps[i].offsetHeight) {
+                if (dy < 0 && Comps[i].scrollTop !== 0 || dy > 0 && Comps[i].scrollTop !== Comps[i].scrollHeight - Comps[i].clientHeight) {
                   return; //nodeInertia.y.dispatch(dy * 10)
                   //dy = 0;
                 } // let the node do this scroll
@@ -4381,15 +4379,15 @@ var is = __webpack_require__(/*! is */ "undefined?63a5"),
    */
   findReactParents: function findReactParents(element) {
     var fiberNode,
-        comps = [];
+        comps = [element];
 
     for (var key in element) {
       if (key.startsWith('__reactInternalInstance$')) {
-        fiberNode = element[key]["return"];
+        fiberNode = element[key];
 
         while (fiberNode["return"]) {
+          if (fiberNode.stateNode && !comps.includes(fiberNode.stateNode)) comps.push(fiberNode.stateNode);
           fiberNode = fiberNode["return"];
-          if (fiberNode.stateNode) comps.push(fiberNode.stateNode);
         }
 
         return comps;

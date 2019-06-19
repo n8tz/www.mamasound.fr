@@ -118,7 +118,7 @@ export default class EventList extends React.Component {
 	}
 	
 	componentDidUpdate() {
-		//this.scrollToSelected();
+		this.scrollToSelected();
 		this.watchCurrentDayFromScroll();
 	}
 	
@@ -174,8 +174,6 @@ export default class EventList extends React.Component {
 											)
 									}
 								</div>
-								{activeScroll && <div className={"noScrollOverlay"}
-								                      onClick={e => $actions.setPageFocus('events', true)}></div>}
 							</div>
 						</TweenRef>
 						<TweenRef
@@ -186,6 +184,8 @@ export default class EventList extends React.Component {
 						</TweenRef>
 					</div>
 				</div>
+				{activeScroll && <div className={"noScrollOverlay"}
+				                      onClick={e => $actions.setPageFocus('events', true)}></div>}
 				<div
 					className={"NavTools container"}
 				>

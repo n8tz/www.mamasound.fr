@@ -157,7 +157,6 @@ export default function asTweener( ...argz ) {
 				_.iMapOrigin[id] = iMap;
 				iStyle           = iStyle || {};
 				iMap             = iMap || {};
-				
 				if ( mapReset ) {
 					_.muxByTarget[id]     = {};
 					_.muxDataByTarget[id] = {};
@@ -173,9 +172,10 @@ export default function asTweener( ...argz ) {
 					Object.assign(_.tweenRefCSS[id], _.tweenRefOriginCss[id]);
 				}
 				else {
-					//_.muxByTarget[id]     = {};
-					delete _.muxDataByTarget[id].transform_head;
-					iStyle = { ...iStyle, ...deMuxTween(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true) };
+					_.muxByTarget[id]     = {};
+					_.muxDataByTarget[id] = {};
+					//delete _.muxDataByTarget[id].transform_head;
+					iStyle = { ...iStyle, ...deMuxTween(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true, true) };
 					// minus initial values
 					Object.keys(_.tweenRefOrigin[id])
 					      .forEach(
@@ -223,7 +223,7 @@ export default function asTweener( ...argz ) {
 				_.muxDataByTarget[id] = _.muxDataByTarget[id] || {};
 				
 				
-				iStyle = { ...iStyle, ...deMuxTween(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true, true) };
+				iStyle = { ...iStyle, ...deMuxTween(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true) };
 				//_.tweenRefUnits[id] = extractUnits(iMap);
 				//}
 				_.tweenRefOrigin[id]    = tweenableMap;
@@ -682,14 +682,14 @@ export default function asTweener( ...argz ) {
 									    x,
 									    y, i, style;
 									
-									parents = this.getScrollableNodes(e.target);
-									console.log("start")
+									parents      = this.getScrollableNodes(e.target);
+									//console.log("start")
 									lastStartTm  = Date.now();
 									dX           = 0;
 									dY           = 0;
 									parentsState = [];
 									//document.body.style.touchAction = 'none';
-									document.body.style.userSelect  = 'none';
+									//document.body.style.userSelect  = 'none';
 									for ( i = 0; i < parents.length; i++ ) {
 										tweener = parents[i];
 										// react comp with tweener support
@@ -801,7 +801,7 @@ export default function asTweener( ...argz ) {
 														cState.scrollY &&
 														((dY < 0 && tweener.scrollTop !== 0)
 															||
-															(dY > 0 && tweener.scrollTop !== (tweener.scrollHeight - tweener.offsetHeight)))
+															(dY > 0 && tweener.scrollTop !== (tweener.scrollHeight - tweener.clientHeight)))
 													) {
 														//cState.lastY = cState.y + dY;
 														//
@@ -824,7 +824,7 @@ export default function asTweener( ...argz ) {
 														cState.scrollX &&
 														((dX < 0 && tweener.scrollLeft !== 0)
 															||
-															(dX > 0 && tweener.scrollLeft !== (tweener.scrollWidth - tweener.offsetWidth)))
+															(dX > 0 && tweener.scrollLeft !== (tweener.scrollWidth - tweener.clientWidth)))
 													) {
 														//cState.lastX = cState.x + dX;
 														//tweener.scrollTo({
@@ -859,13 +859,9 @@ export default function asTweener( ...argz ) {
 									    y, deltaY, yDispatched, vY,
 									    cState, i;
 									
-									if ( lastStartTm && ((lastStartTm > Date.now() - opts.maxClickTm) && Math.abs(dY) < opts.maxClickOffset && Math.abs(dX) < opts.maxClickOffset) )// skip tap & click
-									{
-										return;
-									}
 									cLock = undefined;
 									//lastStartTm                     = undefined;
-									document.body.style.userSelect  = '';
+									//document.body.style.userSelect  = '';
 									//document.body.style.touchAction = '';
 									lastStartTm = 0;
 									for ( i = 0; i < parents.length; i++ ) {
@@ -884,6 +880,9 @@ export default function asTweener( ...argz ) {
 										//}
 										
 									}
+									//if ( lastStartTm && ((lastStartTm > Date.now() - opts.maxClickTm) && Math.abs(dY)
+									// < opts.maxClickOffset && Math.abs(dX) < opts.maxClickOffset) )// skip tap &
+									// click { return; }
 									parents = parentsState = null;
 								}
 							},
@@ -1041,7 +1040,7 @@ export default function asTweener( ...argz ) {
 						if (
 							(dy < 0 && Comps[i].scrollTop !== 0)
 							||
-							(dy > 0 && Comps[i].scrollTop !== (Comps[i].scrollHeight - Comps[i].offsetHeight))
+							(dy > 0 && Comps[i].scrollTop !== (Comps[i].scrollHeight - Comps[i].clientHeight))
 						) {
 							return;
 							//nodeInertia.y.dispatch(dy * 10)

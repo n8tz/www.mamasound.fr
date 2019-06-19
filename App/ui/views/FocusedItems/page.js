@@ -39,9 +39,9 @@ export default (
 	}
 ) => {
 	//debugger;
-	return <div className={"Page Page_" + target._cls}>
+	return <div className={"Page FocusedItems_page type_" + target._cls}>
 		<div className="title">
-			{target && target.title}
+			{target && (target.title || target.label)}
 		</div>
 		{
 			target && !/^\s*$/.test(target.text || '') &&

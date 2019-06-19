@@ -34,10 +34,12 @@ export default class ViewSwitcher extends React.Component {
 		target: PropTypes.object,
 	};
 	static defaultProps = {
-		View           : ( { style, record } ) => <pre style={style}>{JSON.stringify(record, null, 2)}</pre>,
-		ViewPreview    : ( { style, record } ) => <pre style={style}>{JSON.stringify(record, null, 2)}</pre>,
-		getNextTarget  : rec => undefined,
-		showAnim       : {
+		DefaultView       : ( { style, record } ) => <pre style={style}>!!!</pre>,
+		View              : ( { style, record } ) => <pre style={style}>{JSON.stringify(record, null, 2)}</pre>,
+		ViewPreview       : ( { style, record } ) => <pre style={style}>{JSON.stringify(record, null, 2)}</pre>,
+		getNextTarget     : rec => undefined,
+		transitionDuration: 500,
+		showAnim          : {
 			from    : 0,
 			duration: 500,
 			easeFn  : "easeSinOut",
@@ -50,7 +52,7 @@ export default class ViewSwitcher extends React.Component {
 				}]
 			}
 		},
-		hideAnim       : {
+		hideAnim          : {
 			from    : 0,
 			duration: 500,
 			easeFn  : "easeSinOut",
@@ -63,11 +65,11 @@ export default class ViewSwitcher extends React.Component {
 				}]
 			}
 		},
-		showPreviewAnim: [],
-		hidePreviewAnim: []
+		showPreviewAnim   : [],
+		hidePreviewAnim   : []
 	};
 	
-	constructor() {
+	constructor( props ) {
 		super(...arguments);
 		this._inertia = {
 			maxJump     : 1,
@@ -110,15 +112,16 @@ export default class ViewSwitcher extends React.Component {
 			},
 			wayPoints   : [{ at: 0 }, { at: 100 }, { at: 200 }]
 		}
+		this.state    = {
+			curTarget: props.target,
+			history  : []
+		};
 	}
 	
-	state = {
-		history: []
-	};
 	
 	static getDerivedStateFromProps( props, state ) {
 		return {
-			curTarget         : state.curTarget || props.target,
+			//
 			...props,
 			initialPrev       : props.defaultInitial,
 			initialPreviewPrev: props.defaultPreviewInitial,
@@ -156,7 +159,7 @@ export default class ViewSwitcher extends React.Component {
 	
 	componentDidUpdate( prevProps, prevState, nextContext ) {
 		let { curTarget, nextTarget, prevTarget, history } = this.state;
-		if ( prevProps.target !== this.props.target && (!nextTarget && this.props.target._id !== curTarget._id || nextTarget && this.props.target._id !== nextTarget._id) ) {
+		if ( prevProps.target !== this.props.target && (!nextTarget && (!curTarget || this.props.target._id !== curTarget._id) || nextTarget && this.props.target._id !== nextTarget._id) ) {
 			//console.log("tween new", curTarget, nextTarget, this.props.target)
 			this.setState(
 				{
@@ -164,14 +167,14 @@ export default class ViewSwitcher extends React.Component {
 				}
 				,
 				(( s ) => {
-					this.scrollTo(200, 450, "scrollX")
+					this.scrollTo(200, this.props.transitionDuration, "scrollX")
 					    .then(
 						    v => {
 							    this.setState(
 								    {
 									    history   : prevTarget && [...history, prevTarget] || history,
 									    prevTarget: curTarget,
-									    curTarget : nextTarget,
+									    curTarget : this.props.target,
 									    nextTarget: undefined
 								    }
 								    ,
@@ -191,7 +194,7 @@ export default class ViewSwitcher extends React.Component {
 	render() {
 		let {
 			    target, defaultInitial = {}, defaultPreviewInitial,
-			    style, DataProvider, View, ViewPreview, getNextTarget
+			    style, DataProvider, View, ViewPreview, getNextTarget, DefaultView
 		    }                                                                                                            = this.props,
 		    { curTarget, prevTarget, nextTarget = getNextTarget(curTarget), showPreviewAnim, showAnim, scrollableAnims } = this.state,
 		    selected;
@@ -215,6 +218,7 @@ export default class ViewSwitcher extends React.Component {
 						{
 							prevTarget &&
 							<View record={prevTarget} refs={DataProvider}/>
+							|| <DefaultView/>
 						}
 					</div>
 				</TweenRef>
@@ -233,6 +237,7 @@ export default class ViewSwitcher extends React.Component {
 						{
 							curTarget &&
 							<View record={curTarget} refs={DataProvider}/>
+							|| <DefaultView/>
 						}
 					</div>
 				</TweenRef>
