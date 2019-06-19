@@ -29876,24 +29876,20 @@ function asTweener() {
           _.tweenRefs[id] = true;
           _.muxByTarget[id] = _.muxByTarget[id] || {};
           _.muxDataByTarget[id] = _.muxDataByTarget[id] || {};
-          iStyle = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, iStyle, Object(_helpers_css__WEBPACK_IMPORTED_MODULE_17__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true)); //_.tweenRefUnits[id] = extractUnits(iMap);
+          iStyle = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, iStyle, Object(_helpers_css__WEBPACK_IMPORTED_MODULE_17__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true, true)); //_.tweenRefUnits[id] = extractUnits(iMap);
           //}
 
           _.tweenRefOrigin[id] = tweenableMap;
           _.tweenRefOriginCss[id] = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, iStyle);
           _.tweenRefCSS[id] = iStyle;
-          _.tweenRefMaps[id] = _.tweenRefMaps[id] || {}; //Object.keys(initials)
-          //      .forEach(
-          //	      key => (_.tweenRefMaps[id][key] = is.number(_.tweenRefMaps[id][key])
-          //	                                        ? _.tweenRefMaps[id][key]
-          //	                                        : initials[key])
-          //      );
-          //if ( tweenableMap.hasOwnProperty("opacity") && _.tweenRefMaps[id].hasOwnProperty("opacity") ) {
-          //	_.tweenRefMaps[id].opacity -= initials.opacity;
-          //}
+          _.tweenRefMaps[id] = _.tweenRefMaps[id] || {}; // if this ref was initialized by its scroll anims we minus initial values
+
+          Object.keys(tweenableMap).forEach(function (key) {
+            if (_.tweenRefMaps[id].hasOwnProperty(key)) _.tweenRefMaps[id][key] -= initials[key];
+          }); //
           // init / reset or get the tweenable view
 
-          tweenableMap = Object.assign(_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, _.tweenRefMaps[id]), initials, tweenableMap || {}); // set defaults values in case of
+          tweenableMap = Object.assign({}, initials, tweenableMap || {}); // set defaults values in case of
           // add new initial values
 
           Object.keys(tweenableMap).forEach(function (key) {
@@ -29901,7 +29897,7 @@ function asTweener() {
           });
           tweenableMap = _.tweenRefMaps[id];
           Object(_helpers_css__WEBPACK_IMPORTED_MODULE_17__["muxToCss"])(tweenableMap, iStyle, _.muxByTarget[id], _.muxDataByTarget[id], _.box);
-        } //console.log('tweenRef::tweenRef:519: ', id, _.tweenRefCSS[id], tweenableMap);
+        } //console.log('tweenRef::tweenRef:519: ', id, { ...tweenableMap });
 
 
         if (noref) return {
@@ -30155,7 +30151,7 @@ function asTweener() {
 
         dim = this._.axes[axe] = nextDescr; //console.log('TweenableComp::initAxis:519: ', axe, dim.scrollPos);
 
-        _inertia && (dim.inertia._.wayPoints = _inertia.wayPoints);
+        _inertia && (dim.inertia._.wayPoints = _inertia.wayPoints); //(_inertia) && (dim.inertia._.pos = scrollPos);
       }
     }, {
       key: "addScrollableAnim",
@@ -30464,8 +30460,10 @@ function asTweener() {
                         //tweener.dispatchEvent(e)
                         //cState.inertia.y.hold(cState.y + dY)
                         //tweener.scrollTop = cState.y + dY;
-                        //yDispatched = true;
-                        return;
+                        if (opts.dragDirectionLock && cLock === "Y") return;else if (!opts.dragDirectionLock) {
+                          return;
+                        }
+                        yDispatched = true;
                       } // let the node do this scroll
 
 
@@ -31043,8 +31041,11 @@ function () {
       _.lastInertiaPos = 0;
       _.targetDist = 0;
       _.pos = pos;
-      _.pos = max(_.pos, _.max);
-      _.pos = min(_.pos, _.min);
+
+      if (_.conf.bounds) {
+        _.pos = max(_.pos, _.max);
+        _.pos = min(_.pos, _.min);
+      }
     }
   }, {
     key: "teleport",
@@ -31208,7 +31209,7 @@ function () {
       _.lastVelocity = iVel;
       _.baseTS = now;
 
-      if (!_.conf.infinite) {
+      if (_.conf.bounds) {
         if (pos > _.max) {
           pos = _.max + min((pos - _.max) / 10, 10);
         } else if (pos < _.min) {
@@ -31225,20 +31226,22 @@ function () {
           velSign = signOf(_.lastVelocity);
       this.holding = false;
 
-      if (_.pos > _.max) {
-        this.active = true;
-        _.inertia = true;
-        _.lastInertiaPos = 0;
-        _.inertiaStartTm = _.inertiaLastTm = Date.now();
-        _.targetDist = _.max - _.pos;
-        _.targetDuration = abs(_.targetDist * 10);
-      } else if (_.pos < _.min) {
-        this.active = true;
-        _.inertia = true;
-        _.lastInertiaPos = 0;
-        _.inertiaStartTm = _.inertiaLastTm = Date.now();
-        _.targetDist = _.pos - _.min;
-        _.targetDuration = abs(_.targetDist * 10);
+      if (_.conf.bounds) {
+        if (_.pos > _.max) {
+          this.active = true;
+          _.inertia = true;
+          _.lastInertiaPos = 0;
+          _.inertiaStartTm = _.inertiaLastTm = Date.now();
+          _.targetDist = _.max - _.pos;
+          _.targetDuration = abs(_.targetDist * 10);
+        } else if (_.pos < _.min) {
+          this.active = true;
+          _.inertia = true;
+          _.lastInertiaPos = 0;
+          _.inertiaStartTm = _.inertiaLastTm = Date.now();
+          _.targetDist = _.pos - _.min;
+          _.targetDuration = abs(_.targetDist * 10);
+        }
       } else {
         // calc momentum distance...
         applyInertia(_);
@@ -32168,8 +32171,12 @@ var _default = function _default(key, value, target, data, initials) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! is */ "./node_modules/is/index.js");
-/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(is__WEBPACK_IMPORTED_MODULE_0__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/objectSpread */ "./node_modules/@babel/runtime/helpers/objectSpread.js");
+/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! is */ "./node_modules/is/index.js");
+/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(is__WEBPACK_IMPORTED_MODULE_1__);
+
+
 (function () {
   var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
   enterModule && enterModule(module);
@@ -32245,14 +32252,15 @@ var _default = function _default(key, value, target, data, initials, forceUnits)
   data["transform_head"] = data["transform_head"] || key;
   data[key] = data[key] || [{}];
   initials[key] = 0;
-  if (!is__WEBPACK_IMPORTED_MODULE_0___default.a.array(value)) value = [value];
+  if (!is__WEBPACK_IMPORTED_MODULE_1___default.a.array(value)) value = [value];
   value.forEach(function (tmap, i) {
-    return Object.keys(tmap).forEach(function (fkey) {
+    var baseData = {}; //data[key][i]       = forceUnits ? {} : data[key][i] || {};
+
+    Object.keys(tmap).forEach(function (fkey) {
       var fValue = tmap[fkey],
           dkey = key + '_' + fkey + '_' + i,
-          match = is__WEBPACK_IMPORTED_MODULE_0___default.a.string(fValue) ? fValue.match(unitsRe) : false;
-      data[key][i] = data[key][i] || {};
-      data[key][i][fkey] = true;
+          match = is__WEBPACK_IMPORTED_MODULE_1___default.a.string(fValue) ? fValue.match(unitsRe) : false;
+      baseData[fkey] = true;
       initials[dkey] = 0;
 
       if (match) {
@@ -32268,6 +32276,7 @@ var _default = function _default(key, value, target, data, initials, forceUnits)
         if (!data[dkey] && fkey in defaultUnits) data[dkey] = defaultUnits[fkey];
       }
     });
+    data[key][i] = forceUnits ? _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, baseData, data[key][i] || {}) : _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, data[key][i] || {}, baseData);
   });
   return demux;
 };
@@ -32803,7 +32812,7 @@ function muxToCss(tweenable, css, demuxers, data, box) {
     demuxers[key](key, tweenable, css, data, box);
   });
 }
-function deMuxTween(tween, deMuxedTween, initials, data, demuxers, forceUnits) {
+function deMuxTween(tween, deMuxedTween, initials, data, demuxers, forceUnits, reOrder) {
   var fTween = {},
       excluded = {};
   Object.keys(tween).forEach(function (key) {
@@ -32816,8 +32825,8 @@ function deMuxTween(tween, deMuxedTween, initials, data, demuxers, forceUnits) {
   Object.keys(fTween).forEach(function (key) {
     if (cssDemux[key]) {
       //key, value, target, data, initials
-      demuxers[key] = cssDemux[key](key, fTween[key], deMuxedTween, data, initials, forceUnits);
-    } else demuxers[key] = cssDemux.$all(key, fTween[key], deMuxedTween, data, initials, forceUnits);
+      demuxers[key] = cssDemux[key](key, fTween[key], deMuxedTween, data, initials, forceUnits, reOrder);
+    } else demuxers[key] = cssDemux.$all(key, fTween[key], deMuxedTween, data, initials, forceUnits, reOrder);
   });
   return excluded;
 }

@@ -45,9 +45,10 @@ export const header            = {
 export const logo              = {
 	position : "absolute",
 	width    : "40%",
-	left     : "55%",
-	height   : "70px",
-	bottom   : "5%",
+	minWidth : "250px",
+	right    : "5%",
+	height   : "50px",
+	bottom   : "10%",
 	zIndex   : 200,
 	transform: [
 		{
@@ -169,7 +170,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			left: "-55%",
+			right: "-5%",
 			width: "60%",
 		}
 	},

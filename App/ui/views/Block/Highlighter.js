@@ -89,7 +89,7 @@ export default class Highlighter extends React.Component {
 	render() {
 		let {
 			    MountedItems: { items: gridItems = [], layout = [] },
-			    Anims, Selected, appState,
+			    Anims, Selected, DataProvider,
 			    $actions, HighlighterBackground, tweener, style
 		    }     = this.props,
 		    state = this.state;
@@ -127,7 +127,14 @@ export default class Highlighter extends React.Component {
 				>
 					<div className={"focusedContent container"}>
 						<Comps.ViewSwitcher target={Selected && Selected.Focused}
-						                    {...Anims.Focused}/>
+						                    {...Anims.Focused}
+						                    View={Views.FocusedItems.page}
+						                    ViewPreview={Views.FocusedItems.preview}
+						                    getNextTarget={rec => {
+							                    let next = (gridItems[(gridItems.findIndex(ref => (rec._id === ref._id)) + 1) % gridItems.length]);
+							                    return next;
+						                    }}
+						/>
 					</div>
 				</TweenRef>
 				
@@ -142,7 +149,8 @@ export default class Highlighter extends React.Component {
 							autoScroll={10 * 1000}
 							onClick={
 								( e, i, slider ) => {
-									$actions.selectFocus(gridItems[i].targetEtty.objId);
+									//debugger
+									$actions.selectFocus(gridItems[i]._id);
 									slider.goTo(i);
 								}
 							}
@@ -156,9 +164,10 @@ export default class Highlighter extends React.Component {
 										          initial={Anims.Highlighter.slide}
 										          tweenLines={Anims.Highlighter.slideScroll}>
 											<Views.FocusedItems record={item}
-											                    onClick={
-												                    e => $actions.selectFocus(item.targetEtty.objId, i)
-											                    }/>
+												//onTap={
+												//    e => $actions.selectFocus(item.targetEtty.objId, i)
+												//}
+											/>
 										</TweenRef>
 								)
 							}

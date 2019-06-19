@@ -22,10 +22,10 @@ import {asTweener, TweenRef, TweenAxis} from "react-rtween";
 
 const wayPoints =
 	      {
-		      page : 0,
-		      head : 100,
-		      event: 200,
-		      map  : 300
+		      page  : 0,
+		      head  : 100,
+		      events: 200,
+		      map   : 300
 	      };
 
 @scopeToProps("appState", "Anims")
@@ -36,26 +36,16 @@ export default class Home extends React.Component {
 	//hookScrollableTargets( targets, dir ) {
 	//	return [this, "EventNav"];
 	//}
-	
-	componentShouldScroll( axis, delta ) {
-		let { appState } = this.props,
-		    EventNav     = this.getTweenableRef("EventNav");
-		if ( appState.currentPageFocus === "events" && delta < 0 && (EventNav.scrollTop !== 0) )
-			return false;
-		//if ( appState.currentPageFocus === "events" && delta > 0 && (EventNav.scrollTop !== (EventNav.scrollHeight -
-		// EventNav.offsetHeight)) ) return false; if ( appState.currentPageFocus === "event" && delta > 0 &&
-		// (EventNav.scrollTop !== (EventNav.scrollHeight - EventNav.offsetHeight)) ) return false;
-		return true;
-	}
-	
 	componentDidMount( props = this.props ) {
-		window.addEventListener("load", function () {
-			// Set a timeout...
-			setTimeout(function () {
-				// Hide the address bar!
-				window.scrollTo(0, 1);
-			}, 0);
-		});
+		setTimeout(
+			tm => window.addEventListener("load", function () {
+				// Set a timeout...
+				setTimeout(function () {
+					// Hide the address bar!
+					window.scrollTo(0, 1);
+				}, 0);
+			})
+		)
 		let { appState } = props;
 		this.scrollTo(wayPoints[appState.currentPageFocus]);
 	}
@@ -64,7 +54,7 @@ export default class Home extends React.Component {
 		let { appState, $actions } = this.props;
 		//console.warn(appState === props.appState)
 		if ( appState.doFocus && props.appState.currentPageFocus !== appState.currentPageFocus ) {
-			//console.log(appState.currentPageFocus);
+			console.log(appState.currentPageFocus);
 			this.scrollTo(wayPoints[appState.currentPageFocus], 500, undefined, "easeBackIn");
 		}
 	}
@@ -161,7 +151,8 @@ export default class Home extends React.Component {
 				
 				<TweenRef id={"events"}
 				          initial={MainPage.events}>
-					<Views.Events.EventList/>
+					<Views.Events.EventList
+						activeScroll={appState.currentPageFocus !== "map" && appState.currentPageFocus !== "events"}/>
 				</TweenRef>
 				<TweenRef
 					id={"EventMap"}
@@ -171,12 +162,12 @@ export default class Home extends React.Component {
 						day={appState.currentVisibleDay || appState.curDay}
 						viewType={appState.viewType}/>
 				</TweenRef>
-				<TweenRef
-					id={"Footer"}
-					initial={MainPage.Footer}
-				>
-					<Comps.Footer/>
-				</TweenRef>
+				{/*<TweenRef*/}
+				{/*	id={"Footer"}*/}
+				{/*	initial={MainPage.Footer}*/}
+				{/*>*/}
+				{/*	<Comps.Footer/>*/}
+				{/*</TweenRef>*/}
 			</div>
 		</TweenRef>
 	}

@@ -26,16 +26,35 @@
   width: 100vw !important;
   //overflow: hidden;
   //tr
+  .focusedContent{
 
-  //@include use_hvCenteredContent();
+    @media screen and (max-width: $tablet-landscape-breakpoint) {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 96vw !important;
+    }
+  }
+    //@include use_hvCenteredContent();
   .ViewSwitcher {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    user-select: none;
+
     > * {
       background: rgba(255, 255, 255, 0.6);
       border-radius: 20px;
       overflow: auto !important;
+      overflow-x: hidden !important;
+      overflow-y: scroll !important;
       text-align: left;
-      touch-action: auto;
-
+      //touch-action: auto;
+      *{
+        max-width: 100%;
+        overflow: hidden;
+      }
       img {
         max-width: 40vw;
 
@@ -106,7 +125,7 @@
   .slider {
     width: 100%;
     text-align: center;
-    height: calc(20vh - 1.5cm);
+    //height: calc(20vh - 1.5cm);
     //margin-bottom: 10px;
     //@media screen and (max-width: $smartphone-landscape-breakpoint) {
     //  height: 100px;

@@ -22,19 +22,22 @@ import {reScope, scopeToProps, propsToScope} from "rscopes";
 import {withStateMap, asRef, asStore}        from "rescope-spells";
 import anims                                 from 'App/ui/anims/(*).js';
 
-import moment                            from "moment";
-import {Views}                           from 'App/ui';
-import {asTweener, TweenRef, tweenTools} from "react-rtween";
+import moment                                       from "moment";
+import {Views}                                      from 'App/ui';
+import {asTweener, TweenAxis, TweenRef, tweenTools} from "react-rtween";
 
 
 @scopeToProps("Selected", "DataProvider")
-@asTweener
+@asTweener({ enableMouseDrag: true, dragDirectionLock: true })
 export default class ViewSwitcher extends React.Component {
 	static propTypes    = {
 		target: PropTypes.object,
 	};
 	static defaultProps = {
-		showAnim: {
+		View           : ( { style, record } ) => <pre style={style}>{JSON.stringify(record, null, 2)}</pre>,
+		ViewPreview    : ( { style, record } ) => <pre style={style}>{JSON.stringify(record, null, 2)}</pre>,
+		getNextTarget  : rec => undefined,
+		showAnim       : {
 			from    : 0,
 			duration: 500,
 			easeFn  : "easeSinOut",
@@ -47,7 +50,7 @@ export default class ViewSwitcher extends React.Component {
 				}]
 			}
 		},
-		hideAnim: {
+		hideAnim       : {
 			from    : 0,
 			duration: 500,
 			easeFn  : "easeSinOut",
@@ -59,98 +62,204 @@ export default class ViewSwitcher extends React.Component {
 					translateZ: '-50px'
 				}]
 			}
-		}
+		},
+		showPreviewAnim: [],
+		hidePreviewAnim: []
 	};
-	state               = {};
 	
-	reset = () => {
-		this.setState(
-			{
-				lastDay: this.props.day
-			})
+	constructor() {
+		super(...arguments);
+		this._inertia = {
+			maxJump     : 1,
+			onInertiaEnd: ( i, wp ) => {
+				let { curTarget, prevTarget, nextTarget = this.props.getNextTarget(curTarget), history } = this.state;
+				if ( wp.at === 0 ) {
+					let nHisto = [...history];
+					this.setState(
+						{
+							curTarget : prevTarget,
+							nextTarget: curTarget
+						},
+						s => {
+							this.scrollTo(100, 0, "scrollX");
+							this.setState(
+								{
+									prevTarget: nHisto.pop(),
+									history   : nHisto,
+								})
+						}
+					)
+				}
+				if ( wp.at === 200 ) {
+					this.setState(
+						{
+							prevTarget: curTarget,
+						},
+						s => {
+							this.scrollTo(100, 0, "scrollX");
+							this.setState(
+								{
+									history   : prevTarget && [...history, prevTarget] || history,
+									prevTarget: curTarget,
+									curTarget : nextTarget,
+									nextTarget: undefined
+								})
+						}
+					)
+				}
+			},
+			wayPoints   : [{ at: 0 }, { at: 100 }, { at: 200 }]
+		}
 	}
+	
+	state = {
+		history: []
+	};
 	
 	static getDerivedStateFromProps( props, state ) {
-		let {
-			    hideAnim, showAnim
-		    } = props;
 		return {
-			hideAnim: tweenTools.target(hideAnim, 'from'),
-			showAnim: tweenTools.target(showAnim, 'to')
+			curTarget         : state.curTarget || props.target,
+			...props,
+			initialPrev       : props.defaultInitial,
+			initialPreviewPrev: props.defaultPreviewInitial,
+			initialCur        : tweenTools.addCss(
+				tweenTools.extractCss(props.showAnim, true)
+				, props.defaultInitial
+			),
+			initialPreviewCur : tweenTools.addCss(
+				tweenTools.extractCss(props.showPreviewAnim, true)
+				, props.defaultPreviewInitial
+			),
+			initialNext       : tweenTools.addCss(
+				tweenTools.extractCss(props.showAnim, true)
+				, props.defaultInitial
+			),
+			initialPreviewNext: tweenTools.addCss(
+				tweenTools.extractCss(props.showPreviewAnim, true)
+				, props.defaultPreviewInitial
+			),
+			scrollableAnims   : [
+				...tweenTools.scale(tweenTools.target(props.hideAnim, 'prev'), 100),
+				...tweenTools.scale(tweenTools.target(props.hidePreviewAnim, 'prevPreview'), 100),
+				...tweenTools.scale(tweenTools.target(props.showAnim, 'from'), 100),
+				...tweenTools.scale(tweenTools.target(props.showPreviewAnim, 'fromPreview'), 100),
+				...tweenTools.offset(
+					[
+						...tweenTools.scale(tweenTools.target(props.hideAnim, 'from'), 100),
+						...tweenTools.scale(tweenTools.target(props.hidePreviewAnim, 'fromPreview'), 100),
+						...tweenTools.scale(tweenTools.target(props.showAnim, 'to'), 100),
+						...tweenTools.scale(tweenTools.target(props.showPreviewAnim, 'toPreview'), 100),
+					], 100)
+			]
 		}
 	}
 	
-	
-	shouldComponentUpdate( { target }, { curTarget, nextTarget, hideAnim, showAnim }, nextContext ) {
-		if ( target && (!nextTarget || target._id !== nextTarget._id) ) {
-			console.log("tween new")
+	componentDidUpdate( prevProps, prevState, nextContext ) {
+		let { curTarget, nextTarget, prevTarget, history } = this.state;
+		if ( prevProps.target !== this.props.target && (!nextTarget && this.props.target._id !== curTarget._id || nextTarget && this.props.target._id !== nextTarget._id) ) {
+			//console.log("tween new", curTarget, nextTarget, this.props.target)
 			this.setState(
 				{
-					curTarget : nextTarget || target,
-					nextTarget: target
+					nextTarget: this.props.target
 				}
 				,
-				curTarget && (( s ) => {
-						//this.forceUpdate();
-						this.pushAnim(hideAnim, null, true);
-						this.pushAnim(showAnim,
-						              () => {
-							              console.log("tween done")
-							              this.setState(
-								              {
-									              curTarget : target,
-									              nextTarget: target
-								              }
-								              ,
-								              s => {
-									              this.resetTweenable("from", "to");
-								              }
-							              )
-						              }, true);
-					})
+				(( s ) => {
+					this.scrollTo(200, 450, "scrollX")
+					    .then(
+						    v => {
+							    this.setState(
+								    {
+									    history   : prevTarget && [...history, prevTarget] || history,
+									    prevTarget: curTarget,
+									    curTarget : nextTarget,
+									    nextTarget: undefined
+								    }
+								    ,
+								    v => {
+									    this.scrollTo(100, 0, "scrollX")
+								    }
+							    )
+						    }
+					    )
+				})
 			)
 		}
 		
-		return true;
 	}
+	
 	
 	render() {
 		let {
-			    target, defaultInitial = {},
-			    $actions, DataProvider
-		    }                                                      = this.props,
-		    { curTarget = target, nextTarget, hideAnim, showAnim } = this.state,
+			    target, defaultInitial = {}, defaultPreviewInitial,
+			    style, DataProvider, View, ViewPreview, getNextTarget
+		    }                                                                                                            = this.props,
+		    { curTarget, prevTarget, nextTarget = getNextTarget(curTarget), showPreviewAnim, showAnim, scrollableAnims } = this.state,
 		    selected;
+		//console.log("update vs");
 		return (
 			<div
-				className={ "ViewSwitcher" }
-				style={
-					{
-						position: 'relative',
-						width   : '100%',
-						height  : '100%',
-					} }>
-				<TweenRef id={ "from" }
-				          initial={ defaultInitial }>
+				className={"ViewSwitcher"}
+				style={style}>
+				<TweenAxis
+					axe={"scrollX"}
+					defaultPosition={100}
+					items={scrollableAnims}
+					scrollableWindow={100}
+					inertia={
+						this._inertia
+					}
+				/>
+				<TweenRef id={"prev"}
+				          initial={defaultInitial}>
 					<div>
-						{/*{ curTarget && curTarget._id }*/ }
 						{
-							curTarget &&
-							<Views.Page.page record={ curTarget } refs={ DataProvider }/>
+							prevTarget &&
+							<View record={prevTarget} refs={DataProvider}/>
 						}
 					</div>
 				</TweenRef>
-				<TweenRef id={ "to" }
-				          initial={ tweenTools.addCss(
-					          tweenTools.extractCss(showAnim, true)
-					          , defaultInitial
-					          , { opacity: 1, pointerEvents: 'none' }
-				          ) }>
+				<TweenRef id={"prevPreview"}
+				          initial={defaultPreviewInitial}>
 					<div>
-						{/*{ nextTarget && nextTarget._id }*/ }
+						{
+							prevTarget &&
+							<ViewPreview record={prevTarget} refs={DataProvider}/>
+						}
+					</div>
+				</TweenRef>
+				<TweenRef id={"from"}
+				          initial={this.state.initialCur}>
+					<div>
+						{
+							curTarget &&
+							<View record={curTarget} refs={DataProvider}/>
+						}
+					</div>
+				</TweenRef>
+				<TweenRef id={"fromPreview"}
+				          initial={this.state.initialPreviewCur}>
+					<div>
+						{
+							curTarget &&
+							<ViewPreview record={curTarget} refs={DataProvider}/>
+						}
+					</div>
+				</TweenRef>
+				<TweenRef id={"to"}
+				          initial={this.state.initialNext}>
+					<div>
 						{
 							nextTarget &&
-							<Views.Page.page record={ nextTarget } refs={ DataProvider }/>
+							<View record={nextTarget} refs={DataProvider}/>
+						}
+					</div>
+				</TweenRef>
+				<TweenRef id={"toPreview"}
+				          initial={this.state.initialPreviewNext}>
+					<div>
+						{
+							nextTarget &&
+							<ViewPreview record={nextTarget} refs={DataProvider}/>
 						}
 					</div>
 				</TweenRef>

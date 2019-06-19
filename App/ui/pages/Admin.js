@@ -24,14 +24,29 @@ import ReactDom                              from "react-dom";
 import {withStateMap, asRef, asStore}   from "rescope-spells";
 import {asTweener, TweenRef, TweenAxis} from "react-rtween";
 
-@scopeToProps("appState", "Anims")
+@scopeToProps("appState", "Anims", "Selected")
 export default class Admin extends React.Component {
 	state = {};
 	
 	render() {
-		//console.log('render snap', appState.currentPageFocus)
-		return <div className={ "Admin container" }>
-			desk
+		let {
+			    Anims, Selected, appState,
+		    }     = this.props,
+		    state = this.state;
+		console.log('render snap', appState.currentPageFocus)
+		return <div className={"Admin container"}>
+			<pre>{Selected && JSON.stringify(Selected)}</pre>
+			<Comps.ViewSwitcher target={Selected && Selected.Focused}
+			                    {...Anims.Focused} View={Views.Page.page}
+			                    style={{
+				                    position  : "absolute",
+				                    background: "grey",
+				                    top       : "100px",
+				                    left      : "100px",
+				                    width     : "800px",
+				                    height    : "500px"
+			                    }}
+			/>
 		</div>
 	}
 }

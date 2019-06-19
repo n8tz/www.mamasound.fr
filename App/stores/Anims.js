@@ -15,29 +15,30 @@
 import {Scope, Store} from "rscopes";
 
 import desktopAnims from "App/ui/anims/responsive/desktop/(*).js";
-import mobileAnims  from "App/ui/anims/responsive/mobile/(*).js";
+import phoneAnims   from "App/ui/anims/responsive/phone/(*).js";
 
 const isBrowserSide = (new Function("try {return this===window;}catch(e){ return false;}"))();
 
 const breakPts   = {
 	      desktop: desktopAnims,
-	      mobile : mobileAnims
+	      tablet : phoneAnims,
+	      phone  : phoneAnims
       },
-      initialPts = (!isBrowserSide || window.innerWidth >= 900) && "desktop" || "mobile";
+      initialPts = (!isBrowserSide || window.innerWidth >= 800) && "desktop" || "phone";
 
 export default class Anims extends Store {
-	static singleton = true;
-	static actions   = {};
-	state            = {
+	//static singleton = true;
+	static actions = {};
+	state          = {
 		currentBrkPts: initialPts,
 	};
-	data             = {
-		...breakPts[initialPts]
-	};
-	
-	shouldSerialize() {
-		return false;
-	}
+	//data             = {
+	//	//...breakPts[initialPts]
+	//};
+	//
+	//shouldSerialize() {
+	//	return false;
+	//}
 	
 	constructor() {
 		super(...arguments);
@@ -46,18 +47,19 @@ export default class Anims extends Store {
 			"resize",
 			this._onResize = ( e ) => {//@todo
 				let currentBrkPts;
-				if ( window.innerWidth >= 900 )
+				if ( window.innerWidth >= 800 )
 					currentBrkPts = "desktop";
-				if ( window.innerWidth <= 900 )
-					currentBrkPts = "mobile";
+				if ( window.innerWidth <= 800 )
+					currentBrkPts = "phone";
 				this.setState({ currentBrkPts })
 			});
+		isBrowserSide && setTimeout(tm => this._onResize())
 	}
 	
 	apply( data, state, { currentBrkPts } ) {
 		
 		if ( currentBrkPts )
-			return { ...breakPts[currentBrkPts] }
+			return { ...(breakPts[currentBrkPts] || breakPts.desktop) }
 		
 		return data;
 	}

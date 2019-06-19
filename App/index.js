@@ -62,7 +62,7 @@ const ctrl = {
 		    stable  = cScope.isStableTree();
 		//console.log('ctrl::renderSSR:65: ', cfg.location, _attempts);
 		cScope.onceStableTree(s => {
-			state=cScope.serialize({ alias: "App" });
+			state = cScope.serialize({ alias: "App" });
 			//debugger
 			cScope.destroy()
 			if ( !stable && _attempts < 2 ) {
@@ -86,21 +86,26 @@ const ctrl = {
 			    id         : rid,
 			    autoDestroy: false
 		    }), App = reScope(cScope)(require('./App').default);
-
-		cfg.state && cScope.restore(cfg.state, { alias: "App" });
-
+		
+		if ( cfg.state ) {
+			cScope.restore(cfg.state, { alias: "App" });
+		}
+		else {
+			cScope.state.Anims = { currentBrkPts: cfg.device };
+		}
+		
 		let html,
 		    appHtml     = renderToString(<App location={cfg.location}/>),
 		    stable      = cScope.isStableTree();
 		global.contexts = Scope.scopes;
 		//console.log('ctrl::renderSSR:65: ', cfg.location, _attempts);
-		cScope.on("stableTree",state => {
+		cScope.onceStableTree(state => {
 			let nstate = cScope.serialize({ alias: "App" });
 			//cb(null, JSON.stringify(nstate,null,2))
 			cScope.destroy()
 			if ( !_attempts || !stable && _attempts < 3 ) {
 				cfg.state = nstate;
-				ctrl.renderSSR(cfg, cb, ++_attempts);
+				ctrl.renderSSR(cfg, cb,  ++_attempts);
 			}
 			else {
 				try {

@@ -135,61 +135,62 @@ export default class EventList extends React.Component {
 	render() {
 		let {
 			    record                          : { position, size } = {},
-			    UserGeoLocation, appState, Anims: { MainPage },
+			    UserGeoLocation, appState, Anims: { MainPage }, activeScroll,
 			    $actions, style
 		    }     = this.props,
 		    state = this.state;
 		return (
-			<div className={ "EventList" } style={ style }>
-				<div className={ "maskContent" }>
-					<div className={ "content container" }>
+			<div className={"EventList"} style={style}>
+				<div className={"maskContent"}>
+					<div className={"content container"}>
 						<TweenRef
-							id={ "EventNav" }
-							initial={ MainPage.EventNav }
+							id={"EventNav"}
+							initial={MainPage.EventNav}
 						>
 							<div
-								className={ "EventNav" }
+								className={"EventNav"}
 							>
-								<div className={ "dayList" }>
+								<div className={"dayList"}>
 									{
 										Array(1)
 											.fill(0)
 											.map(
 												( v, type ) =>
-													<div className={ "dayItem" } key={ type }>
+													<div className={"dayItem"} key={type}>
 														{
 															Array(appState.dayCountByViewType[type])
 																.fill(0)
 																.map(
 																	( v, i ) =>
 																		<Views.Events.DayEvents
-																			className={ "dayBlock" }
-																			key={ i }
-																			day={ moment(appState.curDay).add(i, 'day').unix() * 1000 }
-																			viewType={ type }/>
+																			className={"dayBlock"}
+																			key={i}
+																			day={moment(appState.curDay).add(i, 'day').unix() * 1000}
+																			viewType={type}/>
 																)
 														}
-														<div id={ "endList_" + type }>loading...</div>
+														<div id={"endList_" + type}>loading...</div>
 													</div>
 											)
 									}
 								</div>
+								{activeScroll && <div className={"noScrollOverlay"}
+								                      onClick={e => $actions.setPageFocus('events', true)}></div>}
 							</div>
 						</TweenRef>
 						<TweenRef
-							id={ "NavBox" }
-							initial={ MainPage.NavBox }
+							id={"NavBox"}
+							initial={MainPage.NavBox}
 						>
 							<Comps.NavBox/>
 						</TweenRef>
 					</div>
 				</div>
-				
 				<div
-					className={ "NavTools container" }
+					className={"NavTools container"}
 				>
-					<Fab aria-label="edit" className={ "newBtn button" }
-					     onClick={ $actions.toggleUserGeoLocation }>
+					<Fab aria-label="edit" className={"newBtn button"}
+					     onClick={$actions.toggleUserGeoLocation}>
 						{
 							UserGeoLocation.activating &&
 							<GpsNoFixedIcon/> ||

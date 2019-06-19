@@ -146,7 +146,7 @@ export default class Slider extends React.Component {
 					axe={"scrollX"}
 					defaultPosition={100 + dec + index * step}
 					size={nbGhostItems * step + 100}
-					scrollableWindow={4 * step}
+					scrollableWindow={2 * step}
 					inertia={
 						{
 							//maxJump   : 1,

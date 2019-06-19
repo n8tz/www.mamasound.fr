@@ -32,31 +32,16 @@ export const backgroundScroll = {
 			from    : 0,
 			duration: 100,
 			apply   : {
-				opacity  : 1,
-				//height   : 2.5,
-				//top      : -2.5,
-				//transform: [{
-				//	rotateX: "4deg"
-				//}, {
-				//	translateY: "-50vh",
-				//}]
+				opacity: 1,
 			}
 		},
-		//{
-		//	type    : "Tween",
-		//	from    : 100,
-		//	duration: 100,
-		//	apply   : {
-		//		filter   : {
-		//			//blur: "5px",
-		//			//translateY: "-50px",
-		//		},
-		//		transform: {
-		//			translateZ: "50px",
-		//			//translateY: "-20vh",
-		//		}
-		//	}
-		//},
+		{
+			from    : 100,
+			duration: 100,
+			apply   : {
+				opacity: -1,
+			}
+		},
 	],
 }
 export const slider           = {
@@ -64,7 +49,7 @@ export const slider           = {
 	bottom   : "0px",
 	left     : "0px",
 	width    : "100%",
-	//height   : "calc(20% - 50px)",
+	height   : "15vh",
 	zIndex   : "100",
 	transform: {
 		perspective: "200px",
@@ -120,7 +105,7 @@ export const focused          = {
 	top      : "45%",
 	left     : "50%",
 	//width    : "90vw",
-	opacity:0,
+	opacity  : 0,
 	height   : "50vh",
 	//overflow       : "hidden",
 	transform: [{
@@ -136,7 +121,7 @@ export const focusedScroll    = {
 			from    : 0,
 			duration: 100,
 			apply   : {
-				opacity  : 1,
+				opacity: 1,
 				//height   : 2.5,
 				//top      : -2.5,
 				//transform: [{

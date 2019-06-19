@@ -731,9 +731,11 @@ function asTweener() {
     };
   }
 
-  opts = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, opts, {
-    wheelRatio: 5
-  });
+  opts = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({
+    wheelRatio: 5,
+    maxClickTm: 300,
+    maxClickOffset: 10
+  }, opts);
   return _temp = _class =
   /*#__PURE__*/
   function (_BaseComponent) {
@@ -881,24 +883,20 @@ function asTweener() {
           _.tweenRefs[id] = true;
           _.muxByTarget[id] = _.muxByTarget[id] || {};
           _.muxDataByTarget[id] = _.muxDataByTarget[id] || {};
-          iStyle = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, iStyle, Object(_helpers_css__WEBPACK_IMPORTED_MODULE_17__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true)); //_.tweenRefUnits[id] = extractUnits(iMap);
+          iStyle = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, iStyle, Object(_helpers_css__WEBPACK_IMPORTED_MODULE_17__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true, true)); //_.tweenRefUnits[id] = extractUnits(iMap);
           //}
 
           _.tweenRefOrigin[id] = tweenableMap;
           _.tweenRefOriginCss[id] = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, iStyle);
           _.tweenRefCSS[id] = iStyle;
-          _.tweenRefMaps[id] = _.tweenRefMaps[id] || {}; //Object.keys(initials)
-          //      .forEach(
-          //	      key => (_.tweenRefMaps[id][key] = is.number(_.tweenRefMaps[id][key])
-          //	                                        ? _.tweenRefMaps[id][key]
-          //	                                        : initials[key])
-          //      );
-          //if ( tweenableMap.hasOwnProperty("opacity") && _.tweenRefMaps[id].hasOwnProperty("opacity") ) {
-          //	_.tweenRefMaps[id].opacity -= initials.opacity;
-          //}
+          _.tweenRefMaps[id] = _.tweenRefMaps[id] || {}; // if this ref was initialized by its scroll anims we minus initial values
+
+          Object.keys(tweenableMap).forEach(function (key) {
+            if (_.tweenRefMaps[id].hasOwnProperty(key)) _.tweenRefMaps[id][key] -= initials[key];
+          }); //
           // init / reset or get the tweenable view
 
-          tweenableMap = Object.assign(_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, _.tweenRefMaps[id]), initials, tweenableMap || {}); // set defaults values in case of
+          tweenableMap = Object.assign({}, initials, tweenableMap || {}); // set defaults values in case of
           // add new initial values
 
           Object.keys(tweenableMap).forEach(function (key) {
@@ -906,7 +904,7 @@ function asTweener() {
           });
           tweenableMap = _.tweenRefMaps[id];
           Object(_helpers_css__WEBPACK_IMPORTED_MODULE_17__["muxToCss"])(tweenableMap, iStyle, _.muxByTarget[id], _.muxDataByTarget[id], _.box);
-        } //console.log('tweenRef::tweenRef:519: ', id, _.tweenRefCSS[id], tweenableMap);
+        } //console.log('tweenRef::tweenRef:519: ', id, { ...tweenableMap });
 
 
         if (noref) return {
@@ -1355,13 +1353,14 @@ function asTweener() {
               'dragstart': function dragstart(e, touch, descr) {
                 //@todo
                 var tweener, x, y, i, style;
-                parents = _this9.getScrollableNodes(e.target); //console.log(parents)
-
+                parents = _this9.getScrollableNodes(e.target);
+                console.log("start");
                 lastStartTm = Date.now();
                 dX = 0;
                 dY = 0;
                 parentsState = []; //document.body.style.touchAction = 'none';
-                //document.body.style.userSelect  = 'none';
+
+                document.body.style.userSelect = 'none';
 
                 for (i = 0; i < parents.length; i++) {
                   tweener = parents[i]; // react comp with tweener support
@@ -1379,7 +1378,9 @@ function asTweener() {
                     if (/(auto|scroll)/.test(style.getPropertyValue("overflow") + style.getPropertyValue("overflow-x") + style.getPropertyValue("overflow-y"))) {
                       parentsState[i] = {
                         y: tweener.scrollTop,
-                        x: tweener.scrollLeft //inertia: this._activateNodeInertia(tweener)
+                        x: tweener.scrollLeft,
+                        scrollX: /(auto|scroll)/.test(style.getPropertyValue("overflow-x")),
+                        scrollY: /(auto|scroll)/.test(style.getPropertyValue("overflow-y")) //inertia: this._activateNodeInertia(tweener)
 
                       }; //parentsState[i].inertia.x.startMove();
                       //parentsState[i].inertia.y.startMove();
@@ -1393,10 +1394,11 @@ function asTweener() {
               },
               'click': function click(e, touch, descr) {
                 //@todo
-                if (lastStartTm && !(lastStartTm > Date.now() - 350 && Math.abs(dY) < 10 && Math.abs(dX) < 10)) // skip tap & click
+                if (lastStartTm && !(lastStartTm > Date.now() - opts.maxClickTm && Math.abs(dY) < opts.maxClickOffset && Math.abs(dX) < opts.maxClickOffset)) // skip tap & click
                   {
                     e.preventDefault();
                     e.stopPropagation();
+                    console.log(':o ' + (lastStartTm - Date.now()) + ' ' + dX + ' ' + dY);
                   }
               },
               'drag': function drag(e, touch, descr) {
@@ -1404,105 +1406,120 @@ function asTweener() {
                 var tweener, x, deltaX, xDispatched, vX, y, deltaY, yDispatched, vY, cState, i;
                 dX = -(descr._lastPos.x - descr._startPos.x);
                 dY = -(descr._lastPos.y - descr._startPos.y);
-                if (lastStartTm > Date.now() - 350 && Math.abs(dY) < 10 && Math.abs(dX) < 10) // skip tap & click
-                  return;
-                xDispatched = !dX;
-                yDispatched = !dY;
 
-                if (opts.dragDirectionLock) {
-                  if (cLock === "Y" || !cLock && Math.abs(dY * .5) > Math.abs(dX)) {
-                    cLock = "Y";
-                    dX = 0;
-                    xDispatched = true;
-                  } else if (cLock === "X" || !cLock && Math.abs(dX * .5) > Math.abs(dY)) {
-                    cLock = "X";
-                    dY = 0;
-                    yDispatched = true;
-                  }
-                } //console.log("drag", dX, dY, cLock, opts.dragDirectionLock);
+                if (lastStartTm && lastStartTm > Date.now() - opts.maxClickTm && Math.abs(dY) < opts.maxClickOffset && Math.abs(dX) < opts.maxClickOffset) // skip tap & click
+                  {
+                    console.log(':u ' + (lastStartTm - Date.now()) + ' ' + dX + ' ' + dY);
+                    return;
+                  } else {
+                  xDispatched = !dX;
+                  yDispatched = !dY;
 
-
-                for (i = 0; i < parents.length; i++) {
-                  tweener = parents[i]; // react comp with tweener support
-
-                  if (tweener.__isTweener && tweener._.scrollEnabled) {
-                    x = tweener._getAxis("scrollX");
-                    y = tweener._getAxis("scrollY");
-
-                    if (!parentsState[i]) {
-                      parentsState[i] = {
-                        x: x.scrollPos,
-                        y: y.scrollPos
-                      };
-                      x.inertia.startMove();
-                      y.inertia.startMove();
-                      !x.inertiaFrame && tweener.applyInertia(x, "scrollX");
-                      !y.inertiaFrame && tweener.applyInertia(y, "scrollY");
-                    }
-
-                    deltaX = dX && dX / tweener._.box.x * (x.scrollableWindow || x.scrollableArea) || 0;
-                    deltaY = dY && dY / tweener._.box.y * (y.scrollableWindow || y.scrollableArea) || 0;
-
-                    if (!xDispatched && !tweener.isAxisOut("scrollX", parentsState[i].x + deltaX, true) && (!tweener.componentShouldScroll || tweener.componentShouldScroll("scrollX", deltaX))) {
-                      x.inertia.hold(parentsState[i].x + deltaX);
+                  if (opts.dragDirectionLock) {
+                    if (cLock === "Y" || !cLock && Math.abs(dY * .5) > Math.abs(dX)) {
+                      cLock = "Y";
+                      dX = 0;
                       xDispatched = true;
-                    } //console.log("scrollY", tweener.isAxisOut("scrollY", parentsState[i].y +
-                    // deltaY, true));
-
-
-                    if (!yDispatched && !tweener.isAxisOut("scrollY", parentsState[i].y + deltaY, true) && (!tweener.componentShouldScroll || tweener.componentShouldScroll("scrollY", deltaY))) {
-                      y.inertia.hold(parentsState[i].y + deltaY);
+                    } else if (cLock === "X" || !cLock && Math.abs(dX * .5) > Math.abs(dY)) {
+                      cLock = "X";
+                      dY = 0;
                       yDispatched = true;
                     }
-                  } else if (is__WEBPACK_IMPORTED_MODULE_10___default.a.element(tweener)) {
-                    cState = parentsState[i];
-
-                    if (cState) {
-                      if (!yDispatched && (dY < 0 && tweener.scrollTop !== 0 || dY > 0 && tweener.scrollTop !== tweener.scrollHeight - tweener.offsetHeight)) {
-                        //cState.lastY = cState.y + dY;
-                        //
-                        //tweener.scrollTo({
-                        //	                 top: cState.y + dY,
-                        //	                 //left    : undefined,
-                        //	                 //behavior: 'smooth'
-                        //                 })
-                        //tweener.dispatchEvent(e)
-                        //cState.inertia.y.hold(cState.y + dY)
-                        //tweener.scrollTop = cState.y + dY;
-                        //yDispatched = true;
-                        return;
-                      } // let the node do this scroll
+                  } //console.log("drag", dX, dY, cLock, opts.dragDirectionLock);
 
 
-                      if (!xDispatched && (dX < 0 && tweener.scrollLeft !== 0 || dX > 0 && tweener.scrollLeft !== tweener.scrollWidth - tweener.offsetWidth)) {
-                        //cState.lastX = cState.x + dX;
-                        //tweener.scrollTo({
-                        //	                 left: cState.x + dX,
-                        //	                 //behavior: 'smooth'
-                        //                 })
-                        //tweener.dispatchEvent(e)
-                        //tweener.scrollTo(style.x + dX)
-                        //cState.inertia.x.hold(cState.x + dX)
-                        //tweener.scrollLeft = cState.x + dX;
+                  for (i = 0; i < parents.length; i++) {
+                    tweener = parents[i]; // react comp with tweener support
+
+                    if (tweener.__isTweener && tweener._.scrollEnabled) {
+                      x = tweener._getAxis("scrollX");
+                      y = tweener._getAxis("scrollY");
+
+                      if (!parentsState[i]) {
+                        parentsState[i] = {
+                          x: x.scrollPos,
+                          y: y.scrollPos
+                        };
+                        x.inertia.startMove();
+                        y.inertia.startMove();
+                        !x.inertiaFrame && tweener.applyInertia(x, "scrollX");
+                        !y.inertiaFrame && tweener.applyInertia(y, "scrollY");
+                      }
+
+                      deltaX = dX && dX / tweener._.box.x * (x.scrollableWindow || x.scrollableArea) || 0;
+                      deltaY = dY && dY / tweener._.box.y * (y.scrollableWindow || y.scrollableArea) || 0;
+
+                      if (!xDispatched && !tweener.isAxisOut("scrollX", parentsState[i].x + deltaX, true) && (!tweener.componentShouldScroll || tweener.componentShouldScroll("scrollX", deltaX))) {
+                        x.inertia.hold(parentsState[i].x + deltaX);
                         xDispatched = true;
-                      } // let the node do this scroll
+                      } //console.log("scrollY", tweener.isAxisOut("scrollY", parentsState[i].y
+                      // + deltaY, true));
 
+
+                      if (!yDispatched && !tweener.isAxisOut("scrollY", parentsState[i].y + deltaY, true) && (!tweener.componentShouldScroll || tweener.componentShouldScroll("scrollY", deltaY))) {
+                        y.inertia.hold(parentsState[i].y + deltaY);
+                        yDispatched = true;
+                      }
+                    } else if (is__WEBPACK_IMPORTED_MODULE_10___default.a.element(tweener)) {
+                      cState = parentsState[i];
+
+                      if (cState) {
+                        if (!yDispatched && cState.scrollY && (dY < 0 && tweener.scrollTop !== 0 || dY > 0 && tweener.scrollTop !== tweener.scrollHeight - tweener.offsetHeight)) {
+                          //cState.lastY = cState.y + dY;
+                          //
+                          //tweener.scrollTo({
+                          //	                 top: cState.y + dY,
+                          //	                 //left    : undefined,
+                          //	                 //behavior: 'smooth'
+                          //                 })
+                          //tweener.dispatchEvent(e)
+                          //cState.inertia.y.hold(cState.y + dY)
+                          //tweener.scrollTop = cState.y + dY;
+                          if (opts.dragDirectionLock && cLock === "Y") return;else if (!opts.dragDirectionLock) {
+                            return;
+                          }
+                          yDispatched = true;
+                        } // let the node do this scroll
+
+
+                        if (!xDispatched && cState.scrollX && (dX < 0 && tweener.scrollLeft !== 0 || dX > 0 && tweener.scrollLeft !== tweener.scrollWidth - tweener.offsetWidth)) {
+                          //cState.lastX = cState.x + dX;
+                          //tweener.scrollTo({
+                          //	                 left: cState.x + dX,
+                          //	                 //behavior: 'smooth'
+                          //                 })
+                          //tweener.dispatchEvent(e)
+                          //tweener.scrollTo(style.x + dX)
+                          //cState.inertia.x.hold(cState.x + dX)
+                          //tweener.scrollLeft = cState.x + dX;
+                          xDispatched = true;
+                        } // let the node do this scroll
+
+                      }
                     }
                   }
+
+                  if (yDispatched && xDispatched) {
+                    e.stopPropagation();
+                    e.preventDefault(); //return;
+                  } //dX = 0;
+                  //dY = 0;
+
                 }
-
-                if (yDispatched && xDispatched) {
-                  e.stopPropagation();
-                  e.preventDefault(); //return;
-                } //dX = 0;
-                //dY = 0;
-
               },
               'dropped': function dropped(e, touch, descr) {
                 var tweener, x, deltaX, xDispatched, vX, y, deltaY, yDispatched, vY, cState, i;
+
+                if (lastStartTm && lastStartTm > Date.now() - opts.maxClickTm && Math.abs(dY) < opts.maxClickOffset && Math.abs(dX) < opts.maxClickOffset) // skip tap & click
+                  {
+                    return;
+                  }
+
                 cLock = undefined; //lastStartTm                     = undefined;
-                //document.body.style.userSelect  = '';
-                //document.body.style.touchAction = '';
+
+                document.body.style.userSelect = ''; //document.body.style.touchAction = '';
+
+                lastStartTm = 0;
 
                 for (i = 0; i < parents.length; i++) {
                   tweener = parents[i]; // react comp with tweener support
@@ -3012,8 +3029,12 @@ function demux(key, tweenable, target, data, box) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! is */ "undefined?63a5");
-/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(is__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/objectSpread */ "undefined?e108");
+/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! is */ "undefined?63a5");
+/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(is__WEBPACK_IMPORTED_MODULE_1__);
+
+
 /*
  * The MIT License (MIT)
  * Copyright (c) 2019. Wise Wild Web
@@ -3084,14 +3105,15 @@ function demux(key, tweenable, target, data, box) {
   data["transform_head"] = data["transform_head"] || key;
   data[key] = data[key] || [{}];
   initials[key] = 0;
-  if (!is__WEBPACK_IMPORTED_MODULE_0___default.a.array(value)) value = [value];
+  if (!is__WEBPACK_IMPORTED_MODULE_1___default.a.array(value)) value = [value];
   value.forEach(function (tmap, i) {
-    return Object.keys(tmap).forEach(function (fkey) {
+    var baseData = {}; //data[key][i]       = forceUnits ? {} : data[key][i] || {};
+
+    Object.keys(tmap).forEach(function (fkey) {
       var fValue = tmap[fkey],
           dkey = key + '_' + fkey + '_' + i,
-          match = is__WEBPACK_IMPORTED_MODULE_0___default.a.string(fValue) ? fValue.match(unitsRe) : false;
-      data[key][i] = data[key][i] || {};
-      data[key][i][fkey] = true;
+          match = is__WEBPACK_IMPORTED_MODULE_1___default.a.string(fValue) ? fValue.match(unitsRe) : false;
+      baseData[fkey] = true;
       initials[dkey] = 0;
 
       if (match) {
@@ -3107,6 +3129,7 @@ function demux(key, tweenable, target, data, box) {
         if (!data[dkey] && fkey in defaultUnits) data[dkey] = defaultUnits[fkey];
       }
     });
+    data[key][i] = forceUnits ? _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, baseData, data[key][i] || {}) : _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, data[key][i] || {}, baseData);
   });
   return demux;
 });
@@ -3495,7 +3518,7 @@ function muxToCss(tweenable, css, demuxers, data, box) {
     demuxers[key](key, tweenable, css, data, box);
   });
 }
-function deMuxTween(tween, deMuxedTween, initials, data, demuxers, forceUnits) {
+function deMuxTween(tween, deMuxedTween, initials, data, demuxers, forceUnits, reOrder) {
   var fTween = {},
       excluded = {};
   Object.keys(tween).forEach(function (key) {
@@ -3508,8 +3531,8 @@ function deMuxTween(tween, deMuxedTween, initials, data, demuxers, forceUnits) {
   Object.keys(fTween).forEach(function (key) {
     if (cssDemux[key]) {
       //key, value, target, data, initials
-      demuxers[key] = cssDemux[key](key, fTween[key], deMuxedTween, data, initials, forceUnits);
-    } else demuxers[key] = cssDemux.$all(key, fTween[key], deMuxedTween, data, initials, forceUnits);
+      demuxers[key] = cssDemux[key](key, fTween[key], deMuxedTween, data, initials, forceUnits, reOrder);
+    } else demuxers[key] = cssDemux.$all(key, fTween[key], deMuxedTween, data, initials, forceUnits, reOrder);
   });
   return excluded;
 }

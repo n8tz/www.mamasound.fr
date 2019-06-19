@@ -34,7 +34,7 @@ function getSrc( src, dims ) {
 	src = src && src.replace('http://' + config.STATIC_URL + '/', '');
 	src = src && src.replace('https://' + config.STATIC_URL + '/', '');
 	//src = src && src.replace(/^([^\?]*)(?:\?.*)$/, "$1");
-	if ( src && /^[^\/\s\!\?]+$/.test(src) )// not / & ? is local resource
+	if ( src && /^[^\/\s\!\?]/.test(src) )// not / & ? is local resource
 		src = "http://" + config.STATIC_URL + "/" + src + '?' + p;
 	else if ( src && /^\//.test(src) )// starting with / is domain based
 		src = "http://" + config.PUBLIC_URL + src;

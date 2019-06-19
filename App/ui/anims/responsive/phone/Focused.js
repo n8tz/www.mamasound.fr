@@ -22,8 +22,8 @@ export const defaultInitial        = {
 	position       : "absolute",
 	bottom         : "0%",
 	right          : "0%",
-	top            : "0%",
-	left           : "300px",
+	top            : "15vh",
+	left           : "0px",
 	zIndex         : 50,
 	overflow       : "hidden",
 	transformOrigin: "50% 50%",
@@ -48,10 +48,10 @@ export const defaultInitial        = {
 };
 export const defaultPreviewInitial = {
 	position       : "absolute",
-	height         : "100%",
-	width          : "280px",
-	top            : "0%",
-	left           : "10px",
+	height         : "14vh",
+	width          : "100%",
+	top            : ".5vh",
+	left           : "0px",
 	zIndex         : 50,
 	overflow       : "hidden",
 	transformOrigin: "50% 50%",
@@ -73,7 +73,7 @@ export const showAnim              = [
 		apply   : {
 			opacity  : 1,
 			transform: [{}, {
-				translateZ: "-20px",
+				translateZ: "20px",
 				translateX: "-100%",
 			}]
 		}
@@ -85,7 +85,7 @@ export const showPreviewAnim       = [
 		duration: 1,
 		apply   : {
 			transform: [{}, {
-				rotateY: "270deg",
+				rotateX: "-270deg",
 			}]
 		}
 	},
@@ -94,7 +94,7 @@ export const showPreviewAnim       = [
 		duration: 50,
 		apply   : {
 			transform: [{}, {
-				rotateY: "90deg",
+				rotateX: "-90deg",
 			}]
 		}
 	},
@@ -110,7 +110,6 @@ export const hideAnim              = [
 	{
 		from    : 0,
 		duration: 700,
-		easeFn  : "easeSinOut",
 		apply   : {
 			opacity  : -1,
 			transform: [{}, {
@@ -127,7 +126,7 @@ export const hidePreviewAnim       = [
 		       duration: 50,
 		       apply   : {
 			       transform: [{}, {
-				       rotateY: "90deg",
+				       rotateX: "-90deg",
 				       //translateY: "-200px",
 				       //translateX: "-250px",
 			       }]

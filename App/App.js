@@ -74,7 +74,7 @@ export default class App extends React.Component {
 				}
 				
 				<Route path="/" exact component={Pages.Home}/>
-				{/*<Route path="/" exact component={ Views.Page.Admin }/>*/}
+				{/*<Route path="/" exact component={Pages.Admin}/>*/}
 			</React.Fragment>
 		</Router>
 	}
