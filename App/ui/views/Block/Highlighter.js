@@ -14,14 +14,14 @@
 import is                                           from "is";
 import PropTypes                                    from "prop-types";
 import React                                        from "react";
-import {reScope, scopeToProps, propsToScope, Store} from "rscopes";
-import moment                                       from 'moment';
-import BackgroundVideo                              from "react-background-video-player";
-import anims                                        from 'App/ui/anims/(*).js';
-import {Comps, Views}                               from 'App/ui';
-import {withStateMap, asRef, asStore}               from "rescope-spells";
-import stores                                       from 'App/stores/(*).js';
-import {withTweener, asTweener, TweenRef}           from "react-rtween";
+import {reScope, scopeToProps, propsToScope, Store}  from "rscopes";
+import moment                                        from 'moment';
+import BackgroundVideo                               from "react-background-video-player";
+import anims                                         from 'App/ui/anims/(*).js';
+import {Comps, Views}                                from 'App/ui';
+import {withStateMap, asRef, asStore}                from "rescope-spells";
+import stores                                        from 'App/stores/(*).js';
+import {withTweener, asTweener, TweenRef, TweenAxis} from "react-rtween";
 
 let Tetris = 'div';
 if ( typeof window !== "undefined" ) {
@@ -112,6 +112,28 @@ export default class Highlighter extends React.Component {
 			<div style={style}
 			     className={"Highlighter"}>
 				
+				<TweenRef
+					id={"header"}
+					initial={Anims.MainPage.header}
+				>
+					<header
+						style={{
+							zIndex : 5000,
+							display: "inline-block",
+							//width  : "100%",
+							//background: "red",
+						}}>
+						<Views.Block.PageBlock>
+							<TweenRef
+								id={"logo"}
+								initial={Anims.MainPage.logo}
+							>
+								<div className={"logo"}/>
+							</TweenRef>
+						</Views.Block.PageBlock>
+					
+					</header>
+				</TweenRef>
 				<div className={"headBackground"}>
 					<div className={"maskContent"}>
 						<TweenRef
@@ -153,6 +175,7 @@ export default class Highlighter extends React.Component {
 				
 				
 				<TweenRef
+					id={"focusSlider"}
 					initial={Anims.Highlighter.slider}
 					tweenLines={Anims.Highlighter.sliderScroll}
 				>

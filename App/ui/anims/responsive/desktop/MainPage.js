@@ -27,7 +27,7 @@ export const header            = {
 	position : "absolute",
 	//right    : "0%",
 	//left     : "0%",
-	height   : "82%",
+	height   : "80%",
 	top      : "0%",
 	zIndex   : 200,
 	transform: [
@@ -65,8 +65,8 @@ export const logo              = {
 export const Highlighter       = {
 	position       : "absolute",
 	right          : "0%",
-	height         : "20%",
-	top            : "78%",
+	height         : "98%",
+	top            : "0%",
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
 	zIndex         : 175,
@@ -111,6 +111,13 @@ export const EventNav          = {
 	top     : "0%",
 	height  : "100%",
 	overflow: "auto"
+};
+export const eventsHook            = (tweenables)=>{
+	tweenables
+	return {
+		height         : "0%",
+		top            : "100%",
+	}
 };
 export const events            = {
 	position       : "absolute",
@@ -179,7 +186,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: "-75%",
+			height: "-70%",
 		}
 	},
 	{
@@ -187,8 +194,8 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			top   : "-78%",
-			height: "60%",
+			//top   : "-78%",
+			height: "-18%",
 			//opacity:-.5
 		}
 	},
@@ -207,7 +214,7 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			height: "-55%",
+			height: "-57%",
 			//opacity:-.5
 		}
 	},
@@ -216,8 +223,8 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			height: "35%",
-			top   : "-55%"
+			height: "36%",
+			top   : "-56%"
 		}
 	},
 	{

@@ -50,7 +50,7 @@ export const slider           = {
 	left     : "0px",
 	width    : "100%",
 	height   : "15vh",
-	zIndex   : "100",
+	zIndex   : "250",
 	transform: {
 		perspective: "200px",
 		translateY : '0px',

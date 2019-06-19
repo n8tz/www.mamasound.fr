@@ -123,8 +123,12 @@ export default class ViewSwitcher extends React.Component {
 		return {
 			//
 			...props,
-			initialPrev       : props.defaultInitial,
-			initialPreviewPrev: props.defaultPreviewInitial,
+			initialPrev       : {
+				...props.defaultInitial, pointerEvents: 'none'
+			},
+			initialPreviewPrev: {
+				...props.defaultPreviewInitial, pointerEvents: 'none'
+			},
 			initialCur        : tweenTools.addCss(
 				tweenTools.extractCss(props.showAnim, true)
 				, props.defaultInitial
@@ -133,14 +137,18 @@ export default class ViewSwitcher extends React.Component {
 				tweenTools.extractCss(props.showPreviewAnim, true)
 				, props.defaultPreviewInitial
 			),
-			initialNext       : tweenTools.addCss(
-				tweenTools.extractCss(props.showAnim, true)
-				, props.defaultInitial
-			),
-			initialPreviewNext: tweenTools.addCss(
-				tweenTools.extractCss(props.showPreviewAnim, true)
-				, props.defaultPreviewInitial
-			),
+			initialNext       : {
+				...tweenTools.addCss(
+					tweenTools.extractCss(props.showAnim, true)
+					, props.defaultInitial
+				), pointerEvents: 'none'
+			},
+			initialPreviewNext: {
+				...tweenTools.addCss(
+					tweenTools.extractCss(props.showPreviewAnim, true)
+					, props.defaultPreviewInitial
+				), pointerEvents: 'none'
+			},
 			scrollableAnims   : [
 				...tweenTools.scale(tweenTools.target(props.hideAnim, 'prev'), 100),
 				...tweenTools.scale(tweenTools.target(props.hidePreviewAnim, 'prevPreview'), 100),

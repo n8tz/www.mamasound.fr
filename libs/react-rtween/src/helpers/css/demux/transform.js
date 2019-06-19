@@ -53,7 +53,7 @@ function demux( key, tweenable, target, data, box ) {
 	if ( data["transform_head"] === key ) {
 		let transforms = "";
 		data[key].forEach(
-			( tmap, i ) => Object.keys(tmap).forEach(
+			( tmap = {}, i ) => Object.keys(tmap).forEach(
 				fkey => {
 					let dkey = key + '_' + fkey + '_' + i, value;
 					
@@ -96,7 +96,7 @@ export default ( key, value, target, data, initials, forceUnits ) => {
 		( tmap, i ) => {
 			let baseData = {}
 			//data[key][i]       = forceUnits ? {} : data[key][i] || {};
-			Object.keys(tmap).forEach(
+			tmap && Object.keys(tmap).forEach(
 				fkey => {
 					let fValue     = tmap[fkey],
 					    dkey       = key + '_' + fkey + '_' + i,
@@ -122,8 +122,8 @@ export default ( key, value, target, data, initials, forceUnits ) => {
 			)
 			data[key][i] =
 				forceUnits
-			               ? { ...baseData, ...(data[key][i] || {}) }
-			               : { ...(data[key][i] || {}), ...baseData };
+				? { ...baseData, ...(data[key][i] || {}) }
+				: { ...(data[key][i] || {}), ...baseData };
 		}
 	)
 	return demux;

@@ -12,7 +12,7 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-@media screen and (max-width: $tablet-landscape-breakpoint) {
+@media screen and (max-width: $tablet-portrait-breakpoint) {
   .mainPageBlock {
 
     padding-bottom: 50px;
@@ -37,7 +37,7 @@
   background: #1f8de2;
   transform: translate3d(-50%, 0, 0);
 
-  @media screen and (max-width: $tablet-landscape-breakpoint) {
+  @media screen and (max-width: $tablet-portrait-breakpoint) {
     margin: 0 !important;
     padding: 0 !important;
     width: 100% !important;

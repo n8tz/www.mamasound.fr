@@ -123,28 +123,6 @@ export default class Home extends React.Component {
 						}
 					}
 				/>
-				<TweenRef
-					id={"header"}
-					initial={MainPage.header}
-				>
-					<header
-						style={{
-							zIndex : 5000,
-							display: "inline-block",
-							//width  : "100%",
-							//background: "red",
-						}}>
-						<Views.Block.PageBlock>
-							<TweenRef
-								id={"logo"}
-								initial={MainPage.logo}
-							>
-								<div className={"logo"}/>
-							</TweenRef>
-						</Views.Block.PageBlock>
-					
-					</header>
-				</TweenRef>
 				<TweenRef id={"Highlighter"} initial={MainPage.Highlighter}>
 					<Views.Block.Highlighter/>
 				</TweenRef>

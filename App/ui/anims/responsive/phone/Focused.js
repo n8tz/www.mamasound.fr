@@ -21,11 +21,11 @@ export const transitionDuration    = 500;
 export const defaultInitial        = {
 	position       : "absolute",
 	bottom         : "0%",
-	right          : "0%",
-	top            : "30%",
-	left           : "0px",
+	right          : "2.5vw",
+	top            : "32%",
+	left           : "2.5vw",
 	zIndex         : 75,
-	overflow       : "hidden",
+	//overflow       : "hidden",
 	transformOrigin: "50% 50%",
 	opacity        : 1,
 	transform      : [
@@ -38,10 +38,11 @@ export const defaultInitial        = {
 };
 export const defaultPreviewInitial = {
 	position       : "absolute",
-	height         : "50%",
-	width          : "100%",
-	top            : "0%",
-	left           : "0px",
+	height         : "40%",
+	right          : "0px",
+	top            : "1%",
+	left           : "2.5vw",
+	width          : "95vw",
 	overflow       : "hidden",
 	transformOrigin: "50% 50%",
 	zIndex         : 50,

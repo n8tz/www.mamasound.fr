@@ -48,8 +48,8 @@ export const slider           = {
 	bottom   : "0px",
 	left     : "0px",
 	width    : "100%",
-	height   : "15vh",
-	zIndex   : "100",
+	height   : "14.5vh",
+	zIndex   : "250",
 	transform: {
 		perspective: "200px",
 		translateY : '0px',
@@ -74,10 +74,10 @@ export const sliderScroll     = {
 export const slide            = {
 	top      : "0%",
 	height   : "100%",
-	transform: {
+	transform: [{}, {
 		perspective: "200px",
 		rotateX    : "2deg"
-	}
+	}]
 };
 export const slideScroll      = {
 	scrollY: [
@@ -89,11 +89,14 @@ export const slideScroll      = {
 				//opacity  : "-1",
 				//height   : 2.5,
 				//top      : -2.5,
-				transform: {
-					//translateY: "-10px",
-					translateZ: "25px",
-					rotateX   : "-4deg"
-				}
+				transform: [
+					{
+						translateY: "-5px",
+						
+					}, {
+						translateZ: "20px",
+						rotateX   : "-4deg"
+					}]
 			}
 		},
 	],
@@ -104,7 +107,7 @@ export const focused          = {
 	top      : "8vh",
 	left     : "0%",
 	width    : "95vw",
-	height   : "65vh",
+	height   : "60vh",
 	opacity  : 1,
 	transform: [{
 		translateX: "0%",

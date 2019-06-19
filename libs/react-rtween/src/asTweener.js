@@ -175,7 +175,7 @@ export default function asTweener( ...argz ) {
 					_.muxByTarget[id]     = {};
 					_.muxDataByTarget[id] = {};
 					//delete _.muxDataByTarget[id].transform_head;
-					iStyle = { ...iStyle, ...deMuxTween(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true, true) };
+					iStyle                = { ...iStyle, ...deMuxTween(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true, true) };
 					// minus initial values
 					Object.keys(_.tweenRefOrigin[id])
 					      .forEach(
@@ -744,7 +744,7 @@ export default function asTweener( ...argz ) {
 									
 									if ( lastStartTm && ((lastStartTm > Date.now() - opts.maxClickTm) && Math.abs(dY) < opts.maxClickOffset && Math.abs(dX) < opts.maxClickOffset) )// skip tap & click
 									{
-										console.log(':u ' + (lastStartTm - Date.now()) + ' ' + dX + ' ' + dY)
+										//console.log(':u ' + (lastStartTm - Date.now()) + ' ' + dX + ' ' + dY)
 										return;
 									}
 									else {
