@@ -30,7 +30,7 @@ export const page              = {
 };
 export const header            = {
 	position : "absolute",
-	height   : ["100%", -sliderHeight],
+	height   : ["100%", "0px", "-" + sliderHeight],
 	top      : "0%",
 	zIndex   : 200,
 	transform: [
@@ -50,7 +50,7 @@ export const Highlighter       = {
 	right          : "0%",
 	//bottom         : "0%",
 	top            : "0%",
-	height         : ["100%", "0px"],
+	height         : ["100%", "0px", "0vh"],
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
 	zIndex         : 175,
@@ -120,7 +120,7 @@ export const events            = {
 	position       : "absolute",
 	right          : "0%",
 	bottom         : "0%",
-	top            : ["100%",0],
+	top            : ["100%", "0px", "0vh"],
 	zIndex         : 150,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
@@ -183,7 +183,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: ["-100%", +sliderHeight + headerMiniHeight],
+			height: ["-100%", +headerMiniHeight + "px", "0vh"],
 		}
 	},
 	{
@@ -191,7 +191,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: [, -eventsMiniHeight]
+			height: ["0%", "-150px", "0vh"]
 		}
 	},
 	{
@@ -199,7 +199,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			top: [, -eventsMiniHeight]
+			top: ["0%", -eventsMiniHeight + "px", "0vh"]
 		}
 	},
 	//// highlighter to events
@@ -208,7 +208,7 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			height: ["-100%", 2 * sliderHeight + 2 * headerMiniHeight],
+			height: ["-100%", 200, 17 + "vh"],
 		}
 	},
 	{
@@ -217,7 +217,7 @@ export const YAxis             = [
 		duration: 100,
 		apply   : {
 			bottom: "20%",
-			top   : ["-100%", eventsMiniHeight + sliderHeight + headerMiniHeight]
+			top   : ["-100%", eventsMiniHeight + headerMiniHeight, sliderHeight]
 		}
 	},
 	{

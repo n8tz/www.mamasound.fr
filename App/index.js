@@ -114,7 +114,7 @@ const ctrl = {
 						{
 							app  : appHtml,
 							state: JSON.stringify(nstate),
-							//css  : cfg.css
+							css  : cfg.css
 						}
 					);
 				} catch ( e ) {
