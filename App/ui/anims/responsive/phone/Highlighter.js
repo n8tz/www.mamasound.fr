@@ -15,10 +15,12 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+import {sliderHeight, eventsMiniHeight, headerMiniHeight} from "./vars";
 
 export const background       = {
 	position : "absolute",
 	//transformOrigin: "0% 0%",
+	opacity  : 0,
 	transform: {
 		perspective: "200px",
 		translateY : '-50%',
@@ -48,36 +50,34 @@ export const slider           = {
 	bottom   : "0px",
 	left     : "0px",
 	width    : "100%",
-	height   : "14.5vh",
+	height   : sliderHeight - 30,
 	zIndex   : "250",
 	transform: {
 		perspective: "200px",
-		translateY : '0px',
+		translateY : '-15px',
 		//rotateX    : "2deg"
 	}
 };
-export const sliderScroll     = {
-	
-	scrollY: [
-		{
-			type    : "Tween",
-			from    : 100,
-			duration: 100,
-			apply   : {
-				transform: {
-					perspective: "100px",
-				}
+export const sliderScroll     = [
+	{
+		from    : 0,
+		duration: 100,
+		apply   : {
+			//bottom: "-10px"
+			transform: {
+				translateY : '10px',
+				//perspective: "100px",
 			}
-		},
-	],
-}
+		}
+	},
+];
 export const slide            = {
 	top      : "0%",
 	height   : "100%",
-	transform: [{}, {
+	transform: {
 		perspective: "200px",
 		rotateX    : "2deg"
-	}]
+	}
 };
 export const slideScroll      = {
 	scrollY: [
@@ -88,15 +88,11 @@ export const slideScroll      = {
 			apply   : {
 				//opacity  : "-1",
 				//height   : 2.5,
-				//top      : -2.5,
-				transform: [
-					{
-						translateY: "-5px",
-						
-					}, {
-						translateZ: "20px",
-						rotateX   : "-4deg"
-					}]
+				transform: {
+					translateY: "-8px",
+					translateZ: "25px",
+					rotateX   : "-4deg"
+				}
 			}
 		},
 	],
@@ -104,22 +100,37 @@ export const slideScroll      = {
 export const focused          = {
 	position : "absolute",
 	//backgroundColor: "red",
-	top      : "8vh",
-	left     : "0%",
-	width    : "95vw",
-	height   : "60vh",
-	opacity  : 1,
+	bottom   : sliderHeight + 10,
+	left     : "50%",
+	top      : headerMiniHeight + 20,
+	//width    : "90vw",
+	opacity  : 0,
+	//height   : "50vh",
+	//overflow       : "hidden",
 	transform: [{
-		translateX: "0%",
-		translateY: "0%",
+		translateX: "-50%",
+		//translateY: "-50%",
 		//perspective: "200px",
 		//rotateX    : "2deg"
-	}, {}, { translateY: '0vh' }]
+	}, {}, { translateY: '0%' }]
 };
 export const focusedScroll    = {
 	scrollY: [
 		{
-			type    : "Tween",
+			from    : 0,
+			duration: 100,
+			apply   : {
+				opacity: 1,
+				//height   : 2.5,
+				//top      : -2.5,
+				//transform: [{
+				//	rotateX: "4deg"
+				//}, {
+				//	translateY: "-50vh",
+				//}]
+			}
+		},
+		{
 			from    : 100,
 			duration: 100,
 			apply   : {

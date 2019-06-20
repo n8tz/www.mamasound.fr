@@ -20,7 +20,7 @@ import {Scope, reScope} from "react-rescope";
 
 const ctrl = {
 	
-	renderTo( node, _state ) {
+	renderTo( node, state ) {
 		//return this.renderSSRTo(...arguments)
 		let cScope      = new Scope(AppScope, {
 			    id         : "App",
@@ -34,10 +34,11 @@ const ctrl = {
 		else if ( __STATE__ )
 			cScope.restore(__STATE__);
 		ReactDom.render(<App/>, node);
-
+		
 		if ( process.env.NODE_ENV !== 'production' && module.hot ) {
 			module.hot.accept('App/App', () => {
-				//ReactDom.render(<App/>, node)
+				state = cScope.serialize({ alias: "App" });
+				cScope.destroy();
 				ctrl.renderTo(node, state)
 			});
 			module.hot.accept('App/App.scope', () => {
@@ -105,7 +106,7 @@ const ctrl = {
 			cScope.destroy()
 			if ( !_attempts || !stable && _attempts < 3 ) {
 				cfg.state = nstate;
-				ctrl.renderSSR(cfg, cb,  ++_attempts);
+				ctrl.renderSSR(cfg, cb, ++_attempts);
 			}
 			else {
 				try {
@@ -113,7 +114,7 @@ const ctrl = {
 						{
 							app  : appHtml,
 							state: JSON.stringify(nstate),
-							css  : cfg.css
+							//css  : cfg.css
 						}
 					);
 				} catch ( e ) {

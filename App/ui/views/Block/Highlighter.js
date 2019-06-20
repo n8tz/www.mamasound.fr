@@ -11,9 +11,9 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-import is                                           from "is";
-import PropTypes                                    from "prop-types";
-import React                                        from "react";
+import is                                            from "is";
+import PropTypes                                     from "prop-types";
+import React                                         from "react";
 import {reScope, scopeToProps, propsToScope, Store}  from "rscopes";
 import moment                                        from 'moment';
 import BackgroundVideo                               from "react-background-video-player";
@@ -92,14 +92,14 @@ export default class Highlighter extends React.Component {
 			    state = this.state;
 			$actions.selectFocus(items[i]._id);
 			slider.goTo(i);
-		}
+		};
 	pickNextFocused = rec => {
 		let {
 			    MountedItems: { items = [] },
 		    }     = this.props,
 		    state = this.state;
 		return (items[(items.findIndex(ref => (rec && ref && rec._id === ref._id)) + 1) % items.length]);
-	}
+	};
 	
 	render() {
 		let {
@@ -175,7 +175,7 @@ export default class Highlighter extends React.Component {
 				
 				
 				<TweenRef
-					id={"focusSlider"}
+					//id={"focusSlider"}
 					initial={Anims.Highlighter.slider}
 					tweenLines={Anims.Highlighter.sliderScroll}
 				>

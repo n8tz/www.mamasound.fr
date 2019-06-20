@@ -30,7 +30,7 @@ export default class Anims extends Store {
 	//static singleton = true;
 	static actions = {};
 	state          = {
-		//currentBrkPts: initialPts,
+		currentBrkPts: initialPts,
 	};
 	//data             = {
 	//	//...breakPts[initialPts]
@@ -53,7 +53,7 @@ export default class Anims extends Store {
 					currentBrkPts = "phone";
 				this.setState({ currentBrkPts })
 			});
-		isBrowserSide && setTimeout(tm => this._onResize(),500)
+		isBrowserSide && setTimeout(tm => this._onResize(), 500)
 	}
 	
 	apply( data, state, { currentBrkPts } ) {

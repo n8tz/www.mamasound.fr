@@ -32735,6 +32735,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var unitsRe = new RegExp("([+-]?(?:[0-9]*[.])?[0-9]+)\\s*(" + ['em', 'ex', '%', 'px', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'rem', 'vh', 'vw', 'vmin', 'vmax'].join('|') + ")"),
+    abs = Math.abs,
     floatCut = function floatCut(v, l) {
   var p = Math.pow(10, l);
   return Math.round(v * p) / p;
@@ -32752,12 +32753,41 @@ var unitsRe = new RegExp("([+-]?(?:[0-9]*[.])?[0-9]+)\\s*(" + ['em', 'ex', '%', 
 };
 
 function demux(key, tweenable, target, data, box) {
-  target[key] = data[key] ? floatCut(tweenable[key], 2) + data[key] : floatCut(tweenable[key], 2);
+  var value;
+  value = data[key + "_" + 0] || defaultUnits[key] ? floatCut(tweenable[key + "_" + 0], 2) + (data[key + "_" + 0] || defaultUnits[key]) : floatCut(tweenable[key + "_" + 0], 2);
+
+  if (data[key] && data[key].length > 1) {
+    for (var i = 1; i < data[key].length; i++) {
+      if (tweenable[key + "_" + i] < 0) value += " - " + abs(floatCut(tweenable[key + "_" + i], 2)) + (data[key + "_" + i] || defaultUnits[key]);else value += " + " + floatCut(tweenable[key + "_" + i], 2) + (data[key + "_" + i] || defaultUnits[key]);
+    }
+
+    value = "calc(" + value + ")";
+  }
+
+  target[key] = value;
 }
 
 var _default = function _default(key, value, target, data, initials, forceUnits) {
+  data[key] = data[key] || [];
+
+  if (is__WEBPACK_IMPORTED_MODULE_0___default.a.array(value)) {
+    for (var i = 0; i < value.length; i++) {
+      data[key][i] = true;
+      mux(key + "_" + i, key, value[i] || 0, target, data, initials, forceUnits);
+    }
+  } else {
+    data[key][0] = true;
+    mux(key + "_" + 0, key, value || 0, target, data, initials, forceUnits);
+  }
+
+  return demux;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (_default);
+
+function mux(key, baseKey, value, target, data, initials, forceUnits) {
   var match = is__WEBPACK_IMPORTED_MODULE_0___default.a.string(value) ? value.match(unitsRe) : false;
-  initials[key] = is__WEBPACK_IMPORTED_MODULE_0___default.a.number(initials[key]) ? initials[key] : defaultValue[key] || 0;
+  initials[key] = is__WEBPACK_IMPORTED_MODULE_0___default.a.number(initials[key]) ? initials[key] : defaultValue[baseKey] || 0;
 
   if (match) {
     if (!forceUnits && data[key] && data[key] !== match[2]) {
@@ -32768,14 +32798,13 @@ var _default = function _default(key, value, target, data, initials, forceUnits)
       target[key] = parseFloat(match[1]);
     }
   } else {
-    target[key] = value;
-    if (!data[key] && key in defaultUnits) data[key] = defaultUnits[key];
+    target[key] = parseFloat(value); //if ( !data[key] && baseKey in defaultUnits )
+    //	data[key] = defaultUnits[baseKey];
   }
 
   return demux;
-};
+}
 
-/* harmony default export */ __webpack_exports__["default"] = (_default);
 ;
 
 (function () {
@@ -32786,10 +32815,12 @@ var _default = function _default(key, value, target, data, initials, forceUnits)
   }
 
   reactHotLoader.register(unitsRe, "unitsRe", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\$all.js");
+  reactHotLoader.register(abs, "abs", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\$all.js");
   reactHotLoader.register(floatCut, "floatCut", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\$all.js");
   reactHotLoader.register(defaultUnits, "defaultUnits", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\$all.js");
   reactHotLoader.register(defaultValue, "defaultValue", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\$all.js");
   reactHotLoader.register(demux, "demux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\$all.js");
+  reactHotLoader.register(mux, "mux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\$all.js");
   reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\$all.js");
 })();
 
@@ -33463,19 +33494,51 @@ var unitsRe = new RegExp("([+-]?(?:[0-9]*[.])?[0-9]+)\\s*(" + ['box', 'em', 'ex'
   height: 'y'
 };
 
-function demux(key, tweenable, target, data, box) {
-  var value = tweenable[key],
-      unit = data[key];
+function demuxOne(key, twVal, baseKey, data, box) {
+  var value = twVal,
+      unit = data[key] || defaultUnits[baseKey];
 
   if (unit === 'box') {
-    value = floatCut(value * (box[defaultBox[key]] || box.x), 3);
+    value = floatCut(value * (box[defaultBox[baseKey]] || box.x), 3);
     unit = 'px';
   }
 
-  target[key] = unit ? value + unit : floatCut(value, 3);
+  return unit ? value + unit : floatCut(value, 3);
+}
+
+function demux(key, tweenable, target, data, box) {
+  var value;
+  value = demuxOne(key + "_" + 0, tweenable[key + "_" + 0], key, data, box);
+
+  if (data[key] && data[key].length > 1) {
+    for (var i = 1; i < data[key].length; i++) {
+      if (tweenable[key + "_" + i] < 0) value += " - " + demuxOne(key + "_" + i, -tweenable[key + "_" + i], key, data, box);else value += " + " + demuxOne(key + "_" + i, tweenable[key + "_" + i], key, data, box);
+    }
+
+    value = "calc(" + value + ")";
+  }
+
+  target[key] = value;
 }
 
 function muxer(key, value, target, data, initials, forceUnits) {
+  data[key] = data[key] || [];
+
+  if (is__WEBPACK_IMPORTED_MODULE_0___default.a.array(value)) {
+    for (var i = 0; i < value.length; i++) {
+      data[key][i] = true;
+      if (value[i] === "-100%" && key === "height") debugger;
+      muxOne(key + "_" + i, value[i] || 0, target, key, data, initials, forceUnits);
+    }
+  } else {
+    data[key][0] = true;
+    muxOne(key + "_" + 0, value || 0, target, key, data, initials, forceUnits);
+  }
+
+  return demux;
+}
+
+function muxOne(key, value, target, baseKey, data, initials, forceUnits) {
   var match = is__WEBPACK_IMPORTED_MODULE_0___default.a.string(value) ? value.match(unitsRe) : false;
   initials[key] = 0;
 
@@ -33488,8 +33551,8 @@ function muxer(key, value, target, data, initials, forceUnits) {
       target[key] = parseFloat(match[1]);
     }
   } else {
-    target[key] = parseFloat(value);
-    if (!data[key] && key in defaultUnits) data[key] = defaultUnits[key];
+    target[key] = parseFloat(value); //if ( !data[key] && baseKey in defaultUnits )
+    //	data[key] = defaultUnits[baseKey];
   }
 
   return demux;
@@ -33512,8 +33575,10 @@ var _default = muxer;
   reactHotLoader.register(floatCut, "floatCut", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\number.js");
   reactHotLoader.register(defaultUnits, "defaultUnits", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\number.js");
   reactHotLoader.register(defaultBox, "defaultBox", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\number.js");
+  reactHotLoader.register(demuxOne, "demuxOne", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\number.js");
   reactHotLoader.register(demux, "demux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\number.js");
   reactHotLoader.register(muxer, "muxer", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\number.js");
+  reactHotLoader.register(muxOne, "muxOne", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\number.js");
   reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\number.js");
 })();
 

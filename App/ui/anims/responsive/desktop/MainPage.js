@@ -11,7 +11,8 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-import {tweenTools} from "react-rtween";
+import {tweenTools}                                       from "react-rtween";
+import {sliderHeight, eventsMiniHeight, headerMiniHeight} from "./vars";
 
 export const page              = {
 	position: "absolute",
@@ -25,17 +26,35 @@ export const page              = {
 };
 export const header            = {
 	position : "absolute",
-	//right    : "0%",
-	//left     : "0%",
-	height   : "80%",
+	height   : ["100%", -sliderHeight],
 	top      : "0%",
 	zIndex   : 200,
 	transform: [
 		{
-			//perspective: "500px",
+			perspective: "500px",
 		},
 		{
 			//translateX: "-50%",
+			translateY: "0%",
+			//translateZ : "-50px",
+			//rotateX   : "-10deg"
+		}
+	]
+};
+export const Highlighter       = {
+	position       : "absolute",
+	right          : "0%",
+	//bottom         : "0%",
+	top            : "0%",
+	height         : ["100%", "0px"],
+	//overflow       : 'hidden',
+	transformOrigin: "center top",
+	zIndex         : 175,
+	transform      : [
+		{
+			//perspective: "500px",
+		},
+		{
 			translateY: "0%",
 			//translateZ : "-50px",
 			//rotateX   : "-10deg"
@@ -56,25 +75,6 @@ export const logo              = {
 		},
 		{
 			//translateX: "-50%",
-			translateY: "0%",
-			//translateZ : "-50px",
-			//rotateX   : "-10deg"
-		}
-	]
-};
-export const Highlighter       = {
-	position       : "absolute",
-	right          : "0%",
-	height         : "98%",
-	top            : "0%",
-	//overflow       : 'hidden',
-	transformOrigin: "center top",
-	zIndex         : 175,
-	transform      : [
-		{
-			perspective: "500px",
-		},
-		{
 			translateY: "0%",
 			//translateZ : "-50px",
 			//rotateX   : "-10deg"
@@ -112,18 +112,11 @@ export const EventNav          = {
 	height  : "100%",
 	overflow: "auto"
 };
-export const eventsHook            = (tweenables)=>{
-	tweenables
-	return {
-		height         : "0%",
-		top            : "100%",
-	}
-};
 export const events            = {
 	position       : "absolute",
 	right          : "0%",
-	height         : "0%",
-	top            : "100%",
+	bottom         : "0%",
+	top            : ["100%", 0],
 	zIndex         : 150,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
@@ -186,7 +179,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: "-70%",
+			height: ["-100%", +sliderHeight + headerMiniHeight],
 		}
 	},
 	{
@@ -194,9 +187,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			//top   : "-78%",
-			height: "-18%",
-			//opacity:-.5
+			height: [, -eventsMiniHeight]
 		}
 	},
 	{
@@ -204,18 +195,16 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: "20%",
-			top   : "-20%"
+			top: [, -eventsMiniHeight]
 		}
 	},
-	// highlighter to events
+	//// highlighter to events
 	{
 		target  : "Highlighter",
 		from    : 100,
 		duration: 100,
 		apply   : {
-			height: "-57%",
-			//opacity:-.5
+			height: ["-100%", 2 * sliderHeight + 2 * headerMiniHeight],
 		}
 	},
 	{
@@ -223,8 +212,8 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			height: "36%",
-			top   : "-56%"
+			bottom: "20%",
+			top   : ["-100%", eventsMiniHeight + sliderHeight + headerMiniHeight]
 		}
 	},
 	{
@@ -237,23 +226,22 @@ export const YAxis             = [
 			top   : -20
 		}
 	},
-	// events to map
+	//// events to map
 	{
 		target  : "events",
 		from    : 200,
 		duration: 100,
 		apply   : {
-			height: "-30%"
+			bottom: "20%"
 		}
 	},
 	{
-		type    : "Tween",
 		target  : "EventMap",
 		from    : 200,
 		duration: 100,
 		apply   : {
-			height: 30,
-			top   : -30
+			height: 20,
+			top   : -20
 		}
 	},
 	//...tweenTools.offset(

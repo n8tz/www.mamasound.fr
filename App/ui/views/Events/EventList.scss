@@ -17,7 +17,7 @@
   position: relative;
 
   perspective: 200px;
-  height: 100%;
+  //height: 100%;
   z-index: 150;
   padding: 0 !important;
   margin-left: -50vw;
@@ -26,11 +26,11 @@
 
   //@include withMaskTop();
 
-  @include withMask();
+  //@include withMask();
 
   .maskContent {
-    //overflow: hidden;
-    //height: 100%;
+    overflow: hidden;
+    height: 100%;
     > .content {
       position: relative;
       height: 100%;
