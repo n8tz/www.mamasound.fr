@@ -17,5 +17,5 @@
  */
 export const sliderHeight     = 200;
 export const headerMiniHeight = 50;
-export const eventsMiniHeight = 250;
+export const eventsMiniHeight = 150;
 

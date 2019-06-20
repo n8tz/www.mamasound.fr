@@ -83,7 +83,7 @@ export const showAnim              = [
 	{
 		from    : 25,
 		duration: 75,
-		easeFn  : "easeBackOut",
+		easeFn  : "easeSinOut",
 		apply   : {
 			opacity  : 1,
 			transform: [{}, {
@@ -104,7 +104,7 @@ export const showPreviewAnim       = [
 		duration: 100,
 		//easeFn  : "easeBackOut",
 		apply   : {
-			opacity  : 1,
+			opacity: 1,
 			//transform: [{}, {
 			//	translateX: "150px",
 			//}]
@@ -114,8 +114,9 @@ export const showPreviewAnim       = [
 export const hideAnim              = [
 	{
 		from    : 0,
-		duration: 50,
-		apply   : {
+		duration: 50, easeFn: "easeSinOut",
+		
+		apply: {
 			opacity  : -1,
 			transform: [{}, {
 				//rotateY: "90deg",
@@ -143,12 +144,12 @@ export const hidePreviewAnim       = [
 		       from    : 0,
 		       duration: 100,
 		       apply   : {
-			       opacity  : -1,
+			       opacity: -1,
 			       //transform: [{}, {
-				   //    //rotateY: "90deg",
-				   //    translateZ: "-50px",
-				   //    //translateY: "-200px",
-				   //    //translateX: "-250px",
+			       //    //rotateY: "90deg",
+			       //    translateZ: "-50px",
+			       //    //translateY: "-200px",
+			       //    //translateX: "-250px",
 			       //}]
 		       }
 	       },

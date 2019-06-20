@@ -235,7 +235,7 @@ export default class ViewSwitcher extends React.Component {
 						{
 							prevTarget &&
 							<View record={prevTarget} refs={DataProvider}/>
-							|| <DefaultView/>
+							|| curTarget && <DefaultView/>
 						}
 					</div>
 				</TweenRef>
@@ -244,7 +244,7 @@ export default class ViewSwitcher extends React.Component {
 					<div>
 						{
 							curTarget &&
-							<ViewPreview record={curTarget} refs={DataProvider}/>
+							<ViewPreview record={curTarget} refs={DataProvider} key={curTarget._id}/>
 						}
 					</div>
 				</TweenRef>
@@ -253,7 +253,7 @@ export default class ViewSwitcher extends React.Component {
 					<div>
 						{
 							curTarget &&
-							<View record={curTarget} refs={DataProvider}/>
+							<View record={curTarget} refs={DataProvider} key={curTarget._id}/>
 							|| <DefaultView/>
 						}
 					</div>
@@ -263,7 +263,7 @@ export default class ViewSwitcher extends React.Component {
 					<div>
 						{
 							nextTarget &&
-							<ViewPreview record={nextTarget} refs={DataProvider}/>
+							<ViewPreview record={nextTarget} refs={DataProvider} key={nextTarget._id}/>
 						}
 					</div>
 				</TweenRef>
@@ -272,7 +272,7 @@ export default class ViewSwitcher extends React.Component {
 					<div>
 						{
 							nextTarget &&
-							<View record={nextTarget} refs={DataProvider}/>
+							<View record={nextTarget} refs={DataProvider} key={nextTarget._id}/>
 						}
 					</div>
 				</TweenRef>

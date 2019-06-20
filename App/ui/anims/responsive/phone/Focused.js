@@ -17,6 +17,8 @@
  */
 
 
+import {eventsMiniHeight, sliderHeight} from "../desktop/vars";
+
 export const transitionDuration    = 500;
 export const defaultInitial        = {
 	position       : "absolute",
@@ -38,21 +40,22 @@ export const defaultInitial        = {
 };
 export const defaultPreviewInitial = {
 	position       : "absolute",
-	height         : "40%",
-	right          : "0px",
-	top            : "1%",
-	left           : "2.5vw",
-	width          : "95vw",
+	height         : ["100vh", -eventsMiniHeight],
+	width          : "100vw",
+	top            : "50%",
+	left           : "50%",
+	zIndex         : 40,
 	overflow       : "hidden",
 	transformOrigin: "50% 50%",
-	zIndex         : 50,
 	opacity        : 1,
 	transform      : [
 		{
+			translateX : "-50%",
+			translateY : "-50%",
 			perspective: "700px",
 		},
 		{
-			translateY: "0%",
+			translateY: sliderHeight / 2,
 		},
 		{},
 		{}]
@@ -75,27 +78,11 @@ export const showAnim              = [
 export const showPreviewAnim       = [
 	{
 		from    : 0,
-		duration: 1,
+		duration: 100,
 		apply   : {
-			transform: [{}, {}]
+			opacity: 1,
 		}
 	},
-	{
-		from    : 50,
-		duration: 50,
-		apply   : {
-			opacity  : 1,
-			transform: [{}, {
-				translateY: "50%",
-				//rotateX: "-90deg",
-			}]
-		}
-	},
-	{
-		from    : 50,
-		duration: 1,
-		apply   : {}
-	}
 ];
 export const hideAnim              = [
 	{
@@ -115,26 +102,9 @@ export const hideAnim              = [
 export const hidePreviewAnim       = [
 	       {
 		       from    : 0,
-		       duration: 50,
+		       duration: 100,
 		       apply   : {
-			       opacity  : -1,
-			       transform: [{}, {
-				       translateY: "-50%",
-				       //translateY: "-200px",
-				       //translateX: "-250px",
-			       }]
-		       }
-	       },
-	       {
-		       from    : 50,
-		       duration: 1,
-		       apply   : {}
-	       },
-	       {
-		       from    : 50,
-		       duration: 50,
-		       apply   : {
-			       //opacity: 1,
+			       opacity: -1,
 		       }
 	       },
        ]

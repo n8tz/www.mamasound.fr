@@ -55,7 +55,7 @@ export default class Home extends React.Component {
 		//console.warn(appState === props.appState)
 		if ( appState.doFocus && props.appState.currentPageFocus !== appState.currentPageFocus ) {
 			console.log(appState.currentPageFocus);
-			this.scrollTo(wayPoints[appState.currentPageFocus], 500, undefined, "easeBackIn");
+			this.scrollTo(wayPoints[appState.currentPageFocus], 500, undefined, "easeSinIn");
 		}
 	}
 	
