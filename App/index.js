@@ -36,11 +36,11 @@ const ctrl = {
 		ReactDom.render(<App/>, node);
 		
 		if ( process.env.NODE_ENV !== 'production' && module.hot ) {
-			module.hot.accept('App/App', () => {
-				state = cScope.serialize({ alias: "App" });
-				cScope.destroy();
-				ctrl.renderTo(node, state)
-			});
+			//module.hot.accept('App/App', () => {
+			//	state = cScope.serialize({ alias: "App" });
+			//	cScope.destroy();
+			//	ctrl.renderTo(node, state)
+			//});
 			module.hot.accept('App/App.scope', () => {
 				cScope.register(AppScope)
 			});

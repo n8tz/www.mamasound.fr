@@ -140,7 +140,7 @@ export default class Highlighter extends React.Component {
 							initial={Anims.Highlighter.background}
 							tweenLines={Anims.Highlighter.backgroundScroll}
 						>
-							<div className={"container "}>
+							<div className={"container back"}>
 								{/*{*/}
 								{/*	//appState.currentPageFocus === "head"*/}
 								{/*	//&&*/}
@@ -156,22 +156,22 @@ export default class Highlighter extends React.Component {
 								{/*}*/}
 							</div>
 						</TweenRef>
+						<TweenRef
+							initial={Anims.Highlighter.focused}
+							tweenLines={Anims.Highlighter.focusedScroll}
+						>
+							<div className={"focusedContent container"}>
+								<Comps.ViewSwitcher target={Selected && Selected.Focused}
+								                    {...Anims.Focused}
+								                    DefaultView={Views.Events.BestEvents}
+								                    View={Views.FocusedItems.page}
+								                    ViewPreview={Views.FocusedItems.preview}
+								                    getNextTarget={this.pickNextFocused}
+								/>
+							</div>
+						</TweenRef>
 					</div>
 				</div>
-				<TweenRef
-					initial={Anims.Highlighter.focused}
-					tweenLines={Anims.Highlighter.focusedScroll}
-				>
-					<div className={"focusedContent container"}>
-						<Comps.ViewSwitcher target={Selected && Selected.Focused}
-						                    {...Anims.Focused}
-						                    DefaultView={Views.Events.BestEvents}
-						                    View={Views.FocusedItems.page}
-						                    ViewPreview={Views.FocusedItems.preview}
-						                    getNextTarget={this.pickNextFocused}
-						/>
-					</div>
-				</TweenRef>
 				
 				
 				<TweenRef

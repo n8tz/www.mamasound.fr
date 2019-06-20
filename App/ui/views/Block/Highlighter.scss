@@ -65,56 +65,90 @@
         height: 100%;
 
         img {
+          @include use_hvCenteredAbs();
           @media screen and (max-width: $tablet-portrait-breakpoint) {
-            @include withTranspaMask();
+            //@include withTranspaMask();
           }
-          max-height: 100%;
-          max-width: 100%;
+          height: 100%;
+          //max-width:600px;
+        }
+
+        img.leftGhost {
+          transform: translate(-50%, -50%) translateX(-50%) scale(1.5);
+          filter: blur(10px);
+
+        }
+
+        img.rightGhost {
+          transform: translate(-50%, -50%) translateX(50%) scale(1.5);
+          filter: blur(10px);
+
         }
       }
     }
 
     .FocusedItems_page {
-      background: rgba(255, 255, 255, 0.7);
+      //background: rgba(255, 255, 255, 0.7);
       //border-radius: 20px;
       text-align: left;
       width: 100%;
       height: 100%;
       overflow: hidden;
+      //
+      //margin-left: 2em;
       //padding-top: 2em;
 
-      @media screen and (min-width: $tablet-portrait-breakpoint) {
-        border-radius: 10px;
-      }
+      //@media screen and (min-width: $tablet-portrait-breakpoint) {
+      //border-radius: 10px;
+      //}
 
       .title {
-        @media screen and (min-width: $tablet-portrait-breakpoint) {
-          border-top-left-radius: 10px;
-          border-top-right-radius: 10px;
-        }
-
-        background: rgba(255, 255, 255, 0.6);
-        text-align: center;
+        //@media screen and (min-width: $tablet-portrait-breakpoint) {
+        //  border-top-left-radius: 10px;
+        //  border-top-right-radius: 10px;
+        //}
+        //background: linear-gradient(45deg, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 20%,rgba(255,255,255,0.71) 43%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        //background: rgba(255, 255, 255, 0.6);
+        padding-left: 1em;
+        text-align: left;
         font-size: 2em;
         font-weight: lighter;
         font-family: EmPower42;
         //border-top:solid 1px grey;
-        border-bottom: solid 1px lightgrey;
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 5px #fff, 0 0 5px rgba(255, 255, 255, 0.4);
+
+        border-bottom: solid 2px lightgrey;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
         position: fixed;
-        top: 0;
+        top: 20%;
         left: 0;
         width: 100%
       }
 
       .resume {
         @include withScrollBar();
+        //background: linear-gradient(135deg, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 1%,rgba(255,255,255,1) 10%,rgba(255,255,255,0.74) 33%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */        direction: rtl;
+        direction: rtl;
+        text-shadow: 0 0 2px #fff, 0 0 5px #fff, 0 0 2px #fff, 0 0 2px rgba(255, 255, 255, 0.4);
+        padding-left: 5px;
+        * {
+
+          direction: ltr;
+          display: inline-block !important;
+          text-align: left !important;
+          margin: 0;
+          padding: 0;
+        }
+
+        img {
+          display: none !important;
+        }
 
         position: absolute;
-        top: 3em;
-        left: 0;
+        top: calc(20% + 3em);
+        left: 1em;
         right: 0;
         bottom: 0;
         overflow: auto !important;
@@ -147,12 +181,12 @@
     position: absolute;
     top: 0;
     left: 50%;
-    user-select: none;
-    pointer-events: none;
     @include withMask();
 
-    .container {
+    .back {
       @include use_hvCenteredAbs();
+      user-select: none;
+      pointer-events: none;
       @media screen and (max-width: $tablet-portrait-breakpoint) {
         margin: 0 !important;
         padding: 0 !important;
@@ -168,33 +202,34 @@
       transform-origin: left top;
       //height: 100%;
 
-    }
 
-    img {
-      @include use_hvCenteredAbs();
-      width: auto;
-      max-height: 100%;
-      //margin: -50%;
-
-    }
-
-    @media screen and (min-width: $smartphone-landscape-breakpoint) {
-      img.leftGhost {
-        transform: translate(-50%, -50%) translateX(-50%) scale(1.5);
-        filter: blur(10px);
+      img {
+        @include use_hvCenteredAbs();
+        width: auto;
+        max-height: 100%;
+        //margin: -50%;
 
       }
-      img.rightGhost {
-        transform: translate(-50%, -50%) translateX(50%) scale(1.5);
-        filter: blur(10px);
 
+      @media screen and (min-width: $smartphone-landscape-breakpoint) {
+        img.leftGhost {
+          transform: translate(-50%, -50%) translateX(-50%) scale(1.5);
+          filter: blur(10px);
+
+        }
+        img.rightGhost {
+          transform: translate(-50%, -50%) translateX(50%) scale(1.5);
+          filter: blur(10px);
+
+        }
+      }
+      @media screen and (max-width: $smartphone-landscape-breakpoint) {
+        img.leftGhost, img.rightGhost {
+          display: none;
+        }
       }
     }
-    @media screen and (max-width: $smartphone-landscape-breakpoint) {
-      img.leftGhost, img.rightGhost {
-        display: none;
-      }
-    }
+
   }
 
   .slider {

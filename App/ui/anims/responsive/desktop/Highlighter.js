@@ -99,12 +99,12 @@ export const slideScroll      = {
 export const focused          = {
 	position : "absolute",
 	//backgroundColor: "red",
-	bottom   : sliderHeight + 10,
+	//bottom   : sliderHeight + 10,
 	left     : "50%",
 	top      : headerMiniHeight + 20,
 	//width    : "90vw",
 	opacity  : 0,
-	//height   : "50vh",
+	height   : ["100vh", -eventsMiniHeight - sliderHeight - headerMiniHeight],
 	//overflow       : "hidden",
 	transform: [{
 		translateX: "-50%",

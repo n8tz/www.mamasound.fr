@@ -220,16 +220,6 @@ export default class ViewSwitcher extends React.Component {
 						this._inertia
 					}
 				/>
-				<TweenRef id={"prev"}
-				          initial={defaultInitial}>
-					<div>
-						{
-							prevTarget &&
-							<View record={prevTarget} refs={DataProvider}/>
-							|| <DefaultView/>
-						}
-					</div>
-				</TweenRef>
 				<TweenRef id={"prevPreview"}
 				          initial={defaultPreviewInitial}>
 					<div>
@@ -239,12 +229,12 @@ export default class ViewSwitcher extends React.Component {
 						}
 					</div>
 				</TweenRef>
-				<TweenRef id={"from"}
-				          initial={this.state.initialCur}>
+				<TweenRef id={"prev"}
+				          initial={defaultInitial}>
 					<div>
 						{
-							curTarget &&
-							<View record={curTarget} refs={DataProvider}/>
+							prevTarget &&
+							<View record={prevTarget} refs={DataProvider}/>
 							|| <DefaultView/>
 						}
 					</div>
@@ -258,12 +248,13 @@ export default class ViewSwitcher extends React.Component {
 						}
 					</div>
 				</TweenRef>
-				<TweenRef id={"to"}
-				          initial={this.state.initialNext}>
+				<TweenRef id={"from"}
+				          initial={this.state.initialCur}>
 					<div>
 						{
-							nextTarget &&
-							<View record={nextTarget} refs={DataProvider}/>
+							curTarget &&
+							<View record={curTarget} refs={DataProvider}/>
+							|| <DefaultView/>
 						}
 					</div>
 				</TweenRef>
@@ -273,6 +264,15 @@ export default class ViewSwitcher extends React.Component {
 						{
 							nextTarget &&
 							<ViewPreview record={nextTarget} refs={DataProvider}/>
+						}
+					</div>
+				</TweenRef>
+				<TweenRef id={"to"}
+				          initial={this.state.initialNext}>
+					<div>
+						{
+							nextTarget &&
+							<View record={nextTarget} refs={DataProvider}/>
 						}
 					</div>
 				</TweenRef>
