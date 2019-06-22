@@ -2,7 +2,6 @@
   "name": "www.mamasound.fr",
   "version": "2.0.0",
   "private": true,
-  "license": "AGPL-3.0",
   "main": "./dist/App.server.js",
   "author": "Nathan Braun <n8tz.js@gmail.com>",
   "wpInherit": {
@@ -12,9 +11,6 @@
       "vars": {
         "extractCss": true,
         "production": true,
-        "DefinePluginCfg": {
-          "__ADMIN__": false
-        },
         "resolve": {
           "alias": {
             "material-ui": "@material-ui/core"
@@ -41,9 +37,6 @@
         "targetDir": "dist.admin",
         "extractCss": true,
         "production": true,
-        "DefinePluginCfg": {
-          "__ADMIN__": true
-        },
         "resolve": {
           "alias": {
             "material-ui": "@material-ui/core"
@@ -67,9 +60,6 @@
       "basedOn": "default",
       "libsPath": "./libs",
       "vars": {
-        "DefinePluginCfg": {
-          "__ADMIN__": true
-        },
         "webpackPatch": {
           "stats": "errors-only",
           "devServer": {
@@ -103,9 +93,6 @@
       "vars": {
         "externals": true,
         "production": true,
-        "DefinePluginCfg": {
-          "__ADMIN__": true
-        },
         "webpackPatch": {
           "stats": "errors-only",
           "resolve": {
@@ -134,9 +121,6 @@
       "basedOn": "api",
       "vars": {
         "externals": true,
-        "DefinePluginCfg": {
-          "__ADMIN__": true
-        },
         "webpackPatch": {
           "stats": "errors-only",
           "resolve": {
@@ -265,7 +249,7 @@
     "xxhashjs": "^0.2.2"
   },
   "devDependencies": {
-    "webpack-inherit": "^1.5.8",
+    "webpack-inherit": "^1.5.7",
     "wpi-react-hmr-ssr": "^1.1.15",
     "wpi-react-rs-sass-ssr": "^1.0.5"
   }
