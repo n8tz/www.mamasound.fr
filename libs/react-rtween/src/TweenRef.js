@@ -120,6 +120,7 @@ export default class TweenRef extends React.Component {
 							children,
 							{
 								...twRef,
+								twId:id,
 								onDoubleClick: onDoubleClick && (e => onDoubleClick(e, parentTweener)),
 								onClick      : onClick && (e => onClick(e, parentTweener))
 							}

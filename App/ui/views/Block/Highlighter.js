@@ -90,7 +90,7 @@ export default class Highlighter extends React.Component {
 				    $actions
 			    }     = this.props,
 			    state = this.state;
-			$actions.selectFocus(items[i]._id);
+			$actions.selectFocus(items[i]._id, items[i]._cls);
 			slider.goTo(i);
 		};
 	pickNextFocused = rec => {

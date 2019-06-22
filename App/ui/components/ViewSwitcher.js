@@ -101,7 +101,7 @@ export default class ViewSwitcher extends React.Component {
 							this.scrollTo(100, 0, "scrollX");
 							this.setState(
 								{
-									history   : prevTarget && [...history, prevTarget] || history,
+									//history   : prevTarget && [...history, prevTarget] || history,
 									prevTarget: curTarget,
 									curTarget : nextTarget,
 									nextTarget: undefined
@@ -225,7 +225,7 @@ export default class ViewSwitcher extends React.Component {
 					<div>
 						{
 							prevTarget &&
-							<ViewPreview record={prevTarget} refs={DataProvider}/>
+							<ViewPreview record={prevTarget} refs={DataProvider} tweener={this}/>
 						}
 					</div>
 				</TweenRef>
@@ -234,7 +234,7 @@ export default class ViewSwitcher extends React.Component {
 					<div>
 						{
 							prevTarget &&
-							<View record={prevTarget} refs={DataProvider}/>
+							<View record={prevTarget} refs={DataProvider} tweener={this}/>
 							|| curTarget && <DefaultView/>
 						}
 					</div>
@@ -244,7 +244,7 @@ export default class ViewSwitcher extends React.Component {
 					<div>
 						{
 							curTarget &&
-							<ViewPreview record={curTarget} refs={DataProvider} key={curTarget._id}/>
+							<ViewPreview record={curTarget} refs={DataProvider} tweener={this}/>
 						}
 					</div>
 				</TweenRef>
@@ -253,7 +253,7 @@ export default class ViewSwitcher extends React.Component {
 					<div>
 						{
 							curTarget &&
-							<View record={curTarget} refs={DataProvider} key={curTarget._id}/>
+							<View record={curTarget} refs={DataProvider} isCurrent={true}/>
 							|| <DefaultView/>
 						}
 					</div>
@@ -263,7 +263,7 @@ export default class ViewSwitcher extends React.Component {
 					<div>
 						{
 							nextTarget &&
-							<ViewPreview record={nextTarget} refs={DataProvider} key={nextTarget._id}/>
+							<ViewPreview record={nextTarget} refs={DataProvider}/>
 						}
 					</div>
 				</TweenRef>
@@ -272,7 +272,8 @@ export default class ViewSwitcher extends React.Component {
 					<div>
 						{
 							nextTarget &&
-							<View record={nextTarget} refs={DataProvider} key={nextTarget._id}/>
+							<View record={nextTarget} refs={DataProvider} key={"next_" + nextTarget._id} isNext={true}
+							      tweener={this}/>
 						}
 					</div>
 				</TweenRef>

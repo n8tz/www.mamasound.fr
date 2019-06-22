@@ -313,29 +313,29 @@ export default class DataProvider extends Store {
 	}
 	
 	_autoClean = () => {
-		let watchers = this.watchersByEttyId,
-		    data     = this.data,
-		    item,
-		    toClean  = this._scrapStack,
-		    dtLimit  = Date.now() - 1000 * 60; // 1mn ttl for unused items
-		
-		while ( toClean.length ) {
-			item = toClean[0];
-			if ( watchers[item.id]
-				&& watchers[item.id].length )// was put in scrap then réused, remove from scrap list
-				toClean.shift()
-			else if ( item.dt < dtLimit ) {// timeout: delete it
-				//console.log("clean", item)
-				delete data[item.id];
-				toClean.shift()
-			}
-			else break;
-		}
-		
-		if ( toClean.length )
-			this._scraperTm = setTimeout(this._autoClean, 5000);// clean interval
-		else
-			this._scraperTm = null;
+		//let watchers = this.watchersByEttyId,
+		//    data     = this.data,
+		//    item,
+		//    toClean  = this._scrapStack,
+		//    dtLimit  = Date.now() - 1000 * 60; // 1mn ttl for unused items
+		//
+		//while ( toClean.length ) {
+		//	item = toClean[0];
+		//	if ( watchers[item.id]
+		//		&& watchers[item.id].length )// was put in scrap then réused, remove from scrap list
+		//		toClean.shift()
+		//	else if ( item.dt < dtLimit ) {// timeout: delete it
+		//		console.log("clean", item)
+		//		delete data[item.id];
+		//		toClean.shift()
+		//	}
+		//	else break;
+		//}
+		//
+		//if ( toClean.length )
+		//	this._scraperTm = setTimeout(this._autoClean, 5000);// clean interval
+		//else
+		//	this._scraperTm = null;
 	};
 	
 	watchersByEttyId = {};

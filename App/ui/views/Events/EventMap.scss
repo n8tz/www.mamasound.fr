@@ -22,7 +22,7 @@
   left: 50%;
   width: 100vw !important;
   z-index: 100;
-  @include withMask();
+  //@include withMask();
 
   .GradientBottom {
     position: absolute;

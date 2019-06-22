@@ -100,7 +100,7 @@ export default {
 				selectedPage   : selectedPage && { id: selectedPage, etty: "Page" } || null
 			};
 		},
-		selectFocus( selectedFocus ) {
+		selectFocus( selectedFocus, cls ) {
 			let { currentPageFocus } = this.nextState;
 			if ( selectedFocus && currentPageFocus === 'page' )
 				currentPageFocus = "loop";
@@ -110,7 +110,7 @@ export default {
 				currentPageFocus,
 				selectedEventId: null,
 				doFocus        : !!selectedFocus,
-				selectedFocus  : { id: selectedFocus || "Page.SkxesB7ugG", etty: "Page" }
+				selectedFocus  : { id: selectedFocus || "Page.SkxesB7ugG", etty: cls||"Page" }
 			};
 		},
 		selectWidget( selectedWidgetId ) {

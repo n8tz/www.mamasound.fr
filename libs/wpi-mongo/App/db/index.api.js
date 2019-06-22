@@ -48,6 +48,7 @@ export function get( cls, objId ) {
 									  dbRelease();
 									
 									  if ( !docs ) {
+										  console.info("Not found ", cls, objId)
 										  reject(err || 404);
 										  return;
 									  }

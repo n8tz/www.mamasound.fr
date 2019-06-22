@@ -204,7 +204,7 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			height: ["-100%", 2 * sliderHeight + 2 * headerMiniHeight],
+			height: ["-100%", 2* sliderHeight ],
 		}
 	},
 	{

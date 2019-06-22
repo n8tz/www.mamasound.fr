@@ -24,7 +24,7 @@ export const defaultInitial        = {
 	bottom         : "0%",
 	right          : "5px",
 	top            : "0%",
-	left           : "300px",
+	left           : "0px",
 	//marginLeft     : "300px",
 	zIndex         : 50,
 	//overflow       : "hidden",
