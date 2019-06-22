@@ -1,17 +1,22 @@
 /*
- * The MIT License (MIT)
- * Copyright (c) 2019. Wise Wild Web
+ * www.mamasound.fr
+ * Copyright (C) 2019 Nathanael Braun
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
  *
- * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- *
- *  @author : Nathanael Braun
- *  @contact : n8tz.js@gmail.com
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import {tweenTools} from "react-rtween";
+import {tweenTools}                                       from "react-rtween";
+import {sliderHeight, eventsMiniHeight, headerMiniHeight} from "./vars";
 
 export const page              = {
 	position: "absolute",
@@ -25,17 +30,35 @@ export const page              = {
 };
 export const header            = {
 	position : "absolute",
-	//right    : "0%",
-	//left     : "0%",
-	height   : "82%",
+	height   : ["100%", -sliderHeight],
 	top      : "0%",
 	zIndex   : 200,
 	transform: [
 		{
-			//perspective: "500px",
+			perspective: "500px",
 		},
 		{
 			//translateX: "-50%",
+			translateY: "0%",
+			//translateZ : "-50px",
+			//rotateX   : "-10deg"
+		}
+	]
+};
+export const Highlighter       = {
+	position       : "absolute",
+	right          : "0%",
+	//bottom         : "0%",
+	top            : "0%",
+	height         : ["100%", "0px"],
+	//overflow       : 'hidden',
+	transformOrigin: "center top",
+	zIndex         : 175,
+	transform      : [
+		{
+			//perspective: "500px",
+		},
+		{
 			translateY: "0%",
 			//translateZ : "-50px",
 			//rotateX   : "-10deg"
@@ -56,25 +79,6 @@ export const logo              = {
 		},
 		{
 			//translateX: "-50%",
-			translateY: "0%",
-			//translateZ : "-50px",
-			//rotateX   : "-10deg"
-		}
-	]
-};
-export const Highlighter       = {
-	position       : "absolute",
-	right          : "0%",
-	height         : "20%",
-	top            : "78%",
-	//overflow       : 'hidden',
-	transformOrigin: "center top",
-	zIndex         : 175,
-	transform      : [
-		{
-			perspective: "500px",
-		},
-		{
 			translateY: "0%",
 			//translateZ : "-50px",
 			//rotateX   : "-10deg"
@@ -115,8 +119,8 @@ export const EventNav          = {
 export const events            = {
 	position       : "absolute",
 	right          : "0%",
-	height         : "0%",
-	top            : "100%",
+	bottom         : "0%",
+	top            : ["100%", 0],
 	zIndex         : 150,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
@@ -179,7 +183,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: "-75%",
+			height: ["-100%", +sliderHeight + headerMiniHeight],
 		}
 	},
 	{
@@ -187,9 +191,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			top   : "-78%",
-			height: "60%",
-			//opacity:-.5
+			height: [, -eventsMiniHeight]
 		}
 	},
 	{
@@ -197,18 +199,16 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: "20%",
-			top   : "-20%"
+			top: [, -eventsMiniHeight]
 		}
 	},
-	// highlighter to events
+	//// highlighter to events
 	{
 		target  : "Highlighter",
 		from    : 100,
 		duration: 100,
 		apply   : {
-			height: "-55%",
-			//opacity:-.5
+			height: ["-100%", 2* sliderHeight ],
 		}
 	},
 	{
@@ -216,8 +216,8 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			height: "35%",
-			top   : "-55%"
+			bottom: "20%",
+			top   : ["-100%", eventsMiniHeight + sliderHeight + headerMiniHeight]
 		}
 	},
 	{
@@ -230,23 +230,22 @@ export const YAxis             = [
 			top   : -20
 		}
 	},
-	// events to map
+	//// events to map
 	{
 		target  : "events",
 		from    : 200,
 		duration: 100,
 		apply   : {
-			height: "-30%"
+			bottom: "20%"
 		}
 	},
 	{
-		type    : "Tween",
 		target  : "EventMap",
 		from    : 200,
 		duration: 100,
 		apply   : {
-			height: 30,
-			top   : -30
+			height: 20,
+			top   : -20
 		}
 	},
 	//...tweenTools.offset(

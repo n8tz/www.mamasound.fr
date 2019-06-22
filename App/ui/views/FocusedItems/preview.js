@@ -1,5 +1,5 @@
 /*
- *
+ * www.mamasound.fr
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -45,6 +45,9 @@ export default (
 		{
 			previewImage &&
 			<div className="preview">
+				
+				<Comps.Image src={previewImage} className={"leftGhost"}/>
+				<Comps.Image src={previewImage} className={"rightGhost"}/>
 				<Comps.Image src={previewImage}/>
 			</div>
 		}

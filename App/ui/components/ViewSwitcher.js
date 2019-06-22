@@ -1,5 +1,5 @@
 /*
- *
+ * www.mamasound.fr
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -101,7 +101,7 @@ export default class ViewSwitcher extends React.Component {
 							this.scrollTo(100, 0, "scrollX");
 							this.setState(
 								{
-									history   : prevTarget && [...history, prevTarget] || history,
+									//history   : prevTarget && [...history, prevTarget] || history,
 									prevTarget: curTarget,
 									curTarget : nextTarget,
 									nextTarget: undefined
@@ -123,8 +123,12 @@ export default class ViewSwitcher extends React.Component {
 		return {
 			//
 			...props,
-			initialPrev       : props.defaultInitial,
-			initialPreviewPrev: props.defaultPreviewInitial,
+			initialPrev       : {
+				...props.defaultInitial, pointerEvents: 'none'
+			},
+			initialPreviewPrev: {
+				...props.defaultPreviewInitial, pointerEvents: 'none'
+			},
 			initialCur        : tweenTools.addCss(
 				tweenTools.extractCss(props.showAnim, true)
 				, props.defaultInitial
@@ -133,14 +137,18 @@ export default class ViewSwitcher extends React.Component {
 				tweenTools.extractCss(props.showPreviewAnim, true)
 				, props.defaultPreviewInitial
 			),
-			initialNext       : tweenTools.addCss(
-				tweenTools.extractCss(props.showAnim, true)
-				, props.defaultInitial
-			),
-			initialPreviewNext: tweenTools.addCss(
-				tweenTools.extractCss(props.showPreviewAnim, true)
-				, props.defaultPreviewInitial
-			),
+			initialNext       : {
+				...tweenTools.addCss(
+					tweenTools.extractCss(props.showAnim, true)
+					, props.defaultInitial
+				), pointerEvents: 'none'
+			},
+			initialPreviewNext: {
+				...tweenTools.addCss(
+					tweenTools.extractCss(props.showPreviewAnim, true)
+					, props.defaultPreviewInitial
+				), pointerEvents: 'none'
+			},
 			scrollableAnims   : [
 				...tweenTools.scale(tweenTools.target(props.hideAnim, 'prev'), 100),
 				...tweenTools.scale(tweenTools.target(props.hidePreviewAnim, 'prevPreview'), 100),
@@ -212,32 +220,22 @@ export default class ViewSwitcher extends React.Component {
 						this._inertia
 					}
 				/>
-				<TweenRef id={"prev"}
-				          initial={defaultInitial}>
-					<div>
-						{
-							prevTarget &&
-							<View record={prevTarget} refs={DataProvider}/>
-							|| <DefaultView/>
-						}
-					</div>
-				</TweenRef>
 				<TweenRef id={"prevPreview"}
 				          initial={defaultPreviewInitial}>
 					<div>
 						{
 							prevTarget &&
-							<ViewPreview record={prevTarget} refs={DataProvider}/>
+							<ViewPreview record={prevTarget} refs={DataProvider} tweener={this}/>
 						}
 					</div>
 				</TweenRef>
-				<TweenRef id={"from"}
-				          initial={this.state.initialCur}>
+				<TweenRef id={"prev"}
+				          initial={defaultInitial}>
 					<div>
 						{
-							curTarget &&
-							<View record={curTarget} refs={DataProvider}/>
-							|| <DefaultView/>
+							prevTarget &&
+							<View record={prevTarget} refs={DataProvider} tweener={this}/>
+							|| curTarget && <DefaultView/>
 						}
 					</div>
 				</TweenRef>
@@ -246,16 +244,17 @@ export default class ViewSwitcher extends React.Component {
 					<div>
 						{
 							curTarget &&
-							<ViewPreview record={curTarget} refs={DataProvider}/>
+							<ViewPreview record={curTarget} refs={DataProvider} tweener={this}/>
 						}
 					</div>
 				</TweenRef>
-				<TweenRef id={"to"}
-				          initial={this.state.initialNext}>
+				<TweenRef id={"from"}
+				          initial={this.state.initialCur}>
 					<div>
 						{
-							nextTarget &&
-							<View record={nextTarget} refs={DataProvider}/>
+							curTarget &&
+							<View record={curTarget} refs={DataProvider} isCurrent={true}/>
+							|| <DefaultView/>
 						}
 					</div>
 				</TweenRef>
@@ -265,6 +264,16 @@ export default class ViewSwitcher extends React.Component {
 						{
 							nextTarget &&
 							<ViewPreview record={nextTarget} refs={DataProvider}/>
+						}
+					</div>
+				</TweenRef>
+				<TweenRef id={"to"}
+				          initial={this.state.initialNext}>
+					<div>
+						{
+							nextTarget &&
+							<View record={nextTarget} refs={DataProvider} key={"next_" + nextTarget._id} isNext={true}
+							      tweener={this}/>
 						}
 					</div>
 				</TweenRef>

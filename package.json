@@ -11,19 +11,32 @@
       "vars": {
         "extractCss": true,
         "production": true,
-        "terserOptions": {
-          "cache": true,
-          "parallel": true,
-          "sourceMap": true,
-          "extractComments": true,
-          "terserOptions": {
-            "mangle ": false,
-            "ecma": 6,
-            "keep_classnames": true,
-            "keep_fnames": true,
-            "toplevel": false
+        "resolve": {
+          "alias": {
+            "material-ui": "@material-ui/core"
           }
         },
+        "webpackPatch": {
+          "mode": "production"
+        }
+      },
+      "extend": [
+        "wpi-auth",
+        "wpi-forms",
+        "wpi-medias",
+        "wpi-xsl",
+        "wpi-mongo",
+        "wpi-react-rs-sass-ssr"
+      ]
+    },
+    "defaultAdmin": {
+      "rootFolder": "App",
+      "libsPath": "./libs",
+      "basedOn": "default",
+      "vars": {
+        "targetDir": "dist.admin",
+        "extractCss": true,
+        "production": true,
         "resolve": {
           "alias": {
             "material-ui": "@material-ui/core"

@@ -15,24 +15,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+export const sliderHeight     = 200;
+export const headerMiniHeight = 50;
+export const eventsMiniHeight = 150;
 
-
-import anims      from 'App/ui/anims/(**/*).js';
-import views      from 'App/ui/views/(**/*).js';
-import fields     from 'App/ui/fields/(**/*).js';
-import forms      from 'App/ui/forms/(**/*).js';
-import components from 'App/ui/components/(**/*).js';
-import pages      from 'App/ui/pages/(**/*).js';
-
-export {
-	anims,
-	pages,
-	pages as Pages,
-	views,
-	forms,
-	forms as Forms,
-	fields,
-	views as Views,
-	components,
-	components as Comps,
-};

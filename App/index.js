@@ -1,15 +1,19 @@
 /*
- * The MIT License (MIT)
- * Copyright (c) 2019. Wise Wild Web
+ * www.mamasound.fr
+ * Copyright (C) 2019 Nathanael Braun
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
  *
- * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- *
- *  @author : Nathanael Braun
- *  @contact : n8tz.js@gmail.com
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 import AppScope         from './App.scope';
 import shortid          from 'shortid';
@@ -20,7 +24,7 @@ import {Scope, reScope} from "react-rescope";
 
 const ctrl = {
 	
-	renderTo( node, _state ) {
+	renderTo( node, state ) {
 		//return this.renderSSRTo(...arguments)
 		let cScope      = new Scope(AppScope, {
 			    id         : "App",
@@ -34,12 +38,13 @@ const ctrl = {
 		else if ( __STATE__ )
 			cScope.restore(__STATE__);
 		ReactDom.render(<App/>, node);
-
+		
 		if ( process.env.NODE_ENV !== 'production' && module.hot ) {
-			module.hot.accept('App/App', () => {
-				//ReactDom.render(<App/>, node)
-				ctrl.renderTo(node, state)
-			});
+			//module.hot.accept('App/App', () => {
+			//	state = cScope.serialize({ alias: "App" });
+			//	cScope.destroy();
+			//	ctrl.renderTo(node, state)
+			//});
 			module.hot.accept('App/App.scope', () => {
 				cScope.register(AppScope)
 			});
@@ -105,7 +110,7 @@ const ctrl = {
 			cScope.destroy()
 			if ( !_attempts || !stable && _attempts < 3 ) {
 				cfg.state = nstate;
-				ctrl.renderSSR(cfg, cb,  ++_attempts);
+				ctrl.renderSSR(cfg, cb, ++_attempts);
 			}
 			else {
 				try {

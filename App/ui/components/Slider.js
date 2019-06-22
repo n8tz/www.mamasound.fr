@@ -1,5 +1,5 @@
 /*
- *
+ * www.mamasound.fr
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -146,7 +146,7 @@ export default class Slider extends React.Component {
 					axe={"scrollX"}
 					defaultPosition={100 + dec + index * step}
 					size={nbGhostItems * step + 100}
-					scrollableWindow={2 * step}
+					scrollableWindow={4 * step}
 					inertia={
 						{
 							//maxJump   : 1,
@@ -168,11 +168,6 @@ export default class Slider extends React.Component {
 							wayPoints : allItems.map(( child, i ) => ({ at: 100 + i * step }))
 						}
 					}
-				/>
-				<TweenAxis
-					axe={"scrollY"}
-					size={1000}
-					defaultPosition={500}
 				/>
 				{
 					allItems.map(

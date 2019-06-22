@@ -1,27 +1,31 @@
 /*
- * The MIT License (MIT)
- * Copyright (c) 2019. Wise Wild Web
+ * www.mamasound.fr
+ * Copyright (C) 2019 Nathanael Braun
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
  *
- * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- *
- *  @author : Nathanael Braun
- *  @contact : n8tz.js@gmail.com
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import is                                           from "is";
-import PropTypes                                    from "prop-types";
-import React                                        from "react";
-import {reScope, scopeToProps, propsToScope, Store} from "rscopes";
-import moment                                       from 'moment';
-import BackgroundVideo                              from "react-background-video-player";
-import anims                                        from 'App/ui/anims/(*).js';
-import {Comps, Views}                               from 'App/ui';
-import {withStateMap, asRef, asStore}               from "rescope-spells";
-import stores                                       from 'App/stores/(*).js';
-import {withTweener, asTweener, TweenRef}           from "react-rtween";
+import is                                            from "is";
+import PropTypes                                     from "prop-types";
+import React                                         from "react";
+import {reScope, scopeToProps, propsToScope, Store}  from "rscopes";
+import moment                                        from 'moment';
+import BackgroundVideo                               from "react-background-video-player";
+import anims                                         from 'App/ui/anims/(*).js';
+import {Comps, Views}                                from 'App/ui';
+import {withStateMap, asRef, asStore}                from "rescope-spells";
+import stores                                        from 'App/stores/(*).js';
+import {withTweener, asTweener, TweenRef, TweenAxis} from "react-rtween";
 
 let Tetris = 'div';
 if ( typeof window !== "undefined" ) {
@@ -90,16 +94,16 @@ export default class Highlighter extends React.Component {
 				    $actions
 			    }     = this.props,
 			    state = this.state;
-			$actions.selectFocus(items[i]._id);
+			$actions.selectFocus(items[i]._id, items[i]._cls);
 			slider.goTo(i);
-		}
+		};
 	pickNextFocused = rec => {
 		let {
 			    MountedItems: { items = [] },
 		    }     = this.props,
 		    state = this.state;
 		return (items[(items.findIndex(ref => (rec && ref && rec._id === ref._id)) + 1) % items.length]);
-	}
+	};
 	
 	render() {
 		let {
@@ -112,13 +116,35 @@ export default class Highlighter extends React.Component {
 			<div style={style}
 			     className={"Highlighter"}>
 				
+				<TweenRef
+					id={"header"}
+					initial={Anims.MainPage.header}
+				>
+					<header
+						style={{
+							zIndex : 5000,
+							display: "inline-block",
+							//width  : "100%",
+							//background: "red",
+						}}>
+						<Views.Block.PageBlock>
+							<TweenRef
+								id={"logo"}
+								initial={Anims.MainPage.logo}
+							>
+								<div className={"logo"}/>
+							</TweenRef>
+						</Views.Block.PageBlock>
+					
+					</header>
+				</TweenRef>
 				<div className={"headBackground"}>
 					<div className={"maskContent"}>
 						<TweenRef
 							initial={Anims.Highlighter.background}
 							tweenLines={Anims.Highlighter.backgroundScroll}
 						>
-							<div className={"container "}>
+							<div className={"container back"}>
 								{/*{*/}
 								{/*	//appState.currentPageFocus === "head"*/}
 								{/*	//&&*/}
@@ -134,25 +160,26 @@ export default class Highlighter extends React.Component {
 								{/*}*/}
 							</div>
 						</TweenRef>
+						<TweenRef
+							initial={Anims.Highlighter.focused}
+							tweenLines={Anims.Highlighter.focusedScroll}
+						>
+							<div className={"focusedContent container"}>
+								<Comps.ViewSwitcher target={Selected && Selected.Focused}
+								                    {...Anims.Focused}
+								                    DefaultView={Views.Events.BestEvents}
+								                    View={Views.FocusedItems.page}
+								                    ViewPreview={Views.FocusedItems.preview}
+								                    getNextTarget={this.pickNextFocused}
+								/>
+							</div>
+						</TweenRef>
 					</div>
 				</div>
-				<TweenRef
-					initial={Anims.Highlighter.focused}
-					tweenLines={Anims.Highlighter.focusedScroll}
-				>
-					<div className={"focusedContent container"}>
-						<Comps.ViewSwitcher target={Selected && Selected.Focused}
-						                    {...Anims.Focused}
-						                    DefaultView={Views.Events.BestEvents}
-						                    View={Views.FocusedItems.page}
-						                    ViewPreview={Views.FocusedItems.preview}
-						                    getNextTarget={this.pickNextFocused}
-						/>
-					</div>
-				</TweenRef>
 				
 				
 				<TweenRef
+					//id={"focusSlider"}
 					initial={Anims.Highlighter.slider}
 					tweenLines={Anims.Highlighter.sliderScroll}
 				>

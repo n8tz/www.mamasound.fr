@@ -1,5 +1,5 @@
 /*
- *
+ * www.mamasound.fr
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -68,7 +68,7 @@ export default class BestEvents extends React.Component {
 				{
 					byDay && byDay.items.map(
 						( [day, items], i ) => {
-							return <div className={"day"}>
+							return <div className={"day"} key={day}>
 								<div className={"date"}>{moment(parseInt(day)).format("dddd DD MMMM")}</div>
 								{
 									items.map(

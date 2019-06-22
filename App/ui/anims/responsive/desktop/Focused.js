@@ -1,5 +1,5 @@
 /*
- *
+ * www.mamasound.fr
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-let stepAngle = "1deg";
+import {sliderHeight, eventsMiniHeight, headerMiniHeight} from "./vars";
 
 export const transitionDuration    = 800;
 export const defaultInitial        = {
@@ -24,7 +24,7 @@ export const defaultInitial        = {
 	bottom         : "0%",
 	right          : "5px",
 	top            : "0%",
-	left           : "300px",
+	left           : "0px",
 	//marginLeft     : "300px",
 	zIndex         : 50,
 	//overflow       : "hidden",
@@ -50,19 +50,23 @@ export const defaultInitial        = {
 };
 export const defaultPreviewInitial = {
 	position       : "absolute",
-	height         : "100%",
-	width          : "280px",
-	top            : "0%",
-	left           : "10px",
-	zIndex         : 50,
+	height         : ["100vh", -eventsMiniHeight],
+	width          : "100vw",
+	top            : "50%",
+	left           : "50%",
+	zIndex         : 40,
 	overflow       : "hidden",
 	transformOrigin: "50% 50%",
 	opacity        : 1,
 	transform      : [
 		{
+			translateX : "-50%",
+			translateY : "-50%",
 			perspective: "700px",
 		},
-		{},
+		{
+			translateY: sliderHeight / 2,
+		},
 		{},
 		{}]
 };
@@ -79,11 +83,12 @@ export const showAnim              = [
 	{
 		from    : 25,
 		duration: 75,
-		easeFn  : "easeBackOut",
+		easeFn  : "easeSinOut",
 		apply   : {
 			opacity  : 1,
 			transform: [{}, {
-				translateZ: "50px",
+				//translateZ: "50px",
+				translateX: "-250px",
 			}]
 		}
 	},
@@ -96,41 +101,28 @@ export const showAnim              = [
 export const showPreviewAnim       = [
 	{
 		from    : 0,
-		duration: 1,
-		apply   : {
-			transform: [{}, {
-				rotateY: "270deg",
-			}]
-		}
-	},
-	{
-		from    : 50,
-		duration: 50,
-		apply   : {
-			transform: [{}, {
-				rotateY: "90deg",
-			}]
-		}
-	},
-	{
-		from    : 50,
-		duration: 1,
+		duration: 100,
+		//easeFn  : "easeBackOut",
 		apply   : {
 			opacity: 1,
+			//transform: [{}, {
+			//	translateX: "150px",
+			//}]
 		}
-	}
+	},
 ];
 export const hideAnim              = [
 	{
 		from    : 0,
-		duration: 50,
-		apply   : {
+		duration: 50, easeFn: "easeSinOut",
+		
+		apply: {
 			opacity  : -1,
 			transform: [{}, {
 				//rotateY: "90deg",
-				translateZ: "-50px",
+				//translateZ: "-50px",
 				//translateY: "-200px",
-				//translateX: "-250px",
+				translateX: "-250px",
 			}]
 		}
 	},
@@ -150,21 +142,21 @@ export const hideAnim              = [
 export const hidePreviewAnim       = [
 	       {
 		       from    : 0,
-		       duration: 50,
+		       duration: 100,
 		       apply   : {
-			       transform: [{}, {
-				       rotateY: "90deg",
-				       //translateY: "-200px",
-				       //translateX: "-250px",
-			       }]
+			       opacity: -1,
+			       //transform: [{}, {
+			       //    //rotateY: "90deg",
+			       //    translateZ: "-50px",
+			       //    //translateY: "-200px",
+			       //    //translateX: "-250px",
+			       //}]
 		       }
 	       },
 	       {
 		       from    : 50,
 		       duration: 1,
-		       apply   : {
-			       opacity: -1,
-		       }
+		       apply   : {}
 	       },
 	       {
 		       from    : 50,
@@ -172,6 +164,6 @@ export const hidePreviewAnim       = [
 		       apply   : {
 			       //opacity: 1,
 		       }
-	       },
+	       }
        ]
 ;

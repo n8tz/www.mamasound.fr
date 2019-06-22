@@ -1,5 +1,5 @@
 /*
- *
+ * www.mamasound.fr
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -15,7 +15,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import {tweenTools} from "react-rtween";
+import {tweenTools}                                       from "react-rtween";
+import {sliderHeight, eventsMiniHeight, headerMiniHeight} from "./vars";
 
 export const page              = {
 	position: "absolute",
@@ -29,17 +30,35 @@ export const page              = {
 };
 export const header            = {
 	position : "absolute",
-	//right    : "0%",
-	//left     : "0%",
-	height   : "82%",
+	height   : ["100%", "0px", "-" + sliderHeight],
 	top      : "0%",
 	zIndex   : 200,
 	transform: [
 		{
-			//perspective: "500px",
+			perspective: "500px",
 		},
 		{
 			//translateX: "-50%",
+			translateY: "0%",
+			//translateZ : "-50px",
+			//rotateX   : "-10deg"
+		}
+	]
+};
+export const Highlighter       = {
+	position       : "absolute",
+	right          : "0%",
+	//bottom         : "0%",
+	top            : "0%",
+	height         : ["100%", "0px", "0vh"],
+	//overflow       : 'hidden',
+	transformOrigin: "center top",
+	zIndex         : 175,
+	transform      : [
+		{
+			//perspective: "500px",
+		},
+		{
 			translateY: "0%",
 			//translateZ : "-50px",
 			//rotateX   : "-10deg"
@@ -60,25 +79,6 @@ export const logo              = {
 		},
 		{
 			//translateX: "-50%",
-			translateY: "0%",
-			//translateZ : "-50px",
-			//rotateX   : "-10deg"
-		}
-	]
-};
-export const Highlighter       = {
-	position       : "absolute",
-	right          : "0%",
-	height         : "20%",
-	top            : "78%",
-	//overflow       : 'hidden',
-	transformOrigin: "center top",
-	zIndex         : 175,
-	transform      : [
-		{
-			perspective: "500px",
-		},
-		{
 			translateY: "0%",
 			//translateZ : "-50px",
 			//rotateX   : "-10deg"
@@ -119,8 +119,8 @@ export const EventNav          = {
 export const events            = {
 	position       : "absolute",
 	right          : "0%",
-	height         : "0%",
-	top            : "100%",
+	bottom         : "0%",
+	top            : ["100%", "0px", "0vh"],
 	zIndex         : 150,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
@@ -174,7 +174,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			right : "-5%",
+			right: "-5%",
 			width: "60%",
 		}
 	},
@@ -183,7 +183,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: "-75%",
+			height: ["-100%", +headerMiniHeight + "px", "0vh"],
 		}
 	},
 	{
@@ -191,9 +191,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			top   : "-78%",
-			height: "65%",
-			//opacity:-.5
+			height: ["0%", "-150px", "0vh"]
 		}
 	},
 	{
@@ -201,18 +199,16 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: "15%",
-			top   : "-15%"
+			top: ["0%", -eventsMiniHeight + "px", "0vh"]
 		}
 	},
-	// highlighter to events
+	//// highlighter to events
 	{
 		target  : "Highlighter",
 		from    : 100,
 		duration: 100,
 		apply   : {
-			height: "-55%",
-			//opacity:-.5
+			height: ["-100%", 200, 17 + "vh"],
 		}
 	},
 	{
@@ -220,8 +216,8 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			height: "35%",
-			top   : "-55%"
+			bottom: "20%",
+			top   : ["-100%", eventsMiniHeight + headerMiniHeight, sliderHeight]
 		}
 	},
 	{
@@ -234,23 +230,252 @@ export const YAxis             = [
 			top   : -20
 		}
 	},
-	// events to map
+	//// events to map
 	{
 		target  : "events",
 		from    : 200,
 		duration: 100,
 		apply   : {
-			height: "-25%"
+			bottom: "20%"
 		}
 	},
 	{
-		type    : "Tween",
 		target  : "EventMap",
 		from    : 200,
 		duration: 100,
 		apply   : {
-			height: 25,
-			top   : -25
+			height: 20,
+			top   : -20
 		}
 	},
+	//...tweenTools.offset(
+	//	[
+	//		{
+	//			type    : "Tween",
+	//			target  : "header",
+	//			from    : 0,
+	//			duration: 100,
+	//			apply   : {
+	//				height: -1,
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "events",
+	//			from    : 0,
+	//			duration: 100,
+	//			apply   : {
+	//				height: "44%",
+	//				top   : "-60%"
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "EventMap",
+	//			from    : 0,
+	//			duration: 100,
+	//			apply   : {
+	//				height: 21,
+	//				top   : -20
+	//			}
+	//		},
+	//		//full map
+	//		{
+	//			type    : "Tween",
+	//			target  : "events",
+	//			from    : 100,
+	//			duration: 50,
+	//			apply   : {
+	//				height: -25,
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "EventMap",
+	//			from    : 100,
+	//			duration: 50,
+	//			apply   : {
+	//				height: 25,
+	//				top   : -25
+	//			}
+	//		},
+	//		//page
+	//		{
+	//			type    : "Tween",
+	//			target  : "PageBlock",
+	//			from    : 150,
+	//			duration: 100,
+	//			apply   : {
+	//				height: 60,
+	//				top   : -80
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "events",
+	//			from    : 150,
+	//			duration: 100,
+	//			apply   : {
+	//				height: -30,
+	//				top   : -30
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "events",
+	//			from    : 247,
+	//			duration: 1,
+	//			apply   : {
+	//				opacity: -1
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "events",
+	//			from    : 248,
+	//			duration: 1,
+	//			apply   : {
+	//				zIndex: -100,
+	//				top   : 100
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "events",
+	//			from    : 249,
+	//			duration: 1,
+	//			apply   : {
+	//				opacity: 1
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "EventMap",
+	//			from    : 150,
+	//			duration: 100,
+	//			apply   : {
+	//				height: -26,
+	//				top   : -55
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "Highlighter",
+	//			from    : 150,
+	//			duration: 50,
+	//			apply   : {
+	//				top: -20
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "Highlighter",
+	//			from    : 199,
+	//			duration: 1,
+	//			apply   : {
+	//				opacity: -1
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "Highlighter",
+	//			from    : 200,
+	//			duration: 1,
+	//			apply   : {
+	//				zIndex: -100,
+	//				top   : 120
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "Highlighter",
+	//			from    : 201,
+	//			duration: 1,
+	//			apply   : {
+	//				opacity: 1
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "Highlighter",
+	//			from    : 200,
+	//			duration: 50,
+	//			apply   : {
+	//				height: 2,
+	//				top   : -23
+	//			}
+	//		},
+	//
+	//		// reset to header
+	//
+	//		{
+	//			type    : "Tween",
+	//			target  : "PageBlock",
+	//			from    : 250,
+	//			duration: 100,
+	//			apply   : {
+	//				//height   : 80,
+	//				top: -80
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "Highlighter",
+	//			from    : 250,
+	//			duration: 100,
+	//			apply   : {
+	//				height: 58,
+	//				top   : -77
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "events",
+	//			from    : 250,
+	//			duration: 100,
+	//			apply   : {
+	//				height: 10,
+	//				top   : -10
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "EventMap",
+	//			from    : 250,
+	//			duration: 50,
+	//			apply   : {
+	//				height: -1,
+	//				top   : -1
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "EventMap",
+	//			from    : 0,
+	//			duration: 1,
+	//			apply   : {
+	//				zIndex: -100,
+	//				top   : 115
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "EventMap",
+	//			from    : 300,
+	//			duration: 50,
+	//			apply   : {
+	//				top: -10
+	//			}
+	//		},
+	//		{
+	//			type    : "Tween",
+	//			target  : "header",
+	//			from    : 300,
+	//			duration: 50,
+	//			apply   : {
+	//				height: 1,
+	//			}
+	//		},
+	//	], 0
+	//)
 ];

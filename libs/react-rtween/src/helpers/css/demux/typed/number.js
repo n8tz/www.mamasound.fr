@@ -1,15 +1,18 @@
 /*
- * The MIT License (MIT)
- * Copyright (c) 2019. Wise Wild Web
+ * Copyright (C) 2019 Nathanael Braun
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
  *
- * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- *
- *  @author : Nathanael Braun
- *  @contact : n8tz.js@gmail.com
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 import is from "is";
@@ -41,19 +44,56 @@ const
 		height: 'y',
 	};
 
-function demux( key, tweenable, target, data, box ) {
-	let value = tweenable[key],
-	    unit  = data[key];
+function demuxOne( key, twVal, baseKey, data, box ) {
+	let value = twVal,
+	    unit  = data[key] || defaultUnits[baseKey];
 	
 	if ( unit === 'box' ) {
-		value = floatCut(value * (box[defaultBox[key]] || box.x), 3);
+		value = floatCut(value * (box[defaultBox[baseKey]] || box.x), 3);
 		unit  = 'px';
 	}
 	
-	target[key] = unit ? value + unit : floatCut(value, 3);
+	return unit ? value + unit : floatCut(value, 3);
+}
+
+function demux( key, tweenable, target, data, box ) {
+	let value;
+	
+	value = demuxOne(key + "_" + 0, tweenable[key + "_" + 0], key, data, box);
+	
+	if ( data[key] && data[key].length > 1 ) {
+		for ( let i = 1; i < data[key].length; i++ ) {
+			if ( tweenable[key + "_" + i] < 0 )
+				value += " - " + demuxOne(key + "_" + i, -tweenable[key + "_" + i], key, data, box);
+			else
+				value += " + " + demuxOne(key + "_" + i, tweenable[key + "_" + i], key, data, box);
+		}
+		value = "calc(" + value + ")";
+	}
+	
+	target[key] = value;
 }
 
 function muxer( key, value, target, data, initials, forceUnits ) {
+	
+	data[key] = data[key] || [];
+	if ( is.array(value) ) {
+		for ( let i = 0; i < value.length; i++ ) {
+			data[key][i] = true;
+			if ( value[i] === "-100%" && key === "height" )
+				debugger
+			muxOne(key + "_" + i, value[i] || 0, target, key, data, initials, forceUnits)
+		}
+	}
+	else {
+		data[key][0] = true;
+		muxOne(key + "_" + 0, value || 0, target, key, data, initials, forceUnits)
+	}
+	
+	return demux;
+}
+
+function muxOne( key, value, target, baseKey, data, initials, forceUnits ) {
 	
 	
 	let match     = is.string(value) ? value.match(unitsRe) : false;
@@ -70,8 +110,8 @@ function muxer( key, value, target, data, initials, forceUnits ) {
 	}
 	else {
 		target[key] = parseFloat(value);
-		if ( !data[key] && key in defaultUnits )
-			data[key] = defaultUnits[key];
+		//if ( !data[key] && baseKey in defaultUnits )
+		//	data[key] = defaultUnits[baseKey];
 	}
 	
 	return demux;
