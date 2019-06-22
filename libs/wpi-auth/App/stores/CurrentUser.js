@@ -39,6 +39,8 @@ export default class CurrentUser extends Store {
 				"http://" + cfg.ROOT_DOMAIN + '/login', user
 			).then(r => {
 				this.setState({ user: r.body.result })
+				document.location.reload(true);
+				
 				cb(null, r.body.result)
 			}).catch(e => {
 				cb(e)

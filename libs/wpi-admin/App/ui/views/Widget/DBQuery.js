@@ -18,9 +18,6 @@
 import is                                                               from "is";
 import PropTypes                                                        from "prop-types";
 import React                                                            from "react";
-import TableGrid                                                        from 'App/ui/components/TableGrid.js';
-import PopAnywhere                                                      from 'App/ui/components/PopAnywhere.js';
-import {DropzoneComponent}                                              from "react-dropzone-component";
 import {remove}                                                         from 'App/db';
 import {reScope, Store, scopeToProps, propsToScope}                     from "rscopes";
 import {withStateMap, asRef, asStore}                                   from "rescope-spells";
@@ -86,41 +83,41 @@ export default class DBQuery extends React.Component {
 		;
 		
 		return (
-			<div className={ "DBQuery" }
+			<div className={"DBQuery"}
 			>
-				<div className={ "controls" }>
-					<IconButton onClick={ e => this.setState({ textMode: !textMode }) }
-					            title={ "Switch viewmode" }>
+				<div className={"controls"}>
+					<IconButton onClick={e => this.setState({ textMode: !textMode })}
+					            title={"Switch viewmode"}>
 						<RefreshIcon/>
 					</IconButton>
-					<IconButton onClick={ e => $actions.updateQuery(query) }
-					            title={ "DoQuery" }>
+					<IconButton onClick={e => $actions.updateQuery(query)}
+					            title={"DoQuery"}>
 						<QueryIcon/>
 					</IconButton>
-					<IconButton onClick={ e => $actions.doQueryDelete(query) }
-					            title={ "Do Delete this query" }>
+					<IconButton onClick={e => $actions.doQueryDelete(query)}
+					            title={"Do Delete this query"}>
 						<DeleteIcon/>
 					</IconButton>
 					
-					<IconButton onClick={ e => $actions.dataProvider_flushAll() } title={ "Update all query" }>
+					<IconButton onClick={e => $actions.dataProvider_flushAll()} title={"Update all query"}>
 						<RefreshIcon/>
 					</IconButton>
 				</div>
-				<div className={ "query" }>
+				<div className={"query"}>
 					{
 						textMode
 						&&
-						<JsonTree data={ query } onFullyUpdate={ this.onQueryChange.bind(this) }/>
+						<JsonTree data={query} onFullyUpdate={this.onQueryChange.bind(this)}/>
 						||
 						<textarea
-							ref="json" onChange={ ( e ) => this.onQueryChange(JSON.parse(e.target.value)) }
-							style={ { width: '100%', minHeight: '10em' } } value={ JSON.stringify(query, null, 2) }>
+							ref="json" onChange={( e ) => this.onQueryChange(JSON.parse(e.target.value))}
+							style={{ width: '100%', minHeight: '10em' }} value={JSON.stringify(query, null, 2)}>
                         </textarea>
 					}
 				</div>
-				<div className={ "results" }>
+				<div className={"results"}>
 					{
-						<JsonTree data={ DBQuery || {} }/>
+						<JsonTree data={DBQuery || {}}/>
 					}
 				</div>
 			</div>
