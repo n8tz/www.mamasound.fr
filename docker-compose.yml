@@ -42,6 +42,8 @@ services:
       - .:/home/app
       - node_modules:/home/app/node_modules
       - ./docker/dist:/home/app/dist
+      - ./docker/dist.admin:/home/app/dist.admin
+      - ./docker/dist.api:/home/app/dist.api
       - ./docker/logs:/home/app/logs
       - ./dump:/home/app/dump
       #      - ../../libs/rScopes:/home/app/libs

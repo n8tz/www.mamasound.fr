@@ -49,7 +49,7 @@ export default class App extends React.Component {
 			Router = StaticRouter;
 		return <Router location={this.props.location}>
 			<React.Fragment>
-				<ContextMenu>
+				{__ADMIN__ && <ContextMenu>
 					<div
 						onClick={() => $actions.newWidget('MamaImporter', { title: "Importer d'events" })}>
 						New Importer
@@ -58,19 +58,19 @@ export default class App extends React.Component {
 						onClick={() => $actions.newWidget('DBQuery', { title: "Db query & delete" })}>
 						New DBQuery
 					</div>
-				</ContextMenu>
+				</ContextMenu>}
 				
-				{
-					widgets.items.map(
-						widget => {
-							let WidgetComp = Views.Widget[widget.type] || 'div';
-							return <Widget key={widget._id} record={widget}
-							               onSelect={e => $actions.selectWidget(widget._id)}
-							               selected={widget._id === appState.selectedWidgetId}>
-								<WidgetComp record={widget} {...widget.props}/>
-							</Widget>
-						}
-					)
+				{__ADMIN__ &&
+				widgets.items.map(
+					widget => {
+						let WidgetComp = Views.Widget[widget.type] || 'div';
+						return <Widget key={widget._id} record={widget}
+						               onSelect={e => $actions.selectWidget(widget._id)}
+						               selected={widget._id === appState.selectedWidgetId}>
+							<WidgetComp record={widget} {...widget.props}/>
+						</Widget>
+					}
+				)
 				}
 				
 				<Route path="/" exact component={Pages.Home}/>

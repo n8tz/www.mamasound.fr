@@ -38,7 +38,8 @@ export function service( server ) {
 	//	server.use(basicAuth(creds.user, creds.pass))
 	//}
 	//
-	
+	let publicFiles = express.static(process.cwd() + '/dist'),
+	    adminFiles  = express.static(process.cwd() + '/dist.admin');
 	server.use(device.capture());
 	server.get(
 		'/',
@@ -65,7 +66,13 @@ export function service( server ) {
 			)
 		}
 	);
-	server.use(express.static(process.cwd() + '/dist'));
+	server.use(
+		( req, res, next ) => {
+			if ( !(req.user && req.user.isAdmin) )
+				return publicFiles(req, res, next);
+			return adminFiles(req, res, next);
+		}
+	);
 	server.use(express.static(process.cwd() + '/static'));
 	server.use("/assets/static", express.static(process.cwd() + '/App/ui/assets/static'));
 	

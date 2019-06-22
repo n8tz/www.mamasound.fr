@@ -40,8 +40,8 @@ export default {
 					    curDay, nbDays = 0,
 					    viewType: type = 0
 				    }    = state,
-				    from = moment(curDay).startOf('day').add(2, 'hour').unix() * 1000,
-				    to   = moment(curDay).endOf('week').add(2, 'hour').unix() * 1000;
+				    from = moment(curDay).startOf('day').add(2, 'hour').valueOf(),
+				    to   = moment(curDay).endOf('week').add(2, 'hour').valueOf();
 				return {
 					query: {
 						mountKeys: ["place", "category"],
