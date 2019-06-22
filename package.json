@@ -102,6 +102,7 @@
       "rootFolder": "App",
       "libsPath": "./libs",
       "vars": {
+        "targetDir": "dist.api",
         "externals": true,
         "production": true,
         "DefinePluginCfg": {
@@ -135,6 +136,7 @@
       "libsPath": "./libs",
       "basedOn": "api",
       "vars": {
+        "targetDir": "dist.api",
         "externals": true,
         "DefinePluginCfg": {
           "__ADMIN__": true
@@ -166,7 +168,7 @@
   "scripts": {
     "build": "wpi&&wpi :admin&&wpi :api",
     "dev-api": "wpi :devApi -w",
-    "start-dev": "wpi :devApi&&concurrently \"wpi-dev-server :devClient --hot --host 0.0.0.0 \" \"wpi :devApi -w\" \"sleep 3&&nodemon -L --watch ./dist/App.server.js --inspect=[::]:9229 ./dist/App.server.js  -p 9701\"",
+    "start-dev": "wpi :devApi&&concurrently \"wpi-dev-server :devClient --hot --host 0.0.0.0 \" \"wpi :devApi -w\" \"sleep 3&&nodemon -L --watch ./dist.api/App.server.js --inspect=[::]:9229 ./dist.api/App.server.js  -p 9701\"",
     "start": "node ./dist/App.server.js  -p 8080",
     "runBrowser": "opener http://localhost:8080",
     "docker_start": "opener docker-compose up&",
