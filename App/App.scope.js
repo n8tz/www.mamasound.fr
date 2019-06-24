@@ -16,14 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import $super     from "$super";
-import moment     from "moment";
-import shortid    from "shortid";
-import superagent from "superagent";
-
-import {withStateMap, asRef, asStore} from "rescope-spells";
+import $super                         from "$super";
 import stores                         from 'App/stores/(*).js';
-import scopes                         from 'App/scopes/(*).js';
+import moment                         from "moment";
+import {asRef, asStore, withStateMap} from "rscopes";
+import shortid                        from "shortid";
 
 
 export default {
@@ -110,7 +107,7 @@ export default {
 				currentPageFocus,
 				selectedEventId: null,
 				doFocus        : !!selectedFocus,
-				selectedFocus  : { id: selectedFocus || "Page.SkxesB7ugG", etty: cls||"Page" }
+				selectedFocus  : { id: selectedFocus || "Page.SkxesB7ugG", etty: cls || "Page" }
 			};
 		},
 		selectWidget( selectedWidgetId ) {

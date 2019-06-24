@@ -64,10 +64,10 @@ export default class TweenRef extends React.Component {
 		    }      = this.props,
 		    target = this._currentTweener.getTweenableRef(id);
 		//debugger
-		let props  = [...target.style];
+		//let props  = [...target.style];
 		//console.log(props)
-		props.forEach(p => (target.style[p] = 'unset'));
-		this._currentTweener._updateTweenRef()
+		//props.forEach(p => (target.style[p] = 'unset'));
+		//this._currentTweener._updateTweenRef()
 		//console.log({ ...this._currentTweener.getTweenableRef(id).style }, this._currentTweener)
 	}
 	
@@ -123,7 +123,6 @@ export default class TweenRef extends React.Component {
 							children,
 							{
 								...twRef,
-								twId:id,
 								onDoubleClick: onDoubleClick && (e => onDoubleClick(e, parentTweener)),
 								onClick      : onClick && (e => onClick(e, parentTweener))
 							}

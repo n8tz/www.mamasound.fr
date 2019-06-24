@@ -210,11 +210,19 @@ export function expandShorthandProperty( property, value, target = {} ) {
 	    childProps = type && type.properties,
 	    values     = value.split(' ');
 	
-	childProps && childProps.forEach(
-		( k, i ) => {
-			target[k] = values[i % values.length];
-		}
-	)
+	if ( type.multiple )
+		childProps && childProps.forEach(
+			( k, i ) => {
+				target[k] = values[i % values.length];
+			}
+		)
+	else
+		childProps && childProps.forEach(
+			( k, i ) => {
+				if ( values[i] )
+					target[k] = values[i];
+			}
+		)
 	return target;
 };
 

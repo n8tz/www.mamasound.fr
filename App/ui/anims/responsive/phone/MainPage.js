@@ -1,5 +1,4 @@
 /*
- * www.mamasound.fr
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -15,8 +14,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import {tweenTools}                                       from "react-rtween";
-import {sliderHeight, eventsMiniHeight, headerMiniHeight} from "./vars";
+import {eventsMiniHeight, headerMiniHeight, sliderHeight} from "./vars";
 
 export const page              = {
 	position: "absolute",
@@ -120,7 +118,7 @@ export const events            = {
 	position       : "absolute",
 	right          : "0%",
 	bottom         : "0%",
-	top            : ["100%", "0px", "0vh"],
+	top            : "100%",
 	zIndex         : 150,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
@@ -183,7 +181,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: ["-100%", +headerMiniHeight + "px", "0vh"],
+			height: ["-100%", headerMiniHeight + "px", sliderHeight],
 		}
 	},
 	{
@@ -191,7 +189,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: ["0%", "-150px", "0vh"]
+			height: "-150px"
 		}
 	},
 	{
@@ -199,7 +197,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			top: ["0%", -eventsMiniHeight + "px", "0vh"]
+			top: -eventsMiniHeight
 		}
 	},
 	//// highlighter to events
@@ -208,7 +206,7 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			height: ["-100%", 200, 17 + "vh"],
+			height: ["-100%", 200, sliderHeight],
 		}
 	},
 	{
@@ -217,7 +215,7 @@ export const YAxis             = [
 		duration: 100,
 		apply   : {
 			bottom: "20%",
-			top   : ["-100%", eventsMiniHeight + headerMiniHeight, sliderHeight]
+			top   : ["-100%", (eventsMiniHeight + headerMiniHeight) + "px", sliderHeight]
 		}
 	},
 	{
@@ -226,8 +224,8 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			height: 20,
-			top   : -20
+			height: "20%",
+			top   : "-20%"
 		}
 	},
 	//// events to map
@@ -244,8 +242,8 @@ export const YAxis             = [
 		from    : 200,
 		duration: 100,
 		apply   : {
-			height: 20,
-			top   : -20
+			height: "20%",
+			top   : "-20%"
 		}
 	},
 	//...tweenTools.offset(

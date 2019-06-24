@@ -30,13 +30,16 @@
     left: 50%;
     width: 100vw !important;
     //@include withMask();
+    background: white;
+    border-bottom: solid 2px black;
+    overflow: hidden;
 
     .logo {
       //@include use_hvCenteredAbs();
       background: url("../assets/medias/LogoVF_MAMA_SOUND.png") no-repeat;
       background-size: auto calc(100% - 10px);
       //background-size: auto 100%;
-      background-position: center top;
+      background-position: center center;
       max-height: 80%;
       filter: invert(100%);
       display: inline-block;
