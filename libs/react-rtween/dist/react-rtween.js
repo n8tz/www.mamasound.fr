@@ -638,8 +638,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-dom */ "undefined?5e9a");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var rtween__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! rtween */ "undefined?929e");
-/* harmony import */ var rtween__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(rtween__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var tween_axis__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! tween-axis */ "undefined?a9ee");
+/* harmony import */ var tween_axis__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(tween_axis__WEBPACK_IMPORTED_MODULE_13__);
 /* harmony import */ var _helpers_css__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./helpers/css */ "./src/helpers/css/index.js");
 /* harmony import */ var _helpers_Inertia__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./helpers/Inertia */ "./src/helpers/Inertia.js");
 /* harmony import */ var _TweenerContext__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./TweenerContext */ "./src/TweenerContext.js");
@@ -996,10 +996,10 @@ function asTweener() {
           initial = anim.initial;
         }
 
-        if (!(sl instanceof rtween__WEBPACK_IMPORTED_MODULE_13___default.a)) {
+        if (!(sl instanceof tween_axis__WEBPACK_IMPORTED_MODULE_13___default.a)) {
           // tweenLine, initials, data, demuxers
           sl = Object(_helpers_css__WEBPACK_IMPORTED_MODULE_14__["deMuxLine"])(sl, initials, this._.muxDataByTarget, this._.muxByTarget);
-          sl = new rtween__WEBPACK_IMPORTED_MODULE_13___default.a(sl, this._.tweenRefMaps);
+          sl = new tween_axis__WEBPACK_IMPORTED_MODULE_13___default.a(sl, this._.tweenRefMaps);
           Object.keys(initials).forEach(function (id) {
             return Object.assign(_this3._.tweenRefMaps[id], _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, initials[id], _this3._.tweenRefMaps[id]));
           });
@@ -1031,9 +1031,9 @@ function asTweener() {
       key: "registerPropChangeAnim",
       value: function registerPropChangeAnim(propId, propValue, anims) {
         this._.rtweensByProp = this._.rtweensByProp || {};
-        this._.rtween = this._.rtween || new rtween__WEBPACK_IMPORTED_MODULE_13___default.a();
+        this._.rtween = this._.rtween || new tween_axis__WEBPACK_IMPORTED_MODULE_13___default.a();
         this._.rtweensByProp[propId] = this._.rtweensByProp[propId] || {};
-        this._.rtweensByProp[propId][propValue] = this._.rtweensByProp[propId][propValue] || new rtween__WEBPACK_IMPORTED_MODULE_13___default.a();
+        this._.rtweensByProp[propId][propValue] = this._.rtweensByProp[propId][propValue] || new tween_axis__WEBPACK_IMPORTED_MODULE_13___default.a();
 
         this._.rtweensByProp[propId][propValue].mount(anims);
       }
@@ -1041,9 +1041,9 @@ function asTweener() {
       key: "registerStateChangeAnim",
       value: function registerStateChangeAnim(propId, propValue, anims) {
         this._.rtweensByStateProp = this._.rtweensByStateProp || {};
-        this._.rtween = this._.rtween || new rtween__WEBPACK_IMPORTED_MODULE_13___default.a();
+        this._.rtween = this._.rtween || new tween_axis__WEBPACK_IMPORTED_MODULE_13___default.a();
         this._.rtweensByStateProp[propId] = this._.rtweensByStateProp[propId] || {};
-        this._.rtweensByStateProp[propId][propValue] = this._.rtweensByStateProp[propId][propValue] || new rtween__WEBPACK_IMPORTED_MODULE_13___default.a();
+        this._.rtweensByStateProp[propId][propValue] = this._.rtweensByStateProp[propId][propValue] || new tween_axis__WEBPACK_IMPORTED_MODULE_13___default.a();
 
         this._.rtweensByStateProp[propId][propValue].mount(anims);
       }
@@ -1209,9 +1209,9 @@ function asTweener() {
           size = anim.length;
         }
 
-        if (!(sl instanceof rtween__WEBPACK_IMPORTED_MODULE_13___default.a)) {
+        if (!(sl instanceof tween_axis__WEBPACK_IMPORTED_MODULE_13___default.a)) {
           sl = Object(_helpers_css__WEBPACK_IMPORTED_MODULE_14__["deMuxLine"])(sl, initials, this._.muxDataByTarget, this._.muxByTarget);
-          sl = new rtween__WEBPACK_IMPORTED_MODULE_13___default.a(sl, _.tweenRefMaps);
+          sl = new tween_axis__WEBPACK_IMPORTED_MODULE_13___default.a(sl, _.tweenRefMaps);
           Object.keys(initials).forEach(function (id) {
             _this6._.tweenRefMaps[id] = _this6._.tweenRefMaps[id] || {}, Object.assign(_this6._.tweenRefMaps[id], _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, initials[id], _this6._.tweenRefMaps[id]));
           });
@@ -3423,7 +3423,8 @@ function demux(key, tweenable, target, data, box, offset) {
       nowhere = {};
 
   for (var i = 0; i < count; i++) {
-    v += _number__WEBPACK_IMPORTED_MODULE_1__["default"].demux(key + '_' + i, tweenable, nowhere, data, box, offset) + ' ';
+    _number__WEBPACK_IMPORTED_MODULE_1__["default"].demux(key + '_' + i, tweenable, nowhere, data, box, offset);
+    v += nowhere[key + '_' + i] + ' ';
   }
 
   target[key] = v;
@@ -3510,7 +3511,6 @@ function demuxOne(key, twVal, baseKey, data, box) {
     value = value * (box[defaultBox[baseKey]] || box.x);
     unit = 'px';
   } //if ( Math.abs(value) < .0001 && value !== 0 )
-  //	debugger
 
 
   return unit ? floatCut(value) + unit : floatCut(value);
@@ -3529,7 +3529,7 @@ function demux(key, tweenable, target, data, box) {
   }
 
   if (i > 1) value = "calc(" + value + ")";
-  return target[key] = value;
+  target[key] = value;
 }
 
 function muxer(key, value, target, data, initials, forceUnits) {
@@ -4781,17 +4781,6 @@ module.exports = require("@babel/runtime/helpers/inherits");
 
 /***/ }),
 
-/***/ "undefined?929e":
-/*!*************************!*\
-  !*** external "rtween" ***!
-  \*************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("rtween");
-
-/***/ }),
-
 /***/ "undefined?a742":
 /*!*****************************!*\
   !*** external "color-rgba" ***!
@@ -4800,6 +4789,17 @@ module.exports = require("rtween");
 /***/ (function(module, exports) {
 
 module.exports = require("color-rgba");
+
+/***/ }),
+
+/***/ "undefined?a9ee":
+/*!*****************************!*\
+  !*** external "tween-axis" ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("tween-axis");
 
 /***/ }),
 

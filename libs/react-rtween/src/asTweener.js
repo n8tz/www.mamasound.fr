@@ -19,7 +19,7 @@ import * as easingFn                     from "d3-ease";
 import is                                from "is";
 import React                             from "react";
 import ReactDom                          from "react-dom";
-import rTween                            from "rtween";
+import rTween                            from "tween-axis";
 import {deMuxLine, deMuxTween, muxToCss} from "./helpers/css";
 import Inertia                           from './helpers/Inertia';
 import TweenerContext                    from "./TweenerContext";

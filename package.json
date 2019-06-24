@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "license": "AGPL-3.0",
-  "main": "./dist/App.server.js",
+  "main": "./dist.api/App.server.js",
   "author": "Nathan Braun <n8tz.js@gmail.com>",
   "wpInherit": {
     "default": {
@@ -169,7 +169,7 @@
     "build": "wpi&&wpi :admin&&wpi :api",
     "dev-api": "wpi :devApi -w",
     "start-dev": "wpi :devApi&&concurrently \"wpi-dev-server :devClient --hot --host 0.0.0.0 \" \"wpi :devApi -w\" \"sleep 3&&nodemon -L --watch ./dist.api/App.server.js --inspect=[::]:9229 ./dist.api/App.server.js  -p 9701\"",
-    "start": "node ./dist/App.server.js  -p 8080",
+    "start": "node ./dist.api/App.server.js  -p 8080",
     "runBrowser": "opener http://localhost:8080",
     "docker_start": "opener docker-compose up&",
     "docker_down": "docker-compose down",
