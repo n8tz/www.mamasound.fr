@@ -24,11 +24,7 @@
  */
 'use strict';
 
-import React          from "react";
-import moment         from "moment";
-import {Comps, Views} from "App/ui";
-
-import {NavLink}  from "react-router-dom";
+import React      from "react";
 import {TweenRef} from "react-rtween";
 
 const tweenLine = {
@@ -80,23 +76,94 @@ export default class page extends React.Component {
 			<div className="title">
 				{target && (target.title || target.label)}
 			</div>
-			{
-				target && !/^\s*$/.test(target.text || '') &&
-				<div className="resume" dangerouslySetInnerHTML={{ __html: target.text }}
-				     onClick={e => this.setState({ big: !big })}/> || ''
-			}
+			<div className="resume">
+				{
+					target && !/^\s*$/.test(target.text || '') &&
+					<div className="content" dangerouslySetInnerHTML={{ __html: target.text }}
+					     onClick={e => this.setState({ big: !big })}/> || ''
+				}
+			</div>
+			
 			
 			<TweenRef
 				initial={
 					{
-						"position"     : "absolute",
-						top            : "50%",
-						left           : "30%",
+						"position": "absolute",
+						top       : ["50%", "3em"],
+						left      : ["30%", "-3em"],
 						//opacity        : 0,
-						width          : "4px",
-						bottom         : "0%",
-						backgroundColor: "white",
-						transform      : [{}, {
+						right     : "1em",
+						height    : "4px",
+						//backgroundColor: "white",
+						transform : [{}, {
+							translateX: (isNext || isCurrent) && "-40vw" || "0vw",
+						}]
+					}
+				}
+				tweenLines={
+					{
+						"scrollX": isNext && [
+							{
+								
+								from    : 100,
+								duration: 100,
+								easeFn  : "easeSinOut",
+								apply   : {
+									transform: [{}, {
+										translateX: "40vw",
+									}]
+								}
+							}] || isCurrent && [
+							{
+								
+								from    : 0,
+								duration: 100,
+								easeFn  : "easeSinIn",
+								apply   : {
+									transform: [{}, {
+										translateX: "40vw",
+									}]
+								}
+							},
+							{
+								
+								from    : 100,
+								duration: 100,
+								easeFn  : "easeSinOut",
+								apply   : {
+									transform: [{}, {
+										translateX: "40vw",
+									}]
+								}
+							}
+						] || [
+							{
+								
+								from    : 0,
+								duration: 100,
+								easeFn  : "easeSinIn",
+								apply   : {
+									transform: [{}, {
+										translateX: "40vw",
+									}]
+								}
+							}
+						] || []
+					}
+				}>
+				<div className={"styleBar"}/>
+			</TweenRef>
+			<TweenRef
+				initial={
+					{
+						"position": "absolute",
+						top       : "50%",
+						left      : "30%",
+						//opacity        : 0,
+						width     : "4px",
+						bottom    : "0%",
+						//backgroundColor: "black",
+						transform : [{}, {
 							translateY: (isNext || isCurrent) && "-40vh" || "0vh",
 						}]
 					}
@@ -151,75 +218,6 @@ export default class page extends React.Component {
 									//opacity  : -1,
 									transform: [{}, {
 										translateY: "40vh",
-									}]
-								}
-							}
-						] || []
-					}
-				}>
-				<div className={"styleBar"}/>
-			</TweenRef>
-			
-			<TweenRef
-				initial={
-					{
-						"position"     : "absolute",
-						top            : ["50%", "3em"],
-						left           : ["30%", "-3em"],
-						//opacity        : 0,
-						right          : "1em",
-						height         : "4px",
-						backgroundColor: "white",
-						transform      : [{}, {
-							translateX: (isNext || isCurrent) && "-40vw" || "0vw",
-						}]
-					}
-				}
-				tweenLines={
-					{
-						"scrollX": isNext && [
-							{
-								
-								from    : 100,
-								duration: 100,
-								easeFn  : "easeSinOut",
-								apply   : {
-									transform: [{}, {
-										translateX: "40vw",
-									}]
-								}
-							}] || isCurrent && [
-							{
-								
-								from    : 0,
-								duration: 100,
-								easeFn  : "easeSinIn",
-								apply   : {
-									transform: [{}, {
-										translateX: "40vw",
-									}]
-								}
-							},
-							{
-								
-								from    : 100,
-								duration: 100,
-								easeFn  : "easeSinOut",
-								apply   : {
-									transform: [{}, {
-										translateX: "40vw",
-									}]
-								}
-							}
-						] || [
-							{
-								
-								from    : 0,
-								duration: 100,
-								easeFn  : "easeSinIn",
-								apply   : {
-									transform: [{}, {
-										translateX: "40vw",
 									}]
 								}
 							}

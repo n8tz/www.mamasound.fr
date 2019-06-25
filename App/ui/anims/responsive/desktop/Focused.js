@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {sliderHeight, eventsMiniHeight, headerMiniHeight} from "./vars";
+import {eventsMiniHeight, sliderHeight} from "./vars";
 
 export const transitionDuration    = 800;
 export const defaultInitial        = {
