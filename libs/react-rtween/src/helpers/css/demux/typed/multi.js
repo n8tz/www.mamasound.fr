@@ -19,10 +19,8 @@ import is     from "is";
 import number from "./number";
 
 const
-	floatCut = function ( v, l ) {
-		var p = Math.pow(10, l);
-		return Math.round(v * p) / p;
-	},
+	floatCut = ( v = 0 ) => v.toFixed(3),
+	
 	alias    = {
 		top   : '0%',
 		bottom: '100%',
@@ -33,14 +31,12 @@ const
 
 function demux( key, tweenable, target, data, box, offset ) {
 	
-	let count = data[key], v = '';
+	let count = data[key], v = '', nowhere = {};
 	
-	for ( let i = 0; i < count; i++ )
-		v += (
-			data[key + '_' + i]
-			? floatCut(tweenable[key + '_' + i], 2) + data[key + '_' + i]
-			: floatCut(tweenable[key + '_' + i], 2)
-		) + ' ';
+	for ( let i = 0; i < count; i++ ) {
+		number.demux(key + '_' + i, tweenable, nowhere, data, box, offset);
+		v += nowhere[key + '_' + i] + ' ';
+	}
 	
 	target[key] = v;
 }

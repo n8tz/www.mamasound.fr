@@ -39,6 +39,11 @@
     > .content {
       position: relative;
       height: 100%;
+      @media screen and (max-width: $tablet-portrait-breakpoint) {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+      }
     }
   }
 
@@ -74,6 +79,7 @@
       padding: 0 !important;
       width: 100% !important;
     }
+
     button {
       height: 28px;
       width: 28px;
@@ -90,11 +96,6 @@
       background: black;
       //background-position: bottom;
     }
-  }
-
-  .content {
-    position: relative;
-    //height: 100%;
   }
 
   .dayList {

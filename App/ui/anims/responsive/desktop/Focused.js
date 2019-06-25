@@ -65,7 +65,7 @@ export const defaultPreviewInitial = {
 			perspective: "700px",
 		},
 		{
-			translateY: sliderHeight / 2,
+			translateY: (parseFloat(sliderHeight) / 2) + "vh",
 		},
 		{},
 		{}]

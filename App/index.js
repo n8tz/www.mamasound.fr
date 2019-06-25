@@ -91,14 +91,14 @@ const ctrl = {
 			    id         : rid,
 			    autoDestroy: false
 		    }), App = reScope(cScope)(require('./App').default);
-		
+
 		if ( cfg.state ) {
 			cScope.restore(cfg.state, { alias: "App" });
 		}
 		else {
 			cScope.state.Anims = { currentBrkPts: cfg.device };
 		}
-		
+
 		let html,
 		    appHtml     = renderToString(<App location={cfg.location}/>),
 		    stable      = cScope.isStableTree();
@@ -106,7 +106,6 @@ const ctrl = {
 		//console.log('ctrl::renderSSR:65: ', cfg.location, _attempts);
 		cScope.onceStableTree(state => {
 			let nstate = cScope.serialize({ alias: "App" });
-			//cb(null, JSON.stringify(nstate,null,2))
 			cScope.destroy()
 			if ( !_attempts || !stable && _attempts < 3 ) {
 				cfg.state = nstate;

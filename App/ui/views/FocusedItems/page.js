@@ -76,8 +76,7 @@ export default class page extends React.Component {
 			    big
 		    } = this.state;
 		//debugger;
-		return <div className={"Page FocusedItems_page type_" + target._cls + " " + (big ? " bigView" : "smallView")}
-		            onClick={e => this.setState({ big: !big })}>
+		return <div className={"Page FocusedItems_page type_" + target._cls + " " + (big ? " bigView" : "smallView")}>
 			<div className="title">
 				{target && (target.title || target.label)}
 			</div>

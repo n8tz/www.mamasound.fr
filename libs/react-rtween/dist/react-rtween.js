@@ -371,28 +371,25 @@ TweenAxis.propTypes = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TweenRef; });
-/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "undefined?4d9b");
-/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "undefined?24b3");
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "undefined?36a1");
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "undefined?03c7");
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "undefined?20a8");
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "undefined?74ba");
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime/helpers/objectSpread */ "undefined?e108");
-/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react */ "undefined?588e");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var shortid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! shortid */ "undefined?beec");
-/* harmony import */ var shortid__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(shortid__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! is */ "undefined?63a5");
-/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(is__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _TweenerContext__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./TweenerContext */ "./src/TweenerContext.js");
-
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "undefined?24b3");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "undefined?36a1");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "undefined?03c7");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "undefined?20a8");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "undefined?74ba");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/objectSpread */ "undefined?e108");
+/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "undefined?588e");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var shortid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! shortid */ "undefined?beec");
+/* harmony import */ var shortid__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(shortid__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! is */ "undefined?63a5");
+/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(is__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _TweenerContext__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./TweenerContext */ "./src/TweenerContext.js");
 
 
 
@@ -423,7 +420,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function setTarget(anims, target) {
   return anims.map(function (tween) {
-    return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_6___default()({}, tween, {
+    return _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_5___default()({}, tween, {
       target: target
     });
   });
@@ -432,26 +429,26 @@ function setTarget(anims, target) {
 var TweenRef =
 /*#__PURE__*/
 function (_React$Component) {
-  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5___default()(TweenRef, _React$Component);
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default()(TweenRef, _React$Component);
 
   function TweenRef() {
     var _getPrototypeOf2;
 
     var _this;
 
-    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default()(this, TweenRef);
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, TweenRef);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3___default()(this, (_getPrototypeOf2 = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4___default()(TweenRef)).call.apply(_getPrototypeOf2, [this].concat(args)));
+    _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, (_getPrototypeOf2 = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(TweenRef)).call.apply(_getPrototypeOf2, [this].concat(args)));
     _this.state = {};
-    _this.__tweenableId = shortid__WEBPACK_IMPORTED_MODULE_8___default.a.generate();
+    _this.__tweenableId = shortid__WEBPACK_IMPORTED_MODULE_7___default.a.generate();
     return _this;
   }
 
-  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default()(TweenRef, [{
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(TweenRef, [{
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       var _this2 = this;
@@ -491,16 +488,11 @@ function (_React$Component) {
           _this$props$onDoubleC = _this$props.onDoubleClick,
           onDoubleClick = _this$props$onDoubleC === void 0 ? children && children.props && children.props.onDoubleClick : _this$props$onDoubleC,
           target = this._currentTweener.getTweenableRef(id); //debugger
-
-
-      var props = _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(target.style); //console.log(props)
-
-
-      props.forEach(function (p) {
-        return target.style[p] = 'unset';
-      });
-
-      this._currentTweener._updateTweenRef(); //console.log({ ...this._currentTweener.getTweenableRef(id).style }, this._currentTweener)
+      //let props  = [...target.style];
+      //console.log(props)
+      //props.forEach(p => (target.style[p] = 'unset'));
+      //this._currentTweener._updateTweenRef()
+      //console.log({ ...this._currentTweener.getTweenableRef(id).style }, this._currentTweener)
 
     }
   }, {
@@ -524,7 +516,7 @@ function (_React$Component) {
           onClick = _this$props2$onClick === void 0 ? children && children.props && children.props.onClick : _this$props2$onClick,
           _this$props2$onDouble = _this$props2.onDoubleClick,
           onDoubleClick = _this$props2$onDouble === void 0 ? children && children.props && children.props.onDoubleClick : _this$props2$onDouble;
-      return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_TweenerContext__WEBPACK_IMPORTED_MODULE_10__["default"].Consumer, null, function (parentTweener) {
+      return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_TweenerContext__WEBPACK_IMPORTED_MODULE_9__["default"].Consumer, null, function (parentTweener) {
         //@todo : should use didmount ?
         parentTweener = tweener || parentTweener;
         var twRef = parentTweener.tweenRef(id, style || children.props && children.props.style, initial, pos, noRef, reset);
@@ -536,13 +528,13 @@ function (_React$Component) {
             });
           }
 
-          if (tweenLines && is__WEBPACK_IMPORTED_MODULE_9___default.a.array(tweenLines)) _this3._tweenLines = {
+          if (tweenLines && is__WEBPACK_IMPORTED_MODULE_8___default.a.array(tweenLines)) _this3._tweenLines = {
             scrollY: parentTweener.addScrollableAnim(setTarget(tweenLines, id))
           };else _this3._tweenLines = tweenLines && Object.keys(tweenLines).reduce(function (h, axe) {
             return h[axe] = parentTweener.addScrollableAnim(setTarget(tweenLines[axe], id), axe), h;
           }, {});
           if (_this3._currentTweener !== parentTweener) _this3._currentTweener && _this3._currentTweener.rmTweenRef(_this3.__tweenableId);
-          twRef.style = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_6___default()({}, parentTweener._updateTweenRef(id));
+          twRef.style = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_5___default()({}, parentTweener._updateTweenRef(id));
 
           if (_this3.props.hasOwnProperty("isRoot")) {
             _this3._currentTweener && _this3._currentTweener.setRootRef(undefined);
@@ -553,9 +545,8 @@ function (_React$Component) {
           _this3._previousScrollable = tweenLines;
         }
 
-        if (react__WEBPACK_IMPORTED_MODULE_7___default.a.isValidElement(children)) {
-          children = react__WEBPACK_IMPORTED_MODULE_7___default.a.cloneElement(children, _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_6___default()({}, twRef, {
-            twId: id,
+        if (react__WEBPACK_IMPORTED_MODULE_6___default.a.isValidElement(children)) {
+          children = react__WEBPACK_IMPORTED_MODULE_6___default.a.cloneElement(children, _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_5___default()({}, twRef, {
             onDoubleClick: onDoubleClick && function (e) {
               return onDoubleClick(e, parentTweener);
             },
@@ -571,7 +562,7 @@ function (_React$Component) {
   }]);
 
   return TweenRef;
-}(react__WEBPACK_IMPORTED_MODULE_7___default.a.Component);
+}(react__WEBPACK_IMPORTED_MODULE_6___default.a.Component);
 
 TweenRef.propTypes = {};
 
@@ -639,20 +630,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @babel/runtime/helpers/objectSpread */ "undefined?e108");
 /* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react */ "undefined?588e");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var d3_ease__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! d3-ease */ "undefined?25b8");
+/* harmony import */ var d3_ease__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(d3_ease__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var is__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! is */ "undefined?63a5");
 /* harmony import */ var is__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(is__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./utils */ "./src/utils.js");
-/* harmony import */ var _helpers_Inertia__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./helpers/Inertia */ "./src/helpers/Inertia.js");
-/* harmony import */ var _TweenerContext__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./TweenerContext */ "./src/TweenerContext.js");
-/* harmony import */ var rtween__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! rtween */ "undefined?929e");
-/* harmony import */ var rtween__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(rtween__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var d3_ease__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! d3-ease */ "undefined?25b8");
-/* harmony import */ var d3_ease__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(d3_ease__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react-dom */ "undefined?5e9a");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var _helpers_css__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./helpers/css */ "./src/helpers/css/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react */ "undefined?588e");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-dom */ "undefined?5e9a");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var tween_axis__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! tween-axis */ "undefined?a9ee");
+/* harmony import */ var tween_axis__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(tween_axis__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _helpers_css__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./helpers/css */ "./src/helpers/css/index.js");
+/* harmony import */ var _helpers_Inertia__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./helpers/Inertia */ "./src/helpers/Inertia.js");
+/* harmony import */ var _TweenerContext__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./TweenerContext */ "./src/TweenerContext.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./utils */ "./src/utils.js");
 
 
 
@@ -759,7 +750,7 @@ function asTweener() {
     argz[_key] = arguments[_key];
   }
 
-  var BaseComponent = (!argz[0] || argz[0].prototype instanceof react__WEBPACK_IMPORTED_MODULE_9___default.a.Component || argz[0] === react__WEBPACK_IMPORTED_MODULE_9___default.a.Component) && argz.shift(),
+  var BaseComponent = (!argz[0] || argz[0].prototype instanceof react__WEBPACK_IMPORTED_MODULE_11___default.a.Component || argz[0] === react__WEBPACK_IMPORTED_MODULE_11___default.a.Component) && argz.shift(),
       opts = (!argz[0] || argz[0] instanceof SimpleObjectProto) && argz.shift() || {};
 
   if (!BaseComponent) {
@@ -770,8 +761,8 @@ function asTweener() {
 
   opts = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({
     wheelRatio: 5,
-    maxClickTm: 300,
-    maxClickOffset: 10
+    maxClickTm: 200,
+    maxClickOffset: 100
   }, opts);
   return _temp = _class =
   /*#__PURE__*/
@@ -880,13 +871,13 @@ function asTweener() {
               return iStyle[key] = iStyle[key] || '';
             });
             _.tweenRefMaps[id] = tweenableMap = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, _.tweenRefOrigin[id]);
-            iStyle = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, iStyle, Object(_helpers_css__WEBPACK_IMPORTED_MODULE_17__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true));
+            iStyle = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, iStyle, Object(_helpers_css__WEBPACK_IMPORTED_MODULE_14__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true));
             Object.assign(_.tweenRefCSS[id], _.tweenRefOriginCss[id]);
           } else {
-            _.muxByTarget[id] = {};
-            _.muxDataByTarget[id] = {}; //delete _.muxDataByTarget[id].transform_head;
+            _.muxByTarget[id] = {}; // should reset only a part of.. complex
+            //_.muxDataByTarget[id] = {};
 
-            iStyle = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, iStyle, Object(_helpers_css__WEBPACK_IMPORTED_MODULE_17__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true, true)); // minus initial values
+            iStyle = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, iStyle, Object(_helpers_css__WEBPACK_IMPORTED_MODULE_14__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true, true)); // minus initial values
 
             Object.keys(_.tweenRefOrigin[id]).forEach(function (key) {
               return _.tweenRefMaps[id][key] -= _.tweenRefOrigin[id][key];
@@ -913,7 +904,7 @@ function asTweener() {
           //_.tweenRefMaps[t] = { ..._.tweenRefOrigin[t] };
 
 
-          Object(_helpers_css__WEBPACK_IMPORTED_MODULE_17__["muxToCss"])(_.tweenRefMaps[id], _.tweenRefCSS[id], _.muxByTarget[id], _.muxDataByTarget[id], _.box);
+          Object(_helpers_css__WEBPACK_IMPORTED_MODULE_14__["muxToCss"])(_.tweenRefMaps[id], _.tweenRefCSS[id], _.muxByTarget[id], _.muxDataByTarget[id], _.box);
         } else if (!_.tweenRefs[id]) {
           _.iMapOrigin[id] = iMap;
           iStyle = iStyle || {};
@@ -921,7 +912,7 @@ function asTweener() {
           _.tweenRefs[id] = true;
           _.muxByTarget[id] = _.muxByTarget[id] || {};
           _.muxDataByTarget[id] = _.muxDataByTarget[id] || {};
-          iStyle = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, iStyle, Object(_helpers_css__WEBPACK_IMPORTED_MODULE_17__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true)); //_.tweenRefUnits[id] = extractUnits(iMap);
+          iStyle = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, iStyle, Object(_helpers_css__WEBPACK_IMPORTED_MODULE_14__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true)); //_.tweenRefUnits[id] = extractUnits(iMap);
           //}
 
           _.tweenRefOrigin[id] = tweenableMap;
@@ -941,7 +932,7 @@ function asTweener() {
             return _.tweenRefMaps[id][key] = (_.tweenRefMaps[id][key] || 0) + tweenableMap[key];
           });
           tweenableMap = _.tweenRefMaps[id];
-          Object(_helpers_css__WEBPACK_IMPORTED_MODULE_17__["muxToCss"])(tweenableMap, iStyle, _.muxByTarget[id], _.muxDataByTarget[id], _.box);
+          Object(_helpers_css__WEBPACK_IMPORTED_MODULE_14__["muxToCss"])(tweenableMap, iStyle, _.muxByTarget[id], _.muxDataByTarget[id], _.box);
         } //console.log('tweenRef::tweenRef:519: ', id, { ...tweenableMap });
 
 
@@ -1005,10 +996,10 @@ function asTweener() {
           initial = anim.initial;
         }
 
-        if (!(sl instanceof rtween__WEBPACK_IMPORTED_MODULE_14___default.a)) {
+        if (!(sl instanceof tween_axis__WEBPACK_IMPORTED_MODULE_13___default.a)) {
           // tweenLine, initials, data, demuxers
-          sl = Object(_helpers_css__WEBPACK_IMPORTED_MODULE_17__["deMuxLine"])(sl, initials, this._.muxDataByTarget, this._.muxByTarget);
-          sl = new rtween__WEBPACK_IMPORTED_MODULE_14___default.a(sl, this._.tweenRefMaps);
+          sl = Object(_helpers_css__WEBPACK_IMPORTED_MODULE_14__["deMuxLine"])(sl, initials, this._.muxDataByTarget, this._.muxByTarget);
+          sl = new tween_axis__WEBPACK_IMPORTED_MODULE_13___default.a(sl, this._.tweenRefMaps);
           Object.keys(initials).forEach(function (id) {
             return Object.assign(_this3._.tweenRefMaps[id], _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, initials[id], _this3._.tweenRefMaps[id]));
           });
@@ -1040,9 +1031,9 @@ function asTweener() {
       key: "registerPropChangeAnim",
       value: function registerPropChangeAnim(propId, propValue, anims) {
         this._.rtweensByProp = this._.rtweensByProp || {};
-        this._.rtween = this._.rtween || new rtween__WEBPACK_IMPORTED_MODULE_14___default.a();
+        this._.rtween = this._.rtween || new tween_axis__WEBPACK_IMPORTED_MODULE_13___default.a();
         this._.rtweensByProp[propId] = this._.rtweensByProp[propId] || {};
-        this._.rtweensByProp[propId][propValue] = this._.rtweensByProp[propId][propValue] || new rtween__WEBPACK_IMPORTED_MODULE_14___default.a();
+        this._.rtweensByProp[propId][propValue] = this._.rtweensByProp[propId][propValue] || new tween_axis__WEBPACK_IMPORTED_MODULE_13___default.a();
 
         this._.rtweensByProp[propId][propValue].mount(anims);
       }
@@ -1050,9 +1041,9 @@ function asTweener() {
       key: "registerStateChangeAnim",
       value: function registerStateChangeAnim(propId, propValue, anims) {
         this._.rtweensByStateProp = this._.rtweensByStateProp || {};
-        this._.rtween = this._.rtween || new rtween__WEBPACK_IMPORTED_MODULE_14___default.a();
+        this._.rtween = this._.rtween || new tween_axis__WEBPACK_IMPORTED_MODULE_13___default.a();
         this._.rtweensByStateProp[propId] = this._.rtweensByStateProp[propId] || {};
-        this._.rtweensByStateProp[propId][propValue] = this._.rtweensByStateProp[propId][propValue] || new rtween__WEBPACK_IMPORTED_MODULE_14___default.a();
+        this._.rtweensByStateProp[propId][propValue] = this._.rtweensByStateProp[propId][propValue] || new tween_axis__WEBPACK_IMPORTED_MODULE_13___default.a();
 
         this._.rtweensByStateProp[propId][propValue].mount(anims);
       }
@@ -1146,7 +1137,7 @@ function asTweener() {
           targetPos: 0,
           scrollableWindow: 0,
           scrollableArea: 0,
-          inertia: new _helpers_Inertia__WEBPACK_IMPORTED_MODULE_12__["default"](_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({
+          inertia: new _helpers_Inertia__WEBPACK_IMPORTED_MODULE_15__["default"](_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({
             value: opts.initialScrollPos && opts.initialScrollPos[axe] || 0
           }, opts.axes && opts.axes[axe] && opts.axes[axe].inertia || {}))
         };
@@ -1181,7 +1172,7 @@ function asTweener() {
             scrollableArea = Math.max(dim && dim.scrollableArea || 0, _scrollableArea),
             scrollableWindow = Math.max(dim && dim.scrollableWindow || 0, _scrollableWindow),
             targetPos = dim ? dim.targetPos : scrollPos,
-            inertia = _inertia !== false && (dim ? dim.inertia : new _helpers_Inertia__WEBPACK_IMPORTED_MODULE_12__["default"](_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, _inertia || {}, {
+            inertia = _inertia !== false && (dim ? dim.inertia : new _helpers_Inertia__WEBPACK_IMPORTED_MODULE_15__["default"](_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, _inertia || {}, {
           value: scrollPos
         }))),
             nextDescr = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, _inertia || {}, {
@@ -1218,9 +1209,9 @@ function asTweener() {
           size = anim.length;
         }
 
-        if (!(sl instanceof rtween__WEBPACK_IMPORTED_MODULE_14___default.a)) {
-          sl = Object(_helpers_css__WEBPACK_IMPORTED_MODULE_17__["deMuxLine"])(sl, initials, this._.muxDataByTarget, this._.muxByTarget);
-          sl = new rtween__WEBPACK_IMPORTED_MODULE_14___default.a(sl, _.tweenRefMaps);
+        if (!(sl instanceof tween_axis__WEBPACK_IMPORTED_MODULE_13___default.a)) {
+          sl = Object(_helpers_css__WEBPACK_IMPORTED_MODULE_14__["deMuxLine"])(sl, initials, this._.muxDataByTarget, this._.muxByTarget);
+          sl = new tween_axis__WEBPACK_IMPORTED_MODULE_13___default.a(sl, _.tweenRefMaps);
           Object.keys(initials).forEach(function (id) {
             _this6._.tweenRefMaps[id] = _this6._.tweenRefMaps[id] || {}, Object.assign(_this6._.tweenRefMaps[id], _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_8___default()({}, initials[id], _this6._.tweenRefMaps[id]));
           });
@@ -1301,7 +1292,7 @@ function asTweener() {
               setPos(newPos);
               resolve();
             } else {
-              _this7._runScrollGoTo(axe, newPos, ms, d3_ease__WEBPACK_IMPORTED_MODULE_15__[ease], setPos, resolve);
+              _this7._runScrollGoTo(axe, newPos, ms, d3_ease__WEBPACK_IMPORTED_MODULE_9__[ease], setPos, resolve);
             }
 
             if (!_this7._.live) {
@@ -1328,10 +1319,10 @@ function asTweener() {
       value: function getScrollableNodes(node) {
         var _this8 = this;
 
-        var scrollable = _utils__WEBPACK_IMPORTED_MODULE_11__["default"].findReactParents(node);
+        var scrollable = _utils__WEBPACK_IMPORTED_MODULE_17__["default"].findReactParents(node);
         scrollable = this.hookScrollableTargets && this.hookScrollableTargets(scrollable) || scrollable;
         return scrollable.map(function (id) {
-          return is__WEBPACK_IMPORTED_MODULE_10___default.a.string(id) ? _this8._.refs[id] && react_dom__WEBPACK_IMPORTED_MODULE_16___default.a.findDOMNode(_this8._.refs[id]) || _this8.refs[id] || document.getElementById(id) : id;
+          return is__WEBPACK_IMPORTED_MODULE_10___default.a.string(id) ? _this8._.refs[id] && react_dom__WEBPACK_IMPORTED_MODULE_12___default.a.findDOMNode(_this8._.refs[id]) || _this8.refs[id] || document.getElementById(id) : id;
         });
       }
     }, {
@@ -1353,7 +1344,7 @@ function asTweener() {
               lastScrollEvt;
 
           if (!this._parentTweener && isBrowserSide) {
-            if (!rootNode) console.warn("fail registering scroll listener !! ");else _utils__WEBPACK_IMPORTED_MODULE_11__["default"].addWheelEvent(rootNode, this._.onScroll = function (e) {
+            if (!rootNode) console.warn("fail registering scroll listener !! ");else _utils__WEBPACK_IMPORTED_MODULE_17__["default"].addWheelEvent(rootNode, this._.onScroll = function (e) {
               //@todo
               var now = Date.now(),
                   prevent;
@@ -1387,7 +1378,7 @@ function asTweener() {
               ;
             });
             var lastStartTm, cLock, dX, parents, dY, parentsState;
-            if (!rootNode) console.warn("fail registering drag listener !! ");else _utils__WEBPACK_IMPORTED_MODULE_11__["default"].addEvent(rootNode, this._.dragList = {
+            if (!rootNode) console.warn("fail registering drag listener !! ");else _utils__WEBPACK_IMPORTED_MODULE_17__["default"].addEvent(rootNode, this._.dragList = {
               'dragstart': function dragstart(e, touch, descr) {
                 //@todo
                 var tweener, x, y, i, style;
@@ -1434,9 +1425,10 @@ function asTweener() {
                 if (lastStartTm && !(lastStartTm > Date.now() - opts.maxClickTm && Math.abs(dY) < opts.maxClickOffset && Math.abs(dX) < opts.maxClickOffset)) // skip tap & click
                   {
                     e.preventDefault();
-                    e.stopPropagation();
-                    console.log(':o ' + (lastStartTm - Date.now()) + ' ' + dX + ' ' + dY);
-                  }
+                    e.stopPropagation(); //console.log("prevented click", Math.abs(dX), Math.abs(dY))
+                    //console.log(':o ' + (lastStartTm - Date.now()) + ' ' + dX + ' ' + dY)
+                  } //else console.log("click", Math.abs(dX), Math.abs(dY))
+
               },
               'drag': function drag(e, touch, descr) {
                 //@todo
@@ -1455,12 +1447,10 @@ function asTweener() {
                   if (opts.dragDirectionLock) {
                     if (cLock === "Y" || !cLock && Math.abs(dY * .5) > Math.abs(dX)) {
                       cLock = "Y";
-                      dX = 0;
-                      xDispatched = true;
+                      dX = 0; //xDispatched = true;
                     } else if (cLock === "X" || !cLock && Math.abs(dX * .5) > Math.abs(dY)) {
                       cLock = "X";
-                      dY = 0;
-                      yDispatched = true;
+                      dY = 0; //yDispatched = true;
                     }
                   } //console.log("drag", dX, dY, cLock, opts.dragDirectionLock);
 
@@ -1550,8 +1540,6 @@ function asTweener() {
                 //document.body.style.userSelect  = '';
                 //document.body.style.touchAction = '';
 
-                lastStartTm = 0;
-
                 for (i = 0; i < parents.length; i++) {
                   tweener = parents[i]; // react comp with tweener support
 
@@ -1567,9 +1555,18 @@ function asTweener() {
                   //	}
                   //}
 
-                } //if ( lastStartTm && ((lastStartTm > Date.now() - opts.maxClickTm) && Math.abs(dY)
-                // < opts.maxClickOffset && Math.abs(dX) < opts.maxClickOffset) )// skip tap &
-                // click { return; }
+                }
+
+                if (lastStartTm && lastStartTm > Date.now() - opts.maxClickTm && Math.abs(dY) < opts.maxClickOffset && Math.abs(dX) < opts.maxClickOffset) // skip tap
+                  // &
+                  // click
+                  {
+                    e.stopPropagation();
+                    e.preventDefault(); //console.log("prevented", Math.abs(dX), Math.abs(dY))
+
+                    return;
+                  } else {} //console.log("not prevented", Math.abs(dX), Math.abs(dY))
+                //lastStartTm = 0;
 
 
                 parents = parentsState = null;
@@ -1631,11 +1628,11 @@ function asTweener() {
         if (i === -1) {
           _.activeInertia.push({
             inertia: {
-              x: new _helpers_Inertia__WEBPACK_IMPORTED_MODULE_12__["default"]({
+              x: new _helpers_Inertia__WEBPACK_IMPORTED_MODULE_15__["default"]({
                 max: node.scrollWidth - node.offsetLeft,
                 value: node.scrollLeft
               }),
-              y: new _helpers_Inertia__WEBPACK_IMPORTED_MODULE_12__["default"]({
+              y: new _helpers_Inertia__WEBPACK_IMPORTED_MODULE_15__["default"]({
                 max: node.scrollHeight - node.offsetHeight,
                 value: node.scrollTop
               })
@@ -1734,7 +1731,7 @@ function asTweener() {
 
         var tmap = {},
             initials = {};
-        Object(_helpers_css__WEBPACK_IMPORTED_MODULE_17__["deMuxTween"])(map, tmap, initials, this._.muxDataByTarget[id], this._.muxByTarget[id]);
+        Object(_helpers_css__WEBPACK_IMPORTED_MODULE_14__["deMuxTween"])(map, tmap, initials, this._.muxDataByTarget[id], this._.muxByTarget[id]);
         Object.keys(tmap).map(function (p) {
           return _this11._.tweenRefMaps[id][p] = (!reset && _this11._.tweenRefMaps[id][p] || initials[p]) + tmap[p];
         });
@@ -1753,7 +1750,7 @@ function asTweener() {
           return _this12.updateRefStyle(m, style, postPone);
         });
         if (!this._.tweenRefCSS) this.makeTweenable();
-        Object(_helpers_css__WEBPACK_IMPORTED_MODULE_17__["deMuxTween"])(style, _.tweenRefMaps[target], initials, _.muxDataByTarget[target], _.muxByTarget[target], true);
+        Object(_helpers_css__WEBPACK_IMPORTED_MODULE_14__["deMuxTween"])(style, _.tweenRefMaps[target], initials, _.muxDataByTarget[target], _.muxByTarget[target], true);
 
         this._updateTweenRef(target); //Object.assign(initials, _.tweenRefCSS[target]);
         //_.tweenRefCSS[target] = initials;
@@ -1773,12 +1770,12 @@ function asTweener() {
     }, {
       key: "getTweenableRef",
       value: function getTweenableRef(id) {
-        return this._.refs[id] && react_dom__WEBPACK_IMPORTED_MODULE_16___default.a.findDOMNode(this._.refs[id]);
+        return this._.refs[id] && react_dom__WEBPACK_IMPORTED_MODULE_12___default.a.findDOMNode(this._.refs[id]);
       }
     }, {
       key: "getRootNode",
       value: function getRootNode() {
-        return this._.rootRef && this.getTweenableRef(this._.rootRef) || react_dom__WEBPACK_IMPORTED_MODULE_16___default.a.findDOMNode(this);
+        return this._.rootRef && this.getTweenableRef(this._.rootRef) || react_dom__WEBPACK_IMPORTED_MODULE_12___default.a.findDOMNode(this);
       }
     }, {
       key: "_rafLoop",
@@ -1806,7 +1803,7 @@ function asTweener() {
       key: "_updateTweenRef",
       value: function _updateTweenRef(target) {
         var node;
-        this._.tweenRefCSS[target] && Object(_helpers_css__WEBPACK_IMPORTED_MODULE_17__["muxToCss"])(this._.tweenRefMaps[target], this._.tweenRefCSS[target], this._.muxByTarget[target], this._.muxDataByTarget[target], this._.box);
+        this._.tweenRefCSS[target] && Object(_helpers_css__WEBPACK_IMPORTED_MODULE_14__["muxToCss"])(this._.tweenRefMaps[target], this._.tweenRefCSS[target], this._.muxByTarget[target], this._.muxDataByTarget[target], this._.box);
         node = this.getTweenableRef(target);
         node && Object.assign(node.style, this._.tweenRefCSS[target]);
         return this._.tweenRefCSS[target];
@@ -1824,8 +1821,8 @@ function asTweener() {
         if (this._.scrollEnabled) {
           this._.scrollEnabled = false; //this._.axes          = undefined;
 
-          node && this._.onScroll && !this._parentTweener && _utils__WEBPACK_IMPORTED_MODULE_11__["default"].rmWheelEvent(node, this._.onScroll);
-          node && this._.dragList && _utils__WEBPACK_IMPORTED_MODULE_11__["default"].removeEvent(node, this._.dragList);
+          node && this._.onScroll && !this._parentTweener && _utils__WEBPACK_IMPORTED_MODULE_17__["default"].rmWheelEvent(node, this._.onScroll);
+          node && this._.dragList && _utils__WEBPACK_IMPORTED_MODULE_17__["default"].removeEvent(node, this._.dragList);
         }
 
         _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(TweenableComp.prototype), "componentWillUnmount", this) && _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(TweenableComp.prototype), "componentWillUnmount", this).apply(this, arguments);
@@ -1893,9 +1890,9 @@ function asTweener() {
       value: function render() {
         var _this15 = this;
 
-        return react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_TweenerContext__WEBPACK_IMPORTED_MODULE_13__["default"].Consumer, null, function (parentTweener) {
+        return react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(_TweenerContext__WEBPACK_IMPORTED_MODULE_16__["default"].Consumer, null, function (parentTweener) {
           _this15._parentTweener = parentTweener;
-          return react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_TweenerContext__WEBPACK_IMPORTED_MODULE_13__["default"].Provider, {
+          return react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(_TweenerContext__WEBPACK_IMPORTED_MODULE_16__["default"].Provider, {
             value: _this15
           }, _babel_runtime_helpers_get__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(TweenableComp.prototype), "render", _this15).call(_this15));
         });
@@ -2772,8 +2769,10 @@ function expandShorthandProperty(property, value) {
   var type = props[property],
       childProps = type && type.properties,
       values = value.split(' ');
-  childProps && childProps.forEach(function (k, i) {
+  if (type.multiple) childProps && childProps.forEach(function (k, i) {
     target[k] = values[i % values.length];
+  });else childProps && childProps.forEach(function (k, i) {
+    if (values[i]) target[k] = values[i];
   });
   return target;
 }
@@ -3406,9 +3405,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var floatCut = function floatCut(v, l) {
-  var p = Math.pow(10, l);
-  return Math.round(v * p) / p;
+var floatCut = function floatCut() {
+  var v = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+  return v.toFixed(3);
 },
     alias = {
   top: '0%',
@@ -3420,10 +3419,12 @@ var floatCut = function floatCut(v, l) {
 
 function demux(key, tweenable, target, data, box, offset) {
   var count = data[key],
-      v = '';
+      v = '',
+      nowhere = {};
 
   for (var i = 0; i < count; i++) {
-    v += (data[key + '_' + i] ? floatCut(tweenable[key + '_' + i], 2) + data[key + '_' + i] : floatCut(tweenable[key + '_' + i], 2)) + ' ';
+    _number__WEBPACK_IMPORTED_MODULE_1__["default"].demux(key + '_' + i, tweenable, nowhere, data, box, offset);
+    v += nowhere[key + '_' + i] + ' ';
   }
 
   target[key] = v;
@@ -3476,10 +3477,11 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-var unitsRe = new RegExp("([+-]?(?:[0-9]*[.])?[0-9]+)\\s*(" + ['box', 'em', 'ex', '%', 'px', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'rem', 'vh', 'vw', 'vmin', 'vmax'].join('|') + ")"),
-    floatCut = function floatCut(v, l) {
-  var p = Math.pow(10, l);
-  return Math.round(v * p) / p;
+var units = ['box', 'em', 'ex', '%', 'px', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'rem', 'vh', 'vw', 'vmin', 'vmax'],
+    unitsRe = new RegExp("([+-]?(?:[0-9]*[.])?[0-9]+)\\s*(" + units.join('|') + ")"),
+    floatCut = function floatCut() {
+  var v = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+  return v.toFixed(3);
 },
     defaultUnits = {
   left: 'px',
@@ -3496,67 +3498,66 @@ var unitsRe = new RegExp("([+-]?(?:[0-9]*[.])?[0-9]+)\\s*(" + ['box', 'em', 'ex'
   bottom: 'y',
   width: 'x',
   height: 'y'
+},
+    defaultValue = {
+  opacity: 1
 };
 
 function demuxOne(key, twVal, baseKey, data, box) {
   var value = twVal,
-      unit = data[key] || defaultUnits[baseKey];
+      unit = data[baseKey][key] || defaultUnits[baseKey];
 
   if (unit === 'box') {
-    value = floatCut(value * (box[defaultBox[baseKey]] || box.x), 3);
+    value = value * (box[defaultBox[baseKey]] || box.x);
     unit = 'px';
-  }
+  } //if ( Math.abs(value) < .0001 && value !== 0 )
 
-  return unit ? value + unit : floatCut(value, 3);
+
+  return unit ? floatCut(value) + unit : floatCut(value);
 }
 
 function demux(key, tweenable, target, data, box) {
-  var value;
-  value = demuxOne(key + "_" + 0, tweenable[key + "_" + 0], key, data, box);
+  var value,
+      i = 0;
+  value = "";
 
-  if (data[key] && data[key].length > 1) {
-    for (var i = 1; i < data[key].length; i++) {
-      if (tweenable[key + "_" + i] < 0) value += " - " + demuxOne(key + "_" + i, -tweenable[key + "_" + i], key, data, box);else value += " + " + demuxOne(key + "_" + i, tweenable[key + "_" + i], key, data, box);
+  for (var rKey in data[key]) {
+    if (data[key].hasOwnProperty(rKey)) {
+      if (tweenable[rKey] < 0) value += (i ? " - " : "-") + demuxOne(rKey, -tweenable[rKey], key, data, box);else value += (i ? " + " : "") + demuxOne(rKey, tweenable[rKey], key, data, box);
+      i++;
     }
-
-    value = "calc(" + value + ")";
   }
 
+  if (i > 1) value = "calc(" + value + ")";
   target[key] = value;
 }
 
 function muxer(key, value, target, data, initials, forceUnits) {
-  data[key] = data[key] || [];
+  data[key] = data[key] || {};
 
   if (is__WEBPACK_IMPORTED_MODULE_0___default.a.array(value)) {
     for (var i = 0; i < value.length; i++) {
-      data[key][i] = true;
-      if (value[i] === "-100%" && key === "height") debugger;
-      muxOne(key + "_" + i, value[i] || 0, target, key, data, initials, forceUnits);
+      muxOne(key, value[i] || 0, target, data, initials, forceUnits);
     }
   } else {
-    data[key][0] = true;
-    muxOne(key + "_" + 0, value || 0, target, key, data, initials, forceUnits);
+    muxOne(key, value || 0, target, data, initials, forceUnits);
   }
 
   return demux;
 }
 
-function muxOne(key, value, target, baseKey, data, initials, forceUnits) {
-  var match = is__WEBPACK_IMPORTED_MODULE_0___default.a.string(value) ? value.match(unitsRe) : false;
-  initials[key] = 0;
+function muxOne(key, value, target, data, initials, forceUnits) {
+  var match = is__WEBPACK_IMPORTED_MODULE_0___default.a.string(value) ? value.match(unitsRe) : false,
+      unit = match && match[2] || defaultUnits[key],
+      unitKey = units.indexOf(unit),
+      realKey = unitKey !== -1 && key + '_' + unitKey || key;
+  initials[realKey] = defaultValue[key] || 0;
+  data[key][realKey] = unit;
 
   if (match) {
-    if (!forceUnits && data[key] && data[key] !== match[2]) {
-      console.warn("Have != units on prop ! Ignore ", key, "present:" + data[key], "new:" + match[2]);
-      target[key] = 0;
-    } else {
-      data[key] = match[2];
-      target[key] = parseFloat(match[1]);
-    }
+    target[realKey] = parseFloat(match[1]);
   } else {
-    target[key] = parseFloat(value); //if ( !data[key] && baseKey in defaultUnits )
-    //	data[key] = defaultUnits[baseKey];
+    target[realKey] = parseFloat(value);
   }
 
   return demux;
@@ -3657,7 +3658,7 @@ function deMuxTween(tween, deMuxedTween, initials, data, demuxers, forceUnits, r
     if (cssDemux[key]) {
       //key, value, target, data, initials
       demuxers[key] = cssDemux[key](key, fTween[key], deMuxedTween, data, initials, forceUnits, reOrder);
-    } else demuxers[key] = cssDemux.$all(key, fTween[key], deMuxedTween, data, initials, forceUnits, reOrder);
+    } else demuxers[key] = Object(_demux_typed_js__WEBPACK_IMPORTED_MODULE_3__["number"])(key, fTween[key], deMuxedTween, data, initials, forceUnits, reOrder);
   });
   return excluded;
 }
@@ -4780,17 +4781,6 @@ module.exports = require("@babel/runtime/helpers/inherits");
 
 /***/ }),
 
-/***/ "undefined?929e":
-/*!*************************!*\
-  !*** external "rtween" ***!
-  \*************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("rtween");
-
-/***/ }),
-
 /***/ "undefined?a742":
 /*!*****************************!*\
   !*** external "color-rgba" ***!
@@ -4799,6 +4789,17 @@ module.exports = require("rtween");
 /***/ (function(module, exports) {
 
 module.exports = require("color-rgba");
+
+/***/ }),
+
+/***/ "undefined?a9ee":
+/*!*****************************!*\
+  !*** external "tween-axis" ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("tween-axis");
 
 /***/ }),
 

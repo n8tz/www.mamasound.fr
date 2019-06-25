@@ -1,0 +1,41 @@
+{
+  "name": "tween-axis",
+  "version": "1.2.4",
+  "license": "AGPL-3.0",
+  "author": "Nathan Braun <n8tz.js@gmail.com>",
+  "description": "Abstract, fast & reversible, tween composition engine",
+  "repository": "https://github.com/n8tz/rTween",
+  "main": "dist/tween-axis.js",
+  "scripts": {
+    "build": "wpi"
+  },
+  "wpInherit": {
+    "default": {
+      "rootFolder": "src",
+      "basedOn": "Component",
+      "vars": {
+        "rootAlias": "tween-axis",
+        "production": true,
+        "externals": true,
+        "webpackPatch": {
+          "optimization": {
+            "usedExports": true
+          }
+        }
+      },
+      "extend": [
+        "wpi-react-hmr-ssr"
+      ]
+    }
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.3.1",
+    "d3-ease": "^1.0.5",
+    "is": "^3.2.1",
+    "point-at-length": "^1.0.1"
+  },
+  "devDependencies": {
+    "wpi-react-hmr-ssr": "^1.1.6",
+    "webpack-inherit": "^1.4.10"
+  }
+}

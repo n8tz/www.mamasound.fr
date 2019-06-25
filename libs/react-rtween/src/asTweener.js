@@ -15,15 +15,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React                             from "react";
-import is                                from "is";
-import utils                             from "./utils";
-import Inertia, {applyInertia}           from './helpers/Inertia';
-import TweenerContext                    from "./TweenerContext";
-import rTween                            from "rtween";
 import * as easingFn                     from "d3-ease";
+import is                                from "is";
+import React                             from "react";
 import ReactDom                          from "react-dom";
-import {deMuxTween, muxToCss, deMuxLine} from "./helpers/css";
+import rTween                            from "tween-axis";
+import {deMuxLine, deMuxTween, muxToCss} from "./helpers/css";
+import Inertia                           from './helpers/Inertia';
+import TweenerContext                    from "./TweenerContext";
+import utils                             from "./utils";
 
 /**
  * @todo : clean & comments
@@ -93,8 +93,8 @@ export default function asTweener( ...argz ) {
 	
 	opts = {
 		wheelRatio    : 5,
-		maxClickTm    : 300,
-		maxClickOffset: 10,
+		maxClickTm    : 200,
+		maxClickOffset: 100,
 		...opts,
 		
 	};
@@ -171,10 +171,13 @@ export default function asTweener( ...argz ) {
 					Object.assign(_.tweenRefCSS[id], _.tweenRefOriginCss[id]);
 				}
 				else {
-					_.muxByTarget[id]     = {};
-					_.muxDataByTarget[id] = {};
-					//delete _.muxDataByTarget[id].transform_head;
-					iStyle                = { ...iStyle, ...deMuxTween(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true, true) };
+					_.muxByTarget[id] = {};
+					
+					// should reset only a part of.. complex
+					//_.muxDataByTarget[id] = {};
+					
+					
+					iStyle = { ...iStyle, ...deMuxTween(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], true, true) };
 					// minus initial values
 					Object.keys(_.tweenRefOrigin[id])
 					      .forEach(
@@ -729,8 +732,11 @@ export default function asTweener( ...argz ) {
 									{
 										e.preventDefault();
 										e.stopPropagation();
-										console.log(':o ' + (lastStartTm - Date.now()) + ' ' + dX + ' ' + dY)
+										//console.log("prevented click", Math.abs(dX), Math.abs(dY))
+										//console.log(':o ' + (lastStartTm - Date.now()) + ' ' + dX + ' ' + dY)
 									}
+									//else console.log("click", Math.abs(dX), Math.abs(dY))
+									
 								},
 								'drag'     : ( e, touch, descr ) => {//@todo
 									let tweener,
@@ -752,14 +758,14 @@ export default function asTweener( ...argz ) {
 										yDispatched = !dY;
 										if ( opts.dragDirectionLock ) {
 											if ( cLock === "Y" || !cLock && Math.abs(dY * .5) > Math.abs(dX) ) {
-												cLock       = "Y";
-												dX          = 0;
-												xDispatched = true;
+												cLock = "Y";
+												dX    = 0;
+												//xDispatched = true;
 											}
 											else if ( cLock === "X" || !cLock && Math.abs(dX * .5) > Math.abs(dY) ) {
-												cLock       = "X";
-												dY          = 0;
-												yDispatched = true;
+												cLock = "X";
+												dY    = 0;
+												//yDispatched = true;
 											}
 										}
 										//console.log("drag", dX, dY, cLock, opts.dragDirectionLock);
@@ -862,7 +868,6 @@ export default function asTweener( ...argz ) {
 									//lastStartTm                     = undefined;
 									//document.body.style.userSelect  = '';
 									//document.body.style.touchAction = '';
-									lastStartTm = 0;
 									for ( i = 0; i < parents.length; i++ ) {
 										tweener = parents[i];
 										// react comp with tweener support
@@ -879,9 +884,21 @@ export default function asTweener( ...argz ) {
 										//}
 										
 									}
-									//if ( lastStartTm && ((lastStartTm > Date.now() - opts.maxClickTm) && Math.abs(dY)
-									// < opts.maxClickOffset && Math.abs(dX) < opts.maxClickOffset) )// skip tap &
-									// click { return; }
+									if ( lastStartTm && ((lastStartTm > Date.now() - opts.maxClickTm) && Math.abs(dY)
+										< opts.maxClickOffset && Math.abs(dX) < opts.maxClickOffset) )// skip tap
+									                                                                  // &
+									                                                                  // click
+									{
+										
+										e.stopPropagation();
+										e.preventDefault();
+										//console.log("prevented", Math.abs(dX), Math.abs(dY))
+										return;
+									}
+									else {
+										//console.log("not prevented", Math.abs(dX), Math.abs(dY))
+									}
+									//lastStartTm = 0;
 									parents = parentsState = null;
 								}
 							},

@@ -1,5 +1,4 @@
 /*
- * www.mamasound.fr
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -30,7 +29,7 @@ export const page              = {
 };
 export const header            = {
 	position : "absolute",
-	height   : ["100%", -sliderHeight],
+	height   : ["100%", "0px", "-" + sliderHeight],
 	top      : "0%",
 	zIndex   : 200,
 	transform: [
@@ -50,7 +49,7 @@ export const Highlighter       = {
 	right          : "0%",
 	//bottom         : "0%",
 	top            : "0%",
-	height         : ["100%", "0px"],
+	height         : ["100%", "0px", "0vh"],
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
 	zIndex         : 175,
@@ -120,7 +119,7 @@ export const events            = {
 	position       : "absolute",
 	right          : "0%",
 	bottom         : "0%",
-	top            : ["100%", 0],
+	top            : "100%",
 	zIndex         : 150,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
@@ -183,7 +182,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: ["-100%", +sliderHeight + headerMiniHeight],
+			height: ["-100%", headerMiniHeight + "px", sliderHeight],
 		}
 	},
 	{
@@ -191,7 +190,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: [, -eventsMiniHeight]
+			height: "-150px"
 		}
 	},
 	{
@@ -199,7 +198,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			top: [, -eventsMiniHeight]
+			top: -eventsMiniHeight
 		}
 	},
 	//// highlighter to events
@@ -208,7 +207,7 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			height: ["-100%", 2* sliderHeight ],
+			height: ["-100%", 200, sliderHeight],
 		}
 	},
 	{
@@ -217,7 +216,7 @@ export const YAxis             = [
 		duration: 100,
 		apply   : {
 			bottom: "20%",
-			top   : ["-100%", eventsMiniHeight + sliderHeight + headerMiniHeight]
+			top   : ["-100%", (eventsMiniHeight + headerMiniHeight) + "px", sliderHeight]
 		}
 	},
 	{
@@ -226,8 +225,8 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			height: 20,
-			top   : -20
+			height: "20%",
+			top   : "-20%"
 		}
 	},
 	//// events to map
@@ -244,238 +243,8 @@ export const YAxis             = [
 		from    : 200,
 		duration: 100,
 		apply   : {
-			height: 20,
-			top   : -20
+			height: "20%",
+			top   : "-20%"
 		}
 	},
-	//...tweenTools.offset(
-	//	[
-	//		{
-	//			type    : "Tween",
-	//			target  : "header",
-	//			from    : 0,
-	//			duration: 100,
-	//			apply   : {
-	//				height: -1,
-	//			}
-	//		},
-	//		{
-	//			type    : "Tween",
-	//			target  : "events",
-	//			from    : 0,
-	//			duration: 100,
-	//			apply   : {
-	//				height: "44%",
-	//				top   : "-60%"
-	//			}
-	//		},
-	//		{
-	//			type    : "Tween",
-	//			target  : "EventMap",
-	//			from    : 0,
-	//			duration: 100,
-	//			apply   : {
-	//				height: 21,
-	//				top   : -20
-	//			}
-	//		},
-	//		//full map
-	//		{
-	//			type    : "Tween",
-	//			target  : "events",
-	//			from    : 100,
-	//			duration: 50,
-	//			apply   : {
-	//				height: -25,
-	//			}
-	//		},
-	//		{
-	//			type    : "Tween",
-	//			target  : "EventMap",
-	//			from    : 100,
-	//			duration: 50,
-	//			apply   : {
-	//				height: 25,
-	//				top   : -25
-	//			}
-	//		},
-	//		//page
-	//		{
-	//			type    : "Tween",
-	//			target  : "PageBlock",
-	//			from    : 150,
-	//			duration: 100,
-	//			apply   : {
-	//				height: 60,
-	//				top   : -80
-	//			}
-	//		},
-	//		{
-	//			type    : "Tween",
-	//			target  : "events",
-	//			from    : 150,
-	//			duration: 100,
-	//			apply   : {
-	//				height: -30,
-	//				top   : -30
-	//			}
-	//		},
-	//		{
-	//			type    : "Tween",
-	//			target  : "events",
-	//			from    : 247,
-	//			duration: 1,
-	//			apply   : {
-	//				opacity: -1
-	//			}
-	//		},
-	//		{
-	//			type    : "Tween",
-	//			target  : "events",
-	//			from    : 248,
-	//			duration: 1,
-	//			apply   : {
-	//				zIndex: -100,
-	//				top   : 100
-	//			}
-	//		},
-	//		{
-	//			type    : "Tween",
-	//			target  : "events",
-	//			from    : 249,
-	//			duration: 1,
-	//			apply   : {
-	//				opacity: 1
-	//			}
-	//		},
-	//		{
-	//			type    : "Tween",
-	//			target  : "EventMap",
-	//			from    : 150,
-	//			duration: 100,
-	//			apply   : {
-	//				height: -26,
-	//				top   : -55
-	//			}
-	//		},
-	//		{
-	//			type    : "Tween",
-	//			target  : "Highlighter",
-	//			from    : 150,
-	//			duration: 50,
-	//			apply   : {
-	//				top: -20
-	//			}
-	//		},
-	//		{
-	//			type    : "Tween",
-	//			target  : "Highlighter",
-	//			from    : 199,
-	//			duration: 1,
-	//			apply   : {
-	//				opacity: -1
-	//			}
-	//		},
-	//		{
-	//			type    : "Tween",
-	//			target  : "Highlighter",
-	//			from    : 200,
-	//			duration: 1,
-	//			apply   : {
-	//				zIndex: -100,
-	//				top   : 120
-	//			}
-	//		},
-	//		{
-	//			type    : "Tween",
-	//			target  : "Highlighter",
-	//			from    : 201,
-	//			duration: 1,
-	//			apply   : {
-	//				opacity: 1
-	//			}
-	//		},
-	//		{
-	//			type    : "Tween",
-	//			target  : "Highlighter",
-	//			from    : 200,
-	//			duration: 50,
-	//			apply   : {
-	//				height: 2,
-	//				top   : -23
-	//			}
-	//		},
-	//
-	//		// reset to header
-	//
-	//		{
-	//			type    : "Tween",
-	//			target  : "PageBlock",
-	//			from    : 250,
-	//			duration: 100,
-	//			apply   : {
-	//				//height   : 80,
-	//				top: -80
-	//			}
-	//		},
-	//		{
-	//			type    : "Tween",
-	//			target  : "Highlighter",
-	//			from    : 250,
-	//			duration: 100,
-	//			apply   : {
-	//				height: 58,
-	//				top   : -77
-	//			}
-	//		},
-	//		{
-	//			type    : "Tween",
-	//			target  : "events",
-	//			from    : 250,
-	//			duration: 100,
-	//			apply   : {
-	//				height: 10,
-	//				top   : -10
-	//			}
-	//		},
-	//		{
-	//			type    : "Tween",
-	//			target  : "EventMap",
-	//			from    : 250,
-	//			duration: 50,
-	//			apply   : {
-	//				height: -1,
-	//				top   : -1
-	//			}
-	//		},
-	//		{
-	//			type    : "Tween",
-	//			target  : "EventMap",
-	//			from    : 300,
-	//			duration: 1,
-	//			apply   : {
-	//				zIndex: -100,
-	//				top   : 115
-	//			}
-	//		},
-	//		{
-	//			type    : "Tween",
-	//			target  : "EventMap",
-	//			from    : 300,
-	//			duration: 50,
-	//			apply   : {
-	//				top: -10
-	//			}
-	//		},
-	//		{
-	//			type    : "Tween",
-	//			target  : "header",
-	//			from    : 300,
-	//			duration: 50,
-	//			apply   : {
-	//				height: 1,
-	//			}
-	//		},
-	//	], 0
-	//)
 ];

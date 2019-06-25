@@ -86,7 +86,7 @@ export function deMuxTween( tween, deMuxedTween, initials, data, demuxers, force
 				      demuxers[key] = cssDemux[key](key, fTween[key], deMuxedTween, data, initials, forceUnits, reOrder)
 			      }
 			      else
-				      demuxers[key] = cssDemux.$all(key, fTween[key], deMuxedTween, data, initials, forceUnits, reOrder)
+				      demuxers[key] = number(key, fTween[key], deMuxedTween, data, initials, forceUnits, reOrder)
 		      }
 	      )
 	return excluded;
