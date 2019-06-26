@@ -13,6 +13,13 @@
           "material-ui": "@material-ui/core"
         }
       },
+      "babelPreset": {
+        "targets": {
+          "browsers": "> 0.25%, not dead, safari >= 7, ios_saf >= 7, chrome >= 52"
+        },
+        "loose": true,
+        "useBuiltIns": "entry"
+      },
       "webpackPatch": {
         "mode": "production"
       }
@@ -35,6 +42,13 @@
       "production": true,
       "DefinePluginCfg": {
         "__ADMIN__": true
+      },
+      "babelPreset": {
+        "targets": {
+          "browsers": "> 0.25%, not dead, safari >= 7, ios_saf >= 7, chrome >= 52"
+        },
+        "loose": true,
+        "useBuiltIns": "entry"
       },
       "resolve": {
         "alias": {
@@ -62,6 +76,13 @@
     "vars": {
       "DefinePluginCfg": {
         "__ADMIN__": true
+      },
+      "babelPreset": {
+        "targets": {
+          "browsers": "> 0.25%, not dead, safari >= 7, ios_saf >= 7, chrome >= 52"
+        },
+        "loose": true,
+        "useBuiltIns": "entry"
       },
       "webpackPatch": {
         "stats": "errors-only",
