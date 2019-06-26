@@ -13,6 +13,13 @@
           "material-ui": "@material-ui/core"
         }
       },
+      "babelInclude": "(ansi\\-regex|strip\\-ansi)",
+      "babelPreset": {
+        "targets": {
+          "browsers": "> 0.25%, not dead, safari >= 6, ios >= 6, chrome >= 52"
+        },
+        "loose": true
+      },
       "webpackPatch": {
         "mode": "production"
       }
@@ -33,8 +40,15 @@
       "targetDir": "dist.admin",
       "extractCss": true,
       "production": true,
+      "babelInclude": "(ansi\\-regex|strip\\-ansi|ckeditor)",
       "DefinePluginCfg": {
         "__ADMIN__": true
+      },
+      "babelPreset": {
+        "targets": {
+          "browsers": "> 0.25%, not dead, safari >= 6, ios >= 6, chrome >= 52"
+        },
+        "loose": true
       },
       "resolve": {
         "alias": {
@@ -62,6 +76,13 @@
     "vars": {
       "DefinePluginCfg": {
         "__ADMIN__": true
+      },
+      "babelInclude": "(ansi\\-regex|strip\\-ansi)",
+      "babelPreset": {
+        "targets": {
+          "browsers": "> 0.25%, not dead, safari >= 6, ios >= 6, chrome >= 52"
+        },
+        "loose": true
       },
       "webpackPatch": {
         "stats": "errors-only",

@@ -50,7 +50,7 @@ export default {
 							$and: [
 								{
 									price: {
-										'$gt': 10,
+										'$gt': 1,
 									}
 								},
 								{
@@ -75,7 +75,7 @@ export default {
 								}
 							]
 						},
-						limit    : 1000,
+						limit    : 15,
 						orderby  : { startTM: 1 }
 						
 					}

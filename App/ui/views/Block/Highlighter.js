@@ -15,17 +15,12 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import is                                            from "is";
-import PropTypes                                     from "prop-types";
-import React                                         from "react";
-import {reScope, scopeToProps, propsToScope, Store}  from "rscopes";
-import moment                                        from 'moment';
-import BackgroundVideo                               from "react-background-video-player";
-import anims                                         from 'App/ui/anims/(*).js';
-import {Comps, Views}                                from 'App/ui';
-import {withStateMap, asRef, asStore}                from "rescope-spells";
-import stores                                        from 'App/stores/(*).js';
-import {withTweener, asTweener, TweenRef, TweenAxis} from "react-rtween";
+import stores                         from 'App/stores/(*).js';
+import {Comps, Views}                 from 'App/ui';
+import React                          from "react";
+import {TweenRef, withTweener}        from "react-rtween";
+import {asRef, asStore, withStateMap} from "rescope-spells";
+import {reScope, scopeToProps}        from "rscopes";
 
 let Tetris = 'div';
 if ( typeof window !== "undefined" ) {
@@ -186,6 +181,7 @@ export default class Highlighter extends React.Component {
 					<div className={"slider"}>
 						<Comps.Slider
 							{...Anims.MainSlider}
+							infinite={true}
 							autoScroll={10 * 1000}
 							onClick={this.selectFocus}
 						>

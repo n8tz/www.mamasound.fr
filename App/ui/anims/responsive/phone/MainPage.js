@@ -106,14 +106,6 @@ export const Footer            = {
 		//translateY: "100%"
 	}
 };
-export const EventNav          = {
-	position: "absolute",
-	right   : "0%",
-	left    : "0px",
-	top     : "0%",
-	height  : "100%",
-	overflow: "auto"
-};
 export const events            = {
 	position       : "absolute",
 	right          : "0%",

@@ -24,11 +24,9 @@
  */
 'use strict';
 
-import React   from "react";
-import moment  from "moment";
-import {Comps} from "App/ui";
-
-import {NavLink} from "react-router-dom";
+import {Comps}  from "App/ui";
+import Editable from "App/ui/Editable";
+import React    from "react";
 
 
 export default (
@@ -42,6 +40,7 @@ export default (
 ) => {
 	//debugger;
 	return <div className={"Page FocusedItems_preview type_" + target._cls}>
+		<Editable id={record._id}/>
 		{
 			previewImage &&
 			<div className="preview">

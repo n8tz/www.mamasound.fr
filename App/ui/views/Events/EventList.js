@@ -15,27 +15,15 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import PropTypes             from "prop-types";
-import React                 from "react";
-import {
-	reScope, scopeToProps, propsToScope
-}                            from "rscopes";
-import {
-	withStateMap, asRef, asStore
-}                            from "rescope-spells";
-import anims                 from 'App/ui/anims/(*).js';
-import {Comps}               from 'App/ui';
-import Tabs                  from '@material-ui/core/Tabs';
-import Tab                   from '@material-ui/core/Tab';
-import moment                from "moment";
-import stores                from 'App/stores/(*).js';
-import {Views}               from 'App/ui';
-import {asTweener, TweenRef} from "react-rtween";
-
 import Fab            from '@material-ui/core/Fab';
-import GpsNoFixedIcon from '@material-ui/icons/GpsNotFixed';
 import GpsFixedIcon   from '@material-ui/icons/GpsFixed';
+import GpsNoFixedIcon from '@material-ui/icons/GpsNotFixed';
 import GpsOffIcon     from '@material-ui/icons/GpsOff';
+import {Comps, Views} from 'App/ui';
+import moment         from "moment";
+import React          from "react";
+import {TweenRef}     from "react-rtween";
+import {scopeToProps} from "rscopes";
 
 @scopeToProps("appState", "Anims", "UserGeoLocation")
 export default class EventList extends React.Component {
@@ -139,7 +127,7 @@ export default class EventList extends React.Component {
 	render() {
 		let {
 			    record                          : { position, size } = {},
-			    UserGeoLocation, appState, Anims: { MainPage }, activeScroll,
+			    UserGeoLocation, appState, Anims: { MainPage, EventCatSlider }, activeScroll,
 			    $actions, style
 		    }     = this.props,
 		    state = this.state;
@@ -149,36 +137,34 @@ export default class EventList extends React.Component {
 					<div className={"content container"}>
 						<TweenRef
 							id={"EventNav"}
-							initial={MainPage.EventNav}
 						>
-							<div
-								className={"EventNav"}
+							<Comps.Slider
+								{...EventCatSlider}
+								className={"EventNav "}
 							>
-								<div className={"dayList"}>
-									{
-										Array(1)
-											.fill(0)
-											.map(
-												( v, type ) =>
-													<div className={"dayItem"} key={type}>
-														{
-															Array(appState.dayCountByViewType[type])
-																.fill(0)
-																.map(
-																	( v, i ) =>
-																		<Views.Events.DayEvents
-																			className={"dayBlock"}
-																			key={i}
-																			day={moment(appState.curDay).add(i, 'day').unix() * 1000}
-																			viewType={type}/>
-																)
-														}
-														<div id={"endList_" + type}>loading...</div>
-													</div>
-											)
-									}
-								</div>
-							</div>
+								{
+									Array(4)
+										.fill(0)
+										.map(
+											( v, type ) =>
+												<div className={"dayList"} key={type}>
+													{
+														Array(appState.dayCountByViewType[type])
+															.fill(0)
+															.map(
+																( v, i ) =>
+																	<Views.Events.DayEvents
+																		className={"dayBlock"}
+																		key={i}
+																		day={moment(appState.curDay).add(i, 'day').unix() * 1000}
+																		viewType={type}/>
+															)
+													}
+													<div id={"endList_" + type}>loading...</div>
+												</div>
+										)
+								}
+							</Comps.Slider>
 						</TweenRef>
 						<TweenRef
 							id={"NavBox"}

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+import "regenerator-runtime/runtime";
 import React                                      from 'react';
 import moment                                     from 'moment';
 import Pages                                      from "App/ui/pages/(*).js";
@@ -36,7 +36,6 @@ React.createElement = function ( type, ...argz ) {
 	return hookedRCE.apply(this, arguments);
 }
 moment.locale('fr');
-
 @scopeToProps("widgets", "appState", "FacebookPage")
 export default class App extends React.Component {
 	state = {};
@@ -44,7 +43,6 @@ export default class App extends React.Component {
 	render() {
 		let Router                                          = BrowserRouter;
 		let { widgets = { items: [] }, appState, $actions } = this.props;
-		
 		if ( this.props.location )
 			Router = StaticRouter;
 		return <Router location={this.props.location}>
@@ -72,7 +70,6 @@ export default class App extends React.Component {
 					}
 				)
 				}
-				
 				<Route path="/" exact component={Pages.Home}/>
 				{/*<Route path="/" exact component={Pages.Admin}/>*/}
 			</React.Fragment>
