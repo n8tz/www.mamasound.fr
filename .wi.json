@@ -17,8 +17,7 @@
         "targets": {
           "browsers": "> 0.25%, not dead, safari >= 7, ios_saf >= 7, chrome >= 52"
         },
-        "loose": true,
-        "useBuiltIns": "entry"
+        "loose": true
       },
       "webpackPatch": {
         "mode": "production"
@@ -47,8 +46,7 @@
         "targets": {
           "browsers": "> 0.25%, not dead, safari >= 7, ios_saf >= 7, chrome >= 52"
         },
-        "loose": true,
-        "useBuiltIns": "entry"
+        "loose": true
       },
       "resolve": {
         "alias": {
@@ -81,8 +79,7 @@
         "targets": {
           "browsers": "> 0.25%, not dead, safari >= 7, ios_saf >= 7, chrome >= 52"
         },
-        "loose": true,
-        "useBuiltIns": "entry"
+        "loose": true
       },
       "webpackPatch": {
         "stats": "errors-only",

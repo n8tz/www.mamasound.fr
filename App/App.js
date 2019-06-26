@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 import "core-js";
+import "core-js/features/object/from-entries";
 import "regenerator-runtime/runtime";
 import React                                      from 'react';
 import moment                                     from 'moment';

@@ -35,7 +35,7 @@
     "compression": "^1.7.4",
     "concurrently": "^4.1.0",
     "connect-redis": "^3.4.1",
-    "core-js": "^2.5.7",
+    "core-js": "^3.1.4",
     "d3-ease": "^1.0.5",
     "debounce": "^1.2.0",
     "debug-logger": "^0.4.1",
@@ -113,7 +113,7 @@
   },
   "devDependencies": {
     "webpack-inherit": "^1.5.10",
-    "wpi-react-hmr-ssr": "^1.1.17",
+    "wpi-react-hmr-ssr": "^1.2.0",
     "wpi-react-rs-sass-ssr": "^1.0.5"
   }
 }
