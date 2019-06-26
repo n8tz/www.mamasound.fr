@@ -13,7 +13,7 @@
           "material-ui": "@material-ui/core"
         }
       },
-      "babelInclude": "ansi\\-regex",
+      "babelInclude": "(ansi\\-regex|strip\\-ansi)",
       "babelPreset": {
         "targets": {
           "browsers": "> 0.25%, not dead, safari >= 6, ios >= 6, chrome >= 52"
@@ -40,6 +40,7 @@
       "targetDir": "dist.admin",
       "extractCss": true,
       "production": true,
+      "babelInclude": "(ansi\\-regex|strip\\-ansi|ckeditor)",
       "DefinePluginCfg": {
         "__ADMIN__": true
       },
