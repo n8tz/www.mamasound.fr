@@ -113,7 +113,7 @@
   },
   "devDependencies": {
     "webpack-inherit": "^1.5.10",
-    "wpi-react-hmr-ssr": "^1.2.0",
+    "wpi-react-hmr-ssr": "^1.2.1",
     "wpi-react-rs-sass-ssr": "^1.0.5"
   }
 }
