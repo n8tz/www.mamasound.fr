@@ -79,8 +79,8 @@
 }
 
 @mixin withTranspaMask() {
-  mask: url("../assets/medias/transpaMask.svg"); /* Élément d'un SVG utilisé comme masque répété horizontalement */
-  mask-size: contain;
+  mask: url("../assets/medias/transpaMask.svg") bottom right; /* Élément d'un SVG utilisé comme masque répété horizontalement */
+  mask-size: 100% auto;
 }
 
 @mixin withMask() {

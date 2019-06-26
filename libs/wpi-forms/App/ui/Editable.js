@@ -16,29 +16,36 @@
  */
 
 'use strict';
-import React, {Component}                           from "react";
-import ReactDOM                                     from 'react-dom'
-import {ContextMenu}                                from "react-inheritable-contextmenu";
-import {reScope, Store, scopeToProps, propsToScope} from "rscopes";
+import React, {Component} from "react";
+import {ContextMenu}      from "react-inheritable-contextmenu";
+import {scopeToProps}     from "rscopes";
 
 
-@scopeToProps("DataProvider")
+@scopeToProps("DataProvider", "CurrentUser")
 export default class Editable extends Component {
 	
 	static defaultProps = {}
 	
+	doEdit = ( e ) => {
+		let { $actions, id, DataProvider, CurrentUser } = this.props;
+		if ( CurrentUser && CurrentUser.isAdmin )
+			$actions.newWidget("RecordEditor", {
+				record: {
+					id,
+					etty: DataProvider[id] && DataProvider[id]._cls
+				}
+			})
+		else
+			alert('Sorry, you must be logged to use editors');
+	}
+	
 	render() {
-		let { $actions, id, DataProvider } = this.props;
+		let { $actions, id, DataProvider, CurrentUser } = this.props;
 		return (
 			<ContextMenu>
-				<div className={ "record_edit_menu" }
-				     onClick={ e => $actions.newWidget("RecordEditor", {
-					     record: {
-						     id,
-						     etty: DataProvider[id]&&DataProvider[id]._cls
-					     }
-				     }) }>
-					Edit "{ DataProvider[id] && DataProvider[id]._alias || id }"
+				<div className={"record_edit_menu"}
+				     onClick={this.doEdit}>
+					Edit "{DataProvider[id] && DataProvider[id]._alias || id}"
 				</div>
 			</ContextMenu>
 		);

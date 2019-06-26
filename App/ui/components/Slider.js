@@ -15,15 +15,17 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import React                                        from "react";
-import {asTweener, TweenRef, TweenAxis, tweenTools} from "react-rtween";
 import is                                           from "is";
+import React                                        from "react";
+import {asTweener, TweenAxis, TweenRef, tweenTools} from "react-rtween";
 
 @asTweener({ enableMouseDrag: true })
 export default class Slider extends React.Component {
 	static defaultProps = {
 		defaultIndex   : 0,
 		visibleItems   : 4,
+		maxJump        : undefined,
+		infinite       : false,
 		//overlaps       : 1 / 6,
 		defaultInitial : {},
 		defaultEntering: [],
@@ -89,17 +91,19 @@ export default class Slider extends React.Component {
 	static getDerivedStateFromProps( props, state ) {
 		let {
 			    defaultIndex = 0,
-			    visibleItems = 5,
-			    overlaps     = 1 / (visibleItems - (visibleItems % 2)),
+			    visibleItems,
+			    overlaps     = 1 / ((visibleItems - (visibleItems % 2)) || 1),
 			    children: _childs,
-			    defaultEntering, defaultLeaving, scrollY
+			    defaultEntering, defaultLeaving, scrollY, infinite
 		    }                        = props,
 		    children                 = is.array(_childs) ? _childs : [],
 		    { index = defaultIndex } = state,
-		    allItems                 = [...children, ...children, ...children].map(( elem, i ) => React.cloneElement(elem, { key: i })),
+		    allItems                 = !infinite
+		                               ? [...children]
+		                               : [...children, ...children, ...children].map(( elem, i ) => React.cloneElement(elem, { key: i })),
 		    nbGhostItems             = allItems.length,
 		    step                     = 100 * overlaps,
-		    dec                      = children.length * step;
+		    dec                      = infinite ? children.length * step : 0;
 		
 		return {
 			allItems,
@@ -126,19 +130,25 @@ export default class Slider extends React.Component {
 		let {
 			    defaultIndex = 0,
 			    defaultInitial,
-			    onClick
+			    style        = {},
+			    onClick,
+			    infinite,
+			    maxJump,
+			    visibleItems,
+			    className    = ""
 		    }                                                                                = this.props,
 		    { index = defaultIndex, allItems, nbGhostItems, step, dec, tweenLines, nbItems } = this.state;
 		
 		//console.log("render slider", nbItems, 100 + dec + index * step)
 		return (
 			<div
-				className={"rSlide slider"}
+				className={"rSlide slider " + className}
 				style={
 					{
-						width     : "100%",
-						height    : "100%",
-						userSelect: "none"
+						//width     : "100%",
+						//height    : "100%",
+						userSelect: "none",
+						...style
 					}
 				}
 			>
@@ -146,18 +156,18 @@ export default class Slider extends React.Component {
 					axe={"scrollX"}
 					defaultPosition={100 + dec + index * step}
 					size={nbGhostItems * step + 100}
-					scrollableWindow={4 * step}
+					scrollableWindow={visibleItems * step}
 					inertia={
 						{
-							//maxJump   : 1,
-							shouldLoop: ( v ) => {
+							maxJump,
+							shouldLoop: infinite && (( v ) => {
 								let { windowSize } = this.state;
 								if ( v > (100 + windowSize * 2) )
 									return -windowSize;
 								
 								if ( v < (100 + windowSize) )
 									return windowSize;
-							},
+							}),
 							willSnap  : ( i, v ) => {
 								let { nbItems }   = this.state;
 								this._wasUserSnap = true;

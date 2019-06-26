@@ -17,6 +17,7 @@
  */
 
 let stepAngle = "1.8deg";
+//export const visibleItems    = 3;
 
 export const defaultInitial  = {
 	position : "absolute",
@@ -49,7 +50,7 @@ export const defaultEntering = [
 		type    : "Tween",
 		from    : 0,
 		duration: 100,
-		//easeFn  : "easePolyIn",
+		easeFn  : "easePolyIn",
 		apply   : {
 			transform: {
 				//translateX: "-1.25box",
@@ -102,7 +103,7 @@ export const defaultLeaving  = [
 		type    : "Tween",
 		from    : 0,
 		duration: 100,
-		//easeFn  : "easePolyOut",
+		easeFn  : "easePolyOut",
 		apply   : {
 			zIndex: -150,
 			

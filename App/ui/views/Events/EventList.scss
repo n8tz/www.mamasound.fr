@@ -48,7 +48,7 @@
   }
 
   .EventNav {
-    @include withScrollBar();
+    overflow: hidden;
   }
 
   .noScrollOverlay {
@@ -99,10 +99,16 @@
   }
 
   .dayList {
-
+    @include withScrollBar();
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     transform: translate3d(0, 0, 0);
+    //background: white;
     //position: absolute;
     padding-top: 10px;
+    width: 100%;
+    height: 100%;
     //left: 0px;
     //bottom: 0px;
     //right: 0%;

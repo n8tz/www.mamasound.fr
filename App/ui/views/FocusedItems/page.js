@@ -24,38 +24,10 @@
  */
 'use strict';
 
+import Editable   from "App/ui/Editable";
 import React      from "react";
 import {TweenRef} from "react-rtween";
 
-const tweenLine = {
-	"scrollX": [
-		{
-			
-			from    : 0,
-			duration: 100,
-			easeFn  : "easeSinIn",
-			apply   : {
-				//opacity  : 1,
-				transform: [{}, {
-					//translateZ: "50px",
-					translateY: "40vh",
-				}]
-			}
-		},
-		{
-			
-			from    : 100,
-			duration: 100,
-			easeFn  : "easeSinOut",
-			apply   : {
-				//opacity  : -1,
-				transform: [{}, {
-					translateY: "40vh",
-				}]
-			}
-		}
-	]
-};
 export default class page extends React.Component {
 	state = {
 		big: false
@@ -73,6 +45,7 @@ export default class page extends React.Component {
 		    } = this.state;
 		//debugger;
 		return <div className={"Page FocusedItems_page type_" + target._cls + " " + (big ? " bigView" : "smallView")}>
+			<Editable id={record._id}/>
 			<div className="title">
 				{target && (target.title || target.label)}
 			</div>
@@ -159,10 +132,8 @@ export default class page extends React.Component {
 						"position": "absolute",
 						top       : "50%",
 						left      : "30%",
-						//opacity        : 0,
 						width     : "4px",
 						bottom    : "0%",
-						//backgroundColor: "black",
 						transform : [{}, {
 							translateY: (isNext || isCurrent) && "-40vh" || "0vh",
 						}]
