@@ -13,9 +13,10 @@
           "material-ui": "@material-ui/core"
         }
       },
+      "babelInclude": "ansi\\-regex",
       "babelPreset": {
         "targets": {
-          "browsers": "> 0.25%, not dead, safari >= 7, ios_saf >= 7, chrome >= 52"
+          "browsers": "> 0.25%, not dead, safari >= 6, ios >= 6, chrome >= 52"
         },
         "loose": true
       },
@@ -44,7 +45,7 @@
       },
       "babelPreset": {
         "targets": {
-          "browsers": "> 0.25%, not dead, safari >= 7, ios_saf >= 7, chrome >= 52"
+          "browsers": "> 0.25%, not dead, safari >= 6, ios >= 6, chrome >= 52"
         },
         "loose": true
       },
@@ -75,9 +76,10 @@
       "DefinePluginCfg": {
         "__ADMIN__": true
       },
+      "babelInclude": "(ansi\\-regex|strip\\-ansi)",
       "babelPreset": {
         "targets": {
-          "browsers": "> 0.25%, not dead, safari >= 7, ios_saf >= 7, chrome >= 52"
+          "browsers": "> 0.25%, not dead, safari >= 6, ios >= 6, chrome >= 52"
         },
         "loose": true
       },

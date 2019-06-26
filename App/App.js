@@ -15,8 +15,6 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import "core-js";
-import "core-js/features/object/from-entries";
 import "regenerator-runtime/runtime";
 import React                                      from 'react';
 import moment                                     from 'moment';
@@ -72,7 +70,6 @@ export default class App extends React.Component {
 					}
 				)
 				}
-				
 				<Route path="/" exact component={Pages.Home}/>
 				{/*<Route path="/" exact component={Pages.Admin}/>*/}
 			</React.Fragment>
