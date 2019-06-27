@@ -29180,11 +29180,15 @@ function (_React$Component) {
         _this$props$onDoubleC = _this$props.onDoubleClick,
         onDoubleClick = _this$props$onDoubleC === void 0 ? children && children.props && children.props.onDoubleClick : _this$props$onDoubleC,
         target = this._currentTweener.getTweenableRef(id); //debugger
-    //let props  = [...target.style];
-    //console.log(props)
-    //props.forEach(p => (target.style[p] = 'unset'));
-    //this._currentTweener._updateTweenRef()
-    //console.log({ ...this._currentTweener.getTweenableRef(id).style }, this._currentTweener)
+
+
+    var props = [].concat(target.style); //console.log(props)
+
+    props.forEach(function (p) {
+      return target.style[p] = null;
+    });
+
+    this._currentTweener._updateTweenRef(); //console.log({ ...this._currentTweener.getTweenableRef(id).style }, this._currentTweener)
 
   };
 
