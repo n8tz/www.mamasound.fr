@@ -15,8 +15,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-let baseDomain = "mamasound.wiseways.me"
-//let baseDomain = "mamasound.localhost"
+//let baseDomain = "mamasound.wiseways.me"
+let baseDomain = "mamasound.localhost"
 export default {
 	STATIC_URL      : "static.mamasound.fr",
 	PUBLIC_URL      : "mamasound.fr",
