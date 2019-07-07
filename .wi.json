@@ -77,7 +77,7 @@
       "DefinePluginCfg": {
         "__ADMIN__": true
       },
-      "babelInclude": "(ansi\\-regex|strip\\-ansi|ckeditor)",
+      "babelInclude": "(ansi\\-regex|strip\\-ansi)",
       "babelPreset": {
         "targets": {
           "browsers": "> 0.25%, not dead, safari >= 6, ios >= 6, chrome >= 52"
