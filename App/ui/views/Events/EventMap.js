@@ -20,7 +20,7 @@ import React                                 from "react";
 import {reScope, scopeToProps, propsToScope} from "rscopes";
 import {withStateMap, asRef, asStore}        from "rescope-spells";
 import scopes                                from 'App/scopes/(*).js';
-import {asTweener, TweenRef}                 from "react-rtween";
+import {asTweener, TweenRef}                 from "react-voodoo";
 import {Views}                               from 'App/ui';
 
 let isBrowser = false;

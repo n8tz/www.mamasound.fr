@@ -1,5 +1,5 @@
 /*!
- * react-rtween
+ * react-voodoo
  * Copyright (C) 2019  Nathanael Braun
  * 
  * This program is free software: you can redistribute it and/or modify
@@ -98,7 +98,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/samples.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -900,169 +900,6 @@ module.exports = {
 	channel: ['red', 'green', 'blue'],
 	alias: ['RGB']
 };
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./src/samples/SimpleHeaderTest/samples.scss":
-/*!**************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./node_modules/sass-loader/lib/loader.js??ref--6-3!./src/samples/SimpleHeaderTest/samples.scss ***!
-  \**************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "/*!\n * Copyright (C) 2019 Nathanael Braun\n *\n * This program is free software: you can redistribute it and/or modify\n * it under the terms of the GNU Affero General Public License as published by\n * the Free Software Foundation, either version 3 of the License, or\n * (at your option) any later version.\n *\n * This program is distributed in the hope that it will be useful,\n * but WITHOUT ANY WARRANTY; without even the implied warranty of\n * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n * GNU Affero General Public License for more details.\n *\n * You should have received a copy of the GNU Affero General Public License\n * along with this program.  If not, see <http://www.gnu.org/licenses/>.\n */\n.sample {\n  -webkit-perspective: 200px;\n          perspective: 200px; }\n\n.SimpleHeader {\n  background: rgba(190, 190, 190, 0.21);\n  text-align: center;\n  background: #3b55a0;\n  overflow-x: hidden;\n  overflow-y: auto;\n  position: relative;\n  width: 100%;\n  height: 100%; }\n  .SimpleHeader header {\n    background: green;\n    position: fixed;\n    width: calc(100% - 17px);\n    top: 0px;\n    left: 0px; }\n    @media (hover: none) {\n      .SimpleHeader header {\n        /* ... */\n        width: 100%; } }\n  .SimpleHeader footer {\n    background: red;\n    position: fixed;\n    width: calc(100% - 17px); }\n    @media (hover: none) {\n      .SimpleHeader footer {\n        /* ... */\n        width: 100%; } }\n  .SimpleHeader .content {\n    padding: 10px;\n    text-align: left;\n    width: 700px;\n    display: inline-block; }\n  .SimpleHeader .logo {\n    text-align: center;\n    -webkit-perspective: 200px;\n            perspective: 200px;\n    position: absolute;\n    bottom: 20px;\n    line-height: 1em;\n    vertical-align: middle;\n    width: 200px;\n    height: 100px;\n    margin-left: -100px;\n    background: url(\"https://source.unsplash.com/600x400/?logo\") no-repeat center center;\n    background-size: cover;\n    border: 1px solid gray;\n    border-radius: 5px;\n    display: inline-block;\n    cursor: pointer; }\n    .SimpleHeader .logo:before {\n      content: ' ';\n      display: inline-block;\n      height: 100%;\n      width: 1px;\n      margin-right: -1px;\n      vertical-align: middle;\n      overflow: hidden; }\n    .SimpleHeader .logo > * {\n      text-align: left;\n      vertical-align: middle;\n      display: inline-block; }\n    .SimpleHeader .logo span {\n      background: white;\n      border-radius: 5px;\n      padding: 5px; }\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./src/samples/SimpleSlider/samples.scss":
-/*!**********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./node_modules/sass-loader/lib/loader.js??ref--6-3!./src/samples/SimpleSlider/samples.scss ***!
-  \**********************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "/*!\n * Copyright (C) 2019 Nathanael Braun\n *\n * This program is free software: you can redistribute it and/or modify\n * it under the terms of the GNU Affero General Public License as published by\n * the Free Software Foundation, either version 3 of the License, or\n * (at your option) any later version.\n *\n * This program is distributed in the hope that it will be useful,\n * but WITHOUT ANY WARRANTY; without even the implied warranty of\n * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n * GNU Affero General Public License for more details.\n *\n * You should have received a copy of the GNU Affero General Public License\n * along with this program.  If not, see <http://www.gnu.org/licenses/>.\n */\n.SimpleSlider {\n  background: rgba(190, 190, 190, 0.21);\n  text-align: center;\n  -webkit-perspective: 200px;\n          perspective: 200px;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none; }\n  .SimpleSlider .slide .item {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, -50%);\n        -ms-transform: translate(-50%, -50%);\n            transform: translate(-50%, -50%);\n    text-align: center;\n    width: 200px;\n    height: 200px;\n    -ms-touch-action: none;\n        touch-action: none; }\n    .SimpleSlider .slide .item:before {\n      content: ' ';\n      display: inline-block;\n      height: 100%;\n      width: 1px;\n      margin-right: -1px;\n      vertical-align: middle;\n      overflow: hidden; }\n    .SimpleSlider .slide .item > * {\n      text-align: left;\n      vertical-align: middle;\n      display: inline-block; }\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./src/samples/SimpleTest/samples.scss":
-/*!********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./node_modules/sass-loader/lib/loader.js??ref--6-3!./src/samples/SimpleTest/samples.scss ***!
-  \********************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "/*!\n * Copyright (C) 2019 Nathanael Braun\n *\n * This program is free software: you can redistribute it and/or modify\n * it under the terms of the GNU Affero General Public License as published by\n * the Free Software Foundation, either version 3 of the License, or\n * (at your option) any later version.\n *\n * This program is distributed in the hope that it will be useful,\n * but WITHOUT ANY WARRANTY; without even the implied warranty of\n * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n * GNU Affero General Public License for more details.\n *\n * You should have received a copy of the GNU Affero General Public License\n * along with this program.  If not, see <http://www.gnu.org/licenses/>.\n */\n.SimpleTest {\n  background: rgba(190, 190, 190, 0.21);\n  text-align: center;\n  -webkit-perspective: 200px;\n          perspective: 200px;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none; }\n  .SimpleTest div {\n    text-align: center;\n    background: url(\"https://source.unsplash.com/600x400/?logo\") no-repeat center center;\n    background-size: cover; }\n    .SimpleTest div:before {\n      content: ' ';\n      display: inline-block;\n      height: 100%;\n      width: 1px;\n      margin-right: -1px;\n      vertical-align: middle;\n      overflow: hidden; }\n    .SimpleTest div > * {\n      text-align: left;\n      vertical-align: middle;\n      display: inline-block; }\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./src/samples/samples.scss":
-/*!*********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./node_modules/sass-loader/lib/loader.js??ref--6-3!./src/samples/samples.scss ***!
-  \*********************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "/*!\n * Copyright (C) 2019 Nathanael Braun\n *\n * This program is free software: you can redistribute it and/or modify\n * it under the terms of the GNU Affero General Public License as published by\n * the Free Software Foundation, either version 3 of the License, or\n * (at your option) any later version.\n *\n * This program is distributed in the hope that it will be useful,\n * but WITHOUT ANY WARRANTY; without even the implied warranty of\n * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n * GNU Affero General Public License for more details.\n *\n * You should have received a copy of the GNU Affero General Public License\n * along with this program.  If not, see <http://www.gnu.org/licenses/>.\n */\nbody, html, #app {\n  width: 100%;\n  height: 100%;\n  margin: 0; }\n\n.sampleLst {\n  overflow: auto; }\n  .sampleLst > div {\n    color: white;\n    background: #2e91d1;\n    display: inline-block;\n    text-align: center;\n    margin: 5px 10px;\n    line-height: 40px;\n    width: calc(100% - 20px);\n    height: 40px;\n    cursor: pointer; }\n    .sampleLst > div:hover {\n      background: #206491; }\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/lib/css-base.js":
-/*!*************************************************!*\
-  !*** ./node_modules/css-loader/lib/css-base.js ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
 
 
 /***/ }),
@@ -28785,515 +28622,6 @@ module.exports = 0;
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/lib/addStyles.js":
-/*!****************************************************!*\
-  !*** ./node_modules/style-loader/lib/addStyles.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-
-var stylesInDom = {};
-
-var	memoize = function (fn) {
-	var memo;
-
-	return function () {
-		if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-		return memo;
-	};
-};
-
-var isOldIE = memoize(function () {
-	// Test for IE <= 9 as proposed by Browserhacks
-	// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
-	// Tests for existence of standard globals is to allow style-loader
-	// to operate correctly into non-standard environments
-	// @see https://github.com/webpack-contrib/style-loader/issues/177
-	return window && document && document.all && !window.atob;
-});
-
-var getTarget = function (target, parent) {
-  if (parent){
-    return parent.querySelector(target);
-  }
-  return document.querySelector(target);
-};
-
-var getElement = (function (fn) {
-	var memo = {};
-
-	return function(target, parent) {
-                // If passing function in options, then use it for resolve "head" element.
-                // Useful for Shadow Root style i.e
-                // {
-                //   insertInto: function () { return document.querySelector("#foo").shadowRoot }
-                // }
-                if (typeof target === 'function') {
-                        return target();
-                }
-                if (typeof memo[target] === "undefined") {
-			var styleTarget = getTarget.call(this, target, parent);
-			// Special case to return head of iframe instead of iframe itself
-			if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
-				try {
-					// This will throw an exception if access to iframe is blocked
-					// due to cross-origin restrictions
-					styleTarget = styleTarget.contentDocument.head;
-				} catch(e) {
-					styleTarget = null;
-				}
-			}
-			memo[target] = styleTarget;
-		}
-		return memo[target]
-	};
-})();
-
-var singleton = null;
-var	singletonCounter = 0;
-var	stylesInsertedAtTop = [];
-
-var	fixUrls = __webpack_require__(/*! ./urls */ "./node_modules/style-loader/lib/urls.js");
-
-module.exports = function(list, options) {
-	if (typeof DEBUG !== "undefined" && DEBUG) {
-		if (typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-	}
-
-	options = options || {};
-
-	options.attrs = typeof options.attrs === "object" ? options.attrs : {};
-
-	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-	// tags it will allow on a page
-	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
-
-	// By default, add <style> tags to the <head> element
-        if (!options.insertInto) options.insertInto = "head";
-
-	// By default, add <style> tags to the bottom of the target
-	if (!options.insertAt) options.insertAt = "bottom";
-
-	var styles = listToStyles(list, options);
-
-	addStylesToDom(styles, options);
-
-	return function update (newList) {
-		var mayRemove = [];
-
-		for (var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-
-			domStyle.refs--;
-			mayRemove.push(domStyle);
-		}
-
-		if(newList) {
-			var newStyles = listToStyles(newList, options);
-			addStylesToDom(newStyles, options);
-		}
-
-		for (var i = 0; i < mayRemove.length; i++) {
-			var domStyle = mayRemove[i];
-
-			if(domStyle.refs === 0) {
-				for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
-
-				delete stylesInDom[domStyle.id];
-			}
-		}
-	};
-};
-
-function addStylesToDom (styles, options) {
-	for (var i = 0; i < styles.length; i++) {
-		var item = styles[i];
-		var domStyle = stylesInDom[item.id];
-
-		if(domStyle) {
-			domStyle.refs++;
-
-			for(var j = 0; j < domStyle.parts.length; j++) {
-				domStyle.parts[j](item.parts[j]);
-			}
-
-			for(; j < item.parts.length; j++) {
-				domStyle.parts.push(addStyle(item.parts[j], options));
-			}
-		} else {
-			var parts = [];
-
-			for(var j = 0; j < item.parts.length; j++) {
-				parts.push(addStyle(item.parts[j], options));
-			}
-
-			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-		}
-	}
-}
-
-function listToStyles (list, options) {
-	var styles = [];
-	var newStyles = {};
-
-	for (var i = 0; i < list.length; i++) {
-		var item = list[i];
-		var id = options.base ? item[0] + options.base : item[0];
-		var css = item[1];
-		var media = item[2];
-		var sourceMap = item[3];
-		var part = {css: css, media: media, sourceMap: sourceMap};
-
-		if(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});
-		else newStyles[id].parts.push(part);
-	}
-
-	return styles;
-}
-
-function insertStyleElement (options, style) {
-	var target = getElement(options.insertInto)
-
-	if (!target) {
-		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
-	}
-
-	var lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];
-
-	if (options.insertAt === "top") {
-		if (!lastStyleElementInsertedAtTop) {
-			target.insertBefore(style, target.firstChild);
-		} else if (lastStyleElementInsertedAtTop.nextSibling) {
-			target.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);
-		} else {
-			target.appendChild(style);
-		}
-		stylesInsertedAtTop.push(style);
-	} else if (options.insertAt === "bottom") {
-		target.appendChild(style);
-	} else if (typeof options.insertAt === "object" && options.insertAt.before) {
-		var nextSibling = getElement(options.insertAt.before, target);
-		target.insertBefore(style, nextSibling);
-	} else {
-		throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");
-	}
-}
-
-function removeStyleElement (style) {
-	if (style.parentNode === null) return false;
-	style.parentNode.removeChild(style);
-
-	var idx = stylesInsertedAtTop.indexOf(style);
-	if(idx >= 0) {
-		stylesInsertedAtTop.splice(idx, 1);
-	}
-}
-
-function createStyleElement (options) {
-	var style = document.createElement("style");
-
-	if(options.attrs.type === undefined) {
-		options.attrs.type = "text/css";
-	}
-
-	if(options.attrs.nonce === undefined) {
-		var nonce = getNonce();
-		if (nonce) {
-			options.attrs.nonce = nonce;
-		}
-	}
-
-	addAttrs(style, options.attrs);
-	insertStyleElement(options, style);
-
-	return style;
-}
-
-function createLinkElement (options) {
-	var link = document.createElement("link");
-
-	if(options.attrs.type === undefined) {
-		options.attrs.type = "text/css";
-	}
-	options.attrs.rel = "stylesheet";
-
-	addAttrs(link, options.attrs);
-	insertStyleElement(options, link);
-
-	return link;
-}
-
-function addAttrs (el, attrs) {
-	Object.keys(attrs).forEach(function (key) {
-		el.setAttribute(key, attrs[key]);
-	});
-}
-
-function getNonce() {
-	if (false) {}
-
-	return __webpack_require__.nc;
-}
-
-function addStyle (obj, options) {
-	var style, update, remove, result;
-
-	// If a transform function was defined, run it on the css
-	if (options.transform && obj.css) {
-	    result = typeof options.transform === 'function'
-		 ? options.transform(obj.css) 
-		 : options.transform.default(obj.css);
-
-	    if (result) {
-	    	// If transform returns a value, use that instead of the original css.
-	    	// This allows running runtime transformations on the css.
-	    	obj.css = result;
-	    } else {
-	    	// If the transform function returns a falsy value, don't add this css.
-	    	// This allows conditional loading of css
-	    	return function() {
-	    		// noop
-	    	};
-	    }
-	}
-
-	if (options.singleton) {
-		var styleIndex = singletonCounter++;
-
-		style = singleton || (singleton = createStyleElement(options));
-
-		update = applyToSingletonTag.bind(null, style, styleIndex, false);
-		remove = applyToSingletonTag.bind(null, style, styleIndex, true);
-
-	} else if (
-		obj.sourceMap &&
-		typeof URL === "function" &&
-		typeof URL.createObjectURL === "function" &&
-		typeof URL.revokeObjectURL === "function" &&
-		typeof Blob === "function" &&
-		typeof btoa === "function"
-	) {
-		style = createLinkElement(options);
-		update = updateLink.bind(null, style, options);
-		remove = function () {
-			removeStyleElement(style);
-
-			if(style.href) URL.revokeObjectURL(style.href);
-		};
-	} else {
-		style = createStyleElement(options);
-		update = applyToTag.bind(null, style);
-		remove = function () {
-			removeStyleElement(style);
-		};
-	}
-
-	update(obj);
-
-	return function updateStyle (newObj) {
-		if (newObj) {
-			if (
-				newObj.css === obj.css &&
-				newObj.media === obj.media &&
-				newObj.sourceMap === obj.sourceMap
-			) {
-				return;
-			}
-
-			update(obj = newObj);
-		} else {
-			remove();
-		}
-	};
-}
-
-var replaceText = (function () {
-	var textStore = [];
-
-	return function (index, replacement) {
-		textStore[index] = replacement;
-
-		return textStore.filter(Boolean).join('\n');
-	};
-})();
-
-function applyToSingletonTag (style, index, remove, obj) {
-	var css = remove ? "" : obj.css;
-
-	if (style.styleSheet) {
-		style.styleSheet.cssText = replaceText(index, css);
-	} else {
-		var cssNode = document.createTextNode(css);
-		var childNodes = style.childNodes;
-
-		if (childNodes[index]) style.removeChild(childNodes[index]);
-
-		if (childNodes.length) {
-			style.insertBefore(cssNode, childNodes[index]);
-		} else {
-			style.appendChild(cssNode);
-		}
-	}
-}
-
-function applyToTag (style, obj) {
-	var css = obj.css;
-	var media = obj.media;
-
-	if(media) {
-		style.setAttribute("media", media)
-	}
-
-	if(style.styleSheet) {
-		style.styleSheet.cssText = css;
-	} else {
-		while(style.firstChild) {
-			style.removeChild(style.firstChild);
-		}
-
-		style.appendChild(document.createTextNode(css));
-	}
-}
-
-function updateLink (link, options, obj) {
-	var css = obj.css;
-	var sourceMap = obj.sourceMap;
-
-	/*
-		If convertToAbsoluteUrls isn't defined, but sourcemaps are enabled
-		and there is no publicPath defined then lets turn convertToAbsoluteUrls
-		on by default.  Otherwise default to the convertToAbsoluteUrls option
-		directly
-	*/
-	var autoFixUrls = options.convertToAbsoluteUrls === undefined && sourceMap;
-
-	if (options.convertToAbsoluteUrls || autoFixUrls) {
-		css = fixUrls(css);
-	}
-
-	if (sourceMap) {
-		// http://stackoverflow.com/a/26603875
-		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-	}
-
-	var blob = new Blob([css], { type: "text/css" });
-
-	var oldSrc = link.href;
-
-	link.href = URL.createObjectURL(blob);
-
-	if(oldSrc) URL.revokeObjectURL(oldSrc);
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/lib/urls.js":
-/*!***********************************************!*\
-  !*** ./node_modules/style-loader/lib/urls.js ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
-/**
- * When source maps are enabled, `style-loader` uses a link element with a data-uri to
- * embed the css on the page. This breaks all relative urls because now they are relative to a
- * bundle instead of the current page.
- *
- * One solution is to only use full urls, but that may be impossible.
- *
- * Instead, this function "fixes" the relative urls to be absolute according to the current page location.
- *
- * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.
- *
- */
-
-module.exports = function (css) {
-  // get current location
-  var location = typeof window !== "undefined" && window.location;
-
-  if (!location) {
-    throw new Error("fixUrls requires window.location");
-  }
-
-	// blank or null?
-	if (!css || typeof css !== "string") {
-	  return css;
-  }
-
-  var baseUrl = location.protocol + "//" + location.host;
-  var currentDir = baseUrl + location.pathname.replace(/\/[^\/]*$/, "/");
-
-	// convert each url(...)
-	/*
-	This regular expression is just a way to recursively match brackets within
-	a string.
-
-	 /url\s*\(  = Match on the word "url" with any whitespace after it and then a parens
-	   (  = Start a capturing group
-	     (?:  = Start a non-capturing group
-	         [^)(]  = Match anything that isn't a parentheses
-	         |  = OR
-	         \(  = Match a start parentheses
-	             (?:  = Start another non-capturing groups
-	                 [^)(]+  = Match anything that isn't a parentheses
-	                 |  = OR
-	                 \(  = Match a start parentheses
-	                     [^)(]*  = Match anything that isn't a parentheses
-	                 \)  = Match a end parentheses
-	             )  = End Group
-              *\) = Match anything and then a close parens
-          )  = Close non-capturing group
-          *  = Match anything
-       )  = Close capturing group
-	 \)  = Match a close parens
-
-	 /gi  = Get all matches, not the first.  Be case insensitive.
-	 */
-	var fixedCss = css.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function(fullMatch, origUrl) {
-		// strip quotes (if they exist)
-		var unquotedOrigUrl = origUrl
-			.trim()
-			.replace(/^"(.*)"$/, function(o, $1){ return $1; })
-			.replace(/^'(.*)'$/, function(o, $1){ return $1; });
-
-		// already a full url? no change
-		if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/|\s*$)/i.test(unquotedOrigUrl)) {
-		  return fullMatch;
-		}
-
-		// convert the url to a full url
-		var newUrl;
-
-		if (unquotedOrigUrl.indexOf("//") === 0) {
-		  	//TODO: should we add protocol?
-			newUrl = unquotedOrigUrl;
-		} else if (unquotedOrigUrl.indexOf("/") === 0) {
-			// path should be relative to the base url
-			newUrl = baseUrl + unquotedOrigUrl; // already starts with '/'
-		} else {
-			// path should be relative to current directory
-			newUrl = currentDir + unquotedOrigUrl.replace(/^\.\//, ""); // Strip leading './'
-		}
-
-		// send back the fixed url(...)
-		return "url(" + JSON.stringify(newUrl) + ")";
-	});
-
-	// send back the fixed css
-	return fixedCss;
-};
-
-
-/***/ }),
-
 /***/ "./node_modules/tween-axis/dist/tween-axis.js":
 /*!****************************************************!*\
   !*** ./node_modules/tween-axis/dist/tween-axis.js ***!
@@ -29445,14 +28773,14 @@ var _default = _exports;
     return;
   }
 
-  reactHotLoader.register(req, "req", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.react_rtween_helpers_css_demux_____js.gen.js");
-  reactHotLoader.register(_exports, "_exports", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.react_rtween_helpers_css_demux_____js.gen.js");
-  reactHotLoader.register(root, "root", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.react_rtween_helpers_css_demux_____js.gen.js");
-  reactHotLoader.register($all, "$all", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.react_rtween_helpers_css_demux_____js.gen.js");
-  reactHotLoader.register(backgroundColor, "backgroundColor", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.react_rtween_helpers_css_demux_____js.gen.js");
-  reactHotLoader.register(filter, "filter", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.react_rtween_helpers_css_demux_____js.gen.js");
-  reactHotLoader.register(transform, "transform", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.react_rtween_helpers_css_demux_____js.gen.js");
-  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.react_rtween_helpers_css_demux_____js.gen.js");
+  reactHotLoader.register(req, "req", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\MapOf.react_rtween_helpers_css_demux_____js.gen.js");
+  reactHotLoader.register(_exports, "_exports", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\MapOf.react_rtween_helpers_css_demux_____js.gen.js");
+  reactHotLoader.register(root, "root", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\MapOf.react_rtween_helpers_css_demux_____js.gen.js");
+  reactHotLoader.register($all, "$all", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\MapOf.react_rtween_helpers_css_demux_____js.gen.js");
+  reactHotLoader.register(backgroundColor, "backgroundColor", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\MapOf.react_rtween_helpers_css_demux_____js.gen.js");
+  reactHotLoader.register(filter, "filter", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\MapOf.react_rtween_helpers_css_demux_____js.gen.js");
+  reactHotLoader.register(transform, "transform", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\MapOf.react_rtween_helpers_css_demux_____js.gen.js");
+  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\MapOf.react_rtween_helpers_css_demux_____js.gen.js");
 })();
 
 ;
@@ -29522,88 +28850,14 @@ var _default = _exports;
     return;
   }
 
-  reactHotLoader.register(req, "req", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.react_rtween_helpers_css_demux_typed_____js.gen.js");
-  reactHotLoader.register(_exports, "_exports", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.react_rtween_helpers_css_demux_typed_____js.gen.js");
-  reactHotLoader.register(root, "root", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.react_rtween_helpers_css_demux_typed_____js.gen.js");
-  reactHotLoader.register(color, "color", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.react_rtween_helpers_css_demux_typed_____js.gen.js");
-  reactHotLoader.register(int, "int", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.react_rtween_helpers_css_demux_typed_____js.gen.js");
-  reactHotLoader.register(multi, "multi", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.react_rtween_helpers_css_demux_typed_____js.gen.js");
-  reactHotLoader.register(number, "number", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.react_rtween_helpers_css_demux_typed_____js.gen.js");
-  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.react_rtween_helpers_css_demux_typed_____js.gen.js");
-})();
-
-;
-
-(function () {
-  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).leaveModule;
-  leaveModule && leaveModule(module);
-})();
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
-
-/***/ }),
-
-/***/ "./src/MapOf.react_rtween_samples_______js.gen.js":
-/*!********************************************************!*\
-  !*** ./src/MapOf.react_rtween_samples_______js.gen.js ***!
-  \********************************************************/
-/*! exports provided: SimpleHeaderTest, SimpleSlider, SimpleTest, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SimpleHeaderTest", function() { return SimpleHeaderTest; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SimpleSlider", function() { return SimpleSlider; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SimpleTest", function() { return SimpleTest; });
-(function () {
-  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
-  enterModule && enterModule(module);
-})();
-
-var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.default.signature : function (a) {
-  return a;
-};
-
-/* This is a virtual file generated by webpack-inherit */
-var req,
-    _exports = {},
-    root;
-req = __webpack_require__("./src/samples sync recursive ^\\.\\/[^\\\\\\/]+\\/([^\\\\\\/]+)\\.js$");
-req.keys().forEach(function (key) {
-  var mod,
-      name = key.match(/^\.\/[^\\\/]+\/([^\\\/]+)\.js$/),
-      i = 0,
-      modExport = _exports;
-  name = name && name[1] || key.substr(2);
-  name = name.split('/');
-  mod = req(key);
-
-  while (i < name.length - 1) {
-    modExport = modExport[name[i]] = modExport[name[i]] || {}, i++;
-  }
-
-  modExport[name[i]] = Object.keys(mod).length === 1 && mod.default || mod;
-});
-var SimpleHeaderTest = _exports.SimpleHeaderTest;
-var SimpleSlider = _exports.SimpleSlider;
-var SimpleTest = _exports.SimpleTest;
-var _default = _exports;
-/* harmony default export */ __webpack_exports__["default"] = (_default);
-;
-
-(function () {
-  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).default;
-
-  if (!reactHotLoader) {
-    return;
-  }
-
-  reactHotLoader.register(req, "req", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.react_rtween_samples_______js.gen.js");
-  reactHotLoader.register(_exports, "_exports", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.react_rtween_samples_______js.gen.js");
-  reactHotLoader.register(root, "root", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.react_rtween_samples_______js.gen.js");
-  reactHotLoader.register(SimpleHeaderTest, "SimpleHeaderTest", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.react_rtween_samples_______js.gen.js");
-  reactHotLoader.register(SimpleSlider, "SimpleSlider", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.react_rtween_samples_______js.gen.js");
-  reactHotLoader.register(SimpleTest, "SimpleTest", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.react_rtween_samples_______js.gen.js");
-  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\MapOf.react_rtween_samples_______js.gen.js");
+  reactHotLoader.register(req, "req", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\MapOf.react_rtween_helpers_css_demux_typed_____js.gen.js");
+  reactHotLoader.register(_exports, "_exports", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\MapOf.react_rtween_helpers_css_demux_typed_____js.gen.js");
+  reactHotLoader.register(root, "root", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\MapOf.react_rtween_helpers_css_demux_typed_____js.gen.js");
+  reactHotLoader.register(color, "color", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\MapOf.react_rtween_helpers_css_demux_typed_____js.gen.js");
+  reactHotLoader.register(int, "int", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\MapOf.react_rtween_helpers_css_demux_typed_____js.gen.js");
+  reactHotLoader.register(multi, "multi", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\MapOf.react_rtween_helpers_css_demux_typed_____js.gen.js");
+  reactHotLoader.register(number, "number", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\MapOf.react_rtween_helpers_css_demux_typed_____js.gen.js");
+  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\MapOf.react_rtween_helpers_css_demux_typed_____js.gen.js");
 })();
 
 ;
@@ -29793,8 +29047,8 @@ TweenAxis.propTypes = {
     return;
   }
 
-  reactHotLoader.register(setTarget, "setTarget", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\TweenAxis.js");
-  reactHotLoader.register(TweenAxis, "TweenAxis", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\TweenAxis.js");
+  reactHotLoader.register(setTarget, "setTarget", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\TweenAxis.js");
+  reactHotLoader.register(TweenAxis, "TweenAxis", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\TweenAxis.js");
 })();
 
 ;
@@ -30021,8 +29275,8 @@ TweenRef.propTypes = {};
     return;
   }
 
-  reactHotLoader.register(setTarget, "setTarget", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\TweenRef.js");
-  reactHotLoader.register(TweenRef, "TweenRef", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\TweenRef.js");
+  reactHotLoader.register(setTarget, "setTarget", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\TweenRef.js");
+  reactHotLoader.register(TweenRef, "TweenRef", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\TweenRef.js");
 })();
 
 ;
@@ -30084,8 +29338,8 @@ var _default = TweenerContext;
     return;
   }
 
-  reactHotLoader.register(TweenerContext, "TweenerContext", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\TweenerContext.js");
-  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\TweenerContext.js");
+  reactHotLoader.register(TweenerContext, "TweenerContext", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\TweenerContext.js");
+  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\TweenerContext.js");
 })();
 
 ;
@@ -31380,14 +30634,14 @@ function asTweener() {
     return;
   }
 
-  reactHotLoader.register(isBrowserSide, "isBrowserSide", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\asTweener.js");
-  reactHotLoader.register(isArray, "isArray", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\asTweener.js");
-  reactHotLoader.register(_live, "_live", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\asTweener.js");
-  reactHotLoader.register(lastTm, "lastTm", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\asTweener.js");
-  reactHotLoader.register(_running, "_running", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\asTweener.js");
-  reactHotLoader.register(SimpleObjectProto, "SimpleObjectProto", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\asTweener.js");
-  reactHotLoader.register(Runner, "Runner", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\asTweener.js");
-  reactHotLoader.register(asTweener, "asTweener", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\asTweener.js");
+  reactHotLoader.register(isBrowserSide, "isBrowserSide", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\asTweener.js");
+  reactHotLoader.register(isArray, "isArray", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\asTweener.js");
+  reactHotLoader.register(_live, "_live", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\asTweener.js");
+  reactHotLoader.register(lastTm, "lastTm", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\asTweener.js");
+  reactHotLoader.register(_running, "_running", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\asTweener.js");
+  reactHotLoader.register(SimpleObjectProto, "SimpleObjectProto", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\asTweener.js");
+  reactHotLoader.register(Runner, "Runner", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\asTweener.js");
+  reactHotLoader.register(asTweener, "asTweener", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\asTweener.js");
 })();
 
 ;
@@ -31787,16 +31041,16 @@ function () {
     return;
   }
 
-  reactHotLoader.register(signOf, "signOf", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\Inertia.js");
-  reactHotLoader.register(abs, "abs", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\Inertia.js");
-  reactHotLoader.register(floor, "floor", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\Inertia.js");
-  reactHotLoader.register(round, "round", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\Inertia.js");
-  reactHotLoader.register(min, "min", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\Inertia.js");
-  reactHotLoader.register(max, "max", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\Inertia.js");
-  reactHotLoader.register(consts, "consts", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\Inertia.js");
-  reactHotLoader.register(applyInertia, "applyInertia", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\Inertia.js");
-  reactHotLoader.register(inertiaByNode, "inertiaByNode", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\Inertia.js");
-  reactHotLoader.register(Inertia, "Inertia", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\Inertia.js");
+  reactHotLoader.register(signOf, "signOf", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\Inertia.js");
+  reactHotLoader.register(abs, "abs", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\Inertia.js");
+  reactHotLoader.register(floor, "floor", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\Inertia.js");
+  reactHotLoader.register(round, "round", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\Inertia.js");
+  reactHotLoader.register(min, "min", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\Inertia.js");
+  reactHotLoader.register(max, "max", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\Inertia.js");
+  reactHotLoader.register(consts, "consts", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\Inertia.js");
+  reactHotLoader.register(applyInertia, "applyInertia", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\Inertia.js");
+  reactHotLoader.register(inertiaByNode, "inertiaByNode", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\Inertia.js");
+  reactHotLoader.register(Inertia, "Inertia", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\Inertia.js");
 })();
 
 ;
@@ -32381,12 +31635,12 @@ function getProperty(property, expand) {
     return;
   }
 
-  reactHotLoader.register(props, "props", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\cssUtils.js");
-  reactHotLoader.register(expandShorthandProperty, "expandShorthandProperty", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\cssUtils.js");
-  reactHotLoader.register(isShorthandProperty, "isShorthandProperty", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\cssUtils.js");
-  reactHotLoader.register(isValidDeclaration, "isValidDeclaration", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\cssUtils.js");
-  reactHotLoader.register(canAnimate, "canAnimate", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\cssUtils.js");
-  reactHotLoader.register(getProperty, "getProperty", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\cssUtils.js");
+  reactHotLoader.register(props, "props", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\cssUtils.js");
+  reactHotLoader.register(expandShorthandProperty, "expandShorthandProperty", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\cssUtils.js");
+  reactHotLoader.register(isShorthandProperty, "isShorthandProperty", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\cssUtils.js");
+  reactHotLoader.register(isValidDeclaration, "isValidDeclaration", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\cssUtils.js");
+  reactHotLoader.register(canAnimate, "canAnimate", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\cssUtils.js");
+  reactHotLoader.register(getProperty, "getProperty", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\cssUtils.js");
 })();
 
 ;
@@ -32553,14 +31807,14 @@ function mux(key, baseKey, value, target, data, initials, forceUnits) {
     return;
   }
 
-  reactHotLoader.register(unitsRe, "unitsRe", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\$all.js");
-  reactHotLoader.register(abs, "abs", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\$all.js");
-  reactHotLoader.register(floatCut, "floatCut", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\$all.js");
-  reactHotLoader.register(defaultUnits, "defaultUnits", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\$all.js");
-  reactHotLoader.register(defaultValue, "defaultValue", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\$all.js");
-  reactHotLoader.register(demux, "demux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\$all.js");
-  reactHotLoader.register(mux, "mux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\$all.js");
-  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\$all.js");
+  reactHotLoader.register(unitsRe, "unitsRe", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\$all.js");
+  reactHotLoader.register(abs, "abs", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\$all.js");
+  reactHotLoader.register(floatCut, "floatCut", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\$all.js");
+  reactHotLoader.register(defaultUnits, "defaultUnits", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\$all.js");
+  reactHotLoader.register(defaultValue, "defaultValue", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\$all.js");
+  reactHotLoader.register(demux, "demux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\$all.js");
+  reactHotLoader.register(mux, "mux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\$all.js");
+  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\$all.js");
 })();
 
 ;
@@ -32607,7 +31861,7 @@ var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoader
  */
 
 
-; /* eslint-disable global-require, import/no-unresolved, no-var, camelcase, func-names */ (function register() { /* react-hot-loader/webpack */ var safe_require = function safe_require() { return  false ? undefined : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js"); }; var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : safe_require()).default; if (!reactHotLoader) { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : exports; /* eslint-enable camelcase, no-undef */ if (!webpackExports) { return; } if (typeof webpackExports === 'function') { reactHotLoader.register(webpackExports, 'module.exports', "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\backgroundColor.js"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } reactHotLoader.register(namedExport, key, "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\backgroundColor.js"); } })(); 
+; /* eslint-disable global-require, import/no-unresolved, no-var, camelcase, func-names */ (function register() { /* react-hot-loader/webpack */ var safe_require = function safe_require() { return  false ? undefined : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js"); }; var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : safe_require()).default; if (!reactHotLoader) { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : exports; /* eslint-enable camelcase, no-undef */ if (!webpackExports) { return; } if (typeof webpackExports === 'function') { reactHotLoader.register(webpackExports, 'module.exports', "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\backgroundColor.js"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } reactHotLoader.register(namedExport, key, "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\backgroundColor.js"); } })();
 
 /***/ }),
 
@@ -32718,12 +31972,12 @@ var _default = function _default(key, value, target, data, initials) {
     return;
   }
 
-  reactHotLoader.register(unitsRe, "unitsRe", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\filter.js");
-  reactHotLoader.register(floatCut, "floatCut", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\filter.js");
-  reactHotLoader.register(defaultUnits, "defaultUnits", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\filter.js");
-  reactHotLoader.register(filters, "filters", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\filter.js");
-  reactHotLoader.register(demux, "demux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\filter.js");
-  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\filter.js");
+  reactHotLoader.register(unitsRe, "unitsRe", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\filter.js");
+  reactHotLoader.register(floatCut, "floatCut", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\filter.js");
+  reactHotLoader.register(defaultUnits, "defaultUnits", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\filter.js");
+  reactHotLoader.register(filters, "filters", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\filter.js");
+  reactHotLoader.register(demux, "demux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\filter.js");
+  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\filter.js");
 })();
 
 ;
@@ -32876,11 +32130,11 @@ var _default = function _default(key, value, target, data, initials, forceUnits)
     return;
   }
 
-  reactHotLoader.register(unitsRe, "unitsRe", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\transform.js");
-  reactHotLoader.register(floatCut, "floatCut", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\transform.js");
-  reactHotLoader.register(defaultUnits, "defaultUnits", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\transform.js");
-  reactHotLoader.register(demux, "demux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\transform.js");
-  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\transform.js");
+  reactHotLoader.register(unitsRe, "unitsRe", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\transform.js");
+  reactHotLoader.register(floatCut, "floatCut", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\transform.js");
+  reactHotLoader.register(defaultUnits, "defaultUnits", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\transform.js");
+  reactHotLoader.register(demux, "demux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\transform.js");
+  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\transform.js");
 })();
 
 ;
@@ -32994,8 +32248,8 @@ var _default = function _default(key, value, target, data, initials) {
     return;
   }
 
-  reactHotLoader.register(demux, "demux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\color.js");
-  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\color.js");
+  reactHotLoader.register(demux, "demux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\typed\\color.js");
+  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\typed\\color.js");
 })();
 
 ;
@@ -33102,11 +32356,11 @@ var _default = function _default(key, value, target, data, initials, forceUnits)
     return;
   }
 
-  reactHotLoader.register(unitsRe, "unitsRe", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\int.js");
-  reactHotLoader.register(floatCut, "floatCut", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\int.js");
-  reactHotLoader.register(defaultUnits, "defaultUnits", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\int.js");
-  reactHotLoader.register(demux, "demux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\int.js");
-  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\int.js");
+  reactHotLoader.register(unitsRe, "unitsRe", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\typed\\int.js");
+  reactHotLoader.register(floatCut, "floatCut", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\typed\\int.js");
+  reactHotLoader.register(defaultUnits, "defaultUnits", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\typed\\int.js");
+  reactHotLoader.register(demux, "demux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\typed\\int.js");
+  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\typed\\int.js");
 })();
 
 ;
@@ -33213,10 +32467,10 @@ var _default = function _default(count) {
     return;
   }
 
-  reactHotLoader.register(floatCut, "floatCut", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\multi.js");
-  reactHotLoader.register(alias, "alias", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\multi.js");
-  reactHotLoader.register(demux, "demux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\multi.js");
-  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\multi.js");
+  reactHotLoader.register(floatCut, "floatCut", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\typed\\multi.js");
+  reactHotLoader.register(alias, "alias", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\typed\\multi.js");
+  reactHotLoader.register(demux, "demux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\typed\\multi.js");
+  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\typed\\multi.js");
 })();
 
 ;
@@ -33369,17 +32623,17 @@ var _default = muxer;
     return;
   }
 
-  reactHotLoader.register(units, "units", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\number.js");
-  reactHotLoader.register(unitsRe, "unitsRe", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\number.js");
-  reactHotLoader.register(floatCut, "floatCut", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\number.js");
-  reactHotLoader.register(defaultUnits, "defaultUnits", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\number.js");
-  reactHotLoader.register(defaultBox, "defaultBox", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\number.js");
-  reactHotLoader.register(defaultValue, "defaultValue", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\number.js");
-  reactHotLoader.register(demuxOne, "demuxOne", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\number.js");
-  reactHotLoader.register(demux, "demux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\number.js");
-  reactHotLoader.register(muxer, "muxer", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\number.js");
-  reactHotLoader.register(muxOne, "muxOne", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\number.js");
-  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\demux\\typed\\number.js");
+  reactHotLoader.register(units, "units", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\typed\\number.js");
+  reactHotLoader.register(unitsRe, "unitsRe", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\typed\\number.js");
+  reactHotLoader.register(floatCut, "floatCut", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\typed\\number.js");
+  reactHotLoader.register(defaultUnits, "defaultUnits", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\typed\\number.js");
+  reactHotLoader.register(defaultBox, "defaultBox", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\typed\\number.js");
+  reactHotLoader.register(defaultValue, "defaultValue", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\typed\\number.js");
+  reactHotLoader.register(demuxOne, "demuxOne", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\typed\\number.js");
+  reactHotLoader.register(demux, "demux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\typed\\number.js");
+  reactHotLoader.register(muxer, "muxer", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\typed\\number.js");
+  reactHotLoader.register(muxOne, "muxOne", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\typed\\number.js");
+  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\demux\\typed\\number.js");
 })();
 
 ;
@@ -33516,10 +32770,10 @@ function deMuxLine(tweenLine, initials, data, demuxers) {
     return;
   }
 
-  reactHotLoader.register(cssDemux, "cssDemux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\index.js");
-  reactHotLoader.register(muxToCss, "muxToCss", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\index.js");
-  reactHotLoader.register(deMuxTween, "deMuxTween", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\index.js");
-  reactHotLoader.register(deMuxLine, "deMuxLine", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\css\\index.js");
+  reactHotLoader.register(cssDemux, "cssDemux", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\index.js");
+  reactHotLoader.register(muxToCss, "muxToCss", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\index.js");
+  reactHotLoader.register(deMuxTween, "deMuxTween", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\index.js");
+  reactHotLoader.register(deMuxLine, "deMuxLine", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\css\\index.js");
 })();
 
 ;
@@ -33737,15 +32991,15 @@ function shiftTransforms(items, shift) {
     return;
   }
 
-  reactHotLoader.register(offset, "offset", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\tweenTools.js");
-  reactHotLoader.register(scale, "scale", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\tweenTools.js");
-  reactHotLoader.register(inverseValues, "inverseValues", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\tweenTools.js");
-  reactHotLoader.register(reverse, "reverse", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\tweenTools.js");
-  reactHotLoader.register(addCss, "addCss", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\tweenTools.js");
-  reactHotLoader.register(addAllType, "addAllType", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\tweenTools.js");
-  reactHotLoader.register(extractCss, "extractCss", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\tweenTools.js");
-  reactHotLoader.register(target, "target", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\tweenTools.js");
-  reactHotLoader.register(shiftTransforms, "shiftTransforms", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\helpers\\tweenTools.js");
+  reactHotLoader.register(offset, "offset", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\tweenTools.js");
+  reactHotLoader.register(scale, "scale", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\tweenTools.js");
+  reactHotLoader.register(inverseValues, "inverseValues", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\tweenTools.js");
+  reactHotLoader.register(reverse, "reverse", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\tweenTools.js");
+  reactHotLoader.register(addCss, "addCss", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\tweenTools.js");
+  reactHotLoader.register(addAllType, "addAllType", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\tweenTools.js");
+  reactHotLoader.register(extractCss, "extractCss", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\tweenTools.js");
+  reactHotLoader.register(target, "target", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\tweenTools.js");
+  reactHotLoader.register(shiftTransforms, "shiftTransforms", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\helpers\\tweenTools.js");
 })();
 
 ;
@@ -33862,8 +33116,8 @@ var _default = Tweenable;
     return;
   }
 
-  reactHotLoader.register(Tweenable, "Tweenable", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\index.js");
-  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\index.js");
+  reactHotLoader.register(Tweenable, "Tweenable", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\index.js");
+  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\index.js");
 })();
 
 ;
@@ -33873,1622 +33127,6 @@ var _default = Tweenable;
   leaveModule && leaveModule(module);
 })();
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
-
-/***/ }),
-
-/***/ "./src/samples sync recursive ^\\.\\/[^\\\\\\/]+\\/([^\\\\\\/]+)\\.js$":
-/*!*********************************************************!*\
-  !*** ./src/samples sync ^\.\/[^\\\/]+\/([^\\\/]+)\.js$ ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var map = {
-	"./SimpleHeaderTest/SimpleHeaderTest.js": "./src/samples/SimpleHeaderTest/SimpleHeaderTest.js",
-	"./SimpleSlider/SimpleSlider.js": "./src/samples/SimpleSlider/SimpleSlider.js",
-	"./SimpleTest/SimpleTest.js": "./src/samples/SimpleTest/SimpleTest.js"
-};
-
-
-function webpackContext(req) {
-	var id = webpackContextResolve(req);
-	return __webpack_require__(id);
-}
-function webpackContextResolve(req) {
-	if(!__webpack_require__.o(map, req)) {
-		var e = new Error("Cannot find module '" + req + "'");
-		e.code = 'MODULE_NOT_FOUND';
-		throw e;
-	}
-	return map[req];
-}
-webpackContext.keys = function webpackContextKeys() {
-	return Object.keys(map);
-};
-webpackContext.resolve = webpackContextResolve;
-module.exports = webpackContext;
-webpackContext.id = "./src/samples sync recursive ^\\.\\/[^\\\\\\/]+\\/([^\\\\\\/]+)\\.js$";
-
-/***/ }),
-
-/***/ "./src/samples.js":
-/*!************************!*\
-  !*** ./src/samples.js ***!
-  \************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/inheritsLoose */ "./node_modules/@babel/runtime/helpers/inheritsLoose.js");
-/* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _samples_samples_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./samples/samples.scss */ "./src/samples/samples.scss");
-/* harmony import */ var _samples_samples_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_samples_samples_scss__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_rtween_samples_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-rtween/samples/* /(*).js */ "./src/MapOf.react_rtween_samples_______js.gen.js");
-
-
-(function () {
-  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
-  enterModule && enterModule(module);
-})();
-
-var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.default.signature : function (a) {
-  return a;
-};
-
-/*
- * Copyright (C) 2019 Nathanael Braun
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-
-
-
-
-var App =
-/*#__PURE__*/
-function (_React$Component) {
-  _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0___default()(App, _React$Component);
-
-  function App() {
-    var _this;
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
-    _this.state = {
-      current: "SimpleHeaderTest"
-    };
-    return _this;
-  }
-
-  var _proto = App.prototype;
-
-  _proto.render = function render() {
-    var _this2 = this;
-
-    var Comp = react_rtween_samples_js__WEBPACK_IMPORTED_MODULE_4__["default"][this.state.current];
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "app",
-      style: {
-        width: "100%",
-        height: "100%"
-      }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "sampleLst",
-      style: {
-        position: "absolute",
-        top: "0px",
-        left: "0px",
-        width: "200px",
-        height: "100%"
-      }
-    }, Object.keys(react_rtween_samples_js__WEBPACK_IMPORTED_MODULE_4__["default"]).map(function (key) {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        onClick: function onClick(e) {
-          return _this2.setState({
-            current: key
-          });
-        },
-        key: key
-      }, key);
-    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "sample",
-      style: {
-        overflow: "hidden",
-        position: "absolute",
-        top: "0px",
-        left: "200px",
-        width: "calc( 100% - 200px )",
-        height: "100%"
-      }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Comp, null)));
-  };
-
-  // @ts-ignore
-  _proto.__reactstandin__regenerateByEval = function __reactstandin__regenerateByEval(key, code) {
-    // @ts-ignore
-    this[key] = eval(code);
-  };
-
-  return App;
-}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
-
-function renderSamples() {
-  react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(App, null), document.getElementById('app'));
-}
-
-renderSamples();
-
-if (false) {}
-
-;
-
-(function () {
-  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).default;
-
-  if (!reactHotLoader) {
-    return;
-  }
-
-  reactHotLoader.register(App, "App", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\samples.js");
-  reactHotLoader.register(renderSamples, "renderSamples", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\samples.js");
-})();
-
-;
-
-(function () {
-  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).leaveModule;
-  leaveModule && leaveModule(module);
-})();
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
-
-/***/ }),
-
-/***/ "./src/samples/SimpleHeaderTest/SimpleHeaderTest.js":
-/*!**********************************************************!*\
-  !*** ./src/samples/SimpleHeaderTest/SimpleHeaderTest.js ***!
-  \**********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Sample; });
-/* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/inheritsLoose */ "./node_modules/@babel/runtime/helpers/inheritsLoose.js");
-/* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_rtween__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-rtween */ "./src/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _samples_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./samples.scss */ "./src/samples/SimpleHeaderTest/samples.scss");
-/* harmony import */ var _samples_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_samples_scss__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _etc_anims__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./etc/anims */ "./src/samples/SimpleHeaderTest/etc/anims.js");
-
-
-var _dec, _class, _temp;
-
-(function () {
-  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
-  enterModule && enterModule(module);
-})();
-
-var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.default.signature : function (a) {
-  return a;
-};
-
-/*
- * Copyright (C) 2019 Nathanael Braun
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-
-
-
-
-
-var Header =
-/*#__PURE__*/
-function (_React$Component) {
-  _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0___default()(Header, _React$Component);
-
-  function Header() {
-    return _React$Component.apply(this, arguments) || this;
-  }
-
-  var _proto = Header.prototype;
-
-  _proto.render = function render() {
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_rtween__WEBPACK_IMPORTED_MODULE_2__["TweenRef"], {
-      id: "header",
-      initial: {
-        height: "250px",
-        transform: {
-          translateZ: "0px"
-        }
-      }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("header", {
-      style: {
-        perspectiveOrigin: "50% 50%",
-        zIndex: 10
-      }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_rtween__WEBPACK_IMPORTED_MODULE_2__["TweenRef"], {
-      id: "logo",
-      initial: {
-        left: "50%",
-        bottom: "60px",
-        height: "100px",
-        marginLeft: "-100px",
-        transform: {
-          perspective: "200px"
-        }
-      },
-      onClick: function onClick(e, tweener) {
-        tweener.pushAnim(Object(_etc_anims__WEBPACK_IMPORTED_MODULE_5__["pushIn"])("logo"));
-      }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "logo"
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "click me")))));
-  };
-
-  // @ts-ignore
-  _proto.__reactstandin__regenerateByEval = function __reactstandin__regenerateByEval(key, code) {
-    // @ts-ignore
-    this[key] = eval(code);
-  };
-
-  return Header;
-}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
-
-var Footer =
-/*#__PURE__*/
-function (_React$Component2) {
-  _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0___default()(Footer, _React$Component2);
-
-  function Footer() {
-    return _React$Component2.apply(this, arguments) || this;
-  }
-
-  var _proto2 = Footer.prototype;
-
-  _proto2.render = function render() {
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_rtween__WEBPACK_IMPORTED_MODULE_2__["TweenRef"], {
-      id: "footer",
-      initial: _etc_anims__WEBPACK_IMPORTED_MODULE_5__["initialFooter"]
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("footer", {
-      style: {
-        zIndex: 10
-      }
-    }, "footer"));
-  };
-
-  // @ts-ignore
-  _proto2.__reactstandin__regenerateByEval = function __reactstandin__regenerateByEval(key, code) {
-    // @ts-ignore
-    this[key] = eval(code);
-  };
-
-  return Footer;
-}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
-
-var Sample = (_dec = Object(react_rtween__WEBPACK_IMPORTED_MODULE_2__["asTweener"])(), _dec(_class = (_temp =
-/*#__PURE__*/
-function (_React$Component3) {
-  _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0___default()(Sample, _React$Component3);
-
-  function Sample() {
-    var _this;
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _React$Component3.call.apply(_React$Component3, [this].concat(args)) || this;
-    _this.state = {
-      currentHeaderMode: "top"
-    };
-    return _this;
-  }
-
-  var _proto3 = Sample.prototype;
-
-  _proto3.hookScrollableTargets = function hookScrollableTargets(targets, dir) {
-    return [this, react_dom__WEBPACK_IMPORTED_MODULE_3___default.a.findDOMNode(this)];
-  };
-
-  _proto3.componentShouldScroll = function componentShouldScroll(axis, delta) {
-    if (this.state.currentHeaderMode === "mid" && delta < 0 && react_dom__WEBPACK_IMPORTED_MODULE_3___default.a.findDOMNode(this).scrollTop !== 0) return false;
-    return true;
-  };
-
-  _proto3.render = function render() {
-    var _this2 = this;
-
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "SimpleHeader",
-      style: {
-        width: "100%",
-        height: "100%"
-      }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_rtween__WEBPACK_IMPORTED_MODULE_2__["TweenAxis"], {
-      axe: "scrollY",
-      items: _etc_anims__WEBPACK_IMPORTED_MODULE_5__["scrollY"],
-      scrollableWindow: 200,
-      inertia: {
-        willSnap: function willSnap(i, v) {
-          _this2.setState({
-            currentHeaderMode: v.id
-          });
-        },
-        wayPoints: [{
-          at: 0,
-          id: 'top'
-        }, {
-          at: 50,
-          id: 'mid'
-        }, {
-          at: 100,
-          id: 'bot'
-        }]
-      }
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Header, null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Footer, null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_rtween__WEBPACK_IMPORTED_MODULE_2__["TweenRef"], {
-      id: "body",
-      initial: _etc_anims__WEBPACK_IMPORTED_MODULE_5__["initialPage"]
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "page"
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "content"
-    }, "drag / scroll me !", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), "Lorem ipsum 1", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), "Lorem ipsum 2", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), "Lorem ipsum 3", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), "Lorem ipsum 4", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut placerat dapibus erat et commodo. Integer pretium vitae lorem at molestie. Donec tincidunt sollicitudin velit eget elementum. Sed interdum non dolor et auctor. Aenean fermentum ipsum in efficitur varius. Quisque sagittis justo a mi finibus, non mattis mauris tempor. Donec ullamcorper gravida fringilla. Proin sed lacus eget nisl venenatis pharetra at nec sapien. Vestibulum imperdiet libero eu est mattis convallis. Nulla ornare orci convallis, tincidunt ligula vitae, vulputate purus. Praesent porta magna a augue lacinia convallis. Nullam ornare semper mauris, a varius erat maximus nec. Pellentesque ultrices commodo risus a blandit. Etiam rutrum urna eu turpis rhoncus dictum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent ullamcorper lectus risus, in placerat eros commodo sed. Proin in nisl in elit dictum lacinia. Donec malesuada arcu metus, sed convallis sapien maximus non. Etiam ullamcorper pretium purus vel mattis. Nullam vel arcu viverra, ornare ipsum id, eleifend velit. Integer commodo gravida mollis. Pellentesque nec elit quam. Proin molestie elementum nisl. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras imperdiet semper dignissim. Duis tristique ut ex et tempor. Mauris quis tempor ipsum. Vivamus et lorem pulvinar, volutpat libero vitae, lobortis ante. Ut vitae laoreet massa. Curabitur at convallis purus. Integer at lacus eu diam cursus pretium. Sed maximus risus et nulla consectetur semper. Donec in tellus eros.", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), "Cras iaculis rutrum ex, sed vulputate nisl porta at. Donec neque ante, interdum quis pulvinar at, scelerisque a odio. In nibh quam, blandit ac nulla vitae, molestie ultricies mi. Fusce quis ornare nulla, ut mattis turpis. Nunc sodales, metus in egestas blandit, nisl odio rutrum orci, id suscipit nibh lectus sit amet magna. Curabitur sagittis et libero vel pellentesque. Vivamus est diam, aliquet eu condimentum cursus, vestibulum id ex. Aenean maximus et risus in tempor. Etiam et placerat tortor. Phasellus ac malesuada est, sed gravida risus. Maecenas arcu eros, pharetra quis volutpat quis, facilisis consectetur tellus. Duis ut auctor nibh, hendrerit volutpat massa.", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), "Morbi ornare bibendum magna non fringilla. In a dictum diam. Quisque pharetra urna eu sapien dignissim malesuada. Ut et pulvinar nibh. Integer in dui nec metus dignissim ultricies. Nulla tellus sapien, elementum et auctor non, porta sed nulla. Pellentesque facilisis eros vitae urna posuere ullamcorper. Mauris nec nibh facilisis lacus interdum gravida vitae placerat arcu. Aliquam enim nulla, congue non est sed, dapibus eleifend metus. In imperdiet egestas nibh sed hendrerit. Maecenas tempus erat congue dapibus iaculis. Curabitur libero lacus, commodo eget dignissim vitae, sagittis eu mauris. Suspendisse tincidunt, dolor quis elementum congue, magna tortor sollicitudin nulla, eu eleifend ex magna vitae magna.", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), "Pellentesque eu dui sit amet risus posuere malesuada vitae in nisl. Vivamus malesuada gravida diam, eu aliquam arcu cursus sed. Vestibulum non erat eu nisl lacinia lobortis. Fusce eget porta quam. Praesent hendrerit, purus eget posuere feugiat, dui purus rhoncus orci, a fringilla libero nibh id dolor. Vivamus tristique laoreet aliquet. Suspendisse potenti. Nullam dictum mauris sed eros dictum finibus. Sed placerat, ipsum eget lobortis tristique, magna sem placerat tortor, et ullamcorper orci neque at ante. In quis justo non nunc pretium porta. Aliquam congue posuere mi, id aliquet nisi rhoncus nec. In et scelerisque purus, a cursus urna. Integer condimentum tortor et ligula pretium posuere. Nunc molestie consequat maximus. Aliquam aliquam, purus a imperdiet aliquet, enim metus sodales dui, in porttitor felis erat in felis.", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), "Nullam sodales ante eu eros aliquet, vel pellentesque mi imperdiet. Nam a augue a lectus aliquet convallis sit amet et sapien. Morbi nec nibh et libero scelerisque finibus. Sed lectus libero, vulputate in sollicitudin a, tincidunt sit amet urna. Nam nec ornare ante, at accumsan ipsum. Ut sit amet arcu leo. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris bibendum, erat vel blandit scelerisque, nisl ipsum congue tellus, sed feugiat metus erat congue sem.", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), "Nunc imperdiet massa ipsum, eget faucibus quam volutpat at. Donec sed nibh arcu. Maecenas urna lorem, finibus eu dapibus sed, ultrices eget ex. Aenean rutrum vestibulum mauris, sed facilisis metus hendrerit eget. Maecenas rhoncus et lorem non faucibus. Quisque quis hendrerit mauris, at varius mauris. In eget tempus ex.", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), "Quisque vel consequat ex. Nullam elit nunc, scelerisque fermentum enim ullamcorper, dapibus viverra nunc. Morbi vel ligula ut ligula porta ullamcorper nec ac quam. Etiam arcu orci, efficitur sit amet volutpat sit amet, sollicitudin id purus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce dictum nisi sit amet libero porttitor accumsan. Integer vel leo felis. Sed est ipsum, consectetur vitae elementum vitae, varius nec lorem. Nullam quis sem et augue interdum dignissim a et erat. Etiam risus turpis, ultrices eget odio in, imperdiet elementum velit. Pellentesque non scelerisque ex, vel aliquet nulla. Mauris commodo orci in ipsum ornare, ut ultricies velit efficitur. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Cras vulputate mattis metus, sit amet imperdiet lacus molestie ut. Vivamus at porttitor augue, posuere posuere nulla.", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), "Nulla facilisi. Integer non ex eros. Duis ut eros est. Vestibulum id semper arcu, ac pellentesque mi. Etiam facilisis quam ut purus sagittis malesuada eget ut lectus. Praesent at porttitor diam. Fusce neque ipsum, dictum sed felis at, egestas tristique nisl.", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), "Ut sagittis leo odio, vitae pellentesque dui finibus eget. Aliquam sed diam at justo tincidunt congue. Morbi ultrices mollis mollis. Aenean blandit, magna non hendrerit varius, dui nulla malesuada leo, sit amet consectetur nisi eros quis lacus. Integer dignissim quis eros ac hendrerit. Nam id blandit lacus. Nullam a ullamcorper eros.", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), "Fusce malesuada odio sed erat pharetra scelerisque. Nullam vehicula diam tempor lacus rutrum, nec feugiat orci suscipit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque ac metus orci. Pellentesque at fringilla lorem. Donec dictum dignissim malesuada. Morbi malesuada mi eget dolor bibendum feugiat. Praesent hendrerit augue ac nisi dignissim scelerisque sit amet eget diam.", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), "Fusce non dui auctor, auctor elit quis, lacinia nunc. Duis tempor urna id libero imperdiet, ultricies convallis quam viverra. Aliquam erat volutpat. Duis ut congue sem. Nullam et faucibus dui, sed fringilla nisi. Mauris a semper dolor. Sed in tempor velit. Quisque vel ligula eleifend lacus luctus mattis. Aliquam fringilla arcu ac est posuere, at molestie dolor tempus. Praesent a sapien commodo, dapibus purus non, tristique nisi.", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), "Integer a massa ut dui commodo ullamcorper. Duis et quam eu neque tempus interdum id vitae ligula. Aliquam ut ullamcorper libero. Integer a lectus vitae libero lacinia accumsan. Etiam at varius magna. Mauris et purus tincidunt neque mollis dapibus a eu enim. In at pulvinar ipsum. Duis imperdiet diam accumsan, convallis ex eu, placerat tellus. Aliquam imperdiet eget ex a finibus. Sed hendrerit urna eu ultrices congue. Aliquam vestibulum metus sit amet mi volutpat tristique. Integer laoreet magna non pellentesque pretium.", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), "Aenean felis lacus, pharetra quis bibendum nec, hendrerit ut lorem. Suspendisse potenti. Aenean sapien tellus, ultrices quis purus sed, ornare dictum erat. Vivamus tristique, risus eu tristique mattis, urna est faucibus est, a placerat augue lectus gravida eros. Proin malesuada, tortor eu cursus lacinia, orci risus ullamcorper neque, rutrum lobortis dolor neque non est. Cras libero tellus, egestas sit amet magna ut, tristique accumsan purus. Sed eu ipsum ultrices, maximus metus et, faucibus diam. Proin ut faucibus est.", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), "Aenean id neque id justo mollis vehicula. Donec placerat pharetra arcu, quis iaculis lectus viverra rutrum. Aenean lorem enim, consequat cursus urna eget, rutrum volutpat justo. Nullam a arcu aliquam, egestas urna non, vehicula sem. Duis vel ligula non odio aliquet porta sit amet ac lorem. Mauris eu ornare sapien, id rutrum erat. Vestibulum vestibulum pellentesque erat, pulvinar pellentesque quam vestibulum sit amet. Proin molestie nisl nec orci tempor, ut consequat dui finibus. Duis faucibus ex at justo efficitur euismod. Mauris volutpat elit nec enim congue, ut dignissim est consectetur. Praesent sagittis, felis id rutrum dignissim, libero nisi interdum mi, at porta dui nibh sit amet nunc. Etiam consequat euismod orci eu convallis. In enim neque, rhoncus id maximus quis, pulvinar sit amet ligula. Ut gravida, dui eu laoreet porttitor, urna ante auctor lorem, non consectetur libero turpis quis purus. Cras porttitor lectus a lectus tristique malesuada.", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), "Cras sagittis nibh eget hendrerit accumsan. Phasellus convallis rhoncus purus, posuere viverra lectus condimentum sit amet. Pellentesque sem massa, pretium eget enim sed, vehicula eleifend ex. Etiam a ante vel mi venenatis pulvinar vel non dui. Phasellus lectus ex, condimentum at porttitor eget, congue sit amet sem. Sed id vehicula urna, eu ultrices nisl. Aenean mattis ipsum imperdiet nisi tincidunt laoreet. Duis volutpat ante eu semper sollicitudin. Donec tempor vel arcu at sagittis. Aliquam lacinia lacinia felis in dapibus. Quisque sollicitudin sem eget ornare sodales. Vivamus venenatis commodo fringilla. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur lobortis sollicitudin nunc eu ultricies. Donec eget pharetra nisl, ut vehicula orci.", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), "Fusce tristique massa a quam laoreet vestibulum. Suspendisse potenti. Aliquam lobortis fermentum lacus, eget egestas quam euismod ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras suscipit purus est, a rhoncus eros molestie ac. Proin eleifend lobortis tellus eu varius. Praesent a elit aliquet, ornare quam nec, ullamcorper ipsum. Sed at turpis et mi iaculis molestie ut eget augue. Nulla eu urna tristique, faucibus urna vel, euismod dolor.", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), "Vestibulum eu justo nisl. Mauris nisi odio, gravida at dolor eget, commodo dapibus ante. Ut at malesuada erat, in tincidunt orci. Curabitur porta scelerisque posuere. Quisque laoreet scelerisque enim ac dictum. Maecenas vitae nulla lorem. Etiam varius ut ante eget dignissim. Mauris congue lectus eget nisi auctor, a scelerisque quam dictum. Donec id dignissim leo. Aenean posuere vel justo nec posuere. Vivamus non facilisis velit, a ultrices ipsum.", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), "Aliquam erat volutpat. Nullam sodales tempor sem, id pharetra ante venenatis euismod. Morbi blandit quam sem, at lacinia eros venenatis ut. Nulla imperdiet fringilla leo, sed maximus metus aliquam vitae. In nisl sem, sodales in eleifend eget, laoreet eget urna. Mauris mattis sit amet elit id pellentesque. Suspendisse non nisi laoreet turpis venenatis luctus. Fusce quis pulvinar purus, at tempor tellus. Suspendisse eleifend tristique lectus iaculis sodales. Mauris tellus massa, tempus a imperdiet at, tincidunt sit amet enim. Maecenas massa orci, dictum eget ipsum molestie, tempus mattis mi. Quisque gravida at ante et pretium.", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), "20 paragraphes, 1707 mots, 11366 caract\xE8res de Lorem Ipsum g\xE9n\xE9r\xE9", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null)))));
-  };
-
-  // @ts-ignore
-  _proto3.__reactstandin__regenerateByEval = function __reactstandin__regenerateByEval(key, code) {
-    // @ts-ignore
-    this[key] = eval(code);
-  };
-
-  return Sample;
-}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component), _temp)) || _class);
-
-;
-
-(function () {
-  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).default;
-
-  if (!reactHotLoader) {
-    return;
-  }
-
-  reactHotLoader.register(Header, "Header", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\samples\\SimpleHeaderTest\\SimpleHeaderTest.js");
-  reactHotLoader.register(Footer, "Footer", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\samples\\SimpleHeaderTest\\SimpleHeaderTest.js");
-  reactHotLoader.register(Sample, "Sample", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\samples\\SimpleHeaderTest\\SimpleHeaderTest.js");
-})();
-
-;
-
-(function () {
-  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).leaveModule;
-  leaveModule && leaveModule(module);
-})();
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
-
-/***/ }),
-
-/***/ "./src/samples/SimpleHeaderTest/etc/anims.js":
-/*!***************************************************!*\
-  !*** ./src/samples/SimpleHeaderTest/etc/anims.js ***!
-  \***************************************************/
-/*! exports provided: initialPage, initialFooter, pushIn, scrollY */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialPage", function() { return initialPage; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialFooter", function() { return initialFooter; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pushIn", function() { return pushIn; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scrollY", function() { return scrollY; });
-(function () {
-  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
-  enterModule && enterModule(module);
-})();
-
-var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.default.signature : function (a) {
-  return a;
-};
-
-/*
- * Copyright (C) 2019 Nathanael Braun
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-var initialPage = {
-  width: "100%",
-  transform: {
-    translateY: "250px"
-  }
-};
-var initialFooter = {
-  position: "fixed",
-  left: "0%",
-  right: "0%",
-  bottom: "0px",
-  height: "50px",
-  transform: {
-    translateY: "50px"
-  }
-};
-function pushIn(target) {
-  return {
-    anims: [{
-      type: "Tween",
-      target: target,
-      from: 0,
-      duration: 500,
-      easeFn: "easeCircleIn",
-      apply: {
-        transform: {
-          translateZ: "-.2box"
-        },
-        filter: {
-          sepia: 100
-        }
-      }
-    }, {
-      type: "Tween",
-      target: target,
-      from: 500,
-      duration: 500,
-      easeFn: "easeCircleIn",
-      apply: {
-        transform: {
-          translateZ: ".2box"
-        },
-        filter: {
-          sepia: -100
-        }
-      }
-    }, {
-      type: "Tween",
-      target: target,
-      from: 250,
-      duration: 500,
-      easeFn: "easeCircle",
-      apply: {
-        transform: {
-          rotateY: 180
-        }
-      }
-    }]
-  };
-}
-;
-var scrollY = [{
-  type: "Tween",
-  target: "body",
-  from: 0,
-  duration: 50,
-  apply: {
-    //paddingTop: -130,
-    transform: {
-      translateY: "-130px"
-    }
-  }
-}, {
-  type: "Tween",
-  target: "header",
-  from: 0,
-  duration: 50,
-  apply: {
-    height: -130
-  }
-}, {
-  type: "Tween",
-  target: "logo",
-  from: 0,
-  duration: 50,
-  apply: {
-    left: -50,
-    height: -50,
-    marginLeft: 110
-  }
-}, {
-  type: "Tween",
-  target: "body",
-  from: 50,
-  duration: 50,
-  //easeFn  : "easePolyOut",
-  apply: {
-    //paddingTop   : -50,
-    //marginBottom: "50px",
-    transform: {
-      translateY: "-170px"
-    }
-  }
-}, {
-  type: "Tween",
-  target: "footer",
-  from: 50,
-  duration: 50,
-  //easeFn  : "easePolyOut",
-  apply: {
-    transform: {
-      translateY: "-50px"
-    }
-  }
-}, {
-  type: "Tween",
-  target: "header",
-  from: 50,
-  duration: 50,
-  apply: {
-    height: -50
-  }
-}, {
-  type: "Tween",
-  target: "logo",
-  from: 50,
-  duration: 50,
-  apply: {
-    bottom: -50
-  }
-}];
-;
-
-(function () {
-  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).default;
-
-  if (!reactHotLoader) {
-    return;
-  }
-
-  reactHotLoader.register(initialPage, "initialPage", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\samples\\SimpleHeaderTest\\etc\\anims.js");
-  reactHotLoader.register(initialFooter, "initialFooter", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\samples\\SimpleHeaderTest\\etc\\anims.js");
-  reactHotLoader.register(pushIn, "pushIn", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\samples\\SimpleHeaderTest\\etc\\anims.js");
-  reactHotLoader.register(scrollY, "scrollY", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\samples\\SimpleHeaderTest\\etc\\anims.js");
-})();
-
-;
-
-(function () {
-  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).leaveModule;
-  leaveModule && leaveModule(module);
-})();
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
-
-/***/ }),
-
-/***/ "./src/samples/SimpleHeaderTest/samples.scss":
-/*!***************************************************!*\
-  !*** ./src/samples/SimpleHeaderTest/samples.scss ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/sass-loader/lib/loader.js??ref--6-3!./samples.scss */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./src/samples/SimpleHeaderTest/samples.scss");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
-/***/ "./src/samples/SimpleSlider/SimpleSlider.js":
-/*!**************************************************!*\
-  !*** ./src/samples/SimpleSlider/SimpleSlider.js ***!
-  \**************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SimpleSlider; });
-/* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/inheritsLoose */ "./node_modules/@babel/runtime/helpers/inheritsLoose.js");
-/* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _etc_Slider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./etc/Slider */ "./src/samples/SimpleSlider/etc/Slider.js");
-/* harmony import */ var _etc_anims__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./etc/anims */ "./src/samples/SimpleSlider/etc/anims.js");
-/* harmony import */ var _samples_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./samples.scss */ "./src/samples/SimpleSlider/samples.scss");
-/* harmony import */ var _samples_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_samples_scss__WEBPACK_IMPORTED_MODULE_4__);
-
-
-(function () {
-  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
-  enterModule && enterModule(module);
-})();
-
-var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.default.signature : function (a) {
-  return a;
-};
-
-/*
- * Copyright (C) 2019 Nathanael Braun
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-
-
-
-
-var SimpleSlider =
-/*#__PURE__*/
-function (_React$Component) {
-  _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0___default()(SimpleSlider, _React$Component);
-
-  function SimpleSlider() {
-    var _this;
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
-    _this.state = {
-      count: 0
-    };
-    return _this;
-  }
-
-  var _proto = SimpleSlider.prototype;
-
-  _proto.componentDidScroll = function componentDidScroll(pos, axe) {
-    console.log('scroll', pos, axe);
-    this.forceUpdate(); // force update to show scroll pos
-  };
-
-  _proto.render = function render() {
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "SimpleSlider",
-      style: {
-        width: "100%",
-        height: "100%"
-      }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_etc_Slider__WEBPACK_IMPORTED_MODULE_2__["default"], _etc_anims__WEBPACK_IMPORTED_MODULE_3__["default"], react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "item",
-      style: {
-        background: "url(https://source.unsplash.com/600x400/?logo)"
-      }
-    }, "drag me"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "item",
-      style: {
-        background: "url(https://source.unsplash.com/600x400/?bridge)"
-      }
-    }, "drag me"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "item",
-      style: {
-        background: "url(https://source.unsplash.com/600x400/?sky)"
-      }
-    }, "drag me"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "item",
-      style: {
-        background: "url(https://source.unsplash.com/600x400/?cat)"
-      }
-    }, "drag me")));
-  };
-
-  // @ts-ignore
-  _proto.__reactstandin__regenerateByEval = function __reactstandin__regenerateByEval(key, code) {
-    // @ts-ignore
-    this[key] = eval(code);
-  };
-
-  return SimpleSlider;
-}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
-
-
-;
-
-(function () {
-  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).default;
-
-  if (!reactHotLoader) {
-    return;
-  }
-
-  reactHotLoader.register(SimpleSlider, "SimpleSlider", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\samples\\SimpleSlider\\SimpleSlider.js");
-})();
-
-;
-
-(function () {
-  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).leaveModule;
-  leaveModule && leaveModule(module);
-})();
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
-
-/***/ }),
-
-/***/ "./src/samples/SimpleSlider/etc/Slider.js":
-/*!************************************************!*\
-  !*** ./src/samples/SimpleSlider/etc/Slider.js ***!
-  \************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Slider; });
-/* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/inheritsLoose */ "./node_modules/@babel/runtime/helpers/inheritsLoose.js");
-/* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_rtween__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-rtween */ "./src/index.js");
-/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! is */ "./node_modules/is/index.js");
-/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(is__WEBPACK_IMPORTED_MODULE_3__);
-
-
-var _dec, _class, _class2, _temp;
-
-(function () {
-  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
-  enterModule && enterModule(module);
-})();
-
-var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.default.signature : function (a) {
-  return a;
-};
-
-/*
- * Copyright (C) 2019 Nathanael Braun
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-
-
-var Slider = (_dec = Object(react_rtween__WEBPACK_IMPORTED_MODULE_2__["asTweener"])({
-  enableMouseDrag: true
-}), _dec(_class = (_temp = _class2 =
-/*#__PURE__*/
-function (_React$Component) {
-  _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0___default()(Slider, _React$Component);
-
-  function Slider() {
-    var _this;
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
-    _this.state = {};
-    return _this;
-  }
-
-  var _proto = Slider.prototype;
-
-  _proto.componentDidMount = function componentDidMount() {
-    var _this2 = this;
-
-    var _this$props = this.props,
-        autoScroll = _this$props.autoScroll,
-        _this$props$defaultIn = _this$props.defaultIndex,
-        defaultIndex = _this$props$defaultIn === void 0 ? 0 : _this$props$defaultIn;
-
-    if (autoScroll) {
-      this._updater = setTimeout(function (tm) {
-        return _this2.goNext();
-      }, autoScroll);
-    }
-  };
-
-  _proto.goNext = function goNext() {
-    var _this$state = this.state,
-        step = _this$state.step,
-        dec = _this$state.dec,
-        nbItems = _this$state.nbItems,
-        nextIndex = (nbItems + this.state.index + 1) % nbItems;
-    if (this.state.index > nextIndex) this.scrollTo(dec + 100 - step, 0, "scrollX");
-    console.log(nextIndex);
-    this.setState({
-      index: nextIndex
-    });
-  };
-
-  _proto.goTo = function goTo(index) {
-    this.setState({
-      index: index
-    });
-  };
-
-  _proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState, snapshot) {
-    var _this3 = this;
-
-    var _this$props2 = this.props,
-        autoScroll = _this$props2.autoScroll,
-        _this$props2$defaultI = _this$props2.defaultIndex,
-        defaultIndex = _this$props2$defaultI === void 0 ? 0 : _this$props2$defaultI,
-        _this$state2 = this.state,
-        _this$state2$index = _this$state2.index,
-        index = _this$state2$index === void 0 ? this.props.defaultIndex : _this$state2$index,
-        step = _this$state2.step,
-        dec = _this$state2.dec;
-
-    if (prevState.dec !== dec) {
-      this.scrollTo(this._getAxis("scrollX").scrollPos + dec - prevState.dec, 0, "scrollX");
-    }
-
-    if (prevState.index !== index) {
-      if (this._wasUserSnap) {
-        this._wasUserSnap = false;
-      } else {
-        this.scrollTo(dec + step * index + 100, 500, "scrollX");
-      }
-
-      if (autoScroll) {
-        clearTimeout(this._updater);
-        this._updater = setTimeout(function (tm) {
-          return _this3.goNext();
-        }, autoScroll);
-      }
-    }
-  };
-
-  _proto.componentWillUnmount = function componentWillUnmount() {
-    clearTimeout(this._updater);
-  };
-
-  Slider.getDerivedStateFromProps = function getDerivedStateFromProps(props, state) {
-    var _props$defaultIndex = props.defaultIndex,
-        defaultIndex = _props$defaultIndex === void 0 ? 0 : _props$defaultIndex,
-        _props$visibleItems = props.visibleItems,
-        visibleItems = _props$visibleItems === void 0 ? 5 : _props$visibleItems,
-        _props$overlaps = props.overlaps,
-        overlaps = _props$overlaps === void 0 ? 1 / (visibleItems - visibleItems % 2) : _props$overlaps,
-        _childs = props.children,
-        defaultEntering = props.defaultEntering,
-        defaultLeaving = props.defaultLeaving,
-        scrollY = props.scrollY,
-        children = is__WEBPACK_IMPORTED_MODULE_3___default.a.array(_childs) ? _childs : [],
-        _state$index = state.index,
-        index = _state$index === void 0 ? defaultIndex : _state$index,
-        allItems = [].concat(children, children, children).map(function (elem, i) {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.cloneElement(elem, {
-        key: i
-      });
-    }),
-        nbGhostItems = allItems.length,
-        step = 100 * overlaps,
-        dec = children.length * step;
-    return {
-      allItems: allItems,
-      nbGhostItems: nbGhostItems,
-      nbItems: children.length,
-      step: step,
-      dec: dec,
-      tweenLines: allItems.map(function (e, i) {
-        return {
-          scrollX: react_rtween__WEBPACK_IMPORTED_MODULE_2__["tweenTools"].offset([].concat(defaultEntering, react_rtween__WEBPACK_IMPORTED_MODULE_2__["tweenTools"].offset(defaultLeaving, 100)), i * step),
-          scrollY: scrollY
-        };
-      }),
-      windowSize: children.length * step,
-      index: index
-    };
-  };
-
-  _proto.render = function render() {
-    var _this4 = this;
-
-    var _this$props3 = this.props,
-        _this$props3$defaultI = _this$props3.defaultIndex,
-        defaultIndex = _this$props3$defaultI === void 0 ? 0 : _this$props3$defaultI,
-        defaultInitial = _this$props3.defaultInitial,
-        onClick = _this$props3.onClick,
-        _this$state3 = this.state,
-        _this$state3$index = _this$state3.index,
-        index = _this$state3$index === void 0 ? defaultIndex : _this$state3$index,
-        allItems = _this$state3.allItems,
-        nbGhostItems = _this$state3.nbGhostItems,
-        step = _this$state3.step,
-        dec = _this$state3.dec,
-        tweenLines = _this$state3.tweenLines,
-        nbItems = _this$state3.nbItems; //console.log("render", index)
-
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "rSlide slider",
-      style: {
-        width: "100%",
-        height: "100%",
-        userSelect: "none"
-      }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_rtween__WEBPACK_IMPORTED_MODULE_2__["TweenAxis"], {
-      axe: "scrollX",
-      defaultPosition: 100 + dec + index * step,
-      size: nbGhostItems * step + 100,
-      scrollableWindow: 4 * step,
-      inertia: {
-        shouldLoop: function shouldLoop(v) {
-          var windowSize = _this4.state.windowSize;
-          if (v > 100 + windowSize * 2) return -windowSize;
-          if (v < 100 + windowSize) return windowSize;
-        },
-        willSnap: function willSnap(i, v) {
-          var nbItems = _this4.state.nbItems;
-          _this4._wasUserSnap = true;
-
-          _this4.setState({
-            index: i % nbItems
-          }); //console.log(i % nbItems, v)
-
-        },
-        value: 100 + dec + index * step,
-        wayPoints: allItems.map(function (child, i) {
-          return {
-            at: 100 + i * step
-          };
-        })
-      }
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_rtween__WEBPACK_IMPORTED_MODULE_2__["TweenAxis"], {
-      axe: "scrollY",
-      size: 1000,
-      defaultPosition: 500
-    }), allItems.map(function (Child, i) {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_rtween__WEBPACK_IMPORTED_MODULE_2__["TweenRef"], {
-        key: i,
-        initial: defaultInitial,
-        tweenLines: tweenLines[i]
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "slide",
-        onClick: onClick && function (e) {
-          return onClick(e, i % nbItems, _this4);
-        }
-      }, Child));
-    }));
-  };
-
-  // @ts-ignore
-  _proto.__reactstandin__regenerateByEval = function __reactstandin__regenerateByEval(key, code) {
-    // @ts-ignore
-    this[key] = eval(code);
-  };
-
-  return Slider;
-}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component), _class2.defaultProps = {
-  defaultIndex: 0,
-  visibleItems: 10,
-  overlaps: 1 / 4,
-  defaultInitial: {},
-  defaultEntering: [],
-  defaultLeaving: [],
-  scrollY: []
-}, _temp)) || _class);
-
-;
-;
-
-(function () {
-  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).default;
-
-  if (!reactHotLoader) {
-    return;
-  }
-
-  reactHotLoader.register(Slider, "Slider", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\samples\\SimpleSlider\\etc\\Slider.js");
-})();
-
-;
-
-(function () {
-  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).leaveModule;
-  leaveModule && leaveModule(module);
-})();
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
-
-/***/ }),
-
-/***/ "./src/samples/SimpleSlider/etc/anims.js":
-/*!***********************************************!*\
-  !*** ./src/samples/SimpleSlider/etc/anims.js ***!
-  \***********************************************/
-/*! exports provided: defaultInitial, scrollY, defaultEntering, defaultLeaving, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultInitial", function() { return defaultInitial; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scrollY", function() { return scrollY; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultEntering", function() { return defaultEntering; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultLeaving", function() { return defaultLeaving; });
-(function () {
-  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
-  enterModule && enterModule(module);
-})();
-
-var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.default.signature : function (a) {
-  return a;
-};
-
-/*
- * Copyright (C) 2019 Nathanael Braun
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-var stepAngle = "20deg";
-var defaultInitial = {
-  position: "absolute",
-  //height   : "100%",
-  top: "50%",
-  left: "50%",
-  zIndex: 50,
-  opacity: 0,
-  transform: [{
-    perspective: "1250px",
-    translateY: "-10000px",
-    rotate: "-" + stepAngle
-  }, {
-    translateY: "10000px",
-    translateZ: "-500px",
-    rotateY: "-65deg" //rotateX   : "-20deg",
-
-  }, {
-    translateX: "-50%",
-    translateY: "-50%"
-  }]
-};
-var scrollY = [{
-  type: "Tween",
-  from: 0,
-  duration: 1000,
-  apply: {
-    transform: [{
-      translateY: "7500px" //rotate     : "-" + stepAngle
-
-    }, {
-      translateY: "-7500px" //rotateX   : "40deg",
-
-    }, {}]
-  }
-}];
-var defaultEntering = [{
-  type: "Tween",
-  from: 0,
-  duration: 100,
-  //easeFn  : "easePolyIn",
-  apply: {
-    transform: {
-      rotate: stepAngle
-    },
-    zIndex: 150
-  }
-}, {
-  type: "Tween",
-  from: 0,
-  duration: 35,
-  apply: {
-    opacity: 1
-  }
-}, {
-  type: "Tween",
-  from: 40,
-  duration: 60,
-  apply: {
-    transform: [{}, {
-      rotateY: "65deg",
-      translateZ: "500px" //rotateX: "-90deg",
-
-    }]
-  }
-}];
-var defaultLeaving = [{
-  type: "Tween",
-  from: 0,
-  duration: 60,
-  apply: {
-    transform: [{}, {
-      rotateY: "65deg",
-      translateZ: "-500px"
-    }]
-  }
-}, {
-  type: "Tween",
-  from: 65,
-  duration: 35,
-  apply: {
-    opacity: -1
-  }
-}, {
-  type: "Tween",
-  from: 0,
-  duration: 100,
-  //easeFn  : "easePolyOut",
-  apply: {
-    zIndex: -150,
-    transform: {
-      rotate: stepAngle
-    }
-  }
-}];
-var _default = {
-  defaultLeaving: defaultLeaving,
-  defaultEntering: defaultEntering,
-  defaultInitial: defaultInitial,
-  scrollY: scrollY
-};
-/* harmony default export */ __webpack_exports__["default"] = (_default);
-;
-
-(function () {
-  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).default;
-
-  if (!reactHotLoader) {
-    return;
-  }
-
-  reactHotLoader.register(stepAngle, "stepAngle", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\samples\\SimpleSlider\\etc\\anims.js");
-  reactHotLoader.register(defaultInitial, "defaultInitial", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\samples\\SimpleSlider\\etc\\anims.js");
-  reactHotLoader.register(scrollY, "scrollY", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\samples\\SimpleSlider\\etc\\anims.js");
-  reactHotLoader.register(defaultEntering, "defaultEntering", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\samples\\SimpleSlider\\etc\\anims.js");
-  reactHotLoader.register(defaultLeaving, "defaultLeaving", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\samples\\SimpleSlider\\etc\\anims.js");
-  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\samples\\SimpleSlider\\etc\\anims.js");
-})();
-
-;
-
-(function () {
-  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).leaveModule;
-  leaveModule && leaveModule(module);
-})();
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
-
-/***/ }),
-
-/***/ "./src/samples/SimpleSlider/samples.scss":
-/*!***********************************************!*\
-  !*** ./src/samples/SimpleSlider/samples.scss ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/sass-loader/lib/loader.js??ref--6-3!./samples.scss */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./src/samples/SimpleSlider/samples.scss");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
-/***/ "./src/samples/SimpleTest/SimpleTest.js":
-/*!**********************************************!*\
-  !*** ./src/samples/SimpleTest/SimpleTest.js ***!
-  \**********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Sample; });
-/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js");
-/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/inheritsLoose */ "./node_modules/@babel/runtime/helpers/inheritsLoose.js");
-/* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_rtween__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-rtween */ "./src/index.js");
-/* harmony import */ var _samples_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./samples.scss */ "./src/samples/SimpleTest/samples.scss");
-/* harmony import */ var _samples_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_samples_scss__WEBPACK_IMPORTED_MODULE_4__);
-
-
-
-var _dec, _class, _temp;
-
-(function () {
-  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
-  enterModule && enterModule(module);
-})();
-
-var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.default.signature : function (a) {
-  return a;
-};
-
-/*
- * Copyright (C) 2019 Nathanael Braun
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-
-
-var pushIn = [{
-  type: "Tween",
-  from: 0,
-  duration: 500,
-  easeFn: "easeCircleIn",
-  apply: {
-    transform: [{}, {
-      translateZ: "-.2box"
-    }],
-    filter: {
-      sepia: 100
-    }
-  }
-}, {
-  type: "Tween",
-  from: 500,
-  duration: 500,
-  easeFn: "easeCircleIn",
-  apply: {
-    transform: [{}, {
-      translateZ: ".2box"
-    }],
-    filter: {
-      sepia: -100
-    }
-  }
-}, {
-  type: "Tween",
-  from: 250,
-  duration: 500,
-  apply: {
-    transform: [{}, {
-      rotateY: 180
-    }]
-  }
-}];
-var scrollAnims = {
-  scrollX: [{
-    type: "Tween",
-    from: 0,
-    duration: 200,
-    apply: {
-      transform: {
-        translateX: "-1box"
-      }
-    }
-  }, {
-    type: "Tween",
-    from: 0,
-    duration: 100,
-    apply: {
-      transform: {
-        rotateX: 30
-      }
-    }
-  }, {
-    type: "Tween",
-    from: 100,
-    duration: 100,
-    apply: {
-      transform: {
-        rotateX: 30
-      }
-    }
-  }],
-  scrollY: [{
-    type: "Tween",
-    from: 0,
-    duration: 200,
-    apply: {
-      transform: {
-        translateY: "-1box"
-      }
-    }
-  }, {
-    type: "Tween",
-    from: 0,
-    duration: 100,
-    apply: {
-      transform: {
-        rotateY: -30
-      }
-    }
-  }, {
-    type: "Tween",
-    from: 100,
-    duration: 100,
-    apply: {
-      transform: {
-        rotateY: -30
-      }
-    }
-  }]
-};
-var Sample = (_dec = Object(react_rtween__WEBPACK_IMPORTED_MODULE_3__["asTweener"])({
-  enableMouseDrag: true
-}), _dec(_class = (_temp =
-/*#__PURE__*/
-function (_React$Component) {
-  _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1___default()(Sample, _React$Component);
-
-  function Sample() {
-    var _this;
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
-    _this.state = {
-      count: 0
-    };
-    return _this;
-  }
-
-  var _proto = Sample.prototype;
-
-  _proto.componentDidScroll = function componentDidScroll(pos, axe) {
-    console.log('scroll', pos, axe);
-    this.forceUpdate(); // force update to show scroll pos
-  };
-
-  _proto.render = function render() {
-    var _this2 = this;
-
-    var scrollAnims_u = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, scrollAnims);
-
-    return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-      className: "SimpleTest",
-      style: {
-        width: "100%",
-        height: "100%"
-      }
-    }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_rtween__WEBPACK_IMPORTED_MODULE_3__["TweenAxis"], {
-      axe: "scrollY",
-      defaultPosition: 100
-    }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_rtween__WEBPACK_IMPORTED_MODULE_3__["TweenAxis"], {
-      axe: "scrollX",
-      defaultPosition: 100
-    }), "hello ! ", this.state.count, " concurent anims ", react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("br", null), "scrollPos : ", react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("pre", null, JSON.stringify(this.getAxisState(), null, 2)), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("br", null), "y:", react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("button", {
-      onClick: function onClick(e) {
-        return _this2.scrollTo(0, 500);
-      }
-    }, "( go to 0 )"), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("button", {
-      onClick: function onClick(e) {
-        return _this2.scrollTo(200, 500);
-      }
-    }, "( go to 200 )"), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("br", null), "x:", react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("button", {
-      onClick: function onClick(e) {
-        return _this2.scrollTo(0, 500, "scrollX");
-      }
-    }, "( go to 0 )"), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("button", {
-      onClick: function onClick(e) {
-        return _this2.scrollTo(200, 500, "scrollX");
-      }
-    }, "( go to 200 )"), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_rtween__WEBPACK_IMPORTED_MODULE_3__["TweenRef"], {
-      id: "testItem",
-      initial: {
-        position: "absolute",
-        display: "inline-block",
-        width: "15em",
-        height: "15em",
-        cursor: "pointer",
-        backgroundColor: "red",
-        overflow: "hidden",
-        margin: "-7.5em 0 0 -7.5em",
-        top: "0%",
-        left: "0%",
-        transform: {
-          translateZ: "0box",
-          translateX: "1box",
-          translateY: "1box",
-          rotateX: -30,
-          rotateY: 30
-        }
-      },
-      tweenLines: scrollAnims_u
-    }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-      onClick: function onClick(e) {
-        _this2.setState({
-          count: _this2.state.count + 1
-        });
-
-        _this2.pushAnim(react_rtween__WEBPACK_IMPORTED_MODULE_3__["tweenTools"].target(pushIn, "testItem"), function () {
-          _this2.setState({
-            count: _this2.state.count - 1
-          });
-        });
-      },
-      style: {}
-    }, "click me !")));
-  };
-
-  // @ts-ignore
-  _proto.__reactstandin__regenerateByEval = function __reactstandin__regenerateByEval(key, code) {
-    // @ts-ignore
-    this[key] = eval(code);
-  };
-
-  return Sample;
-}(react__WEBPACK_IMPORTED_MODULE_2___default.a.Component), _temp)) || _class);
-
-;
-
-(function () {
-  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).default;
-
-  if (!reactHotLoader) {
-    return;
-  }
-
-  reactHotLoader.register(pushIn, "pushIn", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\samples\\SimpleTest\\SimpleTest.js");
-  reactHotLoader.register(scrollAnims, "scrollAnims", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\samples\\SimpleTest\\SimpleTest.js");
-  reactHotLoader.register(Sample, "Sample", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\samples\\SimpleTest\\SimpleTest.js");
-})();
-
-;
-
-(function () {
-  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).leaveModule;
-  leaveModule && leaveModule(module);
-})();
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
-
-/***/ }),
-
-/***/ "./src/samples/SimpleTest/samples.scss":
-/*!*********************************************!*\
-  !*** ./src/samples/SimpleTest/samples.scss ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/sass-loader/lib/loader.js??ref--6-3!./samples.scss */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./src/samples/SimpleTest/samples.scss");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
-/***/ "./src/samples/samples.scss":
-/*!**********************************!*\
-  !*** ./src/samples/samples.scss ***!
-  \**********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../node_modules/css-loader??ref--6-1!../../node_modules/postcss-loader/src??ref--6-2!../../node_modules/sass-loader/lib/loader.js??ref--6-3!./samples.scss */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./src/samples/samples.scss");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
 
 /***/ }),
 
@@ -36087,14 +33725,14 @@ var _default = Dom;
     return;
   }
 
-  reactHotLoader.register(floatCut, "floatCut", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\utils.js");
-  reactHotLoader.register(min, "min", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\utils.js");
-  reactHotLoader.register(max, "max", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\utils.js");
-  reactHotLoader.register(isBrowser, "isBrowser", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\utils.js");
-  reactHotLoader.register(_dom, "_dom", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\utils.js");
-  reactHotLoader.register(__, "__", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\utils.js");
-  reactHotLoader.register(Dom, "Dom", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\utils.js");
-  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\utils.js");
+  reactHotLoader.register(floatCut, "floatCut", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\utils.js");
+  reactHotLoader.register(min, "min", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\utils.js");
+  reactHotLoader.register(max, "max", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\utils.js");
+  reactHotLoader.register(isBrowser, "isBrowser", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\utils.js");
+  reactHotLoader.register(_dom, "_dom", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\utils.js");
+  reactHotLoader.register(__, "__", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\utils.js");
+  reactHotLoader.register(Dom, "Dom", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\utils.js");
+  reactHotLoader.register(_default, "default", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\utils.js");
 })();
 
 ;
@@ -36227,8 +33865,8 @@ function withTweener() {
     return;
   }
 
-  reactHotLoader.register(SimpleObjectProto, "SimpleObjectProto", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\withTweener.js");
-  reactHotLoader.register(withTweener, "withTweener", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-rtween\\src\\withTweener.js");
+  reactHotLoader.register(SimpleObjectProto, "SimpleObjectProto", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\withTweener.js");
+  reactHotLoader.register(withTweener, "withTweener", "G:\\n8tz\\various\\www.mamasound.fr\\libs\\react-voodoo\\src\\withTweener.js");
 })();
 
 ;
@@ -36242,4 +33880,4 @@ function withTweener() {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=samples.js.map
+//# sourceMappingURL=react-voodoo.js.map

@@ -22,7 +22,7 @@ import GpsOffIcon     from '@material-ui/icons/GpsOff';
 import {Comps, Views} from 'App/ui';
 import moment         from "moment";
 import React          from "react";
-import {TweenRef}     from "react-rtween";
+import {TweenRef}     from "react-voodoo";
 import {scopeToProps} from "rscopes";
 
 @scopeToProps("appState", "Anims", "UserGeoLocation")

@@ -18,7 +18,7 @@
 import stores                         from 'App/stores/(*).js';
 import {Comps, Views}                 from 'App/ui';
 import React                          from "react";
-import {TweenRef, withTweener}        from "react-rtween";
+import {TweenRef, withTweener}        from "react-voodoo";
 import {asRef, asStore, withStateMap} from "rescope-spells";
 import {reScope, scopeToProps}        from "rscopes";
 

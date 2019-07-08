@@ -17,7 +17,7 @@
  */
 import is                                           from "is";
 import React                                        from "react";
-import {asTweener, TweenAxis, TweenRef, tweenTools} from "react-rtween";
+import {asTweener, TweenAxis, TweenRef, tweenTools} from "react-voodoo";
 
 @asTweener({ enableMouseDrag: true })
 export default class Slider extends React.Component {

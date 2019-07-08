@@ -16,7 +16,7 @@
  */
 
 import React                                        from "react";
-import {asTweener, TweenRef, TweenAxis, tweenTools} from "react-rtween";
+import {asTweener, TweenRef, TweenAxis, tweenTools} from "react-voodoo";
 import "./samples.scss";
 
 

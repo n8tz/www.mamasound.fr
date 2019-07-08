@@ -26,7 +26,7 @@
 
 import Editable   from "App/ui/Editable";
 import React      from "react";
-import {TweenRef} from "react-rtween";
+import {TweenRef} from "react-voodoo";
 
 export default class page extends React.Component {
 	state = {

@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 import React                                        from "react";
-import {asTweener, TweenRef, TweenAxis, tweenTools} from "react-rtween";
+import {asTweener, TweenRef, TweenAxis, tweenTools} from "react-voodoo";
 import is                                           from "is";
 
 @asTweener({ enableMouseDrag: true })

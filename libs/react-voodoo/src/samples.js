@@ -18,7 +18,7 @@ import React    from "react";
 import ReactDom from "react-dom";
 
 import "./samples/samples.scss";
-import Samples  from "react-rtween/samples/*/(*).js"
+import Samples  from "react-voodoo/samples/*/(*).js"
 
 
 class App extends React.Component {

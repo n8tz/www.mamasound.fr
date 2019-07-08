@@ -23,7 +23,7 @@ import anims                                 from 'App/ui/anims/(*).js';
 import Fab                                   from '@material-ui/core/Fab';
 import stores                                from 'App/stores/(*).js';
 import Views                                 from 'App/ui/components/(*).js';
-import {asTweener, TweenRef}                 from "react-rtween";
+import {asTweener, TweenRef}                 from "react-voodoo";
 import {FacebookProvider, Page}              from 'react-facebook';
 import {ContextMenu}                         from "../../App";
 import {Comps}                               from "../index";

@@ -1,24 +1,24 @@
-<h1 align="center">react-rtween</h1>
+<h1 align="center">react-voodoo</h1>
 <p align="center">Fast, scalable, multiscope, reversible, delta based, tween composition engine</p>
 
 ___
 
-<a href="https://www.npmjs.com/package/react-rtween">
-<img src="https://img.shields.io/npm/v/react-rtween.svg" alt="Npm version" /></a>
+<a href="https://www.npmjs.com/package/react-voodoo">
+<img src="https://img.shields.io/npm/v/react-voodoo.svg" alt="Npm version" /></a>
 
 
-## wtf is react-rTween ?
+## wtf is react-voodoo ?
 
 - rTween engine allow to apply forward and backward multiples tweens on same properties and multiple objects
 - Allow **live composition, hot switch of multiple** scrollable animation
 - etc
 
 
-## Draft [sample](http://htmlpreview.github.io/?https://github.com/n8tz/react-rtween/blob/master/samples/index.html)
+## Draft [sample](http://htmlpreview.github.io/?https://github.com/n8tz/react-voodoo/blob/master/samples/index.html)
 
 ```jsx
 import React                                        from "react";
-import {asTweener, TweenRef, TweenAxis, tweenTools} from "react-rtween";
+import {asTweener, TweenRef, TweenAxis, tweenTools} from "react-voodoo";
 
 
 let pushIn        = [

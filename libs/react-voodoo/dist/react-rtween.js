@@ -1,5 +1,5 @@
 /*!
- * react-rtween
+ * react-voodoo
  * Copyright (C) 2019  Nathanael Braun
  * 
  * This program is free software: you can redistribute it and/or modify
@@ -4677,4 +4677,4 @@ module.exports = require("@babel/runtime/helpers/assertThisInitialized");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=react-rtween.js.map
+//# sourceMappingURL=react-voodoo.js.map
