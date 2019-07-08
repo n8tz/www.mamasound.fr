@@ -29,7 +29,7 @@ import Tab                   from '@material-ui/core/Tab';
 import moment                from "moment";
 import stores                from 'App/stores/(*).js';
 import {Views}                 from 'App/ui';
-import {asTweener, TweenRef} from "react-rtween";
+import {asTweener, TweenRef} from "react-voodoo";
 import scopes                from 'App/scopes/(*).js';
 
 

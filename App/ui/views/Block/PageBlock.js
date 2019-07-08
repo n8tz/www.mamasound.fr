@@ -23,7 +23,7 @@ import anims                                 from 'App/ui/anims/(*).js';
 
 import stores                from 'App/stores/(*).js';
 import {Comps, Views}        from 'App/ui';
-import {asTweener, TweenRef} from "react-rtween";
+import {asTweener, TweenRef} from "react-voodoo";
 
 
 //@reScope(

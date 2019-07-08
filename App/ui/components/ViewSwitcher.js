@@ -24,7 +24,7 @@ import anims                                 from 'App/ui/anims/(*).js';
 
 import moment                                       from "moment";
 import {Views}                                      from 'App/ui';
-import {asTweener, TweenAxis, TweenRef, tweenTools} from "react-rtween";
+import {asTweener, TweenAxis, TweenRef, tweenTools} from "react-voodoo";
 
 
 @scopeToProps("Selected", "DataProvider")

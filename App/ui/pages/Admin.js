@@ -22,7 +22,7 @@ import {Comps, Views}                        from 'App/ui';
 import ReactDom                              from "react-dom";
 
 import {withStateMap, asRef, asStore}   from "rescope-spells";
-import {asTweener, TweenRef, TweenAxis} from "react-rtween";
+import {asTweener, TweenRef, TweenAxis} from "react-voodoo";
 
 @scopeToProps("appState", "Anims", "Selected")
 export default class Admin extends React.Component {
