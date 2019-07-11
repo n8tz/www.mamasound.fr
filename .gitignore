@@ -31,6 +31,9 @@ User.bson.gz
 .tmp
 node_modules
 .idea
-/dist
 /upload
 /public
+/dist
+/docker
+/dist.admin
+/dist.api
