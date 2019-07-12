@@ -142,6 +142,7 @@ export default class ImageEditor extends React.Component {
 	
 	_resize = () => {
 	};
+	
 	componentDidMount() {
 		//window.addEventListener('resize', this._resize);
 		imageCompression
@@ -155,9 +156,9 @@ export default class ImageEditor extends React.Component {
 			.then(
 				( file ) => {
 					let options = {
-						maxSizeMB: 1,
+						maxSizeMB       : 1,
 						maxWidthOrHeight: 1920,
-						useWebWorker: true
+						useWebWorker    : true
 					}
 					return imageCompression(file, options)
 				})
@@ -182,6 +183,10 @@ export default class ImageEditor extends React.Component {
 		
 		
 		//this.bindEventHandlers(this.props);
+	}
+	
+	componentWillUnmount() {
+		this.imageEditorInst && this.imageEditorInst.destroy();
 	}
 	
 	shouldComponentUpdate( nextProps, nextState, nextContext ) {
