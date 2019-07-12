@@ -158,6 +158,13 @@ export default class Media extends React.Component {
 			})
 	}
 	
+	onEditorSave = ( value ) => {
+		
+		this.props.onChange &&
+		this.props.onChange({ target: this.getValue({ value }) });
+		this.setState({ value });
+	}
+	
 	
 	showUploader = ( e ) => {
 		this.setState({ showUploader: true })
@@ -206,8 +213,8 @@ export default class Media extends React.Component {
 					<Button
 						title="Editer"
 						//color={ viewmode == "input" && "primary" }
-						onClick={e => $actions.newWidget("ImageEditor", { src: _value })}>
-						Modifier l'url
+						onClick={e => $actions.newWidget("ImageEditor", { src: _value, onSave: this.onEditorSave })}>
+						Editer
 					</Button>
 					
 					{

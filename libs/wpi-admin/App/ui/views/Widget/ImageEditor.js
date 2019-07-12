@@ -31,7 +31,8 @@ if ( typeof window !== "undefined" ) {
 //@scopeToProps("MamaXls", "appState", "Importer", "Exporter")
 export default class ImageEditor extends React.Component {
 	static propTypes = {
-		src: PropTypes.string,
+		src   : PropTypes.string,
+		onSave: PropTypes.func,
 	};
 	state            = {
 		src: undefined
@@ -97,6 +98,7 @@ export default class ImageEditor extends React.Component {
 			<div className={"ImageEditor"}
 			     onDragEnter={this.showUploader}
 			>
+				{/*1223*/}
 				<div ref={this.rootEl}/>
 				{
 					<DropzoneComponent

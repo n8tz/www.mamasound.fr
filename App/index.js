@@ -16,14 +16,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 import "core-js";
-import "core-js/features/object/from-entries";
 import "core-js/es/object/assign";
-import AppScope         from './App.scope';
-import shortid          from 'shortid';
-import ReactDom         from 'react-dom';
+import "core-js/features/object/from-entries";
 import React            from "react";
+import ReactDom         from 'react-dom';
 import {renderToString} from "react-dom/server";
-import {Scope, reScope} from "react-rescope";
+import {reScope, Scope} from "react-rescope";
+import shortid          from 'shortid';
+import AppScope         from './App.scope';
+//import uiComps                              from "App/ui";
 
 const ctrl = {
 	
@@ -43,11 +44,17 @@ const ctrl = {
 		ReactDom.render(<App/>, node);
 		
 		if ( process.env.NODE_ENV !== 'production' && module.hot ) {
-			//module.hot.accept('App/App', () => {
-			//	state = cScope.serialize({ alias: "App" });
-			//	cScope.destroy();
-			//	ctrl.renderTo(node, state)
-			//});
+			module.hot.accept('./App', () => {
+				state = cScope.serialize({ alias: "App" });
+				cScope.destroy();
+				cScope = new Scope(AppScope, {
+					id         : "App",
+					autoDestroy: true
+				});
+				App    = reScope(cScope)(require('./App').default);
+				cScope.restore(state);
+				ReactDom.render(<App/>, node);
+			});
 			module.hot.accept('App/App.scope', () => {
 				cScope.register(AppScope)
 			});
@@ -94,14 +101,14 @@ const ctrl = {
 			    id         : rid,
 			    autoDestroy: false
 		    }), App = reScope(cScope)(require('./App').default);
-
+		
 		if ( cfg.state ) {
 			cScope.restore(cfg.state, { alias: "App" });
 		}
 		else {
 			cScope.state.Anims = { currentBrkPts: cfg.device };
 		}
-
+		
 		let html,
 		    appHtml     = renderToString(<App location={cfg.location}/>),
 		    stable      = cScope.isStableTree();
