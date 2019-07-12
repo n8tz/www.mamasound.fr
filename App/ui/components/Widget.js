@@ -109,7 +109,7 @@ export default class Widget extends React.Component {
 					title={ title || record.props && record.props.title }
 					//subheader={ record && record.label }
 				/>
-				<div className={ " content" } onClick={ e => e.preventDefault() }>
+				<div className={ " content" }>
 					{ children }
 				</div>
 			</Rnd>

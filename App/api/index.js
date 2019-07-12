@@ -77,6 +77,7 @@ export function service( server ) {
 	server.use(express.static(process.cwd() + '/static'));
 	server.use("/medias", express.static(path.join(process.cwd(), config.UPLOAD_DIR)));
 	server.use("/medias", ( req, res, next ) => {
+		
 		res.redirect(config.ALT_MEDIA_URL + req.url);
 		
 	});

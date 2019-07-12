@@ -11,17 +11,98 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-import utils               from "App/utils/(*).js";
-import path                from "path";
-import PropTypes           from "prop-types";
-import React               from "react";
-import {DropzoneComponent} from "react-dropzone-component";
+import utils     from "App/utils/(*).js";
+import path      from "path";
+import PropTypes from "prop-types";
+import React     from "react";
 
-let TuiImageEditor;
+let TuiImageEditor, blackTheme;
 if ( typeof window !== "undefined" ) {
 	require('react-dropzone-component/styles/filepicker.css');
 	require('tui-image-editor/dist/tui-image-editor.css');
 	TuiImageEditor = require('tui-image-editor');
+	blackTheme     = {
+		'common.bi.image'       : 'about:blank',
+		'common.bisize.width'   : '0px',
+		'common.bisize.height'  : '0px',
+		'common.backgroundImage': 'none',
+		'common.backgroundColor': '#1e1e1e',
+		'common.border'         : '0px',
+		
+		// header
+		'header.backgroundImage': 'none',
+		'header.backgroundColor': 'transparent',
+		'header.border'         : '0px',
+		
+		// load button
+		'loadButton.backgroundColor': '#fff',
+		'loadButton.border'         : '1px solid #ddd',
+		'loadButton.color'          : '#222',
+		'loadButton.fontFamily'     : '\'Noto Sans\', sans-serif',
+		'loadButton.fontSize'       : '12px',
+		
+		// download button
+		'downloadButton.backgroundColor': '#fdba3b',
+		'downloadButton.border'         : '1px solid #fdba3b',
+		'downloadButton.color'          : '#fff',
+		'downloadButton.fontFamily'     : '\'Noto Sans\', sans-serif',
+		'downloadButton.fontSize'       : '12px',
+		
+		// main icons
+		'menu.normalIcon.path'  : require('tui-image-editor/dist/svg/icon-d.svg'),
+		'menu.normalIcon.name'  : 'icon-d',
+		'menu.activeIcon.path'  : require('tui-image-editor/dist/svg/icon-b.svg'),
+		'menu.activeIcon.name'  : 'icon-b',
+		'menu.disabledIcon.path': require('tui-image-editor/dist/svg/icon-a.svg'),
+		'menu.disabledIcon.name': 'icon-a',
+		'menu.hoverIcon.path'   : require('tui-image-editor/dist/svg/icon-c.svg'),
+		'menu.hoverIcon.name'   : 'icon-c',
+		'menu.iconSize.width'   : '24px',
+		'menu.iconSize.height'  : '24px',
+		
+		// submenu primary color
+		'submenu.backgroundColor': '#1e1e1e',
+		'submenu.partition.color': '#3c3c3c',
+		
+		// submenu icons
+		'submenu.normalIcon.path': require('tui-image-editor/dist/svg/icon-d.svg'),
+		'submenu.normalIcon.name': 'icon-d',
+		'submenu.activeIcon.path': require('tui-image-editor/dist/svg/icon-c.svg'),
+		'submenu.activeIcon.name': 'icon-c',
+		'submenu.iconSize.width' : '32px',
+		'submenu.iconSize.height': '32px',
+		
+		// submenu labels
+		'submenu.normalLabel.color'     : '#8a8a8a',
+		'submenu.normalLabel.fontWeight': 'lighter',
+		'submenu.activeLabel.color'     : '#fff',
+		'submenu.activeLabel.fontWeight': 'lighter',
+		
+		// checkbox style
+		'checkbox.border'         : '0px',
+		'checkbox.backgroundColor': '#fff',
+		
+		// range style
+		'range.pointer.color': '#fff',
+		'range.bar.color'    : '#666',
+		'range.subbar.color' : '#d1d1d1',
+		
+		'range.disabledPointer.color': '#414141',
+		'range.disabledBar.color'    : '#282828',
+		'range.disabledSubbar.color' : '#414141',
+		
+		'range.value.color'          : '#fff',
+		'range.value.fontWeight'     : 'lighter',
+		'range.value.fontSize'       : '11px',
+		'range.value.border'         : '1px solid #353535',
+		'range.value.backgroundColor': '#151515',
+		'range.title.color'          : '#fff',
+		'range.title.fontWeight'     : 'lighter',
+		
+		// colorpicker style
+		'colorpicker.button.border': '1px solid #1e1e1e',
+		'colorpicker.title.color'  : '#fff'
+	};
 }
 //@reScope(
 //	{
@@ -39,11 +120,7 @@ export default class ImageEditor extends React.Component {
 	};
 	tuiConfig        = {
 		includeUI     : {
-			loadImage      : {
-				//path: utils.getMediaSrc(_value),
-				//name: path.basename(_value)
-			},
-			//theme          : myTheme,
+			theme          : blackTheme,
 			menu           : ['shape', 'filter'],
 			initMenu       : 'filter',
 			uiSize         : {
@@ -66,6 +143,7 @@ export default class ImageEditor extends React.Component {
 			...this.tuiConfig,
 			includeUI: {
 				...this.tuiConfig.includeUI,
+				theme    : blackTheme,
 				loadImage: {
 					path: utils.getMediaSrc(this.props.src),
 					name: path.basename(this.props.src)
@@ -81,12 +159,10 @@ export default class ImageEditor extends React.Component {
 		return nextProps.src !== this.props.src;
 	}
 	
-	showUploader = ( e ) => {
-		this.setState({ showUploader: true })
-	};
-	hideUploader = ( e ) => {
-		this.setState({ showUploader: false })
-	};
+	save = () => {
+		debugger
+		//console.log(this.imageEditorInst.toDataURL())
+	}
 	
 	render() {
 		let { $actions, src }
@@ -96,44 +172,10 @@ export default class ImageEditor extends React.Component {
 		
 		return (
 			<div className={"ImageEditor"}
-			     onDragEnter={this.showUploader}
 			>
 				{/*1223*/}
+				<button onClick={this.save}>save</button>
 				<div ref={this.rootEl}/>
-				{
-					<DropzoneComponent
-						onDragLeave={this.hideUploader}
-						className={!showUploader && "hidden"}
-						ref="dropzone"
-						eventHandlers={{
-							addedfile: file => {
-								$actions.addXLSfile(
-									file,
-									e => this.refs.dropzone.dropzone.removeFile(file)
-								);
-							},
-							//complete: this.uploadSuccess,
-							drop     : this.hideUploader
-						}}
-						style={{ width: "100%", height: "100%", background: "#ffffff5c" }}
-						
-						config={{
-							parallelUploads : 100,
-							maxFiles        : 100,
-							iconFiletypes   : [".xls", ".csv", ".xslx"],
-							showFiletypeIcon: true,
-							autoDiscover    : false,
-							postUrl         : "no-url"
-						}}
-						djsConfig={{
-							parallelUploads   : 100,
-							maxFiles          : 100,
-							autoProcessQueue  : false,
-							withCredentials   : true,
-							autoDiscover      : false,
-							dictDefaultMessage: "Drop here to parse"
-						}}/>
-				}
 			</div>
 		);
 	}
