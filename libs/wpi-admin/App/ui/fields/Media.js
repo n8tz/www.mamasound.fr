@@ -15,16 +15,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React               from "react";
-import Image               from "App/ui/components/Image";
-import Player              from "App/ui/components/Player";
-import cfg                 from "App/config";
-import Input               from "App/ui/fields/Text";
 //import Paper               from "App/ui/kit/Paper";
 //import audioExtensions     from "audio-extensions";
 //import videoExtensions     from "video-extensions";
 //import imageExtensions     from "image-extensions";
 import Button              from '@material-ui/core/Button';
+import cfg                 from "App/config";
+import Image               from "App/ui/components/Image";
+import Player              from "App/ui/components/Player";
+import Input               from "App/ui/fields/Text";
+import {asFieldType}       from "App/ui/spells";
+import React               from "react";
 import {DropzoneComponent} from 'react-dropzone-component';
 
 
@@ -35,8 +36,6 @@ if ( typeof window !== "undefined" )
  *
  * return/value : url of the uploaded file
  */
-
-import {asFieldType} from "App/ui/spells";
 
 @asFieldType
 export default class Media extends React.Component {
@@ -201,6 +200,13 @@ export default class Media extends React.Component {
 						title="Modifier l'url"
 						//color={ viewmode == "input" && "primary" }
 						onClick={e => this.setMode("input")}>
+						Modifier l'url
+					</Button>
+					
+					<Button
+						title="Editer"
+						//color={ viewmode == "input" && "primary" }
+						onClick={e => $actions.newWidget("ImageEditor", { src: _value })}>
 						Modifier l'url
 					</Button>
 					

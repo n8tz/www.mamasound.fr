@@ -6,7 +6,8 @@
       "extractCss": true,
       "production": true,
       "DefinePluginCfg": {
-        "__ADMIN__": false
+        "__ADMIN__": false,
+        "__IS_SERVER__": false
       },
       "resolve": {
         "alias": {
@@ -42,7 +43,8 @@
       "production": true,
       "babelInclude": "(ansi\\-regex|strip\\-ansi|ckeditor)",
       "DefinePluginCfg": {
-        "__ADMIN__": true
+        "__ADMIN__": true,
+        "__IS_SERVER__": false
       },
       "babelPreset": {
         "targets": {
@@ -75,9 +77,10 @@
     "libsPath": "./libs",
     "vars": {
       "DefinePluginCfg": {
-        "__ADMIN__": true
+        "__ADMIN__": true,
+        "__IS_SERVER__": false
       },
-      "babelInclude": "(ansi\\-regex|strip\\-ansi)",
+      "babelInclude": "(ansi\\-regex|strip\\-ansi|tui\\-image\\-editor)",
       "babelPreset": {
         "targets": {
           "browsers": "> 0.25%, not dead, safari >= 6, ios >= 6, chrome >= 52"
@@ -120,7 +123,8 @@
       "externals": true,
       "production": true,
       "DefinePluginCfg": {
-        "__ADMIN__": true
+        "__ADMIN__": true,
+        "__IS_SERVER__": true
       },
       "webpackPatch": {
         "stats": "errors-only",
@@ -153,7 +157,8 @@
       "targetDir": "dist.api",
       "externals": true,
       "DefinePluginCfg": {
-        "__ADMIN__": true
+        "__ADMIN__": true,
+        "__IS_SERVER__": true
       },
       "webpackPatch": {
         "stats": "errors-only",

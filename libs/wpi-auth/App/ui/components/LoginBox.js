@@ -62,7 +62,7 @@ export default class LoginBox extends Component {
 				{
 					CurrentUser &&
 					<React.Fragment>
-						<Button variant="fab" color="primary"
+						<Button color="primary"
 						        onClick={ event => this.setState({ menu: event.currentTarget }) }>
 							{ CurrentUser._id }
 						</Button>

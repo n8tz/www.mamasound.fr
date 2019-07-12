@@ -17,11 +17,11 @@
  */
 
 
-import App              from "App/index.js";
-import {renderToString} from "react-dom/server";
+import config from "App/config";
+import App    from "App/index.js";
 
-const wpiConf     = require('App/.wpiConfig.json'),
-      fs          = require('fs'),
+const fs          = require('fs'),
+      path        = require('path'),
       express     = require('express'),
       tpl         = require('../index.html.tpl'),
       compression = require('compression'),
@@ -73,7 +73,13 @@ export function service( server ) {
 			return adminFiles(req, res, next);
 		}
 	);
+	
 	server.use(express.static(process.cwd() + '/static'));
+	server.use("/medias", express.static(path.join(process.cwd(), config.UPLOAD_DIR)));
+	server.use("/medias", ( req, res, next ) => {
+		res.redirect(config.ALT_MEDIA_URL + req.url);
+		
+	});
 	server.use("/assets/static", express.static(process.cwd() + '/App/ui/assets/static'));
 	
 }

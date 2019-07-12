@@ -15,16 +15,16 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+import {Views}                              from "App/ui";
+import Widget                               from 'App/ui/components/Widget.js';
+import Pages                                from "App/ui/pages/(*).js";
+import moment                               from 'moment';
+import React                                from 'react';
+import {ContextMenu}                        from 'react-inheritable-contextmenu';
+import {BrowserRouter, Route, StaticRouter} from "react-router-dom";
 import "regenerator-runtime/runtime";
-import React                                      from 'react';
-import moment                                     from 'moment';
-import Pages                                      from "App/ui/pages/(*).js";
-import Widget                                     from 'App/ui/components/Widget.js';
-import {Views}                                    from "App/ui";
-import {BrowserRouter, StaticRouter, Route, Link} from "react-router-dom";
-import {ContextMenu}                              from 'react-inheritable-contextmenu';
+import {scopeToProps}                       from "rscopes";
 import "./ui/styles/index.scss"
-import {reScope, scopeToProps, propsToScope}      from "rscopes";
 
 let hookedRCE       = React.createElement;
 React.createElement = function ( type, ...argz ) {
@@ -45,7 +45,7 @@ export default class App extends React.Component {
 		let { widgets = { items: [] }, appState, $actions } = this.props;
 		if ( this.props.location )
 			Router = StaticRouter;
-		return <Router location={this.props.location}>
+		return <Router location={__IS_SERVER__ && this.props.location}>
 			<React.Fragment>
 				{__ADMIN__ && <ContextMenu>
 					<div
