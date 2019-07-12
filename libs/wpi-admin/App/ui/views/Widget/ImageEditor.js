@@ -16,12 +16,14 @@ import path      from "path";
 import PropTypes from "prop-types";
 import React     from "react";
 
-let TuiImageEditor, blackTheme;
+let TuiImageEditor, blackTheme, imageCompression;
 if ( typeof window !== "undefined" ) {
 	require('react-dropzone-component/styles/filepicker.css');
 	require('tui-image-editor/dist/tui-image-editor.css');
-	TuiImageEditor = require('tui-image-editor');
-	blackTheme     = {
+	TuiImageEditor   = require('tui-image-editor');
+	imageCompression = require('browser-image-compression').default;
+	
+	blackTheme = {
 		'common.bi.image'       : 'about:blank',
 		'common.bisize.width'   : '0px',
 		'common.bisize.height'  : '0px',
@@ -121,12 +123,12 @@ export default class ImageEditor extends React.Component {
 	tuiConfig        = {
 		includeUI     : {
 			theme          : blackTheme,
-			menu           : ['shape', 'filter'],
+			//menu           : ['shape', 'filter'],
 			initMenu       : 'filter',
-			uiSize         : {
-				width : '800px',
-				height: '600px'
-			},
+			//uiSize         : {
+			//	width : '100%',
+			//	height: '100%'
+			//},
 			menuBarPosition: 'bottom'
 		},
 		cssMaxHeight  : 400,
@@ -138,19 +140,46 @@ export default class ImageEditor extends React.Component {
 	};
 	rootEl           = React.createRef();
 	
+	_resize = () => {
+	};
 	componentDidMount() {
-		this.imageEditorInst = new TuiImageEditor(this.rootEl.current, {
-			...this.tuiConfig,
-			includeUI: {
-				...this.tuiConfig.includeUI,
-				theme    : blackTheme,
-				loadImage: {
-					path: utils.getMediaSrc(this.props.src),
-					name: path.basename(this.props.src)
+		//window.addEventListener('resize', this._resize);
+		imageCompression
+			.loadImage(utils.getMediaSrc(this.props.src))
+			.then(
+				( image ) => {
+					let canvas = imageCompression.drawImageInCanvas(image);
+					return imageCompression
+						.canvasToFile(canvas, ".jpg", "fileName.jpg", Date.now())
+				})
+			.then(
+				( file ) => {
+					let options = {
+						maxSizeMB: 1,
+						maxWidthOrHeight: 1920,
+						useWebWorker: true
+					}
+					return imageCompression(file, options)
+				})
+			.then(
+				( file ) => {
+					debugger
+					this.imageEditorInst = new TuiImageEditor(this.rootEl.current, {
+						...this.tuiConfig,
+						includeUI: {
+							...this.tuiConfig.includeUI,
+							theme    : blackTheme,
+							loadImage: {
+								path: URL.createObjectURL(file),
+								name: path.basename(this.props.src)
+							}
+							
+						},
+					});
+					this.imageEditorInst.ui.resizeEditor();
 				}
-				
-			},
-		});
+			);
+		
 		
 		//this.bindEventHandlers(this.props);
 	}
@@ -179,4 +208,5 @@ export default class ImageEditor extends React.Component {
 			</div>
 		);
 	}
-};
+}
+;
