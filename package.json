@@ -114,7 +114,7 @@
   },
   "devDependencies": {
     "tui-image-editor": "^3.6.1",
-    "webpack-inherit": "^1.6.2",
+    "webpack-inherit": "^1.6.3",
     "wpi-react-hmr-ssr": "^1.2.1",
     "wpi-react-rs-sass-ssr": "^1.0.5"
   }

@@ -164,7 +164,6 @@ export default class ImageEditor extends React.Component {
 				})
 			.then(
 				( file ) => {
-					debugger
 					this.imageEditorInst = new TuiImageEditor(this.rootEl.current, {
 						...this.tuiConfig,
 						includeUI: {
@@ -177,7 +176,7 @@ export default class ImageEditor extends React.Component {
 							
 						},
 					});
-					this.imageEditorInst.ui.resizeEditor();
+					//this.imageEditorInst.ui.resizeEditor();
 				}
 			);
 		
@@ -194,7 +193,7 @@ export default class ImageEditor extends React.Component {
 	}
 	
 	save = () => {
-		debugger
+		//debugger
 		//console.log(this.imageEditorInst.toDataURL())
 	}
 	

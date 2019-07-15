@@ -15,7 +15,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 //
-import {pushDbTask} from "App/db/pool";
 
 const config   = require('App/config'),
       aliasAPI = require("App/db/aliasHelpers"),
