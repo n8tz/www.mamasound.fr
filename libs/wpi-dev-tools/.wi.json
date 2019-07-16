@@ -1,6 +1,13 @@
 {
   "default": {
     "rootFolder": "App",
+    "basedOn": "default",
+    "scripts": {
+      "docker": "./cli/docker"
+    }
+  },
+  "api": {
+    "rootFolder": "App",
     "scripts": {
       "docker": "./cli/docker"
     }
