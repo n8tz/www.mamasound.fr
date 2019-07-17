@@ -22,11 +22,23 @@ export default class DevTools extends React.Component {
 	doReboot             = () => {
 		superagent.get("http://localhost:9090/kill").then()
 	}
+	doRestore            = () => {
+		superagent.get("http://localhost:9090/dbRestore").then()
+	}
+	goDev                = () => {
+		superagent.get("http://localhost:9090/switch?targetMode=dev").then()
+	}
+	goProd               = () => {
+		superagent.get("http://localhost:9090/switch?targetMode=prod").then()
+	}
 	
 	render() {
 		return (
 			<div>
 				<div onClick={this.doReboot}>kill App</div>
+				<div onClick={this.doRestore}>db restore</div>
+				<div onClick={this.goDev}>Dev mode</div>
+				<div onClick={this.goProd}>Prod mode</div>
 			</div>
 		);
 	}

@@ -2,16 +2,16 @@
 
 'use strict';
 
-const program = require('commander'),
-      express = require("express"),
-      server  = express(),
-      http    = require('http').Server(server),
-      fs      = require('fs'),
-      path    = require('path'),
-      fkill   = require('fkill'),
-      resolve = require('resolve'),
-      //npm     = require('global-npm'),
-      exec    = require('child_process').exec;
+const program  = require('commander'),
+      express  = require("express"),
+      server   = express(),
+      http     = require('http').Server(server),
+      fs       = require('fs'),
+      path     = require('path'),
+      fkill    = require('fkill'),
+      rimraf   = require('rimraf'),
+      chokidar = require('chokidar'),
+      exec     = require('child_process').exec;
 
 program
 	.option('-m, --mode [mode]', 'active mode')
@@ -25,19 +25,27 @@ let port     = program.port || 9090,
     mode     = program.mode || !command && "prod",
     pDir     = program.source || process.cwd(),
     baseDir  = __dirname,
+    distDir  = {
+	    api  : "dist.api",
+	    admin: "dist.admin",
+	    www  : "dist"
+    },
     commands = {
 	    dev : {
-		    api: "wpi :devApi -w",
-		    www: "wpi :devClient --hot --host 0.0.0.0"
+		    buildApi: "wpi :devApi -w",
+		    startApi: "node --inspect=[::]:9229 ./dist.api/App.server.js -p 9701",
+		    buildWww: "wpi-dev-server :devClient --hot --host 0.0.0.0"
 	    },
 	    prod: {
-		    api: "wpi :api ",
-		    www: "wpi :client&&wpi :admin"
+		    buildApi: "wpi :api ",
+		    startApi: "node ./dist.api/App.server.js  -p 8080 ",
+		    buildWww: "wpi :client&&wpi :admin"
 	    }
     },
     apiCmd,
     wpApiCmd,
-    wpWwwCmd;
+    wpWwwCmd,
+    apiWatcher;
 
 
 function killCmd( reboot ) {
@@ -48,6 +56,8 @@ function killCmd( reboot ) {
 			.then(
 				logs => {
 					apiCmd = null;
+					console.log("cleaning... ");
+					
 					reboot && runCmd();
 				}
 			)
@@ -73,13 +83,54 @@ function runCmd() {
 	apiCmd.stderr.on('data', l => process.stderr.write(l))
 }
 
-function runByMode() {
+function killMode( reboot ) {
+	let theList = [":8080"];
+	
+	console.log("killing... ");
 	if ( apiCmd ) {
-		return killCmd(true);
+		theList.unshift(apiCmd.pid);
+		apiCmd.kill('SIGINT');
+		apiCmd = null;
 	}
+	if ( wpApiCmd ) {
+		theList.unshift(wpApiCmd.pid);
+		wpApiCmd.kill('SIGINT');
+		wpApiCmd = null;
+	}
+	if ( wpWwwCmd ) {
+		theList.unshift(wpWwwCmd.pid);
+		wpWwwCmd.kill('SIGINT');
+		wpWwwCmd = null;
+	}
+	return fkill(theList, { tree: true, force: true, silent: true })
+		.then(
+			logs => {
+				reboot && runByMode();
+			}
+		)
+}
+
+function cleanBuilds() {
+	try {
+		rimraf.sync(path.join(pDir, distDir.admin, "**/*.*"));
+		rimraf.sync(path.join(pDir, distDir.api, "**/*.*"));
+		rimraf.sync(path.join(pDir, distDir.www));
+		console.log("Builds cleaned... ");
+	} catch ( e ) {
+		console.log("Fail cleaning builds... ");
+	}
+}
+
+function runByMode() {
+	if ( wpApiCmd ) {
+		return killMode(true);
+	}
+	apiWatcher && apiWatcher.close();
+	apiWatcher = null;
+	cleanBuilds();
 	
 	wpApiCmd = exec(
-		commands.api,
+		commands[mode].buildApi,
 		{
 			cwd  : pDir,
 			stdio: 'inherit'
@@ -88,18 +139,45 @@ function runByMode() {
 			console.log(stdout, stderr);
 			
 		});
+	wpApiCmd.stdout.on('data', l => process.stdout.write(l))
+	wpApiCmd.stderr.on('data', l => process.stderr.write(l))
 	wpWwwCmd = exec(
-		commands.www,
+		commands[mode].buildWww,
 		{
 			cwd  : pDir,
 			stdio: 'inherit'
 		},
 		function ( err, stdout, stderr ) {
 			console.log(stdout, stderr);
-			
 		});
-	apiCmd.stdout.on('data', l => process.stdout.write(l))
-	apiCmd.stderr.on('data', l => process.stderr.write(l))
+	wpWwwCmd.stdout.on('data', l => process.stdout.write(l))
+	wpWwwCmd.stderr.on('data', l => process.stderr.write(l));
+	(apiWatcher = chokidar.watch(path.join(pDir, distDir.api, '*.js'), { ignored: /(^|[\/\\])\../ }))
+		.on('all', ( event, path ) => {
+			apiCmd && apiCmd.kill('SIGINT');
+			(
+				apiCmd ?
+				fkill([apiCmd.pid, ':8080'], { tree: true, force: true, silent: true })
+				       :
+				fkill([':8080'], { tree: true, force: true, silent: true })
+			)
+				.then(
+					logs => {
+						console.log("Start API", event, path, commands[mode].startApi);
+						apiCmd = exec(
+							commands[mode].startApi,
+							{
+								cwd  : pDir,
+								stdio: 'inherit'
+							},
+							function ( err, stdout, stderr ) {
+								console.log("Api process has terminate");
+							});
+						apiCmd.stdout.on('data', l => process.stdout.write(l))
+						apiCmd.stderr.on('data', l => process.stderr.write(l))
+					}
+				)
+		});
 }
 
 server.use(express.json());       // to support JSON-encoded bodies
@@ -107,7 +185,11 @@ server.use(express.urlencoded()); // to support URL-encoded bodies
 server.get(
 	"/restart",
 	( req, res ) => {
-		runCmd();
+		
+		if ( command )
+			runCmd();
+		else
+			runByMode();
 		res.json({ success: true })
 	}
 );
@@ -115,9 +197,10 @@ server.get(
 server.get(
 	"/switch",
 	( req, res ) => {
-		command = req.query.targetMode || command;
-		runCmd();
-		res.json({ success: !!req.query.targetMode })
+		command = null;
+		mode    = req.query.targetMode || mode;
+		runByMode();
+		res.json({ success: !!req.query.targetMode, mode })
 	}
 );
 server.get(
@@ -126,6 +209,21 @@ server.get(
 		res.json({ success: true })
 		killCmd();
 		process.exit();
+	}
+);
+server.get(
+	"/dbRestore",
+	( req, res ) => {
+		exec(
+			"mongorestore --uri ${mongoUrl}",
+			{
+				cwd  : pDir,
+				stdio: 'inherit'
+			},
+			function ( err, stdout, stderr ) {
+				res.json({ success: !err, logs: stdout })
+			});
+		
 	}
 );
 
