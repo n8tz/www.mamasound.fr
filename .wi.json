@@ -1,7 +1,12 @@
 {
   "default": {
     "rootFolder": "App",
+    "libsPath": "./libs"
+  },
+  "client": {
+    "rootFolder": "App",
     "libsPath": "./libs",
+    "basedOn": "default",
     "vars": {
       "extractCss": true,
       "production": true,

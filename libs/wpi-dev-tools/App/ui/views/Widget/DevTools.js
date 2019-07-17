@@ -11,25 +11,25 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
+import React      from "react";
+import superagent from "superagent";
 
-import config from "App/config";
-
-export default function ( src, dims ) {
-	let p = '';
-	if ( !src || typeof src != "string" )
-		return;
-	if ( dims && (dims.w || dims.h) ) {
-		p = (dims.h ? "h=" + dims.h + "&" : "") + (dims.w ? "w=" + dims.w + "" : "")
+export default class DevTools extends React.Component {
+	static defaultWindow = {
+		"size"    : { "width": 200, "height": 120 },
+		"position": { "x": 0, "y": 0 }
 	}
-	src = src && src.replace('http://' + config.MEDIA_URL + '/', '');
-	src = src && src.replace('https://' + config.MEDIA_URL + '/', '');
-	//src = src && src.replace(/^([^\?]*)(?:\?.*)$/, "$1");
-	if ( src && /^[^\/\s\!\?]/.test(src) )// not / & ? is local resource
-		src = "http://" + config.MEDIA_URL + "/" + src + (p ? '?' + p : '');
-	else if ( src && /^\//.test(src) )// starting with / is domain based
-		src = "http://" + config.MEDIA_URL + src;
-	else if ( src && /^\!/.test(src) )// starting with ! is cached
-		src = "http://" + config.MEDIA_URL + "/?cache=" + encodeURIComponent(src.substr(1)) + '&' + p;
+	doReboot             = () => {
+		superagent.get("http://localhost:9090/kill").then()
+	}
 	
-	return src;
-}
+	render() {
+		return (
+			<div>
+				<div onClick={this.doReboot}>kill App</div>
+			</div>
+		);
+	}
+	
+};
+

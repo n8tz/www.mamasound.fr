@@ -23,6 +23,7 @@ import App    from "App/index.js";
 const fs          = require('fs'),
       path        = require('path'),
       express     = require('express'),
+      superagent  = require('superagent'),
       tpl         = require('../index.html.tpl'),
       compression = require('compression'),
       device      = require('express-device'),
@@ -76,9 +77,27 @@ export function service( server ) {
 	
 	server.use(express.static(process.cwd() + '/static'));
 	server.use("/medias", express.static(path.join(process.cwd(), config.UPLOAD_DIR)));
+	
 	server.use("/medias", ( req, res, next ) => {
-		
-		res.redirect(config.ALT_MEDIA_URL + req.url);
+		// try to retrieve img from the old server...
+		superagent.get(config.ALT_MEDIA_URL + req.url)
+		          .then(
+			          file => {
+				          fs.writeFile(
+					          path.join(process.cwd(), config.UPLOAD_DIR, path.basename(req.url)).replace(/\?.*$/, ''),
+					          file.body,
+					          ( e, r ) => {
+						
+						          res.redirect("/medias/" + req.url);
+					          })
+				          //debugger
+			          }
+		          )
+		          .catch(
+			          file => {
+				          res.redirect(config.ALT_MEDIA_URL + req.url);
+			          }
+		          )
 		
 	});
 	server.use("/assets/static", express.static(process.cwd() + '/App/ui/assets/static'));

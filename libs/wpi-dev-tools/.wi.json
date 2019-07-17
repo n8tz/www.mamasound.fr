@@ -3,13 +3,13 @@
     "rootFolder": "App",
     "basedOn": "default",
     "scripts": {
-      "docker": "./cli/docker"
+      "start": "./cli/start"
     }
   },
   "api": {
     "rootFolder": "App",
     "scripts": {
-      "docker": "./cli/docker"
+      "start": "./cli/start"
     }
   }
 }

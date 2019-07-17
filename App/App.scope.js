@@ -18,6 +18,7 @@
 
 import $super                         from "$super";
 import stores                         from 'App/stores/(*).js';
+import {Views}                        from "App/ui";
 import moment                         from "moment";
 import {asRef, asStore, withStateMap} from "rscopes";
 import shortid                        from "shortid";
@@ -187,17 +188,18 @@ export default {
 	widgets   : {
 		// initial state
 		items: [
-			//{
-			//	"_id"     : "FfseOEKpm",
-			//	"size"    : { "width": 600, "height": 400 },
-			//	"type"    : "RecordEditor",
-			//	"props"   : { "record": { id: "FocusedItems.-f8m8skoA2", "etty": "FocusedItems" } },
-			//	"position": { "x": 750, "y": 500 }
-			//}
+			{
+				"_id"     : "FfseOEKpm",
+				"size"    : { "width": 200, "height": 120 },
+				"title"   : "DevTools",
+				"type"    : "DevTools",
+				"position": { "x": 0, "y": 0 }
+			}
 		],
 		
 		// actions
 		newWidget( type, props = {} ) {
+			let Default = Views.Widget[type] && Views.Widget[type].defaultWindow;
 			return {
 				items: [...this.nextState.items, {
 					_id     : shortid.generate(),
@@ -208,6 +210,7 @@ export default {
 						x: 50 + ~~(Math.random() * 200),
 						y: 50 + ~~(Math.random() * 200)
 					},
+					...Default
 				}]
 			}
 		},

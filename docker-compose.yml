@@ -22,7 +22,8 @@ services:
     build:
       context: .
     working_dir: /home/app
-    command: bash -c "npm i&&npm run start-dev"
+    command: bash -c "npm i&&wi-run :devClient start -c start-dev"
+#    command: bash -c "npm i&&npm run start-dev"
 #    command: bash -c "npm i&&npm run build&&npm run start"
 
     labels:
@@ -51,6 +52,7 @@ services:
       - "8080"
     ports:
       - "${APP_DOCKER_DEBUG_PORT:-9229}:9229"
+      - "9090:9090"
     networks:
       - app_network
   mongodb:
