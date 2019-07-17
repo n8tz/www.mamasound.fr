@@ -182,10 +182,18 @@ function runByMode() {
 
 server.use(express.json());       // to support JSON-encoded bodies
 server.use(express.urlencoded()); // to support URL-encoded bodies
-server.get(
+server.use(
+	"/status",
+	( req, res ) => {
+		res.header("Access-Control-Allow-Origin", "*");
+		res.json({ mode })
+	}
+);
+server.use(
 	"/restart",
 	( req, res ) => {
 		
+		res.header("Access-Control-Allow-Origin", "*");
 		if ( command )
 			runCmd();
 		else
@@ -194,26 +202,29 @@ server.get(
 	}
 );
 
-server.get(
+server.use(
 	"/switch",
 	( req, res ) => {
+		res.header("Access-Control-Allow-Origin", "*");
 		command = null;
 		mode    = req.query.targetMode || mode;
 		runByMode();
 		res.json({ success: !!req.query.targetMode, mode })
 	}
 );
-server.get(
+server.use(
 	"/kill",
 	( req, res ) => {
+		res.header("Access-Control-Allow-Origin", "*");
 		res.json({ success: true })
 		killCmd();
 		process.exit();
 	}
 );
-server.get(
+server.use(
 	"/dbRestore",
 	( req, res ) => {
+		res.header("Access-Control-Allow-Origin", "*");
 		exec(
 			"mongorestore --uri ${mongoUrl}",
 			{
@@ -221,7 +232,7 @@ server.get(
 				stdio: 'inherit'
 			},
 			function ( err, stdout, stderr ) {
-				res.json({ success: !err, logs: stdout })
+				res.json({ success: !err, stdout, stderr })
 			});
 		
 	}

@@ -23,7 +23,7 @@ export default class DevTools extends React.Component {
 		superagent.get("http://localhost:9090/kill").then()
 	}
 	doRestore            = () => {
-		superagent.get("http://localhost:9090/dbRestore").then()
+		superagent.get("http://localhost:9090/dbRestore").then(req => console.log(req.data))
 	}
 	goDev                = () => {
 		superagent.get("http://localhost:9090/switch?targetMode=dev").then()
