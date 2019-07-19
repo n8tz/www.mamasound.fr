@@ -212,6 +212,7 @@ server.use(
 		res.json({ success: !!req.query.targetMode, mode })
 	}
 );
+
 server.use(
 	"/kill",
 	( req, res ) => {

@@ -15,6 +15,7 @@ import utils     from "App/utils/(*).js";
 import path      from "path";
 import PropTypes from "prop-types";
 import React     from "react";
+import {reScope, asStore, scopeToProps, asRef} from "rscopes";
 
 let TuiImageEditor, blackTheme, imageCompression;
 if ( typeof window !== "undefined" ) {
@@ -108,7 +109,20 @@ if ( typeof window !== "undefined" ) {
 }
 //@reScope(
 //	{
-//
+//		@asStore
+//		Exportable: {
+//			@asRef
+//			items: "Importer.imported",
+//			$apply( d, { items } ) {
+//				return {
+//					items: items && items.map(row => ({
+//						...row,
+//						category: row.category.objId,
+//						place   : row.place.objId
+//					}))
+//				}
+//			}
+//		},
 //	}
 //)
 //@scopeToProps("MamaXls", "appState", "Importer", "Exporter")
@@ -193,8 +207,8 @@ export default class ImageEditor extends React.Component {
 	}
 	
 	save = () => {
-		//debugger
-		//console.log(this.imageEditorInst.toDataURL())
+		debugger
+		console.log(this.imageEditorInst.toDataURL("image/png"))
 	}
 	
 	render() {
