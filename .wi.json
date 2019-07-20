@@ -1,11 +1,11 @@
 {
   "default": {
     "rootFolder": "App",
-    "libsPath": "./libs"
+    "libsPath": "./packages"
   },
   "client": {
     "rootFolder": "App",
-    "libsPath": "./libs",
+    "libsPath": "./packages",
     "basedOn": "default",
     "vars": {
       "extractCss": true,
@@ -40,7 +40,7 @@
   },
   "admin": {
     "rootFolder": "App",
-    "libsPath": "./libs",
+    "libsPath": "./packages",
     "basedOn": "default",
     "vars": {
       "targetDir": "dist.admin",
@@ -79,7 +79,7 @@
   "devClient": {
     "rootFolder": "App",
     "basedOn": "default",
-    "libsPath": "./libs",
+    "libsPath": "./packages",
     "vars": {
       "DefinePluginCfg": {
         "__ADMIN__": true,
@@ -123,7 +123,7 @@
   },
   "api": {
     "rootFolder": "App",
-    "libsPath": "./libs",
+    "libsPath": "./packages",
     "vars": {
       "targetDir": "dist.api",
       "externals": true,
@@ -157,7 +157,7 @@
   },
   "devApi": {
     "rootFolder": "App",
-    "libsPath": "./libs",
+    "libsPath": "./packages",
     "basedOn": "api",
     "vars": {
       "targetDir": "dist.api",
