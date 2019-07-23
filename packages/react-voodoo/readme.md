@@ -1,214 +1,127 @@
-<h1 align="center">react-voodoo</h1>
-<p align="center">Fast, scalable, multiscope, reversible, delta based, tween composition engine</p>
+<h1 align="center">react-voodoo tweener</h1>
+<p align="center">Fast, SSR compatible, additive & swipeable, tween composition engine for React</p>
 
 ___
 
 <a href="https://www.npmjs.com/package/react-voodoo">
 <img src="https://img.shields.io/npm/v/react-voodoo.svg" alt="Npm version" /></a>
 
+<p align="center">/!\ This is beta /!\</p>
+
 
 ## wtf is react-voodoo ?
 
-- rTween engine allow to apply forward and backward multiples tweens on same properties and multiple objects
-- Allow **live composition, hot switch of multiple** scrollable animation
-- etc
+react-voodoo is an additive tweener for react
 
+It allow :
 
-## Draft [sample](http://htmlpreview.github.io/?https://github.com/n8tz/react-voodoo/blob/master/samples/index.html)
+- Additive tween ( applying forward and backward multiples tween on same properties )
+- Scrollable & swipeable animations
+- SSR rendering of =! scroll / swipe position
+- Hot switching scrollable anims ( responsive )
+- Predictive inertia
+- etc...
 
-```jsx
-import React                                        from "react";
-import {asTweener, TweenRef, TweenAxis, tweenTools} from "react-voodoo";
+## Draft & minimalist samples [here](http://htmlpreview.github.io/?https://github.com/n8tz/react-voodoo/blob/master/samples/index.html) ( [sources](src/.samples) )
 
+## Draft & minimalist doc [here](doc/readme.md)
 
-let pushIn        = [
-	{
-		type    : "Tween",
-		from    : 0,
-		duration: 500,
-		easeFn  : "easeCircleIn",
-		apply   : {
-			transform: [{}, {
-				translateZ: "-.2box"
-			}],
-			filter   : {
-				sepia: 100
-			}
-		}
-	},
-	{
-		type    : "Tween",
-		from    : 500,
-		duration: 500,
-		easeFn  : "easeCircleIn",
-		apply   : {
-			transform: [{}, {
-				translateZ: ".2box"
-			}],
-			filter   : {
-				sepia: -100
-			}
-		}
-	},
-	{
-		type    : "Tween",
-		from    : 250,
-		duration: 500,
-		easeFn  : "easeCircle",
-		apply   : {
-			transform: [{}, {
-				rotateY: 180,
-			}],
-		}
-	}
-];
-const scrollAnims = {
-	scrollX: [
-		{
-			type    : "Tween",
-			from    : 0,
-			duration: 200,
-			apply   : {
-				transform: {
-					translateX: "-1box"
-				},
-			}
-		},
-		{
-			type    : "Tween",
-			from    : 0,
-			duration: 100,
-			apply   : {
-				transform: {
-					rotateX: 30,
-				},
-			}
-		},
-		{
-			type    : "Tween",
-			from    : 100,
-			duration: 100,
-			apply   : {
-				transform: {
-					rotateX: 30,
-				},
-			}
-		}
-	],
-	scrollY: [
-		{
-			type    : "Tween",
-			from    : 0,
-			duration: 200,
-			apply   : {
-				transform: {
-					translateY: "-1box"
-				},
-			}
-		},
-		{
-			type    : "Tween",
-			from    : 0,
-			duration: 100,
-			apply   : {
-				transform: {
-					rotateY: -30,
-				},
-			}
-		},
-		{
-			type    : "Tween",
-			from    : 100,
-			duration: 100,
-			apply   : {
-				transform: {
-					rotateY: -30,
-				},
-			}
-		}
-	]
-};
-@asTweener({ enableMouseDrag: true })
-export default class Sample extends React.Component {
-	state = {
-		count: 0
-	};
-	
-	componentDidScroll( pos ) {
-		this.forceUpdate();// force update to show scroll pos
-	}
+## Basics
+
+```jsx harmony
+
+import React from "react";
+import {asTweener, TweenAxis, TweenRef, tweenTools} from "react-voodoo";
+import {itemTweenAxis, pageTweenAxisWithTargets} from "./somewhere";
+
+@asTweener
+export default class MyTweenerComp extends React.Component{
 	
 	render() {
-		return <div className={ "SimpleTest" } style={ {
-			width : "100%",
-			height: "100%"
-		} }>
+		return <div>
 			<TweenAxis
-				axe={ "scrollY" }
-				defaultPosition={ 100 }
-			/>
-			<TweenAxis
-				axe={ "scrollX" }
-				defaultPosition={ 100 }
-			/>
-			hello ! { this.state.count } concurent anims <br/>
-			scrollPos : <pre>{ JSON.stringify(this.getAxisState(), null, 2) }</pre>
-			<br/>y:
-			<button onClick={ e => this.scrollTo(0, 500) }>( go to 0 )</button>
-			<button onClick={ e => this.scrollTo(200, 500) }>( go to 200 )</button>
-			<br/>x:
-			<button onClick={ e => this.scrollTo(0, 500, "scrollX") }>( go to 0 )</button>
-			<button onClick={ e => this.scrollTo(200, 500, "scrollX") }>( go to 200 )</button>
-			
-			<TweenRef
-				id={ "testItem" }
-				initial={ {
-					position       : "absolute",
-					display        : "inline-block",
-					width          : "15em",
-					height         : "15em",
-					cursor         : "pointer",
-					backgroundColor: "red",
-					overflow       : "hidden",
-					margin         : "-7.5em 0 0 -7.5em",
-					top            : "0%",
-					left           : "0%",
-					
-					transform: {
-						translateZ: "0box",
-						translateX: "1box",
-						translateY: "1box",
-						rotateX   : -30,
-						rotateY   : 30,
+			    // Tween axis Id 
+			    // * scrollY & scrollX automatically receive mouse & touch events
+				axe={"scrollY"}
+				
+				// default start position
+				defaultPosition={100}
+				
+				// Global scrollable tween with theirs TweenRef target ids
+                items={pageTweenAxisWithTargets}
+                
+                // size of the scrollable window for drag synchronisation
+				scrollableWindow={ 200 }
+				
+				// default length of this scrollable axis
+				size={ 1000 }
+				 
+				// inertia cfg ( false to disable it ) 
+				inertia={
+						{
+							// called when inertia is updated
+							// should return instantaneous move to do if wanted
+							shouldLoop: ( currentPos ) => ( currentPos > 500 ? -500 : null ),
+							
+							// called when inertia know where it will snap ( when the user stop dragging )   
+							willSnap  : ( currentSnapIndex, targetWayPointObj ) => {},
+							
+							// list of waypoints object ( only support auto snap for now ) 
+							wayPoints : [{ at: 100 }, { at: 200 }]
+						}
 					}
-				} }
-				tweenLines={ scrollAnims }
-			>
-				<div
-					onClick={ e => {
-						this.setState({ count: this.state.count + 1 })
-						this.pushAnim(tweenTools.target(pushIn, "testItem"),
-						              () => {
-							              this.setState({ count: this.state.count - 1 })
-						              });
-					} }
-					style={ {} }>click me !
-				</div>
-			</TweenRef>
+			/>
+			
+            <TweenRef
+                id={"testItem"} // optional id
+                initial={
+                	{
+                		// css syntax + voodoo tweener units & transform management 
+                	}
+                }
+                // Scrollable tween with no id required ( it will be ignored )
+                // * will use scrollY axis as default                 
+                tweenAxis={
+                	{
+                		scrollY : itemTweenAxis
+                	}
+                } 
+                // on(Dbl)Click is forwarder with the tweener component as 2nd arg
+                onClick={
+                	(e, tweener)=>{
+                		// start playing an anim
+                	    tweener.pushAnim(
+                                // make all tween target "testItem"
+                                tweenTools.target(pushIn, "testItem")
+                            ).then(
+                            	(tweenAxis) => {
+                                   // doSomething next
+                                }
+                            );
+                    }
+                }
+            >
+                <div>
+                    Some content to tween
+                </div>
+            </TweenRef>
 		</div>;
-	}
+    }
 }
+
 ```
 
-### Todo :
+## todo / roadmap ?
 
-- Nice examples 
-- Matrix support
-- Better scroll support
-- Doc & clean
+- Better scroll support / fixs
+- Full css support ( full background transitions )
+- Doc, tests & code cleaning
+- various simple & smart optims
+- Allow tween-axis to css keyframe anims ? 
+- Allow SVG bindings ?
 
 ### License ?
 
-MIT license
+AGPL license
 
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](#)

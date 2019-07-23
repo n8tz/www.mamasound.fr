@@ -127,7 +127,7 @@ export default class EventList extends React.Component {
 	render() {
 		let {
 			    record                          : { position, size } = {},
-			    UserGeoLocation, appState, Anims: { MainPage, EventCatSlider }, activeScroll,
+			    UserGeoLocation, appState, Anims: { MainPage, EventCatSlider, EventDaySlider }, activeScroll,
 			    $actions, style
 		    }     = this.props,
 		    state = this.state;
@@ -148,19 +148,24 @@ export default class EventList extends React.Component {
 										.map(
 											( v, type ) =>
 												<div className={"dayList"} key={type}>
-													{
-														Array(appState.dayCountByViewType[type])
-															.fill(0)
-															.map(
-																( v, i ) =>
-																	<Views.Events.DayEvents
-																		className={"dayBlock"}
-																		key={i}
-																		day={moment(appState.curDay).add(i, 'day').unix() * 1000}
-																		viewType={type}/>
-															)
-													}
-													<div id={"endList_" + type}>loading...</div>
+													<Comps.Slider
+														{...EventDaySlider}
+														className={"EventDay"}
+													>
+														{
+															Array(appState.dayCountByViewType[type])
+																.fill(0)
+																.map(
+																	( v, i ) =>
+																		<Views.Events.DayEvents
+																			className={"dayBlock"}
+																			key={i}
+																			day={moment(appState.curDay).add(i, 'day').unix() * 1000}
+																			viewType={type}/>
+																)
+														}
+													</Comps.Slider>
+													{/*<div id={"endList_" + type}>loading...</div>*/}
 												</div>
 										)
 								}

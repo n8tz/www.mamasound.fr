@@ -162,7 +162,7 @@ function runByMode() {
 				fkill([':8080'], { tree: true, force: true, silent: true })
 			)
 				.then(
-					logs => {
+					function runApi( logs ) {
 						console.log("Start API", event, path, commands[mode].startApi);
 						apiCmd = exec(
 							commands[mode].startApi,
@@ -171,7 +171,14 @@ function runByMode() {
 								stdio: 'inherit'
 							},
 							function ( err, stdout, stderr ) {
-								console.log("Api process has terminate");
+								console.log("Api process has terminate, restart in 3s");
+								apiCmd = null;
+								setTimeout(
+									tm => {
+										!apiCmd && runApi()
+									},
+									3000
+								)
 							});
 						apiCmd.stdout.on('data', l => process.stdout.write(l))
 						apiCmd.stderr.on('data', l => process.stderr.write(l))

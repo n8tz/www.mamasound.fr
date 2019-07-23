@@ -36,7 +36,7 @@ let defaultPreview = {
 	Expo   : require("App/ui/assets/medias/mme.png")
 };
 export default ( { record, refs, selected, onClick, onTap } ) =>
-	<div className={"Event Event" + record._cls + ' ' + (selected ? "selected" : "")}
+	<div className={"Event Event_item Event" + record._cls + ' ' + (selected ? "selected" : "")}
 	     onClick={onClick}
 	>
 		<Editable id={record._id}/>

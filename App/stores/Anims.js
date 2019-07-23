@@ -16,10 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {Scope, Store} from "rscopes";
-
 import desktopAnims from "App/ui/anims/responsive/desktop/(*).js";
 import phoneAnims   from "App/ui/anims/responsive/phone/(*).js";
+import {Store}      from "rscopes";
 
 const isBrowserSide = (new Function("try {return this===window;}catch(e){ return false;}"))();
 
@@ -57,7 +56,7 @@ export default class Anims extends Store {
 					currentBrkPts = "phone";
 				this.setState({ currentBrkPts })
 			});
-		isBrowserSide && setTimeout(tm => this._onResize(), 500)
+		isBrowserSide && setTimeout(tm => (this._onResize && this._onResize()), 500)
 	}
 	
 	apply( data, state, { currentBrkPts } ) {

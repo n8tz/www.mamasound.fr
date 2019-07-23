@@ -33,7 +33,7 @@ export default {
 	@asStore
 	appState: {
 		
-		currentPageFocus: "head",// head, events, page
+		currentPageFocus: "events",// head, events, page
 		
 		//selectedFocus     : { id: "Page.SkxesB7ugG", etty: 'Page' },
 		selectedPage      : { id: "Page.SkxesB7ugG", etty: 'Page' },
@@ -42,7 +42,7 @@ export default {
 		selectedEventDT   : undefined,
 		curDay            : undefined,
 		viewType          : 0,
-		dayCountByViewType: [4, 1, 1, 1, 0],
+		dayCountByViewType: [2, 1, 1, 1, 0],
 		curTags           : undefined,
 		
 		$apply( data, state ) {

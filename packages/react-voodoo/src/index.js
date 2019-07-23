@@ -1,4 +1,5 @@
 /*
+ *
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,12 +17,12 @@
  */
 
 import {Component}     from 'react';
-import asTweener       from './asTweener';
-import TweenAxis       from './TweenAxis';
-import TweenRef        from './TweenRef';
-import withTweener     from './withTweener';
-import TweenerContext  from './TweenerContext';
-import * as tweenTools from './helpers/tweenTools.js';
+import TweenAxis       from './comps/TweenAxis';
+import TweenerContext  from './comps/TweenerContext';
+import TweenRef        from './comps/TweenRef';
+import asTweener       from './spells/asTweener';
+import withTweener     from './spells/withTweener';
+import * as tweenTools from './utils/tweenTools.js';
 
 @asTweener
 class Tweenable extends Component {

@@ -16,38 +16,74 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React                                 from 'react';
-import {reScope, scopeToProps, propsToScope} from "rscopes";
+import scopes                                from 'App/scopes/(*).js';
 import {Comps, Views}                        from 'App/ui';
-import ReactDom                              from "react-dom";
+import React                                 from 'react';
+import {propsToScope, reScope, scopeToProps} from "rscopes";
 
-import {withStateMap, asRef, asStore}   from "rescope-spells";
-import {asTweener, TweenRef, TweenAxis} from "react-voodoo";
 
-@scopeToProps("appState", "Anims", "Selected")
+@reScope(
+	scopes.EventList
+)
+@propsToScope(
+	[
+		"day:DayEventsQuery.curDay",
+		"viewType:DayEventsQuery.viewType"
+	])
+@scopeToProps("EventList", "ActiveTags", "appState", "Anims")
 export default class Admin extends React.Component {
 	state = {};
 	
 	render() {
 		let {
-			    Anims, Selected, appState,
+			    EventList, appState, day, Anims,
+			    $actions, onSelect
 		    }     = this.props,
-		    state = this.state;
-		console.log('render snap', appState.currentPageFocus)
-		return <div className={"Admin container"}>
-			<pre>{Selected && JSON.stringify(Selected)}</pre>
-			<Comps.ViewSwitcher target={Selected && Selected.Focused}
-			                    {...Anims.Focused} View={Views.Page.page}
-			                    style={{
-				                    position  : "absolute",
-				                    background: "grey",
-				                    top       : "100px",
-				                    left      : "100px",
-				                    width     : "800px",
-				                    height    : "500px"
-			                    }}
-			/>
-		</div>
+		    state = this.state,
+		    selected;
+		return (
+			<div
+				className={"Admin"}
+			>
+				<Comps.Slider
+					{...Anims.EventDaySlider}
+					className={"EventNav "}
+				>
+					
+					<div style={{background:'red'}}>
+						1
+					</div>
+					<div>2</div>
+					{/*{*/}
+					{/*	Array(1)*/}
+					{/*		.fill(0)*/}
+					{/*		.map(*/}
+					{/*			( v, type ) =>*/}
+					{/*				<div className={"dayList"} key={type}>*/}
+					{/*					<Comps.Slider*/}
+					{/*						{...EventDaySlider}*/}
+					{/*						className={"EventDay"}*/}
+					{/*					>*/}
+					{/*						{*/}
+					{/*							Array(appState.dayCountByViewType[type])*/}
+					{/*								.fill(0)*/}
+					{/*								.map(*/}
+					{/*									( v, i ) =>*/}
+					{/*										<Views.Events.DayEvents*/}
+					{/*											className={"dayBlock"}*/}
+					{/*											key={i}*/}
+					{/*											day={moment(appState.curDay).add(i, 'day').unix() * 1000}*/}
+					{/*											viewType={type}/>*/}
+					{/*								)*/}
+					{/*						}*/}
+					{/*					</Comps.Slider>*/}
+					{/*					/!*<div id={"endList_" + type}>loading...</div>*!/*/}
+					{/*				</div>*/}
+					{/*		)*/}
+					{/*}*/}
+				</Comps.Slider>
+			</div>
+		);
 	}
 }
 

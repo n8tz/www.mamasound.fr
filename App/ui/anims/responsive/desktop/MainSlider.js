@@ -41,9 +41,21 @@ export const defaultInitial  = {
 			translateY: "-50%"
 		}]
 };
+export const scrollAxis      = [
+	{
+		from    : 0,
+		duration: 100,
+		easeFn  : "easeSinIn",
+		apply   : {
+			transform: {
+				rotate: stepAngle,
+			},
+			zIndex   : 150,
+		}
+	},
+];
 export const defaultEntering = [
 	{
-		type    : "Tween",
 		from    : 0,
 		duration: 100,
 		easeFn  : "easeSinIn",

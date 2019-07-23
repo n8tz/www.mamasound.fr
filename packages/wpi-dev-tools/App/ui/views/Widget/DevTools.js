@@ -21,17 +21,17 @@ import superagent                                       from "superagent";
 		DevTools: {
 			@asStore
 			ServerStatus: {
-				@asRef
-				items: "Importer.imported",
-				$apply( d, { items } ) {
-					return {
-						items: items && items.map(row => ({
-							...row,
-							category: row.category.objId,
-							place   : row.place.objId
-						}))
-					}
-				}
+				//@asRef
+				//items: "Importer.imported",
+				//$apply( d, { items } ) {
+				//	return {
+				//		items: items && items.map(row => ({
+				//			...row,
+				//			category: row.category.objId,
+				//			place   : row.place.objId
+				//		}))
+				//	}
+				//}
 			},
 		}
 	}
