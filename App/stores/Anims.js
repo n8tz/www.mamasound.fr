@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import desktopAnims from "App/ui/anims/responsive/desktop/(*).js";
-import phoneAnims   from "App/ui/anims/responsive/phone/(*).js";
+import desktopAnims from "App/ui/assets/anims/responsive/desktop/(*).js";
+import phoneAnims   from "App/ui/assets/anims/responsive/phone/(*).js";
 import {Store}      from "rscopes";
 
 const isBrowserSide = (new Function("try {return this===window;}catch(e){ return false;}"))();

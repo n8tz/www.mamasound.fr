@@ -153,18 +153,18 @@ export default class EventList extends React.Component {
 													{/*	{...EventDaySlider}*/}
 													{/*	className={"EventDay"}*/}
 													{/*>*/}
-														{
-															Array(appState.dayCountByViewType[type])
-																.fill(0)
-																.map(
-																	( v, i ) =>
-																		<Views.Events.DayEvents
-																			className={"dayBlock"}
-																			key={i}
-																			day={moment(appState.curDay).add(i, 'day').unix() * 1000}
-																			viewType={type}/>
-																)
-														}
+													{
+														Array(appState.dayCountByViewType[type])
+															.fill(0)
+															.map(
+																( v, i ) =>
+																	<Views.Events.DayEvents
+																		className={"dayBlock"}
+																		key={i}
+																		day={moment(appState.curDay).add(i, 'day').unix() * 1000}
+																		viewType={type}/>
+															)
+													}
 													{/*</Comps.Slider>*/}
 													{/*<div id={"endList_" + type}>loading...</div>*/}
 												</div>
@@ -180,8 +180,10 @@ export default class EventList extends React.Component {
 						</TweenRef>
 					</div>
 				</div>
-				{activeScroll && <div className={"noScrollOverlay"}
-				                      onClick={e => $actions.setPageFocus('events', true)}></div>}
+				{
+					activeScroll && <div className={"noScrollOverlay"}
+					                     onClick={e => $actions.setPageFocus('events', true)}></div>
+				}
 				<div
 					className={"NavTools container"}
 				>

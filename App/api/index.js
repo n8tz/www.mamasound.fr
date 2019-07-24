@@ -19,6 +19,7 @@
 
 import config from "App/config";
 import App    from "App/index.js";
+import redis    from "App/utils/redis.js";
 
 const fs          = require('fs'),
       path        = require('path'),
@@ -48,7 +49,8 @@ export function service( server ) {
 			compressor(
 				req, res,
 				() => {
-					console.warn(req.url, req.user, req.device)
+					console.warn(req.url, req.user, req.device);
+					//let key = "page_"+req.url+"_"+(req.user&&req.user.)
 					App.renderSSR(
 						{
 							device  : req.device.type,

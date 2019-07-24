@@ -241,15 +241,15 @@ export default {
 			data : [
 				{
 					_id     : "test1",
-					mediaUrl: require("App/ui/assets/couvs/test.jpg")
+					mediaUrl: require("App/ui/assets/images/couvs/test.jpg")
 				},
 				{
 					_id     : "test2",
-					mediaUrl: require("App/ui/assets/couvs/test2.jpg")
+					mediaUrl: require("App/ui/assets/images/couvs/test2.jpg")
 				},
 				{
 					_id     : "test3",
-					mediaUrl: require("App/ui/assets/couvs/chat-ninja-photos-hisakata-hiroyuki-4.jpg")
+					mediaUrl: require("App/ui/assets/images/couvs/chat-ninja-photos-hisakata-hiroyuki-4.jpg")
 				}
 			]
 		}

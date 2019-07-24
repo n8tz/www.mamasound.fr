@@ -33,7 +33,7 @@ export function get( cls, objId ) {
 			
 			pushDbTask(
 				( client, dbRelease ) => {
-					var db = client.db("mamasound_fr");
+					let db = client.db("mamasound_fr");
 					
 					aliasAPI.getAlias(
 						cls,
@@ -77,9 +77,8 @@ export function query( req ) {
 			let { query: _query, etty, limit = 1000, skip, orderby, mountKeys = [] } = req;
 			pushDbTask(
 				( client, dbRelease ) => {
-					var db = client.db("mamasound_fr");
-					
-					var data  = {},
+					let db = client.db("mamasound_fr"),
+					    data  = {},
 					    complete,
 					    done  = ( r, ln ) => {
 						    data.length = typeof ln == 'number' ? ln : data.length;

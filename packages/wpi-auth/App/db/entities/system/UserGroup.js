@@ -1,5 +1,5 @@
 /*
- * www.mamasound.fr
+ *
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -15,18 +15,26 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import $super from "$super";
 
-//let baseDomain = "mamasound.wiseways.me"
-let baseDomain = "mamasound.localhost";
+import {types, validate} from "App/db/fields";
+
 export default {
-	STATIC_URL      : baseDomain + "/medias",//"static.mamasound.fr",
-	PUBLIC_URL      : "mamasound.fr",
-	ROOT_DOMAIN     : baseDomain,
-	UPLOAD_URL      : baseDomain + "/upload",
-	MEDIA_URL       : baseDomain + "/medias",
-	ALT_MEDIA_URL   : "http://static.mamasound.fr/",
-	UPLOAD_DIR      : "./upload",
-	SESSION_CHECK_TM: 60000,
-	...$super
+	
+	alias           : "UserGroup",
+	adminRoute      : "Config/UserGroup",
+	label           : "Categories d'utilisateur",
+	category        : "Config",
+	labelField      : "label",
+	searchableFields: ["label"],
+	
+	schema: {
+		login: [validate.mandatory],
+	},
+	fields: {
+		"_id"        : types.indexes,
+		"label"      : types.labels("Nom du groupe"),
+		"desc"       : types.descriptions(),
+		"isAdmin"    : types.boolean("Droit d'administration", true),
+		"isPublisher": types.boolean("Droit de publication", true)
+	}
 };

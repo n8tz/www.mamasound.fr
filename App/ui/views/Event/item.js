@@ -30,9 +30,9 @@ import React    from "react";
 
 
 let defaultPreview = {
-	Concert: require("App/ui/assets/medias/mms.png"),
-	Theatre: require("App/ui/assets/medias/mmt.png"),
-	Expo   : require("App/ui/assets/medias/mme.png")
+	Concert: require("App/ui/assets/images/mms.png"),
+	Theatre: require("App/ui/assets/images/mmt.png"),
+	Expo   : require("App/ui/assets/images/mme.png")
 };
 export default ( { record, refs, selected, onClick, onTap } ) =>
 	<div className={"Event Event_item Event" + record._cls + ' ' + (selected ? "selected" : "")}

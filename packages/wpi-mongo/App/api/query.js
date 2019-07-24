@@ -14,8 +14,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+import entities from "App/db/entities";
 //
-import {pushDbTask} from "App/db/pool";
 
 const config   = require('App/config'),
       aliasAPI = require("App/db/aliasHelpers"),
@@ -27,8 +27,11 @@ export default ( server, http ) => {
 	server.post(
 		'/db/query',
 		function ( req, res, next ) {
-			db.query(req.body).then(data => res.json(data)).catch(err => res.json({ error: err + '' }, 500))
-			
+			let isAdmin = req.user && req.user.isAdmin;
+			if ( entities[req.body.etty] && (!entities[req.body.etty].requireAdmin || isAdmin) )
+				db.query(req.body).then(data => res.json(data)).catch(err => res.json({ error: err + '' }, 500))
+			else
+				res.json({ error: 'Auth required' }, 500)
 		}
 	);
 	server.post(
@@ -43,8 +46,12 @@ export default ( server, http ) => {
 	server.post(
 		'/db/get',
 		function ( req, res, next ) {
-			let { objId, cls } = req.body;
-			db.get(cls, objId).then(data => res.json(data)).catch(err => res.json({ error: err + '' }, 500))
+			let { objId, cls } = req.body,
+			    isAdmin        = req.user && req.user.isAdmin;
+			if ( entities[cls] && (!entities[cls].requireAdmin || isAdmin) )
+				db.get(cls, objId).then(data => res.json(data)).catch(err => res.json({ error: err + '' }, 500))
+			else
+				res.json({ error: 'Auth required' }, 500)
 			
 		}
 	);

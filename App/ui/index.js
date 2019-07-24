@@ -17,7 +17,7 @@
  */
 
 
-import anims      from 'App/ui/anims/(**/*).js';
+import anims      from 'App/ui/assets/anims/(**/*).js';
 import views      from 'App/ui/views/(**/*).js';
 import fields     from 'App/ui/fields/(**/*).js';
 import forms      from 'App/ui/forms/(**/*).js';

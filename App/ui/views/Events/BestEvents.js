@@ -20,7 +20,7 @@ import React                                 from "react";
 import {Rnd}                                 from "react-rnd";
 import {reScope, scopeToProps, propsToScope} from "rscopes";
 import {withStateMap, asRef, asStore}        from "rescope-spells";
-import anims                                 from 'App/ui/anims/(*).js';
+import anims                                 from 'App/ui/assets/anims/(*).js';
 
 import {Comps} from 'App/ui';
 

@@ -1,5 +1,5 @@
 /*
- * www.mamasound.fr
+ *
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -15,18 +15,19 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import $super from "$super";
-
-//let baseDomain = "mamasound.wiseways.me"
-let baseDomain = "mamasound.localhost";
-export default {
-	STATIC_URL      : baseDomain + "/medias",//"static.mamasound.fr",
-	PUBLIC_URL      : "mamasound.fr",
-	ROOT_DOMAIN     : baseDomain,
-	UPLOAD_URL      : baseDomain + "/upload",
-	MEDIA_URL       : baseDomain + "/medias",
-	ALT_MEDIA_URL   : "http://static.mamasound.fr/",
-	UPLOAD_DIR      : "./upload",
-	SESSION_CHECK_TM: 60000,
-	...$super
-};
+//
+//let redis       = require("redis"),
+//    redisClient = redis && redis.createClient(process.env.redisUrl);
+//console.warn(process.env.redisUrl);
+//redis.RedisClient.prototype.delWildcard = function ( key, callback ) {
+//	var redis = this;
+//
+//	redis.keys(key, function ( err, rows ) {
+//		for ( var i = 0, j = rows.length; i < j; ++i ) {
+//			redis.del(rows[i])
+//		}
+//
+//		return callback && callback();
+//	});
+//};
+//export default redisClient;
