@@ -47,7 +47,7 @@ export default class App extends React.Component {
 			Router = StaticRouter;
 		return <Router location={__IS_SERVER__ && this.props.location}>
 			<React.Fragment>
-				{__ADMIN__ && <ContextMenu>
+				{__IS_ADMIN__ && <ContextMenu>
 					<div
 						onClick={() => $actions.newWidget('MamaImporter', { title: "Importer d'events" })}>
 						New Importer
@@ -58,7 +58,7 @@ export default class App extends React.Component {
 					</div>
 				</ContextMenu>}
 				
-				{__ADMIN__ &&
+				{__IS_ADMIN__ &&
 				widgets.items.map(
 					widget => {
 						let WidgetComp = Views.Widget[widget.type] || 'div';

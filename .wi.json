@@ -8,10 +8,12 @@
     "libsPath": "./packages",
     "basedOn": "default",
     "vars": {
+      "targetDir": "dist/www",
       "extractCss": true,
       "production": true,
       "DefinePluginCfg": {
-        "__ADMIN__": false,
+        "__IS_DEV__": false,
+        "__IS_ADMIN__": false,
         "__IS_SERVER__": false
       },
       "resolve": {
@@ -43,12 +45,13 @@
     "libsPath": "./packages",
     "basedOn": "default",
     "vars": {
-      "targetDir": "dist.admin",
+      "targetDir": "dist/admin",
       "extractCss": true,
       "production": true,
       "babelInclude": "(ansi\\-regex|strip\\-ansi|ckeditor)",
       "DefinePluginCfg": {
-        "__ADMIN__": true,
+        "__IS_DEV__": false,
+        "__IS_ADMIN__": true,
         "__IS_SERVER__": false
       },
       "babelPreset": {
@@ -82,7 +85,8 @@
     "libsPath": "./packages",
     "vars": {
       "DefinePluginCfg": {
-        "__ADMIN__": true,
+        "__IS_DEV__": true,
+        "__IS_ADMIN__": true,
         "__IS_SERVER__": false
       },
       "babelInclude": "(ansi\\-regex|strip\\-ansi|tui\\-image\\-editor)",
@@ -125,11 +129,12 @@
     "rootFolder": "App",
     "libsPath": "./packages",
     "vars": {
-      "targetDir": "dist.api",
+      "targetDir": "dist/api",
       "externals": true,
       "production": true,
       "DefinePluginCfg": {
-        "__ADMIN__": true,
+        "__IS_DEV__": false,
+        "__IS_ADMIN__": true,
         "__IS_SERVER__": true
       },
       "webpackPatch": {
@@ -160,10 +165,11 @@
     "libsPath": "./packages",
     "basedOn": "api",
     "vars": {
-      "targetDir": "dist.api",
+      "targetDir": "dist/api",
       "externals": true,
       "DefinePluginCfg": {
-        "__ADMIN__": true,
+        "__IS_DEV__": true,
+        "__IS_ADMIN__": true,
         "__IS_SERVER__": true
       },
       "webpackPatch": {

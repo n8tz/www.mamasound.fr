@@ -23,9 +23,9 @@ const path    = require("path"),
       multer  = require('multer');
 
 export default ( server, http ) => {
-	console.log(path.normalize(path.join(config.projectRoot, config.UPLOAD_DIR)));
-	var upload   = multer({ dest: path.normalize(path.join(config.projectRoot, config.UPLOAD_DIR)) });
-	var uploader = upload.fields([{ name: 'file', maxCount: 8 }]);
+	console.log(path.normalize(path.join(process.cwd(), config.UPLOAD_DIR)));
+	let upload   = multer({ dest: path.normalize(path.join(process.cwd(), config.UPLOAD_DIR)) }),
+	    uploader = upload.fields([{ name: 'file', maxCount: 8 }]);
 	console.log("Upload server running !");
 	server.post(
 		'/upload',

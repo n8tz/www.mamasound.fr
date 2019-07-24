@@ -127,7 +127,7 @@ const ctrl = {
 						{
 							app  : appHtml,
 							state: JSON.stringify(nstate),
-							//css  : cfg.css
+							css  : !__IS_DEV__ && cfg.css
 						}
 					);
 				} catch ( e ) {

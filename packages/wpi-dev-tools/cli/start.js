@@ -26,19 +26,19 @@ let port     = program.port || 9090,
     pDir     = program.source || process.cwd(),
     baseDir  = __dirname,
     distDir  = {
-	    api  : "dist.api",
-	    admin: "dist.admin",
-	    www  : "dist"
+	    api  : "dist/api",
+	    admin: "dist/admin",
+	    www  : "dist/www"
     },
     commands = {
 	    dev : {
 		    buildApi: "wpi :devApi -w",
-		    startApi: "node --inspect=[::]:9229 ./dist.api/App.server.js -p 9701",
+		    startApi: "node --inspect=[::]:9229 ./dist/api/App.server.js -p 9701",
 		    buildWww: "wpi-dev-server :devClient --hot --host 0.0.0.0"
 	    },
 	    prod: {
 		    buildApi: "wpi :api ",
-		    startApi: "node ./dist.api/App.server.js  -p 8080 ",
+		    startApi: "node ./dist/api/App.server.js  -p 8080 ",
 		    buildWww: "wpi :client&&wpi :admin"
 	    }
     },
@@ -112,9 +112,9 @@ function killMode( reboot ) {
 
 function cleanBuilds() {
 	try {
-		rimraf.sync(path.join(pDir, distDir.admin, "**/*.*"));
 		rimraf.sync(path.join(pDir, distDir.api, "**/*.*"));
-		rimraf.sync(path.join(pDir, distDir.www));
+		rimraf.sync(path.join(pDir, distDir.admin, "**/*.*"));
+		rimraf.sync(path.join(pDir, distDir.www, "**/*.*"));
 		console.log("Builds cleaned... ");
 	} catch ( e ) {
 		console.log("Fail cleaning builds... ");
