@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import {sliderHeight, eventsMiniHeight, headerMiniHeight} from "./vars";
+import {headerMiniHeight, sliderHeight} from "./vars";
 
 export const background       = {
 	position : "absolute",
@@ -90,7 +90,7 @@ export const slideScroll      = {
 				//height   : 2.5,
 				transform: {
 					translateY: "-8px",
-					translateZ: "30px",
+					translateZ: "20px",
 					rotateX   : "-4deg"
 				}
 			}
@@ -99,7 +99,6 @@ export const slideScroll      = {
 }
 export const focused          = {
 	position : "absolute",
-	//backgroundColor: "red",
 	bottom   : [sliderHeight, 10],
 	left     : "50%",
 	top      : headerMiniHeight + 20,

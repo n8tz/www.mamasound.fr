@@ -73,7 +73,7 @@ export default class BestEvents extends React.Component {
 								{
 									items.map(
 										( item, i ) => {
-											return <Views.Event.item
+											return <Views.Event.headerItem
 												//onClick={e => $actions.selectEvent(item, moment(day).valueOf(), true)}
 												key={item._id}
 												day={day}

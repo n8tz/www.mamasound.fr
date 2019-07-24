@@ -204,7 +204,7 @@ export default function asTweener( ...argz ) {
 							      if ( _.tweenRefOrigin[id].hasOwnProperty(key) && !tweenableMap.hasOwnProperty(key) ) {
 								      delete _.tweenRefMaps[id][key]
 								      delete _.muxByTarget[id][key]
-								      _.refs[id] && (_.refs[id].style[key] = undefined);
+								      _.refs[id] && _.refs[id].style && (_.refs[id].style[key] = undefined);
 							      }
 						      }
 					      );
@@ -491,7 +491,7 @@ export default function asTweener( ...argz ) {
 					                                    value: scrollPos
 				                                    })),
 			    nextDescr        = {
-				    ...(_inertia || {}),
+				    //...(_inertia || {}),
 				    scrollFirst,
 				    tweenAxis: dim && dim.tweenAxis || [],
 				    scrollPos,
@@ -500,8 +500,8 @@ export default function asTweener( ...argz ) {
 				    scrollableWindow,
 				    scrollableBounds,
 				    scrollableArea
-			    }
-			;
+			    };
+			
 			this._.axes[axe] = nextDescr;
 			(_inertia) && inertia && (inertia._.wayPoints = _inertia.wayPoints);
 			(_inertia) && inertia && !inertia.active && (inertia._.pos = scrollPos);
@@ -577,7 +577,7 @@ export default function asTweener( ...argz ) {
 					if ( this._.axes && this._.axes[axe] ) {
 						let oldPos = this._.axes[axe].targetPos,
 						    setPos = pos => {
-							
+							    pos                        = (~~(pos * 10000)) / 10000;
 							    //console.log('TweenableComp::setPos:514: ', this.constructor.displayName);
 							    this._.axes[axe].targetPos = this._.axes[axe].scrollPos = pos;
 							    if ( this._.axes[axe].inertia ) {
@@ -608,9 +608,14 @@ export default function asTweener( ...argz ) {
 							this._.live = true;
 							requestAnimationFrame(this._._rafLoop);
 						}
-						//return !(oldPos - newPos);
 					}
-				}))
+				})).then(
+				p => {
+					if ( this._.axes[axe].inertia ) {
+						this._.axes[axe].inertia._detectCurrentSnap();
+					}
+				}
+			)
 		}
 		
 		makeScrollable() {
@@ -1005,7 +1010,17 @@ export default function asTweener( ...argz ) {
 			let _   = this._,
 			    dim = _.axes && _.axes[axis],
 			    pos = abs ? v : dim && (dim.scrollPos + v);
-			return !dim || (pos <= 0 || pos >= dim.scrollableArea);
+			
+			pos = pos && Math.round(pos);
+			
+			return !dim
+				|| (
+					dim.scrollableBounds
+					?
+					(pos <= dim.scrollableBounds.min || pos >= dim.scrollableBounds.max)
+					:
+					(pos <= 0 || pos >= dim.scrollableArea)
+				);
 		}
 		
 		_doDispatch( target, dx, dy, holding ) {
@@ -1024,6 +1039,8 @@ export default function asTweener( ...argz ) {
 				// react comp with tweener support
 				if ( Comps[i].__isTweener ) {
 					//debugger
+					//console.log(Comps[i], dx, dy, Comps[i].isAxisOut("scrollX", dx), Comps[i].isAxisOut("scrollY",
+					// dy));
 					if ( !Comps[i].isAxisOut("scrollX", dx) && (!Comps[i].componentShouldScroll || Comps[i].componentShouldScroll("scrollX", dx)) ) {
 						Comps[i].dispatchScroll(dx, "scrollX", holding);
 						dx = 0;

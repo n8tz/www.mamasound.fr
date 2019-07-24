@@ -918,7 +918,7 @@ function asTweener() {
             if (_.tweenRefOrigin[id].hasOwnProperty(key) && !tweenableMap.hasOwnProperty(key)) {
               delete _.tweenRefMaps[id][key];
               delete _.muxByTarget[id][key];
-              _.refs[id] && (_.refs[id].style[key] = undefined);
+              _.refs[id] && _.refs[id].style && (_.refs[id].style[key] = undefined);
             }
           });
           _.tweenRefOrigin[id] = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_2___default()({}, tweenableMap);
@@ -1186,7 +1186,6 @@ function asTweener() {
 
       this.makeTweenable();
       this.makeScrollable();
-
       var _ = this._,
           dim = _.axes[axe],
           scrollableBounds = _scrollableBounds,
@@ -1197,7 +1196,8 @@ function asTweener() {
           inertia = _inertia !== false && (dim ? dim.inertia : new _utils_inertia__WEBPACK_IMPORTED_MODULE_11__["default"](_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_2___default()({}, _inertia || {}, {
         value: scrollPos
       }))),
-          nextDescr = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_2___default()({}, _inertia || {}, {
+          nextDescr = {
+        //...(_inertia || {}),
         scrollFirst: scrollFirst,
         tweenAxis: dim && dim.tweenAxis || [],
         scrollPos: scrollPos,
@@ -1206,8 +1206,7 @@ function asTweener() {
         scrollableWindow: scrollableWindow,
         scrollableBounds: scrollableBounds,
         scrollableArea: scrollableArea
-      });
-
+      };
       this._.axes[axe] = nextDescr;
       _inertia && inertia && (inertia._.wayPoints = _inertia.wayPoints);
       _inertia && inertia && !inertia.active && (inertia._.pos = scrollPos);
@@ -1295,7 +1294,8 @@ function asTweener() {
         if (_this7._.axes && _this7._.axes[axe]) {
           var oldPos = _this7._.axes[axe].targetPos,
               setPos = function setPos(pos) {
-            //console.log('TweenableComp::setPos:514: ', this.constructor.displayName);
+            pos = ~~(pos * 10000) / 10000; //console.log('TweenableComp::setPos:514: ', this.constructor.displayName);
+
             _this7._.axes[axe].targetPos = _this7._.axes[axe].scrollPos = pos;
 
             if (_this7._.axes[axe].inertia) {
@@ -1326,8 +1326,11 @@ function asTweener() {
           if (!_this7._.live) {
             _this7._.live = true;
             requestAnimationFrame(_this7._._rafLoop);
-          } //return !(oldPos - newPos);
-
+          }
+        }
+      }).then(function (p) {
+        if (_this7._.axes[axe].inertia) {
+          _this7._.axes[axe].inertia._detectCurrentSnap();
         }
       });
     };
@@ -1674,7 +1677,8 @@ function asTweener() {
       var _ = this._,
           dim = _.axes && _.axes[axis],
           pos = abs ? v : dim && dim.scrollPos + v;
-      return !dim || pos <= 0 || pos >= dim.scrollableArea;
+      pos = pos && Math.round(pos);
+      return !dim || (dim.scrollableBounds ? pos <= dim.scrollableBounds.min || pos >= dim.scrollableBounds.max : pos <= 0 || pos >= dim.scrollableArea);
     };
 
     _proto._doDispatch = function _doDispatch(target, dx, dy, holding) {
@@ -1691,6 +1695,8 @@ function asTweener() {
         // react comp with tweener support
         if (Comps[i].__isTweener) {
           //debugger
+          //console.log(Comps[i], dx, dy, Comps[i].isAxisOut("scrollX", dx), Comps[i].isAxisOut("scrollY",
+          // dy));
           if (!Comps[i].isAxisOut("scrollX", dx) && (!Comps[i].componentShouldScroll || Comps[i].componentShouldScroll("scrollX", dx))) {
             Comps[i].dispatchScroll(dx, "scrollX", holding);
             dx = 0;
@@ -4144,6 +4150,13 @@ var is = __webpack_require__(/*! is */ "undefined?63a5"),
     round = Math.round,
     min = Math.min,
     max = Math.max,
+    floatCut = function floatCut(v) {
+  if (v === void 0) {
+    v = 0;
+  }
+
+  return v.toFixed(3);
+},
     consts = {
   velocityResetTm: 150,
   clickTm: 250
@@ -4188,6 +4201,8 @@ function () {
     _.wayPoints = _.conf.wayPoints;
     _.inertiaFn = easingFn.easePolyOut;
     _.targetWayPointIndex = 0;
+
+    this._detectCurrentSnap();
   }
 
   var _proto = Inertia.prototype;
@@ -4220,6 +4235,15 @@ function () {
       _.inertia = this.active = false;
       _.lastInertiaPos = delta = 0;
 
+      if (_.targetWayPoint) {
+        delta = _.targetWayPoint.at - _.pos; //console.log("snap done ", _.targetWayPoint, _.pos + delta);
+
+        _.currentWayPoint = _.targetWayPoint;
+        _.currentWayPointIndex = _.targetWayPointIndex;
+        _.targetWayPoint = null;
+        _.targetWayPointIndex = null; //_.lastSnapTm           = Date.now();
+      }
+
       if (_.conf.onInertiaEnd) {
         _.conf.onInertiaEnd(_.pos, _.targetWayPoint);
       }
@@ -4248,12 +4272,20 @@ function () {
     this.active = false;
     _.lastInertiaPos = 0;
     _.targetDist = 0;
-    _.pos = pos;
+    _.pos = pos; //console.log("setPos", pos);
 
     if (_.conf.bounds) {
-      _.pos = max(_.pos, _.max);
-      _.pos = min(_.pos, _.min);
+      _.pos = max(_.pos, _.min);
+      _.pos = min(_.pos, _.max);
     }
+  };
+
+  _proto.setWayPoints = function setWayPoints(wayPoints) {
+    var _ = this._,
+        nextValue;
+    _.wayPoints = wayPoints;
+
+    this._detectCurrentSnap();
   };
 
   _proto.teleport = function teleport(loopDist) {
@@ -4272,7 +4304,7 @@ function () {
     var _ = this._,
         now = Date.now(),
         pos;
-    this.active = true; //console.log("dispatch", delta);
+    this.active = true; // if no inertia has started || if direction has change
 
     if (!_.inertia || signOf(delta) !== signOf(_.targetDist)) {
       _.inertia = true;
@@ -4285,7 +4317,11 @@ function () {
       _.lastInertiaPos = 0;
       _.targetDist += delta;
       _.targetDuration += tm;
-    }
+    } //
+    //if ( _.conf.maxJump ) {
+    //
+    //}
+
 
     if (_.conf.bounds) {
       if (_.pos + _.targetDist > _.max) {
@@ -4315,6 +4351,23 @@ function () {
     return pos > _.min && pos < _.max;
   };
 
+  _proto._detectCurrentSnap = function _detectCurrentSnap() {
+    var _ = this._,
+        pos = _.pos,
+        i;
+
+    if (_.wayPoints && _.wayPoints.length) {
+      for (i = 0; i < _.wayPoints.length; i++) {
+        if (floatCut(_.wayPoints[i].at) === floatCut(pos)) {
+          _.currentWayPoint = _.wayPoints[i];
+          _.currentWayPointIndex = i; //console.warn("snap set", i);
+
+          return i;
+        }
+      }
+    }
+  };
+
   _proto._doSnap = function _doSnap(forceSnap, maxDuration) {
     if (maxDuration === void 0) {
       maxDuration = 2000;
@@ -4332,7 +4385,7 @@ function () {
         if (_.wayPoints[i].at > pos) break;
       }
 
-      if (i == _.wayPoints.length) {
+      if (i === _.wayPoints.length) {
         i--;
       } else if (i === 0) {
         i = 0;
@@ -4341,14 +4394,13 @@ function () {
         if (forceSnap) forceSnap < 0 && i--;else if (pos < mid) i--;
       }
 
-      if (_.conf.maxJump && is.number(_.targetWayPointIndex)) {
-        var d = i - _.targetWayPointIndex; //console.log('Inertia::_doSnap:154: ', i);
+      if (_.conf.maxJump && is.number(_.currentWayPointIndex)) {
+        var d = i - _.currentWayPointIndex; //console.log('Inertia::_doSnap:154: ', i, d);
 
-        if (d) {
-          i -= d;
-          i += _.conf.maxJump * (d / abs(d));
-        } //console.log('Inertia::_doSnap:154: ', i);
-
+        if (abs(d) > _.conf.maxJump) {
+          //console.log('max: ', i, d);
+          i = _.currentWayPointIndex + signOf(d) * _.conf.maxJump;
+        }
       }
 
       target = _.wayPoints[i].at;
@@ -4425,7 +4477,10 @@ function () {
 
     _.lastIVelocity = iVel;
     _.lastVelocity = iVel;
-    _.baseTS = now;
+    _.baseTS = now; // clear snap
+
+    _.targetWayPoint = undefined;
+    _.targetWayPointIndex = undefined;
 
     if (_.conf.bounds) {
       if (pos > _.max) {

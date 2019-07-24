@@ -47,7 +47,6 @@ export const defaultInitial  = {
 };
 export const defaultEntering = [
 	{
-		type    : "Tween",
 		from    : 0,
 		duration: 100,
 		easeFn  : "easePolyIn",
@@ -60,14 +59,12 @@ export const defaultEntering = [
 		}
 	},
 	{
-		type    : "Tween",
 		from    : 0,
 		duration: 35,
 		apply   : {
 			opacity: 1,
 		}
 	}, {
-		type    : "Tween",
 		from    : 55,
 		duration: 45,
 		apply   : {
@@ -81,7 +78,6 @@ export const defaultEntering = [
 ];
 export const defaultLeaving  = [
 	{
-		type    : "Tween",
 		from    : 0,
 		duration: 45,
 		apply   : {
@@ -93,14 +89,12 @@ export const defaultLeaving  = [
 		}
 	},
 	{
-		type    : "Tween",
 		from    : 65,
 		duration: 35,
 		apply   : {
 			opacity: -1,
 		}
 	}, {
-		type    : "Tween",
 		from    : 0,
 		duration: 100,
 		easeFn  : "easePolyOut",

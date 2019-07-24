@@ -137,6 +137,7 @@ export default class EventList extends React.Component {
 					<div className={"content container"}>
 						<TweenRef
 							id={"EventNav"}
+							initial={EventCatSlider.style}
 						>
 							<Comps.Slider
 								{...EventCatSlider}
@@ -148,10 +149,10 @@ export default class EventList extends React.Component {
 										.map(
 											( v, type ) =>
 												<div className={"dayList"} key={type}>
-													<Comps.Slider
-														{...EventDaySlider}
-														className={"EventDay"}
-													>
+													{/*<Comps.Slider*/}
+													{/*	{...EventDaySlider}*/}
+													{/*	className={"EventDay"}*/}
+													{/*>*/}
 														{
 															Array(appState.dayCountByViewType[type])
 																.fill(0)
@@ -164,7 +165,7 @@ export default class EventList extends React.Component {
 																			viewType={type}/>
 																)
 														}
-													</Comps.Slider>
+													{/*</Comps.Slider>*/}
 													{/*<div id={"endList_" + type}>loading...</div>*/}
 												</div>
 										)

@@ -1,5 +1,5 @@
 /*
- * www.mamasound.fr
+ *
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -35,7 +35,7 @@ let defaultPreview = {
 	Expo   : require("App/ui/assets/medias/mme.png")
 };
 export default ( { record, refs, selected, onClick, onTap } ) =>
-	<div className={"Event Event_item Event" + record._cls + ' ' + (selected ? "selected" : "")}
+	<div className={"Event Event_headerItem Event" + record._cls + ' ' + (selected ? "selected" : "")}
 	     onClick={onClick}
 	>
 		<Editable id={record._id}/>

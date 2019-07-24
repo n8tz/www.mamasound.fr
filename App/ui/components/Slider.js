@@ -110,8 +110,9 @@ export default class Slider extends React.Component {
 			    ...tweenTools.offset(defaultLeaving, 100)
 		    ],
 		    tweenLines               = allItems.map(( e, i ) => ({
-			    [scrollDir]: tweenTools.offset(scrollAxis,
-			                                   i * step
+			    [scrollDir]: tweenTools.offset(
+				    scrollAxis,
+				    i * step
 			    )
 		    }));
 		
@@ -141,14 +142,12 @@ export default class Slider extends React.Component {
 		    }                                                                                = this.props,
 		    { index = defaultIndex, allItems, nbGhostItems, step, dec, tweenLines, nbItems } = this.state;
 		
-		console.log("render slider", 100 + dec + index * step, tweenLines)
+		//console.log("render slider", 100 + dec + index * step, tweenLines)
 		return (
 			<div
 				className={"rSlide slider " + className}
 				style={
 					{
-						//width     : "100%",
-						//height    : "100%",
 						userSelect: "none",
 						...style
 					}
@@ -159,6 +158,13 @@ export default class Slider extends React.Component {
 					defaultPosition={100 + dec + index * step}
 					size={nbGhostItems * step + 100}
 					scrollableWindow={visibleItems * step}
+					
+					bounds={
+						!infinite && {
+							min: 100,
+							max: dec + nbGhostItems * step,
+						}
+					}
 					inertia={
 						{
 							maxJump,
@@ -166,7 +172,7 @@ export default class Slider extends React.Component {
 								let { windowSize } = this.state;
 								if ( v > (100 + windowSize * 2) )
 									return -windowSize;
-
+								
 								if ( v < (100 + windowSize) )
 									return windowSize;
 							}),
@@ -176,7 +182,6 @@ export default class Slider extends React.Component {
 								this.setState({ index: (i) % nbItems })
 								//console.log(i % nbItems, v)
 							},
-							//value     : 100 + dec + index * step,
 							wayPoints : allItems.map(( child, i ) => ({ at: 100 + i * step }))
 						}
 					}

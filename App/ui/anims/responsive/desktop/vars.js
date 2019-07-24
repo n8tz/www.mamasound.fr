@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-export const sliderHeight     = "17vh";
+export const sliderHeight     = "15vh";
 export const headerMiniHeight = 50;
 export const eventsMiniHeight = 150;
 

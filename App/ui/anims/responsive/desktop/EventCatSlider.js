@@ -22,9 +22,10 @@ export const visibleItems    = 1;
 export const style           = {
 	position: "absolute",
 	right   : "0%",
-	left    : "300px",
+	//left    : "300px",
 	top     : "0%",
 	height  : "100%",
+	width   : ["100%", "-300px"],
 	//overflow: "auto"
 };
 export const defaultInitial  = {

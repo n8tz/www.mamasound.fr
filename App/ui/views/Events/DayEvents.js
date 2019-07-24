@@ -57,7 +57,7 @@ export default class DayEvents extends React.Component {
 				<div className={"day"}>
 					<Views.SimpleDay day={day}/>
 				</div>
-				<Comps.SlidableList {...Anims.EventsSlider}>
+				{/*<Comps.SlidableList {...Anims.EventsSlider}>*/}
 					{
 						EventList && EventList.items && EventList.items.map(
 							( item, i ) => {
@@ -71,7 +71,7 @@ export default class DayEvents extends React.Component {
 							}
 						)
 					}
-				</Comps.SlidableList>
+				{/*</Comps.SlidableList>*/}
 			</div>
 		);
 	}

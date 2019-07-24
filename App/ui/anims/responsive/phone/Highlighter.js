@@ -90,7 +90,7 @@ export const slideScroll      = {
 				//height   : 2.5,
 				transform: {
 					translateY: "-8px",
-					translateZ: "30px",
+					translateZ: "20px",
 					rotateX   : "-4deg"
 				}
 			}

@@ -104,7 +104,7 @@ export const showPreviewAnim       = [
 		duration: 100,
 		//easeFn  : "easeBackOut",
 		apply   : {
-			opacity: 1,
+			//opacity: 1,
 			//transform: [{}, {
 			//	translateX: "150px",
 			//}]
