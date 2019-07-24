@@ -48,7 +48,7 @@
       "targetDir": "dist/admin",
       "extractCss": true,
       "production": true,
-      "babelInclude": "(ansi\\-regex|strip\\-ansi|ckeditor)",
+      "babelInclude": "(ansi\\-regex|strip\\-ansi)",
       "DefinePluginCfg": {
         "__IS_DEV__": false,
         "__IS_ADMIN__": true,
