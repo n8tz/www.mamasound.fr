@@ -39,8 +39,8 @@ export function service( server ) {
 	//	server.use(basicAuth(creds.user, creds.pass))
 	//}
 	//
-	let publicFiles = express.static(process.cwd() + '/dist'),
-	    adminFiles  = express.static(process.cwd() + '/dist.admin');
+	let publicFiles = express.static(process.cwd() + '/dist/www'),
+	    adminFiles  = express.static(process.cwd() + '/dist/admin');
 	server.use(device.capture());
 	server.get(
 		'/',
@@ -53,8 +53,8 @@ export function service( server ) {
 						{
 							device  : req.device.type,
 							location: req.url,
-							css     : fs.existsSync(process.cwd() + "/dist/App.css")
-							          ? fs.readFileSync(process.cwd() + "/dist/App.css")
+							css     : fs.existsSync(process.cwd() + "/dist/www/App.css")
+							          ? fs.readFileSync(process.cwd() + "/dist/www/App.css")
 							          : "/* ... */",
 							//state   : currentState,
 							tpl

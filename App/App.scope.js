@@ -33,7 +33,7 @@ export default {
 	@asStore
 	appState: {
 		
-		currentPageFocus: "events",// head, events, page
+		currentPageFocus: "head",// head, events, page
 		
 		//selectedFocus     : { id: "Page.SkxesB7ugG", etty: 'Page' },
 		selectedPage      : { id: "Page.SkxesB7ugG", etty: 'Page' },
@@ -187,7 +187,7 @@ export default {
 	@asStore
 	widgets   : {
 		// initial state
-		items: [
+		items: __IS_DEV__ ? [
 			{
 				"_id"     : "FfseOEKpm",
 				"size"    : { "width": 200, "height": 120 },
@@ -195,7 +195,7 @@ export default {
 				"type"    : "DevTools",
 				"position": { "x": 0, "y": 0 }
 			}
-		],
+		] : [],
 		
 		// actions
 		newWidget( type, props = {} ) {
