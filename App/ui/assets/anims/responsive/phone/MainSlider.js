@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-let stepAngle = "1.8deg";
+let stepAngle = "1.45deg";
 //export const visibleItems    = 3;
 
 export const defaultInitial  = {

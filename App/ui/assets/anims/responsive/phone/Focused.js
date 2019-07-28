@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {sliderHeight, eventsMiniHeight, headerMiniHeight} from "./vars";
+import {eventsMiniHeight, sliderHeight} from "./vars";
 
 export const transitionDuration    = 800;
 export const defaultInitial        = {
@@ -56,6 +56,7 @@ export const defaultPreviewInitial = {
 	left           : "50%",
 	zIndex         : 40,
 	overflow       : "hidden",
+	display        : "none",
 	transformOrigin: "50% 50%",
 	opacity        : 1,
 	transform      : [
@@ -104,7 +105,7 @@ export const showPreviewAnim       = [
 		duration: 100,
 		//easeFn  : "easeBackOut",
 		apply   : {
-			//opacity: 1,
+			opacity: 1,
 			//transform: [{}, {
 			//	translateX: "150px",
 			//}]

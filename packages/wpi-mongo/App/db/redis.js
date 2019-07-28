@@ -16,18 +16,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 //
-//let redis       = require("redis"),
-//    redisClient = redis && redis.createClient(process.env.redisUrl);
-//console.warn(process.env.redisUrl);
-//redis.RedisClient.prototype.delWildcard = function ( key, callback ) {
-//	var redis = this;
-//
-//	redis.keys(key, function ( err, rows ) {
-//		for ( var i = 0, j = rows.length; i < j; ++i ) {
-//			redis.del(rows[i])
-//		}
-//
-//		return callback && callback();
-//	});
-//};
-//export default redisClient;
+let redis       = require("redis"),
+    redisClient = redis && redis.createClient(process.env.redisUrl);
+console.warn(process.env.redisUrl);
+redis.RedisClient.prototype.delWildcard = function ( key, callback ) {
+	var redis = this;
+	
+	redis.keys(key, function ( err, rows ) {
+		for ( var i = 0, j = rows.length; i < j; ++i ) {
+			redis.del(rows[i])
+		}
+		
+		return callback && callback();
+	});
+};
+export default redisClient;
