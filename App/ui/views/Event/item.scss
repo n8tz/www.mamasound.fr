@@ -1,0 +1,174 @@
+/*!
+ *
+ * Copyright (C) 2019 Nathanael Braun
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+
+.Event_item {
+  font-size: 16px;
+  @media screen and (max-width: $tablet-portrait-breakpoint) {
+    font-size: 15px;
+  }
+  @media screen and (max-width: $tablet-portrait-breakpoint) {
+    font-size: 15px;
+  }
+  @media screen and (max-width: $smartphone-landscape-breakpoint) {
+    font-size: 10px;
+
+  }
+  height: 3.5em;
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: rgb(211, 211, 211);
+
+  &:nth-child(2n+1) {
+    background: white;
+  }
+
+  &.selected .title {
+    text-decoration: underline;
+  }
+
+  .title {
+    @include use_hvCenteredContent();
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    right: (6em / 1.25);
+    font-size: 1.25em;
+    position: absolute;
+    top: 0px;
+    height: (3.5em / 1.25);
+    left: (11em / 1.25);
+    text-align: left;
+    padding-top: .1em;
+    display: inline-block;
+  }
+
+  .start {
+    @include use_hvCenteredContent();
+    float: left;
+    height: 100%;
+    padding-top: .1em;
+    padding-left: .2em;
+    padding-right: 1em;
+    width: 3em;
+    font-size: 1.5em;
+
+  }
+
+  .price {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    font-size: .9em;
+  }
+
+  .place {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: .9em;
+
+    span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 10em;
+      display: inline-block;
+      margin-top: 3px;
+      vertical-align: bottom;
+    }
+  }
+
+  .icon {
+    @include use_hvCenteredContent();
+    float: left;
+    background: rgb(249, 249, 249);
+
+    padding: .2em;
+    width: 2.5em;
+    height: 2.5em;
+    overflow: hidden;
+    border-radius: 3em;
+    transform: scale(1.8);
+    margin-top: .1em;
+    //background: rgba(249, 249, 249, 0.66);
+    border: solid 1px #b0b0b0;
+
+    img {
+      width: 100%;
+      //height: 100%;
+    }
+  }
+
+  @media screen and (max-width: $smartphone-portrait-breakpoint) {
+    .title {
+      right: (3em / 1.25);
+      font-size: 1.25em;
+      position: absolute;
+      top: .45em;
+      height: (3.5em / 1.25);
+      left: (8.5em / 1.25);
+      text-align: left;
+      padding-top: .1em;
+    }
+
+    .start {
+      @include use_hvCenteredContent();
+      float: left;
+      height: 100%;
+      padding-top: .1em;
+      padding-left: 0em;
+      padding-right: .95em;
+      width: 3em;
+      font-size: 1.25em;
+    }
+
+    .price {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      font-size: .9em;
+    }
+
+    .icon {
+      @include use_hvCenteredContent();
+      padding: .2em;
+      width: 1.75em;
+      height: 1.75em;
+      transform: scale(1.75);
+      margin-top: .5em;
+      margin-left: -.4em;
+    }
+  }
+
+  //&.EventTheatre .icon,
+  &.EventTheatre .start {
+    background: rgba(97, 36, 153, 0.68);
+  }
+
+  //&.EventConcert .icon,
+  &.EventConcert .start {
+    background: rgba(207, 30, 46, 0.67);
+  }
+
+  //&.EventExpo .icon,
+  &.EventExpo .start {
+    background: rgba(1, 199, 151, 0.81);
+  }
+}

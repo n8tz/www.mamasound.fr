@@ -79,7 +79,7 @@
 }
 
 @mixin withTranspaMask() {
-  mask: url("../assets/medias/transpaMask.svg") bottom right; /* Élément d'un SVG utilisé comme masque répété horizontalement */
+  mask: url("../assets/images/transpaMask.svg") bottom right; /* Élément d'un SVG utilisé comme masque répété horizontalement */
   mask-size: 100% auto;
 }
 
@@ -92,7 +92,7 @@
     width: 100%;
     height: 30px;
     transform: translate3d(-50%, 0, 0);
-    background: url("../assets/medias/border-mask.svg") bottom center repeat-x/4000px; /* Élément d'un SVG utilisé comme masque répété horizontalement */
+    background: url("../assets/images/border-mask.svg") bottom center repeat-x/4000px; /* Élément d'un SVG utilisé comme masque répété horizontalement */
     //opacity: .35;
     filter: drop-shadow(0px 7px 1px rgba(0, 0, 0, 0.2));
     animation: shadowFun 15s infinite;
@@ -106,8 +106,8 @@
     height: calc(100% + 10px);
     z-index: 1;
     background: white;
-    mask: url("../assets/medias/border-mask.svg") repeat-x bottom center/4000px; /* Élément d'un SVG utilisé comme masque répété horizontalement */
-    //mask-border: url("../assets/medias/border-mask.svg") 20 0 repeat ;
+    mask: url("../assets/images/border-mask.svg") repeat-x bottom center/4000px; /* Élément d'un SVG utilisé comme masque répété horizontalement */
+    //mask-border: url("../assets/images/border-mask.svg") 20 0 repeat ;
     //mask-border-width: 142px;
 
     &:after {
@@ -118,7 +118,7 @@
       width: 100%;
       height: 40px;
       transform: translate3d(-50%, 0, 0);
-      background: url("../assets/medias/border.svg") bottom center repeat-x/4000px;
+      background: url("../assets/images/border.svg") bottom center repeat-x/4000px;
       opacity: .9;
       z-index: 100000;
       pointer-events: none;
@@ -151,7 +151,7 @@
     width: 100%;
     height: 40px;
     transform: translate3d(-50%, 0, 0);
-    background: url("../assets/medias/border-mask.svg") top center repeat-x/4000px; /* Élément d'un SVG utilisé comme masque répété horizontalement */
+    background: url("../assets/images/border-mask.svg") top center repeat-x/4000px; /* Élément d'un SVG utilisé comme masque répété horizontalement */
     //opacity: .35;
     filter: drop-shadow(0px 7px 1px rgba(0, 0, 0, 0.2));
   }
@@ -163,7 +163,7 @@
     height: calc(100% + 20px);
     z-index: 1;
     background: white;
-    mask: url("../assets/medias/border-mask.svg") repeat-x top center/4000px; /* Élément d'un SVG utilisé comme masque répété horizontalement */
+    mask: url("../assets/images/border-mask.svg") repeat-x top center/4000px; /* Élément d'un SVG utilisé comme masque répété horizontalement */
 
     &:after {
       content: ' ';
@@ -172,7 +172,7 @@
       width: 100%;
       height: 40px;
       transform: translate3d(-50%, 0, 0);
-      background: url("../assets/medias/border.svg") top center repeat-x/4000px;
+      background: url("../assets/images/border.svg") top center repeat-x/4000px;
       opacity: .9;
       z-index: 100000;
       //background-position: bottom;

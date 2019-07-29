@@ -15,13 +15,18 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+import $super from "$super";
+
 //let baseDomain = "mamasound.wiseways.me"
-let baseDomain = "mamasound.localhost"
+let baseDomain = "mamasound.localhost";
 export default {
-	STATIC_URL      : "static.mamasound.fr",
+	STATIC_URL      : baseDomain + "/medias",//"static.mamasound.fr",
 	PUBLIC_URL      : "mamasound.fr",
 	ROOT_DOMAIN     : baseDomain,
 	UPLOAD_URL      : baseDomain + "/upload",
+	MEDIA_URL       : baseDomain + "/medias",
+	ALT_MEDIA_URL   : "http://static.mamasound.fr/",
+	UPLOAD_DIR      : "./upload",
 	SESSION_CHECK_TM: 60000,
-	...require('$super')
+	...$super
 };

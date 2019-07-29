@@ -22,8 +22,9 @@ services:
     build:
       context: .
     working_dir: /home/app
-    command: bash -c "npm i&&npm run start-dev"
-#    command: bash -c "npm i&&npm run build&&npm run start"
+    command: bash -c "npm i&&wi-run :devClient start -m dev"
+#    command: bash -c "npm i&&npm run start-dev"
+#    command: bash -c "npm run build&&npm run start"
 
     labels:
       - 'traefik.enable=true'
@@ -42,8 +43,6 @@ services:
       - .:/home/app
       - node_modules:/home/app/node_modules
       - ./docker/dist:/home/app/dist
-      - ./docker/dist.admin:/home/app/dist.admin
-      - ./docker/dist.api:/home/app/dist.api
       - ./docker/logs:/home/app/logs
       - ./dump:/home/app/dump
       #      - ../../libs/rScopes:/home/app/libs
@@ -51,6 +50,7 @@ services:
       - "8080"
     ports:
       - "${APP_DOCKER_DEBUG_PORT:-9229}:9229"
+      - "9090:9090"
     networks:
       - app_network
   mongodb:

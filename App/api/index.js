@@ -17,12 +17,14 @@
  */
 
 
-import App              from "App/index.js";
-import {renderToString} from "react-dom/server";
+import config from "App/config";
+import App    from "App/index.js";
+import redis    from "App/utils/redis.js";
 
-const wpiConf     = require('App/.wpiConfig.json'),
-      fs          = require('fs'),
+const fs          = require('fs'),
+      path        = require('path'),
       express     = require('express'),
+      superagent  = require('superagent'),
       tpl         = require('../index.html.tpl'),
       compression = require('compression'),
       device      = require('express-device'),
@@ -38,8 +40,8 @@ export function service( server ) {
 	//	server.use(basicAuth(creds.user, creds.pass))
 	//}
 	//
-	let publicFiles = express.static(process.cwd() + '/dist'),
-	    adminFiles  = express.static(process.cwd() + '/dist.admin');
+	let publicFiles = express.static(process.cwd() + '/dist/www'),
+	    adminFiles  = express.static(process.cwd() + '/dist/admin');
 	server.use(device.capture());
 	server.get(
 		'/',
@@ -47,13 +49,14 @@ export function service( server ) {
 			compressor(
 				req, res,
 				() => {
-					console.warn(req.url, req.user, req.device)
+					console.warn(req.url, req.user, req.device);
+					//let key = "page_"+req.url+"_"+(req.user&&req.user.)
 					App.renderSSR(
 						{
 							device  : req.device.type,
 							location: req.url,
-							css     : fs.existsSync(process.cwd() + "/dist/App.css")
-							          ? fs.readFileSync(process.cwd() + "/dist/App.css")
+							css     : fs.existsSync(process.cwd() + "/dist/www/App.css")
+							          ? fs.readFileSync(process.cwd() + "/dist/www/App.css")
 							          : "/* ... */",
 							//state   : currentState,
 							tpl
@@ -73,7 +76,32 @@ export function service( server ) {
 			return adminFiles(req, res, next);
 		}
 	);
+	
 	server.use(express.static(process.cwd() + '/static'));
+	server.use("/medias", express.static(path.join(process.cwd(), config.UPLOAD_DIR)));
+	
+	server.use("/medias", ( req, res, next ) => {
+		// try to retrieve img from the old server...
+		superagent.get(config.ALT_MEDIA_URL + req.url)
+		          .then(
+			          file => {
+				          fs.writeFile(
+					          path.join(process.cwd(), config.UPLOAD_DIR, path.basename(req.url)).replace(/\?.*$/, ''),
+					          file.body,
+					          ( e, r ) => {
+						
+						          res.redirect("/medias/" + req.url);
+					          })
+				          //debugger
+			          }
+		          )
+		          .catch(
+			          file => {
+				          res.redirect(config.ALT_MEDIA_URL + req.url);
+			          }
+		          )
+		
+	});
 	server.use("/assets/static", express.static(process.cwd() + '/App/ui/assets/static'));
 	
 }

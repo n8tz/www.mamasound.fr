@@ -22,7 +22,6 @@ import db, {mount}    from "App/db";
 
 import config           from 'App/config';
 import {types, query}   from 'App/db';
-import {updateWatchers} from "../../libs/wpi-mongo/App/stores/DataProvider";
 
 function getSrc( src, dims ) {
 	var p = '';

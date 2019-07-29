@@ -18,6 +18,7 @@
 
 import $super                         from "$super";
 import stores                         from 'App/stores/(*).js';
+import {Views}                        from "App/ui";
 import moment                         from "moment";
 import {asRef, asStore, withStateMap} from "rscopes";
 import shortid                        from "shortid";
@@ -26,6 +27,7 @@ import shortid                        from "shortid";
 export default {
 	...$super,
 	Anims          : stores.Anims,
+	//CurrentUser    : stores.CurrentUser,
 	UserGeoLocation: stores.UserGeoLocation,
 	
 	@asStore
@@ -40,7 +42,7 @@ export default {
 		selectedEventDT   : undefined,
 		curDay            : undefined,
 		viewType          : 0,
-		dayCountByViewType: [4, 1, 1, 1, 0],
+		dayCountByViewType: [2, 1, 1, 1, 0],
 		curTags           : undefined,
 		
 		$apply( data, state ) {
@@ -185,18 +187,19 @@ export default {
 	@asStore
 	widgets   : {
 		// initial state
-		items: [
-			//{
-			//	"_id"     : "FfseOEKpm",
-			//	"size"    : { "width": 600, "height": 400 },
-			//	"type"    : "RecordEditor",
-			//	"props"   : { "record": { id: "FocusedItems.-f8m8skoA2", "etty": "FocusedItems" } },
-			//	"position": { "x": 750, "y": 500 }
-			//}
-		],
+		items: __IS_DEV__ ? [
+			{
+				"_id"     : "FfseOEKpm",
+				"size"    : { "width": 200, "height": 120 },
+				"title"   : "DevTools",
+				"type"    : "DevTools",
+				"position": { "x": 0, "y": 0 }
+			}
+		] : [],
 		
 		// actions
 		newWidget( type, props = {} ) {
+			let Default = Views.Widget[type] && Views.Widget[type].defaultWindow;
 			return {
 				items: [...this.nextState.items, {
 					_id     : shortid.generate(),
@@ -207,6 +210,7 @@ export default {
 						x: 50 + ~~(Math.random() * 200),
 						y: 50 + ~~(Math.random() * 200)
 					},
+					...Default
 				}]
 			}
 		},
@@ -237,15 +241,15 @@ export default {
 			data : [
 				{
 					_id     : "test1",
-					mediaUrl: require("App/ui/assets/couvs/test.jpg")
+					mediaUrl: require("App/ui/assets/images/couvs/test.jpg")
 				},
 				{
 					_id     : "test2",
-					mediaUrl: require("App/ui/assets/couvs/test2.jpg")
+					mediaUrl: require("App/ui/assets/images/couvs/test2.jpg")
 				},
 				{
 					_id     : "test3",
-					mediaUrl: require("App/ui/assets/couvs/chat-ninja-photos-hisakata-hiroyuki-4.jpg")
+					mediaUrl: require("App/ui/assets/images/couvs/chat-ninja-photos-hisakata-hiroyuki-4.jpg")
 				}
 			]
 		}

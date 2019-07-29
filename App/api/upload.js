@@ -15,16 +15,17 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+import config from "App/config";
 
-const wpiConf = require('App/.wpiConfig'),
-      path    = require("path"),
+const path    = require("path"),
       shortid = require("shortid"),
       fs      = require("fs"),
       multer  = require('multer');
 
 export default ( server, http ) => {
-	var upload   = multer({ dest: wpiConf.projectRoot + '/upload' });
-	var uploader = upload.fields([{ name: 'file', maxCount: 8 }]);
+	console.log(path.normalize(path.join(process.cwd(), config.UPLOAD_DIR)));
+	let upload   = multer({ dest: path.normalize(path.join(process.cwd(), config.UPLOAD_DIR)) }),
+	    uploader = upload.fields([{ name: 'file', maxCount: 8 }]);
 	console.log("Upload server running !");
 	server.post(
 		'/upload',
@@ -43,12 +44,12 @@ export default ( server, http ) => {
 									let name   = shortid.generate() + path.extname(file.originalname),
 									    record = {
 										    label   : file.originalname,
-										    url     : "/medias/" + name,
+										    url     : name,
 										    mimetype: file.mimetype
 									    };
 									fs.rename(
 										file.path,
-										path.join(wpiConf.projectRoot, "public", name),
+										path.join(config.projectRoot, config.UPLOAD_DIR, name),
 										function ( e, r ) {
 											if ( e ) {
 												return reject(e);

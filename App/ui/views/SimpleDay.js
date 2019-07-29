@@ -30,13 +30,13 @@ import moment from "moment";
 import {NavLink} from "react-router-dom";
 
 const banList = [
-	require("App/ui/assets/medias/ban/jours-lundi.png"),
-	require("App/ui/assets/medias/ban/jours-mardi.png"),
-	require("App/ui/assets/medias/ban/jours-mercredi.png"),
-	require("App/ui/assets/medias/ban/jours-jeudi.png"),
-	require("App/ui/assets/medias/ban/jours-vendredi.png"),
-	require("App/ui/assets/medias/ban/jours-samedi.png"),
-	require("App/ui/assets/medias/ban/jours-dimanche.png")
+	require("App/ui/assets/images/ban/jours-lundi.png"),
+	require("App/ui/assets/images/ban/jours-mardi.png"),
+	require("App/ui/assets/images/ban/jours-mercredi.png"),
+	require("App/ui/assets/images/ban/jours-jeudi.png"),
+	require("App/ui/assets/images/ban/jours-vendredi.png"),
+	require("App/ui/assets/images/ban/jours-samedi.png"),
+	require("App/ui/assets/images/ban/jours-dimanche.png")
 ]
 
 export default ( { day } ) =>

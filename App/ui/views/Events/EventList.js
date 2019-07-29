@@ -127,7 +127,7 @@ export default class EventList extends React.Component {
 	render() {
 		let {
 			    record                          : { position, size } = {},
-			    UserGeoLocation, appState, Anims: { MainPage, EventCatSlider }, activeScroll,
+			    UserGeoLocation, appState, Anims: { MainPage, EventCatSlider, EventDaySlider }, activeScroll,
 			    $actions, style
 		    }     = this.props,
 		    state = this.state;
@@ -137,6 +137,7 @@ export default class EventList extends React.Component {
 					<div className={"content container"}>
 						<TweenRef
 							id={"EventNav"}
+							initial={EventCatSlider.style}
 						>
 							<Comps.Slider
 								{...EventCatSlider}
@@ -148,6 +149,10 @@ export default class EventList extends React.Component {
 										.map(
 											( v, type ) =>
 												<div className={"dayList"} key={type}>
+													{/*<Comps.Slider*/}
+													{/*	{...EventDaySlider}*/}
+													{/*	className={"EventDay"}*/}
+													{/*>*/}
 													{
 														Array(appState.dayCountByViewType[type])
 															.fill(0)
@@ -160,7 +165,8 @@ export default class EventList extends React.Component {
 																		viewType={type}/>
 															)
 													}
-													<div id={"endList_" + type}>loading...</div>
+													{/*</Comps.Slider>*/}
+													{/*<div id={"endList_" + type}>loading...</div>*/}
 												</div>
 										)
 								}
@@ -174,8 +180,10 @@ export default class EventList extends React.Component {
 						</TweenRef>
 					</div>
 				</div>
-				{activeScroll && <div className={"noScrollOverlay"}
-				                      onClick={e => $actions.setPageFocus('events', true)}></div>}
+				{
+					activeScroll && <div className={"noScrollOverlay"}
+					                     onClick={e => $actions.setPageFocus('events', true)}></div>
+				}
 				<div
 					className={"NavTools container"}
 				>

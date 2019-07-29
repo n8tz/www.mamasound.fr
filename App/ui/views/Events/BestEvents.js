@@ -20,7 +20,7 @@ import React                                 from "react";
 import {Rnd}                                 from "react-rnd";
 import {reScope, scopeToProps, propsToScope} from "rscopes";
 import {withStateMap, asRef, asStore}        from "rescope-spells";
-import anims                                 from 'App/ui/anims/(*).js';
+import anims                                 from 'App/ui/assets/anims/(*).js';
 
 import {Comps} from 'App/ui';
 
@@ -73,7 +73,7 @@ export default class BestEvents extends React.Component {
 								{
 									items.map(
 										( item, i ) => {
-											return <Views.Event.item
+											return <Views.Event.headerItem
 												//onClick={e => $actions.selectEvent(item, moment(day).valueOf(), true)}
 												key={item._id}
 												day={day}

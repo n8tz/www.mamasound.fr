@@ -1,12 +1,20 @@
 {
   "default": {
     "rootFolder": "App",
-    "libsPath": "./libs",
+    "libsPath": "./packages"
+  },
+  "client": {
+    "rootFolder": "App",
+    "libsPath": "./packages",
+    "basedOn": "default",
     "vars": {
+      "targetDir": "dist/www",
       "extractCss": true,
       "production": true,
       "DefinePluginCfg": {
-        "__ADMIN__": false
+        "__IS_DEV__": false,
+        "__IS_ADMIN__": false,
+        "__IS_SERVER__": false
       },
       "resolve": {
         "alias": {
@@ -34,15 +42,17 @@
   },
   "admin": {
     "rootFolder": "App",
-    "libsPath": "./libs",
+    "libsPath": "./packages",
     "basedOn": "default",
     "vars": {
-      "targetDir": "dist.admin",
+      "targetDir": "dist/admin",
       "extractCss": true,
       "production": true,
-      "babelInclude": "(ansi\\-regex|strip\\-ansi|ckeditor)",
+      "babelInclude": "(ansi\\-regex|strip\\-ansi)",
       "DefinePluginCfg": {
-        "__ADMIN__": true
+        "__IS_DEV__": false,
+        "__IS_ADMIN__": true,
+        "__IS_SERVER__": false
       },
       "babelPreset": {
         "targets": {
@@ -72,12 +82,14 @@
   "devClient": {
     "rootFolder": "App",
     "basedOn": "default",
-    "libsPath": "./libs",
+    "libsPath": "./packages",
     "vars": {
       "DefinePluginCfg": {
-        "__ADMIN__": true
+        "__IS_DEV__": true,
+        "__IS_ADMIN__": true,
+        "__IS_SERVER__": false
       },
-      "babelInclude": "(ansi\\-regex|strip\\-ansi)",
+      "babelInclude": "(ansi\\-regex|strip\\-ansi|tui\\-image\\-editor)",
       "babelPreset": {
         "targets": {
           "browsers": "> 0.25%, not dead, safari >= 6, ios >= 6, chrome >= 52"
@@ -103,6 +115,7 @@
       }
     },
     "extend": [
+      "wpi-dev-tools",
       "wpi-auth",
       "wpi-admin",
       "wpi-forms",
@@ -114,13 +127,15 @@
   },
   "api": {
     "rootFolder": "App",
-    "libsPath": "./libs",
+    "libsPath": "./packages",
     "vars": {
-      "targetDir": "dist.api",
+      "targetDir": "dist/api",
       "externals": true,
       "production": true,
       "DefinePluginCfg": {
-        "__ADMIN__": true
+        "__IS_DEV__": false,
+        "__IS_ADMIN__": true,
+        "__IS_SERVER__": true
       },
       "webpackPatch": {
         "stats": "errors-only",
@@ -147,13 +162,15 @@
   },
   "devApi": {
     "rootFolder": "App",
-    "libsPath": "./libs",
+    "libsPath": "./packages",
     "basedOn": "api",
     "vars": {
-      "targetDir": "dist.api",
+      "targetDir": "dist/api",
       "externals": true,
       "DefinePluginCfg": {
-        "__ADMIN__": true
+        "__IS_DEV__": true,
+        "__IS_ADMIN__": true,
+        "__IS_SERVER__": true
       },
       "webpackPatch": {
         "stats": "errors-only",
@@ -169,6 +186,7 @@
       }
     },
     "extend": [
+      "wpi-dev-tools",
       "wpi-auth",
       "wpi-admin",
       "wpi-forms",

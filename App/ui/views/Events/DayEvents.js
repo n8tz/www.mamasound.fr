@@ -15,22 +15,13 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+import scopes from 'App/scopes/(*).js';
+
+import {Comps, Views}                        from 'App/ui';
+import moment                                from "moment";
 import PropTypes                             from "prop-types";
 import React                                 from "react";
-import {Rnd}                                 from "react-rnd";
-import {reScope, scopeToProps, propsToScope} from "rscopes";
-import {withStateMap, asRef, asStore}        from "rescope-spells";
-import anims                                 from 'App/ui/anims/(*).js';
-
-import {Comps}                from 'App/ui';
-
-import Tabs                  from '@material-ui/core/Tabs';
-import Tab                   from '@material-ui/core/Tab';
-import moment                from "moment";
-import stores                from 'App/stores/(*).js';
-import {Views}                 from 'App/ui';
-import {asTweener, TweenRef} from "react-voodoo";
-import scopes                from 'App/scopes/(*).js';
+import {propsToScope, reScope, scopeToProps} from "rscopes";
 
 
 @reScope(
@@ -41,7 +32,7 @@ import scopes                from 'App/scopes/(*).js';
 		"day:DayEventsQuery.curDay",
 		"viewType:DayEventsQuery.viewType"
 	])
-@scopeToProps("EventList", "ActiveTags", "appState")
+@scopeToProps("EventList", "ActiveTags", "appState", "Anims")
 //@asTweener({ initialScrollPos: { scrollX: 100 }, propagateAxes: { scrollY: true } })
 export default class DayEvents extends React.Component {
 	static propTypes = {
@@ -53,33 +44,34 @@ export default class DayEvents extends React.Component {
 	
 	render() {
 		let {
-			    record: { position, size } = {},
-			    EventList, appState, day,
+			    EventList, appState, day, Anims,
 			    $actions, onSelect
 		    }     = this.props,
 		    state = this.state,
 		    selected;
 		return (
 			<div
-				className={ "DayEvents" }
-				data-dt={ moment(day).valueOf() }
+				className={"DayEvents"}
+				data-dt={moment(day).valueOf()}
 			>
-				<div className={ "day" }>
-					<Views.SimpleDay day={ day }/>
+				<div className={"day"}>
+					<Views.SimpleDay day={day}/>
 				</div>
-				{
-					EventList && EventList.items && EventList.items.map(
-						( item, i ) => {
-							return <Views.Event.item
-								onClick={ e => $actions.selectEvent(item, moment(day).valueOf(), true) }
-								key={ item._id }
-								day={ day }
-								selected={ appState.selectedEventId === item._id && moment(appState.selectedEventDT).isSame(day, "day") }
-								record={ item }
-								refs={ EventList.refs || {} }/>;
-						}
-					)
-				}
+				{/*<Comps.SlidableList {...Anims.EventsSlider}>*/}
+					{
+						EventList && EventList.items && EventList.items.map(
+							( item, i ) => {
+								return <Views.Event.item
+									onClick={e => $actions.selectEvent(item, moment(day).valueOf(), true)}
+									key={item._id}
+									day={day}
+									selected={appState.selectedEventId === item._id && moment(appState.selectedEventDT).isSame(day, "day")}
+									record={item}
+									refs={EventList.refs || {}}/>;
+							}
+						)
+					}
+				{/*</Comps.SlidableList>*/}
 			</div>
 		);
 	}

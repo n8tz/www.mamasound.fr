@@ -1,0 +1,15 @@
+{
+  "default": {
+    "rootFolder": "App",
+    "basedOn": "default",
+    "scripts": {
+      "start": "./cli/start"
+    }
+  },
+  "api": {
+    "rootFolder": "App",
+    "scripts": {
+      "start": "./cli/start"
+    }
+  }
+}
