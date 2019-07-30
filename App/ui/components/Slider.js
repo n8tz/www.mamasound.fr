@@ -47,10 +47,11 @@ export default class Slider extends React.Component {
 	
 	goNext() {
 		let { step, dec, nbItems, scrollDir } = this.state,
+		    tweener = this.props.tweener,
 		    nextIndex                         = ((nbItems + this.state.index + 1) % nbItems);
 		
 		if ( this.state.index > nextIndex )
-			this.scrollTo(dec + 100 - step, 0, scrollDir);
+			tweener.scrollTo(dec + 100 - step, 0, scrollDir);
 		
 		//console.log(nextIndex)
 		this.setState({ index: nextIndex })
@@ -62,18 +63,18 @@ export default class Slider extends React.Component {
 	}
 	
 	componentDidUpdate( prevProps, prevState, snapshot ) {
-		let { autoScroll, scrollDir }                      = this.props,
+		let { autoScroll, scrollDir, tweener }                      = this.props,
 		    { index = this.props.defaultIndex, step, dec } = this.state;
 		
 		if ( prevState.dec !== dec ) {
-			this.scrollTo(this._getAxis(scrollDir).scrollPos + dec - prevState.dec, 0, scrollDir);
+			tweener.scrollTo(tweener._getAxis(scrollDir).scrollPos + dec - prevState.dec, 0, scrollDir);
 		}
 		if ( prevState.index !== index ) {
 			if ( this._wasUserSnap ) {
 				this._wasUserSnap = false;
 			}
 			else {
-				this.scrollTo(dec + step * index + 100, 500, scrollDir);
+				tweener.scrollTo(dec + step * index + 100, 500, scrollDir);
 			}
 			if ( autoScroll ) {
 				clearTimeout(this._updater);

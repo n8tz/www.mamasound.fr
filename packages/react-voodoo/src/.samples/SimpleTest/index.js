@@ -22,6 +22,30 @@ import {pushIn, tweenAxis}                          from "./anims";
 import "./sample.scss";
 
 
+const testItemStyle = {
+	position       : "absolute",
+	display        : "inline-block",
+	width          : "15em",
+	height         : "15em",
+	cursor         : "pointer",
+	backgroundColor: "red",
+	overflow       : "hidden",
+	margin         : "-7.5em 0 0 -7.5em",
+	top            : ".1box",
+	left           : ".1box",
+	transformOrigin: "50% 50%",
+	
+	transform: {
+		translateZ: "0box",
+		translateX: ".8box",
+		translateY: ".8box",
+		//rotateX   : -30,
+		//rotateY   : 30,
+		
+		//rotateY: 180,
+	}
+};
+
 @asTweener({ enableMouseDrag: true })
 export default class Sample extends React.Component {
 	state = {
@@ -33,7 +57,17 @@ export default class Sample extends React.Component {
 		this.forceUpdate();// force update to show scroll pos
 	}
 	
+	pushAnim = ( e, tweener ) => {
+		this.setState({ count: this.state.count + 1 })
+		tweener.pushAnim(tweenTools.target(pushIn, "testItem"),
+		                 () => {
+			                 this.setState({ count: this.state.count - 1 })
+		                 });
+		
+	}
+	
 	render() {
+		let tweener = this.props.tweener;
 		return <div className={"SimpleTest"} style={{
 			width : "100%",
 			height: "100%"
@@ -47,53 +81,26 @@ export default class Sample extends React.Component {
 				defaultPosition={100}
 			/>
 			hello ! {this.state.count} concurent anims <br/>
-			scrollPos : <pre>{JSON.stringify(this.getAxisState(), null, 2)}</pre>
 			<br/>y:
-			<button onClick={e => this.scrollTo(0, 500)}>( go to 0 )</button>
-			<button onClick={e => this.scrollTo(200, 500)}>( go to 200 )</button>
+			<button onClick={e => tweener.scrollTo(0, 500)}>( go to 0 )</button>
+			<button onClick={e => tweener.scrollTo(100, 500)}>( go to 100 )</button>
+			<button onClick={e => tweener.scrollTo(200, 500)}>( go to 200 )</button>
 			<br/>x:
-			<button onClick={e => this.scrollTo(0, 500, "scrollX")}>( go to 0 )</button>
-			<button onClick={e => this.scrollTo(200, 500, "scrollX")}>( go to 200 )</button>
-			
-			<TweenRef
-				id={"testItem"}
-				initial={{
-					position       : "absolute",
-					display        : "inline-block",
-					width          : "15em",
-					height         : "15em",
-					cursor         : "pointer",
-					backgroundColor: "red",
-					overflow       : "hidden",
-					margin         : "-7.5em 0 0 -7.5em",
-					top            : ".1box",
-					left           : ".1box",
-					transformOrigin: "50% 50%",
-					
-					transform: {
-						translateZ: "0box",
-						translateX: ".8box",
-						translateY: ".8box",
-						//rotateX   : -30,
-						//rotateY   : 30,
-						
-						//rotateY: 180,
-					}
-				}}
-				tweenLines={tweenAxis}
-			>
-				<div
-					onClick={e => {
-						this.setState({ count: this.state.count + 1 })
-						this.pushAnim(tweenTools.target(pushIn, "testItem"),
-						              () => {
-							              this.setState({ count: this.state.count - 1 })
-						              });
-					}}
-					style={{}}>
-					<span>drag and/or click me !</span>
-				</div>
-			</TweenRef>
+			<button onClick={e => tweener.scrollTo(0, 500, "scrollX")}>( go to 0 )</button>
+			<button onClick={e => tweener.scrollTo(100, 500, "scrollX")}>( go to 100 )</button>
+			<button onClick={e => tweener.scrollTo(200, 500, "scrollX")}>( go to 200 )</button>
+			<span>
+				<TweenRef
+					id={"testItem"}
+					initial={testItemStyle}
+					tweenLines={tweenAxis}
+					onClick={this.pushAnim}
+				>
+					<div>
+						<span>drag and/or click me !</span>
+					</div>
+				</TweenRef>
+			</span>
 		</div>;
 	}
 }

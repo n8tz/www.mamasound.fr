@@ -51,15 +51,15 @@ export default class Home extends React.Component {
 			})
 		)
 		let { appState } = props;
-		this.scrollTo(wayPoints[appState.currentPageFocus]);
+		props.tweener.scrollTo(wayPoints[appState.currentPageFocus]);
 	}
 	
 	componentDidUpdate( props ) {
-		let { appState, $actions } = this.props;
+		let { appState, tweener } = this.props;
 		//console.warn(appState === props.appState)
 		if ( appState.doFocus && props.appState.currentPageFocus !== appState.currentPageFocus ) {
 			console.log(appState.currentPageFocus);
-			this.scrollTo(wayPoints[appState.currentPageFocus], 500, undefined, "easeSinIn");
+			tweener.scrollTo(wayPoints[appState.currentPageFocus], 500, undefined, "easeSinIn");
 		}
 	}
 	
