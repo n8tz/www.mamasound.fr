@@ -1569,7 +1569,7 @@ function asTweener() {
 
               }
 
-              if (lastStartTm && lastStartTm > Date.now() - opts.maxClickTm && Math.abs(dY) < opts.maxClickOffset && Math.abs(dX) < opts.maxClickOffset) // skip tap
+              if (lastStartTm && !(lastStartTm > Date.now() - opts.maxClickTm && Math.abs(dY) < opts.maxClickOffset && Math.abs(dX) < opts.maxClickOffset)) // skip tap
                 // &
                 // click
                 {
@@ -1577,7 +1577,9 @@ function asTweener() {
                   e.preventDefault(); //console.log("prevented", Math.abs(dX), Math.abs(dY))
 
                   return;
-                } else {} //console.log("not prevented", Math.abs(dX), Math.abs(dY))
+                } //else {
+              //console.log("not prevented", Math.abs(dX), Math.abs(dY))
+              //}
               //lastStartTm = 0;
 
 

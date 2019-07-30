@@ -879,7 +879,7 @@ export default function asTweener( ...argz ) {
 										//}
 										
 									}
-									if ( lastStartTm && ((lastStartTm > Date.now() - opts.maxClickTm) && Math.abs(dY)
+									if ( lastStartTm && !((lastStartTm > Date.now() - opts.maxClickTm) && Math.abs(dY)
 										< opts.maxClickOffset && Math.abs(dX) < opts.maxClickOffset) )// skip tap
 									                                                                  // &
 									                                                                  // click
@@ -890,9 +890,9 @@ export default function asTweener( ...argz ) {
 										//console.log("prevented", Math.abs(dX), Math.abs(dY))
 										return;
 									}
-									else {
+									//else {
 										//console.log("not prevented", Math.abs(dX), Math.abs(dY))
-									}
+									//}
 									//lastStartTm = 0;
 									parents = parentsState = null;
 								}
