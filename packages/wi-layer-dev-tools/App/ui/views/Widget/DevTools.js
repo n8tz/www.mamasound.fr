@@ -11,32 +11,9 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-import React                                            from "react";
-import {asRef, asScope, asStore, reScope, scopeToProps} from "rscopes";
-import superagent                                       from "superagent";
+import React      from "react";
+import superagent from "superagent";
 
-@reScope(
-	{
-		@asScope
-		DevTools: {
-			@asStore
-			ServerStatus: {
-				//@asRef
-				//items: "Importer.imported",
-				//$apply( d, { items } ) {
-				//	return {
-				//		items: items && items.map(row => ({
-				//			...row,
-				//			category: row.category.objId,
-				//			place   : row.place.objId
-				//		}))
-				//	}
-				//}
-			},
-		}
-	}
-)
-@scopeToProps("DevTools.ServerStatus")
 export default class DevTools extends React.Component {
 	static defaultWindow = {
 		"size"    : { "width": 200, "height": 120 },
