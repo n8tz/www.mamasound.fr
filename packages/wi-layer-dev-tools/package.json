@@ -10,7 +10,8 @@
     "fkill": "^6.2.0",
     "is": "^3.3.0",
     "rimraf": "^2.6.3",
-    "superagent": "^3.8.2"
+    "superagent": "^3.8.2",
+    "wait-on": "^3.3.0"
   },
   "devDependencies": {}
 }

@@ -1,6 +1,7 @@
 const wpi      = require('webpack-inherit'),
       fs       = require('fs'),
       fkill    = require('fkill'),
+      waitOn   = require('wait-on'),
       rimraf   = require('rimraf'),
       chokidar = require('chokidar'),
       exec     = require('child_process').exec;
@@ -98,21 +99,31 @@ module.exports = function Profile( profileId ) {
 			if ( !watched && task.watch ) {
 				watchers[cmdId] && watchers[cmdId].close();
 				
-				try {
-					if ( !fs.existsSync(task.watch) )
-						return doDefer(tm => this.run(cmdId, true, false, true), 3000);
-					watchers[cmdId] = chokidar
-						.watch(task.watch, { ignored: /(^|[\/\\])\../ })
-						.on('all', ( event, path ) => {
-							if ( event === 'add' ) {
-								console.warn(cmdId + ": '" + task.watch + "' has been updated restarting...");
-								this.run(cmdId, true, true, true);
-							}
-						});
-					console.warn(cmdId + ": '" + task.watch + "' waiting updates...");
-				} catch ( e ) {
-					return doDefer(tm => this.run(cmdId, true, false, true), 1000);
-				}
+				return waitOn({
+					              resources: [
+						              task.watch
+					              ],
+					              delay    : 1000,
+					              interval : 100,
+					              timeout  : 30000,
+				              },
+				              err => {
+					              if ( err ) {
+						              console.warn(cmdId + ": '" + task.watch + "' still not here...");
+						              return doDefer(tm => this.run(cmdId, true, false, true), 3000);
+					              }
+					
+					              watchers[cmdId] = chokidar
+						              .watch(task.watch, { ignored: /(^|[\/\\])\../ })
+						              .on('all', ( event, path ) => {
+							              if ( event === 'add' ) {
+								              console.warn(cmdId + ": '" + task.watch + "' has been updated restarting...");
+								              this.run(cmdId, true, true, true);
+							              }
+						              });
+					              console.warn(cmdId + ": '" + task.watch + "' waiting updates...");
+				              }
+				)
 			}
 			this.cmdLog(cmdId, 'Starting ' + ':' + profileId + '::' + cmdId);
 			running[cmdId] = cmd = exec(
