@@ -13,24 +13,15 @@ function getConfigKey( config, key ) {
 };
 
 module.exports = function Profile( profileId ) {
-	let config     = wpi.getConfig(profileId),
-	    commands   = getConfigKey(config, "commands"),
-	    logs       = {},
-	    watchers   = {},
-	    killing    = {},
-	    running    = {},
-	    runAfter   = {},
-	    onComplete = [],
-	    defered    = [],
-	    nbCmd      = 0;
-	
-	function doDefer( fn, tm ) {
-		let id;
-		defered.push(id = setTimeout(tm => {
-			defered = defered.filter(tmId => (tmId !== id));
-			fn();
-		}, tm))
-	}
+	let config        = wpi.getConfig(profileId),
+	    commands      = getConfigKey(config, "commands"),
+	    logs          = {},
+	    watchers      = {},
+	    running       = {},
+	    runAfter      = {},
+	    onComplete    = [],
+	    curSessionNum = 0,
+	    nbCmd         = 0;
 	
 	return {
 		raw: config,
@@ -38,6 +29,7 @@ module.exports = function Profile( profileId ) {
 			if ( !commands )
 				return console.error('No commands in this profile', profileId);
 			
+			curSessionNum++;
 			for ( let cmdId in commands )
 				if ( commands.hasOwnProperty(cmdId) ) {
 					logs[cmdId] = logs[cmdId] || { stdout: "", stderr: "" };
@@ -58,9 +50,7 @@ module.exports = function Profile( profileId ) {
 			process.stdout.write(text);
 		},
 		stop() {
-			while ( defered.length )
-				clearTimeout(defered.shift());
-			
+			curSessionNum++;
 			return Promise.all(Object.keys(commands).map(id => this.kill(id)));
 		},
 		kill( cmdId ) {
@@ -68,26 +58,28 @@ module.exports = function Profile( profileId ) {
 			    task = commands[cmdId];
 			//this.cmdLog(cmdId, 'Killing ' + ':' + profileId + '::' + cmdId);
 			console.warn("Killing " + ':' + profileId + '::' + cmdId);
-			killing[cmdId] = true;
+			watchers[cmdId] && watchers[cmdId].close();
 			return cmd && fkill(cmd.pid, { tree: true, force: true, silent: true })
 				.then(
 					logs => {
 						running[cmdId] = null;
-						killing[cmdId] = false;
 					}
 				)
 		},
-		run( cmdId, cleared, watched, waitDone ) {
+		run( cmdId, cleared, watched, waitDone, sessionNum = curSessionNum ) {
 			let cmd  = running[cmdId],
 			    task = commands[cmdId];
 			
+			if ( sessionNum < curSessionNum )// stop previous lost call backs
+				return;
+			
 			if ( cmd ) {
-				return this.kill(cmdId).then(e => this.run(cmdId, cleared, watched, waitDone));
+				return this.kill(cmdId).then(e => this.run(cmdId, cleared, watched, waitDone, sessionNum));
 			}
 			
 			if ( !cleared && task.clearBefore ) {
 				console.warn("Clear before ", task.clearBefore);
-				return rimraf(task.clearBefore, ( err, val ) => this.run(cmdId, true, watched, waitDone));
+				return rimraf(task.clearBefore, ( err, val ) => this.run(cmdId, true, watched, waitDone, sessionNum));
 			}
 			
 			nbCmd++;
@@ -110,7 +102,7 @@ module.exports = function Profile( profileId ) {
 				              err => {
 					              if ( err ) {
 						              console.warn(cmdId + ": '" + task.watch + "' still not here...");
-						              return doDefer(tm => this.run(cmdId, true, false, true), 3000);
+						              return setTimeout(tm => this.run(cmdId, true, false, true, sessionNum), 3000);
 					              }
 					
 					              watchers[cmdId] = chokidar
@@ -118,7 +110,7 @@ module.exports = function Profile( profileId ) {
 						              .on('all', ( event, path ) => {
 							              if ( event === 'add' ) {
 								              console.warn(cmdId + ": '" + task.watch + "' has been updated restarting...");
-								              this.run(cmdId, true, true, true);
+								              this.run(cmdId, true, true, true, sessionNum);
 							              }
 						              });
 					              console.warn(cmdId + ": '" + task.watch + "' waiting updates...");
@@ -141,22 +133,24 @@ module.exports = function Profile( profileId ) {
 					
 					//this.cmdLog(cmdId, cmdId + ": '" + task.run + "' ended ...");
 					err && this.cmdErr(cmdId, cmdId + ": '" + task.run + "' ended with error : " + err);
-					if ( !killing[cmdId] && task.forever ) {
+					if ( sessionNum === curSessionNum && task.forever ) {
 						console.warn(cmdId + "' restart ...");
-						doDefer(tm => this.run(cmdId, true, true, true), 1000);
+						setTimeout(tm => this.run(cmdId, true, true, true, sessionNum), 1000);
 					}
 					else {// normal exit
-						watchers[cmdId] && watchers[cmdId].close();
-						
-						if ( runAfter[cmdId] ) {
-							while ( runAfter[cmdId].length )
-								this.run(runAfter[cmdId].shift(), false, false, true);
+						if ( sessionNum === curSessionNum ) {
+							watchers[cmdId] && watchers[cmdId].close();
+							
+							if ( runAfter[cmdId] ) {
+								while ( runAfter[cmdId].length )
+									this.run(runAfter[cmdId].shift(), false, false, true, sessionNum);
+							}
+							
+							nbCmd--;
+							if ( nbCmd === 0 )
+								while ( onComplete.length )
+									onComplete.shift()();
 						}
-						
-						nbCmd--;
-						if ( !killing[cmdId] && nbCmd === 0 )
-							while ( onComplete.length )
-								onComplete.shift()();
 					}
 					running[cmdId] = null;
 				}

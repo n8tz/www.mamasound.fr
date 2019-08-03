@@ -25,6 +25,32 @@
       "wi-layer-dev-tools"
     ]
   },
+  "prod": {
+    "rootFolder": "App",
+    "libsPath": "./packages",
+    "commands": {
+      "api": {
+        "clearBefore": "dist/api",
+        "run": "wpi :api"
+      },
+      "server": {
+        "watch": "dist/api/App.server.js",
+        "run": "node ./dist/api/App.server.js -p 8080",
+        "forever": true
+      },
+      "www": {
+        "clearBefore": "dist/www",
+        "run": "wpi :client"
+      },
+      "admin": {
+        "clearBefore": "dist/admin",
+        "run": "wpi :admin"
+      }
+    },
+    "extend": [
+      "wi-layer-dev-tools"
+    ]
+  },
   "client": {
     "rootFolder": "App",
     "libsPath": "./packages",
