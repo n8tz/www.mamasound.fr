@@ -24,33 +24,32 @@
  *   @contact : n8tz.js@gmail.com
  */
 
-import is  from 'is';
-import api from './api/(*).js';
+import React from 'react';
 
-let debug = require('App/console').default("server");
-
-export default ( server, http ) => Object
-	.keys(api)
-	.map(
-		( service ) => (
-			is.fn(api[service]) ?
-			{
-				name         : service,
-				priorityLevel: 0,
-				service      : api[service]
-			} : api[service]
-		)
-	)
-	.sort(
-		( a, b ) => (a.priorityLevel > b.priorityLevel ? -1 : 1)
-	)
-	.forEach(
-		( service ) => {
-			try {
-				debug.info("Load Api : ", service.name, "\n")
-				
-				service.service(server, http);
-			} catch ( e ) {
-				debug.error("Api fail loading service ", service.name, "\n", e)
-			}
-		})
+export default class index extends React.Component {
+	render() {
+		const { helmet, content, state } = this.props,
+		      htmlAttrs                  = helmet.htmlAttributes.toComponent(),
+		      bodyAttrs                  = helmet.bodyAttributes.toComponent();
+		return <React.Fragment>
+			<html {...htmlAttrs}>
+			<head>
+				{helmet.title.toComponent()}
+				{helmet.meta.toComponent()}
+				{helmet.link.toComponent()}
+				{
+					state &&
+					<script dangerouslySetInnerHTML={{ __html: "window.__STATE__  = " + (JSON.stringify(state)) }}/>
+				}
+			</head>
+			<body {...bodyAttrs}>
+			<div id="app" dangerouslySetInnerHTML={{ __html: content }}>
+			</div>
+			
+			<script src="./App.js"></script>
+			<script src="./App.vendors.js"></script>
+			</body>
+			</html>
+		</React.Fragment>
+	}
+}

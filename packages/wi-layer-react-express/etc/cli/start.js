@@ -1,5 +1,32 @@
-#!/usr/bin/env node
+/*
+ *   The MIT License (MIT)
+ *   Copyright (c) 2019. Wise Wild Web
+ *
+ *   Permission is hereby granted, free of charge, to any person obtaining a copy
+ *   of this software and associated documentation files (the "Software"), to deal
+ *   in the Software without restriction, including without limitation the rights
+ *   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *   copies of the Software, and to permit persons to whom the Software is
+ *   furnished to do so, subject to the following conditions:
+ *
+ *   The above copyright notice and this permission notice shall be included in all
+ *   copies or substantial portions of the Software.
+ *
+ *   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *   SOFTWARE.
+ *
+ *   @author : Nathanael Braun
+ *   @contact : n8tz.js@gmail.com
+ */
 
+#!/usr/
+bin / env
+node
 'use strict';
 
 const program = require('commander'),
@@ -16,6 +43,7 @@ if ( argz[0] && /^\:.*$/.test(argz[0]) )
 	profileId = argz.shift().replace(/^\:(.*)$/, '$1');
 
 program
+	.option('-l, --local', 'Limit Build control web api to localhost')
 	.option('-p, --port [port=9090]', 'Build control')
 	.parse(process.argv);
 
@@ -27,19 +55,21 @@ let profile = new Profile(profileId);
 profile.start();
 profile.onComplete(e => process.exit());
 
+
 server.use(express.json());       // to support JSON-encoded bodies
 server.use(express.urlencoded()); // to support URL-encoded bodies
-//server.use(
-//	"/status",
-//	( req, res ) => {
-//		res.header("Access-Control-Allow-Origin", "*");
-//		res.json({ mode })
-//	}
-//);
+
+server.use(
+	"/status",
+	( req, res ) => {
+		res.header("Access-Control-Allow-Origin", "*");
+		res.json({ status: profile.getStatus() })
+	}
+);
+
 server.use(
 	"/restart",
 	( req, res ) => {
-		
 		res.header("Access-Control-Allow-Origin", "*");
 		profile.start();
 		
@@ -74,25 +104,9 @@ server.use(
 		profile.stop().then(e => process.exit());
 	}
 );
-server.use(
-	"/dbRestore",
-	( req, res ) => {
-		res.header("Access-Control-Allow-Origin", "*");
-		exec(
-			"mongorestore --uri ${mongoUrl}",
-			{
-				cwd  : pDir,
-				stdio: 'inherit'
-			},
-			function ( err, stdout, stderr ) {
-				res.json({ success: !err, stdout, stderr })
-			});
-		
-	}
-);
 
 let server_instance = http.listen(parseInt(port), function () {
-	console.info('Running on ', server_instance.address(), server_instance.address().port)
+	console.info('Build manager running on ', server_instance.address(), server_instance.address().port)
 });
 
 process.on('SIGINT', e => profile.stop()); // catch ctrl-c

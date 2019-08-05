@@ -86,7 +86,6 @@ export const scrollY = [
 		from    : 0,
 		duration: 50,
 		apply   : {
-			//paddingTop: -130,
 			transform: {
 				translateY: "-130px"
 			}
@@ -101,6 +100,14 @@ export const scrollY = [
 		}
 	},
 	{
+		target  : "headerBackground",
+		from    : 0,
+		duration: 50,
+		apply   : {
+			transform: { scale: 1.1 }
+		}
+	},
+	{
 		target  : "logo",
 		from    : 0,
 		duration: 50,
@@ -112,21 +119,16 @@ export const scrollY = [
 	},
 	
 	{
-		type    : "Tween",
 		target  : "body",
 		from    : 50,
 		duration: 50,
-		//easeFn  : "easePolyOut",
 		apply   : {
-			//paddingTop   : -50,
-			//marginBottom: "50px",
 			transform: {
 				translateY: "-170px"
 			}
 		}
 	},
 	{
-		type    : "Tween",
 		target  : "footer",
 		from    : 50,
 		duration: 50,
@@ -138,7 +140,6 @@ export const scrollY = [
 		}
 	},
 	{
-		type    : "Tween",
 		target  : "header",
 		from    : 50,
 		duration: 50,
@@ -147,7 +148,6 @@ export const scrollY = [
 		}
 	},
 	{
-		type    : "Tween",
 		target  : "logo",
 		from    : 50,
 		duration: 50,
