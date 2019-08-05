@@ -13,7 +13,7 @@
  */
 
 import React                 from 'react';
-import {scopeToState, Scope} from "rscopes";
+import {scopeToState, Scope} from "react-scopes";
 import {renderToString}      from "react-dom/server"
 
 export default scopeToState([])(

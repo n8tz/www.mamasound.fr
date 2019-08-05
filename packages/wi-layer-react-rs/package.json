@@ -9,7 +9,7 @@
   "dependencies": {
     "react": "^16.2.0",
     "concurrently": "^4.1.0",
-    "rscopes": "^16.1.2",
+    "react-scopes": "^1.0.0",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^4.6.3",
     "wpi-react-hmr-ssr": "^1.1.5"

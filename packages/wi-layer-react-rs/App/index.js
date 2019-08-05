@@ -16,7 +16,7 @@ import shortid          from 'shortid';
 import ReactDom         from 'react-dom';
 import React            from "react";
 import {renderToString} from "react-dom/server";
-import {Scope, reScope} from "rscopes";
+import {Scope, withScope} from "react-scopes";
 
 
 const ctrl = {
@@ -24,7 +24,7 @@ const ctrl = {
 		let cScope      = new Scope(AppScope, {
 			id         : "App",
 			autoDestroy: true
-		}), App         = reScope(cScope)(require('./App').default);
+		}), App         = withScope(cScope)(require('./App').default);
 		window.contexts = Scope.scopes;
 		state && cScope.restore(state);
 		ReactDom.render(<App/>, node);
@@ -44,7 +44,7 @@ const ctrl = {
 		    cScope  = new Scope(AppScope, {
 			    id         : rid,
 			    autoDestroy: false
-		    }), App = reScope(cScope)(require('./App').default);
+		    }), App = withScope(cScope)(require('./App').default);
 		
 		cfg.state && cScope.restore(cfg.state, { alias: "App" });
 		

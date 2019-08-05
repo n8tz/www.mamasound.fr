@@ -1,4 +1,4 @@
-# wi-layer-react-express
+# wi-layer-react-scopes
 
 A inheritable boilerplate with webpack4, react, sass, hmr, express & SSR support
 
