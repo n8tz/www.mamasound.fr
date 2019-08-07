@@ -19,7 +19,7 @@
 import scopes                                from 'App/scopes/(*).js';
 import {Comps, Views}                        from 'App/ui';
 import React                                 from 'react';
-import {propsToScope, reScope, scopeToProps} from "rscopes";
+import {propsToScope, reScope, scopeToProps} from "react-scopes";
 
 
 @reScope(

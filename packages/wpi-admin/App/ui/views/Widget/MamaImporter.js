@@ -22,7 +22,7 @@ import TableGrid                                    from 'App/ui/components/Tabl
 import PopAnywhere                                  from 'App/ui/components/PopAnywhere.js';
 import {DropzoneComponent}                          from "react-dropzone-component";
 import Select                                       from 'react-select';
-import {reScope, Store, scopeToProps, propsToScope} from "rscopes";
+import {reScope, Store, scopeToProps, propsToScope} from "react-scopes";
 import {withStateMap, asRef, asStore}               from "rescope-spells";
 import ImportIcon                                   from '@material-ui/icons/CloudUploadOutlined';
 import ExportIcon                                   from '@material-ui/icons/Delete';

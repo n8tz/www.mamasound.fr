@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {Scope, Store} from "rscopes";
+import {Scope, Store} from "react-scopes";
 
 import {types, query}                                        from 'App/db';
 import {updateWatchers, clearWatchers, getQueriesFromIdKeys} from './DataProvider';

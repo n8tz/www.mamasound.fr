@@ -29,7 +29,7 @@ import Avatar      from '@material-ui/core/Avatar';
 import {
 	isSpell, spells, Store, Scope, reScope, propsToScope, scopeToProps,
 	scopeToState
-} from "rscopes";
+} from "react-scopes";
 
 
 @scopeToProps("CurrentUser")

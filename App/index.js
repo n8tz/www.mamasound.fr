@@ -21,10 +21,13 @@ import "core-js/features/object/from-entries";
 import React            from "react";
 import ReactDom         from 'react-dom';
 import {renderToString} from "react-dom/server";
+import {Helmet}         from "react-helmet";
+import {hot}            from 'react-hot-loader/root'
 import {reScope, Scope} from "react-rescope";
+import "regenerator-runtime/runtime";
 import shortid          from 'shortid';
 import AppScope         from './App.scope';
-//import uiComps                              from "App/ui";
+import Index            from "./index.html";
 
 const ctrl = {
 	
@@ -87,28 +90,26 @@ const ctrl = {
 		})
 		
 	},
-	//renderSSR( cfg, cb, _attempts = 0 ) {
-	//	let html = cfg.tpl.render(
-	//		{
-	//			app: "",
-	//		}
-	//	);
-	//	cb(null, html)
-	//},
 	renderSSR( cfg, cb, _attempts = 0 ) {
+		let html = "<!doctype html>\n" + renderToString(<Index helmet={Helmet.renderStatic()}
+		                                                       content={""}/>);
+		console.warn("render !!fdgdffd!!!!")
+		cb(null, html)
+	},
+	renderSSR2( cfg, cb, _attempts = 0 ) {
 		let rid     = shortid.generate(),
 		    cScope  = new Scope(AppScope, {
 			    id         : rid,
 			    autoDestroy: false
 		    }), App = reScope(cScope)(require('./App').default);
-		
+
 		if ( cfg.state ) {
 			cScope.restore(cfg.state, { alias: "App" });
 		}
 		else {
 			cScope.state.Anims = { currentBrkPts: cfg.device };
 		}
-		
+
 		let html,
 		    appHtml     = renderToString(<App location={cfg.location}/>),
 		    stable      = cScope.isStableTree();
@@ -123,13 +124,17 @@ const ctrl = {
 			}
 			else {
 				try {
-					html = cfg.tpl.render(
-						{
-							app  : appHtml,
-							state: JSON.stringify(nstate),
-							css  : !__IS_DEV__ && cfg.css
-						}
-					);
+					html = "<!doctype html>\n" + renderToString(<Index helmet={Helmet.renderStatic()}
+					                                                   state={JSON.stringify(nstate)}
+					                                                   content={appHtml}/>);
+
+					//html = cfg.tpl.render(
+					//	{
+					//		app  : appHtml,
+					//		state: JSON.stringify(nstate),
+					//		css  : !__IS_DEV__ && cfg.css
+					//	}
+					//);
 				} catch ( e ) {
 					return cb(e)
 				}

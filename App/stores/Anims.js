@@ -18,7 +18,7 @@
 
 import desktopAnims from "App/ui/assets/anims/responsive/desktop/(*).js";
 import phoneAnims   from "App/ui/assets/anims/responsive/phone/(*).js";
-import {Store}      from "rscopes";
+import {Store}      from "react-scopes";
 
 const isBrowserSide = (new Function("try {return this===window;}catch(e){ return false;}"))();
 

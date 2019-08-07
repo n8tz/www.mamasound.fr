@@ -18,7 +18,7 @@
 'use strict';
 import React, {Component} from "react";
 import {ContextMenu}      from "react-inheritable-contextmenu";
-import {scopeToProps}     from "rscopes";
+import {scopeToProps}     from "react-scopes";
 
 
 @scopeToProps("DataProvider", "CurrentUser")

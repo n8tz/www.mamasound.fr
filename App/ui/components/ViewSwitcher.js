@@ -18,7 +18,7 @@
 import PropTypes                                    from "prop-types";
 import React                                        from "react";
 import {asTweener, TweenAxis, TweenRef, tweenTools} from "react-voodoo";
-import {scopeToProps}                               from "rscopes";
+import {scopeToProps}                               from "react-scopes";
 
 
 @scopeToProps("Selected", "DataProvider")

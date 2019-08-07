@@ -21,7 +21,7 @@ import FormControlLabel
 import Select                                                                       from './Select';
 import Text                                                                         from './Text';
 import {asFieldType}                                                                from "App/ui/spells";
-import {reScope, scopeToProps, asScope, withStateMap, asRef, asStore, propsToScope} from "rscopes";
+import {reScope, scopeToProps, asScope, withStateMap, asRef, asStore, propsToScope} from "react-scopes";
 import {Views}                                                                      from 'App/ui';
 import stores                                                                       from 'App/stores/(*).js';
 import entities                                                                     from 'App/db/entities';

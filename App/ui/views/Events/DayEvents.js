@@ -21,7 +21,7 @@ import {Comps, Views}                        from 'App/ui';
 import moment                                from "moment";
 import PropTypes                             from "prop-types";
 import React                                 from "react";
-import {propsToScope, reScope, scopeToProps} from "rscopes";
+import {propsToScope, reScope, scopeToProps} from "react-scopes";
 
 
 @reScope(

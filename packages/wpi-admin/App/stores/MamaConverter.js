@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {Scope, Store} from "rscopes";
+import {Scope, Store} from "react-scopes";
 import moment         from "moment";
 
 export default class MamaConverter extends Store {

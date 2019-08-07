@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 import React                                 from "react";
-import {reScope, scopeToProps, propsToScope} from "rscopes";
+import {reScope, scopeToProps, propsToScope} from "react-scopes";
 import {withStateMap, asRef, asStore}        from "rescope-spells";
 import Select                                from 'react-select';
 import Typography                            from '@material-ui/core/Typography';

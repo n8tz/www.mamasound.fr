@@ -49,6 +49,7 @@
     "express-session": "^1.16.1",
     "extract-hoc": "0.0.5",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "fabric": "^3.3.2",
     "file-formats": "0.0.12",
     "fkill": "^6.2.0",
     "geolib": "^2.0.24",
@@ -103,7 +104,7 @@
     "redis": "^2.8.0",
     "request": "^2.85.0",
     "rimraf": "^2.6.3",
-    "rscopes": "^16.1.1",
+    "react-scopes": "^1.0.4",
     "shortid": "^2.2.14",
     "speakingurl": "^14.0.1",
     "superagent": "^3.8.2",
@@ -118,7 +119,7 @@
     "xxhashjs": "^0.2.2"
   },
   "devDependencies": {
-    "webpack-inherit": "^1.6.9",
+    "webpack-inherit": "^1.7.1",
     "wi-layer-react-rs": "file:packages/wi-layer-react-rs",
     "wi-layer-react-express": "file:packages/wi-layer-react-express",
     "wi-layer-dev-tools": "file:packages/wi-layer-dev-tools"

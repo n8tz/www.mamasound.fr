@@ -45,7 +45,7 @@ services:
       - ./docker/dist:/home/app/dist
       - ./docker/logs:/home/app/logs
       - ./dump:/home/app/dump
-      #      - ../../libs/rScopes:/home/app/libs
+      #      - ../../libs/react-scopes:/home/app/libs
     expose:
       - "8080"
     ports:

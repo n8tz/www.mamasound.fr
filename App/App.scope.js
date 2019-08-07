@@ -20,7 +20,7 @@ import $super                         from "$super";
 import stores                         from 'App/stores/(*).js';
 import {Views}                        from "App/ui";
 import moment                         from "moment";
-import {asRef, asStore, withStateMap} from "rscopes";
+import {asRef, asStore, withStateMap} from "react-scopes";
 import shortid                        from "shortid";
 
 

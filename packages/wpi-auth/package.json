@@ -7,40 +7,7 @@
   "author": "Nathan Braun <n8tz.js@gmail.com>",
   "wpInherit": {
     "default": {
-      "rootFolder": "App",
-      "vars": {
-      },
-      "extend": [
-      ]
-    },
-    "devClient": {
-      "rootFolder": "App",
-      "basedOn": "default",
-      "vars": {
-        "webpackPatch": {
-          "watchOptions": {
-            "aggregateTimeout": 300,
-            "poll": 1000
-          }
-        }
-      },
-      "extend": [
-      ]
-    },
-    "api": {
-      "rootFolder": "App",
-      "vars": {
-        "externals": true,
-        "webpackPatch": {
-          "devtool": "inline",
-          "watchOptions": {
-            "aggregateTimeout": 300,
-            "poll": 1000
-          }
-        }
-      },
-      "extend": [
-      ]
+      "rootFolder": "App"
     }
   },
   "scripts": {
@@ -61,6 +28,6 @@
     "superagent": "^3.8.2"
   },
   "devDependencies": {
-    "webpack-inherit": "^1.4.9"
+    "webpack-inherit": "^1.7.2"
   }
 }

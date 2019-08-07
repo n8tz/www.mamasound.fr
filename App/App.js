@@ -23,7 +23,7 @@ import React                                from 'react';
 import {ContextMenu}                        from 'react-inheritable-contextmenu';
 import {BrowserRouter, Route, StaticRouter} from "react-router-dom";
 import "regenerator-runtime/runtime";
-import {scopeToProps}                       from "rscopes";
+import {scopeToProps}                       from "react-scopes";
 import "./ui/styles/index.scss"
 
 let hookedRCE       = React.createElement;

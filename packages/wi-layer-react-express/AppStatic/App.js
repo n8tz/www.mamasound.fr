@@ -24,33 +24,29 @@
  *   @contact : n8tz.js@gmail.com
  */
 
-import is  from 'is';
-import api from './api/(*).js';
+import React    from 'react';
+import {Helmet} from "react-helmet";
 
-let debug = require('./console').default("server");
+class App extends React.Component {
+	
+	render() {
+		return <React.Fragment>
+			<Helmet>
+				<meta charSet="utf-8"/>
+				<title>wi-layer-react-express boilerplate v1.0</title>
+			</Helmet>
+			<h1>wi-layer-react-express boilerplate v1.0</h1>
+			<h2>Included ( among others ) : </h2>
+			<ul>
+				<li>react ^16.8.6</li>
+				<li>express with minimal SSR</li>
+				<li>sass</li>
+				<li>es6 + decorators</li>
+				<li>hot reload with dev server, SSR & api proxying</li>
+				<li>react-helmet ( html header manager )</li>
+			</ul>
+		</React.Fragment>
+	}
+}
 
-export default ( server, http ) => Object
-	.keys(api)
-	.map(
-		( service ) => (
-			is.fn(api[service]) ?
-			{
-				name         : service,
-				priorityLevel: 0,
-				service      : api[service]
-			} : api[service]
-		)
-	)
-	.sort(
-		( a, b ) => (a.priorityLevel > b.priorityLevel ? -1 : 1)
-	)
-	.forEach(
-		( service ) => {
-			try {
-				debug.info("Load Api : ", service.name, "\n")
-				
-				service.service(server, http);
-			} catch ( e ) {
-				debug.error("Api fail loading service ", service.name, "\n", e)
-			}
-		})
+export default App
