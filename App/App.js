@@ -43,7 +43,7 @@ export default class App extends React.Component {
 	render() {
 		let Router                                          = BrowserRouter;
 		let { widgets = { items: [] }, appState, $actions } = this.props;
-		if ( this.props.location )
+		if ( __IS_SERVER__ )
 			Router = StaticRouter;
 		return <Router location={__IS_SERVER__ && this.props.location}>
 			<React.Fragment>

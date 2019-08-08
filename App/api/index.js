@@ -31,9 +31,10 @@ const fs          = require('fs'),
       device      = require('express-device'),
       compressor  = compression();
 
-export const name          = "Rendering";
+export const name          = "Rendering service";
 export const priorityLevel = 100000;
 
+debugger
 export function service( server ) {
 	//
 	//if ( process.env.NODE_ENV === 'production' ) {
@@ -48,16 +49,15 @@ export function service( server ) {
 		'/',
 		function ( req, res, next ) {
 			let key = config.PUBLIC_URL + "_page_" + req.url + "_" + req.device.type + "_" + (req.user && req.user.login);
-			redis.get(
-				key,
-				( err, html ) => {
-					if ( html ) {
-						console.log("from redis ", key);
-						
-						res.send(200, html);
-						return;
-					}
-					
+			//redis.get(
+			//	key,
+			//	( err, html ) => {
+			//		if ( html ) {
+			//			console.log("from redis ", key);
+			//
+			//			res.send(200, html);
+			//			return;
+			//		}
 					
 					App.renderSSR(
 						{
@@ -71,12 +71,12 @@ export function service( server ) {
 						},
 						( err, html, nstate ) => {
 							res.send(200, html);
-							redis.set(key, html, 'EX', 1000 * 60 * 60);
+							//redis.set(key, html, 'EX', 1000 * 60 * 60);
 						}
 					)
 					
-				}
-			)
+				//}
+			//)
 		}
 	);
 	server.use(

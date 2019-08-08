@@ -140,7 +140,14 @@ module.exports = function Profile( profileId ) {
 					              }
 					
 					              watchers[cmdId] = chokidar
-						              .watch(task.watch, { ignored: /(^|[\/\\])\../ })
+						              .watch(task.watch, {
+						              	ignored: /(^|[\/\\])\../,
+							              //
+							              //usePolling: true,
+							              //"aggregateTimeout": 300,
+							              //"poll": 1000,
+							              //interval: 100,
+						              })
 						              .on('all', ( event, path ) => {
 							              console.warn(cmdId + ": '" + task.watch + "' has been updated restarting...", event);
 							
@@ -150,7 +157,6 @@ module.exports = function Profile( profileId ) {
 								              this.run(cmdId, true, true, true, sessionNum);
 							              }
 						              });
-					              watchers[cmdId].close=()=>console.error("wtf")
 					              console.warn(cmdId + ": '" + task.watch + "' waiting updates...");
 				              }
 				)

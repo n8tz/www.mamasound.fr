@@ -22,7 +22,7 @@ import React            from "react";
 import ReactDom         from 'react-dom';
 import {renderToString} from "react-dom/server";
 import {Helmet}         from "react-helmet";
-import {hot}            from 'react-hot-loader/root'
+//import {hot}            from 'react-hot-loader/root'
 import {reScope, Scope} from "react-rescope";
 import "regenerator-runtime/runtime";
 import shortid          from 'shortid';
@@ -90,26 +90,27 @@ const ctrl = {
 		})
 		
 	},
-	renderSSR( cfg, cb, _attempts = 0 ) {
+	renderSSR2( cfg, cb, _attempts = 0 ) {
 		let html = "<!doctype html>\n" + renderToString(<Index helmet={Helmet.renderStatic()}
 		                                                       content={""}/>);
-		console.warn("render !!fdgdffd!!!!")
+		console.warn("render !!!!")
 		cb(null, html)
 	},
-	renderSSR2( cfg, cb, _attempts = 0 ) {
+	renderSSR( cfg, cb, _attempts = 0 ) {
 		let rid     = shortid.generate(),
 		    cScope  = new Scope(AppScope, {
 			    id         : rid,
 			    autoDestroy: false
 		    }), App = reScope(cScope)(require('./App').default);
-
+		
+		//debugger;
 		if ( cfg.state ) {
 			cScope.restore(cfg.state, { alias: "App" });
 		}
 		else {
 			cScope.state.Anims = { currentBrkPts: cfg.device };
 		}
-
+		
 		let html,
 		    appHtml     = renderToString(<App location={cfg.location}/>),
 		    stable      = cScope.isStableTree();
@@ -127,7 +128,7 @@ const ctrl = {
 					html = "<!doctype html>\n" + renderToString(<Index helmet={Helmet.renderStatic()}
 					                                                   state={JSON.stringify(nstate)}
 					                                                   content={appHtml}/>);
-
+					
 					//html = cfg.tpl.render(
 					//	{
 					//		app  : appHtml,

@@ -192,7 +192,7 @@
         "__IS_SERVER__": true
       },
       "webpackPatch": {
-//        "stats": "errors-only",
+        //        "stats": "errors-only",
         "resolve": {
           "alias": {
             "material-ui": "@material-ui/core"
@@ -229,7 +229,7 @@
         "__IS_SERVER__": true
       },
       "webpackPatch": {
-//        "stats": "errors-only",
+        "devtool": "eval",
         "resolve": {
           "alias": {
             "material-ui": "@material-ui/core"
