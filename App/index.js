@@ -126,6 +126,7 @@ const ctrl = {
 			else {
 				try {
 					html = "<!doctype html>\n" + renderToString(<Index helmet={Helmet.renderStatic()}
+					                                                   css={!__IS_DEV__ && cfg.css}
 					                                                   state={JSON.stringify(nstate)}
 					                                                   content={appHtml}/>);
 					

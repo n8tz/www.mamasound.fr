@@ -16,19 +16,4 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-const defaultUnits = {};
-
-function demux( key, tweenable, target, data, box ) {
-	target[key] = ~~(tweenable[key]);
-}
-
-export default ( key, value, target, data, initials, forceUnits ) => {
-	
-	
-	initials[key] = 0;
-	target[key]   = ~~value;
-	if ( !data[key] && key in defaultUnits )
-		data[key] = defaultUnits[key];
-	
-	return demux;
-}
+export * from "../dist/react-voodoo";
