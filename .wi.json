@@ -85,7 +85,6 @@
       "wpi-forms",
       "wpi-medias",
       "wpi-mongo",
-      "wi-layer-react-rs",
       "wi-layer-react-express"
     ]
   },
@@ -125,7 +124,6 @@
       "wpi-medias",
       "wpi-xsl",
       "wpi-mongo",
-      "wi-layer-react-rs",
       "wi-layer-react-express"
     ]
   },
@@ -174,7 +172,6 @@
       "wpi-medias",
       "wpi-xsl",
       "wpi-mongo",
-      "wi-layer-react-rs",
       "wi-layer-react-express"
     ]
   },
@@ -211,7 +208,6 @@
       "wpi-medias",
       "wpi-xsl",
       "wpi-mongo",
-      "wi-layer-react-rs",
       "wi-layer-react-express"
     ]
   },
@@ -249,7 +245,6 @@
       "wpi-medias",
       "wpi-xsl",
       "wpi-mongo",
-      "wi-layer-react-rs",
       "wi-layer-react-express"
     ]
   }
