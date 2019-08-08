@@ -15,16 +15,14 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import React                                 from "react";
-import {reScope, scopeToProps, propsToScope} from "react-scopes";
-import {withStateMap, asRef, asStore}        from "rescope-spells";
-import Select                                from 'react-select';
-import Typography                            from '@material-ui/core/Typography';
-import TextField                             from '@material-ui/core/TextField';
-import {asTweener, TweenRef}                 from "react-voodoo";
-import Fab                                   from '@material-ui/core/Fab';
+import Fab                       from '@material-ui/core/Fab';
+import TextField                 from '@material-ui/core/TextField';
+import moment                    from "moment";
+import React                     from "react";
+import {scopeToProps, withScope} from "react-scopes";
+import {asStore}                 from "rescope-spells";
 
-@reScope(
+@withScope(
 	{
 		@asStore
 		SearchValues: {
@@ -44,7 +42,7 @@ import Fab                                   from '@material-ui/core/Fab';
 		
 	}
 )
-@scopeToProps("SearchValues", "TagManager")
+@scopeToProps("SearchValues", "TagManager", "appState")
 export default class SearchBar extends React.Component {
 	static propTypes = {};
 	state            = {
@@ -60,70 +58,80 @@ export default class SearchBar extends React.Component {
 	
 	render() {
 		const {
-			      record: { position, size } = {},
-			      TagManager, children, disabled,
+			      record              : { position, size } = {},
+			      TagManager, appState: { curDay: day }, disabled,
 			      $actions, onSelect, selected, classes, theme
 		      } = this.props;
 		//console.log(Object.keys(TagManager.available).map(t => TagManager.available[t]))
 		return (
 			<div
-				className={ "SearchBar container" }
+				className={"SearchBar container"}
 			>
-				<Fab>
-					<div className={ "material-icons icon" }>search</div>
+				<Fab className={"searchIcon"}>
+					<div className={"material-icons icon"}>search</div>
 				</Fab>
+				<div className={"cDay"}>
+					{(moment(day).isSame(moment(), 'week'))
+					&&
+					moment(day).calendar(moment(), {
+						sameDay : '[Aujourd\'hui]',
+						nextDay : '[Demain]',
+						nextWeek: 'dddd',
+						lastDay : '[hier]',
+						lastWeek: 'dddd [dernier]',
+						sameElse: '[Le ]DD/MM/YYYY'
+					})
+					||
+					(moment(day).format("dddd DD MMMM YYYY"))}
+				</div>
 				<TextField
-					style={
-						{
-							width: "calc(100% - 100px)"
-						}
-					}
+					className={"input"}
 					//value={ this.state.multi }
 					//onChange={ this.handleChange('multi') }
 				/>
-				{/*<Select*/ }
-				{/*classes={ classes }*/ }
-				{/*styles={ selectStyles }*/ }
-				{/*textFieldProps={ {*/ }
-				{/*label          : 'Tags',*/ }
-				{/*InputLabelProps: {*/ }
-				{/*shrink: true,*/ }
-				{/*},*/ }
-				{/*} }*/ }
-				{/*options={ Object.keys(TagManager.available).map(t => TagManager.available[t]) }*/ }
-				{/*components={ components }*/ }
-				{/*value={ this.state.multi }*/ }
-				{/*onChange={ this.handleChange('multi') }*/ }
-				{/*//placeholder="Select multiple countries"*/ }
-				{/*isMulti={ true }*/ }
-				{/*/>*/ }
-				{/*<ChipInput*/ }
-				{/*value={ TagManager.selected }*/ }
-				{/*dataSource={ Object.keys(TagManager.available) }*/ }
-				{/*onRequestAdd={ ( chip ) => $actions.selectTag(chip) }*/ }
-				{/*onRequestDelete={ ( chip, index ) => $actions.unSelectTag(chip) }*/ }
-				{/*/>*/ }
-				{/*{*/ }
-				{/*TagManager &&*/ }
-				{/*TagManager.available &&*/ }
-				{/*Object.keys(TagManager.available)*/ }
-				{/*.map(*/ }
-				{/*tag => TagManager.available[tag])*/ }
-				{/*.map(*/ }
-				{/*tag =>*/ }
-				{/*<Chip*/ }
-				{/*key={ tag.title }*/ }
-				{/*icon={*/ }
-				{/*//<Badge badgeContent={ tag.count} color="secondary" >*/ }
-				{/*<img alt={ tag.title } src={ tag.style.icon } className={ "icon" }/>*/ }
-				{/*//</Badge>*/ }
-				{/*}*/ }
-				{/*label={ tag.title }*/ }
-				{/*//onClick={handleClick}*/ }
-				{/*//onDelete={handleDelete}*/ }
-				{/*//className={classes.chip}*/ }
-				{/*/>*/ }
-				{/*) }*/ }
+				{/*<Select*/}
+				{/*classes={ classes }*/}
+				{/*styles={ selectStyles }*/}
+				{/*textFieldProps={ {*/}
+				{/*label          : 'Tags',*/}
+				{/*InputLabelProps: {*/}
+				{/*shrink: true,*/}
+				{/*},*/}
+				{/*} }*/}
+				{/*options={ Object.keys(TagManager.available).map(t => TagManager.available[t]) }*/}
+				{/*components={ components }*/}
+				{/*value={ this.state.multi }*/}
+				{/*onChange={ this.handleChange('multi') }*/}
+				{/*//placeholder="Select multiple countries"*/}
+				{/*isMulti={ true }*/}
+				{/*/>*/}
+				{/*<ChipInput*/}
+				{/*value={ TagManager.selected }*/}
+				{/*dataSource={ Object.keys(TagManager.available) }*/}
+				{/*onRequestAdd={ ( chip ) => $actions.selectTag(chip) }*/}
+				{/*onRequestDelete={ ( chip, index ) => $actions.unSelectTag(chip) }*/}
+				{/*/>*/}
+				{/*{*/}
+				{/*TagManager &&*/}
+				{/*TagManager.available &&*/}
+				{/*Object.keys(TagManager.available)*/}
+				{/*.map(*/}
+				{/*tag => TagManager.available[tag])*/}
+				{/*.map(*/}
+				{/*tag =>*/}
+				{/*<Chip*/}
+				{/*key={ tag.title }*/}
+				{/*icon={*/}
+				{/*//<Badge badgeContent={ tag.count} color="secondary" >*/}
+				{/*<img alt={ tag.title } src={ tag.style.icon } className={ "icon" }/>*/}
+				{/*//</Badge>*/}
+				{/*}*/}
+				{/*label={ tag.title }*/}
+				{/*//onClick={handleClick}*/}
+				{/*//onDelete={handleDelete}*/}
+				{/*//className={classes.chip}*/}
+				{/*/>*/}
+				{/*) }*/}
 			</div>
 		);
 	}

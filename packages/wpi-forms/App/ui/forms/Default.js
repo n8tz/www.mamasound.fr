@@ -19,7 +19,7 @@ import PropTypes       from "prop-types";
 import React           from "react";
 import {Forms, fields} from "App/ui";
 
-import {reScope, Store, scopeToProps, propsToScope} from "react-scopes";
+import {withScope, Store, scopeToProps, propsToScope} from "react-scopes";
 import {withStateMap, asRef, asStore}               from "rescope-spells";
 
 import stores from 'App/stores/(*).js';
@@ -29,7 +29,7 @@ import entities      from 'App/db/entities';
 import {ContextMenu} from 'react-inheritable-contextmenu';
 import Button        from '@material-ui/core/Button';
 
-@reScope(
+@withScope(
 	{
 		@withStateMap(
 			{

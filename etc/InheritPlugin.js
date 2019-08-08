@@ -1,15 +1,19 @@
 /*
- * The MIT License (MIT)
- * Copyright (c) 2019. Wise Wild Web
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * Copyright (C) 2019 Nathanael Braun
  *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
  *
- *  @author : Nathanael Braun
- *  @contact : n8tz.js@gmail.com
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 const path            = require('path'),
@@ -90,19 +94,6 @@ module.exports = function ( cfg, opts ) {
 									request,
 									( err, req, data ) => {
 										callback(err, req)
-									},
-									( err, req, data ) => {
-										resolver.doResolve(
-											target,
-											req || request,
-											"resolved wpi files using " + currentProfile, resolveContext,
-											( err, result ) => {
-												//console.log("Proxy resolved : ", err, result)
-												if ( err ) return callback(err);
-												if ( result ) return callback(null, result);
-												return callback();
-											});
-										
 									})
 							});
 					}
@@ -154,7 +145,7 @@ module.exports = function ( cfg, opts ) {
 			/**
 			 * The main resolver / glob mngr
 			 */
-			function wpiResolve( data, cb, proxy ) {
+			function wpiResolve( data, cb ) {
 				let requireOrigin = data.context && data.context.issuer,
 				    context       = requireOrigin && path.dirname(requireOrigin),
 				    reqPath       = data.request || data.path,
@@ -195,14 +186,13 @@ module.exports = function ( cfg, opts ) {
 						RootAliasRe,
 						function ( e, filePath, content ) {
 							//console.warn("glob", filePath)
-							let req = {
-								...data,
+							Object.assign(data, {
 								relativePath: undefined,
 								path        : filePath,
 								resource    : filePath,
 								request     : filePath,
-							};
-							cb(e, req, content);
+							});
+							cb(e, data, content);
 						}
 					)
 				}
@@ -254,14 +244,14 @@ module.exports = function ( cfg, opts ) {
 								return cb()
 							}
 							//console.log("find %s\t\t\t=> %s", reqPath, filePath);
-							let req = {
+							Object.assign(data, {
 								...data,
 								path        : filePath,
 								relativePath: undefined,
 								//request     : filePath,
 								resource    : filePath
-							};
-							cb(null, req);
+							});
+							cb(null, data);
 						}
 					);
 				}

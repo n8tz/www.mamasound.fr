@@ -32,18 +32,55 @@
   //display: none;
   touch-action: none;
   //overflow: hidden;
-  position: absolute;
-  bottom: 0px;
-  left: 50%;
+  //bottom: 0px;
+  //left: 50%;
   //width: 100%;
-  height: 50px;
-  z-index: 1000;
-  background: #1f8de2;
-  transform: translate3d(-50%, 0, 0);
+  //height: 100%;
+  //z-index: 1000;
+  //background: #1f8de2;
+  //transform: translate3d(-50%, 0, 0);
+  margin-top: 20px;
 
-  @media screen and (max-width: $tablet-portrait-breakpoint) {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100% !important;
+  .cDay {
+    position: absolute;
+    width: 40%;
+    top: 15px;
+    left: 20px;
+    background: #1f8de2;
+    padding: 10px;
+
+    font-size: 2em;
+    font-weight: lighter;
+    font-family: EmPower42;
+
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 5px #fff, 0 0 5px rgba(255, 255, 255, 0.4); //border-radius: 2em;
   }
+
+  .input {
+    position: absolute;
+    width: 40%;
+    top: 15px;
+    right: 20px;
+    background: #d6d6d6;
+    padding: 10px;
+    border-radius: 2em;
+    border: solid 1px rgba(0, 0, 0, 0.38);
+    box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
+
+  }
+
+  .searchIcon {
+    position: absolute;
+    right: calc(40% + 45px);
+    top: 13px;
+    padding: 10px;
+    border-radius: 2em;
+    box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
+  }
+
+  //@media screen and (max-width: $tablet-portrait-breakpoint) {
+  //  margin: 0 !important;
+  //  padding: 0 !important;
+  //  width: 100% !important;
+  //}
 }

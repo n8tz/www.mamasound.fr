@@ -23,7 +23,7 @@ import ReactDom         from 'react-dom';
 import {renderToString} from "react-dom/server";
 import {Helmet}         from "react-helmet";
 //import {hot}            from 'react-hot-loader/root'
-import {reScope, Scope} from "react-rescope";
+import {withScope, Scope} from "react-rescope";
 import "regenerator-runtime/runtime";
 import shortid          from 'shortid';
 import AppScope         from './App.scope';
@@ -37,7 +37,7 @@ const ctrl = {
 			    id         : "App",
 			    autoDestroy: true
 		    }),
-		    App         = reScope(cScope)(require('./App').default);
+		    App         = withScope(cScope)(require('./App').default);
 		window.contexts = Scope.scopes;
 		window.ctrl     = this;
 		if ( localStorage.mama )
@@ -54,7 +54,7 @@ const ctrl = {
 					id         : "App",
 					autoDestroy: true
 				});
-				App    = reScope(cScope)(require('./App').default);
+				App    = withScope(cScope)(require('./App').default);
 				cScope.restore(state);
 				ReactDom.render(<App/>, node);
 			});
@@ -71,7 +71,7 @@ const ctrl = {
 		    cScope  = new Scope(AppScope, {
 			    id         : rid,
 			    autoDestroy: false
-		    }), App = reScope(cScope)(require('./App').default);
+		    }), App = withScope(cScope)(require('./App').default);
 		
 		
 		state && cScope.restore(state, { alias: "App" });
@@ -101,7 +101,7 @@ const ctrl = {
 		    cScope  = new Scope(AppScope, {
 			    id         : rid,
 			    autoDestroy: false
-		    }), App = reScope(cScope)(require('./App').default);
+		    }), App = withScope(cScope)(require('./App').default);
 		
 		//debugger;
 		if ( cfg.state ) {

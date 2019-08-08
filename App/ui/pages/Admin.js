@@ -19,10 +19,10 @@
 import scopes                                from 'App/scopes/(*).js';
 import {Comps, Views}                        from 'App/ui';
 import React                                 from 'react';
-import {propsToScope, reScope, scopeToProps} from "react-scopes";
+import {propsToScope, withScope, scopeToProps} from "react-scopes";
 
 
-@reScope(
+@withScope(
 	scopes.EventList
 )
 @propsToScope(

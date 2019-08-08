@@ -116,10 +116,10 @@
     margin-left: 0px;
 
     .DayEvents {
-      background: #1f8de2;
+      //background: #1f8de2;
 
       .day {
-        height: 50px;
+        height: 2.25em;
       }
     }
 
@@ -164,11 +164,11 @@
       color: black;
       min-width: 50%;
       text-align: left;
-      font-size: 2em;
+      font-size: 1.2em;
       font-weight: lighter;
       font-family: EmPower42;
       opacity: .9;
-      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 75px rgba(34, 141, 255, 0.62);
+      //text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 75px rgba(34, 141, 255, 0.62);
       padding-top: .15em;
       padding-left: 25px;
     }
@@ -261,7 +261,7 @@
   .NavBox {
 
     position: absolute;
-    background: yellow;
+    //background: yellow;
     top: 0px;
     left: 0px;
     width: 300px;

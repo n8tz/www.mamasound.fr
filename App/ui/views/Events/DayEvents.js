@@ -21,10 +21,10 @@ import {Comps, Views}                        from 'App/ui';
 import moment                                from "moment";
 import PropTypes                             from "prop-types";
 import React                                 from "react";
-import {propsToScope, reScope, scopeToProps} from "react-scopes";
+import {propsToScope, withScope, scopeToProps} from "react-scopes";
 
 
-@reScope(
+@withScope(
 	scopes.EventList
 )
 @propsToScope(

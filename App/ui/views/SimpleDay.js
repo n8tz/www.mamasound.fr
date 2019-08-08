@@ -41,7 +41,7 @@ const banList = [
 
 export default ( { day } ) =>
 	<div className={ "SimpleDay" }>
-		<img src={ banList[moment(day).weekday()] }/>
+		{/*<img src={ banList[moment(day).weekday()] }/>*/}
 		<div className="date">
 			{ (moment(day).isSame(moment(), 'week'))
 			&&

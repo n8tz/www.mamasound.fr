@@ -20,14 +20,14 @@ import {Comps, Views}                 from 'App/ui';
 import React                          from "react";
 import {TweenRef, withTweener}        from "react-voodoo";
 import {asRef, asStore, withStateMap} from "rescope-spells";
-import {reScope, scopeToProps}        from "react-scopes";
+import {withScope, scopeToProps}        from "react-scopes";
 
 let Tetris = 'div';
 if ( typeof window !== "undefined" ) {
 	Tetris = require('react-tetris');
 }
 
-@reScope(
+@withScope(
 	{
 		@withStateMap(
 			{

@@ -85,11 +85,11 @@ export const logo              = {
 	]
 };
 export const NavBox            = {
-	height    : "100%",
+	height    : "200px",
 	left      : "0px",
 	top       : "0px",
-	width     : "300px",
-	background: "green",
+	width     : "100%",
+	//background: "green",
 	position  : "absolute",
 	transform : {
 		//translateY: "85%"

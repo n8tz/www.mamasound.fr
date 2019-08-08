@@ -22,7 +22,7 @@ import ReactDom         from "react-dom";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import {
-	isSpell, spells, Store, Scope, reScope, propsToScope, scopeToProps,
+	isSpell, spells, Store, Scope, withScope, propsToScope, scopeToProps,
 	scopeToState
 } from "react-scopes";
 

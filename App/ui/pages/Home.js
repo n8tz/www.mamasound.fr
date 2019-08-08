@@ -17,7 +17,7 @@
  */
 
 import React                                 from 'react';
-import {reScope, scopeToProps, propsToScope} from "react-scopes";
+import {withScope, scopeToProps, propsToScope} from "react-scopes";
 import {Comps, Views}                        from 'App/ui';
 import ReactDom                              from "react-dom";
 

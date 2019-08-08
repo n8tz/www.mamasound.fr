@@ -176,14 +176,14 @@ export default class EventList extends React.Component {
 							id={"NavBox"}
 							initial={MainPage.NavBox}
 						>
-							<Comps.NavBox/>
+							<Comps.SearchBar/>
 						</TweenRef>
 					</div>
 				</div>
-				{
-					activeScroll && <div className={"noScrollOverlay"}
-					                     onClick={e => $actions.setPageFocus('events', true)}></div>
-				}
+				{/*{*/}
+				{/*	activeScroll && <div className={"noScrollOverlay"}*/}
+				{/*	                     onClick={e => $actions.setPageFocus('events', true)}></div>*/}
+				{/*}*/}
 				<div
 					className={"NavTools container"}
 				>

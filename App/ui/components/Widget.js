@@ -18,13 +18,13 @@
 import PropTypes                                      from "prop-types";
 import React                                          from "react";
 import {Rnd}                                          from "react-rnd";
-import {reScope, scopeToProps, propsToScope, asStore} from "react-scopes";
+import {withScope, scopeToProps, propsToScope, asStore} from "react-scopes";
 import CloseIcon                                      from '@material-ui/icons/Close';
 import CardHeader                                     from '@material-ui/core/CardHeader';
 import IconButton                                     from '@material-ui/core/IconButton';
 
 
-@reScope(
+@withScope(
 	{
 		@asStore
 		widget: {

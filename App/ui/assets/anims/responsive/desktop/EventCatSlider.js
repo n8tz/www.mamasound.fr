@@ -25,7 +25,7 @@ export const style           = {
 	//left    : "300px",
 	top     : "100px",
 	bottom  : "0%",
-	width   : ["100%", "-300px"],
+	width   : ["100%"],
 	//overflow: "auto"
 };
 export const defaultInitial  = {

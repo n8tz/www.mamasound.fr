@@ -43,8 +43,8 @@ services:
     volumes:
       - .:/home/app
       - node_modules:/home/app/node_modules
-      - ./docker/dist:/home/app/dist
-      - ./docker/logs:/home/app/logs
+#      - ./docker/dist:/home/app/dist
+#      - ./docker/logs:/home/app/logs
       - ./dump:/home/app/dump
       #      - ../../libs/react-scopes:/home/app/libs
     expose:
