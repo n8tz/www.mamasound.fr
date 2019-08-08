@@ -143,10 +143,10 @@ module.exports = function Profile( profileId ) {
 						              .watch(task.watch, {
 						              	ignored: /(^|[\/\\])\../,
 							              //
-							              //usePolling: true,
-							              //"aggregateTimeout": 300,
-							              //"poll": 1000,
-							              //interval: 100,
+							              usePolling: true,
+							
+							              "aggregateTimeout": 300,
+							              "poll": 1000
 						              })
 						              .on('all', ( event, path ) => {
 							              console.warn(cmdId + ": '" + task.watch + "' has been updated restarting...", event);

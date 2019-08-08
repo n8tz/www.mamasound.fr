@@ -23,7 +23,6 @@ import moment                         from "moment";
 import {asRef, asStore, withStateMap} from "react-scopes";
 import shortid                        from "shortid";
 
-console.warn($super)
 export default {
 	...$super,
 	Anims          : stores.Anims,

@@ -33,7 +33,7 @@ services:
     environment:
       - mongoUrl=mongodb://mongodb:27017
       - redisUrl=redis://redis:6379
-      - CHOKIDAR_USEPOLLING=true
+#      - CHOKIDAR_USEPOLLING=true
     links:
       - mongodb
       - redis
