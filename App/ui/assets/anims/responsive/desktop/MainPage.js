@@ -107,7 +107,7 @@ export const Footer            = {
 		//translateY: "100%"
 	}
 };
-export const events            = {
+export const EventsBlock            = {
 	position       : "absolute",
 	right          : "0%",
 	bottom         : "0%",
@@ -186,14 +186,14 @@ export const YAxis             = [
 		}
 	},
 	{
-		target  : "events",
+		target  : "EventsBlock",
 		from    : 0,
 		duration: 100,
 		apply   : {
 			top: -eventsMiniHeight
 		}
 	},
-	//// highlighter to events
+	//// highlighter to EventsBlock
 	{
 		target  : "Highlighter",
 		from    : 100,
@@ -203,7 +203,7 @@ export const YAxis             = [
 		}
 	},
 	{
-		target  : "events",
+		target  : "EventsBlock",
 		from    : 100,
 		duration: 100,
 		apply   : {
@@ -212,7 +212,6 @@ export const YAxis             = [
 		}
 	},
 	{
-		type    : "Tween",
 		target  : "EventMap",
 		from    : 100,
 		duration: 100,
@@ -221,9 +220,9 @@ export const YAxis             = [
 			top   : "-20%"
 		}
 	},
-	//// events to map
+	//// EventsBlock to map
 	{
-		target  : "events",
+		target  : "EventsBlock",
 		from    : 200,
 		duration: 100,
 		apply   : {

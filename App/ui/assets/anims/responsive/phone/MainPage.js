@@ -14,7 +14,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import {eventsMiniHeight, headerMiniHeight, sliderHeight} from "./vars";
+import {tweenTools}                                       from "react-voodoo";
+import {sliderHeight, eventsMiniHeight, headerMiniHeight} from "./vars";
 
 export const page              = {
 	position: "absolute",
@@ -84,11 +85,11 @@ export const logo              = {
 	]
 };
 export const NavBox            = {
-	height    : "100%",
+	height    : "200px",
 	left      : "0px",
 	top       : "0px",
-	width     : "0px",
-	background: "green",
+	width     : "100%",
+	//background: "green",
 	position  : "absolute",
 	transform : {
 		//translateY: "85%"
@@ -106,7 +107,7 @@ export const Footer            = {
 		//translateY: "100%"
 	}
 };
-export const events            = {
+export const EventsBlock            = {
 	position       : "absolute",
 	right          : "0%",
 	bottom         : "0%",
@@ -185,14 +186,14 @@ export const YAxis             = [
 		}
 	},
 	{
-		target  : "events",
+		target  : "EventsBlock",
 		from    : 0,
 		duration: 100,
 		apply   : {
 			top: -eventsMiniHeight
 		}
 	},
-	//// highlighter to events
+	//// highlighter to EventsBlock
 	{
 		target  : "Highlighter",
 		from    : 100,
@@ -202,16 +203,15 @@ export const YAxis             = [
 		}
 	},
 	{
-		target  : "events",
+		target  : "EventsBlock",
 		from    : 100,
 		duration: 100,
 		apply   : {
 			bottom: "20%",
-			top   : ["-100%", (eventsMiniHeight + headerMiniHeight), sliderHeight]
+			top   : ["-100%", (eventsMiniHeight + headerMiniHeight) + "px", sliderHeight]
 		}
 	},
 	{
-		type    : "Tween",
 		target  : "EventMap",
 		from    : 100,
 		duration: 100,
@@ -220,9 +220,9 @@ export const YAxis             = [
 			top   : "-20%"
 		}
 	},
-	//// events to map
+	//// EventsBlock to map
 	{
-		target  : "events",
+		target  : "EventsBlock",
 		from    : 200,
 		duration: 100,
 		apply   : {

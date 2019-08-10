@@ -23,8 +23,7 @@ services:
       context: .
     working_dir: /home/app
     command: bash -c "npm i&&wi-run :dev start"
-#    command: bash -c "npm i&&npm run start-dev"
-#    command: bash -c "npm run build&&npm run start"
+#    command: bash -c "npm i&&wi-run :prod start"
 
     labels:
       - 'traefik.enable=true'

@@ -24,10 +24,8 @@
  */
 'use strict';
 
-import React  from "react";
 import moment from "moment";
-
-import {NavLink} from "react-router-dom";
+import React  from "react";
 
 const banList = [
 	require("App/ui/assets/images/ban/jours-lundi.png"),
@@ -40,10 +38,10 @@ const banList = [
 ]
 
 export default ( { day } ) =>
-	<div className={ "SimpleDay" }>
+	<div className={"SimpleDay"}>
 		{/*<img src={ banList[moment(day).weekday()] }/>*/}
 		<div className="date">
-			{ (moment(day).isSame(moment(), 'week'))
+			{(moment(day).isSame(moment(), 'week'))
 			&&
 			moment(day).calendar(moment(), {
 				sameDay : '[Aujourd\'hui]',
@@ -54,7 +52,7 @@ export default ( { day } ) =>
 				sameElse: '[Le ]DD/MM/YYYY'
 			})
 			||
-			(moment(day).format("dddd DD MMMM YYYY")) }
+			(moment(day).format("dddd DD MMMM YYYY"))}
 		</div>
 	</div>
 ;

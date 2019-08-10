@@ -18,16 +18,16 @@
 import "core-js";
 import "core-js/es/object/assign";
 import "core-js/features/object/from-entries";
-import React            from "react";
-import ReactDom         from 'react-dom';
-import {renderToString} from "react-dom/server";
-import {Helmet}         from "react-helmet";
+import React              from "react";
+import ReactDom           from 'react-dom';
+import {renderToString}   from "react-dom/server";
+import {Helmet}           from "react-helmet";
 //import {hot}            from 'react-hot-loader/root'
-import {withScope, Scope} from "react-rescope";
+import {Scope, withScope} from "react-rescope";
 import "regenerator-runtime/runtime";
-import shortid          from 'shortid';
-import AppScope         from './App.scope';
-import Index            from "./index.html";
+import shortid            from 'shortid';
+import AppScope           from './App.scope';
+import Index              from "./index.html";
 
 const ctrl = {
 	
@@ -125,18 +125,13 @@ const ctrl = {
 			}
 			else {
 				try {
-					html = "<!doctype html>\n" + renderToString(<Index helmet={Helmet.renderStatic()}
-					                                                   css={!__IS_DEV__ && cfg.css}
-					                                                   state={JSON.stringify(nstate)}
-					                                                   content={appHtml}/>);
+					html = "<!doctype html>\n" +
+						renderToString(<Index
+							helmet={Helmet.renderStatic()}
+							css={!__IS_DEV__ && cfg.css}
+							state={nstate}
+							content={appHtml}/>);
 					
-					//html = cfg.tpl.render(
-					//	{
-					//		app  : appHtml,
-					//		state: JSON.stringify(nstate),
-					//		css  : !__IS_DEV__ && cfg.css
-					//	}
-					//);
 				} catch ( e ) {
 					return cb(e)
 				}

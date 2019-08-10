@@ -16,13 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React                                 from 'react';
-import {withScope, scopeToProps, propsToScope} from "react-scopes";
-import {Comps, Views}                        from 'App/ui';
-import ReactDom                              from "react-dom";
-
-import {withStateMap, asRef, asStore}   from "rescope-spells";
-import {asTweener, TweenRef, TweenAxis} from "react-voodoo";
+import {Views}                          from 'App/ui';
+import React                            from 'react';
+import {scopeToProps}                   from "react-scopes";
+import {asTweener, TweenAxis, TweenRef} from "react-voodoo";
 
 const wayPoints =
 	      {
@@ -131,8 +128,8 @@ export default class Home extends React.Component {
 					<Views.Block.Highlighter/>
 				</TweenRef>
 				
-				<TweenRef id={"events"}
-				          initial={MainPage.events}>
+				<TweenRef id={"EventsBlock"}
+				          initial={MainPage.EventsBlock}>
 					<Views.Events.EventList
 						activeScroll={appState.currentPageFocus !== "map" && appState.currentPageFocus !== "events"}/>
 				</TweenRef>

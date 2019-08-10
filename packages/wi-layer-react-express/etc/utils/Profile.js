@@ -141,12 +141,11 @@ module.exports = function Profile( profileId ) {
 					
 					              watchers[cmdId] = chokidar
 						              .watch(task.watch, {
-						              	ignored: /(^|[\/\\])\../,
-							              //
+							              ignored   : /(^|[\/\\])\../,
 							              usePolling: true,
 							
 							              "aggregateTimeout": 300,
-							              "poll": 1000
+							              "poll"            : 1000
 						              })
 						              .on('all', ( event, path ) => {
 							              console.warn(cmdId + ": '" + task.watch + "' has been updated restarting...", event);
@@ -182,7 +181,7 @@ module.exports = function Profile( profileId ) {
 					err && this.cmdErr(cmdId, cmdId + ": '" + task.run + "' ended with error : " + err);
 					if ( sessionNum === curSessionNum && task.forever ) {
 						console.warn(cmdId + " restart ...");
-						setTimeout(tm => this.run(cmdId, true, true, true, sessionNum), 1000);
+						setTimeout(tm => this.run(cmdId, true, true, true, sessionNum), 5000);
 					}
 					else {// normal exit
 						if ( sessionNum === curSessionNum ) {

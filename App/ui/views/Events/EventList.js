@@ -22,8 +22,8 @@ import GpsOffIcon     from '@material-ui/icons/GpsOff';
 import {Comps, Views} from 'App/ui';
 import moment         from "moment";
 import React          from "react";
-import {TweenRef}     from "react-voodoo";
 import {scopeToProps} from "react-scopes";
+import {TweenRef}     from "react-voodoo";
 
 @scopeToProps("appState", "Anims", "UserGeoLocation")
 export default class EventList extends React.Component {
@@ -126,22 +126,25 @@ export default class EventList extends React.Component {
 	
 	render() {
 		let {
-			    record                          : { position, size } = {},
-			    UserGeoLocation, appState, Anims: { MainPage, EventCatSlider, EventDaySlider }, activeScroll,
+			    UserGeoLocation,
+			    appState,
+			    Anims: { MainPage, EventsBlock: { EventCatSlider }, EventDaySlider },
+			    activeScroll,
 			    $actions, style
 		    }     = this.props,
 		    state = this.state;
+		console.log('EventList::render:136: ', activeScroll);
 		return (
 			<div className={"EventList"} style={style}>
 				<div className={"maskContent"}>
 					<div className={"content container"}>
 						<TweenRef
-							id={"EventNav"}
+							id={"EventCatSlider"}
 							initial={EventCatSlider.style}
 						>
 							<Comps.Slider
 								{...EventCatSlider}
-								className={"EventNav "}
+								className={"EventCatSlider "}
 							>
 								{
 									Array(4)
@@ -180,10 +183,10 @@ export default class EventList extends React.Component {
 						</TweenRef>
 					</div>
 				</div>
-				{/*{*/}
-				{/*	activeScroll && <div className={"noScrollOverlay"}*/}
-				{/*	                     onClick={e => $actions.setPageFocus('events', true)}></div>*/}
-				{/*}*/}
+				{
+					activeScroll && <div className={"noScrollOverlay"}
+					                     onClick={e => $actions.setPageFocus('events', true)}></div>
+				}
 				<div
 					className={"NavTools container"}
 				>
