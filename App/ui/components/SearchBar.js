@@ -21,7 +21,7 @@ import moment                    from "moment";
 import React                     from "react";
 import {scopeToProps, withScope} from "react-scopes";
 import {asStore}                 from "rescope-spells";
-import {Comps}                   from "../index";
+import {Comps}                   from "App/ui";
 
 @withScope(
 	{
@@ -87,7 +87,6 @@ export default class SearchBar extends React.Component {
 						(moment(day).format("dddd DD MMMM YYYY"))
 					}
 					
-					<Comps.LoginBox/>
 				</div>
 				<TextField
 					className={"input"}

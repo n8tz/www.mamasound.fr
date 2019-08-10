@@ -16,18 +16,18 @@
  */
 //
 import redis from "App/db/redis.js";
+import config from "App/config";
 
-const config   = require('App/config'),
-      aliasAPI = require("App/db/aliasHelpers"),
+const aliasAPI = require("App/db/aliasHelpers"),
       db       = require("App/db");
 
 export default ( server, http ) => {
-	console.log("wpi-docker server running ! :D");
+	console.log("wi-layer-dev-tools server running ! :D");
 	server.get(
 		'/devTools/clearCache',
 		function ( req, res, next ) {
 			redis.delWildcard(config.PUBLIC_URL + "_*")
-			res.json({ status: 'ok' })
+			res.json({ status: 'ok', deleted: config.PUBLIC_URL + "_*" })
 			
 		}
 	);

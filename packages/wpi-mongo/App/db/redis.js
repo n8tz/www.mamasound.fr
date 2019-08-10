@@ -30,4 +30,5 @@ redis.RedisClient.prototype.delWildcard = function ( key, callback ) {
 		return callback && callback();
 	});
 };
+
 export default redisClient;

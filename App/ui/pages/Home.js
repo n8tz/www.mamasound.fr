@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {Views}                          from 'App/ui';
+import {Comps, Views}                   from 'App/ui';
 import React                            from 'react';
 import {scopeToProps}                   from "react-scopes";
 import {asTweener, TweenAxis, TweenRef} from "react-voodoo";
@@ -141,12 +141,12 @@ export default class Home extends React.Component {
 						day={appState.currentVisibleDay || appState.curDay}
 						viewType={appState.viewType}/>
 				</TweenRef>
-				{/*<TweenRef*/}
-				{/*	id={"Footer"}*/}
-				{/*	initial={MainPage.Footer}*/}
-				{/*>*/}
-				{/*	<Comps.Footer/>*/}
-				{/*</TweenRef>*/}
+				<TweenRef
+					id={"Footer"}
+					initial={MainPage.Footer}
+				>
+					<Comps.Footer/>
+				</TweenRef>
 			</div>
 		</TweenRef>
 	}

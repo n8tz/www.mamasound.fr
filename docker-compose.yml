@@ -22,9 +22,9 @@ services:
     build:
       context: .
     working_dir: /home/app
-#    command: bash -c "npm i&&wi-run :dev start"
-    command: bash -c "npm i&&wi-run :prod start"
-
+    command: bash -c "npm i&&wi-run :dev start"
+#    command: bash -c "npm i&&wi-run :prod start"
+#
     labels:
       - 'traefik.enable=true'
       - 'traefik.protocol=http'
