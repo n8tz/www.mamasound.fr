@@ -189,7 +189,7 @@ export default {
 		items: __IS_DEV__ ? [
 			{
 				"_id"     : "FfseOEKpm",
-				"size"    : { "width": 200, "height": 120 },
+				"size"    : { "width": 200, "height": 200 },
 				"title"   : "DevTools",
 				"type"    : "DevTools",
 				"position": { "x": 0, "y": 0 }

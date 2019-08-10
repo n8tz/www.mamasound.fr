@@ -12,12 +12,14 @@
     "start": "node ./dist/api/App.server.js  -p 8080",
     "runBrowser": "opener http://localhost:8080",
     "docker_start": "opener docker-compose up&",
+    "docker_restart": "docker-compose down&&opener docker-compose up",
+    "docker_restartClean": "docker-compose down -v&& (rm package-lock.json||1) &&opener docker-compose up",
     "docker_down": "docker-compose down",
     "docker_kill": "docker-compose kill",
     "docker_ash": "opener docker-compose exec app ash -c \"cd /home/app&&ash\"&",
     "docker_build": "opener docker-compose exec app ash -c \"cd /home/app&&npm run build\"&",
     "docker_restoreDb": "opener docker-compose exec app ash -c \"cd /home/app&&mongorestore --uri ${mongoUrl}\"&",
-    "docker_clear": "docker-compose down -v&& rm package-lock.json",
+    "docker_reset": "docker-compose down -v&& rm package-lock.json",
     "docker_runBrowser": "opener http://mamasound.localhost&"
   },
   "dependencies": {

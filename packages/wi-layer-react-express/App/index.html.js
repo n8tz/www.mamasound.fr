@@ -33,7 +33,7 @@ export default class index extends React.Component {
 					<script dangerouslySetInnerHTML={{ __html: "window.__STATE__  = " + (JSON.stringify(state)) }}/>
 				}
 				{
-					css && <style type="text/css">{css + ''}</style>
+					css && <style type="text/css" dangerouslySetInnerHTML={{ __html: css + '' }}/>
 				}
 			</head>
 			<body {...bodyAttrs}>

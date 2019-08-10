@@ -15,6 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 //
+import redis from "App/db/redis.js";
 
 const config   = require('App/config'),
       aliasAPI = require("App/db/aliasHelpers"),
@@ -23,17 +24,18 @@ const config   = require('App/config'),
 export default ( server, http ) => {
 	console.log("wpi-docker server running ! :D");
 	server.get(
-		'/$docker/shellExec',
+		'/devTools/clearCache',
 		function ( req, res, next ) {
+			redis.delWildcard(config.PUBLIC_URL + "_*")
 			res.json({ status: 'ok' })
 			
 		}
 	);
-	server.get(
-		'/$docker/restart',
-		function ( req, res, next ) {
-			res.json({ status: 'ok' })
-			
-		}
-	);
+	//server.get(
+	//	'/$docker/restart',
+	//	function ( req, res, next ) {
+	//		res.json({ status: 'ok' })
+	//
+	//	}
+	//);
 }

@@ -84,7 +84,12 @@ module.exports = function Profile( profileId ) {
 			curSessionNum++;
 			runAfter          = {};
 			onComplete.length = 0;
-			return Promise.all(Object.keys(commands).map(id => this.kill(id, true))).then(e => (killing = {}));
+			return Promise.all(
+				[
+					...Object.keys(commands).map(id => this.kill(id, true)),
+					fkill(":8080", { tree: true, force: true, silent: true })
+				]
+			).then(e => (killing = {}));
 		},
 		kill( cmdId, stopWatching ) {
 			let cmd  = running[cmdId],
@@ -141,9 +146,8 @@ module.exports = function Profile( profileId ) {
 					
 					              watchers[cmdId] = chokidar
 						              .watch(task.watch, {
-							              ignored   : /(^|[\/\\])\../,
-							              usePolling: true,
-							
+							              ignored           : /(^|[\/\\])\../,
+							              usePolling        : true,
 							              "aggregateTimeout": 300,
 							              "poll"            : 1000
 						              })
