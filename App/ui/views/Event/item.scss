@@ -39,8 +39,14 @@
     background: white;
   }
 
-  &.selected .title {
-    text-decoration: underline;
+  transition: all 500ms;
+
+  &.selected {
+    .title {
+      text-decoration: underline;
+    }
+
+    height: 12em;
   }
 
   .title {
@@ -69,6 +75,18 @@
     width: 3em;
     font-size: 1.5em;
 
+  }
+
+  .ShareBox {
+    position: absolute;
+    bottom: 1.5em;
+    right: 2px;
+    font-size: .9em;
+
+    .SocialMediaShareButton {
+      display: inline-block;
+      cursor: pointer;
+    }
   }
 
   .price {

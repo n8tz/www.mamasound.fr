@@ -48,7 +48,7 @@
     left: 20px;
     background: #1f8de2;
     padding: 10px;
-
+    text-transform: capitalize;
     font-size: 2em;
     font-weight: lighter;
     font-family: EmPower42;
@@ -58,7 +58,7 @@
 
   .input {
     position: absolute;
-    width: 40%;
+    width: 25%;
     top: 15px;
     right: 20px;
     background: #d6d6d6;
@@ -71,7 +71,7 @@
 
   .searchIcon {
     position: absolute;
-    right: calc(40% + 45px);
+    right: calc(25% + 45px);
     top: 13px;
     padding: 10px;
     border-radius: 2em;

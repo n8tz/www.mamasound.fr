@@ -71,18 +71,20 @@ export default class SearchBar extends React.Component {
 					<div className={"material-icons icon"}>search</div>
 				</Fab>
 				<div className={"cDay"}>
-					{(moment(day).isSame(moment(), 'week'))
-					&&
-					moment(day).calendar(moment(), {
-						sameDay : '[Aujourd\'hui]',
-						nextDay : '[Demain]',
-						nextWeek: 'dddd',
-						lastDay : '[hier]',
-						lastWeek: 'dddd [dernier]',
-						sameElse: '[Le ]DD/MM/YYYY'
-					})
-					||
-					(moment(day).format("dddd DD MMMM YYYY"))}
+					{
+						//	(moment(day).isSame(moment(), 'week'))
+						//&&
+						//moment(day).calendar(moment(), {
+						//	sameDay : '[Aujourd\'hui]',
+						//	nextDay : '[Demain]',
+						//	nextWeek: 'dddd',
+						//	lastDay : '[hier]',
+						//	lastWeek: 'dddd [dernier]',
+						//	sameElse: '[Le ]DD/MM/YYYY'
+						//})
+						//||
+						(moment(day).format("dddd DD MMMM YYYY"))
+					}
 				</div>
 				<TextField
 					className={"input"}

@@ -24,6 +24,7 @@
  */
 'use strict';
 
+import {Comps}  from 'App/ui';
 import Editable from "App/ui/Editable";
 import moment   from "moment";
 import React    from "react";
@@ -70,7 +71,7 @@ export default ( { record, refs, selected, onClick, onTap } ) =>
 				( <span>{refs[record.place.objId].label}</span> )
 			</div>
 		}
-		
+		{selected && <Comps.ShareBox event={record} place={record.place && refs[record.place.objId]}/>}
 		{!/^\s*$/.test(record.resume || '') &&
 		<div className="resume" dangerouslySetInnerHTML={{ __html: record.resume }}/> || ''}
 	</div>
