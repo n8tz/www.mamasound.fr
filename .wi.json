@@ -225,7 +225,7 @@
         "__IS_SERVER__": true
       },
       "webpackPatch": {
-        "devtool": "eval",
+        "devtool": "source-map",
         "resolve": {
           "alias": {
             "material-ui": "@material-ui/core"
