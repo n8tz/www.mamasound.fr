@@ -15,12 +15,10 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import App              from "App/App"
-import React            from "react";
-import api              from "./api";
-import {renderToString} from "react-dom/server";
+import React from "react";
+import api   from "./api";
 
-var express     = require("express"),
+const express     = require("express"),
     server      = express(),
     http        = require('http').Server(server),
     argz        = require('minimist')(process.argv.slice(2)),

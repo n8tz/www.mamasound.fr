@@ -1,18 +1,17 @@
 {
   "name": "react-voodoo",
-  "version": "1.0.6",
+  "version": "1.0.12",
   "license": "AGPL-3.0",
   "main": "./dist/react-voodoo.js",
   "author": "Nathan Braun <n8tz.js@gmail.com>",
   "repository": "https://github.com/n8tz/react-voodoo",
-  "description": "Fast, additive & swipeable animation engine for React",
+  "description": "Additive & swipeable animation engine for React",
   "scripts": {
     "build": "wpi && wpi :samples",
-    "live": "wpi :staging -w",
-    "dev": "wpi-dev-server :samples --hot",
-    "devSamples": "wpi :samples -w",
-    "startSamples": "ws -d ./samples -p 8080",
-    "runBrowser": "start http://localhost:9501"
+    "devLib": "wpi :staging -w",
+    "devSamples": "wpi-dev-server :samples --hot --host 0.0.0.0",
+    "startSamples": "ws -d ./dist.samples -p 8080",
+    "runBrowser": "start http://localhost:8080"
   },
   "peerDependencies": {
     "react": "^16.3.2",
@@ -21,13 +20,14 @@
   "dependencies": {
     "@babel/runtime": "^7.3.1",
     "color-rgba": "^2.1.0",
+    "css-box-shadow": "^1.0.0-3",
     "d3-ease": "^1.0.5",
     "is": "^3.2.1",
-    "tween-axis": "^1.2.4"
+    "tween-axis": "^1.2.6"
   },
   "devDependencies": {
     "local-web-server": "^3.0.7",
-    "webpack-inherit": "^1.7.1",
-    "wi-layer-react-express": "^1.0.4"
+    "webpack-inherit": "^1.7.12",
+    "wi-layer-react-express": "^1.1.1"
   }
 }

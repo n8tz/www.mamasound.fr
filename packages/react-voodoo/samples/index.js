@@ -17,14 +17,13 @@
  */
 import React    from "react";
 import ReactDom from "react-dom";
+
+import Samples from "./(*)/index.js"
 import "./samples.scss";
-
-import Samples  from "./(*)/index.js"
-
 
 class App extends React.Component {
 	state = {
-		current: "SimpleCatTest"
+		current: "MassGoo"
 	};
 	
 	render() {

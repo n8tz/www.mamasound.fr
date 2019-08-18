@@ -95,7 +95,7 @@ export default function asTweener( ...argz ) {
 	opts = {
 		wheelRatio    : 5,
 		maxClickTm    : 200,
-		maxClickOffset: 100,
+		maxClickOffset: 50,
 		...opts,
 		
 	};
@@ -151,9 +151,10 @@ export default function asTweener( ...argz ) {
 				_.iMapOrigin[id] = iMap;
 				iStyle           = iStyle || {};
 				iMap             = iMap || {};
-				if ( mapReset ) {
+				if ( _.tweenRefCSS[id]&&mapReset ) {
 					_.muxByTarget[id]     = {};
 					_.muxDataByTarget[id] = {};
+					
 					Object.keys(_.tweenRefCSS[id])// unset
 					      .forEach(
 						      key => (iStyle[key] = iStyle[key] || '')
@@ -251,7 +252,7 @@ export default function asTweener( ...argz ) {
 				muxToCss(tweenableMap, iStyle, _.muxByTarget[id], _.muxDataByTarget[id], _.box);
 				
 			}
-			//console.log('tweenRef::tweenRef:519: ', id, { ...tweenableMap });
+			//console.log('tweenRef::tweenRef:519: ', id, { ..._.tweenRefCSS[id]  });
 			if ( noref )
 				return {
 					style: { ..._.tweenRefCSS[id] }
@@ -348,7 +349,7 @@ export default function asTweener( ...argz ) {
 		 * @returns {tweenAxis}
 		 */
 		pushAnim( anim, then, skipInit ) {
-			let sl, initial, muxed, initials = {};
+			let sl, initial, muxed, initials = {}, fail;
 			if ( isArray(anim) ) {
 				sl = anim;
 			}
@@ -364,13 +365,16 @@ export default function asTweener( ...argz ) {
 				Object.keys(initials)
 				      .forEach(
 					      id => (
+						      this._.tweenRefMaps[id] &&
 						      Object.assign(this._.tweenRefMaps[id], {
 							      ...initials[id],
 							      ...this._.tweenRefMaps[id]
-						      })
+						      }) || (fail = console.warn("react-voodoo : Can't find tween target ", id, " in ", TweenableComp.displayName) || true)
 					      )
 				      )
 			}
+			if ( fail )
+				return;
 			
 			this.makeTweenable();
 			
@@ -387,6 +391,7 @@ export default function asTweener( ...argz ) {
 						if ( i != -1 )
 							this._.runningAnims.splice(i, 1);
 						
+						sl.destroy();
 						resolve(sl);
 					});
 					
@@ -616,9 +621,10 @@ export default function asTweener( ...argz ) {
 		 */
 		rmScrollableAnim( sl, axe = "scrollY" ) {
 			let _   = this._, found,
-			    dim = this._getAxis(axe);
+			    dim = this._getAxis(axe), twAxis;
 			let i   = dim.tweenAxis.indexOf(sl);
 			if ( i != -1 ) {
+				dim.tweenAxis[i].destroy();
 				dim.tweenAxis.splice(i, 1);
 				dim.scrollableArea = Math.max(...dim.tweenAxis.map(tl => tl.duration), 0);
 				if ( !dim.scrollableBounds )
@@ -1240,12 +1246,21 @@ export default function asTweener( ...argz ) {
 			}
 		}
 		
+		_swap = {};
+		
 		_updateTweenRef( target ) {
-			let node;
+			let node, swap = this._swap;
 			this._.tweenRefCSS[target] &&
-			muxToCss(this._.tweenRefMaps[target], this._.tweenRefCSS[target], this._.muxByTarget[target], this._.muxDataByTarget[target], this._.box);
+			muxToCss(this._.tweenRefMaps[target], swap, this._.muxByTarget[target], this._.muxDataByTarget[target], this._.box);
 			node = this.getTweenableRef(target);
-			node && Object.assign(node.style, this._.tweenRefCSS[target]);
+			if ( node )
+				for ( let o in swap )
+					if ( this._.tweenRefCSS[target].hasOwnProperty(o) ) {
+						if ( swap[o] !== this._.tweenRefCSS[target][o] ) {
+							node.style[o] = this._.tweenRefCSS[target][o] = swap[o];
+						}
+						delete swap[o];
+					}
 			return this._.tweenRefCSS[target];
 		}
 		

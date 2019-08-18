@@ -75,16 +75,15 @@ export default class TweenRef extends React.Component {
 		    } = this.props;
 		return <TweenerContext.Consumer>
 			{
-				parentTweener => {//@todo : me be better method
+				parentTweener => {//@todo : must be better method
 					
 					
 					parentTweener = tweener || parentTweener;
 					
-					if (!parentTweener)
-						{
-							console.error("No voodoo tweener found in the context, is there any parent with asTweener ?")
-							return <React.Fragment/>;
-						}
+					if ( !parentTweener ) {
+						console.error("No voodoo tweener found in the context, is there any parent with asTweener ?")
+						return <React.Fragment/>;
+					}
 					
 					let twRef = parentTweener.tweenRef(id, style || children.props && children.props.style, initial, pos, noRef, reset);
 					
@@ -134,4 +133,10 @@ export default class TweenRef extends React.Component {
 			}
 		</TweenerContext.Consumer>;
 	}
+}
+
+TweenRef.div = ( { children, className, ...props } ) => {
+	return <TweenRef {...props}>
+		<div className={className}>{children}</div>
+	</TweenRef>;
 }
