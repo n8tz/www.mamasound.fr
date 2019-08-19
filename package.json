@@ -120,7 +120,7 @@
     "xxhashjs": "^0.2.2"
   },
   "devDependencies": {
-    "webpack-inherit": "^1.8.1",
+    "webpack-inherit": "^1.8.2",
     "wi-layer-react-express": "file:packages/wi-layer-react-express",
     "wi-layer-dev-tools": "file:packages/wi-layer-dev-tools"
   }
