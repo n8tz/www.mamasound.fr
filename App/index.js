@@ -90,13 +90,13 @@ const ctrl = {
 		})
 		
 	},
-	renderSSR2( cfg, cb, _attempts = 0 ) {
+	renderSSR( cfg, cb, _attempts = 0 ) {
 		let html = "<!doctype html>\n" + renderToString(<Index helmet={Helmet.renderStatic()}
 		                                                       content={""}/>);
 		console.warn("render !!!!")
 		cb(null, html)
 	},
-	renderSSR( cfg, cb, _attempts = 0 ) {
+	renderSSR2( cfg, cb, _attempts = 0 ) {
 		let rid     = shortid.generate(),
 		    cScope  = new Scope(AppScope, {
 			    id         : rid,

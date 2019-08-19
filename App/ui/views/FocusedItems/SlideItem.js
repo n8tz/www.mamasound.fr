@@ -1,5 +1,5 @@
 /*
- * www.mamasound.fr
+ *
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -28,9 +28,8 @@ import React    from "react";
 import Editable from "App/ui/Editable";
 
 import {NavLink}          from "react-router-dom";
-import moment, {TweenRef} from "./DayBlock";
 
-export default class FocusedItems extends React.Component {
+export default class SlideItem extends React.Component {
 	render() {
 		let {
 			    record, style, className, onClick

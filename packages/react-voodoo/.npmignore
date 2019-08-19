@@ -26,10 +26,12 @@ Desktop.ini
 $RECYCLE.BIN/
 
 # App specific
-node_modules
+
 .tmp
 .idea
 /doc/
 /src/
 /samples
-/assets
+/dist.samples
+.wi.json
+react-voodoo.js.map

@@ -20,27 +20,6 @@ import React                     from "react";
 import {scopeToProps, withScope} from "react-scopes";
 import {asStore}                 from "rescope-spells";
 
-@withScope(
-	{
-		@asStore
-		SearchValues: {
-			tags  : [],
-			search: undefined,
-			updateSearch( str ) {
-			
-			},
-			addTag( str ) {
-			
-			},
-			rmTag( str ) {
-			
-			}
-			
-		},
-		
-	}
-)
-@scopeToProps("SearchValues", "ActiveTags")
 export default class Footer extends React.Component {
 	static propTypes = {};
 	state            = {};

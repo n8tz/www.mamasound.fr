@@ -97,14 +97,14 @@ export const NavBox            = {
 export const Footer            = {
 	height    : footerMiniHeight,
 	left      : "0px",
-	top       : ["100%"],
+	top       : "100%",
 	width     : "100%",
 	background: "green",
 	position  : "absolute",
 	overflow  : 'hidden',
 	zIndex    : 300,
 	transform : {
-		//translateY: "100%"
+		translateY: "-100%"
 	}
 };
 export const EventsBlock       = {

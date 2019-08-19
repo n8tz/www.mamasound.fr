@@ -15,12 +15,11 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import stores                         from 'App/stores/(*).js';
-import {Comps, Views}                 from 'App/ui';
-import React                          from "react";
-import {TweenRef, withTweener}        from "react-voodoo";
-import {asRef, asStore, withStateMap} from "rescope-spells";
-import {withScope, scopeToProps}        from "react-scopes";
+import stores                                                  from 'App/stores/(*).js';
+import {Comps, Views}                                          from 'App/ui';
+import React                                                   from "react";
+import {asRef, asStore, scopeToProps, withScope, withStateMap} from "react-scopes";
+import {TweenRef, withTweener}                                 from "react-voodoo";
 
 let Tetris = 'div';
 if ( typeof window !== "undefined" ) {
@@ -160,13 +159,13 @@ export default class Highlighter extends React.Component {
 							tweenLines={Anims.Highlighter.focusedScroll}
 						>
 							<div className={"focusedContent container"}>
-								<Comps.ViewSwitcher target={Selected && Selected.Focused}
-								                    {...Anims.Focused}
-								                    DefaultView={Views.Events.BestEvents}
-								                    View={Views.FocusedItems.page}
-								                    ViewPreview={Views.FocusedItems.preview}
-								                    getNextTarget={this.pickNextFocused}
-								/>
+								{/*<Comps.ViewSwitcher target={Selected && Selected.Focused}*/}
+								{/*                    {...Anims.Focused}*/}
+								{/*                    DefaultView={Views.Events.BestEvents}*/}
+								{/*                    View={Views.FocusedItems.page}*/}
+								{/*                    ViewPreview={Views.FocusedItems.preview}*/}
+								{/*                    getNextTarget={this.pickNextFocused}*/}
+								{/*/>*/}
 							</div>
 						</TweenRef>
 					</div>
@@ -193,7 +192,7 @@ export default class Highlighter extends React.Component {
 										          tweener={tweener}
 										          initial={Anims.Highlighter.slide}
 										          tweenLines={Anims.Highlighter.slideScroll}>
-											<Views.FocusedItems record={item}
+											<Views.FocusedItems.SlideItem record={item}
 												//onTap={
 												//    e => $actions.selectFocus(item.targetEtty.objId, i)
 												//}

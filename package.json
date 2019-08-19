@@ -105,7 +105,7 @@
     "redis": "^2.8.0",
     "request": "^2.85.0",
     "rimraf": "^2.6.3",
-    "react-scopes": "^1.0.6",
+    "react-scopes": "^1.0.8",
     "shortid": "^2.2.14",
     "speakingurl": "^14.0.1",
     "superagent": "^3.8.2",
@@ -120,7 +120,7 @@
     "xxhashjs": "^0.2.2"
   },
   "devDependencies": {
-    "webpack-inherit": "^1.8.0",
+    "webpack-inherit": "^1.8.1",
     "wi-layer-react-express": "file:packages/wi-layer-react-express",
     "wi-layer-dev-tools": "file:packages/wi-layer-dev-tools"
   }
