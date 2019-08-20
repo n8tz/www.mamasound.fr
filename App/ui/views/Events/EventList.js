@@ -133,7 +133,7 @@ export default class EventList extends React.Component {
 			    $actions, style
 		    }     = this.props,
 		    state = this.state;
-		console.log('EventList::render:136: ', activeScroll);
+		//console.log('EventList::render:136: ', activeScroll);
 		return (
 			<div className={"EventList"} style={style}>
 				<div className={"maskContent"}>

@@ -42,8 +42,8 @@ const ctrl = {
 		window.ctrl     = this;
 		if ( localStorage.mama )
 			cScope.restore(JSON.parse(localStorage.mama));
-		else if ( __STATE__ )
-			cScope.restore(__STATE__);
+		else if ( window.__STATE__ )
+			cScope.restore(window.__STATE__);
 		ReactDom.render(<App/>, node);
 		
 		if ( process.env.NODE_ENV !== 'production' && module.hot ) {
@@ -90,19 +90,19 @@ const ctrl = {
 		})
 		
 	},
+	//renderSSR( cfg, cb, _attempts = 0 ) {
+	//	let html = "<!doctype html>\n" + renderToString(<Index helmet={Helmet.renderStatic()}
+	//	                                                       content={""}/>);
+	//	console.warn("render !!!!")
+	//	cb(null, html)
+	//},
 	renderSSR( cfg, cb, _attempts = 0 ) {
-		let html = "<!doctype html>\n" + renderToString(<Index helmet={Helmet.renderStatic()}
-		                                                       content={""}/>);
-		console.warn("render !!!!")
-		cb(null, html)
-	},
-	renderSSR2( cfg, cb, _attempts = 0 ) {
 		let rid     = shortid.generate(),
 		    cScope  = new Scope(AppScope, {
 			    id         : rid,
 			    autoDestroy: false
 		    }), App = withScope(cScope)(require('./App').default);
-		
+
 		//debugger;
 		if ( cfg.state ) {
 			cScope.restore(cfg.state, { alias: "App" });
@@ -110,7 +110,7 @@ const ctrl = {
 		else {
 			cScope.state.Anims = { currentBrkPts: cfg.device };
 		}
-		
+
 		let html,
 		    appHtml     = renderToString(<App location={cfg.location}/>),
 		    stable      = cScope.isStableTree();
@@ -131,7 +131,7 @@ const ctrl = {
 							css={!__IS_DEV__ && cfg.css}
 							state={nstate}
 							content={appHtml}/>);
-					
+
 				} catch ( e ) {
 					return cb(e)
 				}

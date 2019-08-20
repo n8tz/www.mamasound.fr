@@ -56,7 +56,6 @@
     "fkill": "^6.2.0",
     "geolib": "^2.0.24",
     "global-npm": "^0.3.0",
-    "greenlock-express": "^2.6.8",
     "helmet": "^3.16.0",
     "https": "^1.0.0",
     "image-extensions": "^1.1.0",
@@ -121,7 +120,7 @@
   },
   "devDependencies": {
     "webpack-inherit": "^1.8.2",
-    "wi-layer-react-express": "file:packages/wi-layer-react-express",
+    "wi-layer-react-express": "^1.1.6",
     "wi-layer-dev-tools": "file:packages/wi-layer-dev-tools"
   }
 }

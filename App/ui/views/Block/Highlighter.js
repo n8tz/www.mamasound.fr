@@ -159,6 +159,7 @@ export default class Highlighter extends React.Component {
 							tweenLines={Anims.Highlighter.focusedScroll}
 						>
 							<div className={"focusedContent container"}>
+								{/*<Views.Events.BestEvents/>*/}
 								{/*<Comps.ViewSwitcher target={Selected && Selected.Focused}*/}
 								{/*                    {...Anims.Focused}*/}
 								{/*                    DefaultView={Views.Events.BestEvents}*/}

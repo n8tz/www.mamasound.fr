@@ -15,13 +15,11 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import PropTypes                             from "prop-types";
-import React                                 from "react";
-import {withScope, scopeToProps, propsToScope} from "react-scopes";
-import {withStateMap, asRef, asStore}        from "rescope-spells";
-import scopes                                from 'App/scopes/(*).js';
-import {asTweener, TweenRef}                 from "react-voodoo";
-import {Views}                               from 'App/ui';
+import scopes                                  from 'App/scopes/(*).js';
+import {Views}                                 from 'App/ui';
+import React                                   from "react";
+import {propsToScope, scopeToProps, withScope} from "react-scopes";
+import {asRef, asStore}                        from "rescope-spells";
 
 let isBrowser = false;
 
@@ -76,7 +74,7 @@ else {
 			@asRef
 			selected    : "Selected.record",
 			@asRef
-			MountedItems: "EventList",
+			MountedItems: "!EventList",
 			$apply( d, { MountedItems: { items, refs }, selected } ) {
 				let POIs = [], center, zoom = 13;
 				if ( selected ) {
@@ -186,6 +184,7 @@ export default class EventMap extends React.Component {
 	
 	render() {
 		let {
+			    Events,
 			    Events: { center = {}, POIs = [], zoom } = {},
 			    Anims : { MainPage }, UserGeoLocation, Selected,
 			    $actions, DataProvider, style
@@ -204,20 +203,20 @@ export default class EventMap extends React.Component {
 				map.getZoom()
 			)
 		}
-		if ( !isBrowser )
-			return <div className={ "EventMap" }/>
+		if ( !isBrowser || !Events )
+			return <div className={"EventMap"}/>
 		return (
-			<div className={ "EventMap" } style={ style }>
-				<div className={ "maskContent " }>
+			<div className={"EventMap"} style={style}>
+				<div className={"maskContent "}>
 					
-					<Map center={ center }
-					     zoom={ zoom }
-					     className={ "container" }
-					     scrollWheelZoom={ false }
-					     animate={ true }
-					     useFlyTo={ true }
-					     ref={ "map" }
-					     dragging={ false }
+					<Map center={center}
+					     zoom={zoom}
+					     className={"container"}
+					     scrollWheelZoom={false}
+					     animate={true}
+					     useFlyTo={true}
+					     ref={"map"}
+					     dragging={false}
 					>
 						<TileLayer
 							url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -234,14 +233,14 @@ export default class EventMap extends React.Component {
 										[...selectedPOI.address.geoPoint].reverse()
 										|| selectedPOI.address
 									}
-									key={ Selected.Page.place._id }
+									key={Selected.Page.place._id}
 									//style={ { marginBottom: '50px' } }
-									offset={ Leaflet.point(13, 20) }
+									offset={Leaflet.point(13, 20)}
 								>
 									<Views.Event.popin
-										$scope={ this.props.$scope }
-										record={ Selected.Page }
-										refs={ DataProvider }
+										$scope={this.props.$scope}
+										record={Selected.Page}
+										refs={DataProvider}
 										onClick={
 											e => $actions.selectPage(Selected.Page._id)
 											
@@ -262,7 +261,7 @@ export default class EventMap extends React.Component {
 										//		                   color   : 'blue'
 										//	                   }) || Leaflet.Marker.prototype.options.icon
 										//}
-										position={ { lat: geoPoint[1], lng: geoPoint[0] } } key={ event._id }>
+										position={{ lat: geoPoint[1], lng: geoPoint[0] }} key={event._id}>
 									</Marker>
 							)
 						}
@@ -272,13 +271,13 @@ export default class EventMap extends React.Component {
 								icon={
 									Leaflet.icon.pulse({ iconSize: [12, 12], color: 'red' })
 								}
-								position={ { lat: UserGeoLocation.pos.latitude, lng: UserGeoLocation.pos.longitude } }/>
+								position={{ lat: UserGeoLocation.pos.latitude, lng: UserGeoLocation.pos.longitude }}/>
 						}
 					</Map>
 					
-					{/*<TweenRef id={ "EventMap_Gradient" } initial={ MainPage.EventMap_Gradient }>*/ }
-					{/*<div className={ "GradientBottom" }/>*/ }
-					{/*</TweenRef>*/ }
+					{/*<TweenRef id={ "EventMap_Gradient" } initial={ MainPage.EventMap_Gradient }>*/}
+					{/*<div className={ "GradientBottom" }/>*/}
+					{/*</TweenRef>*/}
 				</div>
 			</div>
 		);

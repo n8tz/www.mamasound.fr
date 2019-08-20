@@ -164,7 +164,7 @@ export default class Slider extends React.Component {
 						!infinite && {
 							min: 100,
 							max: dec + nbGhostItems * step,
-						}
+						}||undefined
 					}
 					inertia={
 						{

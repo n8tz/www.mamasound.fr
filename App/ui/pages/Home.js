@@ -34,9 +34,9 @@ const wayPoints =
 export default class Home extends React.Component {
 	state = {};
 	
-	//hookScrollableTargets( targets, dir ) {
-	//	return [this, "EventNav"];
-	//}
+	////hookScrollableTargets( targets, dir ) {
+	////	return [this, "EventNav"];
+	////}
 	componentDidMount( props = this.props ) {
 		setTimeout(
 			tm => window.addEventListener("load", function () {
@@ -50,7 +50,7 @@ export default class Home extends React.Component {
 		let { appState } = props;
 		props.tweener.scrollTo(wayPoints[appState.currentPageFocus]);
 	}
-	
+
 	componentDidUpdate( props ) {
 		let { appState, tweener } = this.props;
 		//console.warn(appState === props.appState)
@@ -65,7 +65,7 @@ export default class Home extends React.Component {
 		let { Anims: { MainPage }, appState, $actions } = this.props;
 		if ( typeof window !== "undefined" )
 			window.$actions = $actions;
-		console.log('render snap', appState.currentPageFocus, wayPoints[appState.currentPageFocus])
+		console.log('render snap', appState.currentPageFocus, wayPoints[appState.currentPageFocus], appState.currentPageFocus !== "map" && appState.currentPageFocus !== "events")
 		return <TweenRef
 			id={"page"}
 			initial={MainPage.page}>

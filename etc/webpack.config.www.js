@@ -1,38 +1,33 @@
 /*
- *   The MIT License (MIT)
- *   Copyright (c) 2019. Wise Wild Web
  *
- *   Permission is hereby granted, free of charge, to any person obtaining a copy
- *   of this software and associated documentation files (the "Software"), to deal
- *   in the Software without restriction, including without limitation the rights
- *   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- *   copies of the Software, and to permit persons to whom the Software is
- *   furnished to do so, subject to the following conditions:
+ * Copyright (C) 2019 Nathanael Braun
  *
- *   The above copyright notice and this permission notice shall be included in all
- *   copies or substantial portions of the Software.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- *   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- *   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- *   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- *   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- *   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- *   SOFTWARE.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
  *
- *   @author : Nathanael Braun
- *   @contact : n8tz.js@gmail.com
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+const TerserJSPlugin          = require('terser-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const wpInherit               = require('webpack-inherit');
+const fs                      = require("fs");
+const webpack                 = require("webpack");
+const path                    = require("path");
+const HtmlWebpackPlugin       = require('html-webpack-plugin');
+const Visualizer              = require('webpack-visualizer-plugin');
+const autoprefixer            = require('autoprefixer');
+const MiniCssExtractPlugin    = require('mini-css-extract-plugin');
 
-const wpInherit            = require('webpack-inherit'),
-      fs                   = require("fs"),
-      webpack              = require("webpack"),
-      path                 = require("path"),
-      HtmlWebpackPlugin    = require('html-webpack-plugin'),
-      autoprefixer         = require('autoprefixer'),
-      wpiCfg               = wpInherit.getConfig(),
-      isExcluded           = wpInherit.isFileExcluded();
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const wpiCfg     = wpInherit.getConfig(),
+      isExcluded = wpInherit.isFileExcluded();
 
 module.exports = [
 	{
@@ -46,26 +41,57 @@ module.exports = [
 				wpiCfg.vars.entryPoint ?
 				wpiCfg.vars.entryPoint
 				                       :
-				wpiCfg.vars.rootAlias  // default to 'App'
+				wpiCfg.vars.rootAlias + "/index.client" // default to 'App'
 			]
 		},
 		devServer: wpiCfg.vars.devServer && {
-			//index             : '', //needed to enable root proxying
+			index             : '', //needed to enable root proxying
 			contentBase       : wpInherit.getHeadRoot() + "/" + (wpiCfg.vars.targetDir || 'dist'),
 			historyApiFallback: true,
 			hot               : true,
 			inline            : true,
-			publicPath        : wpInherit.getHeadRoot() + "/" + (wpiCfg.vars.targetDir || 'dist'),
+			//publicPath        : wpInherit.getHeadRoot() + "/" + (wpiCfg.vars.targetDir || 'dist'),
 			
-			host: 'localhost', // Defaults to `localhost`
-			port: 8080, // Defaults to 8080
+			host : 'localhost', // Defaults to `localhost`
+			port : 8080, // Defaults to 8080
+			proxy: [{
+				context: ['/**', '!/sockjs-node/**'],
+				target : 'http://localhost:9701',
+				ws     : true,
+				secure : false                         // proxy websockets
+			}]
 		} || undefined,
 		
 		// The resulting build
-		output: {
+		output      : {
 			path      : wpInherit.getHeadRoot() + "/" + (wpiCfg.vars.targetDir || 'dist'),
 			filename  : "[name].js",
-			//publicPath: "/",
+			publicPath: "/",
+		},
+		optimization: {
+			minimizer  : wpiCfg.vars.production && [
+				new TerserJSPlugin(wpiCfg.vars.terserOptions || {}),
+				new OptimizeCSSAssetsPlugin({
+					                            //assetNameRegExp          : /\.optimize\.css$/g,
+					                            cssProcessor             : require('cssnano'),
+					                            cssProcessorPluginOptions: {
+						                            preset: ['default', { discardComments: { removeAll: true } }],
+					                            },
+					                            canPrint                 : true
+				                            })] || [],
+			splitChunks: {
+				cacheGroups: {
+					default: false,
+					vendors: {
+						// sync + async chunks
+						chunks  : 'all',
+						filename: wpiCfg.vars.rootAlias + ".vendors.js",
+						test    : ( f ) => {
+							return f.resource && wpInherit.isFileExcluded().test(f.resource)
+						},
+					},
+				}
+			}
 		},
 		
 		// add sourcemap in a dedicated file (.map)
@@ -76,6 +102,7 @@ module.exports = [
 			extensions: [
 				".",
 				".js",
+				".jsx",
 				".json",
 				".scss",
 				".css",
@@ -89,7 +116,6 @@ module.exports = [
 		plugins: (
 			[
 				wpInherit.plugin(),
-				
 				...(wpiCfg.vars.extractCss && [
 					new MiniCssExtractPlugin({
 						                         // Options similar to the same options in webpackOptions.output
@@ -98,11 +124,12 @@ module.exports = [
 						                         //chunkFilename: '[id].css'
 					                         })
 				] || []),
+				new webpack.ContextReplacementPlugin(/moment[\/\\](lang|locale)$/, /^\.\/(fr|en|us)$/),
+				
 				...(fs.existsSync("./LICENCE.HEAD.MD") && [
 						new webpack.BannerPlugin(fs.readFileSync("./LICENCE.HEAD.MD").toString())
 					] || []
 				),
-				new webpack.NamedModulesPlugin(),
 				
 				...((wpiCfg.vars.indexTpl || wpiCfg.vars.HtmlWebpackPlugin) && [
 						new HtmlWebpackPlugin({
@@ -111,6 +138,17 @@ module.exports = [
 						                      })
 					] || []
 				),
+				
+				...(wpiCfg.vars.production && [
+					new webpack.DefinePlugin({
+						                         'process.env': {
+							                         'NODE_ENV': JSON.stringify('production')
+						                         }
+					                         }),
+					new Visualizer({
+						               filename: './' + wpiCfg.vars.rootAlias + '.stats.html'
+					               })
+				] || [new webpack.NamedModulesPlugin()])
 			]
 		),
 		
@@ -119,6 +157,7 @@ module.exports = [
 		module: {
 			rules: [
 				...(wpiCfg.vars.devServer && [
+					{ test: /\.jsx?$/, loader: 'source-map-loader', exclude: /react-hot-loader/ },
 					{
 						test   : /\.jsx?$/,
 						exclude: isExcluded,
@@ -180,13 +219,13 @@ module.exports = [
 								      plugins: function () {
 									      return [
 										      autoprefixer({
-											                   //overrideBrowserslist: [
-											                   //    '>1%',
-											                   //    'last 4 versions',
-											                   //    'Firefox ESR',
-											                   //    'not ie < 9', // React doesn't support IE8
-											                   //                  // anyway
-											                   //]
+											                   overrideBrowserslist: [
+												                   '>1%',
+												                   'last 4 versions',
+												                   'Firefox ESR',
+												                   'not ie < 9', // React doesn't support IE8
+											                                     // anyway
+											                   ]
 										                   }),
 									      ];
 								      }
@@ -211,12 +250,12 @@ module.exports = [
 								      plugins: function () {
 									      return [
 										      autoprefixer({
-											                   //overrideBrowserslist: [
-											                   //    '>1%',
-											                   //    'last 4 versions',
-											                   //    'Firefox ESR',
-											                   //    'not ie < 9', // React doesn't support IE8 anyway
-											                   //]
+											                   overrideBrowserslist: [
+												                   '>1%',
+												                   'last 4 versions',
+												                   'Firefox ESR',
+												                   'not ie < 9', // React doesn't support IE8 anyway
+											                   ]
 										                   }),
 									      ];
 								      }

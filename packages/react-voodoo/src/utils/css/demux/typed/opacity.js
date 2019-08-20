@@ -1,5 +1,5 @@
 /*
- * www.mamasound.fr
+ *
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -15,41 +15,19 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-export const selected       = {
-	position : "absolute",
-	backgroundColor: "red",
-	top      : "45%",
-	left     : "50%",
-	//width          : "90vw",
-	height   : "50vh",
-	opacity  : 1,
-	transform: [{
-		translateX : "-50%",
-		translateY : "-50%",
-		perspective: "600px",
-		//rotateX    : "2deg"
-	}, {}, {}]
-};
-export const selectedScroll = {
-	scrollY: [
-		{
-			from    : 0,
-			duration: 100,
-			apply   : {
-				opacity  : -1,
-				//height   : 2.5,
-				//top      : -2.5,
-				transform: [
-					{
-						//perspective:'500px'
-					},
-					{
-						rotateX: "-6deg"
-					}, {
-						translateY: "150px",
-						translateZ: "50px",
-					}]
-			}
-		},
-	],
+import {floatCut} from "../../cssUtils";
+
+const defaultUnits = {};
+
+function demux( key, tweenable, target, data, box ) {
+	target[key] = Math.min(1, Math.max(0, floatCut(tweenable[key])))
+}
+
+export default ( key, value, target, data, initials, forceUnits ) => {
+	
+	
+	initials[key] = 1;
+	target[key]   = parseFloat(value);
+	
+	return demux;
 }

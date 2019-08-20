@@ -30,6 +30,7 @@ import {propsToScope, withScope, scopeToProps} from "react-scopes";
 @propsToScope(
 	[
 		"day:DayEventsQuery.curDay",
+		//"filter:EventList.filter",
 		"viewType:DayEventsQuery.viewType"
 	])
 @scopeToProps("EventList", "ActiveTags", "appState", "Anims")

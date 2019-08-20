@@ -252,7 +252,7 @@ export default function asTweener( ...argz ) {
 				muxToCss(tweenableMap, iStyle, _.muxByTarget[id], _.muxDataByTarget[id], _.box);
 				
 			}
-			//console.log('tweenRef::tweenRef:519: ', id, { ..._.tweenRefCSS[id]  });
+			//console.log('tweenRef::tweenRef:519: ', id, { ..._.tweenRefCSS[id]  }, { ...tweenableMap  });
 			if ( noref )
 				return {
 					style: { ..._.tweenRefCSS[id] }
@@ -261,7 +261,7 @@ export default function asTweener( ...argz ) {
 				return {
 					style: { ..._.tweenRefCSS[id] },
 					ref  : node => (_.refs[id] = node)
-					,
+					//,
 					// __tweenMap : this._.tweenRefMaps[id],
 					// __tweenCSS : this._.tweenRefCSS[id]
 				};
@@ -495,7 +495,7 @@ export default function asTweener( ...argz ) {
 		/**
 		 * Return axis infos
 		 */
-		getAxisState() {
+		getAxisState(axe) {
 			let _ = this._, state = {};
 			_.axes && Object.keys(_.axes)
 			                .forEach(
@@ -1249,18 +1249,21 @@ export default function asTweener( ...argz ) {
 		_swap = {};
 		
 		_updateTweenRef( target ) {
-			let node, swap = this._swap;
+			let node, swap = this._swap, changes;
 			this._.tweenRefCSS[target] &&
 			muxToCss(this._.tweenRefMaps[target], swap, this._.muxByTarget[target], this._.muxDataByTarget[target], this._.box);
 			node = this.getTweenableRef(target);
+			//console.log('no changes', target, swap)
 			if ( node )
 				for ( let o in swap )
 					if ( this._.tweenRefCSS[target].hasOwnProperty(o) ) {
 						if ( swap[o] !== this._.tweenRefCSS[target][o] ) {
 							node.style[o] = this._.tweenRefCSS[target][o] = swap[o];
+							changes=true;
 						}
 						delete swap[o];
 					}
+			//if (!changes)
 			return this._.tweenRefCSS[target];
 		}
 		

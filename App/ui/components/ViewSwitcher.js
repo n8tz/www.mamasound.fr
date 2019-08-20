@@ -67,43 +67,43 @@ export default class ViewSwitcher extends React.Component {
 		super(...arguments);
 		this._inertia = {
 			maxJump     : 1,
-			//onInertiaEnd: ( i, wp ) => {
-			//	let { curTarget, prevTarget, nextTarget = this.props.getNextTarget(curTarget), history } = this.state;
-			//	if ( wp.at === 0 ) {
-			//		let nHisto = [...history];
-			//		this.setState(
-			//			{
-			//				curTarget : prevTarget,
-			//				nextTarget: curTarget
-			//			},
-			//			s => {
-			//				props.tweener.scrollTo(100, 0, "scrollX");
-			//				this.setState(
-			//					{
-			//						prevTarget: nHisto.pop(),
-			//						history   : nHisto,
-			//					})
-			//			}
-			//		)
-			//	}
-			//	if ( wp.at === 200 ) {
-			//		this.setState(
-			//			{
-			//				prevTarget: curTarget,
-			//			},
-			//			s => {
-			//				props.tweener.scrollTo(100, 0, "scrollX");
-			//				this.setState(
-			//					{
-			//						//history   : prevTarget && [...history, prevTarget] || history,
-			//						prevTarget: curTarget,
-			//						curTarget : nextTarget,
-			//						nextTarget: undefined
-			//					})
-			//			}
-			//		)
-			//	}
-			//},
+			onInertiaEnd: ( i, wp ) => {
+				let { curTarget, prevTarget, nextTarget = this.props.getNextTarget(curTarget), history } = this.state;
+				if ( wp.at === 0 ) {
+					let nHisto = [...history];
+					this.setState(
+						{
+							curTarget : prevTarget,
+							nextTarget: curTarget
+						},
+						s => {
+							props.tweener.scrollTo(100, 0, "scrollX");
+							this.setState(
+								{
+									prevTarget: nHisto.pop(),
+									history   : nHisto,
+								})
+						}
+					)
+				}
+				if ( wp.at === 200 ) {
+					this.setState(
+						{
+							prevTarget: curTarget,
+						},
+						s => {
+							props.tweener.scrollTo(100, 0, "scrollX");
+							this.setState(
+								{
+									//history   : prevTarget && [...history, prevTarget] || history,
+									prevTarget: curTarget,
+									curTarget : nextTarget,
+									nextTarget: undefined
+								})
+						}
+					)
+				}
+			},
 			wayPoints   : [{ at: 0 }, { at: 100 }, { at: 200 }]
 		}
 		this.state    = {
@@ -159,38 +159,38 @@ export default class ViewSwitcher extends React.Component {
 		}
 	}
 	
-	//componentDidUpdate( prevProps, prevState, nextContext ) {
-	//	let { curTarget, nextTarget, prevTarget, history } = this.state;
-	//	if ( prevProps.target !== this.props.target && (!nextTarget && (!curTarget || this.props.target._id !== curTarget._id) || nextTarget && this.props.target._id !== nextTarget._id) ) {
-	//		//console.log("tween new", curTarget, nextTarget, this.props.target)
-	//		this.setState(
-	//			{
-	//				nextTarget: this.props.target
-	//			}
-	//			,
-	//			(( s ) => {
-	//				this.props.tweener.scrollTo(200, this.props.transitionDuration, "scrollX")
-	//				    .then(
-	//					    v => {
-	//						    this.setState(
-	//							    {
-	//								    history   : prevTarget && [...history, prevTarget] || history,
-	//								    prevTarget: curTarget,
-	//								    curTarget : this.props.target,
-	//								    nextTarget: undefined
-	//							    }
-	//							    ,
-	//							    v => {
-	//								    this.props.tweener.scrollTo(100, 0, "scrollX")
-	//							    }
-	//						    )
-	//					    }
-	//				    )
-	//			})
-	//		)
-	//	}
+	componentDidUpdate( prevProps, prevState, nextContext ) {
+		let { curTarget, nextTarget, prevTarget, history } = this.state;
+		if ( prevProps.target !== this.props.target && (!nextTarget && (!curTarget || this.props.target._id !== curTarget._id) || nextTarget && this.props.target._id !== nextTarget._id) ) {
+			//console.log("tween new", curTarget, nextTarget, this.props.target)
+			this.setState(
+				{
+					nextTarget: this.props.target
+				}
+				,
+				(( s ) => {
+					this.props.tweener.scrollTo(200, this.props.transitionDuration, "scrollX")
+					    .then(
+						    v => {
+							    this.setState(
+								    {
+									    history   : prevTarget && [...history, prevTarget] || history,
+									    prevTarget: curTarget,
+									    curTarget : this.props.target,
+									    nextTarget: undefined
+								    }
+								    ,
+								    v => {
+									    this.props.tweener.scrollTo(100, 0, "scrollX")
+								    }
+							    )
+						    }
+					    )
+				})
+			)
+		}
 	//
-	//}
+	}
 	//
 	
 	render() {

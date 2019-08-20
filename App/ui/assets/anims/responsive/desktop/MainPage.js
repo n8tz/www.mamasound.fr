@@ -104,7 +104,7 @@ export const Footer            = {
 	overflow  : 'hidden',
 	zIndex    : 300,
 	transform : {
-		translateY: "-100%"
+		//translateY: "-100%"
 	}
 };
 export const EventsBlock       = {

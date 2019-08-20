@@ -40,6 +40,7 @@ export default {
 		selectedEventId   : undefined,
 		selectedEventDT   : undefined,
 		curDay            : undefined,
+		currentSearch     : undefined,
 		viewType          : 0,
 		dayCountByViewType: [3, 1, 1, 1, 0],
 		curTags           : undefined,
@@ -51,6 +52,9 @@ export default {
 		
 		// global app actions
 		
+		updateCurrentSearch( currentSearch ) {
+			return { currentSearch };
+		},
 		setCurStyleTab( viewType ) {
 			return { viewType };
 		},

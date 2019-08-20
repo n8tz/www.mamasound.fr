@@ -27,9 +27,9 @@ export const defaultInitial        = {
 	left           : "0px",
 	//marginLeft     : "300px",
 	zIndex         : 50,
-	backgroundColor       : "red",
+	//backgroundColor       : "red",
 	transformOrigin: "50% 50%",
-	opacity        : 0,
+	opacity        : 1,
 	transform      : [
 		{
 			//translateX : "-50%",

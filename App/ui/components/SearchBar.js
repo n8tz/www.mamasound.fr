@@ -15,35 +15,13 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import Fab                       from '@material-ui/core/Fab';
-import TextField                 from '@material-ui/core/TextField';
-import moment                    from "moment";
-import React                     from "react";
-import {scopeToProps, withScope} from "react-scopes";
-import {asStore}                 from "rescope-spells";
-import {Comps}                   from "App/ui";
+import Fab            from '@material-ui/core/Fab';
+import TextField      from '@material-ui/core/TextField';
+import moment         from "moment";
+import React          from "react";
+import {scopeToProps} from "react-scopes";
 
-@withScope(
-	{
-		@asStore
-		SearchValues: {
-			tags  : [],
-			search: undefined,
-			updateSearch( str ) {
-			
-			},
-			addTag( str ) {
-			
-			},
-			rmTag( str ) {
-			
-			}
-			
-		},
-		
-	}
-)
-@scopeToProps("SearchValues", "TagManager", "appState")
+@scopeToProps("appState")
 export default class SearchBar extends React.Component {
 	static propTypes = {};
 	state            = {
@@ -51,17 +29,16 @@ export default class SearchBar extends React.Component {
 		multi : null,
 	};
 	
-	handleChange = name => value => {
+	handleSearchChange = e => {
 		this.setState({
-			              [name]: value,
+			              search: e.target.value,
 		              });
+		this.props.$actions.updateCurrentSearch(e.target.value)
 	};
 	
 	render() {
 		const {
-			      record              : { position, size } = {},
-			      TagManager, appState: { curDay: day }, disabled,
-			      $actions, onSelect, selected, classes, theme
+			      appState: { curDay: day, currentSearch }, disabled,
 		      } = this.props;
 		//console.log(Object.keys(TagManager.available).map(t => TagManager.available[t]))
 		return (
@@ -73,25 +50,15 @@ export default class SearchBar extends React.Component {
 				</Fab>
 				<div className={"cDay"}>
 					{
-						//	(moment(day).isSame(moment(), 'week'))
-						//&&
-						//moment(day).calendar(moment(), {
-						//	sameDay : '[Aujourd\'hui]',
-						//	nextDay : '[Demain]',
-						//	nextWeek: 'dddd',
-						//	lastDay : '[hier]',
-						//	lastWeek: 'dddd [dernier]',
-						//	sameElse: '[Le ]DD/MM/YYYY'
-						//})
-						//||
 						(moment(day).format("dddd DD MMMM YYYY"))
 					}
-					
+					{currentSearch&&(" - "+currentSearch)}
+				
 				</div>
 				<TextField
 					className={"input"}
-					//value={ this.state.multi }
-					//onChange={ this.handleChange('multi') }
+					value={this.state.search}
+					onChange={this.handleSearchChange}
 				/>
 				{/*<Select*/}
 				{/*classes={ classes }*/}

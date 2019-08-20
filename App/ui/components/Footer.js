@@ -15,10 +15,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import {Comps}                   from 'App/ui';
-import React                     from "react";
-import {scopeToProps, withScope} from "react-scopes";
-import {asStore}                 from "rescope-spells";
+import {Comps} from 'App/ui';
+import React   from "react";
 
 export default class Footer extends React.Component {
 	static propTypes = {};
@@ -26,13 +24,11 @@ export default class Footer extends React.Component {
 	
 	render() {
 		let {
-			    record: { position, size } = {},
-			    Events, children, disabled,
-			    $actions, onSelect, selected
+			    style
 		    }     = this.props,
 		    state = this.state;
 		return (
-			<div className={"Footer"}>
+			<div className={"Footer"} style={style}>
 				<div className={"toolbar"}>
 					<Comps.LoginBox/>
 				</div>

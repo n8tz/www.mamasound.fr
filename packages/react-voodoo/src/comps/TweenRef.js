@@ -85,7 +85,8 @@ export default class TweenRef extends React.Component {
 						return <React.Fragment/>;
 					}
 					
-					let twRef = parentTweener.tweenRef(id, style || children.props && children.props.style, initial, pos, noRef, reset);
+					let twRef = this._lastRef || parentTweener.tweenRef(id, style || children.props && children.props.style, initial,
+					                                                    pos, noRef);
 					
 					
 					if ( this._currentTweener !== parentTweener || this._previousScrollable !== tweenAxis ) {
@@ -94,10 +95,14 @@ export default class TweenRef extends React.Component {
 							      .forEach(axe => this._currentTweener.rmScrollableAnim(this._tweenAxis[axe], axe));
 							
 						}
-						//if ( this._currentTweener !== parentTweener )
-						this._currentTweener && this._currentTweener.rmTweenRef(id)
+						//twRef = parentTweener.tweenRef(id, style || children.props && children.props.style, initial,
+						// pos, noRef, reset);
+						if ( this._currentTweener !== parentTweener )
+							this._currentTweener && this._currentTweener.rmTweenRef(id);
+						if ( this._previousScrollable !== tweenAxis )
 						twRef = parentTweener.tweenRef(id, style || children.props && children.props.style, initial,
-						                               pos, noRef, this._previousScrollable !== tweenAxis)
+						                               pos, noRef, true)
+						//}
 						
 						if ( tweenAxis && is.array(tweenAxis) )
 							this._tweenAxis = { scrollY: parentTweener.addScrollableAnim(setTarget(tweenAxis, id)) };
@@ -117,18 +122,29 @@ export default class TweenRef extends React.Component {
 						this._previousScrollable = tweenAxis;
 						
 					}
-					if ( React.isValidElement(children) ) {
-						children = React.cloneElement(
-							children,
+					else if ( twRef ) {
+						twRef.style = { ...parentTweener._updateTweenRef(id) };
+					}
+					
+					let refChild = React.Children.only(children);
+					
+					if ( refChild && React.isValidElement(refChild) ) {
+						refChild      = React.cloneElement(
+							refChild,
 							{
 								...twRef,
 								onDoubleClick: onDoubleClick && (e => onDoubleClick(e, parentTweener)),
 								onClick      : onClick && (e => onClick(e, parentTweener))
 							}
 						);
-						
+						this._lastRef = twRef;
+						//console.log(twRef, refChild)
+						return refChild;
 					}
-					return children;
+					else {
+						console.error("Invalid voodoo TweenRef child : ", id)
+					}
+					return <div>Invalid</div>;
 				}
 			}
 		</TweenerContext.Consumer>;

@@ -16,11 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import moment  from "moment";
-import shortid from "shortid";
+import stores from 'App/stores/(*).js';
+import moment from "moment";
 
-import {withStateMap, asRef, asStore} from "rescope-spells";
-import stores                         from 'App/stores/(*).js';
+import {asRef, asStore, withStateMap} from "rescope-spells";
 
 
 export default {
@@ -136,18 +135,33 @@ export default {
 			events: "DayEventsQuery.query",
 		}
 	)
-	Queries  : stores.MongoQueries,
+	Queries: stores.MongoQueries,
 	
-	@withStateMap(
-		{
-			@asRef
-			items  : "Queries.events.items",
-			@asRef
-			refs   : "Queries.events.refs",
-			imgKeys: ["previewImage", "icon"]
+	@asStore
+	EventList: {
+		@asRef
+		items : "!Queries.events.items",
+		@asRef
+		refs  : "Queries.events.refs",
+		@asRef
+		filter: "appState.currentSearch",
+		$apply( data, { items, filter, refs } ) {
+			//debugger
+			let filterRE = filter && new RegExp(filter.replace(/[^\w]+/ig, '.+'), 'ig');
+			return {
+				items: filter ?
+				       items.filter(
+					       item => {
+						       return filterRE.test(item.title);
+					       }
+				       )
+				              :
+				       items,
+				refs,
+				filter
+			}
 		}
-	)
-	EventList: stores.ImgFieldsLoader,
+	},
 	
 	
 	@asStore
@@ -155,7 +169,7 @@ export default {
 		//@asRef
 		//TagManager: "TagManager",
 		@asRef
-		events: "EventList",
+		events: "!EventList",
 		
 		$apply( data, { events: { items = [], refs } } ) {
 			let available = [], seen = {}, styles = {};
