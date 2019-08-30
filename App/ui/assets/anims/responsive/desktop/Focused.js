@@ -29,7 +29,7 @@ export const defaultInitial        = {
 	zIndex         : 50,
 	//backgroundColor       : "red",
 	transformOrigin: "50% 50%",
-	opacity        : 1,
+	//opacity        : 1,
 	transform      : [
 		{
 			//translateX : "-50%",

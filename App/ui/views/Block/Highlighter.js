@@ -160,13 +160,13 @@ export default class Highlighter extends React.Component {
 						>
 							<div className={"focusedContent container"}>
 								{/*<Views.Events.BestEvents/>*/}
-								{/*<Comps.ViewSwitcher target={Selected && Selected.Focused}*/}
-								{/*                    {...Anims.Focused}*/}
-								{/*                    DefaultView={Views.Events.BestEvents}*/}
-								{/*                    View={Views.FocusedItems.page}*/}
-								{/*                    ViewPreview={Views.FocusedItems.preview}*/}
-								{/*                    getNextTarget={this.pickNextFocused}*/}
-								{/*/>*/}
+								<Comps.ViewSwitcher target={Selected && Selected.Focused}
+								                    {...Anims.Focused}
+								                    DefaultView={Views.Events.BestEvents}
+								                    View={Views.FocusedItems.page}
+								                    ViewPreview={Views.FocusedItems.preview}
+								                    getNextTarget={this.pickNextFocused}
+								/>
 							</div>
 						</TweenRef>
 					</div>
