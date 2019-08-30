@@ -588,10 +588,13 @@ function (_React$Component) {
       if (!parentTweener) {
         console.error("No voodoo tweener found in the context, is there any parent with asTweener ?");
         return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_5___default.a.Fragment, null);
-      }
+      } //console.warn("render : ", this.__tweenableId, this._currentTweener, parentTweener,
+      // this._currentTweener !== parentTweener)
+
 
       var twRef = parentTweener.tweenRef(id, children.props && children.props.style, style || initial, pos, noRef),
-          axisItemsChange;
+          axisItemsChange; //console.warn("render2 : ", this.__tweenableId, this._currentTweener, parentTweener,
+      // this._currentTweener !== parentTweener)
 
       if (_this3._currentTweener !== parentTweener || _this3._previousScrollable !== tweenAxis) {
         axisItemsChange = _this3._tweenAxis !== tweenAxis && !(_this3._tweenAxis && fast_deep_equal__WEBPACK_IMPORTED_MODULE_3___default()(tweenAxis, _this3._tweenAxis));
@@ -603,8 +606,8 @@ function (_React$Component) {
         } //console.log(twRef, axisItemsChange, this._tweenAxis, tweenAxis)
 
 
-        if (_this3._currentTweener !== parentTweener) {
-          _this3._currentTweener && _this3._currentTweener.rmTweenRef(id);
+        if (_this3._currentTweener && _this3._currentTweener !== parentTweener) {
+          _this3._currentTweener.rmTweenRef(id);
         }
 
         if (axisItemsChange) {
@@ -1028,7 +1031,7 @@ function asTweener() {
         _.tweenRefOriginCss[id] = iStyle;
         iStyle = iStyle || {};
         iMap = iMap || {};
-        iStyle = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_2___default()({}, iStyle, {}, Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id])); //console.log("update ref", id)
+        iStyle = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_2___default()({}, iStyle, {}, Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], false, true)); //console.log("update ref", id)
         // minus initial values
 
         Object.keys(_.tweenRefOrigin[id]).forEach(function (key) {
@@ -1073,6 +1076,7 @@ function asTweener() {
         tweenableMap = _.tweenRefMaps[id];
         Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["muxToCss"])(tweenableMap, iStyle, _.muxByTarget[id], _.muxDataByTarget[id], _.box); //console.log('tweenRef::tweenRef:newref: ', id, { ..._.tweenRefCSS[id] }, { ..._.tweenRefMaps[id] });
       } else {
+        //console.log("maj ref", id)
         Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["muxToCss"])(_.tweenRefMaps[id], _.tweenRefCSS[id], _.muxByTarget[id], _.muxDataByTarget[id], _.box);
       } //console.log('tweenRef::tweenRef:519: ', id, { ..._.muxDataByTarget[id] }, { ..._.tweenRefCSS[id] });
 
@@ -1186,6 +1190,10 @@ function asTweener() {
     _proto.pushAnim = function pushAnim(anim, then, keepResults) {
       var _this4 = this;
 
+      if (keepResults === void 0) {
+        keepResults = true;
+      }
+
       var sl,
           initial,
           _ = this._,
@@ -1215,7 +1223,8 @@ function asTweener() {
         sl.run(_this4._.tweenRefMaps, function () {
           var i = _this4._.runningAnims.indexOf(sl);
 
-          if (i != -1) _this4._.runningAnims.splice(i, 1);
+          if (i != -1) _this4._.runningAnims.splice(i, 1); //console.log( _.muxDataByTarget)
+
           Object.keys(initials) // unset
           .forEach(function (id) {
             Object.keys(initials[id]) // unset
@@ -3185,9 +3194,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "demux", function() { return demux; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "muxOne", function() { return muxOne; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mux", function() { return mux; });
-/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! is */ "undefined?63a5");
-/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(is__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _cssUtils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../cssUtils */ "./src/utils/css/cssUtils.js");
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "undefined?df9b");
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! is */ "undefined?63a5");
+/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(is__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _cssUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../cssUtils */ "./src/utils/css/cssUtils.js");
+
+
 /*
  *
  * Copyright (C) 2019 Nathanael Braun
@@ -3292,7 +3305,7 @@ function release(twKey, tweenableMap, cssMap, dataMap, muxerMap, keepValues) {
 }
 function demuxOne(unitIndex, dkey, twVal, baseKey, data, box) {
   var value = twVal,
-      unit = _cssUtils__WEBPACK_IMPORTED_MODULE_1__["units"][unitIndex] || defaultUnits[baseKey];
+      unit = _cssUtils__WEBPACK_IMPORTED_MODULE_2__["units"][unitIndex] || defaultUnits[baseKey];
 
   if (unit === 'box') {
     value = value * (box[defaultBox[baseKey]] || box.x);
@@ -3315,7 +3328,7 @@ function demuxOne(unitIndex, dkey, twVal, baseKey, data, box) {
   }
 
   if (unit === 'deg') value = value % 360;
-  return unit ? Object(_cssUtils__WEBPACK_IMPORTED_MODULE_1__["floatCut"])(value) + unit : Object(_cssUtils__WEBPACK_IMPORTED_MODULE_1__["floatCut"])(value);
+  return unit ? Object(_cssUtils__WEBPACK_IMPORTED_MODULE_2__["floatCut"])(value) + unit : Object(_cssUtils__WEBPACK_IMPORTED_MODULE_2__["floatCut"])(value);
 }
 function demux(key, tweenable, target, data, box) {
   //console.log(key)
@@ -3363,9 +3376,9 @@ function demux(key, tweenable, target, data, box) {
   target.transform = transforms;
 }
 function muxOne(key, baseKey, value, target, data, initials, noPropLock) {
-  var match = is__WEBPACK_IMPORTED_MODULE_0___default.a.string(value) ? value.match(_cssUtils__WEBPACK_IMPORTED_MODULE_1__["unitsRe"]) : false,
+  var match = is__WEBPACK_IMPORTED_MODULE_1___default.a.string(value) ? value.match(_cssUtils__WEBPACK_IMPORTED_MODULE_2__["unitsRe"]) : false,
       unit = match && match[2] || defaultUnits[baseKey],
-      unitKey = _cssUtils__WEBPACK_IMPORTED_MODULE_1__["units"].indexOf(unit),
+      unitKey = _cssUtils__WEBPACK_IMPORTED_MODULE_2__["units"].indexOf(unit),
       realKey = unitKey !== -1 && key + '_' + unitKey || key;
   initials[realKey] = defaultValue[baseKey] || 0; //if (unitKey===-1)
   //	console.log("gfdgfdgdgfdgg", key, defaultUnits[key])
@@ -3382,10 +3395,10 @@ function muxOne(key, baseKey, value, target, data, initials, noPropLock) {
   return demux;
 }
 ;
-var mux = function mux(key, value, target, data, initials, noPropLock, reset) {
+var mux = function mux(key, value, target, data, initials, noPropLock, reOrder) {
   data[key] = data[key] || []; //initials[key] = 0;
 
-  if (!is__WEBPACK_IMPORTED_MODULE_0___default.a.array(value)) value = [value];
+  if (!is__WEBPACK_IMPORTED_MODULE_1___default.a.array(value)) value = [value];
   var ti = 0,
       tmap,
       fkey,
@@ -3396,18 +3409,18 @@ var mux = function mux(key, value, target, data, initials, noPropLock, reset) {
 
   for (; ti < value.length; ti++) {
     tmap = value[ti];
-    baseData = data[key][ti] = data[key][ti] || {};
+    baseData = reOrder ? {} : _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, data[key][ti] || {});
 
     for (fkey in tmap) {
       if (tmap.hasOwnProperty(fkey)) {
         fValue = tmap[fkey];
         dkey = key + '_' + ti + '_' + fkey;
-        baseData[fkey] = baseData[fkey] || 0;
+        baseData[fkey] = baseData[fkey] || data[key][ti] && data[key][ti][fkey] || 0;
         !noPropLock && baseData[fkey]++; //console.warn("set ", key, dkey, noPropLock, baseData[fkey])
 
         data[dkey] = data[dkey] || [];
 
-        if (is__WEBPACK_IMPORTED_MODULE_0___default.a.array(fValue)) {
+        if (is__WEBPACK_IMPORTED_MODULE_1___default.a.array(fValue)) {
           for (u = 0; u < fValue.length; u++) {
             muxOne(dkey, fkey, fValue[u] || 0, target, data, initials, noPropLock);
           }
@@ -3416,6 +3429,8 @@ var mux = function mux(key, value, target, data, initials, noPropLock, reset) {
         }
       }
     }
+
+    data[key][ti] = reOrder ? _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, baseData, {}, data[key][ti] || {}, {}, baseData) : baseData; //console.log(key, reOrder, data[key][ti], baseData)
   }
 
   return demux;
@@ -3850,14 +3865,13 @@ var swap = {};
 function release(twKey, tweenableMap, cssMap, dataMap, muxerMap, keepValues) {
   var path = twKey.split('_'),
       tmpKey; // not optimal at all
-
-  console.log("dec", twKey, dataMap[path[0]] && dataMap[path[0]][path[1]]);
+  //console.log("dec", twKey, dataMap[path[0]] && dataMap[path[0]][path[1]])
 
   if (dataMap[path[0]] && path.length === 2) {
     if (! --dataMap[path[0]][path[1]] && !keepValues) {
       delete tweenableMap[twKey];
-      delete dataMap[path[0]][path[1]];
-      console.log("delete", path[0]);
+      delete dataMap[path[0]][path[1]]; //console.log("delete", path[0])
+
       _js__WEBPACK_IMPORTED_MODULE_2__["color"].release(twKey + "_color", tweenableMap, cssMap, dataMap, muxerMap, keepValues); //blurRadius: 2
 
       _js__WEBPACK_IMPORTED_MODULE_2__["number"].release(twKey + "_blurRadius", tweenableMap, cssMap, dataMap, muxerMap, keepValues); //inset: false
@@ -3879,11 +3893,10 @@ function release(twKey, tweenableMap, cssMap, dataMap, muxerMap, keepValues) {
     if (dataMap[path[0]].length === 0 && !keepValues) {
       delete dataMap[path[0]];
       delete muxerMap[path[0]];
-      delete cssMap[path[0]];
-      console.log("delete", path[0]);
+      delete cssMap[path[0]]; //console.log("delete", path[0])
     }
   } else {//console.log("ignore", path)
-  }
+    }
 }
 function demux(key, tweenable, target, data, box) {
   //if ( data["filter_head"] === key ) {
@@ -5225,6 +5238,7 @@ function addCss(target) {
     if (is__WEBPACK_IMPORTED_MODULE_1___default.a.object(source[key])) {
       if (!target[key]) {
         target[key] = {};
+        addCss(target[key], source[key]);
       } else if (is__WEBPACK_IMPORTED_MODULE_1___default.a.array(target[key])) {
         addCss(target[key][0], source[key]);
       } else addCss(target[key], source[key]);
