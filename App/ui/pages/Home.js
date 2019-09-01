@@ -50,7 +50,7 @@ export default class Home extends React.Component {
 		let { appState } = props;
 		props.tweener.scrollTo(wayPoints[appState.currentPageFocus]);
 	}
-
+	
 	componentDidUpdate( props ) {
 		let { appState, tweener } = this.props;
 		//console.warn(appState === props.appState)

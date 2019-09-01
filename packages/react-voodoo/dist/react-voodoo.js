@@ -451,7 +451,7 @@ function (_React$Component) {
         _this3._previousTweener = tweener;
         _this3._previousTweens = items;
       } else if (_this3._previousTweens !== items) {
-        _this3._lastTL && tweener.rmScrollableAnim(_this3._lastTL, _this3._previousAxis);
+        _this3._lastTL && _this3._previousTweener && _this3._previousTweener.rmScrollableAnim(_this3._lastTL, _this3._previousAxis);
         _this3._lastTL = null;
         if (items.length) _this3._lastTL = tweener.addScrollableAnim(items, axe, size);
         _this3._previousTweens = items;
@@ -635,7 +635,7 @@ function (_React$Component) {
           }, {});
         }
 
-        twRef.style = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_2___default()({}, parentTweener._updateTweenRef(id));
+        twRef.style = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_2___default()({}, parentTweener._updateTweenRef(id, true));
 
         if (_this3.props.hasOwnProperty("isRoot")) {
           _this3._currentTweener && _this3._currentTweener.setRootRef(undefined);
@@ -645,7 +645,7 @@ function (_React$Component) {
         _this3._currentTweener = parentTweener;
         _this3._previousScrollable = tweenAxis;
       } else if (twRef) {
-        twRef.style = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_2___default()({}, parentTweener._updateTweenRef(id));
+        twRef.style = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_2___default()({}, parentTweener._updateTweenRef(id, true));
       }
 
       var refChild = react__WEBPACK_IMPORTED_MODULE_5___default.a.Children.only(children);
@@ -1078,7 +1078,13 @@ function asTweener() {
         _.muxByTarget[id] = _.muxByTarget[id] || {};
         _.muxDataByTarget[id] = _.muxDataByTarget[id] || {};
         _.tweenRefOriginCss[id] = iStyle;
-        iStyle = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_2___default()({}, iStyle, {}, Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id]));
+
+        try {
+          iStyle = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_2___default()({}, iStyle, {}, Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id]));
+        } catch (e) {
+          debugger;
+        }
+
         _.tweenRefOrigin[id] = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_2___default()({}, tweenableMap);
         _.tweenRefCSS[id] = iStyle;
         _.tweenRefMaps[id] = _.tweenRefMaps[id] || {}; // init / reset or get the tweenable view
@@ -1090,7 +1096,7 @@ function asTweener() {
           return _.tweenRefMaps[id][key] = (_.tweenRefMaps[id][key] || 0) + tweenableMap[key];
         });
         tweenableMap = _.tweenRefMaps[id];
-        Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["muxToCss"])(tweenableMap, iStyle, _.muxByTarget[id], _.muxDataByTarget[id], _.box); //console.log('tweenRef::tweenRef:newref: ', id, { ..._.tweenRefCSS[id] }, { ..._.tweenRefMaps[id] });
+        Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["muxToCss"])(tweenableMap, iStyle, _.muxByTarget[id], _.muxDataByTarget[id], _.box);
       } else {
         //console.log("maj ref", id)
         Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["muxToCss"])(_.tweenRefMaps[id], _.tweenRefCSS[id], _.muxByTarget[id], _.muxDataByTarget[id], _.box);
@@ -2092,17 +2098,27 @@ function asTweener() {
           changes;
       this._.tweenRefCSS[target] && Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["muxToCss"])(this._.tweenRefMaps[target], swap, this._.muxByTarget[target], this._.muxDataByTarget[target], this._.box);
       node = this.getTweenableRef(target);
-      if (node) for (var o in swap) {
-        if (this._.tweenRefCSS[target].hasOwnProperty(o)) {
-          if (force || swap[o] !== this._.tweenRefCSS[target][o]) {
-            node.style[o] = this._.tweenRefCSS[target][o] = swap[o];
-            changes = true;
-          }
 
-          delete swap[o];
+      if (node) {
+        //for ( let o in this._.tweenRefCSS[target] )
+        //	if ( swap[o] === undefined ) {
+        //		node.style[o] = null;
+        //		delete this._.tweenRefCSS[target][o];
+        //	}
+        for (var o in swap) {
+          if (this._.tweenRefCSS[target].hasOwnProperty(o)) {
+            if (force || swap[o] !== this._.tweenRefCSS[target][o]) {
+              node.style[o] = this._.tweenRefCSS[target][o] = swap[o]; //if ( target == "card" ) console.log(target, o, node.style[o], swap[o]);
+
+              changes = true;
+            }
+
+            delete swap[o];
+          }
         }
       } //if ( !changes )
-      //console.log('no changes', target, o,swap[o])
+      //console.log('no changes', target, this._.tweenRefCSS[target], !!node, force)
+
 
       return this._.tweenRefCSS[target];
     } // ------------------------------------------------------------
@@ -3288,27 +3304,29 @@ function release(twKey, tweenableMap, cssMap, dataMap, muxerMap, keepValues) {
 
   if (path.length === 4) {
     //console.log("dec", twKey, dataMap[path[0]][path[1]][path[2]])
+    // dec count on transform
     if (! --dataMap[path[0]][path[1]][path[2]] && !keepValues) {
       delete dataMap[path[0]][path[1]][path[2]];
-    }
+    } //if ( Object.keys(dataMap[path[0]][path[1]]).length === 0 && !keepValues )
+    //	delete dataMap[path[0]][path[1]];
+    // free transform layers
 
-    if (Object.keys(dataMap[path[0]][path[1]]).length === 0 && !keepValues) delete dataMap[path[0]][path[1]];
+
     if (!keepValues) while (dataMap[path[0]].length && !dataMap[path[0]][dataMap[path[0]].length - 1]) {
       dataMap[path[0]].pop();
     }
-    tmpKey = path[0] + "_" + path[1] + "_" + path[2]; //console.warn("free", dataMap, path, tweenableMap[twKey])
-
-    if (!dataMap[tmpKey]) return console.warn("overRelease", path);
+    tmpKey = path[0] + "_" + path[1] + "_" + path[2];
 
     if (! --dataMap[tmpKey][path[3]] && !keepValues) {
-      delete dataMap[tmpKey][path[3]];
+      delete dataMap[tmpKey][path[3]]; //dataMap[path[0]][path[3]] = undefined;
+
       delete tweenableMap[twKey]; //console.log("delete", twKey)
     }
 
     if (!keepValues) while (dataMap[tmpKey].length && !dataMap[tmpKey][dataMap[tmpKey].length - 1]) {
       dataMap[tmpKey].pop();
     }
-    if (dataMap[path[0] + "_" + path[1] + "_" + path[2]].length === 0 && !keepValues) delete dataMap[path[0] + "_" + path[1] + "_" + path[2]];
+    if (dataMap[tmpKey].length === 0 && !keepValues) delete dataMap[tmpKey];
 
     if (dataMap[path[0]].length === 0 && !keepValues) {
       delete dataMap[path[0]];
@@ -3373,8 +3391,9 @@ function demux(key, tweenable, target, data, box) {
         for (unitIndex = 0; unitIndex < data[dkey].length; unitIndex++) {
           if (data[dkey][unitIndex]) {
             unitKey = dkey + "_" + unitIndex; //console.log("mux ", key, dkey, unitKey)
+            //if ( !tweenable[unitKey] )
+            //	continue;
 
-            if (!tweenable[unitKey]) continue;
             iValue = demuxOne(unitIndex, dkey, tweenable[unitKey], fkey, data, box); //console.log(unitKey, tweenable[unitKey], iValue)
 
             if (y && iValue[0] === '-') iValue = " - " + iValue.substr(1);else if (y) iValue = " + " + iValue;
@@ -3391,21 +3410,31 @@ function demux(key, tweenable, target, data, box) {
 
   target.transform = transforms;
 }
-function muxOne(key, baseKey, value, target, data, initials, noPropLock) {
+function muxOne(key, baseKey, value, target, data, initials, noPropLock, seenUnits) {
   var match = is__WEBPACK_IMPORTED_MODULE_1___default.a.string(value) ? value.match(_cssUtils__WEBPACK_IMPORTED_MODULE_2__["unitsRe"]) : false,
-      unit = match && match[2] || defaultUnits[baseKey],
+      unit = match && match[2] || defaultUnits[baseKey] || "px",
       unitKey = _cssUtils__WEBPACK_IMPORTED_MODULE_2__["units"].indexOf(unit),
       realKey = unitKey !== -1 && key + '_' + unitKey || key;
-  initials[realKey] = defaultValue[baseKey] || 0; //if (unitKey===-1)
-  //	console.log("gfdgfdgdgfdgg", key, defaultUnits[key])
+  initials[realKey] = defaultValue[baseKey] || 0;
+  data[key][unitKey] = data[key][unitKey] || 0; //console.log(key, ':', data[key][unitKey], value, noPropLock)
 
-  data[key][unitKey] = data[key][unitKey] || 0;
-  !noPropLock && data[key][unitKey]++; //console.log("set ", key, baseKey, realKey)
-
-  if (match) {
-    target[realKey] = parseFloat(match[1]);
+  if (seenUnits && seenUnits[unitKey]) {
+    //console.warn(key, ':', data[key][unitKey], value, noPropLock)
+    if (match) {
+      target[realKey] += parseFloat(match[1]);
+    } else {
+      target[realKey] += parseFloat(value);
+    }
   } else {
-    target[realKey] = parseFloat(value);
+    !noPropLock && data[key][unitKey]++;
+
+    if (match) {
+      target[realKey] = parseFloat(match[1]);
+    } else {
+      target[realKey] = parseFloat(value);
+    }
+
+    if (seenUnits) seenUnits[unitKey] = true;
   }
 
   return demux;
@@ -3417,31 +3446,33 @@ var mux = function mux(key, value, target, data, initials, noPropLock, reOrder) 
   if (!is__WEBPACK_IMPORTED_MODULE_1___default.a.array(value)) value = [value];
   var ti = 0,
       tmap,
-      fkey,
+      tFnKey,
       baseData,
       fValue,
       dkey,
-      u;
+      u,
+      seenUnits;
 
   for (; ti < value.length; ti++) {
     tmap = value[ti];
     baseData = reOrder ? {} : _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, data[key][ti] || {});
 
-    for (fkey in tmap) {
-      if (tmap.hasOwnProperty(fkey)) {
-        fValue = tmap[fkey];
-        dkey = key + '_' + ti + '_' + fkey;
-        baseData[fkey] = baseData[fkey] || data[key][ti] && data[key][ti][fkey] || 0;
-        !noPropLock && baseData[fkey]++; //console.warn("set ", key, dkey, noPropLock, baseData[fkey])
+    for (tFnKey in tmap) {
+      if (tmap.hasOwnProperty(tFnKey)) {
+        fValue = tmap[tFnKey];
+        seenUnits = {};
+        dkey = key + '_' + ti + '_' + tFnKey;
+        baseData[tFnKey] = baseData[tFnKey] || data[key][ti] && data[key][ti][tFnKey] || 0;
+        !noPropLock && baseData[tFnKey]++; //console.warn("set ", key, dkey, noPropLock, baseData[fkey])
 
         data[dkey] = data[dkey] || [];
 
         if (is__WEBPACK_IMPORTED_MODULE_1___default.a.array(fValue)) {
           for (u = 0; u < fValue.length; u++) {
-            muxOne(dkey, fkey, fValue[u] || 0, target, data, initials, noPropLock);
+            muxOne(dkey, tFnKey, fValue[u] || 0, target, data, initials, noPropLock, seenUnits);
           }
         } else {
-          muxOne(dkey, fkey, fValue || 0, target, data, initials, noPropLock);
+          muxOne(dkey, tFnKey, fValue || 0, target, data, initials, noPropLock);
         }
       }
     }
@@ -3730,10 +3761,9 @@ function release(twKey, tweenableMap, cssMap, dataMap, muxerMap, keepValues) {
       tmpKey; // not optimal at all
 
   if (path.length === 2) {
-    //console.log("dec", twKey, dataMap[path[0]][path[1]])
+    //console.log("dec", twKey, dataMap[path[0]][path[1]], keepValues)
     if (! --dataMap[path[0]][path[1]] && !keepValues) {
-      delete tweenableMap[twKey];
-      delete dataMap[path[0]][path[1]];
+      delete tweenableMap[twKey]; //dataMap[path[0]][path[1]] = undefined;
     }
 
     if (!keepValues) while (dataMap[path[0]].length && !dataMap[path[0]][dataMap[path[0]].length - 1]) {
@@ -3743,7 +3773,7 @@ function release(twKey, tweenableMap, cssMap, dataMap, muxerMap, keepValues) {
     if (dataMap[path[0]].length === 0 && !keepValues) {
       delete dataMap[path[0]];
       delete muxerMap[path[0]];
-      delete cssMap[path[0]]; //console.log("delete", path[0])
+      if (cssMap) delete cssMap[path[0]]; //console.log("delete", path[0])
     }
   } else {
     console.log("wtf", path);
@@ -3780,27 +3810,28 @@ function demux(key, tweenable, target, data, box, baseKey) {
       i = 0,
       y,
       rKey;
-  value = "";
+  value = ""; //if ( key=="height" )
+  //	debugger;
 
   for (y = 0; y < data[key].length; y++) {
     if (data[key][y]) {
-      rKey = key + "_" + y; //if ( !tweenable[rKey] )
-      //	continue;
-
+      rKey = key + "_" + y;
       if (tweenable[rKey] < 0) value += (i ? " - " : "-") + demuxOne(y, -tweenable[rKey], baseKey || key, data, box);else value += (i ? " + " : "") + demuxOne(y, tweenable[rKey], baseKey || key, data, box);
       i++;
     }
   }
 
-  if (i > 1) value = "calc(" + value + ")";
+  if (i > 1) value = "calc(" + value + ")"; //console.log(key, ':', value)
+
   return target ? target[key] = value : value;
 }
 function muxer(key, value, target, data, initials, noPropLock) {
   data[key] = data[key] || [];
+  var seenUnits = [];
 
   if (is__WEBPACK_IMPORTED_MODULE_0___default.a.array(value)) {
     for (var i = 0; i < value.length; i++) {
-      muxOne(key, value[i] || 0, target, data, initials, noPropLock);
+      muxOne(key, value[i] || 0, target, data, initials, noPropLock, seenUnits);
     }
   } else {
     muxOne(key, value || 0, target, data, initials, noPropLock);
@@ -3808,19 +3839,31 @@ function muxer(key, value, target, data, initials, noPropLock) {
 
   return demux;
 }
-function muxOne(key, value, target, data, initials, noPropLock) {
+function muxOne(key, value, target, data, initials, noPropLock, seenUnits) {
   var match = is__WEBPACK_IMPORTED_MODULE_0___default.a.string(value) ? value.match(_cssUtils__WEBPACK_IMPORTED_MODULE_1__["unitsRe"]) : false,
       unit = match && match[2] || defaultUnits[key] || "px",
       unitKey = _cssUtils__WEBPACK_IMPORTED_MODULE_1__["units"].indexOf(unit),
       realKey = unitKey !== -1 && key + '_' + unitKey || key;
   initials[realKey] = defaultValue[key] || 0;
-  data[key][unitKey] = data[key][unitKey] || 0;
-  !noPropLock && data[key][unitKey]++; //console.log(key, ':', data[key][unitKey])
+  data[key][unitKey] = data[key][unitKey] || 0; //console.log(key, ':', data[key][unitKey], value, noPropLock)
 
-  if (match) {
-    target[realKey] = parseFloat(match[1]);
+  if (seenUnits && seenUnits[unitKey]) {
+    //console.warn(key, ':', data[key][unitKey], value, noPropLock)
+    if (match) {
+      target[realKey] += parseFloat(match[1]);
+    } else {
+      target[realKey] += parseFloat(value);
+    }
   } else {
-    target[realKey] = parseFloat(value);
+    !noPropLock && data[key][unitKey]++;
+
+    if (match) {
+      target[realKey] = parseFloat(match[1]);
+    } else {
+      target[realKey] = parseFloat(value);
+    }
+
+    if (seenUnits) seenUnits[unitKey] = true;
   }
 
   return demux;
@@ -4094,7 +4137,6 @@ function clearTweenableValue(cssKey, twKey, tweenableMap, cssMap, dataMap, muxer
 }
 function muxToCss(tweenable, css, demuxers, data, box) {
   Object.keys(demuxers).forEach(function (key) {
-    //if ( key === 'zIndex' ) debugger
     demuxers[key].demux(key, tweenable, css, data, box);
   });
 }
@@ -5299,6 +5341,10 @@ function reverse(items) {
     return item;
   });
 }
+var MultiCssProps = {
+  "transform": true,
+  "filter": true
+};
 function addCss(target) {
   for (var _len2 = arguments.length, sources = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
     sources[_key2 - 1] = arguments[_key2];
@@ -5309,23 +5355,40 @@ function addCss(target) {
   for (var key in source) {
     if (!source.hasOwnProperty(key)) continue;
 
-    if (is__WEBPACK_IMPORTED_MODULE_1___default.a.object(source[key])) {
-      if (!target[key]) {
-        target[key] = {};
-        addCss(target[key], source[key]);
-      } else if (is__WEBPACK_IMPORTED_MODULE_1___default.a.array(target[key])) {
-        addCss(target[key][0], source[key]);
-      } else addCss(target[key], source[key]);
-    } else if (is__WEBPACK_IMPORTED_MODULE_1___default.a.array(source[key])) {
+    if (MultiCssProps[key]) {
       if (!target[key]) {
         target[key] = [];
-      } else if (!is__WEBPACK_IMPORTED_MODULE_1___default.a.array(target[key])) {
-        target[key] = [target[key]];
       }
 
-      addCss(target[key], source[key]);
+      if (!is__WEBPACK_IMPORTED_MODULE_1___default.a.array(source[key])) {
+        addCss(target[key], [source[key]]);
+      } else addCss(target[key], source[key]);
     } else {
-      target[key] = addAllType(target[key], source[key]);
+      // adding units
+      if (is__WEBPACK_IMPORTED_MODULE_1___default.a.array(source[key])) {
+        var _target$key;
+
+        if (!target[key]) {
+          target[key] = [];
+        }
+
+        if (!is__WEBPACK_IMPORTED_MODULE_1___default.a.array(target[key])) {
+          target[key] = [].concat(source[key], [target[key]]);
+        } else (_target$key = target[key]).push.apply(_target$key, source[key]);
+      } else {
+        if (!target[key]) {
+          if (!is__WEBPACK_IMPORTED_MODULE_1___default.a.object(source[key])) {
+            target[key] = source[key];
+          } else {
+            target[key] = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, source[key]);
+          }
+        } else if (is__WEBPACK_IMPORTED_MODULE_1___default.a.object(target[key]) && is__WEBPACK_IMPORTED_MODULE_1___default.a.object(source[key])) {
+          addCss(target[key], source[key]);
+        } else {
+          //else target[key].push(...source[key]);
+          target[key] = addAllType(target[key], source[key]); //console.log(key, target[key])
+        }
+      }
     }
   }
 
