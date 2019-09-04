@@ -16,18 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import desktopAnims from "App/ui/assets/anims/responsive/desktop/(*).js";
-import phoneAnims   from "App/ui/assets/anims/responsive/phone/(*).js";
-import {Store}      from "rscopes";
+import anims from "App/ui/assets/anims/responsive/(**/*).js";
+import {Store}      from "react-scopes";
 
 const isBrowserSide = (new Function("try {return this===window;}catch(e){ return false;}"))();
 
-const breakPts   = {
-	      desktop: desktopAnims,
-	      tablet : phoneAnims,
-	      phone  : phoneAnims
-      },
-      initialPts = (!isBrowserSide || window.innerWidth >= 900) && "desktop" || "phone";
+const initialPts = (!isBrowserSide || window.innerWidth >= 900) && "desktop" || "phone";
 
 export default class Anims extends Store {
 	//static singleton = true;
@@ -62,7 +56,7 @@ export default class Anims extends Store {
 	apply( data, state, { currentBrkPts } ) {
 		
 		if ( currentBrkPts )
-			return { ...(breakPts[currentBrkPts] || breakPts.desktop) }
+			return { ...(anims[currentBrkPts] || anims.desktop) }
 		
 		return data;
 	}

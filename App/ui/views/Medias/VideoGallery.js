@@ -18,8 +18,8 @@
 import PropTypes             from "prop-types";
 import React                 from "react";
 import {
-	reScope, scopeToProps, propsToScope
-}                            from "rscopes";
+	withScope, scopeToProps, propsToScope
+}                            from "react-scopes";
 import {
 	withStateMap, asRef, asStore
 }                            from "rescope-spells";

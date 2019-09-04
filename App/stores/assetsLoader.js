@@ -22,7 +22,7 @@
  * Date: 12/06/2017
  * Time: 10:32
  */
-import rescope, {Store} from "rscopes";
+import rescope, {Store} from "react-scopes";
 import jsonQuery        from "json-query";
 import is               from "is";
 import config           from "../config";

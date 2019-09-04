@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {Scope, Store} from "rscopes";
+import {Scope, Store} from "react-scopes";
 
 import XLSX      from "xlsx";
 import camelCase from "camelcase";

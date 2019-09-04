@@ -15,36 +15,13 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import React                                 from "react";
-import {reScope, scopeToProps, propsToScope} from "rscopes";
-import {withStateMap, asRef, asStore}        from "rescope-spells";
-import Select                                from 'react-select';
-import Typography                            from '@material-ui/core/Typography';
-import TextField                             from '@material-ui/core/TextField';
-import {asTweener, TweenRef}                 from "react-voodoo";
-import Fab                                   from '@material-ui/core/Fab';
+import Fab            from '@material-ui/core/Fab';
+import TextField      from '@material-ui/core/TextField';
+import moment         from "moment";
+import React          from "react";
+import {scopeToProps} from "react-scopes";
 
-@reScope(
-	{
-		@asStore
-		SearchValues: {
-			tags  : [],
-			search: undefined,
-			updateSearch( str ) {
-			
-			},
-			addTag( str ) {
-			
-			},
-			rmTag( str ) {
-			
-			}
-			
-		},
-		
-	}
-)
-@scopeToProps("SearchValues", "TagManager")
+@scopeToProps("appState")
 export default class SearchBar extends React.Component {
 	static propTypes = {};
 	state            = {
@@ -52,78 +29,80 @@ export default class SearchBar extends React.Component {
 		multi : null,
 	};
 	
-	handleChange = name => value => {
+	handleSearchChange = e => {
 		this.setState({
-			              [name]: value,
+			              search: e.target.value,
 		              });
+		this.props.$actions.updateCurrentSearch(e.target.value)
 	};
 	
 	render() {
 		const {
-			      record: { position, size } = {},
-			      TagManager, children, disabled,
-			      $actions, onSelect, selected, classes, theme
+			      appState: { curDay: day, currentSearch }, disabled,
 		      } = this.props;
 		//console.log(Object.keys(TagManager.available).map(t => TagManager.available[t]))
 		return (
 			<div
-				className={ "SearchBar container" }
+				className={"SearchBar container"}
 			>
-				<Fab>
-					<div className={ "material-icons icon" }>search</div>
+				<Fab className={"searchIcon"}>
+					<div className={"material-icons icon"}>search</div>
 				</Fab>
-				<TextField
-					style={
-						{
-							width: "calc(100% - 100px)"
-						}
+				<div className={"cDay"}>
+					{
+						(moment(day).format("dddd DD MMMM YYYY"))
 					}
-					//value={ this.state.multi }
-					//onChange={ this.handleChange('multi') }
+					{currentSearch&&(" - "+currentSearch)}
+				
+				</div>
+				<TextField
+					className={"input"}
+					value={this.state.search}
+					onChange={this.handleSearchChange}
 				/>
-				{/*<Select*/ }
-				{/*classes={ classes }*/ }
-				{/*styles={ selectStyles }*/ }
-				{/*textFieldProps={ {*/ }
-				{/*label          : 'Tags',*/ }
-				{/*InputLabelProps: {*/ }
-				{/*shrink: true,*/ }
-				{/*},*/ }
-				{/*} }*/ }
-				{/*options={ Object.keys(TagManager.available).map(t => TagManager.available[t]) }*/ }
-				{/*components={ components }*/ }
-				{/*value={ this.state.multi }*/ }
-				{/*onChange={ this.handleChange('multi') }*/ }
-				{/*//placeholder="Select multiple countries"*/ }
-				{/*isMulti={ true }*/ }
-				{/*/>*/ }
-				{/*<ChipInput*/ }
-				{/*value={ TagManager.selected }*/ }
-				{/*dataSource={ Object.keys(TagManager.available) }*/ }
-				{/*onRequestAdd={ ( chip ) => $actions.selectTag(chip) }*/ }
-				{/*onRequestDelete={ ( chip, index ) => $actions.unSelectTag(chip) }*/ }
-				{/*/>*/ }
-				{/*{*/ }
-				{/*TagManager &&*/ }
-				{/*TagManager.available &&*/ }
-				{/*Object.keys(TagManager.available)*/ }
-				{/*.map(*/ }
-				{/*tag => TagManager.available[tag])*/ }
-				{/*.map(*/ }
-				{/*tag =>*/ }
-				{/*<Chip*/ }
-				{/*key={ tag.title }*/ }
-				{/*icon={*/ }
-				{/*//<Badge badgeContent={ tag.count} color="secondary" >*/ }
-				{/*<img alt={ tag.title } src={ tag.style.icon } className={ "icon" }/>*/ }
-				{/*//</Badge>*/ }
-				{/*}*/ }
-				{/*label={ tag.title }*/ }
-				{/*//onClick={handleClick}*/ }
-				{/*//onDelete={handleDelete}*/ }
-				{/*//className={classes.chip}*/ }
-				{/*/>*/ }
-				{/*) }*/ }
+				{/*<Select*/}
+				{/*classes={ classes }*/}
+				{/*styles={ selectStyles }*/}
+				{/*textFieldProps={ {*/}
+				{/*label          : 'Tags',*/}
+				{/*InputLabelProps: {*/}
+				{/*shrink: true,*/}
+				{/*},*/}
+				{/*} }*/}
+				{/*options={ Object.keys(TagManager.available).map(t => TagManager.available[t]) }*/}
+				{/*components={ components }*/}
+				{/*value={ this.state.multi }*/}
+				{/*onChange={ this.handleChange('multi') }*/}
+				{/*//placeholder="Select multiple countries"*/}
+				{/*isMulti={ true }*/}
+				{/*/>*/}
+				{/*<ChipInput*/}
+				{/*value={ TagManager.selected }*/}
+				{/*dataSource={ Object.keys(TagManager.available) }*/}
+				{/*onRequestAdd={ ( chip ) => $actions.selectTag(chip) }*/}
+				{/*onRequestDelete={ ( chip, index ) => $actions.unSelectTag(chip) }*/}
+				{/*/>*/}
+				{/*{*/}
+				{/*TagManager &&*/}
+				{/*TagManager.available &&*/}
+				{/*Object.keys(TagManager.available)*/}
+				{/*.map(*/}
+				{/*tag => TagManager.available[tag])*/}
+				{/*.map(*/}
+				{/*tag =>*/}
+				{/*<Chip*/}
+				{/*key={ tag.title }*/}
+				{/*icon={*/}
+				{/*//<Badge badgeContent={ tag.count} color="secondary" >*/}
+				{/*<img alt={ tag.title } src={ tag.style.icon } className={ "icon" }/>*/}
+				{/*//</Badge>*/}
+				{/*}*/}
+				{/*label={ tag.title }*/}
+				{/*//onClick={handleClick}*/}
+				{/*//onDelete={handleDelete}*/}
+				{/*//className={classes.chip}*/}
+				{/*/>*/}
+				{/*) }*/}
 			</div>
 		);
 	}

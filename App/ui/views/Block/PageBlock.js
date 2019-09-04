@@ -17,8 +17,7 @@
  */
 import PropTypes                             from "prop-types";
 import React                                 from "react";
-import {reScope, scopeToProps, propsToScope} from "rscopes";
-import {withStateMap, asRef, asStore}        from "rescope-spells";
+import {withScope, scopeToProps, propsToScope} from "react-scopes";
 import anims                                 from 'App/ui/assets/anims/(*).js';
 
 import stores                from 'App/stores/(*).js';
@@ -26,7 +25,7 @@ import {Comps, Views}        from 'App/ui';
 import {asTweener, TweenRef} from "react-voodoo";
 
 
-//@reScope(
+//@withScope(
 //	{
 //		//@asStore
 //		//EventsByDay: {

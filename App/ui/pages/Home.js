@@ -16,13 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React                                 from 'react';
-import {reScope, scopeToProps, propsToScope} from "rscopes";
-import {Comps, Views}                        from 'App/ui';
-import ReactDom                              from "react-dom";
-
-import {withStateMap, asRef, asStore}   from "rescope-spells";
-import {asTweener, TweenRef, TweenAxis} from "react-voodoo";
+import {Comps, Views}                   from 'App/ui';
+import React                            from 'react';
+import {scopeToProps}                   from "react-scopes";
+import {asTweener, TweenAxis, TweenRef} from "react-voodoo";
 
 const wayPoints =
 	      {
@@ -37,9 +34,9 @@ const wayPoints =
 export default class Home extends React.Component {
 	state = {};
 	
-	//hookScrollableTargets( targets, dir ) {
-	//	return [this, "EventNav"];
-	//}
+	////hookScrollableTargets( targets, dir ) {
+	////	return [this, "EventNav"];
+	////}
 	componentDidMount( props = this.props ) {
 		setTimeout(
 			tm => window.addEventListener("load", function () {
@@ -51,15 +48,15 @@ export default class Home extends React.Component {
 			})
 		)
 		let { appState } = props;
-		this.scrollTo(wayPoints[appState.currentPageFocus]);
+		props.tweener.scrollTo(wayPoints[appState.currentPageFocus]);
 	}
 	
 	componentDidUpdate( props ) {
-		let { appState, $actions } = this.props;
+		let { appState, tweener } = this.props;
 		//console.warn(appState === props.appState)
 		if ( appState.doFocus && props.appState.currentPageFocus !== appState.currentPageFocus ) {
 			console.log(appState.currentPageFocus);
-			this.scrollTo(wayPoints[appState.currentPageFocus], 500, undefined, "easeSinIn");
+			tweener.scrollTo(wayPoints[appState.currentPageFocus], 500, undefined, "easeSinIn");
 		}
 	}
 	
@@ -68,7 +65,7 @@ export default class Home extends React.Component {
 		let { Anims: { MainPage }, appState, $actions } = this.props;
 		if ( typeof window !== "undefined" )
 			window.$actions = $actions;
-		console.log('render snap', appState.currentPageFocus, wayPoints[appState.currentPageFocus])
+		console.log('render snap', appState.currentPageFocus, wayPoints[appState.currentPageFocus], appState.currentPageFocus !== "map" && appState.currentPageFocus !== "events")
 		return <TweenRef
 			id={"page"}
 			initial={MainPage.page}>
@@ -131,8 +128,8 @@ export default class Home extends React.Component {
 					<Views.Block.Highlighter/>
 				</TweenRef>
 				
-				<TweenRef id={"events"}
-				          initial={MainPage.events}>
+				<TweenRef id={"EventsBlock"}
+				          initial={MainPage.EventsBlock}>
 					<Views.Events.EventList
 						activeScroll={appState.currentPageFocus !== "map" && appState.currentPageFocus !== "events"}/>
 				</TweenRef>
@@ -144,12 +141,12 @@ export default class Home extends React.Component {
 						day={appState.currentVisibleDay || appState.curDay}
 						viewType={appState.viewType}/>
 				</TweenRef>
-				{/*<TweenRef*/}
-				{/*	id={"Footer"}*/}
-				{/*	initial={MainPage.Footer}*/}
-				{/*>*/}
-				{/*	<Comps.Footer/>*/}
-				{/*</TweenRef>*/}
+				<TweenRef
+					id={"Footer"}
+					initial={MainPage.Footer}
+				>
+					<Comps.Footer/>
+				</TweenRef>
 			</div>
 		</TweenRef>
 	}

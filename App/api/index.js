@@ -18,11 +18,12 @@
 
 
 import config from "App/config";
+import redis  from "App/db/redis.js";
 import App    from "App/index.js";
-import redis    from "App/utils/redis.js";
 
 const fs          = require('fs'),
       path        = require('path'),
+      webp        = require('webp-converter'),
       express     = require('express'),
       superagent  = require('superagent'),
       tpl         = require('../index.html.tpl'),
@@ -30,11 +31,10 @@ const fs          = require('fs'),
       device      = require('express-device'),
       compressor  = compression();
 
-export const name          = "Rendering";
+export const name          = "Rendering service";
 export const priorityLevel = 100000;
 
 export function service( server ) {
-	//
 	//if ( process.env.NODE_ENV === 'production' ) {
 	//	let creds = JSON.parse(fs.readFileSync(process.cwd() + '/creds.json'));
 	//	server.use(basicAuth(creds.user, creds.pass))
@@ -42,15 +42,24 @@ export function service( server ) {
 	//
 	let publicFiles = express.static(process.cwd() + '/dist/www'),
 	    adminFiles  = express.static(process.cwd() + '/dist/admin');
+	
+	redis.delWildcard(config.PUBLIC_URL + "_*")
+	
 	server.use(device.capture());
 	server.get(
 		'/',
 		function ( req, res, next ) {
-			compressor(
-				req, res,
-				() => {
-					console.warn(req.url, req.user, req.device);
-					//let key = "page_"+req.url+"_"+(req.user&&req.user.)
+			let key = config.PUBLIC_URL + "_page_" + req.url + "_" + req.device.type + "_" + (req.user && req.user.login);
+			redis.get(
+				key,
+				( err, html ) => {
+					if ( html ) {
+						console.log("from redis ", key);
+						
+						res.send(200, html);
+						return;
+					}
+					
 					App.renderSSR(
 						{
 							device  : req.device.type,
@@ -62,9 +71,11 @@ export function service( server ) {
 							tpl
 						},
 						( err, html, nstate ) => {
-							res.send(200, html)
+							res.send(200, html);
+							redis.set(key, html, 'EX', 1000 * 60 * 60);
 						}
 					)
+					
 				}
 			)
 		}
@@ -85,12 +96,23 @@ export function service( server ) {
 		superagent.get(config.ALT_MEDIA_URL + req.url)
 		          .then(
 			          file => {
+				          let pathName = path.join(process.cwd(), config.UPLOAD_DIR, path.basename(req.url)).replace(/\?+.*$/, '');
 				          fs.writeFile(
-					          path.join(process.cwd(), config.UPLOAD_DIR, path.basename(req.url)).replace(/\?.*$/, ''),
+					          pathName,
 					          file.body,
 					          ( e, r ) => {
 						
+						          //webp.gwebp(pathName, pathName.replace(/(\.\w+$|$)/, '.webp'), "-q 80",
+						          //           ( status, error ) => {
+						          //               //if conversion successful status will be '100'
+						          //               //if conversion fails status will be '101'
+						          //               //console.log(status, error);
+						          //               if ( status === 100 )
+						          //                   res.redirect("/medias/" + req.url.replace(/\?+.*$/,
+						          // '').replace(/(\.\w+$|$)/, '.webp')); else
 						          res.redirect("/medias/" + req.url);
+						          //});
+						
 					          })
 				          //debugger
 			          }

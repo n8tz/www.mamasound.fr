@@ -15,7 +15,7 @@ import utils     from "App/utils/(*).js";
 import path      from "path";
 import PropTypes from "prop-types";
 import React     from "react";
-import {reScope, asStore, scopeToProps, asRef} from "rscopes";
+import {withScope, asStore, scopeToProps, asRef} from "react-scopes";
 
 let TuiImageEditor, blackTheme, imageCompression;
 if ( typeof window !== "undefined" ) {
@@ -107,7 +107,7 @@ if ( typeof window !== "undefined" ) {
 		'colorpicker.title.color'  : '#fff'
 	};
 }
-//@reScope(
+//@withScope(
 //	{
 //		@asStore
 //		Exportable: {

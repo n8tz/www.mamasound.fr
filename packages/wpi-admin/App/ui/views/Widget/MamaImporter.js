@@ -22,7 +22,7 @@ import TableGrid                                    from 'App/ui/components/Tabl
 import PopAnywhere                                  from 'App/ui/components/PopAnywhere.js';
 import {DropzoneComponent}                          from "react-dropzone-component";
 import Select                                       from 'react-select';
-import {reScope, Store, scopeToProps, propsToScope} from "rscopes";
+import {withScope, Store, scopeToProps, propsToScope} from "react-scopes";
 import {withStateMap, asRef, asStore}               from "rescope-spells";
 import ImportIcon                                   from '@material-ui/icons/CloudUploadOutlined';
 import ExportIcon                                   from '@material-ui/icons/Delete';
@@ -134,7 +134,7 @@ class StyleRenderer extends React.Component {
 	}
 }
 
-@reScope(
+@withScope(
 	{
 		XlsDataProvider: stores.XlsDataProvider,
 		
@@ -244,12 +244,12 @@ export default class MamaImporter extends React.Component {
 			    groupe   : types.string,
 			    lieu     : {
 				    "type"  : "string",
-				    renderer: reScope($scope)(PlaceRenderer),
+				    renderer: withScope($scope)(PlaceRenderer),
 				    sanitize: ( v ) => (v && ('' + v).trim())
 			    },
 			    style    : {
 				    "type"  : "string",
-				    renderer: reScope($scope)(StyleRenderer),
+				    renderer: withScope($scope)(StyleRenderer),
 				    sanitize: ( v ) => (v && ('' + v).trim())
 			    },
 			    prix     : types.string,

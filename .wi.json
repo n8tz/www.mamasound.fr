@@ -3,10 +3,58 @@
     "rootFolder": "App",
     "libsPath": "./packages"
   },
+  "dev": {
+    "rootFolder": "App",
+    "libsPath": "./packages",
+    "commands": {
+      "server": {
+        "watch": "dist/api/App.server.js",
+        "run": "node --inspect=[::]:9229 ./dist/api/App.server.js -p 9701",
+        "forever": true
+      },
+      "api": {
+        "clearBefore": "dist/api",
+        "run": "wpi :devApi -w"
+      },
+      "www": {
+        "clearBefore": "dist/www",
+        "run": "wpi-dev-server :devClient --hot --host 0.0.0.0"
+      }
+    },
+    "extend": [
+      "wi-layer-react-express"
+    ]
+  },
+  "prod": {
+    "rootFolder": "App",
+    "libsPath": "./packages",
+    "commands": {
+      "api": {
+        "clearBefore": "dist/api",
+        "run": "wpi :api"
+      },
+      "server": {
+        "watch": "dist/api/App.server.js",
+        "run": "node ./dist/api/App.server.js -p 8080",
+        "forever": true
+      },
+      "www": {
+        "clearBefore": "dist/www",
+        "run": "wpi :client"
+      },
+      "admin": {
+        "clearBefore": "dist/admin",
+        "run": "wpi :admin"
+      }
+    },
+    "extend": [
+      "wi-layer-react-express"
+    ]
+  },
   "client": {
     "rootFolder": "App",
     "libsPath": "./packages",
-    "basedOn": "default",
+    "basedOn": "defaultBrowser",
     "vars": {
       "targetDir": "dist/www",
       "extractCss": true,
@@ -37,13 +85,13 @@
       "wpi-forms",
       "wpi-medias",
       "wpi-mongo",
-      "wpi-react-rs-sass-ssr"
+      "wi-layer-react-express"
     ]
   },
   "admin": {
     "rootFolder": "App",
     "libsPath": "./packages",
-    "basedOn": "default",
+    "basedOn": "defaultBrowser",
     "vars": {
       "targetDir": "dist/admin",
       "extractCss": true,
@@ -76,14 +124,16 @@
       "wpi-medias",
       "wpi-xsl",
       "wpi-mongo",
-      "wpi-react-rs-sass-ssr"
+      "wi-layer-react-express"
     ]
   },
   "devClient": {
     "rootFolder": "App",
-    "basedOn": "default",
+    "basedOn": "www",
     "libsPath": "./packages",
     "vars": {
+      "devServer": true,
+      "production": false,
       "DefinePluginCfg": {
         "__IS_DEV__": true,
         "__IS_ADMIN__": true,
@@ -115,19 +165,20 @@
       }
     },
     "extend": [
-      "wpi-dev-tools",
+      "wi-layer-dev-tools",
       "wpi-auth",
       "wpi-admin",
       "wpi-forms",
       "wpi-medias",
       "wpi-xsl",
       "wpi-mongo",
-      "wpi-react-rs-sass-ssr"
+      "wi-layer-react-express"
     ]
   },
   "api": {
     "rootFolder": "App",
     "libsPath": "./packages",
+    "basedOn": "defaultServer",
     "vars": {
       "targetDir": "dist/api",
       "externals": true,
@@ -138,7 +189,7 @@
         "__IS_SERVER__": true
       },
       "webpackPatch": {
-        "stats": "errors-only",
+        //        "stats": "errors-only",
         "resolve": {
           "alias": {
             "material-ui": "@material-ui/core"
@@ -157,23 +208,24 @@
       "wpi-medias",
       "wpi-xsl",
       "wpi-mongo",
-      "wpi-react-rs-sass-ssr"
+      "wi-layer-react-express"
     ]
   },
   "devApi": {
     "rootFolder": "App",
     "libsPath": "./packages",
-    "basedOn": "api",
+    "basedOn": "defaultServer",
     "vars": {
       "targetDir": "dist/api",
       "externals": true,
+      "production": false,
       "DefinePluginCfg": {
         "__IS_DEV__": true,
         "__IS_ADMIN__": true,
         "__IS_SERVER__": true
       },
       "webpackPatch": {
-        "stats": "errors-only",
+        "devtool": "source-map",
         "resolve": {
           "alias": {
             "material-ui": "@material-ui/core"
@@ -186,14 +238,14 @@
       }
     },
     "extend": [
-      "wpi-dev-tools",
+      "wi-layer-dev-tools",
       "wpi-auth",
       "wpi-admin",
       "wpi-forms",
       "wpi-medias",
       "wpi-xsl",
       "wpi-mongo",
-      "wpi-react-rs-sass-ssr"
+      "wi-layer-react-express"
     ]
   }
 }

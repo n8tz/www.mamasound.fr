@@ -16,7 +16,6 @@
  */
 
 
-const wpiConf = require('App/.wpiConfig.json');
 import {pushDbTask} from "App/db/pool";
 
 let express         = require("express"),
@@ -42,7 +41,7 @@ let express         = require("express"),
 		    function ( client, release ) {
 			    let db = client.db("mamasound_fr");
 			    // assert.equal(null, err);
-			    console.log('query', q);
+			    //console.log('query', q);
 			    return db.collection("User")
 			             .findOne(
 				             q,

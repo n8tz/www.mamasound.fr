@@ -18,9 +18,9 @@
 
 
 import {expandShorthandProperty, isShorthandProperty, isValidDeclaration} from "./cssUtils";
-import * as cssDemuxers                                                   from "./demux/(*).js";
+import cssDemuxers                                                        from "./demux/(*).js";
 
-import {int, multi, number} from "./demux/typed/(*).js";
+import {int, multi, number, opacity} from "./demux/typed/(*).js";
 
 
 const cssDemux = {
@@ -41,17 +41,7 @@ const cssDemux = {
 	paddingBottom  : number,
 	transformOrigin: multi(2),
 	zIndex         : int,
-	//rotate       : transforms,
-	//rotateX      : transforms,
-	//rotateY      : transforms,
-	//x            : transforms,
-	//y            : transforms,
-	//z            : transforms,
-	//_x           : transforms,
-	//_y           : transforms,
-	//_z           : transforms,
-	//blur         : transforms,
-	//perspective  : transforms
+	opacity        : opacity,
 };
 
 export function muxToCss( tweenable, css, demuxers, data, box ) {
@@ -109,7 +99,7 @@ export function deMuxLine( tweenLine, initials, data, demuxers ) {
 						apply: demuxedTween
 					});
 			}
-			else line.push({...tween});
+			else line.push({ ...tween });
 			return line
 		},
 		[]

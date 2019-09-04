@@ -14,14 +14,13 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import {tweenTools}                                       from "react-voodoo";
-import {sliderHeight, eventsMiniHeight, headerMiniHeight} from "./vars";
+import {eventsMiniHeight, footerMiniHeight, headerMiniHeight, sliderHeight} from "./vars";
 
 export const page              = {
 	position: "absolute",
 	top     : "0cm",
 	left    : "50%",
-	bottom  : "0px",
+	bottom  : footerMiniHeight,
 	
 	transform: {
 		translateX: "-50%"
@@ -85,29 +84,30 @@ export const logo              = {
 	]
 };
 export const NavBox            = {
-	height    : "100%",
-	left      : "0px",
-	top       : "0px",
-	width     : "300px",
-	background: "green",
-	position  : "absolute",
-	transform : {
+	height   : "200px",
+	left     : "0px",
+	top      : "0px",
+	width    : "100%",
+	//background: "green",
+	position : "absolute",
+	transform: {
 		//translateY: "85%"
 	}
 };
 export const Footer            = {
-	height    : "50px",
+	height    : footerMiniHeight,
 	left      : "0px",
 	top       : "100%",
 	width     : "100%",
-	background: "green",
+	//background: "green",
 	position  : "absolute",
-	overflow  : 'hidden',
+	//overflow  : 'hidden',
+	zIndex    : 300,
 	transform : {
-		//translateY: "100%"
+		//translateY: "-100%"
 	}
 };
-export const events            = {
+export const EventsBlock       = {
 	position       : "absolute",
 	right          : "0%",
 	bottom         : "0%",
@@ -186,14 +186,14 @@ export const YAxis             = [
 		}
 	},
 	{
-		target  : "events",
+		target  : "EventsBlock",
 		from    : 0,
 		duration: 100,
 		apply   : {
 			top: -eventsMiniHeight
 		}
 	},
-	//// highlighter to events
+	//// highlighter to EventsBlock
 	{
 		target  : "Highlighter",
 		from    : 100,
@@ -203,7 +203,7 @@ export const YAxis             = [
 		}
 	},
 	{
-		target  : "events",
+		target  : "EventsBlock",
 		from    : 100,
 		duration: 100,
 		apply   : {
@@ -212,7 +212,6 @@ export const YAxis             = [
 		}
 	},
 	{
-		type    : "Tween",
 		target  : "EventMap",
 		from    : 100,
 		duration: 100,
@@ -221,9 +220,9 @@ export const YAxis             = [
 			top   : "-20%"
 		}
 	},
-	//// events to map
+	//// EventsBlock to map
 	{
-		target  : "events",
+		target  : "EventsBlock",
 		from    : 200,
 		duration: 100,
 		apply   : {

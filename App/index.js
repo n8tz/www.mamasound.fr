@@ -18,29 +18,33 @@
 import "core-js";
 import "core-js/es/object/assign";
 import "core-js/features/object/from-entries";
-import React            from "react";
-import ReactDom         from 'react-dom';
-import {renderToString} from "react-dom/server";
-import {reScope, Scope} from "react-rescope";
-import shortid          from 'shortid';
-import AppScope         from './App.scope';
-//import uiComps                              from "App/ui";
+import React              from "react";
+import ReactDom           from 'react-dom';
+import {renderToString}   from "react-dom/server";
+import {Helmet}           from "react-helmet";
+//import {hot}            from 'react-hot-loader/root'
+import {Scope, withScope} from "react-rescope";
+import "regenerator-runtime/runtime";
+import shortid            from 'shortid';
+import Index              from "./index.html";
+import AppScope           from './scopes/App';
 
 const ctrl = {
 	
 	renderTo( node, state ) {
 		//return this.renderSSRTo(...arguments)
+		
 		let cScope      = new Scope(AppScope, {
 			    id         : "App",
 			    autoDestroy: true
 		    }),
-		    App         = reScope(cScope)(require('./App').default);
+		    App         = withScope(cScope)(require('./App').default);
 		window.contexts = Scope.scopes;
 		window.ctrl     = this;
 		if ( localStorage.mama )
 			cScope.restore(JSON.parse(localStorage.mama));
-		else if ( __STATE__ )
-			cScope.restore(__STATE__);
+		else if ( window.__STATE__ )
+			cScope.restore(window.__STATE__);
 		ReactDom.render(<App/>, node);
 		
 		if ( process.env.NODE_ENV !== 'production' && module.hot ) {
@@ -51,11 +55,11 @@ const ctrl = {
 					id         : "App",
 					autoDestroy: true
 				});
-				App    = reScope(cScope)(require('./App').default);
+				App    = withScope(cScope)(require('./App').default);
 				cScope.restore(state);
 				ReactDom.render(<App/>, node);
 			});
-			module.hot.accept('App/App.scope', () => {
+			module.hot.accept('./scopes/App', () => {
 				cScope.register(AppScope)
 			});
 		}
@@ -68,7 +72,7 @@ const ctrl = {
 		    cScope  = new Scope(AppScope, {
 			    id         : rid,
 			    autoDestroy: false
-		    }), App = reScope(cScope)(require('./App').default);
+		    }), App = withScope(cScope)(require('./App').default);
 		
 		
 		state && cScope.restore(state, { alias: "App" });
@@ -88,11 +92,9 @@ const ctrl = {
 		
 	},
 	//renderSSR( cfg, cb, _attempts = 0 ) {
-	//	let html = cfg.tpl.render(
-	//		{
-	//			app: "",
-	//		}
-	//	);
+	//	let html = "<!doctype html>\n" + renderToString(<Index helmet={Helmet.renderStatic()}
+	//	                                                       content={""}/>);
+	//	console.warn("render !!!!")
 	//	cb(null, html)
 	//},
 	renderSSR( cfg, cb, _attempts = 0 ) {
@@ -100,8 +102,9 @@ const ctrl = {
 		    cScope  = new Scope(AppScope, {
 			    id         : rid,
 			    autoDestroy: false
-		    }), App = reScope(cScope)(require('./App').default);
+		    }), App = withScope(cScope)(require('./App').default);
 		
+		//debugger;
 		if ( cfg.state ) {
 			cScope.restore(cfg.state, { alias: "App" });
 		}
@@ -123,13 +126,13 @@ const ctrl = {
 			}
 			else {
 				try {
-					html = cfg.tpl.render(
-						{
-							app  : appHtml,
-							state: JSON.stringify(nstate),
-							css  : !__IS_DEV__ && cfg.css
-						}
-					);
+					html = "<!doctype html>\n" +
+						renderToString(<Index
+							helmet={Helmet.renderStatic()}
+							css={!__IS_DEV__ && cfg.css}
+							state={nstate}
+							content={appHtml}/>);
+					
 				} catch ( e ) {
 					return cb(e)
 				}

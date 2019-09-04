@@ -20,10 +20,11 @@ import Widget                               from 'App/ui/components/Widget.js';
 import Pages                                from "App/ui/pages/(*).js";
 import moment                               from 'moment';
 import React                                from 'react';
+import {Helmet}                             from "react-helmet";
 import {ContextMenu}                        from 'react-inheritable-contextmenu';
 import {BrowserRouter, Route, StaticRouter} from "react-router-dom";
+import {scopeToProps}                       from "react-scopes";
 import "regenerator-runtime/runtime";
-import {scopeToProps}                       from "rscopes";
 import "./ui/styles/index.scss"
 
 let hookedRCE       = React.createElement;
@@ -43,10 +44,34 @@ export default class App extends React.Component {
 	render() {
 		let Router                                          = BrowserRouter;
 		let { widgets = { items: [] }, appState, $actions } = this.props;
-		if ( this.props.location )
+		if ( __IS_SERVER__ )
 			Router = StaticRouter;
 		return <Router location={__IS_SERVER__ && this.props.location}>
 			<React.Fragment>
+				
+				<Helmet>
+					<meta charSet="UTF-8"/>
+					<meta name="viewport"
+					      content="width=device-width, initial-scale=1.01, maximum-scale=1.0, user-scalable=no, minimal-ui"/>
+					<meta http-equiv="X-UA-Compatible" content="IE=9;IE=10;IE=11;IE=Edge,chrome=1"/>
+					<meta name="apple-mobile-web-app-capable" content="yes"/>
+					<meta name="apple-touch-fullscreen" content="yes"/>
+					<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+					<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+					<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+					<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+					<link rel="manifest" href="/manifest.json"/>
+					<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"/>
+					<meta name="theme-color" content="#ffffff"/>
+					<title>MamaSound</title>
+					<script src="/jwplayer/jwplayer.js"></script>
+					<link rel="stylesheet"
+					      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"/>
+					<link
+						href="https://fonts.googleapis.com/icon?family=Material+Icons"
+						rel="stylesheet"/>
+				</Helmet>
+				
 				{__IS_ADMIN__ && <ContextMenu>
 					<div
 						onClick={() => $actions.newWidget('MamaImporter', { title: "Importer d'events" })}>

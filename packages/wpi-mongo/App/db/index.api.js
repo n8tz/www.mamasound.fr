@@ -14,11 +14,13 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import is           from "is";
 import aliasAPI     from "App/db/aliasHelpers";
-import typesList    from "App/db/types";
-import {pushDbTask} from "App/db/pool";
+import entities     from "App/db/entities";
 import {mount}      from "App/db/mountRecord";
+import {pushDbTask} from "App/db/pool";
+import typesList    from "App/db/types";
+import is           from "is";
+import shortid      from "shortid";
 
 export const types = typesList;
 export {mount}      from "App/db/mountRecord";
@@ -70,6 +72,75 @@ export function get( cls, objId ) {
 }
 ;
 
+export function create( etty, data, id = shortid.generate() ) {
+	return new Promise(
+		( resolve, reject ) => {
+			
+			
+			pushDbTask(
+				( client, dbRelease ) => {
+					let db     = client.db("mamasound_fr"),
+					    table  = entities[etty].targetCollection || etty,
+					    record = { ...data, _id: id, _cls: etty };
+					
+					// assert.equal(null, err);
+					aliasAPI.applyAlias(
+						record,
+						entities[etty],
+						etty, db,
+						( alias, datas ) => {
+							//delete datas._id;
+							db.collection(table)
+							  .insertOne(
+								  record
+								  , ( err, docs ) => {
+									  if ( err ) console.warn("save failed ", err);
+									  dbRelease();
+									  !err && resolve({ id, etty });
+									  err && reject(err);
+								  });
+						}
+					)
+				});
+		}
+	)
+}
+
+export function update( etty, id, data ) {
+	return new Promise(
+		( resolve, reject ) => {
+			
+			
+			pushDbTask(
+				( client, dbRelease ) => {
+					let db    = client.db("mamasound_fr"),
+					    table = entities[etty].targetCollection || etty;
+					
+					// assert.equal(null, err);
+					aliasAPI.applyAlias(
+						data,
+						entities[etty],
+						etty, db,
+						( alias, datas ) => {
+							//delete datas._id;
+							db.collection(table)
+							  .update(
+								  { _id: id },
+								  { $set: data }
+								  , ( err, docs ) => {
+									  if ( err ) console.warn("save failed ", err);
+									  dbRelease();
+									  !err && resolve(data);
+									  err && reject(err);
+								  });
+						}
+					)
+				});
+		}
+	)
+}
+;
+
 export function query( req ) {
 	return new Promise(
 		( resolve, reject ) => {
@@ -77,7 +148,7 @@ export function query( req ) {
 			let { query: _query, etty, limit = 1000, skip, orderby, mountKeys = [] } = req;
 			pushDbTask(
 				( client, dbRelease ) => {
-					let db = client.db("mamasound_fr"),
+					let db    = client.db("mamasound_fr"),
 					    data  = {},
 					    complete,
 					    done  = ( r, ln ) => {

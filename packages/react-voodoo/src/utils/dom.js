@@ -15,16 +15,24 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-var
+let
 	is        = require('is'),
-	floatCut  = function ( v, l ) {
-		var p = Math.pow(10, l);
-		return Math.round(v * p) / p;
-	},
-	min       = Math.min,
-	max       = Math.max,
 	isBrowser = typeof window !== 'undefined',
+	isTouch   = isBrowser && (function is_touch_device() {
+		var prefixes = ' -webkit- -moz- -o- -ms- '.split(' ');
+		var mq       = function ( query ) {
+			return window.matchMedia&&window.matchMedia(query).matches;
+		}
+		
+		if ( ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch ) {
+			return true;
+		}
+		
+		// include the 'heartz' as a way to have a non matching MQ to help terminate the join
+		// https://git.io/vznFH
+		var query = ['(', prefixes.join('touch-enabled),('), 'heartz', ')'].join('');
+		return mq(query);
+	}()),
 	_dom      = isBrowser ? {
 		prefix      : (/webkit/i).test(navigator.appVersion) ? 'webkit' :
 		              (/firefox/i).test(navigator.userAgent) ? 'Moz' :
@@ -47,7 +55,7 @@ var
 		fingers          : {},
 		nbFingers        : 0,
 		dragstartAnywhere: function ( e ) {
-			var o,
+			let o,
 			    me            = __,
 			    i             = me.dragEnabled.indexOf(this),
 			    finger,
@@ -78,7 +86,7 @@ var
 			}
 			else fingers.push(e);
 			
-			for ( var t = 0, ln = fingers.length; t < ln; t++ ) {
+			for ( let t = 0, ln = fingers.length; t < ln; t++ ) {
 				finger = fingers[t];
 				
 				
@@ -108,7 +116,7 @@ var
 			}
 		},
 		dragAnywhere     : function ( e ) {
-			var o,
+			let o,
 			    me              = __,
 			    finger, fingers = [], stopped,
 			    desc            = __.dragging[0];
@@ -119,7 +127,7 @@ var
 			}
 			else fingers.push(e);
 			
-			for ( var i = 0, ln = fingers.length; i < ln; i++ ) {
+			for ( let i = 0, ln = fingers.length; i < ln; i++ ) {
 				finger = fingers[i];
 				desc   = me.fingers[finger.identifier];
 				me.fingers[finger.identifier] &&
@@ -155,7 +163,7 @@ var
 			                });
 		},
 		dropAnywhere     : function ( e ) {
-			var o,
+			let o,
 			    me = __, finger, fingers = [],
 			    prevent;
 			
@@ -164,7 +172,7 @@ var
 			}
 			else fingers.push(e);
 			
-			for ( var i = 0, ln = fingers.length; i < ln; i++ ) {
+			for ( let i = 0, ln = fingers.length; i < ln; i++ ) {
 				finger = fingers[i];
 				me.nbFingers--;
 				me.fingers[finger.identifier] &&
@@ -201,7 +209,7 @@ var
 			}
 		},
 		getDraggable     : function ( node, mouseDrag ) {
-			var i = this.dragEnabled.indexOf(node), desc;
+			let i = this.dragEnabled.indexOf(node), desc;
 			if ( i === -1 ) {
 				this.dragEnabled.push(node);
 				this.dragEnabledDesc.push(
@@ -234,7 +242,7 @@ var
 			return desc;
 		},
 		freeDraggable    : function ( node ) {
-			var i = this.dragEnabled.indexOf(node), desc;
+			let i = this.dragEnabled.indexOf(node), desc;
 			if ( i !== -1 ) {
 				this.dragEnabled.splice(i, 1);
 				this.dragEnabledDesc.splice(i, 1);
@@ -248,7 +256,7 @@ var
 		},
 		addOverflowEvent : function addFlowListener( element, fn ) {
 			
-			var type = 'over', flow = type == 'over';
+			let type = 'over', flow = type == 'over';
 			
 			element.addEventListener('OverflowEvent' in window ? 'overflowchanged' : type + 'flow',
 			                         function ( e ) {
@@ -282,70 +290,19 @@ var
 			}
 		},
 		rmDragFn         : function ( arr, fn, scope ) {
-			for ( var i = 0, ln = arr.length; i < ln; i++ ) {
+			for ( let i = 0, ln = arr.length; i < ln; i++ ) {
 				if ( arr[i][0] === fn )
 					return arr.splice(i, 1);
 			}
 			
 			console.warn("Rm event : Listener not found !!");
 		},
-		_createElement   : function ( tag, opt, refs, parent ) {
-			var a, o, i, ln,
-			    node = parent || document.createElement(tag);
-			
-			//if (parent) opt = {content:opt};
-			
-			if ( opt )
-				for ( o in opt )
-					if ( opt.hasOwnProperty(o) && opt[o] !== undefined
-						&& !_createElementAttr.hasOwnProperty(o) ) {
-						a       = document.createAttribute(o);
-						a.value = opt[o];
-						node.setAttributeNode(a);
-					}
-			
-			refs && opt.$id && (refs[opt.$id] = node);
-			
-			opt.style && Dom.applyCss(node, opt.style);
-			
-			opt.cls && Dom.addCls(node, opt.cls);
-			
-			if ( opt.events ) {
-				for ( o in opt.events )
-					if ( opt.events.hasOwnProperty(o) && o !== "$scope" )
-						Dom.addEvent(node, o, opt.events[o], opt.events.$scope);
-			}
-			if ( opt.content ) {
-				if ( typeof opt.content === 'string' || typeof opt.content[o] == 'number' ) {
-					node.innerHTML = opt.content;
-				}
-				else if ( opt.content instanceof Array ) {
-					for ( i = 0, ln = opt.content.length; i < ln; i++ )
-						node.appendChild(
-							typeof opt.content[i] == 'string' || typeof opt.content[i] == 'number' || !opt.content[i] ?
-							document.createTextNode(opt.content[i] || '') :
-							isElement(opt.content[i]) ?
-							opt.content[i] :
-							__createElement(opt.content[i].tagName || 'div', opt.content[i], refs)
-						);
-				}
-				else {
-					node.appendChild(
-						opt.content instanceof HTMLElement ?
-						opt.content : __createElement(
-							opt.content.tagName || 'div', opt.content, refs)
-					);
-				}
-			}
-			
-			return node;
-		}
 	},
 	Dom       = {
 		addEvent     : function ( node, type, fn, mouseDrag, bubble ) {
 			if ( is.object(type) ) {
-				for ( var o in type )
-					if ( type.hasOwnProperty(o) )
+				for ( let o in type )
+					if ( type.hasOwnProperty(o) && type[o] )
 						this.addEvent(node, o, type[o], mouseDrag, bubble);
 				return;
 			}
@@ -372,10 +329,10 @@ var
 			
 		},
 		removeEvent  : function ( node, type, fn, scope, bubble ) {
-			var i, desc;
+			let i, desc;
 			
 			if ( is.object(type) ) {
-				for ( var o in type )
+				for ( let o in type )
 					if ( type.hasOwnProperty(o) )
 						this.removeEvent(node, o, type[o], scope);
 				
@@ -400,7 +357,7 @@ var
 			
 		},
 		offset       : function ( elem ) {// @todo
-			var dims = { top: 0, left: 0, width: elem.offsetWidth, height: elem.offsetHeight };
+			let dims = { top: 0, left: 0, width: elem.offsetWidth, height: elem.offsetHeight };
 			while ( elem ) {
 				dims.top  = dims.top + parseInt(elem.offsetTop);
 				dims.left = dims.left + parseInt(elem.offsetLeft);
@@ -410,7 +367,7 @@ var
 		},
 		addWheelEvent: isBrowser && (function ( window, document ) {
 			
-			var prefix = "", _addEventListener, _rmEventListener, onwheel, support;
+			let prefix = "", _addEventListener, _rmEventListener, onwheel, support;
 			
 			// detect event model
 			if ( window.addEventListener ) {
@@ -437,12 +394,12 @@ var
 				}
 			};
 			// Reasonable defaults
-			var PIXEL_STEP         = 10;
-			var LINE_HEIGHT        = 40;
-			var PAGE_HEIGHT        = 800;
+			let PIXEL_STEP         = 10;
+			let LINE_HEIGHT        = 40;
+			let PAGE_HEIGHT        = 800;
 			
 			function normalizeWheel( /*object*/ event ) /*object*/ {
-				var sX = 0, sY = 0,       // spinX, spinY
+				let sX = 0, sY = 0,       // spinX, spinY
 				    pX         = 0, pY = 0;       // pixelX, pixelY
 				
 				// Legacy
@@ -507,7 +464,7 @@ var
 					!originalEvent && (originalEvent = window.event);
 					
 					// create a normalized event object
-					var event = {
+					let event = {
 						// keep a ref to the original event object
 						originalEvent : originalEvent,
 						target        : originalEvent.target || originalEvent.srcElement,
@@ -554,7 +511,7 @@ var
 		})(window, document),
 		rmWheelEvent : isBrowser && (function ( window, document ) {
 			
-			var prefix = "", _rmEventListener, onwheel, support;
+			let prefix = "", _rmEventListener, onwheel, support;
 			
 			// detect event model
 			if ( addEventListener ) {

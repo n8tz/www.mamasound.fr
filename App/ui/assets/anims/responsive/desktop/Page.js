@@ -17,27 +17,26 @@
  */
 export const selected       = {
 	position : "absolute",
-	//backgroundColor: "red",
+	backgroundColor: "red",
 	top      : "45%",
 	left     : "50%",
 	//width          : "90vw",
 	height   : "50vh",
-	//overflow       : "hidden",
+	opacity  : 1,
 	transform: [{
-		translateX: "-50%",
-		translateY: "-50%",
+		translateX : "-50%",
+		translateY : "-50%",
 		perspective: "600px",
 		//rotateX    : "2deg"
-	}, {}, {  }]
+	}, {}, {}]
 };
 export const selectedScroll = {
 	scrollY: [
 		{
-			type    : "Tween",
 			from    : 0,
 			duration: 100,
 			apply   : {
-				opacity  : "-1",
+				opacity  : -1,
 				//height   : 2.5,
 				//top      : -2.5,
 				transform: [

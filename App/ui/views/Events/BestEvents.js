@@ -18,7 +18,7 @@
 import PropTypes                             from "prop-types";
 import React                                 from "react";
 import {Rnd}                                 from "react-rnd";
-import {reScope, scopeToProps, propsToScope} from "rscopes";
+import {withScope, scopeToProps, propsToScope} from "react-scopes";
 import {withStateMap, asRef, asStore}        from "rescope-spells";
 import anims                                 from 'App/ui/assets/anims/(*).js';
 
@@ -33,7 +33,7 @@ import {asTweener, TweenRef} from "react-voodoo";
 import scopes                from 'App/scopes/(*).js';
 
 
-@reScope(
+@withScope(
 	scopes.BestEvents
 )
 @propsToScope(

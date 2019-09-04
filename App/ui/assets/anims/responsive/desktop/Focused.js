@@ -27,9 +27,9 @@ export const defaultInitial        = {
 	left           : "0px",
 	//marginLeft     : "300px",
 	zIndex         : 50,
-	//overflow       : "hidden",
+	//backgroundColor       : "red",
 	transformOrigin: "50% 50%",
-	opacity        : 1,
+	//opacity        : 1,
 	transform      : [
 		{
 			//translateX : "-50%",
@@ -57,6 +57,7 @@ export const defaultPreviewInitial = {
 	zIndex         : 40,
 	overflow       : "hidden",
 	transformOrigin: "50% 50%",
+	display        : "none",
 	opacity        : 1,
 	transform      : [
 		{
@@ -104,7 +105,7 @@ export const showPreviewAnim       = [
 		duration: 100,
 		//easeFn  : "easeBackOut",
 		apply   : {
-			//opacity: 1,
+			opacity: 1,
 			//transform: [{}, {
 			//	translateX: "150px",
 			//}]

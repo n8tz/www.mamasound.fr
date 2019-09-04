@@ -22,10 +22,9 @@ services:
     build:
       context: .
     working_dir: /home/app
-    command: bash -c "npm i&&wi-run :devClient start -m dev"
-#    command: bash -c "npm i&&npm run start-dev"
-#    command: bash -c "npm run build&&npm run start"
-
+    command: bash -c "npm i&&wi-run :dev start"
+#    command: bash -c "npm i&&wi-run :prod start"
+#
     labels:
       - 'traefik.enable=true'
       - 'traefik.protocol=http'
@@ -33,6 +32,7 @@ services:
     environment:
       - mongoUrl=mongodb://mongodb:27017
       - redisUrl=redis://redis:6379
+#      - CHOKIDAR_USEPOLLING=true
     links:
       - mongodb
       - redis
@@ -42,10 +42,10 @@ services:
     volumes:
       - .:/home/app
       - node_modules:/home/app/node_modules
-      - ./docker/dist:/home/app/dist
-      - ./docker/logs:/home/app/logs
+#      - ./docker/dist:/home/app/dist
+#      - ./docker/logs:/home/app/logs
       - ./dump:/home/app/dump
-      #      - ../../libs/rScopes:/home/app/libs
+      #      - ../../libs/react-scopes:/home/app/libs
     expose:
       - "8080"
     ports:

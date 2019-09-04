@@ -27,9 +27,9 @@ import MenuItem    from '@material-ui/core/MenuItem';
 import Avatar      from '@material-ui/core/Avatar';
 
 import {
-	isSpell, spells, Store, Scope, reScope, propsToScope, scopeToProps,
+	isSpell, spells, Store, Scope, withScope, propsToScope, scopeToProps,
 	scopeToState
-} from "rscopes";
+} from "react-scopes";
 
 
 @scopeToProps("CurrentUser")

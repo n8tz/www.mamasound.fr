@@ -17,7 +17,7 @@
  */
 import PropTypes                             from "prop-types";
 import React                                 from "react";
-import {reScope, scopeToProps, propsToScope} from "rscopes";
+import {withScope, scopeToProps, propsToScope} from "react-scopes";
 import {withStateMap, asRef, asStore}        from "rescope-spells";
 import anims                                 from 'App/ui/assets/anims/(*).js';
 import Fab                                   from '@material-ui/core/Fab';
@@ -28,7 +28,7 @@ import {FacebookProvider, Page}              from 'react-facebook';
 import {ContextMenu}                         from "../../App";
 import {Comps}                               from "../index";
 
-@reScope(
+@withScope(
 	{
 		@asStore
 		SearchValues: {

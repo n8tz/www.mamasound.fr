@@ -64,7 +64,7 @@ export default class page extends React.Component {
 						"position": "absolute",
 						top       : ["50%", "3em"],
 						left      : ["30%", "-3em"],
-						//opacity        : 0,
+						//opacity   : 0,
 						right     : "1em",
 						height    : "4px",
 						//backgroundColor: "white",
@@ -133,6 +133,7 @@ export default class page extends React.Component {
 						top       : "50%",
 						left      : "30%",
 						width     : "4px",
+						//opacity   : 0,
 						bottom    : "0%",
 						transform : [{}, {
 							translateY: (isNext || isCurrent) && "-40vh" || "0vh",

@@ -37,7 +37,7 @@ let style = {
         // transform can use multiple "layers"
         transform: [
             {
-                // can only use rotate(X|Y|Z) & translate(X|Y|Z) 
+                // use rotate(X|Y|Z) & translate(X|Y|Z)
                 rotateX:"25deg"
             }, 
             {
@@ -46,7 +46,17 @@ let style = {
         ],
         filter   : {
             sepia: 100
-        }
+        },
+        
+        //boxShadow      : "12px 12cm 2px 1px rgba(0, 0, 255, .2), inset 5px 5px red"
+        boxShadow      : {
+            blurRadius  : 30,
+            color       : "rgba(0, 0, 255, .2)",// default is black
+            inset       : false,// only value not relative
+            offsetX     : "-20em",
+            offsetY     : -20,
+            spreadRadius: 1
+        },
     
 }
 ```
@@ -107,6 +117,9 @@ export default class MyTweenerComp extends React.Component{
                 // size of the scrollable window for drag synchronisation
 				scrollableWindow={ 200 }
 				
+				// optional bounds ( inertia will target them if target pos is out )
+				bounds={ { min : 100, max : 900 } }
+				 
 				// default length of this scrollable axis
 				size={ 1000 }
 				 
@@ -167,7 +180,7 @@ export default class MyTweenerComp extends React.Component{
 
 ### asTweener
 
-Return a react-voodoo tweener component inheriting the target React component
+Return a react-voodoo tweener component composing the target React component
 
 The resulting component will have the tweener hooks
 
@@ -203,6 +216,17 @@ export default class MyTweenerComp extends React.Component{
     */
 	componentShouldScroll(axisId, delta){
 		
+	}
+	/**
+	* Hook to change the targets order of scroll & drag events
+	*
+	* The returning array could also contain tween refs id & dom node id
+	*
+    * @param targets {array} array of node & react elements (default is all parents of the touch/mouse event)
+    * return {array}
+    */
+	hookScrollableTargets( targets ) {
+	    return ["myTweenRefId", ...targets];
 	}
 	/**
 	* did scroll event

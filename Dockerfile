@@ -16,6 +16,7 @@ RUN apk --no-cache update \
         rsync \
         git \
         nano \
+        htop \
         certbot
 
 ENV PATH=node_modules/.bin:$PATH

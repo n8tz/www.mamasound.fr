@@ -21,15 +21,16 @@ import {Comps, Views}                        from 'App/ui';
 import moment                                from "moment";
 import PropTypes                             from "prop-types";
 import React                                 from "react";
-import {propsToScope, reScope, scopeToProps} from "rscopes";
+import {propsToScope, withScope, scopeToProps} from "react-scopes";
 
 
-@reScope(
+@withScope(
 	scopes.EventList
 )
 @propsToScope(
 	[
 		"day:DayEventsQuery.curDay",
+		//"filter:EventList.filter",
 		"viewType:DayEventsQuery.viewType"
 	])
 @scopeToProps("EventList", "ActiveTags", "appState", "Anims")

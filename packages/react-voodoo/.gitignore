@@ -27,8 +27,8 @@ $RECYCLE.BIN/
 
 # App specific
 
+node_modules/
 .tmp
+uploads/*
 node_modules
 .idea
-/upload
-/public

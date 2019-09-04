@@ -1,9 +1,10 @@
 {
   "default": {
     "rootFolder": "src",
-    "basedOn": "Component",
+    "basedOn": "component",
     "vars": {
       "rootAlias": "react-voodoo",
+      "entryPoint": "./src",
       "production": true,
       "externals": true,
       "babelPreset": {
@@ -19,32 +20,18 @@
       }
     },
     "extend": [
-      "wpi-react-hmr-ssr"
+      "wi-layer-react-express"
     ]
   },
   "staging": {
     "rootFolder": "src",
-    "basedOn": "Component",
+    "basedOn": "component",
     "vars": {
       "rootAlias": "react-voodoo",
+      "entryPoint": "./src",
       "externals": true,
-      "babelPreset": {
-        "targets": {
-          "browsers": "> 0.25%, not dead, safari >= 7, ios_saf >= 7, chrome >= 52"
-        },
-        "loose": true
-      },
-      "webpackPatch": {}
-    },
-    "extend": [
-      "wpi-react-hmr-ssr"
-    ]
-  },
-  "samples": {
-    "rootFolder": "src",
-    "basedOn": "ComponentSamples",
-    "vars": {
-      "rootAlias": "react-voodoo",
+      "production": false,
+
       "babelPreset": {
         "targets": {
           "browsers": "> 0.25%, not dead, safari >= 7, ios_saf >= 7, chrome >= 52"
@@ -52,13 +39,40 @@
         "loose": true
       },
       "webpackPatch": {
-        "devServer": {
-          "port": 9501
+
+      }
+    },
+    "extend": [
+      "wi-layer-react-express"
+    ]
+  },
+  "samples": {
+    "rootFolder": "samples",
+    "basedOn": "static",
+    "vars": {
+      "rootAlias": "Samples",
+//      "devServer": true,
+      "targetDir": "dist.samples",
+      "entryPoint": "Samples/index.js",
+      "HtmlWebpackPlugin": {
+        "template": "./samples/index.html.tpl"
+      },
+      "babelPreset": {
+        "targets": {
+          "browsers": "> 0.25%, not dead, safari >= 7, ios_saf >= 7, chrome >= 52"
+        },
+        "loose": true
+      },
+      "webpackPatch": {
+        "resolve": {
+          "alias": {
+            "react-voodoo": "Samples/voodoo.js"
+          }
         }
       }
     },
     "extend": [
-      "wpi-react-hmr-ssr"
+      "wi-layer-react-express"
     ]
   }
 }

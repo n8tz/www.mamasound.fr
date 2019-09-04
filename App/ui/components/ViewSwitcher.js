@@ -15,20 +15,14 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import is                                    from "is";
-import PropTypes                             from "prop-types";
-import React                                 from "react";
-import {reScope, scopeToProps, propsToScope} from "rscopes";
-import {withStateMap, asRef, asStore}        from "rescope-spells";
-import anims                                 from 'App/ui/assets/anims/(*).js';
-
-import moment                                       from "moment";
-import {Views}                                      from 'App/ui';
+import PropTypes                                    from "prop-types";
+import React                                        from "react";
 import {asTweener, TweenAxis, TweenRef, tweenTools} from "react-voodoo";
+import {scopeToProps}                               from "react-scopes";
 
 
 @scopeToProps("Selected", "DataProvider")
-@asTweener({ enableMouseDrag: true, dragDirectionLock: true })
+@asTweener({ })
 export default class ViewSwitcher extends React.Component {
 	static propTypes    = {
 		target: PropTypes.object,
@@ -83,7 +77,7 @@ export default class ViewSwitcher extends React.Component {
 							nextTarget: curTarget
 						},
 						s => {
-							this.scrollTo(100, 0, "scrollX");
+							props.tweener.scrollTo(100, 0, "scrollX");
 							this.setState(
 								{
 									prevTarget: nHisto.pop(),
@@ -98,7 +92,7 @@ export default class ViewSwitcher extends React.Component {
 							prevTarget: curTarget,
 						},
 						s => {
-							this.scrollTo(100, 0, "scrollX");
+							props.tweener.scrollTo(100, 0, "scrollX");
 							this.setState(
 								{
 									//history   : prevTarget && [...history, prevTarget] || history,
@@ -175,7 +169,7 @@ export default class ViewSwitcher extends React.Component {
 				}
 				,
 				(( s ) => {
-					this.scrollTo(200, this.props.transitionDuration, "scrollX")
+					this.props.tweener.scrollTo(200, this.props.transitionDuration, "scrollX")
 					    .then(
 						    v => {
 							    this.setState(
@@ -187,7 +181,7 @@ export default class ViewSwitcher extends React.Component {
 								    }
 								    ,
 								    v => {
-									    this.scrollTo(100, 0, "scrollX")
+									    this.props.tweener.scrollTo(100, 0, "scrollX")
 								    }
 							    )
 						    }
@@ -195,9 +189,9 @@ export default class ViewSwitcher extends React.Component {
 				})
 			)
 		}
-		
+	//
 	}
-	
+	//
 	
 	render() {
 		let {

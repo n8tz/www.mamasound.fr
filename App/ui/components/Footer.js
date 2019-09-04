@@ -15,71 +15,38 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import PropTypes                             from "prop-types";
-import React                                 from "react";
-import {reScope, scopeToProps, propsToScope} from "rscopes";
-import {withStateMap, asRef, asStore}        from "rescope-spells";
-import anims                                 from 'App/ui/assets/anims/(*).js';
-import Fab                                   from '@material-ui/core/Fab';
-import stores                                from 'App/stores/(*).js';
-import Views                                 from 'App/ui/components/(*).js';
-import {asTweener, TweenRef}                 from "react-voodoo";
-import {FacebookProvider, Page}              from 'react-facebook';
-
 import {Comps} from 'App/ui';
+import React   from "react";
 
-@reScope(
-	{
-		@asStore
-		SearchValues: {
-			tags  : [],
-			search: undefined,
-			updateSearch( str ) {
-			
-			},
-			addTag( str ) {
-			
-			},
-			rmTag( str ) {
-			
-			}
-			
-		},
-		
-	}
-)
-@scopeToProps("SearchValues", "ActiveTags")
 export default class Footer extends React.Component {
 	static propTypes = {};
 	state            = {};
 	
 	render() {
 		let {
-			    record: { position, size } = {},
-			    Events, children, disabled,
-			    $actions, onSelect, selected
+			    style
 		    }     = this.props,
 		    state = this.state;
 		return (
-			<div className={ "Footer" }>
-				<div className={ "toolbar" }>
-					<Comps.SearchBar/>
+			<div className={"Footer"} style={style}>
+				<div className={"toolbar"}>
+					<Comps.LoginBox/>
 				</div>
-				{/*{ ActiveTags && ActiveTags.available && ActiveTags.available.map(*/ }
-				{/*tag =>*/ }
-				{/*<Chip*/ }
-				{/*key={ tag.title }*/ }
-				{/*icon={*/ }
-				{/*//<Badge badgeContent={ tag.count} color="secondary" >*/ }
-				{/*<img alt={ tag.title } src={ tag.style.icon } className={ "icon" }/>*/ }
-				{/*//</Badge>*/ }
-				{/*}*/ }
-				{/*label={ tag.title }*/ }
-				{/*//onClick={handleClick}*/ }
-				{/*//onDelete={handleDelete}*/ }
-				{/*//className={classes.chip}*/ }
-				{/*/>*/ }
-				{/*) }*/ }
+				{/*{ ActiveTags && ActiveTags.available && ActiveTags.available.map(*/}
+				{/*tag =>*/}
+				{/*<Chip*/}
+				{/*key={ tag.title }*/}
+				{/*icon={*/}
+				{/*//<Badge badgeContent={ tag.count} color="secondary" >*/}
+				{/*<img alt={ tag.title } src={ tag.style.icon } className={ "icon" }/>*/}
+				{/*//</Badge>*/}
+				{/*}*/}
+				{/*label={ tag.title }*/}
+				{/*//onClick={handleClick}*/}
+				{/*//onDelete={handleDelete}*/}
+				{/*//className={classes.chip}*/}
+				{/*/>*/}
+				{/*) }*/}
 			</div>
 		);
 	}

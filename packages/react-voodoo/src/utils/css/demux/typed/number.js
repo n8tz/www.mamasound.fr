@@ -16,63 +16,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import is from "is";
+import is                         from "is";
+import {floatCut, units, unitsRe} from "../../cssUtils";
 
-const
-	units        = ['box', 'bz', 'bh', 'bw', 'deg', 'em', 'ex', '%', 'px', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'rem', 'vh', 'vw', 'vmin', 'vmax'],
-	unitsRe      = new RegExp(
-		"([+-]?(?:[0-9]*[.])?[0-9]+)\\s*(" +
-		['\\w+', 'bz', 'bh', 'bw', 'cap', 'ch', 'deg', 'em', 'ic', 'ex', '%', 'px', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'rem', 'vh', 'vw', 'vmin', 'vmax'].join('|')
-		+ ")"
-	),
-	floatCut        = ( v = 0 ) => v.toFixed(3),
-	defaultUnits    = {
-		left       : 'px',
-		right      : 'px',
-		top        : 'px',
-		bottom     : 'px',
-		width      : 'px',
-		height     : 'px',
-		translateX : 'px',
-		translateY : 'px',
-		translateZ : 'px',
-		scale      : '',
-		//scaleX     : 'px',
-		//scaleY     : 'px',
-		rotate     : 'deg',
-		//skew       : 'deg',
-		skewX      : 'deg',
-		skewY      : 'deg',
-		//matrix3d   : true,
-		//translate3d: true,
-		//scale3d    : true,
-		scaleZ     : 'px',
-		//rotate3d   : true,
-		rotateX    : 'deg',
-		rotateY    : 'deg',
-		rotateZ    : 'deg',
-		perspective: 'px',
-	},
-	defaultBox      = {
-		translateX: 'x',
-		translateY: 'y',
-		translateZ: 'z',
-		rotateX   : 'x',
-		rotateY   : 'y',
-		rotateZ   : 'z',
-		left      : 'x',
-		right     : 'x',
-		top       : 'y',
-		bottom    : 'y',
-		width     : 'x',
-		height    : 'y',
-	}, defaultValue = {
-		opacity: 1
-	};
+const defaultUnits    = {
+	      left       : 'px',
+	      right      : 'px',
+	      top        : 'px',
+	      bottom     : 'px',
+	      width      : 'px',
+	      height     : 'px',
+	      perspective: 'px',
+      },
+      defaultBox      = {
+	      left  : 'x',
+	      right : 'x',
+	      top   : 'y',
+	      bottom: 'y',
+	      width : 'x',
+	      height: 'y',
+      }, defaultValue = {
+	      opacity: 1
+      };
 
 function demuxOne( key, twVal, baseKey, data, box ) {
 	let value = twVal,
-	    unit  = data[baseKey][key] || defaultUnits[baseKey];
+	    unit  = data[baseKey][key] || defaultUnits[baseKey] || "px";
 	
 	if ( unit === 'box' ) {
 		value = value * (box[defaultBox[baseKey]] || box.x);
@@ -91,7 +60,6 @@ function demuxOne( key, twVal, baseKey, data, box ) {
 		value = value * box.z;
 		unit  = 'px';
 	}
-	//if ( Math.abs(value) < .0001 && value !== 0 )
 	return unit ? floatCut(value) + unit : floatCut(value);
 }
 
@@ -111,7 +79,7 @@ function demux( key, tweenable, target, data, box, baseKey ) {
 	if ( i > 1 )
 		value = "calc(" + value + ")";
 	
-	target[key] = value;
+	return target ? target[key] = value : value;
 }
 
 function muxer( key, value, target, data, initials, forceUnits ) {

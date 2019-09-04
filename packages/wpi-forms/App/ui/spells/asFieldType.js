@@ -22,9 +22,9 @@ import ReactDom         from "react-dom";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import {
-	isSpell, spells, Store, Scope, reScope, propsToScope, scopeToProps,
+	isSpell, spells, Store, Scope, withScope, propsToScope, scopeToProps,
 	scopeToState
-} from "rscopes";
+} from "react-scopes";
 
 function isReactRenderable( obj ) {
 	return obj.prototype instanceof React.Component || obj === React.Component || obj.$$typeof || is.func(obj);

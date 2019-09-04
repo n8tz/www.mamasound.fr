@@ -20,7 +20,7 @@ import is  from 'is';
 import api from './api/(*).js';
 
 let debug = require('App/console').default("server");
-
+//console.warn(api)
 export default ( server, http ) => Object
 	.keys(api)
 	.map(

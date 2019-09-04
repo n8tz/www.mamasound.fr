@@ -1,4 +1,5 @@
 /*
+ *
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -84,13 +85,13 @@ export const logo              = {
 	]
 };
 export const NavBox            = {
-	height    : "100%",
-	left      : "0px",
-	top       : "0px",
-	width     : "0px",
-	background: "green",
-	position  : "absolute",
-	transform : {
+	height   : "200px",
+	left     : "0px",
+	top      : "0px",
+	width    : "100%",
+	//background: "green",
+	position : "absolute",
+	transform: {
 		//translateY: "85%"
 	}
 };
@@ -102,11 +103,12 @@ export const Footer            = {
 	background: "green",
 	position  : "absolute",
 	overflow  : 'hidden',
+	zIndex    : 300,
 	transform : {
 		//translateY: "100%"
 	}
 };
-export const events            = {
+export const EventsBlock       = {
 	position       : "absolute",
 	right          : "0%",
 	bottom         : "0%",
@@ -185,14 +187,14 @@ export const YAxis             = [
 		}
 	},
 	{
-		target  : "events",
+		target  : "EventsBlock",
 		from    : 0,
 		duration: 100,
 		apply   : {
 			top: -eventsMiniHeight
 		}
 	},
-	//// highlighter to events
+	//// highlighter to EventsBlock
 	{
 		target  : "Highlighter",
 		from    : 100,
@@ -202,16 +204,15 @@ export const YAxis             = [
 		}
 	},
 	{
-		target  : "events",
+		target  : "EventsBlock",
 		from    : 100,
 		duration: 100,
 		apply   : {
 			bottom: "20%",
-			top   : ["-100%", (eventsMiniHeight + headerMiniHeight), sliderHeight]
+			top   : ["-100%", (eventsMiniHeight + headerMiniHeight) + "px", sliderHeight]
 		}
 	},
 	{
-		type    : "Tween",
 		target  : "EventMap",
 		from    : 100,
 		duration: 100,
@@ -220,9 +221,9 @@ export const YAxis             = [
 			top   : "-20%"
 		}
 	},
-	//// events to map
+	//// EventsBlock to map
 	{
-		target  : "events",
+		target  : "EventsBlock",
 		from    : 200,
 		duration: 100,
 		apply   : {

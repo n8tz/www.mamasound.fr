@@ -16,53 +16,54 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import is from "is";
+import is                         from "is";
+import {floatCut, units, unitsRe} from "../cssUtils";
 
-const
-	units        = ['box', 'bz', 'bh', 'bw', 'deg', 'em', 'ex', '%', 'px', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'rem', 'vh', 'vw', 'vmin', 'vmax'],
-	unitsRe      = new RegExp(
-		"([+-]?(?:[0-9]*[.])?[0-9]+)\\s*(" +
-		['\\w+', 'bz', 'bh', 'bw', 'cap', 'ch', 'deg', 'em', 'ic', 'ex', '%', 'px', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'rem', 'vh', 'vw', 'vmin', 'vmax'].join('|')
-		+ ")"
-	),
-	floatCut     = ( v = 0 ) => v.toFixed(3),
-	defaultUnits = {
-		//matrix     : true,
-		//translate  : 'px',
-		translateX : 'px',
-		translateY : 'px',
-		translateZ : 'px',
-		scale      : '',
-		//scaleX     : 'px',
-		//scaleY     : 'px',
-		rotate     : 'deg',
-		//skew       : 'deg',
-		skewX      : 'deg',
-		skewY      : 'deg',
-		//matrix3d   : true,
-		//translate3d: true,
-		//scale3d    : true,
-		scaleZ     : 'px',
-		//rotate3d   : true,
-		rotateX    : 'deg',
-		rotateY    : 'deg',
-		rotateZ    : 'deg',
-		perspective: 'px',
-	},
-	defaultBox   = {
-		translateX: 'x',
-		translateY: 'y',
-		translateZ: 'z',
-		rotateX   : 'x',
-		rotateY   : 'y',
-		rotateZ   : 'z',
-		left      : 'x',
-		right     : 'x',
-		top       : 'y',
-		bottom    : 'y',
-		width     : 'x',
-		height    : 'y',
-	};
+const defaultUnits    = {
+	      //matrix     : true,
+	      //translate  : 'px',
+	      translateX : 'px',
+	      translateY : 'px',
+	      translateZ : 'px',
+	      scale      : '',
+	      scaleZ     : '',
+	      scaleX     : '',
+	      scaleY     : '',
+	      rotate     : 'deg',
+	      //skew       : 'deg',
+	      skewX      : 'deg',
+	      skewY      : 'deg',
+	      //matrix3d   : true,
+	      //translate3d: true,
+	      //scale3d    : true,
+	      //rotate3d   : true,
+	      rotateX    : 'deg',
+	      rotateY    : 'deg',
+	      rotateZ    : 'deg',
+	      perspective: 'px',
+      },
+      defaultBox      = {
+	      translateX: 'x',
+	      translateY: 'y',
+	      translateZ: 'z',
+	      rotateX   : 'x',
+	      rotateY   : 'y',
+	      rotateZ   : 'z',
+	      left      : 'x',
+	      right     : 'x',
+	      top       : 'y',
+	      bottom    : 'y',
+	      width     : 'x',
+	      height    : 'y',
+      }, defaultValue = {
+	      //skew  : 1,
+	      //skewX : 1,
+	      //skewY : 1,
+	      scale : 1,
+	      scaleX: 1,
+	      scaleY: 1,
+	      scaleZ: 1
+      };
 
 function demuxOne( key, dkey, twVal, baseKey, data, box ) {
 	let value = twVal,
@@ -87,7 +88,7 @@ function demuxOne( key, dkey, twVal, baseKey, data, box ) {
 	
 	if ( unit === 'deg' )
 		value = value % 360;
-	//if ( Math.abs(value) < .0001 && value !== 0 )
+	
 	return unit ? floatCut(value) + unit : floatCut(value);
 }
 
@@ -100,22 +101,26 @@ function demux( key, tweenable, target, data, box ) {
 			( tmap = {}, i ) => Object.keys(tmap).forEach(
 				fkey => {
 					let dkey     = key + '_' + fkey + '_' + i;
-					let value, y = 0;
+					let value, y = 0, iValue;
 					
 					value = "";
 					
 					for ( let rKey in data[dkey] )
 						if ( data[dkey].hasOwnProperty(rKey) ) {
-							if ( tweenable[dkey] < 0 )
-								value += (y ? " - " : "-") + demuxOne(rKey, dkey, -tweenable[rKey], fkey, data, box);
-							else
-								value += (y ? " + " : "") + demuxOne(rKey, dkey, tweenable[rKey], fkey, data, box);
+							if ( !tweenable[rKey] )
+								continue;
+							iValue = demuxOne(rKey, dkey, tweenable[rKey], fkey, data, box);
+							if ( y && iValue[0] === '-' )
+								iValue = " - " + iValue.substr(2);
+							else if ( y )
+								iValue = " + " + iValue;
+							value += iValue;
 							y++;
 						}
 					if ( y > 1 )
 						value = "calc(" + value + ")";
-					transforms += fkey + "(" + value + ") ";
 					
+					transforms += fkey + "(" + (value || "0") + ") ";
 					
 				}
 			)
@@ -125,14 +130,15 @@ function demux( key, tweenable, target, data, box ) {
 	
 }
 
-function muxOne( key, value, target, data, initials, forceUnits ) {
+function muxOne( key, baseKey, value, target, data, initials, forceUnits ) {
 	
 	let match   = is.string(value) ? value.match(unitsRe) : false,
 	    unit    = match && match[2] || defaultUnits[key],
 	    unitKey = units.indexOf(unit),
 	    realKey = unitKey !== -1 && (key + '_' + unitKey) || key;
 	
-	initials[realKey]  = 0;
+	initials[realKey] = defaultValue[baseKey] || 0;
+	
 	data[key][realKey] = unit;
 	
 	if ( match ) {
@@ -155,24 +161,22 @@ export default ( key, value, target, data, initials, forceUnits, reset ) => {
 	
 	value.forEach(
 		( tmap, i ) => {
-			let baseData = {}
-			//data[key][i]       = forceUnits ? {} : data[key][i] || {};
+			let baseData = {};
 			tmap && Object.keys(tmap).forEach(
 				fkey => {
 					let fValue = tmap[fkey],
 					    dkey   = key + '_' + fkey + '_' + i;
-					//match  = is.string(fValue) ? fValue.match(unitsRe) : false;
-					//number(dkey, fValue, target, data, initials, forceUnits)
+					
 					baseData[fkey] = true;
 					
 					data[dkey] = data[dkey] || {};
 					if ( is.array(fValue) ) {
 						for ( let u = 0; u < fValue.length; u++ ) {
-							muxOne(dkey, fValue[u] || 0, target, data, initials, forceUnits)
+							muxOne(dkey, fkey, fValue[u] || 0, target, data, initials, forceUnits)
 						}
 					}
 					else {
-						muxOne(dkey, fValue || 0, target, data, initials, forceUnits)
+						muxOne(dkey, fkey, fValue || 0, target, data, initials, forceUnits)
 					}
 				}
 			)

@@ -15,22 +15,21 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import App              from "App/App"
-import React            from "react";
-import api              from "./api";
-import {renderToString} from "react-dom/server";
+import React from "react";
+import api   from "./api";
 
-var express = require("express"),
-    server  = express(),
-    http    = require('http').Server(server),
-    argz    = require('minimist')(process.argv.slice(2)),
-    wpiConf = require('App/.wpiConfig'),
-    debug   = require('App/console').default("server");
-process.title = wpiConf.project.name + '::server';
+const express     = require("express"),
+    server      = express(),
+    http        = require('http').Server(server),
+    argz        = require('minimist')(process.argv.slice(2)),
+    compression = require('compression'),
+    wpiConf     = require('App/.wpiConfig'),
+    debug       = require('App/console').default("server");
+process.title   = wpiConf.project.name + '::server';
 
 debug.warn("process.env.DEBUG : ", process.env.DEBUG);
 
-//server.use(compression());
+server.use(compression());
 server.use(express.json());       // to support JSON-encoded bodies
 server.use(express.urlencoded()); // to support URL-encoded bodies
 
