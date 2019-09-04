@@ -22,7 +22,7 @@ export default {
 		"index": true
 	},
 	hidden         : {
-		renderer    : "Text",
+		formRenderer    : "Text",
 		defaultProps: {
 			type: "text"
 		},
@@ -30,7 +30,7 @@ export default {
 		test        : /^[\w_\-\d]+$/
 	},
 	url            : ( label ) => ({
-		renderer    : "Text",
+		formRenderer    : "Text",
 		defaultProps: {
 			type: "text"
 		},
@@ -38,7 +38,7 @@ export default {
 		test        : /^[\w_\-\d]+$/ // @todo url regexp
 	}),
 	labels         : ( label ) => ({
-		renderer    : "Text",
+		formRenderer    : "Text",
 		defaultProps: {
 			type: "text"
 		},
@@ -46,7 +46,7 @@ export default {
 		test        : /^[\w_\-\d]+$/
 	}),
 	dateTime       : {
-		//renderer    : require('App/ui/fields/dateTimeField'),
+		//formRenderer    : require('App/ui/fields/dateTimeField'),
 		defaultProps: {
 			//type : "chrome"
 		},
@@ -54,7 +54,7 @@ export default {
 		test        : /^[\w_\-\d]+$/
 	},
 	date           : ( label, props ) => ({
-		//renderer    : require('App/ui/fields/dateTimeField'),
+		//formRenderer    : require('App/ui/fields/dateTimeField'),
 		defaultProps: {
 			...(props || {})
 		},
@@ -62,7 +62,7 @@ export default {
 		test        : /^[\w_\-\d]+$/
 	}),
 	datesList      : ( label, props ) => ({
-		//renderer    : require('App/ui/fields/dateTimeListField'),
+		//formRenderer    : require('App/ui/fields/dateTimeListField'),
 		defaultProps: {
 			...(props || {})
 		},
@@ -70,7 +70,7 @@ export default {
 		test        : /^[\w_\-\d]+$/
 	}),
 	color          : ( label, props ) => ({
-		//renderer    : require('App/ui/fields/colorField'),
+		//formRenderer    : require('App/ui/fields/colorField'),
 		defaultProps: {
 			type: "chrome",
 			...(props || {})
@@ -79,7 +79,7 @@ export default {
 		test        : /^[\w_\-\d]+$/
 	}),
 	enum           : ( label, options, props ) => ({
-		//renderer    : require('App/ui/fields/Select'),
+		//formRenderer    : require('App/ui/fields/Select'),
 		defaultProps: {
 			options    : options.map(( v ) => (typeof v == "string"
 			                                   ? { label: v, value: v }
@@ -92,7 +92,7 @@ export default {
 		test        : /^[\w_\-\d]+$/
 	}),
 	ettyEnum       : ( label, multiple ) => ({
-		//renderer    : require('App/ui/fields/Select'),
+		//formRenderer    : require('App/ui/fields/Select'),
 		defaultProps: {
 			multiple   : multiple,
 			get options() {
@@ -109,13 +109,13 @@ export default {
 		test        : /^[\w_\-\d]+$/
 	}),
 	media          : ( cfg, label ) => ({
-		renderer    : "Media",
+		formRenderer    : "Media",
 		defaultProps: { ...cfg },
 		label       : label || "Media Url",
 		test        : /^[\w_\-\d]+$/
 	}),
 	publicationFlag: {
-		renderer    : inputField,
+		formRenderer    : inputField,
 		defaultProps: {
 			type       : "select",
 			options    : [
@@ -127,7 +127,7 @@ export default {
 		label       : "Diffusion :"
 	},
 	collectionStr  : ( etty, filters, label ) => ({
-		//renderer    : require('App/ui/fields/RecordRefList'),
+		//formRenderer    : require('App/ui/fields/RecordRefList'),
 		defaultProps: {
 			etty        : etty,
 			stringValue : true,
@@ -139,7 +139,7 @@ export default {
 	}),
 	collection     : ( etty, filters, label ) => ({
 		//@lazyInitialize
-		//renderer    : require('App/ui/fields/RecordRefList'),
+		//formRenderer    : require('App/ui/fields/RecordRefList'),
 		defaultProps: Object.assign({}, {
 			etty        : etty,
 			// defaultProps : true,
@@ -150,7 +150,7 @@ export default {
 	}),
 	picker         : function ( etty, defaultProps = {}, label ) {
 		return {
-			renderer    : "Picker",
+			formRenderer    : "Picker",
 			defaultProps: {
 				defaultValue      : false,
 				disallowId        : true,
@@ -163,7 +163,7 @@ export default {
 		};
 	},
 	address        : ( cfg, label ) => ({
-		renderer    : 'Address',
+		formRenderer    : 'Address',
 		defaultProps: Object.assign({
 			                            //allowedType : etty
 		                            }, cfg || {}),
@@ -171,7 +171,7 @@ export default {
 		test        : /^[\w_\-\d]+$/
 	}),
 	value          : ( label, cfg ) => ({
-		//renderer    : require('App/ui/fields/valueSliderField'),
+		//formRenderer    : require('App/ui/fields/valueSliderField'),
 		defaultProps: Object.assign({
 			                            //allowedType : etty
 		                            }, cfg || {}),
@@ -180,20 +180,20 @@ export default {
 	}),
 	json           : ( label, props ) => ({
 		
-		//renderer    : require('App/ui/fields/jsonEditorField'),
+		//formRenderer    : require('App/ui/fields/jsonEditorField'),
 		defaultProps: props,
 		"type"      : "string",
 		label       : label
 	}),
 	descriptions   : ( label ) => ({
-		renderer    : "Html",
+		formRenderer    : "Html",
 		defaultProps: {},
 		"type"      : "string",
 		label       : label || "Description",
 		test        : /^[\w_\-\d]+$/
 	}),
 	excerpt        : {
-		renderer    : inputField,
+		formRenderer    : inputField,
 		label       : "Résumé",
 		"type"      : "string",
 		defaultProps: {
@@ -202,7 +202,7 @@ export default {
 		test        : /^[\w_\-\d]+$/
 	},
 	boolean        : ( label, checked ) => ({
-		renderer    : "Switch",
+		formRenderer    : "Switch",
 		label       : label,
 		defaultProps: {
 			checked: checked ? "checked" : null, // TODO check if this property works

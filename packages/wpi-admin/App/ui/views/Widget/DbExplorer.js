@@ -17,10 +17,14 @@
  */
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon  from '@material-ui/icons/Clear';
+import entities   from 'App/db/entities.js';
 import stores     from 'App/stores/(*).js';
+import TableGrid  from 'App/ui/components/TableGrid.js';
 import PropTypes  from "prop-types";
 import React      from "react";
+import {JsonTree} from "react-editable-json-tree";
 import rs         from "react-scopes";
+import SplitPane  from "react-split-pane";
 
 if ( typeof window !== "undefined" )
 	require('react-dropzone-component/styles/filepicker.css');
@@ -29,6 +33,16 @@ if ( typeof window !== "undefined" )
 @rs.withScope({
 	              @rs.asScope
 	              DbExplorer: {
+		              @rs.asStore
+		              Query: {
+			              etty       : 'Place',
+			              query      : {},
+			              limit      : 50,
+			              updateType : ( etty ) => ({ etty }),
+			              selectType : ( e ) => ({ etty: e.target.value }),
+			              updateQuery: ( query ) => ({ query })
+		              },
+		
 		              @rs.withStateMap(
 			              {
 				              @rs.asRef
@@ -38,18 +52,20 @@ if ( typeof window !== "undefined" )
 		              Data: stores.MongoQueries,
 		
 		              @rs.asStore
-		              Query: {
-			              etty       : 'Place',
-			              query      : {},
-			              limit      : 50,
-			              updateType : ( etty ) => ({ etty }),
-			              updateQuery: ( query ) => ({ query })
+		              Schema: {
+			              @rs.asRef
+			              etty: 'Query.etty',
+			              $apply( data, state ) {
+				              //entities;
+				              debugger
+				              return entities[state.etty].fields;
+			              }
 		              }
 	              },
 	
               }
 )
-@rs.scopeToProps("DbExplorer.Data", "DbExplorer.Query")
+@rs.scopeToProps("DbExplorer.Data", "DbExplorer.Query", "DbExplorer.Schema")
 export default class DbExplorer extends React.Component {
 	static propTypes = {
 		record: PropTypes.object,
@@ -57,36 +73,38 @@ export default class DbExplorer extends React.Component {
 	state            = {};
 	
 	render() {
-		let { $actions, Data, Query, $scope }
+		let { $actions, Data, Query, Schema }
 			    = this.props;
-		
 		return (
-			<div className={"DbExplorer"}
-			>
+			<SplitPane className={"DbExplorer"} split="horizontal" minSize={50} defaultSize={75}>
 				<div className={"controls"}>
-					<span>{Query.etty}
-					</span>
+					<span>{Query.etty} {Data && Data.Query && Data.Query.items.length}</span>
+					<select value={Query.etty} onChange={$actions.DbExplorer.selectType}>
+						{
+							Object.keys(entities).map(
+								id => <option key={id} value={id}>{entities[id].label || id}</option>
+							)
+						}
+					</select>
 					<IconButton onClick={e => $actions.clearState()} title={"Clear app state"}>
 						<ClearIcon/>
 					</IconButton>
 				</div>
-				{/*<TableGrid*/}
-				{/*	data={MamaXls}*/}
-				{/*	columns={Object.keys(schema)}*/}
-				{/*	schema={schema}*/}
-				{/*	//keys={ cTable && schemas[cTable].primaryKey }*/}
-				{/*	//onFullyUpdate={ this.onCurTableChange.bind(this) }*/}
-				{/*/>*/}
-				<pre>
-					{
-						JSON.stringify(Query, null, 2)
-					}
-					---
-					{
-						JSON.stringify(Data, null, 2)
-					}
-				</pre>
-			</div>
+				<div>
+					<SplitPane split="vertical" minSize={50} defaultSize={150}>
+						<div>
+							<JsonTree data={Query.query} onFullyUpdate={$actions.DbExplorer.updateQuery}/>
+						</div>
+						<TableGrid
+							data={Data && Data.Query}
+							columns={Object.keys(Schema)}
+							schema={Schema}
+							//keys={ cTable && schemas[cTable].primaryKey }
+							//onFullyUpdate={ this.onCurTableChange.bind(this) }
+						/>
+					</SplitPane>
+				</div>
+			</SplitPane>
 		);
 	}
 };

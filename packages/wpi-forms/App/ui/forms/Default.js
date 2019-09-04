@@ -14,20 +14,19 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import is              from "is";
-import PropTypes       from "prop-types";
-import React           from "react";
-import {Forms, fields} from "App/ui";
-
-import {withScope, Store, scopeToProps, propsToScope} from "react-scopes";
-import {withStateMap, asRef, asStore}               from "rescope-spells";
-
-import stores from 'App/stores/(*).js';
+import Button from '@material-ui/core/Button';
 
 
-import entities      from 'App/db/entities';
+import entities from 'App/db/entities';
+
+import stores        from 'App/stores/(*).js';
+import {fields}      from "App/ui";
+import is            from "is";
+import React         from "react";
 import {ContextMenu} from 'react-inheritable-contextmenu';
-import Button        from '@material-ui/core/Button';
+
+import {propsToScope, scopeToProps, withScope} from "react-scopes";
+import {withStateMap}                          from "rescope-spells";
 
 @withScope(
 	{
@@ -172,11 +171,11 @@ export default class RecordEditor extends React.Component {
 				if ( !recordDef.fields[name].renderer || recordDef.fields[name].hidden )
 					return <div/>;
 				let key      = etty + "_" + name,
-				    renderer = recordDef.fields[name].renderer,
+				    renderer = recordDef.fields[name].formRenderer,
 				    Tag      = is.string(renderer) ? fields[renderer] : renderer,
 				    def      = record && record[name] || recordDef.fields[name].defaultProps.defaultValue
 					    || '';
-				if ( !Tag ) throw "This fields doesn't exist : " + recordDef.fields[name].renderer;
+				if ( !Tag ) throw "This fields doesn't exist : " + recordDef.fields[name].formRenderer;
 				form.push([<Tag {
 					                ...{
 						                ...recordDef.fields[name].defaultProps,
