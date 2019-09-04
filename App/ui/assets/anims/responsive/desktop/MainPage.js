@@ -99,9 +99,9 @@ export const Footer            = {
 	left      : "0px",
 	top       : "100%",
 	width     : "100%",
-	background: "green",
+	//background: "green",
 	position  : "absolute",
-	overflow  : 'hidden',
+	//overflow  : 'hidden',
 	zIndex    : 300,
 	transform : {
 		//translateY: "-100%"

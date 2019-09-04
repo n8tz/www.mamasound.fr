@@ -22,7 +22,7 @@ export default {
 		"index": true
 	},
 	hidden         : {
-		formRenderer    : "Text",
+		formRenderer: "Text",
 		defaultProps: {
 			type: "text"
 		},
@@ -30,7 +30,7 @@ export default {
 		test        : /^[\w_\-\d]+$/
 	},
 	url            : ( label ) => ({
-		formRenderer    : "Text",
+		formRenderer: "Text",
 		defaultProps: {
 			type: "text"
 		},
@@ -38,7 +38,7 @@ export default {
 		test        : /^[\w_\-\d]+$/ // @todo url regexp
 	}),
 	labels         : ( label ) => ({
-		formRenderer    : "Text",
+		formRenderer: "Text",
 		defaultProps: {
 			type: "text"
 		},
@@ -109,13 +109,13 @@ export default {
 		test        : /^[\w_\-\d]+$/
 	}),
 	media          : ( cfg, label ) => ({
-		formRenderer    : "Media",
+		formRenderer: "Media",
 		defaultProps: { ...cfg },
 		label       : label || "Media Url",
 		test        : /^[\w_\-\d]+$/
 	}),
 	publicationFlag: {
-		formRenderer    : inputField,
+		formRenderer: inputField,
 		defaultProps: {
 			type       : "select",
 			options    : [
@@ -150,7 +150,7 @@ export default {
 	}),
 	picker         : function ( etty, defaultProps = {}, label ) {
 		return {
-			formRenderer    : "Picker",
+			formRenderer: "Picker",
 			defaultProps: {
 				defaultValue      : false,
 				disallowId        : true,
@@ -163,7 +163,7 @@ export default {
 		};
 	},
 	address        : ( cfg, label ) => ({
-		formRenderer    : 'Address',
+		formRenderer: 'Address',
 		defaultProps: Object.assign({
 			                            //allowedType : etty
 		                            }, cfg || {}),
@@ -186,14 +186,14 @@ export default {
 		label       : label
 	}),
 	descriptions   : ( label ) => ({
-		formRenderer    : "Html",
+		formRenderer: "Html",
 		defaultProps: {},
 		"type"      : "string",
 		label       : label || "Description",
 		test        : /^[\w_\-\d]+$/
 	}),
 	excerpt        : {
-		formRenderer    : inputField,
+		formRenderer: inputField,
 		label       : "Résumé",
 		"type"      : "string",
 		defaultProps: {
@@ -202,7 +202,7 @@ export default {
 		test        : /^[\w_\-\d]+$/
 	},
 	boolean        : ( label, checked ) => ({
-		formRenderer    : "Switch",
+		formRenderer: "Switch",
 		label       : label,
 		defaultProps: {
 			checked: checked ? "checked" : null, // TODO check if this property works

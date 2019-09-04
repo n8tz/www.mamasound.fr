@@ -31,7 +31,7 @@ export const EventCatSlider = {
 	       defaultInitial : {
 		       position       : "absolute",
 		       overflow       : "hidden",
-		       backgroundColor: "white",
+		       //backgroundColor: "white",
 		       top            : "0%",
 		       left           : "0%",
 		       width          : "100%",

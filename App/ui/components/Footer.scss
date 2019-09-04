@@ -17,12 +17,19 @@
  */
 
 .Footer {
+
   .toolbar {
-    width: 100%;
+    position: absolute;
+    width: 100vw;
+    left: 50%;
+    top: 0px;
+    transform: translate(-50%, 0%);
+    //width: 100%;
     text-align: center;
     //margin-top: 5px;
     height: 50px;
     overflow: hidden;
+    background: grey;
 
     > button {
       //@include use_hvCenteredContent();
@@ -49,7 +56,7 @@
   .fbPage {
 
     @media screen and (max-width: $tablet-portrait-breakpoint) {
-     display: none;
+      display: none;
     }
 
     width: 100%;

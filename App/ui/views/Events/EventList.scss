@@ -39,6 +39,8 @@
     > .content {
       position: relative;
       height: 100%;
+      //padding: 0 !important;
+      //margin: 0 !important;
       @media screen and (max-width: $tablet-portrait-breakpoint) {
         margin: 0 !important;
         padding: 0 !important;
@@ -49,6 +51,10 @@
 
   .EventCatSlider {
     overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.34);
+    z-index: 1;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
   }
 
   .noScrollOverlay {
@@ -66,7 +72,7 @@
     position: absolute;
     top: auto;
     bottom: -35px;
-    //width: 100vw;
+    width: 100vw;
     //left: 0px;
     //right: 0px;
     height: 32px;
