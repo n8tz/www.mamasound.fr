@@ -26,13 +26,14 @@ import {Helmet}           from "react-helmet";
 import {Scope, withScope} from "react-rescope";
 import "regenerator-runtime/runtime";
 import shortid            from 'shortid';
-import AppScope           from './App.scope';
 import Index              from "./index.html";
+import AppScope           from './scopes/App';
 
 const ctrl = {
 	
 	renderTo( node, state ) {
 		//return this.renderSSRTo(...arguments)
+		
 		let cScope      = new Scope(AppScope, {
 			    id         : "App",
 			    autoDestroy: true
@@ -58,7 +59,7 @@ const ctrl = {
 				cScope.restore(state);
 				ReactDom.render(<App/>, node);
 			});
-			module.hot.accept('App/App.scope', () => {
+			module.hot.accept('./scopes/App', () => {
 				cScope.register(AppScope)
 			});
 		}

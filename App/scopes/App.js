@@ -1,5 +1,5 @@
 /*
- * www.mamasound.fr
+ *
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -197,6 +197,13 @@ export default {
 				"title"   : "DevTools",
 				"type"    : "DevTools",
 				"position": { "x": 0, "y": 0 }
+			},
+			{
+				"_id"     : "FfsfeOEKpm",
+				"size"    : { "width": 600, "height": 500 },
+				"title"   : "DbExplorer",
+				"type"    : "DbExplorer",
+				"position": { "x": 100, "y": 100 }
 			}
 		] : [],
 		
