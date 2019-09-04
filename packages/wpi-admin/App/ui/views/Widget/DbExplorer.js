@@ -49,7 +49,7 @@ if ( typeof window !== "undefined" )
 	
               }
 )
-@rs.scopeToProps("DbExplorer.Data", "Query")
+@rs.scopeToProps("DbExplorer.Data", "DbExplorer.Query")
 export default class DbExplorer extends React.Component {
 	static propTypes = {
 		record: PropTypes.object,
