@@ -19,13 +19,13 @@ import React from "react";
 import api   from "./api";
 
 const express     = require("express"),
-    server      = express(),
-    http        = require('http').Server(server),
-    argz        = require('minimist')(process.argv.slice(2)),
-    compression = require('compression'),
-    wpiConf     = require('App/.wpiConfig'),
-    debug       = require('App/console').default("server");
-process.title   = wpiConf.project.name + '::server';
+      server      = express(),
+      http        = require('http').Server(server),
+      argz        = require('minimist')(process.argv.slice(2)),
+      compression = require('compression'),
+      wpiConf     = require('App/.wpiConfig'),
+      debug       = require('App/console').default("server");
+process.title     = wpiConf.project.name + '::server';
 
 debug.warn("process.env.DEBUG : ", process.env.DEBUG);
 

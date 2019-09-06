@@ -109,7 +109,13 @@ class RecordRefRenderer extends React.Component {
 					                    ( field ) => (
 						                    TableGridSchema[field] = {
 							                    ...field,
-							                    renderer: ( { value } ) => <div>{is.object(value) ? "obj" : value}</div>
+							                    renderer: ( { value } ) => <div>
+								                    {
+									                    is.object(value) ? JSON.stringify(value) :
+									                    is.array(value) ? JSON.stringify(value) :
+									                    value
+								                    }
+							                    </div>
 						                    }
 					                    )
 				                    );
