@@ -17,8 +17,8 @@
  */
 import $super from "$super";
 
-let baseDomain = "mamasound.wiseways.me"
-//let baseDomain = "mamasound.localhost";
+//let baseDomain = "mamasound.wiseways.me"
+let baseDomain = "mamasound.localhost";
 export default {
 	STATIC_URL      : baseDomain + "/medias",//"static.mamasound.fr",
 	PUBLIC_URL      : "mamasound.fr",

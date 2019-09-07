@@ -60,7 +60,7 @@ export default class XlsDataProvider extends Store {
 						      ( h, k ) => (
 							      key = k.replace(/^\s*([^\s]+)\s*$/ig, '$1').toUpperCase(),
 								      headers[key] = this.getCamelCaseHeader(xls.Sheets[k], k),
-								      h[key] = XLSX.domUtils.sheet_to_json(
+								      h[key] = XLSX.utils.sheet_to_json(
 									      xls.Sheets[k],
 									      {
 										      raw: true,
@@ -158,12 +158,12 @@ export default class XlsDataProvider extends Store {
 	}
 	
 	getCamelCaseHeader( sheet, id, row = 0 ) {
-		var range  = sheet['!ref'] && XLSX.domUtils.decode_range(sheet['!ref']),
+		var range  = sheet['!ref'] && XLSX.utils.decode_range(sheet['!ref']),
 		    header = [];
 		if ( !range )
 			return { range: 1, header };
 		for ( var C = 0, addr, cell; C <= range.e.c; ++C ) {
-			addr = XLSX.domUtils.encode_cell(
+			addr = XLSX.utils.encode_cell(
 				{
 					r: row,
 					c: C

@@ -59,13 +59,15 @@ export function service( server ) {
 						res.send(200, html);
 						return;
 					}
-					
+					let cssPath = (req.user && req.user.isAdmin)
+					              ? process.cwd() + "/dist/admin/App.css"
+					              : process.cwd() + "/dist/www/App.css";
 					App.renderSSR(
 						{
 							device  : req.device.type,
 							location: req.url,
-							css     : fs.existsSync(process.cwd() + "/dist/www/App.css")
-							          ? fs.readFileSync(process.cwd() + "/dist/www/App.css")
+							css     : fs.existsSync(cssPath)
+							          ? fs.readFileSync(cssPath)
 							          : "/* ... */",
 							//state   : currentState,
 							tpl

@@ -41,8 +41,8 @@ export default class XlsExporter extends Store {
 		
 		exportAsXLS() {
 			let { items, docName } = this.nextState;
-			var wb                 = XLSX.domUtils.book_new();
-			XLSX.domUtils.book_append_sheet(wb, XLSX.domUtils.json_to_sheet(items), docName);
+			var wb                 = XLSX.utils.book_new();
+			XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(items), docName);
 			
 			fileDownload(
 				new Blob([s2ab(XLSX.write(wb, {
