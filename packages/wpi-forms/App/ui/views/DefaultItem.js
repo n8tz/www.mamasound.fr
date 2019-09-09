@@ -17,11 +17,11 @@
 
 'use strict';
 
-import React from 'react';
-
-import Time from 'react-time'
+import entities from 'App/db/entities';
 
 import Image from 'App/ui/components/Image';
+import React from 'react';
+import Time  from 'react-time'
 
 
 export default class DefaultItem extends React.Component {
@@ -43,7 +43,7 @@ export default class DefaultItem extends React.Component {
 				{record._cls}
 			</div>
 			<div className="title">
-				{record.label}
+				{record[entities[record._cls].labelField || 'label']}
 			</div>
 			<div className="lastModifiedDate">
 				<Time value={new Date(record.updated)} format="DD/MM/YYYY HH:mm"/>
