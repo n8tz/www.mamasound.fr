@@ -30,7 +30,6 @@
       display: flex;
 
       .field {
-
         vertical-align: middle;
         display: inline-block;
         width: auto;
@@ -49,18 +48,26 @@
       }
     }
 
+    .menu {
+      position: absolute;
+      bottom: 0;
+      right: 0px;
+      z-index: 10;
+      margin: 5px;
+    }
     .selected {
       position: absolute;
-      top: 2em;
+      top: 0;
       left: 0px;
-      width: 50%;
+      width: 100%;
       bottom: 0%;
+
     }
 
     .results {
       position: absolute;
       top: 2em;
-      left: 50%;
+      left: 0%;
       right: 0%;
       bottom: 0%;
       overflow-y: scroll;

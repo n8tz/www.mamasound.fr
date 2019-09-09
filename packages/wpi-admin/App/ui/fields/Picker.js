@@ -15,6 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import Fab                                                                            from '@material-ui/core/Fab';
 import entities                                                                       from 'App/db/entities';
 import stores                                                                         from 'App/stores/(*).js';
 import {Views}                                                                        from 'App/ui';
@@ -30,8 +31,14 @@ import Text                                                                     
 		Picker: {
 			@asStore
 			SelectedQuery: {
-				$apply( data, { search, defaultType, types, selectedType = defaultType || types && types[0] } ) {
+				active: false,
+				$apply( data, { active, search, defaultType, types, selectedType = defaultType || types && types[0] } ) {
 					let query = {}, etty = selectedType;
+					
+					
+					if ( !active )
+						return;
+					
 					while ( entities[etty].targetCollection ) {
 						etty = entities[etty].targetCollection;
 					}
@@ -56,10 +63,10 @@ import Text                                                                     
 					}
 				},
 				updateSearch( search ) {
-					return { search };
+					return { search, active: true };
 				},
 				updateQuery( selectedType ) {
-					return { selectedType };
+					return { selectedType, active: true };
 				}
 			},
 			@withStateMap(
@@ -98,44 +105,68 @@ export default class Picker extends React.Component {
 	static defaultProps = {
 		allowTypeSelection: Object.keys(entities)
 	};
-	state               = {};
+	state               = {
+		editing: false
+	};
+	togglePicker        = () => {
+		let { $actions } = this.props;
+		
+		!this.state.editing && $actions.Picker.updateSearch("")
+		this.setState({ editing: !this.state.editing });
+	};
 	
 	render() {
 		let { defaultValue, value = defaultValue, Query, Selected, allowTypeSelection, SelectedQuery = {}, $actions } = this.props,
-		    { currentType = SelectedQuery.etty || allowTypeSelection[0], currentSearch = "" }                         = this.state;
+		    { currentType = SelectedQuery.etty || allowTypeSelection[0], currentSearch = "", editing }                = this.state;
 		return (
 			<>
-				<div className={"queryBar"}>
-					<Select options={allowTypeSelection.map(etty => ({ label: etty, value: etty }))}
-					        value={currentType}
-					        onChange={e => {
-						        this.setState({ currentType: e.target.value })
-						        $actions.Picker.updateQuery(e.target.value)
-					        }}
-					/>
-					<Text
-						placeholder={"Search"}
-						value={currentSearch}
-						onChange={e => {
-							this.setState({ currentSearch: e.target.value })
-							$actions.Picker.updateSearch(e.target.value)
-						}}
-					/>
+				<div className={"menu"}>
+					<Fab onClick={this.togglePicker} size={"small"}>
+						<i className="material-icons">
+							{
+								!editing ? "create" : "cancel"
+							}
+						</i>
+					</Fab>
 				</div>
-				<div className={"selected"}>
-					{
-						Selected && Selected.record
-						&& <Views.DefaultPreview record={Selected.record}/>
-					}
-				</div>
-				<div className={"results"}>
-					{
-						Query
-						&& Query.data
-						&& Query.data.items
-						&& Query.data.items.map(record => <Views.DefaultItem record={record}/>)
-					}
-				</div>
+				{
+					!editing ?
+					<>
+						<div className={"selected"}>
+							{
+								Selected && Selected.record
+								&& <Views.DefaultPreview record={Selected.record}/>
+							}
+						</div>
+					</> :
+					<>
+						<div className={"queryBar"}>
+							<Select options={allowTypeSelection.map(etty => ({ label: etty, value: etty }))}
+							        value={currentType}
+							        onChange={e => {
+								        this.setState({ currentType: e.target.value })
+								        $actions.Picker.updateQuery(e.target.value)
+							        }}
+							/>
+							<Text
+								placeholder={"Search"}
+								value={currentSearch}
+								onChange={e => {
+									this.setState({ currentSearch: e.target.value })
+									$actions.Picker.updateSearch(e.target.value)
+								}}
+							/>
+						</div>
+						<div className={"results"}>
+							{
+								Query
+								&& Query.data
+								&& Query.data.items
+								&& Query.data.items.map(record => <Views.DefaultItem record={record}/>)
+							}
+						</div>
+					</>
+				}
 			</>
 		);
 	}
