@@ -56,7 +56,7 @@ $labelsWidth: 120px;
       position: relative;
       width: 100%;
       background: #fbfbfb;
-
+      overflow: hidden;
       &:nth-child(2n+1) {
         background: #e7e7e7;
       }
@@ -77,9 +77,9 @@ $labelsWidth: 120px;
         position: relative;
         display: inline-block;
         width: calc(100% - #{$labelsWidth} - 30px);
-        //float: right;
+        float: right;
         //margin: 0 10px;
-        padding-left: $labelsWidth + 20px;
+        //left: $labelsWidth + 20px;
       }
 
       &.field_Text {

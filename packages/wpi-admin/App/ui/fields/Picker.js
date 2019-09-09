@@ -15,16 +15,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React                                                                        from "react";
-import FormControlLabel
-                                                                                    from '@material-ui/core/FormControlLabel';
-import Select                                                                       from './Select';
-import Text                                                                         from './Text';
-import {asFieldType}                                                                from "App/ui/spells";
-import {withScope, scopeToProps, asScope, withStateMap, asRef, asStore, propsToScope} from "react-scopes";
-import {Views}                                                                      from 'App/ui';
-import stores                                                                       from 'App/stores/(*).js';
-import entities                                                                     from 'App/db/entities';
+import entities                                                                       from 'App/db/entities';
+import stores                                                                         from 'App/stores/(*).js';
+import {Views}                                                                        from 'App/ui';
+import {asFieldType}                                                                  from "App/ui/spells";
+import React                                                                          from "react";
+import {asRef, asScope, asStore, propsToScope, scopeToProps, withScope, withStateMap} from "react-scopes";
+import Select                                                                         from './Select';
+import Text                                                                           from './Text';
 
 @withScope(
 	{
@@ -99,40 +97,45 @@ export default class Picker extends React.Component {
 	static displayName  = "Picker";
 	static defaultProps = {
 		allowTypeSelection: Object.keys(entities)
-	}
+	};
 	state               = {};
 	
 	render() {
 		let { defaultValue, value = defaultValue, Query, Selected, allowTypeSelection, SelectedQuery = {}, $actions } = this.props,
 		    { currentType = SelectedQuery.etty || allowTypeSelection[0], currentSearch = "" }                         = this.state;
-		//debugger
 		return (
 			<>
-				<Select options={allowTypeSelection.map(etty => ({ label: etty, value: etty }))}
-				        value={currentType}
-				        onChange={e => {
-					        this.setState({ currentType: e.target.value })
-					        $actions.Picker.updateQuery(e.target.value)
-				        }}
-				/>
-				<Text
-					placeholder={"Search"}
-					value={currentSearch}
-					onChange={e => {
-						this.setState({ currentSearch: e.target.value })
-						$actions.Picker.updateSearch(e.target.value)
-					}}
-				/>
-				{
-					Selected && Selected.record
-					&& <Views.DefaultPreview record={Selected.record}/>
-				}
-				{
-					Query
-					&& Query.data
-					&& Query.data.items
-					&& Query.data.items.map(record => <Views.DefaultItem record={record}/>)
-				}
+				<div className={"queryBar"}>
+					<Select options={allowTypeSelection.map(etty => ({ label: etty, value: etty }))}
+					        value={currentType}
+					        onChange={e => {
+						        this.setState({ currentType: e.target.value })
+						        $actions.Picker.updateQuery(e.target.value)
+					        }}
+					/>
+					<Text
+						placeholder={"Search"}
+						value={currentSearch}
+						onChange={e => {
+							this.setState({ currentSearch: e.target.value })
+							$actions.Picker.updateSearch(e.target.value)
+						}}
+					/>
+				</div>
+				<div className={"selected"}>
+					{
+						Selected && Selected.record
+						&& <Views.DefaultPreview record={Selected.record}/>
+					}
+				</div>
+				<div className={"results"}>
+					{
+						Query
+						&& Query.data
+						&& Query.data.items
+						&& Query.data.items.map(record => <Views.DefaultItem record={record}/>)
+					}
+				</div>
 			</>
 		);
 	}
