@@ -31,10 +31,11 @@ import Text                                                                     
 		Picker: {
 			@asStore
 			SelectedQuery: {
-				active: false,
-				$apply( data, { active, search, defaultType, types, selectedType = defaultType || types && types[0] } ) {
+				active    : false,
+				page      : 0,
+				pageLength: 10,
+				$apply( data, { active, page, pageLength, search, defaultType, types, selectedType = defaultType || types && types[0] } ) {
 					let query = {}, etty = selectedType;
-					
 					
 					if ( !active )
 						return;
@@ -59,14 +60,25 @@ import Text                                                                     
 					return {
 						etty,
 						query,
-						limit: 3,
+						skip : page * pageLength,
+						limit: pageLength,
+						page
 					}
 				},
+				updatePage( page ) {
+					return { page };
+				},
+				nextPage  : () => state => ({
+					page: state.page + 1
+				}),
+				precPage  : () => state => ({
+					page: state.page - 1
+				}),
 				updateSearch( search ) {
-					return { search, active: true };
+					return { search, active: true, page: 0 };
 				},
 				updateQuery( selectedType ) {
-					return { selectedType, active: true };
+					return { selectedType, active: true, page: 0 };
 				}
 			},
 			@withStateMap(
@@ -80,6 +92,9 @@ import Text                                                                     
 			SelectedRef  : {
 				$apply( data, { ref: { objId, cls } = {} } ) {
 					return { id: objId, etty: cls }
+				},
+				selectItem( ref ) {
+					return { ref };
 				}
 			},
 			@withStateMap(
@@ -98,7 +113,7 @@ import Text                                                                     
 	"allowTypeSelection:Picker.SelectedQuery.types",
 	"defaultValue.cls:Picker.SelectedQuery.defaultType"
 )
-@scopeToProps("Picker.Query", "Picker.Selected", "SelectedQuery")
+@scopeToProps("Picker.Query", "Picker.Selected", "Picker.SelectedQuery")
 @asFieldType
 export default class Picker extends React.Component {
 	static displayName  = "Picker";
@@ -108,11 +123,35 @@ export default class Picker extends React.Component {
 	state               = {
 		editing: false
 	};
-	togglePicker        = () => {
+	
+	togglePicker = () => {
 		let { $actions } = this.props;
 		
 		!this.state.editing && $actions.Picker.updateSearch("")
 		this.setState({ editing: !this.state.editing });
+	};
+	//
+	//getValue( s, p ) {
+	//	s = s || this.state;
+	//	p = p || this.props;
+	//	return {
+	//		name : p.name,
+	//		value: s.value
+	//	};
+	//}
+	
+	selectRecord = ( record ) => {
+		let { $actions, name } = this.props;
+		let value              = { objId: record._id, cls: record._cls };
+		this.props.onChange
+		&& this.props.onChange({
+			                       target: {
+				                       name,
+				                       value
+			                       }// should have .value
+		                       });
+		$actions.Picker.selectItem(value)
+		this.setState({ editing: false });
 	};
 	
 	render() {
@@ -135,7 +174,7 @@ export default class Picker extends React.Component {
 						<div className={"selected"}>
 							{
 								Selected && Selected.record
-								&& <Views.DefaultPreview record={Selected.record}/>
+								&& <Views.DefaultPreview record={Selected.record} key={Selected.record._id}/>
 							}
 						</div>
 					</> :
@@ -156,13 +195,17 @@ export default class Picker extends React.Component {
 									$actions.Picker.updateSearch(e.target.value)
 								}}
 							/>
+							<button onClick={$actions.Picker.precPage}>prec</button>
+							<span>{SelectedQuery.page}</span>
+							<button onClick={$actions.Picker.nextPage}>next</button>
 						</div>
 						<div className={"results"}>
 							{
 								Query
 								&& Query.data
 								&& Query.data.items
-								&& Query.data.items.map(record => <Views.DefaultItem record={record}/>)
+								&& Query.data.items.map(record => <Views.DefaultItem key={record._id} record={record}
+								                                                     onClick={e => this.selectRecord(record)}/>)
 							}
 						</div>
 					</>

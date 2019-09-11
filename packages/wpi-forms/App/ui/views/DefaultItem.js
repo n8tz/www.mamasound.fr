@@ -27,10 +27,10 @@ import Time  from 'react-time'
 export default class DefaultItem extends React.Component {
 	
 	render() {
-		let record     = this.props.record,
-		    background = record.previewUrl;
+		let { record, onClick } = this.props,
+		    background          = record.previewUrl;
 		
-		return <div className={"DefaultItem"}>
+		return <div className={"DefaultItem"} onClick={onClick}>
 			{
 				background &&
 				<Image src={background} w={250} h={250}
