@@ -1772,14 +1772,14 @@ function asTweener() {
                     deltaX = dX && dX / tweener._.box.x * (x.scrollableWindow || x.scrollableArea) || 0;
                     deltaY = dY && dY / tweener._.box.y * (y.scrollableWindow || y.scrollableArea) || 0;
 
-                    if (!xDispatched && !tweener.isAxisOut("scrollX", parentsState[i].x + deltaX, true) && tweener.componentShouldScroll("scrollX", deltaX)) {
+                    if (!xDispatched && x.inertia.isInbound(parentsState[i].x + deltaX) && tweener.componentShouldScroll("scrollX", deltaX)) {
                       x.inertia.hold(parentsState[i].x + deltaX);
                       xDispatched = true;
                     } //console.log("scrollY", tweener.isAxisOut("scrollY", parentsState[i].y
                     // + deltaY, true));
 
 
-                    if (!yDispatched && !tweener.isAxisOut("scrollY", parentsState[i].y + deltaY, true) && tweener.componentShouldScroll("scrollY", deltaY)) {
+                    if (!yDispatched && y.inertia.isInbound(parentsState[i].y + deltaY) && tweener.componentShouldScroll("scrollY", deltaY)) {
                       y.inertia.hold(parentsState[i].y + deltaY);
                       yDispatched = true;
                     }
@@ -5038,7 +5038,13 @@ var is = __webpack_require__(/*! is */ "undefined?63a5"),
     consts = {
   velocityResetTm: 150,
   clickTm: 250
-};
+}; // this is a mess
+
+/**
+ * Predict the inertia
+ * @param _
+ */
+
 
 function applyInertia(_) {
   var velSign = signOf(_.lastVelocity); // calc momentum distance...
@@ -5094,24 +5100,24 @@ function () {
         nextValue,
         loop;
 
-    if (!_.inertia) {
-      if (_.conf.shouldLoop) {
-        while (loop = _.conf.shouldLoop(_.pos)) {
-          this.teleport(loop);
-        }
-      }
+    var pos = _.inertiaFn((at - _.inertiaStartTm) / _.targetDuration) * _.targetDist;
 
+    if (!_.inertia) {
+      //if ( _.conf.shouldLoop ) {
+      //	while ( (loop = _.conf.shouldLoop(_.pos, 0)) ) {
+      //		this.teleport(loop);
+      //	}
+      //}
       return _.pos;
     }
 
-    var pos = _.inertiaFn((at - _.inertiaStartTm) / _.targetDuration) * _.targetDist,
-        delta = pos - _.lastInertiaPos;
-
+    var delta = pos - _.lastInertiaPos;
     _.lastInertiaPos = pos;
 
     if (at - _.inertiaStartTm >= _.targetDuration) {
       _.inertia = this.active = false;
       _.lastInertiaPos = delta = 0;
+      _.targetDist = 0;
 
       if (_.targetWayPoint) {
         delta = _.targetWayPoint.at - _.pos; //console.log("snap done ", _.targetWayPoint, _.pos + delta);
@@ -5131,11 +5137,10 @@ function () {
 
     nextValue = _.pos + delta;
 
-    if (_.conf.shouldLoop) {
-      while (loop = _.conf.shouldLoop(nextValue)) {
-        //console.warn("loop", loop);
-        nextValue += loop;
-        this.teleport(loop);
+    if (delta && _.conf.shouldLoop) {
+      while (loop = _.conf.shouldLoop(nextValue, delta)) {
+        //console.warn("loop update", loop);
+        nextValue += loop; //this.teleport(loop);
       }
     }
 
@@ -5150,7 +5155,7 @@ function () {
     this.active = false;
     _.lastInertiaPos = 0;
     _.targetDist = 0;
-    _.pos = pos; //console.log("setPos", pos);
+    _.pos = pos;
 
     if (_.conf.bounds) {
       _.pos = max(_.pos, _.min);
@@ -5169,9 +5174,9 @@ function () {
   _proto.teleport = function teleport(loopDist) {
     var _ = this._,
         nextValue;
-    if (!_.inertia) return _.pos += loopDist;
-    _.lastInertiaPos += loopDist;
-    _.pos += loopDist;
+    if (!_.inertia) return _.pos += loopDist; //_.lastInertiaPos += loopDist;
+
+    _.pos += loopDist; //console.log("setPos", _.lastInertiaPos);
   };
 
   _proto.dispatch = function dispatch(delta, tm) {
@@ -5212,21 +5217,6 @@ function () {
     }
 
     this._doSnap(signOf(delta), 750);
-  };
-
-  _proto.isOutbound = function isOutbound(delta) {
-    var _ = this._,
-        loop,
-        pos = _.targetDist + (_.pos - (_.lastInertiaPos || 0)) + delta; //if ( _.conf.infinite ) return false;
-
-    if (_.conf.shouldLoop) {
-      while (loop = _.conf.shouldLoop(nextValue)) {
-        //console.warn("loop", loop);
-        pos += loop;
-      }
-    }
-
-    return pos > _.min && pos < _.max;
   };
 
   _proto._detectCurrentSnap = function _detectCurrentSnap() {
@@ -5329,17 +5319,35 @@ function () {
     _.inertia = false;
   };
 
-  _proto.hold = function hold(pos) {
+  _proto.isInbound = function isInbound(nextPos) {
     var _ = this._,
-        loop;
+        loop,
+        delta = _.lastHoldPos !== undefined ? nextPos - _.lastHoldPos : 0,
+        pos = (_.targetDist || 0) + (_.pos - (_.lastInertiaPos || 0)) + delta; //if ( _.conf.infinite ) return false;
+    //
+    //if ( _.conf.shouldLoop ) {
+    //	while ( (loop = _.conf.shouldLoop(nextValue)) ) {
+    //!(pos >= _.min && pos <= _.max) && console.warn("out", _.pos, pos, delta);
+    //		pos += loop;
+    //	}
+    //}
 
-    if (_.conf.shouldLoop) {
-      while (loop = _.conf.shouldLoop(pos)) {
-        //console.warn("loop", loop);
-        pos += loop;
-      }
+    return pos >= _.min && pos <= _.max;
+  };
 
-      while (loop = _.conf.shouldLoop(_.pos)) {
+  _proto.hold = function hold(nextPos) {
+    var _ = this._,
+        delta = _.lastHoldPos !== undefined ? nextPos - _.lastHoldPos : 0,
+        loop; //_.holding     = true;
+
+    _.lastHoldPos = nextPos;
+
+    if (delta && _.conf.shouldLoop) {
+      //while ( (loop = _.conf.shouldLoop(pos, delta)) ) {
+      //	//console.warn("loop", loop);
+      //	pos += loop;
+      //}
+      while (loop = _.conf.shouldLoop(_.pos, delta)) {
         //console.warn("loop", loop);
         _.pos += loop;
       }
@@ -5348,23 +5356,25 @@ function () {
     var now = Date.now() / 1000,
         //e.timeStamp,
     sinceLastPos = now - _.baseTS,
-        delta = pos - _.pos,
+        pos = _.pos + delta,
         iVel = delta / sinceLastPos; //if (is.nan(pos))
     //	debugger
-    //console.log("hold", pos, _.pos);
+    //console.log("hold", pos, iVel);
 
     _.lastIVelocity = iVel;
     _.lastVelocity = iVel;
-    _.baseTS = now; // clear snap
+    _.baseTS = now;
+    _.targetDist = 0;
+    _.lastInertiaPos = 0; // clear snap
 
     _.targetWayPoint = undefined;
     _.targetWayPointIndex = undefined;
 
     if (_.conf.bounds) {
       if (pos > _.max) {
-        pos = _.max + min((pos - _.max) / 10, 10);
+        pos = _.max; // + min((pos - _.max) / 10, 10);
       } else if (pos < _.min) {
-        pos = _.min - min((_.min - pos) / 10, 10);
+        pos = _.min; // - min((_.min - pos) / 10, 10);
       }
     }
 
@@ -5377,6 +5387,8 @@ function () {
     this.holding = false; // calc momentum distance...
 
     applyInertia(_);
+    _.lastHoldPos = undefined;
+    _.holding = false;
 
     if (_.conf.bounds) {
       if (_.pos + _.targetDist > _.max) {
