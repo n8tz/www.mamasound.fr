@@ -1006,18 +1006,41 @@ function asTweener() {
       };
 
       _this._swap = {};
-      _this._ = {
+
+      var _2 = _this._ = {
         refs: {},
         muxByTarget: {}
       };
-      _this._.box = {
+
+      _2.box = {
         x: 100,
         y: 100,
         z: 800
       };
-      _this._._rafLoop = _this._rafLoop.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this));
+      _2._rafLoop = _this._rafLoop.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this));
+      _2.rootRef = _this.props.forwardedRef || react__WEBPACK_IMPORTED_MODULE_6___default.a.createRef();
       _this.__isTweener = true;
-      _this._.rootRef = _this.props.forwardedRef || react__WEBPACK_IMPORTED_MODULE_6___default.a.createRef();
+      _2.tweenRefCSS = {};
+      _2.tweenRefs = {};
+      _2.tweenRefMaps = {};
+      _2.iMapOrigin = {};
+      _2.tweenRefInitialData = {};
+      _2.tweenEnabled = true;
+      _2.tweenRefOrigin = {};
+      _2.tweenRefOriginCss = {};
+      _2.axes = {};
+      _2.muxDataByTarget = _2.muxDataByTarget || {};
+      _2.tweenRefDemuxed = _2.tweenRefDemuxed || {};
+      _2.tweenRefTargets = _2.tweenRefTargets || [];
+      _2.runningAnims = _2.runningAnims || [];
+      isBrowserSide && window.addEventListener("resize", _this._.onResize = function (e) {
+        //@todo
+        _this._updateBox();
+
+        _this._updateTweenRefs();
+
+        _2.rootRef && _2.rootRef.current && _2.rootRef.current.windowDidResize && _2.rootRef.current.windowDidResize(e);
+      });
       return _this;
     } // ------------------------------------------------------------
     // -------------------- TweenRefs utils -----------------------
@@ -1048,7 +1071,6 @@ function asTweener() {
       }
 
       // ref initial style
-      this.makeTweenable();
       var _ = this._,
           tweenableMap = {};
       var initials = {};
@@ -1094,23 +1116,37 @@ function asTweener() {
         _.muxByTarget[id] = _.muxByTarget[id] || {};
         _.muxDataByTarget[id] = _.muxDataByTarget[id] || {};
         _.tweenRefOriginCss[id] = iStyle;
+        _.tweenRefMaps[id] = _.tweenRefMaps[id] || {};
 
-        try {
-          iStyle = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_2___default()({}, iStyle, {}, Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id]));
-        } catch (e) {
-          debugger;
+        if (_.tweenRefOrigin[id]) {
+          //debugger
+          // minus initial values from axis pre init
+          //Object.keys(_.tweenRefOrigin[id])
+          //      .forEach(
+          //	      key => (_.tweenRefMaps[id][key] -= _.tweenRefOrigin[id][key])
+          //      );
+          iStyle = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_2___default()({}, iStyle, {}, Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], false, true)); //// set defaults values in case of
+
+          Object.keys(initials).forEach(function (key) {
+            return _.tweenRefMaps[id][key] = is__WEBPACK_IMPORTED_MODULE_5___default.a.number(_.tweenRefMaps[id][key]) ? _.tweenRefMaps[id][key] - initials[key] : 0;
+          }); //// add new initial values
+
+          Object.keys(tweenableMap).forEach(function (key) {
+            return _.tweenRefMaps[id][key] += tweenableMap[key];
+          });
+        } else {
+          iStyle = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_2___default()({}, iStyle, {}, Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id])); // init / reset or get the tweenable view
+
+          tweenableMap = Object.assign({}, initials, tweenableMap || {}); // set defaults values in case of
+          // add new initial values
+
+          Object.keys(tweenableMap).forEach(function (key) {
+            return _.tweenRefMaps[id][key] = (_.tweenRefMaps[id][key] || 0) + tweenableMap[key];
+          });
         }
 
         _.tweenRefOrigin[id] = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_2___default()({}, tweenableMap);
         _.tweenRefCSS[id] = iStyle;
-        _.tweenRefMaps[id] = _.tweenRefMaps[id] || {}; // init / reset or get the tweenable view
-
-        tweenableMap = Object.assign({}, initials, tweenableMap || {}); // set defaults values in case of
-        // add new initial values
-
-        Object.keys(tweenableMap).forEach(function (key) {
-          return _.tweenRefMaps[id][key] = (_.tweenRefMaps[id][key] || 0) + tweenableMap[key];
-        });
         tweenableMap = _.tweenRefMaps[id];
         Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["muxToCss"])(tweenableMap, iStyle, _.muxByTarget[id], _.muxDataByTarget[id], _.box);
       } else {
@@ -1127,7 +1163,10 @@ function asTweener() {
           return _.refs[id] = node;
         }
       };
-    }
+    };
+
+    _proto.preInitRef = function preInitRef(id, initials) {} // ref initial style
+
     /**
      * Delete tweenable element
      * @param id
@@ -1189,8 +1228,7 @@ function asTweener() {
       if (isArray(target)) return target.map(function (m) {
         return _this3.updateRefStyle(m, style, postPone);
       });
-      if (!this._.tweenRefCSS) this.makeTweenable();
-      Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["deMuxTween"])(style, _.tweenRefMaps[target], initials, _.muxDataByTarget[target], _.muxByTarget[target], true);
+      if (!this._.tweenRefCSS) Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["deMuxTween"])(style, _.tweenRefMaps[target], initials, _.muxDataByTarget[target], _.muxByTarget[target], true);
 
       this._updateTweenRef(target);
     }
@@ -1255,7 +1293,6 @@ function asTweener() {
       }
 
       if (fail) return;
-      this.makeTweenable();
       return new Promise(function (resolve) {
         // start timer launch @todo
         sl.run(_this4._.tweenRefMaps, function () {
@@ -1328,7 +1365,6 @@ function asTweener() {
           defaultPosition = _ref.defaultPosition,
           scrollFirst = _ref.scrollFirst;
 
-      this.makeTweenable();
       this.makeScrollable();
       var _ = this._,
           dim = _.axes[axe],
@@ -1489,14 +1525,19 @@ function asTweener() {
         //deepExtend(this._.muxDataByTarget, muxed)
 
         sl = new _utils_CssTweenAxis__WEBPACK_IMPORTED_MODULE_10__["default"](sl, _.tweenRefMaps);
-        sl.initials = initials;
+        sl.initials = initials; //console.log(initials)
+
         Object.keys(initials).forEach(function (id) {
-          _this7._.tweenRefMaps[id] = _this7._.tweenRefMaps[id] || {};
+          _.tweenRefOrigin[id] = _.tweenRefOrigin[id] || {}; //Object.assign(_.tweenRefOrigin[id], {
+          //    ...initials[id],
+          //    ..._.tweenRefOrigin[id]
+          //})
+
+          _.tweenRefMaps[id] = _.tweenRefMaps[id] || {};
           Object.assign(_this7._.tweenRefMaps[id], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_2___default()({}, initials[id], {}, _this7._.tweenRefMaps[id]));
         });
       }
 
-      this.makeTweenable();
       this.makeScrollable(); // init scroll
 
       dim.tweenAxis.push(sl);
@@ -2034,36 +2075,6 @@ function asTweener() {
     // ------------------------------------------------------------
     // --------------- Initialization & drawers -------------------
     // ------------------------------------------------------------
-    _proto.makeTweenable = function makeTweenable() {
-      var _this12 = this;
-
-      var _ = this._;
-
-      if (!_.tweenEnabled) {
-        _.tweenRefCSS = {};
-        _.tweenRefs = {};
-        _.tweenRefMaps = {};
-        _.iMapOrigin = {};
-        _.tweenRefInitialData = {};
-        _.tweenEnabled = true;
-        _.tweenRefOrigin = {};
-        _.tweenRefOriginCss = {};
-        _.axes = {};
-        _.muxDataByTarget = _.muxDataByTarget || {};
-        _.tweenRefDemuxed = _.tweenRefDemuxed || {};
-        _.tweenRefTargets = _.tweenRefTargets || [];
-        _.runningAnims = _.runningAnims || [];
-        isBrowserSide && window.addEventListener("resize", this._.onResize = function (e) {
-          //@todo
-          _this12._updateBox();
-
-          _this12._updateTweenRefs();
-
-          _.rootRef && _.rootRef.current && _.rootRef.current.windowDidResize && _.rootRef.current.windowDidResize(e);
-        });
-      }
-    };
-
     _proto.setRootRef = function setRootRef(id) {
       this._.rootRef = id;
     };
@@ -2143,11 +2154,16 @@ function asTweener() {
     ;
 
     _proto.componentWillUnmount = function componentWillUnmount() {
+      var _this12 = this;
+
       var node = this.getRootNode();
 
       if (this._.tweenEnabled) {
         this._.tweenEnabled = false;
         window.removeEventListener("resize", this._.onResize);
+        Object.keys(this._.axes).forEach(function (axe) {
+          _this12._.axes[axe].inertiaFrame && clearTimeout(_this12._.axes[axe].inertiaFrame);
+        });
       }
 
       if (this._.scrollEnabled) {
@@ -2911,7 +2927,7 @@ var props = {
   //
 
 };
-var units = ['deg', 'box', 'bz', 'bh', 'bw', 'deg', 'em', 'ex', '%', 'px', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'rem', 'vh', 'vw', 'vmin', 'vmax'];
+var units = ['', 'deg', 'box', 'bz', 'bh', 'bw', 'deg', 'em', 'ex', '%', 'px', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'rem', 'vh', 'vw', 'vmin', 'vmax'];
 var unitsRe = new RegExp("([+-]?(?:[0-9]*[.])?[0-9]+)\\s*(" + ['\\w+', 'deg', 'bz', 'bh', 'bw', 'cap', 'ch', 'deg', 'em', 'ic', 'ex', '%', 'px', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'rem', 'vh', 'vw', 'vmin', 'vmax'].join('|') + ")");
 var floatCut = function floatCut(v) {
   if (v === void 0) {
@@ -3327,7 +3343,7 @@ function release(twKey, tweenableMap, cssMap, dataMap, muxerMap, keepValues) {
       tmpKey; // not optimal at all
 
   if (path.length === 4) {
-    //console.log("dec", twKey, dataMap[path[0]][path[1]][path[2]])
+    //console.warn("dec", twKey, dataMap[path[0]][path[1]][path[2]])
     // dec count on transform
     if (! --dataMap[path[0]][path[1]][path[2]] && !keepValues) {
       delete dataMap[path[0]][path[1]][path[2]];
@@ -3436,14 +3452,13 @@ function demux(key, tweenable, target, data, box) {
 }
 function muxOne(key, baseKey, value, target, data, initials, noPropLock, seenUnits) {
   var match = is__WEBPACK_IMPORTED_MODULE_1___default.a.string(value) ? value.match(_cssUtils__WEBPACK_IMPORTED_MODULE_2__["unitsRe"]) : false,
-      unit = match && match[2] || defaultUnits[baseKey] || "px",
+      unit = match && match[2] || defaultUnits[baseKey],
       unitKey = _cssUtils__WEBPACK_IMPORTED_MODULE_2__["units"].indexOf(unit),
       realKey = unitKey !== -1 && key + '_' + unitKey || key;
   initials[realKey] = defaultValue[baseKey] || 0;
-  data[key][unitKey] = data[key][unitKey] || 0; //console.log(key, ':', data[key][unitKey], value, noPropLock)
+  data[key][unitKey] = data[key][unitKey] || 0; //console.log(key, ':', realKey, data[key][unitKey], initials[realKey], noPropLock)
 
   if (seenUnits && seenUnits[unitKey]) {
-    //console.warn(key, ':', data[key][unitKey], value, noPropLock)
     if (match) {
       target[realKey] += parseFloat(match[1]);
     } else {
@@ -3487,7 +3502,7 @@ var mux = function mux(key, value, target, data, initials, noPropLock, reOrder) 
         seenUnits = {};
         dkey = key + '_' + ti + '_' + tFnKey;
         baseData[tFnKey] = baseData[tFnKey] || data[key][ti] && data[key][ti][tFnKey] || 0;
-        !noPropLock && baseData[tFnKey]++; //console.warn("set ", key, dkey, noPropLock, baseData[fkey])
+        !noPropLock && baseData[tFnKey]++; //console.warn("set ", key, dkey, noPropLock, baseData[tFnKey])
 
         data[dkey] = data[dkey] || [];
 
@@ -3689,10 +3704,10 @@ function release(twKey, tweenableMap, cssMap, dataMap, muxerMap, keepValues) {
   }
 }
 function demux(key, tweenable, target, data, box) {
-  target[key] = ~~tweenable[key];
+  target[key] = ~~tweenable[key]; // + defaultUnits[key];
 }
 var mux = function mux(key, value, target, data, initials, noPropLock) {
-  initials[key] = defaultUnits[key] || 0;
+  initials[key] = 0;
   target[key] = ~~value;
   data[key] = data[key] || 0;
   !noPropLock && data[key]++;
@@ -3858,7 +3873,7 @@ var defaultUnits = {
   height: 'y'
 },
     defaultValue = {
-  opacity: 1
+  opacity: 0
 };
 function release(twKey, tweenableMap, cssMap, dataMap, muxerMap, keepValues) {
   var path = twKey.split('_'),
@@ -5390,7 +5405,7 @@ function () {
     _.lastHoldPos = undefined;
     _.holding = false;
 
-    if (_.conf.bounds) {
+    if (_.conf.bounds && _.conf.snapToBounds) {
       if (_.pos + _.targetDist > _.max) {
         _.targetDist = _.max - _.pos;
         _.targetDuration = abs(_.targetDist * 10);
@@ -5415,7 +5430,8 @@ function () {
 }();
 
 Inertia.config = {
-  bounds: true
+  bounds: true,
+  snapToBounds: true
 };
 
 
