@@ -22,13 +22,14 @@ export const selected       = {
 	left     : "50%",
 	//width          : "90vw",
 	height   : "50vh",
+	opacity  : 1,
 	//overflow       : "hidden",
 	transform: [{
-		translateX: "-50%",
-		translateY: "-50%",
+		translateX : "-50%",
+		translateY : "-50%",
 		perspective: "600px",
 		//rotateX    : "2deg"
-	}, {}, {  }]
+	}, {}, {}]
 };
 export const selectedScroll = {
 	scrollY: [

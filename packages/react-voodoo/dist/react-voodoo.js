@@ -1064,9 +1064,10 @@ function asTweener() {
 
       // ref initial style
       var _ = this._,
-          tweenableMap = {},
-          initials = {};
-      if (!_.tweenRefs[id]) _.tweenRefTargets.push(id);
+          tweenableMap = {};
+      var initials = {};
+      if (!_.tweenRefs[id]) _.tweenRefTargets.push(id); //debugger
+      //console.warn('ref ', id, { ...iMap })
 
       if (_.tweenRefs[id] && (mapReset || _.iMapOrigin[id] !== iMap && !fast_deep_equal__WEBPACK_IMPORTED_MODULE_4___default()(iMap, _.iMapOrigin[id]) || _.tweenRefOriginCss[id] !== iStyle && !fast_deep_equal__WEBPACK_IMPORTED_MODULE_4___default()(iStyle, _.tweenRefOriginCss[id]))) {
         // hot switch initial values
@@ -1154,7 +1155,10 @@ function asTweener() {
           return _.refs[id] = node;
         }
       };
-    }
+    };
+
+    _proto.preInitRef = function preInitRef(id, initials) {} // ref initial style
+
     /**
      * Delete tweenable element
      * @param id
@@ -1436,7 +1440,8 @@ function asTweener() {
       var _ = this._;
       return new Promise(function (resolve, reject) {
         if (_.axes && _.axes[axe]) {
-          var setPos = function setPos(pos) {
+          var oldPos = _.axes[axe].targetPos,
+              setPos = function setPos(pos) {
             //console.log('TweenableComp::setPos:514: ',  newPos,pos, ms, axe);
             pos = ~~(pos * 10000) / 10000;
             _.axes[axe].targetPos = _.axes[axe].scrollPos = pos;
@@ -1558,18 +1563,23 @@ function asTweener() {
       var i = dim.tweenAxis.indexOf(sl);
 
       if (i !== -1) {
+        //dim.tweenAxis[i].destroy();
         dim.tweenAxis.splice(i, 1);
         dim.scrollableArea = Math.max.apply(Math, dim.tweenAxis.map(function (tl) {
           return tl.duration;
         }).concat([0]));
         if (!dim.scrollableBounds) dim.inertia.setBounds(0, dim.scrollableArea || 0); //console.warn("rm scrollable", { ...this._.tweenRefMaps })
 
-        sl.goTo(0, this._.tweenRefMaps);
+        sl.goTo(0, this._.tweenRefMaps); //console.warn("rm scrollable", { ...this._.tweenRefMaps["card"] })
+
         Object.keys(sl.initials) // unset
         .forEach(function (id) {
           Object.keys(sl.initials[id]) // unset
           .forEach(function (rkey) {
-            Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["clearTweenableValue"])(rkey, rkey, _.tweenRefMaps[id], _.tweenRefCSS[id], _.muxDataByTarget[id], _.muxByTarget[id]);
+            //debugger
+            Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["clearTweenableValue"])(rkey, rkey, _.tweenRefMaps[id], _.tweenRefCSS[id], _.muxDataByTarget[id], _.muxByTarget[id]); //!_.tweenRefCSS[id] &&
+            //_.refs[id] && _.refs[id].style && _.refs[id].style[rkey] &&
+            // (_.refs[id].style[rkey] = null);
           });
         });
         delete sl.initials;
@@ -2139,16 +2149,23 @@ function asTweener() {
       var _this12 = this;
 
       var node = this.getRootNode();
-      window.removeEventListener("resize", this._.onResize);
-      Object.keys(this._.axes).forEach(function (axe) {
-        _this12._.axes[axe].inertiaFrame && clearTimeout(_this12._.axes[axe].inertiaFrame);
-      });
+
+      if (this._.tweenEnabled) {
+        this._.tweenEnabled = false;
+        window.removeEventListener("resize", this._.onResize);
+        Object.keys(this._.axes).forEach(function (axe) {
+          _this12._.axes[axe].inertiaFrame && clearTimeout(_this12._.axes[axe].inertiaFrame);
+        });
+      }
 
       if (this._.scrollEnabled) {
-        this._.scrollEnabled = false;
+        this._.scrollEnabled = false; //this._.axes          = undefined;
+
         node && this._.onScroll && !this._parentTweener && _utils_dom__WEBPACK_IMPORTED_MODULE_11__["default"].rmWheelEvent(node, this._.onScroll);
         node && this._.dragList && _utils_dom__WEBPACK_IMPORTED_MODULE_11__["default"].removeEvent(node, this._.dragList);
       }
+
+      _React$Component.prototype.componentWillUnmount && _React$Component.prototype.componentWillUnmount.apply(this, arguments);
     };
 
     _proto.componentDidMount = function componentDidMount() {
@@ -2175,6 +2192,8 @@ function asTweener() {
 
         this._.doRegister = false;
       }
+
+      _React$Component.prototype.componentDidMount && _React$Component.prototype.componentDidMount.apply(this, arguments);
     };
 
     _proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {
@@ -2183,6 +2202,8 @@ function asTweener() {
 
         this._updateTweenRefs();
       }
+
+      _React$Component.prototype.componentDidUpdate && _React$Component.prototype.componentDidUpdate.apply(this, arguments);
     };
 
     _proto.render = function render() {
