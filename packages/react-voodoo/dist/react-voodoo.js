@@ -348,11 +348,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TweenAxis; });
 /* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/inheritsLoose */ "undefined?cdfe");
 /* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "undefined?3832");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "undefined?588e");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _TweenerContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./TweenerContext */ "./src/comps/TweenerContext.js");
+/* harmony import */ var fast_deep_equal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! fast-deep-equal */ "undefined?8c1d");
+/* harmony import */ var fast_deep_equal__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(fast_deep_equal__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "undefined?3832");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "undefined?588e");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _TweenerContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./TweenerContext */ "./src/comps/TweenerContext.js");
 
 
 /*
@@ -372,6 +374,7 @@ __webpack_require__.r(__webpack_exports__);
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 
 
 
@@ -422,18 +425,7 @@ function (_React$Component) {
         defaultPosition = _this$props.defaultPosition,
         _this$props$items = _this$props.items,
         items = _this$props$items === void 0 ? [] : _this$props$items;
-    return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_TweenerContext__WEBPACK_IMPORTED_MODULE_3__["default"].Consumer, null, function (tweener) {
-      //if ( React.isValidElement(children) ) {
-      //	children = React.cloneElement(
-      //		children,
-      //		{
-      //			...tweener.tweenRef(id, style || children.props.style, initial, pos, noRef, reset),
-      //			onDoubleClick: onDoubleClick && (e => onDoubleClick(e, tweener)),
-      //			onClick      : onClick && (e => onClick(e, tweener))
-      //		}
-      //	);
-      //
-      //}
+    return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_TweenerContext__WEBPACK_IMPORTED_MODULE_4__["default"].Consumer, null, function (tweener) {
       if (!_this3._previousAxis || _this3._previousAxis !== axe) {
         //....
         _this3._previousAxis = axe;
@@ -466,27 +458,27 @@ function (_React$Component) {
         if (items.length) _this3._lastTL = tweener.addScrollableAnim(items, axe, size);
         _this3._previousTweener = tweener;
         _this3._previousTweens = items;
-      } else if (_this3._previousTweens !== items) {
+      } else if (_this3._previousTweens !== items && !(_this3._previousTweens && fast_deep_equal__WEBPACK_IMPORTED_MODULE_1___default()(items, _this3._previousTweens))) {
         _this3._lastTL && _this3._previousTweener && _this3._previousTweener.rmScrollableAnim(_this3._lastTL, _this3._previousAxis);
         _this3._lastTL = null;
         if (items.length) _this3._lastTL = tweener.addScrollableAnim(items, axe, size);
         _this3._previousTweens = items;
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null);
+      return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_3___default.a.Fragment, null);
     });
   };
 
   return TweenAxis;
-}(react__WEBPACK_IMPORTED_MODULE_2___default.a.Component);
+}(react__WEBPACK_IMPORTED_MODULE_3___default.a.Component);
 
 TweenAxis.propTypes = {
-  axe: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
-  items: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array,
-  bounds: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
-  inertia: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.any,
-  defaultPosition: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
-  size: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.any
+  axe: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
+  items: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.array,
+  bounds: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object,
+  inertia: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.any,
+  defaultPosition: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number,
+  size: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.any
 };
 
 
@@ -1072,10 +1064,9 @@ function asTweener() {
 
       // ref initial style
       var _ = this._,
-          tweenableMap = {};
-      var initials = {};
-      if (!_.tweenRefs[id]) _.tweenRefTargets.push(id); //debugger
-      //console.warn('ref ', id, { ...iMap })
+          tweenableMap = {},
+          initials = {};
+      if (!_.tweenRefs[id]) _.tweenRefTargets.push(id);
 
       if (_.tweenRefs[id] && (mapReset || _.iMapOrigin[id] !== iMap && !fast_deep_equal__WEBPACK_IMPORTED_MODULE_4___default()(iMap, _.iMapOrigin[id]) || _.tweenRefOriginCss[id] !== iStyle && !fast_deep_equal__WEBPACK_IMPORTED_MODULE_4___default()(iStyle, _.tweenRefOriginCss[id]))) {
         // hot switch initial values
@@ -1163,10 +1154,7 @@ function asTweener() {
           return _.refs[id] = node;
         }
       };
-    };
-
-    _proto.preInitRef = function preInitRef(id, initials) {} // ref initial style
-
+    }
     /**
      * Delete tweenable element
      * @param id
@@ -1448,8 +1436,7 @@ function asTweener() {
       var _ = this._;
       return new Promise(function (resolve, reject) {
         if (_.axes && _.axes[axe]) {
-          var oldPos = _.axes[axe].targetPos,
-              setPos = function setPos(pos) {
+          var setPos = function setPos(pos) {
             //console.log('TweenableComp::setPos:514: ',  newPos,pos, ms, axe);
             pos = ~~(pos * 10000) / 10000;
             _.axes[axe].targetPos = _.axes[axe].scrollPos = pos;
@@ -1571,23 +1558,18 @@ function asTweener() {
       var i = dim.tweenAxis.indexOf(sl);
 
       if (i !== -1) {
-        //dim.tweenAxis[i].destroy();
         dim.tweenAxis.splice(i, 1);
         dim.scrollableArea = Math.max.apply(Math, dim.tweenAxis.map(function (tl) {
           return tl.duration;
         }).concat([0]));
         if (!dim.scrollableBounds) dim.inertia.setBounds(0, dim.scrollableArea || 0); //console.warn("rm scrollable", { ...this._.tweenRefMaps })
 
-        sl.goTo(0, this._.tweenRefMaps); //console.warn("rm scrollable", { ...this._.tweenRefMaps["card"] })
-
+        sl.goTo(0, this._.tweenRefMaps);
         Object.keys(sl.initials) // unset
         .forEach(function (id) {
           Object.keys(sl.initials[id]) // unset
           .forEach(function (rkey) {
-            //debugger
-            Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["clearTweenableValue"])(rkey, rkey, _.tweenRefMaps[id], _.tweenRefCSS[id], _.muxDataByTarget[id], _.muxByTarget[id]); //!_.tweenRefCSS[id] &&
-            //_.refs[id] && _.refs[id].style && _.refs[id].style[rkey] &&
-            // (_.refs[id].style[rkey] = null);
+            Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["clearTweenableValue"])(rkey, rkey, _.tweenRefMaps[id], _.tweenRefCSS[id], _.muxDataByTarget[id], _.muxByTarget[id]);
           });
         });
         delete sl.initials;
@@ -2157,23 +2139,16 @@ function asTweener() {
       var _this12 = this;
 
       var node = this.getRootNode();
-
-      if (this._.tweenEnabled) {
-        this._.tweenEnabled = false;
-        window.removeEventListener("resize", this._.onResize);
-        Object.keys(this._.axes).forEach(function (axe) {
-          _this12._.axes[axe].inertiaFrame && clearTimeout(_this12._.axes[axe].inertiaFrame);
-        });
-      }
+      window.removeEventListener("resize", this._.onResize);
+      Object.keys(this._.axes).forEach(function (axe) {
+        _this12._.axes[axe].inertiaFrame && clearTimeout(_this12._.axes[axe].inertiaFrame);
+      });
 
       if (this._.scrollEnabled) {
-        this._.scrollEnabled = false; //this._.axes          = undefined;
-
+        this._.scrollEnabled = false;
         node && this._.onScroll && !this._parentTweener && _utils_dom__WEBPACK_IMPORTED_MODULE_11__["default"].rmWheelEvent(node, this._.onScroll);
         node && this._.dragList && _utils_dom__WEBPACK_IMPORTED_MODULE_11__["default"].removeEvent(node, this._.dragList);
       }
-
-      _React$Component.prototype.componentWillUnmount && _React$Component.prototype.componentWillUnmount.apply(this, arguments);
     };
 
     _proto.componentDidMount = function componentDidMount() {
@@ -2200,8 +2175,6 @@ function asTweener() {
 
         this._.doRegister = false;
       }
-
-      _React$Component.prototype.componentDidMount && _React$Component.prototype.componentDidMount.apply(this, arguments);
     };
 
     _proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {
@@ -2210,8 +2183,6 @@ function asTweener() {
 
         this._updateTweenRefs();
       }
-
-      _React$Component.prototype.componentDidUpdate && _React$Component.prototype.componentDidUpdate.apply(this, arguments);
     };
 
     _proto.render = function render() {
