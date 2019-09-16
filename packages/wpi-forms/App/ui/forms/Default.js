@@ -25,8 +25,7 @@ import is            from "is";
 import React         from "react";
 import {ContextMenu} from 'react-inheritable-contextmenu';
 
-import {propsToScope, scopeToProps, withScope} from "react-scopes";
-import {withStateMap}                          from "rescope-spells";
+import {propsToScope, scopeToProps, withScope, withStateMap} from "react-scopes";
 
 @withScope(
 	{

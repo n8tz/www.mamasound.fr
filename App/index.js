@@ -23,7 +23,7 @@ import ReactDom           from 'react-dom';
 import {renderToString}   from "react-dom/server";
 import {Helmet}           from "react-helmet";
 //import {hot}            from 'react-hot-loader/root'
-import {Scope, withScope} from "react-rescope";
+import {Scope, withScope} from "react-scopes";
 import "regenerator-runtime/runtime";
 import shortid            from 'shortid';
 import Index              from "./index.html";

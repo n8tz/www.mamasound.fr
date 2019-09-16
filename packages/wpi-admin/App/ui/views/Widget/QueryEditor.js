@@ -22,8 +22,7 @@ import PopAnywhere                                  from 'App/ui/components/PopA
 import {types}                                      from 'App/db';
 import {DropzoneComponent}                          from "react-dropzone-component";
 import Select                                       from 'react-select';
-import {withScope, Store, scopeToProps, propsToScope} from "react-scopes";
-import {withStateMap, asRef, asStore}               from "rescope-spells";
+import {withScope, Store, scopeToProps, withStateMap, asRef, asStore} from "react-scopes";
 import ImportIcon                                   from '@material-ui/icons/CloudUploadOutlined';
 import ExportIcon                                   from '@material-ui/icons/Delete';
 import SaveIcon                                     from '@material-ui/icons/Save';

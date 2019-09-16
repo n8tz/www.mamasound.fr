@@ -15,11 +15,10 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import scopes                                  from 'App/scopes/(*).js';
-import {Views}                                 from 'App/ui';
-import React                                   from "react";
-import {propsToScope, scopeToProps, withScope} from "react-scopes";
-import {asRef, asStore}                        from "rescope-spells";
+import scopes                                                  from 'App/scopes/(*).js';
+import {Views}                                                 from 'App/ui';
+import React                                                   from "react";
+import {asRef, asStore, propsToScope, scopeToProps, withScope} from "react-scopes";
 
 let isBrowser = false;
 

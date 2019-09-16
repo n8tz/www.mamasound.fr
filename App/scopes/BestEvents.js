@@ -19,7 +19,7 @@
 import moment  from "moment";
 import shortid from "shortid";
 
-import {withStateMap, asRef, asStore, asScope} from "rescope-spells";
+import {withStateMap, asRef, asStore, asScope} from "react-scopes";
 import stores                                  from 'App/stores/(*).js';
 
 

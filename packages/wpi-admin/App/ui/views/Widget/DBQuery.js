@@ -20,7 +20,7 @@ import PropTypes                                                        from "pr
 import React                                                            from "react";
 import {remove}                                                         from 'App/db';
 import {withScope, Store, scopeToProps, propsToScope}                     from "react-scopes";
-import {withStateMap, asRef, asStore}                                   from "rescope-spells";
+import {withStateMap, asRef, asStore}                                   from "react-scopes";
 import QueryIcon                                                        from '@material-ui/icons/CloudUploadOutlined';
 import DeleteIcon                                                       from '@material-ui/icons/Delete';
 import RefreshIcon                                                      from '@material-ui/icons/Refresh';

@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {Context, Store, scopeToProps} from "rescope";
+import { Store, scopeToProps} from "react-scopes";
 import React                          from 'react'
 import debounce                       from 'debounce'
 import is                             from 'is'

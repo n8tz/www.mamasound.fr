@@ -19,7 +19,7 @@
 import stores from 'App/stores/(*).js';
 import moment from "moment";
 
-import {asRef, asStore, withStateMap} from "rescope-spells";
+import {asRef, asStore, withStateMap} from "react-scopes";
 
 
 export default {
