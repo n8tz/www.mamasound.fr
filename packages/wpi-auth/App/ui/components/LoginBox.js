@@ -72,8 +72,7 @@ export default class LoginBox extends Component {
 				}
 				<Dialog open={ this.state.showModal }
 				        title='My awesome dialog'
-				        onEscKeyDown={ () => this.setState({ showModal: false }) }
-				        onOverlayClick={ () => this.setState({ showModal: false }) }>
+				        onClose={ () => this.setState({ showModal: false }) }>
 					<h1>Connexion</h1>
 					
 					<form onKeyPress={
