@@ -17,20 +17,20 @@
 
 'use strict';
 
-import React from 'react';
-
-import Time from 'react-time'
+import entities from 'App/db/entities';
 
 import Image from 'App/ui/components/Image';
+import React from 'react';
+import Time  from 'react-time'
 
 
 export default class DefaultItem extends React.Component {
 	
 	render() {
-		let record     = this.props.record,
-		    background = record.previewUrl;
+		let { record, onClick } = this.props,
+		    background          = record.previewUrl;
 		
-		return <div className={"DefaultItem"}>
+		return <div className={"DefaultItem"} onClick={onClick}>
 			{
 				background &&
 				<Image src={background} w={250} h={250}
@@ -43,7 +43,7 @@ export default class DefaultItem extends React.Component {
 				{record._cls}
 			</div>
 			<div className="title">
-				{record.label}
+				{record[entities[record._cls].labelField || 'label']}
 			</div>
 			<div className="lastModifiedDate">
 				<Time value={new Date(record.updated)} format="DD/MM/YYYY HH:mm"/>

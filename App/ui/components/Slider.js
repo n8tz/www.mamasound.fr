@@ -46,12 +46,12 @@ export default class Slider extends React.Component {
 	}
 	
 	goNext() {
-		let { step, dec, nbItems, scrollDir } = this.state,
-		    tweener = this.props.tweener,
-		    nextIndex                         = ((nbItems + this.state.index + 1) % nbItems);
+		let { step, windowSize, nbItems } = this.state,
+		    { tweener, scrollDir }        = this.props,
+		    nextIndex                     = ((nbItems + this.state.index + 1) % (nbItems));
 		
 		if ( this.state.index > nextIndex )
-			tweener.scrollTo(dec + 100 - step, 0, scrollDir);
+			tweener.scrollTo(100 + windowSize - step, 0, scrollDir);
 		
 		//console.log(nextIndex)
 		this.setState({ index: nextIndex })
@@ -63,7 +63,7 @@ export default class Slider extends React.Component {
 	}
 	
 	componentDidUpdate( prevProps, prevState, snapshot ) {
-		let { autoScroll, scrollDir, tweener }                      = this.props,
+		let { autoScroll, scrollDir, tweener }             = this.props,
 		    { index = this.props.defaultIndex, step, dec } = this.state;
 		
 		if ( prevState.dec !== dec ) {
@@ -164,26 +164,27 @@ export default class Slider extends React.Component {
 						!infinite && {
 							min: 100,
 							max: dec + nbGhostItems * step,
-						}||undefined
+						} || undefined
 					}
 					inertia={
 						{
-							maxJump,
-							shouldLoop: infinite && (( v ) => {
+							snapToBounds: false,
+							//maxJump,
+							shouldLoop  : infinite && (( v, d ) => {
 								let { windowSize } = this.state;
-								if ( v > (100 + windowSize * 2) )
+								if ( d > 0 && (v) >= (100 + windowSize * 2) )
 									return -windowSize;
 								
-								if ( v < (100 + windowSize) )
+								if ( d < 0 && (v) <= (100 + windowSize) )
 									return windowSize;
 							}),
-							willSnap  : ( i, v ) => {
+							willSnap    : ( i, v ) => {
 								let { nbItems }   = this.state;
 								this._wasUserSnap = true;
 								this.setState({ index: (i) % nbItems })
 								//console.log(i % nbItems, v)
 							},
-							wayPoints : allItems.map(( child, i ) => ({ at: 100 + i * step }))
+							wayPoints   : allItems.map(( child, i ) => ({ at: 100 + i * step }))
 						}
 					}
 				/>

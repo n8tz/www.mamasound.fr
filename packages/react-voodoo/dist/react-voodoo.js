@@ -348,11 +348,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TweenAxis; });
 /* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/inheritsLoose */ "undefined?cdfe");
 /* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "undefined?3832");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "undefined?588e");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _TweenerContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./TweenerContext */ "./src/comps/TweenerContext.js");
+/* harmony import */ var fast_deep_equal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! fast-deep-equal */ "undefined?8c1d");
+/* harmony import */ var fast_deep_equal__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(fast_deep_equal__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "undefined?3832");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "undefined?588e");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _TweenerContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./TweenerContext */ "./src/comps/TweenerContext.js");
 
 
 /*
@@ -372,6 +374,7 @@ __webpack_require__.r(__webpack_exports__);
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 
 
 
@@ -422,18 +425,7 @@ function (_React$Component) {
         defaultPosition = _this$props.defaultPosition,
         _this$props$items = _this$props.items,
         items = _this$props$items === void 0 ? [] : _this$props$items;
-    return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_TweenerContext__WEBPACK_IMPORTED_MODULE_3__["default"].Consumer, null, function (tweener) {
-      //if ( React.isValidElement(children) ) {
-      //	children = React.cloneElement(
-      //		children,
-      //		{
-      //			...tweener.tweenRef(id, style || children.props.style, initial, pos, noRef, reset),
-      //			onDoubleClick: onDoubleClick && (e => onDoubleClick(e, tweener)),
-      //			onClick      : onClick && (e => onClick(e, tweener))
-      //		}
-      //	);
-      //
-      //}
+    return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_TweenerContext__WEBPACK_IMPORTED_MODULE_4__["default"].Consumer, null, function (tweener) {
       if (!_this3._previousAxis || _this3._previousAxis !== axe) {
         //....
         _this3._previousAxis = axe;
@@ -466,27 +458,27 @@ function (_React$Component) {
         if (items.length) _this3._lastTL = tweener.addScrollableAnim(items, axe, size);
         _this3._previousTweener = tweener;
         _this3._previousTweens = items;
-      } else if (_this3._previousTweens !== items) {
+      } else if (_this3._previousTweens !== items && !(_this3._previousTweens && fast_deep_equal__WEBPACK_IMPORTED_MODULE_1___default()(items, _this3._previousTweens))) {
         _this3._lastTL && _this3._previousTweener && _this3._previousTweener.rmScrollableAnim(_this3._lastTL, _this3._previousAxis);
         _this3._lastTL = null;
         if (items.length) _this3._lastTL = tweener.addScrollableAnim(items, axe, size);
         _this3._previousTweens = items;
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null);
+      return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_3___default.a.Fragment, null);
     });
   };
 
   return TweenAxis;
-}(react__WEBPACK_IMPORTED_MODULE_2___default.a.Component);
+}(react__WEBPACK_IMPORTED_MODULE_3___default.a.Component);
 
 TweenAxis.propTypes = {
-  axe: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
-  items: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array,
-  bounds: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
-  inertia: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.any,
-  defaultPosition: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
-  size: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.any
+  axe: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
+  items: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.array,
+  bounds: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object,
+  inertia: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.any,
+  defaultPosition: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number,
+  size: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.any
 };
 
 
@@ -1006,18 +998,41 @@ function asTweener() {
       };
 
       _this._swap = {};
-      _this._ = {
+
+      var _2 = _this._ = {
         refs: {},
         muxByTarget: {}
       };
-      _this._.box = {
+
+      _2.box = {
         x: 100,
         y: 100,
         z: 800
       };
-      _this._._rafLoop = _this._rafLoop.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this));
+      _2._rafLoop = _this._rafLoop.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this));
+      _2.rootRef = _this.props.forwardedRef || react__WEBPACK_IMPORTED_MODULE_6___default.a.createRef();
       _this.__isTweener = true;
-      _this._.rootRef = _this.props.forwardedRef || react__WEBPACK_IMPORTED_MODULE_6___default.a.createRef();
+      _2.tweenRefCSS = {};
+      _2.tweenRefs = {};
+      _2.tweenRefMaps = {};
+      _2.iMapOrigin = {};
+      _2.tweenRefInitialData = {};
+      _2.tweenEnabled = true;
+      _2.tweenRefOrigin = {};
+      _2.tweenRefOriginCss = {};
+      _2.axes = {};
+      _2.muxDataByTarget = _2.muxDataByTarget || {};
+      _2.tweenRefDemuxed = _2.tweenRefDemuxed || {};
+      _2.tweenRefTargets = _2.tweenRefTargets || [];
+      _2.runningAnims = _2.runningAnims || [];
+      isBrowserSide && window.addEventListener("resize", _this._.onResize = function (e) {
+        //@todo
+        _this._updateBox();
+
+        _this._updateTweenRefs();
+
+        _2.rootRef && _2.rootRef.current && _2.rootRef.current.windowDidResize && _2.rootRef.current.windowDidResize(e);
+      });
       return _this;
     } // ------------------------------------------------------------
     // -------------------- TweenRefs utils -----------------------
@@ -1048,7 +1063,6 @@ function asTweener() {
       }
 
       // ref initial style
-      this.makeTweenable();
       var _ = this._,
           tweenableMap = {};
       var initials = {};
@@ -1094,23 +1108,37 @@ function asTweener() {
         _.muxByTarget[id] = _.muxByTarget[id] || {};
         _.muxDataByTarget[id] = _.muxDataByTarget[id] || {};
         _.tweenRefOriginCss[id] = iStyle;
+        _.tweenRefMaps[id] = _.tweenRefMaps[id] || {};
 
-        try {
-          iStyle = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_2___default()({}, iStyle, {}, Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id]));
-        } catch (e) {
-          debugger;
+        if (_.tweenRefOrigin[id]) {
+          //debugger
+          // minus initial values from axis pre init
+          //Object.keys(_.tweenRefOrigin[id])
+          //      .forEach(
+          //	      key => (_.tweenRefMaps[id][key] -= _.tweenRefOrigin[id][key])
+          //      );
+          iStyle = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_2___default()({}, iStyle, {}, Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id], false, true)); //// set defaults values in case of
+
+          Object.keys(initials).forEach(function (key) {
+            return _.tweenRefMaps[id][key] = is__WEBPACK_IMPORTED_MODULE_5___default.a.number(_.tweenRefMaps[id][key]) ? _.tweenRefMaps[id][key] - initials[key] : 0;
+          }); //// add new initial values
+
+          Object.keys(tweenableMap).forEach(function (key) {
+            return _.tweenRefMaps[id][key] += tweenableMap[key];
+          });
+        } else {
+          iStyle = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_2___default()({}, iStyle, {}, Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["deMuxTween"])(iMap, tweenableMap, initials, _.muxDataByTarget[id], _.muxByTarget[id])); // init / reset or get the tweenable view
+
+          tweenableMap = Object.assign({}, initials, tweenableMap || {}); // set defaults values in case of
+          // add new initial values
+
+          Object.keys(tweenableMap).forEach(function (key) {
+            return _.tweenRefMaps[id][key] = (_.tweenRefMaps[id][key] || 0) + tweenableMap[key];
+          });
         }
 
         _.tweenRefOrigin[id] = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_2___default()({}, tweenableMap);
         _.tweenRefCSS[id] = iStyle;
-        _.tweenRefMaps[id] = _.tweenRefMaps[id] || {}; // init / reset or get the tweenable view
-
-        tweenableMap = Object.assign({}, initials, tweenableMap || {}); // set defaults values in case of
-        // add new initial values
-
-        Object.keys(tweenableMap).forEach(function (key) {
-          return _.tweenRefMaps[id][key] = (_.tweenRefMaps[id][key] || 0) + tweenableMap[key];
-        });
         tweenableMap = _.tweenRefMaps[id];
         Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["muxToCss"])(tweenableMap, iStyle, _.muxByTarget[id], _.muxDataByTarget[id], _.box);
       } else {
@@ -1127,7 +1155,10 @@ function asTweener() {
           return _.refs[id] = node;
         }
       };
-    }
+    };
+
+    _proto.preInitRef = function preInitRef(id, initials) {} // ref initial style
+
     /**
      * Delete tweenable element
      * @param id
@@ -1189,8 +1220,7 @@ function asTweener() {
       if (isArray(target)) return target.map(function (m) {
         return _this3.updateRefStyle(m, style, postPone);
       });
-      if (!this._.tweenRefCSS) this.makeTweenable();
-      Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["deMuxTween"])(style, _.tweenRefMaps[target], initials, _.muxDataByTarget[target], _.muxByTarget[target], true);
+      if (!this._.tweenRefCSS) Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["deMuxTween"])(style, _.tweenRefMaps[target], initials, _.muxDataByTarget[target], _.muxByTarget[target], true);
 
       this._updateTweenRef(target);
     }
@@ -1255,7 +1285,6 @@ function asTweener() {
       }
 
       if (fail) return;
-      this.makeTweenable();
       return new Promise(function (resolve) {
         // start timer launch @todo
         sl.run(_this4._.tweenRefMaps, function () {
@@ -1328,7 +1357,6 @@ function asTweener() {
           defaultPosition = _ref.defaultPosition,
           scrollFirst = _ref.scrollFirst;
 
-      this.makeTweenable();
       this.makeScrollable();
       var _ = this._,
           dim = _.axes[axe],
@@ -1489,14 +1517,19 @@ function asTweener() {
         //deepExtend(this._.muxDataByTarget, muxed)
 
         sl = new _utils_CssTweenAxis__WEBPACK_IMPORTED_MODULE_10__["default"](sl, _.tweenRefMaps);
-        sl.initials = initials;
+        sl.initials = initials; //console.log(initials)
+
         Object.keys(initials).forEach(function (id) {
-          _this7._.tweenRefMaps[id] = _this7._.tweenRefMaps[id] || {};
+          _.tweenRefOrigin[id] = _.tweenRefOrigin[id] || {}; //Object.assign(_.tweenRefOrigin[id], {
+          //    ...initials[id],
+          //    ..._.tweenRefOrigin[id]
+          //})
+
+          _.tweenRefMaps[id] = _.tweenRefMaps[id] || {};
           Object.assign(_this7._.tweenRefMaps[id], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_2___default()({}, initials[id], {}, _this7._.tweenRefMaps[id]));
         });
       }
 
-      this.makeTweenable();
       this.makeScrollable(); // init scroll
 
       dim.tweenAxis.push(sl);
@@ -1772,14 +1805,14 @@ function asTweener() {
                     deltaX = dX && dX / tweener._.box.x * (x.scrollableWindow || x.scrollableArea) || 0;
                     deltaY = dY && dY / tweener._.box.y * (y.scrollableWindow || y.scrollableArea) || 0;
 
-                    if (!xDispatched && !tweener.isAxisOut("scrollX", parentsState[i].x + deltaX, true) && tweener.componentShouldScroll("scrollX", deltaX)) {
+                    if (!xDispatched && x.inertia.isInbound(parentsState[i].x + deltaX) && tweener.componentShouldScroll("scrollX", deltaX)) {
                       x.inertia.hold(parentsState[i].x + deltaX);
                       xDispatched = true;
                     } //console.log("scrollY", tweener.isAxisOut("scrollY", parentsState[i].y
                     // + deltaY, true));
 
 
-                    if (!yDispatched && !tweener.isAxisOut("scrollY", parentsState[i].y + deltaY, true) && tweener.componentShouldScroll("scrollY", deltaY)) {
+                    if (!yDispatched && y.inertia.isInbound(parentsState[i].y + deltaY) && tweener.componentShouldScroll("scrollY", deltaY)) {
                       y.inertia.hold(parentsState[i].y + deltaY);
                       yDispatched = true;
                     }
@@ -2034,36 +2067,6 @@ function asTweener() {
     // ------------------------------------------------------------
     // --------------- Initialization & drawers -------------------
     // ------------------------------------------------------------
-    _proto.makeTweenable = function makeTweenable() {
-      var _this12 = this;
-
-      var _ = this._;
-
-      if (!_.tweenEnabled) {
-        _.tweenRefCSS = {};
-        _.tweenRefs = {};
-        _.tweenRefMaps = {};
-        _.iMapOrigin = {};
-        _.tweenRefInitialData = {};
-        _.tweenEnabled = true;
-        _.tweenRefOrigin = {};
-        _.tweenRefOriginCss = {};
-        _.axes = {};
-        _.muxDataByTarget = _.muxDataByTarget || {};
-        _.tweenRefDemuxed = _.tweenRefDemuxed || {};
-        _.tweenRefTargets = _.tweenRefTargets || [];
-        _.runningAnims = _.runningAnims || [];
-        isBrowserSide && window.addEventListener("resize", this._.onResize = function (e) {
-          //@todo
-          _this12._updateBox();
-
-          _this12._updateTweenRefs();
-
-          _.rootRef && _.rootRef.current && _.rootRef.current.windowDidResize && _.rootRef.current.windowDidResize(e);
-        });
-      }
-    };
-
     _proto.setRootRef = function setRootRef(id) {
       this._.rootRef = id;
     };
@@ -2143,11 +2146,16 @@ function asTweener() {
     ;
 
     _proto.componentWillUnmount = function componentWillUnmount() {
+      var _this12 = this;
+
       var node = this.getRootNode();
 
       if (this._.tweenEnabled) {
         this._.tweenEnabled = false;
         window.removeEventListener("resize", this._.onResize);
+        Object.keys(this._.axes).forEach(function (axe) {
+          _this12._.axes[axe].inertiaFrame && clearTimeout(_this12._.axes[axe].inertiaFrame);
+        });
       }
 
       if (this._.scrollEnabled) {
@@ -2911,7 +2919,7 @@ var props = {
   //
 
 };
-var units = ['deg', 'box', 'bz', 'bh', 'bw', 'deg', 'em', 'ex', '%', 'px', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'rem', 'vh', 'vw', 'vmin', 'vmax'];
+var units = ['', 'deg', 'box', 'bz', 'bh', 'bw', 'deg', 'em', 'ex', '%', 'px', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'rem', 'vh', 'vw', 'vmin', 'vmax'];
 var unitsRe = new RegExp("([+-]?(?:[0-9]*[.])?[0-9]+)\\s*(" + ['\\w+', 'deg', 'bz', 'bh', 'bw', 'cap', 'ch', 'deg', 'em', 'ic', 'ex', '%', 'px', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'rem', 'vh', 'vw', 'vmin', 'vmax'].join('|') + ")");
 var floatCut = function floatCut(v) {
   if (v === void 0) {
@@ -3327,7 +3335,7 @@ function release(twKey, tweenableMap, cssMap, dataMap, muxerMap, keepValues) {
       tmpKey; // not optimal at all
 
   if (path.length === 4) {
-    //console.log("dec", twKey, dataMap[path[0]][path[1]][path[2]])
+    //console.warn("dec", twKey, dataMap[path[0]][path[1]][path[2]])
     // dec count on transform
     if (! --dataMap[path[0]][path[1]][path[2]] && !keepValues) {
       delete dataMap[path[0]][path[1]][path[2]];
@@ -3436,14 +3444,13 @@ function demux(key, tweenable, target, data, box) {
 }
 function muxOne(key, baseKey, value, target, data, initials, noPropLock, seenUnits) {
   var match = is__WEBPACK_IMPORTED_MODULE_1___default.a.string(value) ? value.match(_cssUtils__WEBPACK_IMPORTED_MODULE_2__["unitsRe"]) : false,
-      unit = match && match[2] || defaultUnits[baseKey] || "px",
+      unit = match && match[2] || defaultUnits[baseKey],
       unitKey = _cssUtils__WEBPACK_IMPORTED_MODULE_2__["units"].indexOf(unit),
       realKey = unitKey !== -1 && key + '_' + unitKey || key;
   initials[realKey] = defaultValue[baseKey] || 0;
-  data[key][unitKey] = data[key][unitKey] || 0; //console.log(key, ':', data[key][unitKey], value, noPropLock)
+  data[key][unitKey] = data[key][unitKey] || 0; //console.log(key, ':', realKey, data[key][unitKey], initials[realKey], noPropLock)
 
   if (seenUnits && seenUnits[unitKey]) {
-    //console.warn(key, ':', data[key][unitKey], value, noPropLock)
     if (match) {
       target[realKey] += parseFloat(match[1]);
     } else {
@@ -3487,7 +3494,7 @@ var mux = function mux(key, value, target, data, initials, noPropLock, reOrder) 
         seenUnits = {};
         dkey = key + '_' + ti + '_' + tFnKey;
         baseData[tFnKey] = baseData[tFnKey] || data[key][ti] && data[key][ti][tFnKey] || 0;
-        !noPropLock && baseData[tFnKey]++; //console.warn("set ", key, dkey, noPropLock, baseData[fkey])
+        !noPropLock && baseData[tFnKey]++; //console.warn("set ", key, dkey, noPropLock, baseData[tFnKey])
 
         data[dkey] = data[dkey] || [];
 
@@ -3689,10 +3696,10 @@ function release(twKey, tweenableMap, cssMap, dataMap, muxerMap, keepValues) {
   }
 }
 function demux(key, tweenable, target, data, box) {
-  target[key] = ~~tweenable[key];
+  target[key] = ~~tweenable[key]; // + defaultUnits[key];
 }
 var mux = function mux(key, value, target, data, initials, noPropLock) {
-  initials[key] = defaultUnits[key] || 0;
+  initials[key] = 0;
   target[key] = ~~value;
   data[key] = data[key] || 0;
   !noPropLock && data[key]++;
@@ -3858,7 +3865,7 @@ var defaultUnits = {
   height: 'y'
 },
     defaultValue = {
-  opacity: 1
+  opacity: 0
 };
 function release(twKey, tweenableMap, cssMap, dataMap, muxerMap, keepValues) {
   var path = twKey.split('_'),
@@ -5038,7 +5045,13 @@ var is = __webpack_require__(/*! is */ "undefined?63a5"),
     consts = {
   velocityResetTm: 150,
   clickTm: 250
-};
+}; // this is a mess
+
+/**
+ * Predict the inertia
+ * @param _
+ */
+
 
 function applyInertia(_) {
   var velSign = signOf(_.lastVelocity); // calc momentum distance...
@@ -5094,24 +5107,24 @@ function () {
         nextValue,
         loop;
 
-    if (!_.inertia) {
-      if (_.conf.shouldLoop) {
-        while (loop = _.conf.shouldLoop(_.pos)) {
-          this.teleport(loop);
-        }
-      }
+    var pos = _.inertiaFn((at - _.inertiaStartTm) / _.targetDuration) * _.targetDist;
 
+    if (!_.inertia) {
+      //if ( _.conf.shouldLoop ) {
+      //	while ( (loop = _.conf.shouldLoop(_.pos, 0)) ) {
+      //		this.teleport(loop);
+      //	}
+      //}
       return _.pos;
     }
 
-    var pos = _.inertiaFn((at - _.inertiaStartTm) / _.targetDuration) * _.targetDist,
-        delta = pos - _.lastInertiaPos;
-
+    var delta = pos - _.lastInertiaPos;
     _.lastInertiaPos = pos;
 
     if (at - _.inertiaStartTm >= _.targetDuration) {
       _.inertia = this.active = false;
       _.lastInertiaPos = delta = 0;
+      _.targetDist = 0;
 
       if (_.targetWayPoint) {
         delta = _.targetWayPoint.at - _.pos; //console.log("snap done ", _.targetWayPoint, _.pos + delta);
@@ -5131,11 +5144,10 @@ function () {
 
     nextValue = _.pos + delta;
 
-    if (_.conf.shouldLoop) {
-      while (loop = _.conf.shouldLoop(nextValue)) {
-        //console.warn("loop", loop);
-        nextValue += loop;
-        this.teleport(loop);
+    if (delta && _.conf.shouldLoop) {
+      while (loop = _.conf.shouldLoop(nextValue, delta)) {
+        //console.warn("loop update", loop);
+        nextValue += loop; //this.teleport(loop);
       }
     }
 
@@ -5150,7 +5162,7 @@ function () {
     this.active = false;
     _.lastInertiaPos = 0;
     _.targetDist = 0;
-    _.pos = pos; //console.log("setPos", pos);
+    _.pos = pos;
 
     if (_.conf.bounds) {
       _.pos = max(_.pos, _.min);
@@ -5169,9 +5181,9 @@ function () {
   _proto.teleport = function teleport(loopDist) {
     var _ = this._,
         nextValue;
-    if (!_.inertia) return _.pos += loopDist;
-    _.lastInertiaPos += loopDist;
-    _.pos += loopDist;
+    if (!_.inertia) return _.pos += loopDist; //_.lastInertiaPos += loopDist;
+
+    _.pos += loopDist; //console.log("setPos", _.lastInertiaPos);
   };
 
   _proto.dispatch = function dispatch(delta, tm) {
@@ -5212,21 +5224,6 @@ function () {
     }
 
     this._doSnap(signOf(delta), 750);
-  };
-
-  _proto.isOutbound = function isOutbound(delta) {
-    var _ = this._,
-        loop,
-        pos = _.targetDist + (_.pos - (_.lastInertiaPos || 0)) + delta; //if ( _.conf.infinite ) return false;
-
-    if (_.conf.shouldLoop) {
-      while (loop = _.conf.shouldLoop(nextValue)) {
-        //console.warn("loop", loop);
-        pos += loop;
-      }
-    }
-
-    return pos > _.min && pos < _.max;
   };
 
   _proto._detectCurrentSnap = function _detectCurrentSnap() {
@@ -5329,17 +5326,35 @@ function () {
     _.inertia = false;
   };
 
-  _proto.hold = function hold(pos) {
+  _proto.isInbound = function isInbound(nextPos) {
     var _ = this._,
-        loop;
+        loop,
+        delta = _.lastHoldPos !== undefined ? nextPos - _.lastHoldPos : 0,
+        pos = (_.targetDist || 0) + (_.pos - (_.lastInertiaPos || 0)) + delta; //if ( _.conf.infinite ) return false;
+    //
+    //if ( _.conf.shouldLoop ) {
+    //	while ( (loop = _.conf.shouldLoop(nextValue)) ) {
+    //!(pos >= _.min && pos <= _.max) && console.warn("out", _.pos, pos, delta);
+    //		pos += loop;
+    //	}
+    //}
 
-    if (_.conf.shouldLoop) {
-      while (loop = _.conf.shouldLoop(pos)) {
-        //console.warn("loop", loop);
-        pos += loop;
-      }
+    return pos >= _.min && pos <= _.max;
+  };
 
-      while (loop = _.conf.shouldLoop(_.pos)) {
+  _proto.hold = function hold(nextPos) {
+    var _ = this._,
+        delta = _.lastHoldPos !== undefined ? nextPos - _.lastHoldPos : 0,
+        loop; //_.holding     = true;
+
+    _.lastHoldPos = nextPos;
+
+    if (delta && _.conf.shouldLoop) {
+      //while ( (loop = _.conf.shouldLoop(pos, delta)) ) {
+      //	//console.warn("loop", loop);
+      //	pos += loop;
+      //}
+      while (loop = _.conf.shouldLoop(_.pos, delta)) {
         //console.warn("loop", loop);
         _.pos += loop;
       }
@@ -5348,23 +5363,25 @@ function () {
     var now = Date.now() / 1000,
         //e.timeStamp,
     sinceLastPos = now - _.baseTS,
-        delta = pos - _.pos,
+        pos = _.pos + delta,
         iVel = delta / sinceLastPos; //if (is.nan(pos))
     //	debugger
-    //console.log("hold", pos, _.pos);
+    //console.log("hold", pos, iVel);
 
     _.lastIVelocity = iVel;
     _.lastVelocity = iVel;
-    _.baseTS = now; // clear snap
+    _.baseTS = now;
+    _.targetDist = 0;
+    _.lastInertiaPos = 0; // clear snap
 
     _.targetWayPoint = undefined;
     _.targetWayPointIndex = undefined;
 
     if (_.conf.bounds) {
       if (pos > _.max) {
-        pos = _.max + min((pos - _.max) / 10, 10);
+        pos = _.max; // + min((pos - _.max) / 10, 10);
       } else if (pos < _.min) {
-        pos = _.min - min((_.min - pos) / 10, 10);
+        pos = _.min; // - min((_.min - pos) / 10, 10);
       }
     }
 
@@ -5377,8 +5394,10 @@ function () {
     this.holding = false; // calc momentum distance...
 
     applyInertia(_);
+    _.lastHoldPos = undefined;
+    _.holding = false;
 
-    if (_.conf.bounds) {
+    if (_.conf.bounds && _.conf.snapToBounds) {
       if (_.pos + _.targetDist > _.max) {
         _.targetDist = _.max - _.pos;
         _.targetDuration = abs(_.targetDist * 10);
@@ -5403,7 +5422,8 @@ function () {
 }();
 
 Inertia.config = {
-  bounds: true
+  bounds: true,
+  snapToBounds: true
 };
 
 

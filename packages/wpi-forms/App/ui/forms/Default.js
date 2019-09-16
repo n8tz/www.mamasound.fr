@@ -57,17 +57,17 @@ export default class RecordEditor extends React.Component {
 	
 	shouldComponentUpdate( nextProps, nextState ) {
 		if ( (
-			nextState.isLoading != this.state.isLoading
-			|| nextState.haveErrors != this.state.haveErrors
-			|| nextState.hidden != this.state.hidden
+			nextState.isLoading !== this.state.isLoading
+			|| nextState.haveErrors !== this.state.haveErrors
+			|| nextState.hidden !== this.state.hidden
 		)
 		) {
 			return true;
 		}
-		if ( nextState.errors && (nextState.errors != this.state.errors) ) {
+		if ( nextState.errors && (nextState.errors !== this.state.errors) ) {
 			return true;
 		}
-		if ( nextProps.record && this.props.record && nextProps.record._id == this.props.record._id )
+		if ( nextProps.record && this.props.record && nextProps.record._id === this.props.record._id )
 			return false;
 		if ( nextProps.record && !this.props.record )
 			return true;
@@ -168,7 +168,7 @@ export default class RecordEditor extends React.Component {
 			return <div>Entity not found '{etty}'</div>
 		Object.keys(recordDef.fields).map(
 			( name ) => {
-				if ( !recordDef.fields[name].renderer || recordDef.fields[name].hidden )
+				if ( !recordDef.fields[name].formRenderer || recordDef.fields[name].hidden )
 					return <div/>;
 				let key      = etty + "_" + name,
 				    renderer = recordDef.fields[name].formRenderer,

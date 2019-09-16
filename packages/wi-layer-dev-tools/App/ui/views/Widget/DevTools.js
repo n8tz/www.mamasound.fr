@@ -31,7 +31,7 @@ export default class DevTools extends React.Component {
 	goProd               = () => {
 		superagent.get("http://localhost:9090/switch?to=prod").then(req => console.log(req.data))
 	}
-	forceKill8080               = () => {
+	forceKill8080        = () => {
 		superagent.get("http://localhost:9090/forceKill8080").then(req => console.log(req.data))
 	}
 	

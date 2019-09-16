@@ -28,6 +28,7 @@
     "@ckeditor/ckeditor5-react": "^1.1.3",
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
+    "@material-ui/styles": "^4.4.1",
     "@toast-ui/react-image-editor": "^1.0.1",
     "ag-grid": "^18.1.2",
     "ag-grid-community": "^20.1.0",
@@ -120,8 +121,8 @@
     "xxhashjs": "^0.2.2"
   },
   "devDependencies": {
-    "webpack-inherit": "^1.8.2",
-    "wi-layer-react-express": "^1.1.8",
-    "wi-layer-dev-tools": "file:packages/wi-layer-dev-tools"
+    "webpack-inherit": "^1.8.4",
+    "wi-layer-dev-tools": "file:packages/wi-layer-dev-tools",
+    "wi-layer-react-express": "^1.1.8"
   }
 }

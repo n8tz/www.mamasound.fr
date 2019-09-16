@@ -18,12 +18,62 @@
 .field_Picker {
   > .input {
     min-height: 150px;
-    @include use_hvCenteredContent();
+    position: relative;
 
-    .field {
-      display: inline-block;
-      width: auto;
+    .queryBar {
+      position: absolute;
+      top: 0;
+      left: 0px;
+      width: 100%;
+      background: rgba(211, 211, 211, 0.25);
+      z-index: 10;
+      display: flex;
+
+      .field {
+        vertical-align: middle;
+        display: inline-block;
+        width: auto;
+      }
+
+      .field_Select {
+        flex: 2;
+      }
+
+      .field_Text {
+        flex: 5;
+
+        .input {
+          width: 100%;
+        }
+      }
     }
+
+    .menu {
+      position: absolute;
+      bottom: 0;
+      right: 0px;
+      z-index: 10;
+      margin: 5px;
+    }
+    .selected {
+      position: absolute;
+      top: 0;
+      left: 0px;
+      width: 100%;
+      bottom: 0%;
+
+    }
+
+    .results {
+      position: absolute;
+      top: 2em;
+      left: 0%;
+      right: 0%;
+      bottom: 0%;
+      overflow-y: scroll;
+      overflow-x: hidden;
+    }
+
 
     .DefaultPreview {
       height: 150px;
