@@ -59,17 +59,14 @@ export const slider           = {
 	}
 };
 export const sliderScroll     = [
-	{
-		from    : 0,
-		duration: 100,
-		apply   : {
-			//bottom: "-10px"
-			transform: {
-				//translateY: '5px',
-				//perspective: "100px",
-			}
-		}
-	},
+	//{
+	//	from    : 0,
+	//	duration: 100,
+	//	apply   : {
+	//		transform: {
+	//		}
+	//	}
+	//},
 ];
 export const slide            = {
 	top      : "0%",
@@ -86,12 +83,10 @@ export const slideScroll      = {
 			from    : 100,
 			duration: 100,
 			apply   : {
-				//opacity  : "-1",
-				//height   : 2.5,
 				transform: {
 					translateY: "-8px",
 					translateZ: "20px",
-					rotateX   : "-4deg"
+					rotateX   : "-2deg"
 				}
 			}
 		},

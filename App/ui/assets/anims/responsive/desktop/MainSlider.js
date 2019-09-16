@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-let stepAngle = "3deg";
+let stepAngle = "6deg";
 
 export const defaultInitial  = {
 	position : "absolute",
@@ -28,13 +28,13 @@ export const defaultInitial  = {
 	transform: [
 		{
 			perspective: "1250px",
-			translateY : "-18000px",
+			translateY : "-25000px",
 			rotate     : "-" + stepAngle
 		},
 		{
-			translateY: "18000px",
+			translateY: "25000px",
 			translateZ: "-500px",
-			rotateY   : "-65deg",
+			rotateY   : "-15deg",
 		},
 		{
 			translateX: "-50%",
@@ -45,7 +45,7 @@ export const scrollAxis      = [
 	{
 		from    : 0,
 		duration: 100,
-		easeFn  : "easeSinIn",
+		//easeFn  : "easeSinIn",
 		apply   : {
 			transform: {
 				rotate: stepAngle,
@@ -58,7 +58,7 @@ export const defaultEntering = [
 	{
 		from    : 0,
 		duration: 100,
-		easeFn  : "easeSinIn",
+		//easeFn  : "easeSinIn",
 		apply   : {
 			transform: {
 				rotate: stepAngle,
@@ -67,19 +67,17 @@ export const defaultEntering = [
 		}
 	},
 	{
-		type    : "Tween",
 		from    : 0,
 		duration: 35,
 		apply   : {
 			opacity: 1,
 		}
 	}, {
-		type    : "Tween",
 		from    : 55,
 		duration: 45,
 		apply   : {
 			transform: [{}, {
-				rotateY   : "65deg",
+				rotateY   : "15deg",
 				translateZ: "500px",
 				//rotateX: "-90deg",
 			}],
@@ -88,28 +86,25 @@ export const defaultEntering = [
 ];
 export const defaultLeaving  = [
 	{
-		type    : "Tween",
 		from    : 0,
 		duration: 45,
 		apply   : {
 			transform: [{}, {
-				rotateY   : "65deg",
+				rotateY   : "15deg",
 				translateZ: "-500px",
 			}]
 		}
 	},
 	{
-		type    : "Tween",
 		from    : 65,
 		duration: 35,
 		apply   : {
 			opacity: -1,
 		}
 	}, {
-		type    : "Tween",
 		from    : 0,
 		duration: 100,
-		easeFn  : "easeSinOut",
+		//easeFn  : "easeSinOut",
 		apply   : {
 			zIndex: -150,
 			
