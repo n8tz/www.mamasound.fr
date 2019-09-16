@@ -48,61 +48,18 @@ export default class SearchBar extends React.Component {
 				<Fab className={"searchIcon"}>
 					<div className={"material-icons icon"}>search</div>
 				</Fab>
-				<div className={"cDay"}>
-					{
-						(moment(day).format("dddd DD MMMM YYYY"))
-					}
-					{currentSearch&&(" - "+currentSearch)}
+				{/*<div className={"cDay"}>*/}
+				{/*	{*/}
+				{/*		(moment(day).format("dddd DD MMMM YYYY"))*/}
+				{/*	}*/}
+				{/*	{currentSearch&&(" - "+currentSearch)}*/}
 				
-				</div>
+				{/*</div>*/}
 				<TextField
 					className={"input"}
 					value={this.state.search}
 					onChange={this.handleSearchChange}
 				/>
-				{/*<Select*/}
-				{/*classes={ classes }*/}
-				{/*styles={ selectStyles }*/}
-				{/*textFieldProps={ {*/}
-				{/*label          : 'Tags',*/}
-				{/*InputLabelProps: {*/}
-				{/*shrink: true,*/}
-				{/*},*/}
-				{/*} }*/}
-				{/*options={ Object.keys(TagManager.available).map(t => TagManager.available[t]) }*/}
-				{/*components={ components }*/}
-				{/*value={ this.state.multi }*/}
-				{/*onChange={ this.handleChange('multi') }*/}
-				{/*//placeholder="Select multiple countries"*/}
-				{/*isMulti={ true }*/}
-				{/*/>*/}
-				{/*<ChipInput*/}
-				{/*value={ TagManager.selected }*/}
-				{/*dataSource={ Object.keys(TagManager.available) }*/}
-				{/*onRequestAdd={ ( chip ) => $actions.selectTag(chip) }*/}
-				{/*onRequestDelete={ ( chip, index ) => $actions.unSelectTag(chip) }*/}
-				{/*/>*/}
-				{/*{*/}
-				{/*TagManager &&*/}
-				{/*TagManager.available &&*/}
-				{/*Object.keys(TagManager.available)*/}
-				{/*.map(*/}
-				{/*tag => TagManager.available[tag])*/}
-				{/*.map(*/}
-				{/*tag =>*/}
-				{/*<Chip*/}
-				{/*key={ tag.title }*/}
-				{/*icon={*/}
-				{/*//<Badge badgeContent={ tag.count} color="secondary" >*/}
-				{/*<img alt={ tag.title } src={ tag.style.icon } className={ "icon" }/>*/}
-				{/*//</Badge>*/}
-				{/*}*/}
-				{/*label={ tag.title }*/}
-				{/*//onClick={handleClick}*/}
-				{/*//onDelete={handleDelete}*/}
-				{/*//className={classes.chip}*/}
-				{/*/>*/}
-				{/*) }*/}
 			</div>
 		);
 	}

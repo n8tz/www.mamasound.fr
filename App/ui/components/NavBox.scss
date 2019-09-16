@@ -17,32 +17,58 @@
  */
 
 .NavBox {
-  .toolbar {
-    width: 100%;
-    text-align: center;
-    //margin-top: 5px;
+  position: relative;
+  margin-top: 20px;
+
+  &:before {
+    content: ' ';
+    position: absolute;
+    width: 110vw;
+    top: -20px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    height: 200px;
+    //background-color: black;
+    background: url("../assets/images/shuperDesign.jpg");
+    background-size: auto 100%;
+
+  }
+
+  .eventTypeNav {
+    @include use_hvCenteredContent();
+    position: absolute;
+    width: 60%;
+    top: 15px;
+    left: 20px;
     height: 50px;
-    overflow: hidden;
+    //overflow: hidden;
+    background: rgba(255, 255, 255, 0.45);
+    border-radius: 10px;
 
-    > button {
-      //@include use_hvCenteredContent();
-      margin-bottom: 5px !important;
-      text-align: center;
-
-      .icon {
-        font-size: 32px;
-        margin: auto;
-        transition: transform 250ms;
-        //color:red;
-      }
-
-      &:hover {
-        .icon {
-          transform: scale(1.2);
-          //color: black;
-        }
-      }
+    .typeIcon {
+      width: 40px;
+      height: 40px;
+      display: inline-block;
+      cursor: pointer;
+      margin-left: 5px;
     }
+
+  }
+
+  .cDay {
+    position: absolute;
+    width: 40%;
+    top: 15px;
+    left: 20px;
+    //background: #1f8de2;
+    padding: 10px;
+    //text-transform: capitalize;
+    font-size: 1.5em;
+    text-align: left;
+    font-weight: lighter;
+    //font-family: EmPower42;
+
+    //text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 5px #fff, 0 0 5px rgba(255, 255, 255, 0.4); //border-radius: 2em;
   }
 
 

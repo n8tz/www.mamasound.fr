@@ -15,18 +15,11 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import PropTypes                             from "prop-types";
-import React                                 from "react";
-import {withScope, scopeToProps, propsToScope} from "react-scopes";
-import {withStateMap, asRef, asStore}        from "rescope-spells";
-import anims                                 from 'App/ui/assets/anims/(*).js';
-import Fab                                   from '@material-ui/core/Fab';
-import stores                                from 'App/stores/(*).js';
-import Views                                 from 'App/ui/components/(*).js';
-import {asTweener, TweenRef}                 from "react-voodoo";
-import {FacebookProvider, Page}              from 'react-facebook';
-import {ContextMenu}                         from "../../App";
-import {Comps}                               from "../index";
+import Badge                              from '@material-ui/core/Badge';
+import React                              from "react";
+import {asStore, scopeToProps, withScope} from "react-scopes";
+import {ContextMenu}                      from "../../App";
+import {Comps}                            from "../index";
 
 @withScope(
 	{
@@ -48,53 +41,50 @@ import {Comps}                               from "../index";
 		
 	}
 )
-@scopeToProps("SearchValues", "ActiveTags")
+@scopeToProps("appState")
 export default class NavBox extends React.Component {
 	static propTypes = {};
 	state            = {};
 	
 	render() {
 		let {
-			    record: { position, size } = {},
-			    Events, children, disabled,
-			    $actions, onSelect, selected
+			    record  : { position, size } = {},
+			    appState: { curDay: day, viewType },
+			    $actions
 		    }     = this.props,
 		    state = this.state;
 		return (
-			<div
-				className={ "NavBox" }
-			>
-				<div className={ "toolbar" }>
-					<Fab>
-						<div className={ "material-icons icon" }>search</div>
-					</Fab>
-				</div>
+			<div className={"NavBox"}>
 				
-				<Comps.LoginBox/>
-				<div className={ "fbPage" }>
-					{/*<FacebookProvider appId="1191108604284018">*/}
-						{/*<Page href="https://www.facebook.com/mamasound.fr"*/}
-						      {/*smallHeader={ true } tabs="timeline"*/}
-						      {/*adaptContainerWidth={ true }*/}
-						      {/*height={ 350 }*/}
-						      {/*width={ 300 }/>*/}
-					{/*</FacebookProvider>*/}
+				<div className={"eventTypeNav"}>
+					<Badge badgeContent={4} color="primary">
+						<img src={require("App/ui/assets/images/jip/btn-event-on.png")}
+						     onClick={e => $actions.setCurStyleTab(0)}
+						     className={"typeIcon"}/>
+					</Badge>
+					<Badge badgeContent={4} color="primary">
+						<img src={require("App/ui/assets/images/jip/concert-gif.gif")}
+						     onClick={e => $actions.setCurStyleTab(1)}
+						     className={"typeIcon"}/>
+					</Badge>
+					<Badge badgeContent={4} color="primary">
+						<img src={require("App/ui/assets/images/jip/expo-gif.gif")} className={"typeIcon"}
+						     onClick={e => $actions.setCurStyleTab(2)}
+						/>
+					</Badge>
+					<Badge badgeContent={4} color="primary">
+						<img src={require("App/ui/assets/images/jip/theatre-gif.gif")} className={"typeIcon"}
+						     onClick={e => $actions.setCurStyleTab(3)}
+						/>
+					</Badge>
 				</div>
-				{/*{ ActiveTags && ActiveTags.available && ActiveTags.available.map(*/ }
-				{/*tag =>*/ }
-				{/*<Chip*/ }
-				{/*key={ tag.title }*/ }
-				{/*icon={*/ }
-				{/*//<Badge badgeContent={ tag.count} color="secondary" >*/ }
-				{/*<img alt={ tag.title } src={ tag.style.icon } className={ "icon" }/>*/ }
-				{/*//</Badge>*/ }
-				{/*}*/ }
-				{/*label={ tag.title }*/ }
-				{/*//onClick={handleClick}*/ }
-				{/*//onDelete={handleDelete}*/ }
-				{/*//className={classes.chip}*/ }
-				{/*/>*/ }
-				{/*) }*/ }
+				{/*<div className={"cDay"}>*/}
+				{/*	Cette semaine :*/}
+				{/*	{*/}
+				{/*		//(moment(day).format("dddd DD MMMM YYYY"))*/}
+				{/*	}*/}
+				{/*</div>*/}
+				<Comps.SearchBar/>
 			</div>
 		);
 	}

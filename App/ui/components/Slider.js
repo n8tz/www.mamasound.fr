@@ -63,13 +63,25 @@ export default class Slider extends React.Component {
 	}
 	
 	componentDidUpdate( prevProps, prevState, snapshot ) {
-		let { autoScroll, scrollDir, tweener }             = this.props,
-		    { index = this.props.defaultIndex, step, dec } = this.state;
+		let { autoScroll, scrollDir, tweener, onChange, index: pIndex } = this.props,
+		    { index = this.props.defaultIndex, step, dec }              = this.state;
 		
 		if ( prevState.dec !== dec ) {
 			tweener.scrollTo(tweener._getAxis(scrollDir).scrollPos + dec - prevState.dec, 0, scrollDir);
 		}
+		if ( pIndex !== prevProps.index ) {
+			tweener.scrollTo(dec + step * pIndex + 100, 500, scrollDir);
+			
+			if ( autoScroll ) {
+				clearTimeout(this._updater);
+				this._updater = setTimeout(
+					tm => this.goNext(),
+					autoScroll
+				)
+			}
+		}
 		if ( prevState.index !== index ) {
+			onChange && onChange(index);
 			if ( this._wasUserSnap ) {
 				this._wasUserSnap = false;
 			}
@@ -86,6 +98,11 @@ export default class Slider extends React.Component {
 		}
 	}
 	
+	componentWillReceiveProps( nextProps, nextContext ) {
+		if ( nextProps.index !== this.props.index )
+			this.goTo(this.props.index)
+	}
+	
 	componentWillUnmount() {
 		clearTimeout(this._updater);
 	}
@@ -95,8 +112,8 @@ export default class Slider extends React.Component {
 			    defaultIndex = 0,
 			    visibleItems,
 			    overlaps     = 1 / ((visibleItems - (visibleItems % 2)) || 1),
-			    children: _childs, scrollDir,
-			    defaultEntering, defaultLeaving, scrollY, infinite
+			    children                                                 : _childs, scrollDir,
+			    defaultEntering, defaultLeaving, scrollY, infinite, index: pIndex
 		    }                        = props,
 		    children                 = is.array(_childs) ? _childs : [],
 		    { index = defaultIndex } = state,

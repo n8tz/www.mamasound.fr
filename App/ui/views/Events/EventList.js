@@ -139,11 +139,20 @@ export default class EventList extends React.Component {
 				<div className={"maskContent"}>
 					<div className={"content container"}>
 						<TweenRef
+							id={"NavBox"}
+							initial={MainPage.NavBox}
+						>
+							<Comps.NavBox/>
+						</TweenRef>
+						{appState.viewType}
+						<TweenRef
 							id={"EventCatSlider"}
 							initial={EventCatSlider.style}
 						>
 							<Comps.Slider
 								{...EventCatSlider}
+								index={appState.viewType}
+								onChange={$actions.setCurStyleTab}
 								className={"EventCatSlider "}
 							>
 								{
@@ -174,12 +183,6 @@ export default class EventList extends React.Component {
 										)
 								}
 							</Comps.Slider>
-						</TweenRef>
-						<TweenRef
-							id={"NavBox"}
-							initial={MainPage.NavBox}
-						>
-							<Comps.SearchBar/>
 						</TweenRef>
 					</div>
 				</div>
