@@ -193,26 +193,26 @@ export default class Media extends React.Component {
 					}
 					
 					<Button onClick={e => this.setMode("preview")}
-						//color={ viewmode == "preview" && "primary" }
-						    title="Aperçu">Aperçu</Button>
+					        color={viewmode == "preview" && "primary"}
+					        title="Aperçu">Aperçu</Button>
 					
 					<Button
 						title="Upload"
-						//color={ viewmode == "upload" && "primary" }
+						color={viewmode == "upload" && "primary"}
 						onClick={e => this.setMode("upload")}>
 						Uploader un fichier
 					</Button>
 					
 					<Button
 						title="Modifier l'url"
-						//color={ viewmode == "input" && "primary" }
+						color={viewmode == "input" && "primary"}
 						onClick={e => this.setMode("input")}>
 						Modifier l'url
 					</Button>
 					
 					<Button
 						title="Editer"
-						//color={ viewmode == "input" && "primary" }
+						color={viewmode == "input" && "primary"}
 						onClick={e => $actions.newWidget("ImageEditor", { src: _value, onSave: this.onEditorSave })}>
 						Editer
 					</Button>
@@ -255,11 +255,9 @@ export default class Media extends React.Component {
 						(viewmode === "preview") &&
 						// /^[^\s]+\.i?(jpeg|jpg|png|gif|bmp)(\?.*)?$/.test(_value.toLowerCase())
 						// &&
-						<div className=" use_mBox">
-							<Image ref="preview" src={_value}
-							       style={{ maxHeight: "300px" }}
-							       w={250} h={250}/>
-						</div>
+						<Image ref="preview" src={_value}
+						       style={{ maxHeight: "300px" }}
+						       w={250} h={250}/>
 						//||
 						///soundcloud/.test(_value)
 						//&& <PlayerSC item={{mediaUrl: _value, visible:true}}/>
