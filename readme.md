@@ -3,7 +3,8 @@
 
 tmp url : http://mamasound.wiseways.me/
 
-_* personal & probono project using experimental libs ( & design )_
+_* this is personal & probono project using experimental libs ( & design )_
+_* so this is NOT corporate grade code _
 
 ## How to start
 
@@ -36,7 +37,6 @@ npm run start
 
 ## Code structure
 
-This app inherit a RS structure/boilerplate from [wpi-react-rs-sass-ssr](https://github.com/n8tz/wpi-react-rs-sass-ssr)<br/>
-which inherit itself SSR & webpack from [wpi-react-hmr-ssr](https://github.com/n8tz/wpi-react-hmr-ssr)
+This app inherit the base boilerplate & webpack config from [wi-layer-react-express](https://github.com/n8tz/wi-layer-react-express)
 
 See [webpack-inherit](https://github.com/n8tz/webpack-inherit)
