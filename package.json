@@ -97,7 +97,7 @@
     "react-rnd": "^9.0.4",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-scopes": "^1.0.8",
+    "react-scopes": "^1.0.13",
     "react-select": "^2.4.1",
     "react-share": "^2.4.0",
     "react-split-pane": "^0.1.87",

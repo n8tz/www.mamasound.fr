@@ -32,7 +32,7 @@ if ( typeof window !== "undefined" )
 	require('react-dropzone-component/styles/filepicker.css');
 
 
-@rs.scopeToProps("DbExplorer.Data:AllItems")
+@rs.toProps("DbExplorer.Data:AllItems")
 class RecordRefRenderer extends React.Component {
 	state = {
 		edit: false
@@ -72,10 +72,10 @@ class RecordRefRenderer extends React.Component {
 	}
 }
 
-@rs.withScope({
-	              @rs.asScope
+@rs({
+	              @rs.scope
 	              DbExplorer: {
-		              @rs.asStore
+		              @rs.store
 		              Query: {
 			              etty       : 'Place',
 			              query      : {},
@@ -87,15 +87,15 @@ class RecordRefRenderer extends React.Component {
 		
 		              @rs.withStateMap(
 			              {
-				              @rs.asRef
+				              @rs.ref
 				              Query: 'Query',
 			              }
 		              )
 		              Data: stores.MongoQueries,
 		
-		              @rs.asStore
+		              @rs.store
 		              Schema: {
-			              @rs.asRef
+			              @rs.ref
 			              etty: 'Query.etty',
 			              $apply( data, state ) {
 				              //entities;

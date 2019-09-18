@@ -17,26 +17,19 @@
 
 'use strict';
 
-import React       from "react";
-import {Component} from "react";
-import Button      from '@material-ui/core/Button';
-import Dialog      from '@material-ui/core/Dialog';
-import IconPerson  from '@material-ui/icons/AccountBox';
-import Menu        from '@material-ui/core/Menu';
-import MenuItem    from '@material-ui/core/MenuItem';
-import Avatar      from '@material-ui/core/Avatar';
+import Button             from '@material-ui/core/Button';
+import Dialog             from '@material-ui/core/Dialog';
+import IconPerson         from '@material-ui/icons/AccountBox';
+import React, {Component} from "react";
 
-import {
-	isSpell, spells, Store, Scope, withScope, propsToScope, scopeToProps,
-	scopeToState
-} from "react-scopes";
+import {scopeToProps} from "react-scopes";
 
 
 @scopeToProps("CurrentUser")
 export default class LoginBox extends Component {
 	state = { session: {}, showModal: false, lastLoginFail: false };
 	
-	doSubmit( form ) {
+	doSubmit = ( form ) => {
 		this.props.$actions.login(
 			{
 				username: this.state.login,
@@ -56,23 +49,23 @@ export default class LoginBox extends Component {
 			<div className="LoginBox">
 				{
 					!CurrentUser &&
-					<a className="loginLink" onClick={ () => this.setState({ showModal: true }) }
+					<a className="loginLink" onClick={() => this.setState({ showModal: true })}
 					   title="Connexion"><IconPerson/></a>
 				}
 				{
 					CurrentUser &&
 					<React.Fragment>
 						<Button color="primary"
-						        onClick={ event => this.setState({ menu: event.currentTarget }) }>
-							{ CurrentUser._id }
+						        onClick={event => this.setState({ menu: event.currentTarget })}>
+							{CurrentUser._id}
 						</Button>
-						<span onClick={ $actions.logout }>Sign out</span>
+						<span onClick={$actions.logout}>Sign out</span>
 					</React.Fragment>
 					
 				}
-				<Dialog open={ this.state.showModal }
+				<Dialog open={this.state.showModal}
 				        title='My awesome dialog'
-				        onClose={ () => this.setState({ showModal: false }) }>
+				        onClose={() => this.setState({ showModal: false })}>
 					<h1>Connexion</h1>
 					
 					<form onKeyPress={
@@ -81,20 +74,16 @@ export default class LoginBox extends Component {
 								e.preventDefault();
 								this.doSubmit();
 							}
-						} }>
+						}}>
 						
 						<input label="Login / Adresse email" ref="login"
 						       type="email"
-							//placeholder="Email"
-							   onChange={ ( e ) => this.setState({ login: e.target.value }) }
-							   name="login"/>
+						       onChange={( e ) => this.setState({ login: e.target.value })}
+						       name="login"/>
 						
 						<input label="Mot de passe" ref="pass" type="password"
-							//placeholder="Mot de passe"
-							   onChange={
-								   ( e ) => this.setState({ pass: e.target.value })// this is shit !!!!!!
-							   }
-							   name="pass"/>
+						       onChange={( e ) => this.setState({ pass: e.target.value })}
+						       name="pass"/>
 						{
 							this.state.lastLoginFail
 							&&
@@ -104,8 +93,8 @@ export default class LoginBox extends Component {
 						}
 					</form>
 					
-					<a className="loginBoxPasswordLost">Mot de passe oublié</a>
-					<button className="submit-input" onClick={ this.doSubmit.bind(this) }>Connexion</button>
+					<a className="loginBoxPasswordLost" onClick={this.doFindSubmit}>Mot de passe oublié</a>
+					<button className="submit-input" onClick={this.doSubmit}>Connexion</button>
 				</Dialog>
 			</div>
 		)
