@@ -40,10 +40,9 @@ export default class SearchBar extends React.Component {
 		const {
 			      appState: { curDay: day, currentSearch }, disabled,
 		      } = this.props;
-		//console.log(Object.keys(TagManager.available).map(t => TagManager.available[t]))
 		return (
 			<div
-				className={"SearchBar container"}
+				className={"SearchBar"}
 			>
 				<Fab className={"searchIcon"}>
 					<div className={"material-icons icon"}>search</div>

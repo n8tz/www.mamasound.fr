@@ -52,7 +52,7 @@ export default class VideoGallery extends React.Component {
 	render() {
 		let {
 			    record                          : { position, size } = {},
-			    UserGeoLocation, appState, Anims: { MainPage },
+			    UserGeoLocation, appState, Anims: { HomePage },
 			    $actions, style
 		    }     = this.props,
 		    state = this.state;

@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-let stepAngle = "5.5deg";
+let stepAngle = "5deg";
 
 export const defaultInitial  = {
 	position : "absolute",

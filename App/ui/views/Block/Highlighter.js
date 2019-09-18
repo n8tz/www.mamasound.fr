@@ -112,7 +112,7 @@ export default class Highlighter extends React.Component {
 				
 				<TweenRef
 					id={"header"}
-					initial={Anims.MainPage.header}
+					initial={Anims.HomePage.header}
 				>
 					<header
 						style={{
@@ -124,7 +124,7 @@ export default class Highlighter extends React.Component {
 						<Views.Block.PageBlock>
 							<TweenRef
 								id={"logo"}
-								initial={Anims.MainPage.logo}
+								initial={Anims.HomePage.logo}
 							>
 								<div className={"logo"}/>
 							</TweenRef>

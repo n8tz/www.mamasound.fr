@@ -185,7 +185,7 @@ export default class EventMap extends React.Component {
 		let {
 			    Events,
 			    Events: { center = {}, POIs = [], zoom } = {},
-			    Anims : { MainPage }, UserGeoLocation, Selected,
+			    Anims : { HomePage }, UserGeoLocation, Selected,
 			    $actions, DataProvider, style
 		    }           = this.props,
 		    map         = this.refs.map && this.refs.map.leafletElement,
@@ -274,7 +274,7 @@ export default class EventMap extends React.Component {
 						}
 					</Map>
 					
-					{/*<TweenRef id={ "EventMap_Gradient" } initial={ MainPage.EventMap_Gradient }>*/}
+					{/*<TweenRef id={ "EventMap_Gradient" } initial={ HomePage.EventMap_Gradient }>*/}
 					{/*<div className={ "GradientBottom" }/>*/}
 					{/*</TweenRef>*/}
 				</div>

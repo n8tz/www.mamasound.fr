@@ -62,18 +62,17 @@ export default class Home extends React.Component {
 	
 	//
 	render() {
-		let { Anims: { MainPage }, appState, $actions } = this.props;
+		let { Anims: { HomePage }, appState, $actions } = this.props;
 		if ( typeof window !== "undefined" )
 			window.$actions = $actions;
-		console.log('render snap', appState.currentPageFocus, wayPoints[appState.currentPageFocus], appState.currentPageFocus !== "map" && appState.currentPageFocus !== "events")
 		return <TweenRef
 			id={"page"}
-			initial={MainPage.page}>
+			initial={HomePage.page}>
 			<div className={"Home container"}>
 				
 				<TweenAxis
 					axe={"scrollY"}
-					items={MainPage.YAxis}
+					items={HomePage.YAxis}
 					//scrollableWindow={ 225 }
 					defaultPosition={wayPoints[appState.currentPageFocus]}
 					//defaultPosition={100}
@@ -124,18 +123,18 @@ export default class Home extends React.Component {
 						}
 					}
 				/>
-				<TweenRef id={"Highlighter"} initial={MainPage.Highlighter}>
+				<TweenRef id={"Highlighter"} initial={HomePage.Highlighter}>
 					<Views.Block.Highlighter/>
 				</TweenRef>
 				
 				<TweenRef id={"EventsBlock"}
-				          initial={MainPage.EventsBlock}>
+				          initial={HomePage.EventsBlock}>
 					<Views.Events.EventList
 						activeScroll={appState.currentPageFocus !== "map" && appState.currentPageFocus !== "events"}/>
 				</TweenRef>
 				<TweenRef
 					id={"EventMap"}
-					initial={MainPage.EventMap}
+					initial={HomePage.EventMap}
 				>
 					<Views.Events.EventMap
 						day={appState.currentVisibleDay || appState.curDay}
@@ -143,7 +142,7 @@ export default class Home extends React.Component {
 				</TweenRef>
 				<TweenRef
 					id={"Footer"}
-					initial={MainPage.Footer}
+					initial={HomePage.Footer}
 				>
 					<Comps.Footer/>
 				</TweenRef>

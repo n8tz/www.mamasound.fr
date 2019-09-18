@@ -128,7 +128,7 @@ export default class EventList extends React.Component {
 		let {
 			    UserGeoLocation,
 			    appState,
-			    Anims: { MainPage, EventsBlock: { EventCatSlider }, EventDaySlider },
+			    Anims: { HomePage, EventsBlock: { EventCatSlider }, EventDaySlider },
 			    activeScroll,
 			    $actions, style
 		    }     = this.props,
@@ -140,7 +140,7 @@ export default class EventList extends React.Component {
 					<div className={"content container"}>
 						<TweenRef
 							id={"NavBox"}
-							initial={MainPage.NavBox}
+							initial={HomePage.NavBox}
 						>
 							<Comps.NavBox/>
 						</TweenRef>

@@ -55,6 +55,22 @@
 
   }
 
+  .SearchBar {
+    position: absolute;
+    width: 40%;
+    top: 10px;
+    right: 5px;
+
+    .icon {
+      background: #f9f9f9;
+      margin: 5px;
+      width: 1.2em;
+      height: 1.2em;
+      overflow: hidden;
+      border-radius: 25px;
+    }
+  }
+
   .cDay {
     position: absolute;
     width: 40%;

@@ -19,18 +19,13 @@
 .EventList {
   touch-action: none;
   position: relative;
-
   perspective: 200px;
-  //height: 100%;
   z-index: 150;
   padding: 0 !important;
   margin-left: -50vw;
   left: 50%;
   width: 100vw !important;
   user-select: none;
-  //@include withMaskTop();
-
-  //@include withMask();
 
   .maskContent {
     overflow: hidden;
@@ -144,15 +139,6 @@
       }
     }
 
-    //
-    //@media screen and (min-width: $tablet-portrait-breakpoint) {
-    //  margin-left: 300px;
-    //}
-    //
-    //@media screen and (max-width: $smartphone-landscape-breakpoint) {
-    //  margin-left: 40px;
-    //}
-
   }
 
   .SimpleDay {
@@ -174,7 +160,6 @@
       font-weight: lighter;
       font-family: EmPower42;
       opacity: .9;
-      //text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 75px rgba(34, 141, 255, 0.62);
       padding-top: .15em;
       padding-left: 25px;
     }
@@ -187,7 +172,6 @@
   }
 
   .DayBlock {
-
     position: absolute;
     top: 0px;
     height: 50px;
@@ -195,12 +179,6 @@
     background: #ffbcc3;
     z-index: 1000;
     overflow: hidden;
-    //@media screen and (min-width: $tablet-portrait-breakpoint) {
-    //  left: 300px;
-    //}
-    //@media screen and (max-width: $smartphone-landscape-breakpoint) {
-    //  left: 40px;
-    //}
     right: 17px;
     @media (hover: none), (hover: on-demand) {
       right: 0px;
@@ -263,45 +241,18 @@
     }
   }
 
-
   .NavBox {
-
     position: absolute;
-    //background: yellow;
     top: 0px;
     left: 0px;
     width: 300px;
     bottom: 0px;
-    //z-index: 1001;
     @media screen and (max-width: $tablet-portrait-breakpoint) {
       width: 75px;
     }
 
     @media screen and (max-width: $smartphone-landscape-breakpoint) {
       width: 40px;
-    }
-  }
-
-  .SearchBar {
-
-    @media screen and (max-width: $tablet-portrait-breakpoint) {
-      margin: 0 !important;
-      padding: 0 !important;
-      width: 100% !important;
-    }
-
-    > * {
-      margin: 4px;
-      font-size: 1.2em;
-
-      .icon {
-        background: #f9f9f9;
-        margin: 5px;
-        width: 1.2em;
-        height: 1.2em;
-        overflow: hidden;
-        border-radius: 25px;
-      }
     }
   }
 }
