@@ -35,7 +35,6 @@
     overflow: hidden;
 
     .logo {
-      //@include use_hvCenteredAbs();
       background: url("../assets/images/LogoVF_MAMA_SOUND.png") no-repeat;
       background-size: auto calc(100% - 10px);
       //background-size: auto 100%;

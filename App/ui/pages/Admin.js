@@ -30,13 +30,13 @@ import {propsToScope, withScope, scopeToProps} from "react-scopes";
 		"day:DayEventsQuery.curDay",
 		"viewType:DayEventsQuery.viewType"
 	])
-@scopeToProps("EventList", "ActiveTags", "appState", "Anims")
+@scopeToProps("EventList", "ActiveTags", "appState", "Styles")
 export default class Admin extends React.Component {
 	state = {};
 	
 	render() {
 		let {
-			    EventList, appState, day, Anims,
+			    EventList, appState, day, Styles,
 			    $actions, onSelect
 		    }     = this.props,
 		    state = this.state,
@@ -46,7 +46,7 @@ export default class Admin extends React.Component {
 				className={"Admin"}
 			>
 				<Comps.Slider
-					{...Anims.EventDaySlider}
+					{...Styles.EventDaySlider}
 					className={"EventNav "}
 				>
 					

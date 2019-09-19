@@ -1,4 +1,5 @@
 /*
+ *
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -15,6 +16,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+export const NavBox            = {
+	height   : "80px",
+	left     : "0px",
+	top      : "0px",
+	width    : "100%",
+	position : "absolute",
+	transform: {
+		//translateY: "85%"
+	}
+};
 
 export const EventCatSlider = {
 	       maxJump        : 1,
@@ -31,7 +42,7 @@ export const EventCatSlider = {
 	       defaultInitial : {
 		       position       : "absolute",
 		       overflow       : "hidden",
-		       backgroundColor: "white",
+		       //backgroundColor: "white",
 		       top            : "0%",
 		       left           : "0%",
 		       width          : "100%",

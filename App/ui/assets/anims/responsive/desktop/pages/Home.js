@@ -15,13 +15,13 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import {eventsMiniHeight, headerMiniHeight, sliderHeight} from "./vars";
+import {eventsMiniHeight, footerMiniHeight, headerMiniHeight, sliderHeight} from "../vars";
 
 export const page              = {
 	position: "absolute",
 	top     : "0cm",
 	left    : "50%",
-	bottom  : "0px",
+	bottom  : footerMiniHeight,
 	
 	transform: {
 		translateX: "-50%"
@@ -47,10 +47,8 @@ export const header            = {
 export const Highlighter       = {
 	position       : "absolute",
 	right          : "0%",
-	//bottom         : "0%",
 	top            : "0%",
 	height         : ["100%", "0px", "0vh"],
-	//overflow       : 'hidden',
 	transformOrigin: "center top",
 	zIndex         : 175,
 	transform      : [
@@ -84,28 +82,15 @@ export const logo              = {
 		}
 	]
 };
-export const NavBox            = {
-	height   : "200px",
-	left     : "0px",
-	top      : "0px",
-	width    : "100%",
-	//background: "green",
-	position : "absolute",
-	transform: {
-		//translateY: "85%"
-	}
-};
 export const Footer            = {
-	height    : "50px",
-	left      : "0px",
-	top       : "100%",
-	width     : "100%",
-	background: "green",
-	position  : "absolute",
-	overflow  : 'hidden',
-	zIndex    : 300,
-	transform : {
-		//translateY: "100%"
+	height   : footerMiniHeight,
+	left     : "0px",
+	top      : "100%",
+	width    : "100%",
+	position : "absolute",
+	zIndex   : 300,
+	transform: {
+		//translateY: "-100%"
 	}
 };
 export const EventsBlock       = {

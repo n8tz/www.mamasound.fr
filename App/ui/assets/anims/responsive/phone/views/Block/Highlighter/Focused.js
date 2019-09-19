@@ -1,5 +1,5 @@
 /*
- * www.mamasound.fr
+ *
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {eventsMiniHeight, sliderHeight} from "./vars";
+import {eventsMiniHeight, sliderHeight} from "../../../vars";
 
 export const transitionDuration    = 800;
 export const defaultInitial        = {

@@ -17,13 +17,12 @@
  */
 export const selected       = {
 	position : "absolute",
-	//backgroundColor: "red",
+	backgroundColor: "red",
 	top      : "45%",
 	left     : "50%",
 	//width          : "90vw",
 	height   : "50vh",
 	opacity  : 1,
-	//overflow       : "hidden",
 	transform: [{
 		translateX : "-50%",
 		translateY : "-50%",
@@ -34,11 +33,10 @@ export const selected       = {
 export const selectedScroll = {
 	scrollY: [
 		{
-			type    : "Tween",
 			from    : 0,
 			duration: 100,
 			apply   : {
-				opacity  : "-1",
+				opacity  : -1,
 				//height   : 2.5,
 				//top      : -2.5,
 				transform: [

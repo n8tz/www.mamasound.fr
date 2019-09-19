@@ -33,7 +33,7 @@ import {propsToScope, withScope, scopeToProps} from "react-scopes";
 		//"filter:EventList.filter",
 		"viewType:DayEventsQuery.viewType"
 	])
-@scopeToProps("EventList", "ActiveTags", "appState", "Anims")
+@scopeToProps("EventList", "ActiveTags", "appState", "Styles")
 //@asTweener({ initialScrollPos: { scrollX: 100 }, propagateAxes: { scrollY: true } })
 export default class DayEvents extends React.Component {
 	static propTypes = {
@@ -45,7 +45,7 @@ export default class DayEvents extends React.Component {
 	
 	render() {
 		let {
-			    EventList, appState, day, Anims,
+			    EventList, appState, day, Styles,
 			    $actions, onSelect
 		    }     = this.props,
 		    state = this.state,
@@ -58,7 +58,7 @@ export default class DayEvents extends React.Component {
 				<div className={"day"}>
 					<Views.SimpleDay day={day}/>
 				</div>
-				{/*<Comps.SlidableList {...Anims.EventsSlider}>*/}
+				{/*<Comps.SlidableList {...Styles.EventsSlider}>*/}
 					{
 						EventList && EventList.items && EventList.items.map(
 							( item, i ) => {

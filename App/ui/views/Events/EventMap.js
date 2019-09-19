@@ -90,7 +90,7 @@ else {
 						                                                              });
 						
 					}
-				)
+				);
 				
 				if ( selected && POIs[0] ) {
 					center = {
@@ -126,7 +126,7 @@ else {
 		"day:DayEventsQuery.curDay",
 		"viewType:DayEventsQuery.viewType"
 	])
-@scopeToProps("Selected", "Anims", "Events", "UserGeoLocation", "DataProvider")
+@scopeToProps("Selected", "Styles", "Events", "UserGeoLocation", "DataProvider")
 export default class EventMap extends React.Component {
 	static propTypes = {};
 	state            = {};
@@ -185,7 +185,7 @@ export default class EventMap extends React.Component {
 		let {
 			    Events,
 			    Events: { center = {}, POIs = [], zoom } = {},
-			    Anims : { HomePage }, UserGeoLocation, Selected,
+			    Styles : { HomePage }, UserGeoLocation, Selected,
 			    $actions, DataProvider, style
 		    }           = this.props,
 		    map         = this.refs.map && this.refs.map.leafletElement,

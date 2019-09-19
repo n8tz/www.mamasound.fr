@@ -1,5 +1,5 @@
 /*
- * www.mamasound.fr
+ *
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import {headerMiniHeight, sliderHeight} from "./vars";
+import {headerMiniHeight, sliderHeight} from "../../vars";
 
 export const background       = {
 	position : "absolute",
@@ -97,15 +97,9 @@ export const focused          = {
 	bottom   : [sliderHeight, 10],
 	left     : "50%",
 	top      : headerMiniHeight + 20,
-	//width    : "90vw",
 	opacity  : 0,
-	//height   : "50vh",
-	//overflow       : "hidden",
 	transform: [{
 		translateX: "-50%",
-		//translateY: "-50%",
-		//perspective: "200px",
-		//rotateX    : "2deg"
 	}, {}, { translateY: '0%' }]
 };
 export const focusedScroll    = {
@@ -115,13 +109,6 @@ export const focusedScroll    = {
 			duration: 100,
 			apply   : {
 				opacity: 1,
-				//height   : 2.5,
-				//top      : -2.5,
-				//transform: [{
-				//	rotateX: "4deg"
-				//}, {
-				//	translateY: "-50vh",
-				//}]
 			}
 		},
 		{

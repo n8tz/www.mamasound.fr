@@ -37,7 +37,7 @@ import {asTweener, TweenRef} from "react-voodoo";
 //		//}
 //	}
 //)
-@scopeToProps("Selected", "Anims", "DataProvider")
+@scopeToProps("Selected", "Styles.views.Block.PageBlock:Styles", "DataProvider")
 export default class PageBlock extends React.Component {
 	static propTypes = {};
 	state            = {};
@@ -46,7 +46,7 @@ export default class PageBlock extends React.Component {
 		let {
 			    record: { position, size } = {},
 			    Selected, children, DataProvider,
-			    $actions, style, Anims
+			    $actions, style, Styles
 		    }     = this.props,
 		    state = this.state;
 		return (
@@ -58,8 +58,8 @@ export default class PageBlock extends React.Component {
 					
 					{children}
 					<TweenRef
-						initial={Anims.Page.selected}
-						tweenLines={Anims.Page.selectedScroll}
+						initial={Styles.selected}
+						tweenLines={Styles.selectedScroll}
 					>
 						<div className={"selectedPage container"}>
 							{

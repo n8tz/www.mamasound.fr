@@ -91,54 +91,54 @@ const ctrl = {
 		})
 		
 	},
-	//renderSSR( cfg, cb, _attempts = 0 ) {
-	//	let html = "<!doctype html>\n" + renderToString(<Index helmet={Helmet.renderStatic()}
-	//	                                                       content={""}/>);
-	//	console.warn("render !!!!")
-	//	cb(null, html)
-	//},
 	renderSSR( cfg, cb, _attempts = 0 ) {
-		let rid     = shortid.generate(),
-		    cScope  = new Scope(AppScope, {
-			    id         : rid,
-			    autoDestroy: false
-		    }), App = withScope(cScope)(require('./App').default);
-		
-		//debugger;
-		if ( cfg.state ) {
-			cScope.restore(cfg.state, { alias: "App" });
-		}
-		else {
-			cScope.state.Anims = { currentBrkPts: cfg.device };
-		}
-		
-		let html,
-		    appHtml     = renderToString(<App location={cfg.location}/>),
-		    stable      = cScope.isStableTree();
-		global.contexts = Scope.scopes;
-		//console.log('ctrl::renderSSR:65: ', cfg.location, _attempts);
-		cScope.onceStableTree(state => {
-			let nstate = cScope.serialize({ alias: "App" });
-			cScope.destroy()
-			if ( !_attempts || !stable && _attempts < 3 ) {
-				cfg.state = nstate;
-				ctrl.renderSSR(cfg, cb, ++_attempts);
-			}
-			else {
-				try {
-					html = "<!doctype html>\n" +
-						renderToString(<Index
-							helmet={Helmet.renderStatic()}
-							css={!__IS_DEV__ && cfg.css}
-							state={nstate}
-							content={appHtml}/>);
-					
-				} catch ( e ) {
-					return cb(e)
-				}
-				cb(null, html)
-			}
-		})
-	}
+		let html = "<!doctype html>\n" + renderToString(<Index helmet={Helmet.renderStatic()}
+		                                                       content={""}/>);
+		console.warn("render !!!!")
+		cb(null, html)
+	},
+	//renderSSR( cfg, cb, _attempts = 0 ) {
+	//	let rid     = shortid.generate(),
+	//	    cScope  = new Scope(AppScope, {
+	//		    id         : rid,
+	//		    autoDestroy: false
+	//	    }), App = withScope(cScope)(require('./App').default);
+	//
+	//	//debugger;
+	//	if ( cfg.state ) {
+	//		cScope.restore(cfg.state, { alias: "App" });
+	//	}
+	//	else {
+	//		cScope.state.Anims = { currentBrkPts: cfg.device };
+	//	}
+	//
+	//	let html,
+	//	    appHtml     = renderToString(<App location={cfg.location}/>),
+	//	    stable      = cScope.isStableTree();
+	//	global.contexts = Scope.scopes;
+	//	//console.log('ctrl::renderSSR:65: ', cfg.location, _attempts);
+	//	cScope.onceStableTree(state => {
+	//		let nstate = cScope.serialize({ alias: "App" });
+	//		cScope.destroy()
+	//		if ( !_attempts || !stable && _attempts < 3 ) {
+	//			cfg.state = nstate;
+	//			ctrl.renderSSR(cfg, cb, ++_attempts);
+	//		}
+	//		else {
+	//			try {
+	//				html = "<!doctype html>\n" +
+	//					renderToString(<Index
+	//						helmet={Helmet.renderStatic()}
+	//						css={!__IS_DEV__ && cfg.css}
+	//						state={nstate}
+	//						content={appHtml}/>);
+	//
+	//			} catch ( e ) {
+	//				return cb(e)
+	//			}
+	//			cb(null, html)
+	//		}
+	//	})
+	//}
 }
 export default ctrl;

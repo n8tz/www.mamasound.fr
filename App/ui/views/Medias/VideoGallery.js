@@ -24,7 +24,7 @@ import {Comps}               from 'App/ui';
 
 import ReactJWPlayer from 'react-jw-player';
 
-//@scopeToProps("appState", "Anims", "UserGeoLocation")
+//@scopeToProps("appState", "Styles", "UserGeoLocation")
 export default class VideoGallery extends React.Component {
 	static propTypes = {};
 	state            = {};
@@ -52,7 +52,7 @@ export default class VideoGallery extends React.Component {
 	render() {
 		let {
 			    record                          : { position, size } = {},
-			    UserGeoLocation, appState, Anims: { HomePage },
+			    UserGeoLocation, appState, Styles: { HomePage },
 			    $actions, style
 		    }     = this.props,
 		    state = this.state;

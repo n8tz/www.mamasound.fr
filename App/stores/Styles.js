@@ -23,7 +23,7 @@ const isBrowserSide = (new Function("try {return this===window;}catch(e){ return
 
 const initialPts = (!isBrowserSide || window.innerWidth >= 900) && "desktop" || "phone";
 
-export default class Anims extends Store {
+export default class Styles extends Store {
 	//static singleton = true;
 	static actions = {};
 	state          = {

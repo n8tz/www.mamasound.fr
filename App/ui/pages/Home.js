@@ -29,7 +29,7 @@ const wayPoints =
 		      map   : 300
 	      };
 
-@scopeToProps("appState", "Anims")
+@scopeToProps("appState", "Styles.pages.Home:Styles")
 @asTweener({ enableMouseDrag: true, dragDirectionLock: true })
 export default class Home extends React.Component {
 	state = {};
@@ -60,19 +60,15 @@ export default class Home extends React.Component {
 		}
 	}
 	
-	//
 	render() {
-		let { Anims: { HomePage }, appState, $actions } = this.props;
-		if ( typeof window !== "undefined" )
-			window.$actions = $actions;
-		return <TweenRef
-			id={"page"}
-			initial={HomePage.page}>
+		let { Styles, appState, $actions } = this.props;
+		
+		return <TweenRef id={"page"} initial={Styles.page}>
 			<div className={"Home container"}>
 				
 				<TweenAxis
 					axe={"scrollY"}
-					items={HomePage.YAxis}
+					items={Styles.YAxis}
 					//scrollableWindow={ 225 }
 					defaultPosition={wayPoints[appState.currentPageFocus]}
 					//defaultPosition={100}
@@ -123,27 +119,43 @@ export default class Home extends React.Component {
 						}
 					}
 				/>
-				<TweenRef id={"Highlighter"} initial={HomePage.Highlighter}>
-					<Views.Block.Highlighter/>
+				<TweenRef id={"Highlighter"} initial={Styles.Highlighter}>
+					<Views.Block.Highlighter>
+						<TweenRef
+							id={"header"}
+							initial={Styles.header}
+						>
+							<header
+								style={{
+									zIndex : 5000,
+									display: "inline-block",
+									//width  : "100%",
+									//background: "red",
+								}}>
+								<Views.Block.PageBlock>
+									<TweenRef
+										id={"logo"}
+										initial={Styles.logo}
+									>
+										<div className={"logo"}/>
+									</TweenRef>
+								</Views.Block.PageBlock>
+							
+							</header>
+						</TweenRef>
+					</Views.Block.Highlighter>
 				</TweenRef>
 				
-				<TweenRef id={"EventsBlock"}
-				          initial={HomePage.EventsBlock}>
+				<TweenRef id={"EventsBlock"} initial={Styles.EventsBlock}>
 					<Views.Events.EventList
 						activeScroll={appState.currentPageFocus !== "map" && appState.currentPageFocus !== "events"}/>
 				</TweenRef>
-				<TweenRef
-					id={"EventMap"}
-					initial={HomePage.EventMap}
-				>
+				<TweenRef id={"EventMap"} initial={Styles.EventMap}>
 					<Views.Events.EventMap
 						day={appState.currentVisibleDay || appState.curDay}
 						viewType={appState.viewType}/>
 				</TweenRef>
-				<TweenRef
-					id={"Footer"}
-					initial={HomePage.Footer}
-				>
+				<TweenRef id={"Footer"} initial={Styles.Footer}>
 					<Comps.Footer/>
 				</TweenRef>
 			</div>

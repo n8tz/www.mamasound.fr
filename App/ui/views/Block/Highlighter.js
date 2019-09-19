@@ -75,7 +75,7 @@ if ( typeof window !== "undefined" ) {
 		
 	}
 )
-@scopeToProps("MountedItems", "Selected", "HighlighterBackground", "Anims", "DataProvider", "appState")
+@scopeToProps("MountedItems", "Selected", "HighlighterBackground", "Styles.views.Block.Highlighter:Styles", "DataProvider", "appState")
 @withTweener
 export default class Highlighter extends React.Component {
 	static propTypes = {};
@@ -102,41 +102,19 @@ export default class Highlighter extends React.Component {
 	render() {
 		let {
 			    MountedItems: { items = [], layout = [] },
-			    Anims, Selected, DataProvider,
+			    Styles, Selected, children,
 			    $actions, HighlighterBackground, tweener, style
 		    }     = this.props,
 		    state = this.state;
 		return (
 			<div style={style}
 			     className={"Highlighter"}>
-				
-				<TweenRef
-					id={"header"}
-					initial={Anims.HomePage.header}
-				>
-					<header
-						style={{
-							zIndex : 5000,
-							display: "inline-block",
-							//width  : "100%",
-							//background: "red",
-						}}>
-						<Views.Block.PageBlock>
-							<TweenRef
-								id={"logo"}
-								initial={Anims.HomePage.logo}
-							>
-								<div className={"logo"}/>
-							</TweenRef>
-						</Views.Block.PageBlock>
-					
-					</header>
-				</TweenRef>
+				{children}
 				<div className={"headBackground"}>
 					<div className={"maskContent"}>
 						<TweenRef
-							initial={Anims.Highlighter.background}
-							tweenLines={Anims.Highlighter.backgroundScroll}
+							initial={Styles.background}
+							tweenLines={Styles.backgroundScroll}
 						>
 							<div className={"container back"}>
 								{/*{*/}
@@ -155,13 +133,12 @@ export default class Highlighter extends React.Component {
 							</div>
 						</TweenRef>
 						<TweenRef
-							initial={Anims.Highlighter.focused}
-							tweenLines={Anims.Highlighter.focusedScroll}
-						>
+							initial={Styles.focused}
+							tweenLines={Styles.focusedScroll}>
 							<div className={"focusedContent container"}>
 								{/*<Views.Events.BestEvents/>*/}
 								<Comps.ViewSwitcher target={Selected && Selected.Focused}
-								                    {...Anims.Focused}
+								                    {...Styles.Focused}
 								                    DefaultView={Views.Events.BestEvents}
 								                    View={Views.FocusedItems.page}
 								                    ViewPreview={Views.FocusedItems.preview}
@@ -175,12 +152,12 @@ export default class Highlighter extends React.Component {
 				
 				<TweenRef
 					//id={"focusSlider"}
-					initial={Anims.Highlighter.slider}
-					tweenLines={Anims.Highlighter.sliderScroll}
+					initial={Styles.slider}
+					tweenLines={Styles.sliderScroll}
 				>
 					<div className={"slider"}>
 						<Comps.Slider
-							{...Anims.MainSlider}
+							{...Styles.Slider}
 							infinite={true}
 							autoScroll={10 * 1000}
 							onClick={this.selectFocus}
@@ -191,8 +168,8 @@ export default class Highlighter extends React.Component {
 									( item, i ) =>
 										<TweenRef key={item._id + i}
 										          tweener={tweener}
-										          initial={Anims.Highlighter.slide}
-										          tweenLines={Anims.Highlighter.slideScroll}>
+										          initial={Styles.slide}
+										          tweenLines={Styles.slideScroll}>
 											<Views.FocusedItems.SlideItem record={item}
 												//onTap={
 												//    e => $actions.selectFocus(item.targetEtty.objId, i)

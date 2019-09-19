@@ -25,7 +25,7 @@ import React          from "react";
 import {scopeToProps} from "react-scopes";
 import {TweenRef}     from "react-voodoo";
 
-@scopeToProps("appState", "Anims", "UserGeoLocation")
+@scopeToProps("appState", "Styles.views.Events.EventsList:Styles", "UserGeoLocation")
 export default class EventList extends React.Component {
 	static propTypes = {};
 	state            = {};
@@ -128,7 +128,7 @@ export default class EventList extends React.Component {
 		let {
 			    UserGeoLocation,
 			    appState,
-			    Anims: { HomePage, EventsBlock: { EventCatSlider }, EventDaySlider },
+			    Styles,
 			    activeScroll,
 			    $actions, style
 		    }     = this.props,
@@ -140,17 +140,16 @@ export default class EventList extends React.Component {
 					<div className={"content container"}>
 						<TweenRef
 							id={"NavBox"}
-							initial={HomePage.NavBox}
+							initial={Styles.NavBox}
 						>
 							<Comps.NavBox/>
 						</TweenRef>
-						{appState.viewType}
 						<TweenRef
 							id={"EventCatSlider"}
-							initial={EventCatSlider.style}
+							initial={Styles.EventCatSlider.style}
 						>
 							<Comps.Slider
-								{...EventCatSlider}
+								{...Styles.EventCatSlider}
 								index={appState.viewType}
 								onChange={$actions.setCurStyleTab}
 								className={"EventCatSlider "}
@@ -190,9 +189,7 @@ export default class EventList extends React.Component {
 					activeScroll && <div className={"noScrollOverlay"}
 					                     onClick={e => $actions.setPageFocus('events', true)}></div>
 				}
-				<div
-					className={"NavTools container"}
-				>
+				<div className={"NavTools container"}>
 					<Fab aria-label="edit" className={"newBtn button"}
 					     onClick={$actions.toggleUserGeoLocation}>
 						{
