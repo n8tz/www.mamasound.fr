@@ -28,26 +28,27 @@ export default class Editable extends Component {
 	
 	doEdit = ( e ) => {
 		let { $actions, id, DataProvider, CurrentUser } = this.props;
-		if ( CurrentUser && CurrentUser.isAdmin )
+		
 			$actions.newWidget("RecordEditor", {
 				record: {
 					id,
 					etty: DataProvider[id] && DataProvider[id]._cls
 				}
 			})
-		else
-			alert('Sorry, you must be logged to use editors');
 	}
 	
 	render() {
 		let { $actions, id, DataProvider, CurrentUser } = this.props;
+		
 		return (
+			CurrentUser && CurrentUser.isAdmin ?
 			<ContextMenu>
 				<div className={"record_edit_menu"}
 				     onClick={this.doEdit}>
 					Edit "{DataProvider[id] && DataProvider[id]._alias || id}"
 				</div>
-			</ContextMenu>
+			</ContextMenu> :
+			''
 		);
 	}
 	

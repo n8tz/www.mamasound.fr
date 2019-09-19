@@ -65,6 +65,7 @@ export default class LoginBox extends Component {
 				}
 				<Dialog open={this.state.showModal}
 				        title='My awesome dialog'
+				        classes={{paper:"LoginBoxDialog"}}
 				        onClose={() => this.setState({ showModal: false })}>
 					<h1>Connexion</h1>
 					
@@ -92,8 +93,8 @@ export default class LoginBox extends Component {
 							</div>
 						}
 					</form>
-					
-					<a className="loginBoxPasswordLost" onClick={this.doFindSubmit}>Mot de passe oublié</a>
+					<br/>
+					{/*<a className="loginBoxPasswordLost" onClick={this.doFindSubmit}>Mot de passe oublié</a>*/}
 					<button className="submit-input" onClick={this.doSubmit}>Connexion</button>
 				</Dialog>
 			</div>

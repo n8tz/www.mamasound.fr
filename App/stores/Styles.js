@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import anims   from "App/ui/assets/anims/responsive/(**/*).js";
+import anims   from "App/ui/assets/anims/(**/*).js";
 import {Store} from "react-scopes";
 
 const isBrowserSide = (new Function("try {return this===window;}catch(e){ return false;}"))();

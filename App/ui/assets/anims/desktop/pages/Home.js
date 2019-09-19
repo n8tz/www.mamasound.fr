@@ -98,7 +98,7 @@ export const EventsBlock       = {
 	right          : "0%",
 	bottom         : "0%",
 	top            : "100%",
-	zIndex         : 150,
+	zIndex         : 125,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
 	transform      : [
@@ -116,7 +116,7 @@ export const EventMap          = {
 	position       : "absolute",
 	right          : "0%",
 	height         : "0%",
-	zIndex         : 125,
+	zIndex         : 150,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
 	top            : "100%",

@@ -15,10 +15,6 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import Fab            from '@material-ui/core/Fab';
-import GpsFixedIcon   from '@material-ui/icons/GpsFixed';
-import GpsNoFixedIcon from '@material-ui/icons/GpsNotFixed';
-import GpsOffIcon     from '@material-ui/icons/GpsOff';
 import {Comps, Views} from 'App/ui';
 import moment         from "moment";
 import React          from "react";
@@ -189,19 +185,7 @@ export default class EventList extends React.Component {
 					activeScroll && <div className={"noScrollOverlay"}
 					                     onClick={e => $actions.setPageFocus('events', true)}></div>
 				}
-				<div className={"NavTools container"}>
-					<Fab aria-label="edit" className={"newBtn button"}
-					     onClick={$actions.toggleUserGeoLocation}>
-						{
-							UserGeoLocation.activating &&
-							<GpsNoFixedIcon/> ||
-							UserGeoLocation.active &&
-							<GpsFixedIcon/> ||
-							<GpsOffIcon/>
-						}
-					
-					</Fab>
-				</div>
+				
 			</div>
 		);
 	}

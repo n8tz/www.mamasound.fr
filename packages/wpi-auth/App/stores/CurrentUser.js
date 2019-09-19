@@ -15,12 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {Scope, Store} from "react-scopes";
-
-import {types, get} from 'App/db';
+import cfg     from "App/config";
+import {Store} from "react-scopes";
 
 import superagent from "superagent";
-import cfg        from "App/config";
 
 export default class CurrentUser extends Store {
 	static singleton = true;
@@ -39,7 +37,9 @@ export default class CurrentUser extends Store {
 				"http://" + cfg.ROOT_DOMAIN + '/login', user
 			).then(r => {
 				this.setState({ user: r.body.result })
-				document.location.reload(true);
+				
+				if ( r.body.result.isAdmin )
+					document.location.reload(true);
 				
 				cb(null, r.body.result)
 			}).catch(e => {
@@ -55,7 +55,9 @@ export default class CurrentUser extends Store {
 			superagent.get(
 				"http://" + cfg.ROOT_DOMAIN + '/logout'
 			).then(( r ) => {
-				this.setState({ user: null })
+				this.setState({ user: null });
+				if ( this.data.isAdmin )
+					document.location.reload(true);
 			}).catch(e => {
 				debugger
 			});

@@ -37,13 +37,13 @@ React.createElement = function ( type, ...argz ) {
 	return hookedRCE.apply(this, arguments);
 }
 moment.locale('fr');
-@scopeToProps("widgets", "appState", "FacebookPage")
+@scopeToProps("widgets", "appState", "FacebookPage", "CurrentUser")
 export default class App extends React.Component {
 	state = {};
 	
 	render() {
 		let Router                                          = BrowserRouter;
-		let { widgets = { items: [] }, appState, $actions } = this.props;
+		let { widgets = { items: [] }, appState, CurrentUser, $actions } = this.props;
 		if ( __IS_SERVER__ )
 			Router = StaticRouter;
 		return <Router location={__IS_SERVER__ && this.props.location}>
@@ -72,7 +72,7 @@ export default class App extends React.Component {
 						rel="stylesheet"/>
 				</Helmet>
 				
-				{__IS_ADMIN__ && <ContextMenu>
+				{CurrentUser && CurrentUser.isAdmin && <ContextMenu>
 					<div
 						onClick={() => $actions.newWidget('MamaImporter', { title: "Importer d'events" })}>
 						New Importer

@@ -15,6 +15,10 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+import Fab                                                     from '@material-ui/core/Fab';
+import GpsFixedIcon                                            from '@material-ui/icons/GpsFixed';
+import GpsNoFixedIcon                                          from '@material-ui/icons/GpsNotFixed';
+import GpsOffIcon                                              from '@material-ui/icons/GpsOff';
 import scopes                                                  from 'App/scopes/(*).js';
 import {Views}                                                 from 'App/ui';
 import React                                                   from "react";
@@ -101,7 +105,7 @@ else {
 				}
 				else {
 					center = {
-						latitude : "43.618091",
+						latitude : "43.608091",
 						longitude: "3.876624"
 					};//POIs.length && geolib.getCenter(POIs.map(poi => poi.geoPoint)) ||
 				}
@@ -185,7 +189,7 @@ export default class EventMap extends React.Component {
 		let {
 			    Events,
 			    Events: { center = {}, POIs = [], zoom } = {},
-			    Styles : { HomePage }, UserGeoLocation, Selected,
+			    Styles: { HomePage }, UserGeoLocation, Selected,
 			    $actions, DataProvider, style
 		    }           = this.props,
 		    map         = this.refs.map && this.refs.map.leafletElement,
@@ -206,8 +210,22 @@ export default class EventMap extends React.Component {
 			return <div className={"EventMap"}/>
 		return (
 			<div className={"EventMap"} style={style}>
-				<div className={"maskContent "}>
-					
+				<div className={"NavTools"}>
+					<div className={"container tools"}>
+						<Fab aria-label="edit" className={"newBtn button"}
+						     onClick={$actions.toggleUserGeoLocation}>
+							{
+								UserGeoLocation.activating &&
+								<GpsNoFixedIcon/> ||
+								UserGeoLocation.active &&
+								<GpsFixedIcon/> ||
+								<GpsOffIcon/>
+							}
+						
+						</Fab>
+					</div>
+				</div>
+				<div className={"mapContainer "}>
 					<Map center={center}
 					     zoom={zoom}
 					     className={"container"}
