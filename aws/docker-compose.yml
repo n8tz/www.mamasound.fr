@@ -1,0 +1,78 @@
+version: '3'
+volumes:
+  node_modules:
+  emptyDockerDir:
+networks:
+  app_network:
+services:
+  traefik:
+    image: traefik
+    command: --web --docker --docker.domain=docker.localhost --logLevel=error
+    ports:
+      - "${APP_DOCKER_PORT:-80}:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+#      - ../traefik.toml:/traefik.toml
+      - ../etc/cert/:/cert/
+    networks:
+      - app_network
+  app:
+    restart: always
+    build:
+      context: .
+    working_dir: /home/app
+    command: bash -c "mongorestore --uri ${mongoUrl}&&node ./dist/api/App.server.js  -p 8080"
+    #
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.protocol=http'
+      - "traefik.frontend.rule=Host:${APP_DOMAIN:-mamasound.localhost}"
+    environment:
+      - mongoUrl=mongodb://mongodb:27017
+      - redisUrl=redis://redis:6379
+      - APP_MODE=${APP_MODE:-dev}
+      - APP_DOMAIN=${APP_DOMAIN:-mamasound.localhost}
+    #      - CHOKIDAR_USEPOLLING=true
+    links:
+      - mongodb
+      - redis
+    depends_on:
+      - mongodb
+      - redis
+#    volumes:
+#      - ..:/home/app
+#      - node_modules:/home/app/node_modules
+#      - ../dump:/home/app/dump
+    expose:
+      - "8080"
+    ports:
+      - "${APP_DOCKER_DEBUG_PORT:-9229}:9229"
+      - "9090:9090"
+    networks:
+      - app_network
+  mongodb:
+    image: mongo
+    restart: always
+    command: --quiet --smallfiles
+    environment:
+      - MONGO_DATA_DIR=/data/db
+    volumes:
+      - ./docker/db:/data
+    expose:
+      - 27017
+    #    ports:
+    #      - "27017"
+    networks:
+      - app_network
+  redis:
+    image: redis:4.0.5-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    hostname: redis
+    restart: always
+    expose:
+      - 6379
+    networks:
+      - app_network
+    volumes:
+      - ./docker/redis-data:/data
