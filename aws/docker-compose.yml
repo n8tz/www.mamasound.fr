@@ -54,7 +54,7 @@ services:
   mongodb:
     image: mongo
     restart: always
-    command: --quiet --smallfiles
+    command: --quiet
     environment:
       - MONGO_DATA_DIR=/data/db
     volumes:
