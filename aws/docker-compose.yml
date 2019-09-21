@@ -6,15 +6,19 @@ networks:
   app_network:
 services:
   traefik:
-    image: traefik
-    command: --web --docker --docker.domain=docker.localhost --logLevel=error
+    image: "traefik:v2.0.0-rc3"
+    container_name: "traefik"
+    command:
+      #- "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
     ports:
-      - "${APP_DOCKER_PORT:-80}:80"
-      - "443:443"
+      - "80:80"
+      - "8080:8080"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-#      - ../traefik.toml:/traefik.toml
-      - ../etc/cert/:/cert/
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
     networks:
       - app_network
   app:
@@ -23,14 +27,15 @@ services:
     command: bash -c "node ./dist/api/App.server.js  -p 8080"
     #
     labels:
-      - 'traefik.enable=true'
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`${APP_DOMAIN}`)"
+      - "traefik.http.routers.whoami.entrypoints=web"
       - 'traefik.protocol=http'
-      - "traefik.frontend.rule=Host:${APP_DOMAIN:-mamasound.localhost}"
     environment:
       - mongoUrl=mongodb://mongodb:27017
       - redisUrl=redis://redis:6379
       - APP_MODE=${APP_MODE:-dev}
-      - APP_DOMAIN=${APP_DOMAIN:-mamasound.localhost}
+      - APP_DOMAIN=${APP_DOMAIN}
     #      - CHOKIDAR_USEPOLLING=true
     links:
       - mongodb
@@ -44,9 +49,6 @@ services:
 #      - ../dump:/home/app/dump
     expose:
       - "8080"
-    ports:
-      - "${APP_DOCKER_DEBUG_PORT:-9229}:9229"
-      - "9090:9090"
     networks:
       - app_network
   mongodb:

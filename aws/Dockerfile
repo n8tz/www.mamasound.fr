@@ -39,4 +39,4 @@ RUN npm i&&npm run build
 #EXPOSE 80/tcp
 #EXPOSE 80/udp
 
-#CMD cd aws&&APP_RUN_BEFORE="npm i" APP_MODE=prod APP_DOMAIN=${APP_DOMAIN} docker-compose up
+#CMD cd aws&&APP_RUN_BEFORE="npm i" APP_MODE=prod APP_DOMAIN=35.156.40.138 docker-compose up
