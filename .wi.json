@@ -29,22 +29,25 @@
     "rootFolder": "App",
     "libsPath": "./packages",
     "commands": {
-      "api": {
-        "clearBefore": "dist/api",
-        "run": "wpi :api"
-      },
-      "server": {
-        "watch": "dist/api/App.server.js",
-        "run": "node ./dist/api/App.server.js -p 8080",
-        "forever": true
-      },
       "www": {
         "clearBefore": "dist/www",
         "run": "wpi :client"
       },
       "admin": {
+        "wait": "www",
         "clearBefore": "dist/admin",
         "run": "wpi :admin"
+      },
+      "api": {
+        "wait": "admin",
+        "clearBefore": "dist/api",
+        "run": "wpi :api"
+      },
+      "server": {
+        "wait": "api",
+        "watch": "dist/api/App.server.js",
+        "run": "node ./dist/api/App.server.js -p 8080",
+        "forever": true
       }
     },
     "extend": [

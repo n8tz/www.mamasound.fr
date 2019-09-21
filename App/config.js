@@ -18,7 +18,15 @@
 import $super from "$super";
 
 //let baseDomain = "mamasound.wiseways.me"
-let baseDomain = "mamasound.localhost";
+let baseDomain;
+
+if ( __IS_SERVER__ ) {
+	baseDomain = process.env.APP_DOMAIN;
+}
+else {
+	baseDomain = location.host;
+}
+console.warn("baseDomain",baseDomain)
 export default {
 	STATIC_URL      : baseDomain + "/medias",//"static.mamasound.fr",
 	PUBLIC_URL      : "mamasound.fr",

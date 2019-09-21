@@ -33,13 +33,15 @@ export default (
 	{
 		record,
 		refs = {},
+		style = {},
+		className = "",
 		target = record.targetEtty && refs[record.targetEtty.objId] || record,
 		previewImage = target && target.previewImage || record.previewImage,
 		category = record.category && refs[record.category.objId]
 	}
 ) => {
 	//debugger;
-	return <div className={"Page FocusedItems_preview type_" + target._cls}>
+	return <div className={"Page FocusedItems_preview type_" + target._cls+" "+className} style={style}>
 		<Editable id={record._id}/>
 		{
 			previewImage &&

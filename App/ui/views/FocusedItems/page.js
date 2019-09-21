@@ -24,6 +24,7 @@
  */
 'use strict';
 
+import {Views}    from "App/ui";
 import Editable   from "App/ui/Editable";
 import React      from "react";
 import {TweenRef} from "react-voodoo";
@@ -62,8 +63,8 @@ export default class page extends React.Component {
 				initial={
 					{
 						"position": "absolute",
-						top       : ["50%", "3em"],
-						left      : ["30%", "-3em"],
+						top       : ["40%", "3em"],
+						left      : "1em",
 						//opacity   : 0,
 						right     : "1em",
 						height    : "4px",
@@ -130,12 +131,16 @@ export default class page extends React.Component {
 				initial={
 					{
 						"position": "absolute",
-						top       : "50%",
-						left      : "30%",
-						width     : "4px",
-						//opacity   : 0,
-						bottom    : "0%",
-						transform : [{}, {
+						top       : "0%",
+						left      : "50%",
+						zIndex    : -1,
+						width     : "100%",
+						height    : "100%",
+						//backgroundColor: "red",
+						transform : [{
+							translateX: "-50%",
+							translateY: "0%"
+						}, {
 							translateY: (isNext || isCurrent) && "-40vh" || "0vh",
 						}]
 					}
@@ -144,59 +149,54 @@ export default class page extends React.Component {
 					{
 						"scrollX": isNext && [
 							{
-								
+
 								from    : 100,
 								duration: 100,
 								easeFn  : "easeSinOut",
 								apply   : {
-									//opacity  : -1,
 									transform: [{}, {
 										translateY: "40vh",
 									}]
 								}
 							}] || isCurrent && [
 							{
-								
+
 								from    : 0,
 								duration: 100,
 								easeFn  : "easeSinIn",
 								apply   : {
-									//opacity  : 1,
 									transform: [{}, {
-										//translateZ: "50px",
 										translateY: "40vh",
 									}]
 								}
 							},
 							{
-								
+
 								from    : 100,
 								duration: 100,
 								easeFn  : "easeSinOut",
 								apply   : {
-									//opacity  : -1,
 									transform: [{}, {
 										translateY: "40vh",
 									}]
 								}
 							}
 						] || [
-							{
-								
-								from    : 0,
-								duration: 100,
-								easeFn  : "easeSinIn",
-								apply   : {
-									//opacity  : -1,
-									transform: [{}, {
-										translateY: "40vh",
-									}]
-								}
-							}
+							//{
+							//
+							//	from    : 0,
+							//	duration: 100,
+							//	easeFn  : "easeSinIn",
+							//	apply   : {
+							//		transform: [{}, {
+							//			translateY: "40vh",
+							//		}]
+							//	}
+							//}
 						] || []
 					}
 				}>
-				<div className={"styleBar"}/>
+				<Views.FocusedItems.preview className={"preview"} record={record}/>
 			</TweenRef>
 		</div>
 	}

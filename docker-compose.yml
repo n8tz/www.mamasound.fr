@@ -22,17 +22,19 @@ services:
     build:
       context: .
     working_dir: /home/app
-    command: bash -c "npm i&&wi-run :dev start"
-#    command: bash -c "npm i&&wi-run :prod start"
-#
+    #    command: bash -c "npm i&&wi-run :dev start"
+    command: bash -c "${APP_RUN_BEFORE:-sleep 0}&&wi-run :${APP_MODE:-dev} start"
+    #
     labels:
       - 'traefik.enable=true'
       - 'traefik.protocol=http'
-      - "traefik.frontend.rule=Host:mamasound.localhost"
+      - "traefik.frontend.rule=Host:${APP_DOMAIN:-mamasound.localhost}"
     environment:
       - mongoUrl=mongodb://mongodb:27017
       - redisUrl=redis://redis:6379
-#      - CHOKIDAR_USEPOLLING=true
+      - APP_MODE=${APP_MODE:-dev}
+      - APP_DOMAIN=${APP_DOMAIN:-mamasound.localhost}
+    #      - CHOKIDAR_USEPOLLING=true
     links:
       - mongodb
       - redis
@@ -42,10 +44,7 @@ services:
     volumes:
       - .:/home/app
       - node_modules:/home/app/node_modules
-#      - ./docker/dist:/home/app/dist
-#      - ./docker/logs:/home/app/logs
       - ./dump:/home/app/dump
-      #      - ../../libs/react-scopes:/home/app/libs
     expose:
       - "8080"
     ports:

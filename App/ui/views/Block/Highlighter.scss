@@ -102,6 +102,29 @@
         font-size: 12px;
       }
 
+      &:before {
+        content: ' ';
+
+        position: absolute;
+        top: calc(40% + 3em);
+        left: 50%;
+        width: 100vw;
+
+        bottom: -20vh;
+        background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 27%,rgba(0,0,0,1) 80%,rgba(0,0,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        transform: translateX(-50%);
+      }
+      .FocusedItems_preview {
+
+        img {
+          width: 100%;
+          overflow: hidden;
+          //top:-1em;
+          //transform: translate(-50%, 0%);
+        }
+
+      }
+
       &.smallView {
 
 
@@ -124,6 +147,10 @@
         }
 
         .title {
+          position: fixed;
+          top: 40%;
+          left: 1em;
+          right: 1em;
           padding-left: 1em;
           text-align: left;
           font-size: 2em;
@@ -137,10 +164,6 @@
           text-overflow: ellipsis;
           white-space: nowrap;
           overflow: hidden;
-          position: fixed;
-          top: 50%;
-          left: 30%;
-          right: 1em;
           @media screen and (max-width: $tablet-portrait-breakpoint) {
             left: 5%;
             top: 35%;
@@ -153,6 +176,20 @@
 
         .resume {
           //@include withScrollBar();
+
+          position: absolute;
+          top: calc(40% + 3em);
+          left: 1em;
+          right: 1em;
+          bottom: 5px;
+          margin: 5px;
+          overflow: hidden;
+
+          cursor: pointer;
+          direction: rtl;
+          text-shadow: 0 0 2px #fff, 0 0 5px #fff, 0 0 2px #fff, 0 0 2px rgba(255, 255, 255, 0.4);
+          transition: all 500ms;
+
           > .content {
             @include withTranspaMask();
             background: linear-gradient(170deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, .5) 2%, rgba(255, 255, 255, 0.6) 10%, rgba(255, 255, 255, 0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
@@ -175,20 +212,6 @@
               display: none !important;
             }
           }
-
-          cursor: pointer;
-          position: absolute;
-          direction: rtl;
-          text-shadow: 0 0 2px #fff, 0 0 5px #fff, 0 0 2px #fff, 0 0 2px rgba(255, 255, 255, 0.4);
-          transition: all 500ms;
-
-          top: calc(50% + 3em);
-          left: 30%;
-          right: 1em;
-          bottom: 5px;
-          margin: 5px;
-
-          overflow: hidden;
 
           &:after {
             content: "Plus d'infos";
@@ -217,13 +240,13 @@
         }
 
         //touch-action: auto;
-        * {
-          max-width: 100%;
-          overflow: hidden;
-        }
+        //* {
+        //  max-width: 100%;
+        //overflow: hidden;
+        //}
 
         img {
-          max-width: 40vw;
+          //max-width: 40vw;
           touch-action: none;
           pointer-events: none;
           height: auto !important;
@@ -274,6 +297,20 @@
 
         .resume {
 
+          position: absolute;
+          background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 1%, rgba(255, 255, 255, 0.88) 13%, rgba(255, 255, 255, 0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+          text-shadow: 0 0 2px #fff, 0 0 5px #fff, 0 0 2px #fff, 0 0 2px rgba(255, 255, 255, 0.4);
+          padding-left: 5px;
+          top: calc(5% + 3.5em);
+          left: 1em;
+          right: 1em;
+          width: auto !important;
+          max-width: none !important;
+          bottom: 1em;
+          margin: 5px;
+          transition: all 500ms;
+          overflow: hidden;
+          border-radius: 3px;
           > .content {
             @include withScrollBar();
             position: absolute;
@@ -299,20 +336,15 @@
             }
           }
 
-          position: absolute;
-          background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 1%, rgba(255, 255, 255, 0.88) 13%, rgba(255, 255, 255, 0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-          text-shadow: 0 0 2px #fff, 0 0 5px #fff, 0 0 2px #fff, 0 0 2px rgba(255, 255, 255, 0.4);
-          padding-left: 5px;
-          top: calc(5% + 3.5em);
-          left: 1em;
-          right: 1em;
-          width: auto !important;
-          max-width: none !important;
-          bottom: 1em;
-          margin: 5px;
-          transition: all 500ms;
-          overflow: hidden;
-          border-radius: 3px;
+          img {
+            max-width: 80%;
+            max-height: 50vw;
+            width: auto !important;
+            touch-action: none;
+            pointer-events: none;
+            height: auto !important;
+            //max-height: 60%;
+          }
           @media screen and (max-width: $tablet-portrait-breakpoint) {
 
             > * {
@@ -326,26 +358,17 @@
 
           }
 
+          * {
+            max-width: 100%;
+            overflow: hidden;
+          }
           img {
             display: unset !important;
           }
 
-          img {
-            max-width: 80%;
-            max-height: 50vw;
-            width: auto !important;
-            touch-action: none;
-            pointer-events: none;
-            height: auto !important;
-            //max-height: 60%;
-          }
         }
 
         //touch-action: auto;
-        * {
-          max-width: 100%;
-          overflow: hidden;
-        }
 
       }
     }
