@@ -19,10 +19,8 @@ services:
       - app_network
   app:
     restart: always
-    build:
-      context: .
-    working_dir: /home/app
-    command: bash -c "mongorestore --uri ${mongoUrl}&&node ./dist/api/App.server.js  -p 8080"
+    image: n8tz/www.mamasound.fr:latest
+    command: bash -c "node ./dist/api/App.server.js  -p 8080"
     #
     labels:
       - 'traefik.enable=true'

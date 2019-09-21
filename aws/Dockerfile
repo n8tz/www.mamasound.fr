@@ -22,12 +22,9 @@ RUN apk --no-cache update \
         py-pip \
         git \
         certbot \
-        docker \
         nano \
         htop
 
-RUN pip install --upgrade pip
-RUN pip install docker-compose
 
 ENV PATH=node_modules/.bin:$PATH
 ENV APP_DOMAIN=${APP_DOMAIN}
