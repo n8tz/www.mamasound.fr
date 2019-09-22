@@ -13,7 +13,7 @@
     "runBrowser": "opener http://localhost:8080",
     "docker_start": "cd dockers/dev&&opener docker-compose up",
     "docker_restart": "cd dockers/dev&&docker-compose down&&opener docker-compose up",
-    "docker_restartClean": "cd dockers/dev&&docker-compose down -v&& (rm package-lock.json||1) &&opener docker-compose up",
+    "docker_restartClean": "(rm package-lock.json||sleep 0) &&cd dockers/dev&&docker-compose down -v&& opener docker-compose up",
     "docker_down": "cd dockers/dev&&docker-compose down",
     "docker_kill": "cd dockers/dev&&docker-compose kill",
     "docker_ash": "cd dockers/dev&&opener docker-compose exec app ash -c \"cd /home/app&&ash\"&",
