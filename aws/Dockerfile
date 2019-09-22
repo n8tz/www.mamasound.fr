@@ -1,5 +1,5 @@
 FROM node:8.12.0-alpine
-ARG APP_DOMAIN=52.59.210.34
+ARG APP_DOMAIN=app.localhost
 ARG GIT_TAG=release
 ARG GIT_BRANCH=dev
 ARG GIT_URL=https://github.com/n8tz/www.mamasound.fr
@@ -34,9 +34,10 @@ WORKDIR /home/app
 RUN git fetch --all --tags --prune
 RUN git checkout tags/$GIT_TAG -b $GIT_BRANCH
 
-RUN npm i&&npm run build
+RUN npm i
+RUN npm run build
 
 #EXPOSE 80/tcp
 #EXPOSE 80/udp
 
-#CMD cd aws&&APP_RUN_BEFORE="npm i" APP_MODE=prod APP_DOMAIN=35.156.40.138 docker-compose up
+#CMD cd aws&&APP_RUN_BEFORE="npm i" APP_MODE=prod APP_DOMAIN=whatsnext.doctor docker-compose up

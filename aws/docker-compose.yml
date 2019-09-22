@@ -6,7 +6,7 @@ networks:
   app_network:
 services:
   traefik:
-    image: "traefik:v2.0.0-rc3"
+    image: "traefik:v2.0.0"
     container_name: "traefik"
     command:
       #- "--log.level=DEBUG"
@@ -34,7 +34,6 @@ services:
     environment:
       - mongoUrl=mongodb://mongodb:27017
       - redisUrl=redis://redis:6379
-      - APP_MODE=${APP_MODE:-dev}
       - APP_DOMAIN=${APP_DOMAIN}
     #      - CHOKIDAR_USEPOLLING=true
     links:
@@ -43,10 +42,6 @@ services:
     depends_on:
       - mongodb
       - redis
-#    volumes:
-#      - ..:/home/app
-#      - node_modules:/home/app/node_modules
-#      - ../dump:/home/app/dump
     expose:
       - "8080"
     networks:
@@ -61,8 +56,6 @@ services:
       - ./docker/db:/data
     expose:
       - 27017
-    #    ports:
-    #      - "27017"
     networks:
       - app_network
   redis:
