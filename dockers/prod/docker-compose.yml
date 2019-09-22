@@ -7,6 +7,7 @@ networks:
 services:
   traefik:
     image: "traefik:v2.0.0"
+    container_name: "traefik"
     command:
       #- "--log.level=DEBUG"
       - "--api.insecure=true"
@@ -22,22 +23,18 @@ services:
       - app_network
   app:
     restart: always
-    build:
-      context: .
-    working_dir: /home/app
-    #    command: bash -c "npm i&&wi-run :dev start"
-    command: bash -c "${APP_RUN_BEFORE:-sleep 0}&&wi-run :${APP_MODE:-dev} start"
+    image: n8tz/www.mamasound.fr:latest
+    command: bash -c "node ./dist/api/App.server.js  -p 8080"
     #
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`${APP_DOMAIN:-mamasound.localhost}`)"
+      - "traefik.http.routers.whoami.rule=Host(`${APP_DOMAIN}`)"
       - "traefik.http.routers.whoami.entrypoints=web"
       - 'traefik.protocol=http'
     environment:
       - mongoUrl=mongodb://mongodb:27017
       - redisUrl=redis://redis:6379
-      - APP_MODE=${APP_MODE:-dev}
-      - APP_DOMAIN=${APP_DOMAIN:-mamasound.localhost}
+      - APP_DOMAIN=${APP_DOMAIN}
     #      - CHOKIDAR_USEPOLLING=true
     links:
       - mongodb
@@ -45,15 +42,8 @@ services:
     depends_on:
       - mongodb
       - redis
-    volumes:
-      - .:/home/app
-      - node_modules:/home/app/node_modules
-      - ./dump:/home/app/dump
     expose:
       - "8080"
-    ports:
-      - "${APP_DOCKER_DEBUG_PORT:-9229}:9229"
-      - "9090:9090"
     networks:
       - app_network
   mongodb:
@@ -61,13 +51,11 @@ services:
     restart: always
     command: --quiet
     environment:
-      - MONGO_DATA_DIR=/data/mongodb
+      - MONGO_DATA_DIR=/data/db
     volumes:
-      - ./docker/db:/data
+      - ../../docker/mongodb:/data
     expose:
       - 27017
-    #    ports:
-    #      - "27017"
     networks:
       - app_network
   redis:
@@ -80,4 +68,4 @@ services:
     networks:
       - app_network
     volumes:
-      - ./docker/redis-data:/data
+      - ../../docker/redis-data:/data

@@ -23,7 +23,8 @@ services:
       - app_network
   app:
     restart: always
-    image: n8tz/www.mamasound.fr:latest
+    build:
+      context: .
     command: bash -c "node ./dist/api/App.server.js  -p 8080"
     #
     labels:
@@ -35,6 +36,10 @@ services:
       - mongoUrl=mongodb://mongodb:27017
       - redisUrl=redis://redis:6379
       - APP_DOMAIN=${APP_DOMAIN}
+      - APP_DOMAIN=a
+      - GIT_TAG=${GIT_TAG}
+      - GIT_BRANCH=${GIT_BRANCH}
+      - GIT_URL=${GIT_URL}
     #      - CHOKIDAR_USEPOLLING=true
     links:
       - mongodb
@@ -53,7 +58,7 @@ services:
     environment:
       - MONGO_DATA_DIR=/data/db
     volumes:
-      - ./docker/db:/data
+      - ../../docker/mongodb:/data
     expose:
       - 27017
     networks:
@@ -68,4 +73,4 @@ services:
     networks:
       - app_network
     volumes:
-      - ./docker/redis-data:/data
+      - ../../docker/redis-data:/data
