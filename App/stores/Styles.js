@@ -34,7 +34,7 @@ export default class Styles extends Store {
 	//};
 	//
 	//shouldSerialize() {
-	//	return false;
+		//return false;
 	//}
 	
 	constructor() {

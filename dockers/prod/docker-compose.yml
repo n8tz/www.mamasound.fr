@@ -53,7 +53,7 @@ services:
     environment:
       - MONGO_DATA_DIR=/data/db
     volumes:
-      - ../../docker/mongodb:/data
+      - ../../docker-data/mongodb:/data
     expose:
       - 27017
     networks:
@@ -68,4 +68,4 @@ services:
     networks:
       - app_network
     volumes:
-      - ../../docker/redis-data:/data
+      - ../../docker-data/redis-data:/data

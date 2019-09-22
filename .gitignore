@@ -34,6 +34,4 @@ node_modules
 /upload
 /public
 /dist
-/docker
-/dist.admin
-/dist.api
+/docker-data
