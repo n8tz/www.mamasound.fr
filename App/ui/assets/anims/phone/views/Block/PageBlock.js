@@ -1,5 +1,5 @@
 /*
- * www.mamasound.fr
+ *
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,7 +17,7 @@
  */
 export const selected       = {
 	position : "absolute",
-	backgroundColor: "red",
+	//backgroundColor: "red",
 	top      : "45%",
 	left     : "50%",
 	//width          : "90vw",

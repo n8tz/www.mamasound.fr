@@ -17,7 +17,7 @@
  */
 export const selected       = {
 	position : "absolute",
-	backgroundColor: "red",
+	//backgroundColor: "red",
 	top      : "45%",
 	left     : "50%",
 	//width          : "90vw",

@@ -57,7 +57,7 @@ export const defaultPreviewInitial = {
 	zIndex         : 40,
 	overflow       : "hidden",
 	transformOrigin: "50% 50%",
-	display        : "none",
+	//display        : "none",
 	opacity        : 1,
 	transform      : [
 		{

@@ -21,7 +21,7 @@ export const page              = {
 	position: "absolute",
 	top     : "0cm",
 	left    : "50%",
-	bottom  : footerMiniHeight,
+	bottom  : 0,
 	
 	transform: {
 		translateX: "-50%"
@@ -47,8 +47,8 @@ export const header            = {
 export const Highlighter       = {
 	position       : "absolute",
 	right          : "0%",
-	top            : "0%",
-	height         : ["100%", "0px", "0vh"],
+	top            : ["0%"],
+	height         : ["100%", "0px", "0vh", -2*footerMiniHeight],
 	transformOrigin: "center top",
 	zIndex         : 175,
 	transform      : [
@@ -85,7 +85,7 @@ export const logo              = {
 export const Footer            = {
 	height   : footerMiniHeight,
 	left     : "0px",
-	top      : "100%",
+	top      : ["100%", -footerMiniHeight],
 	width    : "100%",
 	position : "absolute",
 	zIndex   : 300,
@@ -96,9 +96,9 @@ export const Footer            = {
 export const EventsBlock       = {
 	position       : "absolute",
 	right          : "0%",
-	bottom         : "0%",
+	bottom         : -footerMiniHeight,
 	top            : "100%",
-	zIndex         : 150,
+	zIndex         : 125,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
 	transform      : [
@@ -116,10 +116,10 @@ export const EventMap          = {
 	position       : "absolute",
 	right          : "0%",
 	height         : "0%",
-	zIndex         : 125,
+	zIndex         : 150,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
-	top            : "100%",
+	top            : ["100%", -footerMiniHeight],
 };
 export const PageBlock         = {
 	
@@ -168,7 +168,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: "-150px"
+			height: ["-200px", 2*footerMiniHeight]
 		}
 	},
 	{
@@ -185,7 +185,7 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			height: ["-100%", 200, sliderHeight],
+			height: ["-100%", 200, sliderHeight, 2*footerMiniHeight],
 		}
 	},
 	{

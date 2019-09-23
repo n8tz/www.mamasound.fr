@@ -86,7 +86,6 @@
     "extend": [
       "wpi-auth",
       "wpi-forms",
-      "wpi-medias",
       "wpi-mongo",
       "wi-layer-react-express"
     ]
@@ -124,8 +123,6 @@
       "wpi-auth",
       "wpi-admin",
       "wpi-forms",
-      "wpi-medias",
-      "wpi-xsl",
       "wpi-mongo",
       "wi-layer-react-express"
     ]
@@ -172,8 +169,6 @@
       "wpi-auth",
       "wpi-admin",
       "wpi-forms",
-      "wpi-medias",
-      "wpi-xsl",
       "wpi-mongo",
       "wi-layer-react-express"
     ]
@@ -208,8 +203,6 @@
       "wpi-auth",
       "wpi-admin",
       "wpi-forms",
-      "wpi-medias",
-      "wpi-xsl",
       "wpi-mongo",
       "wi-layer-react-express"
     ]
@@ -245,8 +238,6 @@
       "wpi-auth",
       "wpi-admin",
       "wpi-forms",
-      "wpi-medias",
-      "wpi-xsl",
       "wpi-mongo",
       "wi-layer-react-express"
     ]

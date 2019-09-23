@@ -18,6 +18,15 @@
 
 .Home {
 
+  overflow: hidden;
+  border-left: solid 1px gray;
+  border-right: solid 1px gray;
+  @media screen and (max-width: $tablet-landscape-breakpoint) {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    border: none;
+  }
   header {
     touch-action: none;
     position: relative;
@@ -51,10 +60,5 @@
     }
   }
 
-  @media screen and (max-width: $tablet-portrait-breakpoint) {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100% !important;
-  }
 
 }

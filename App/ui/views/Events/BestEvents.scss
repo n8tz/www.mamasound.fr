@@ -23,7 +23,6 @@
   perspective: 200px;
   height: 100%;
   z-index: 50;
-  padding: 0 !important;
   min-height: 40px;
   left: 50%;
   text-align: left;
@@ -46,6 +45,8 @@
   }
 
   .day {
+    margin-left: 1em;
+    padding-right: 1em;
     .date {
       font-size: 1.5em;
       font-weight: lighter;
@@ -59,7 +60,8 @@
     }
   }
 
-  .EventConcert {
+  .Event {
+    margin-left: 2em;
     background: rgba(231, 240, 249, 0.36);
     clear: both;
     overflow: hidden;
@@ -74,7 +76,7 @@
     }
 
     .title {
-      margin-left: 1em;
+      //margin-left: 1em;
       font-size: 1.3em;
       font-weight: lighter;
       font-family: EmPower42;

@@ -75,7 +75,7 @@ export default {
 								}
 							]
 						},
-						limit    : 15,
+						limit    : 10,
 						orderby  : { startTM: 1 }
 						
 					}

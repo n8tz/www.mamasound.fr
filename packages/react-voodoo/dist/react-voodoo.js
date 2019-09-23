@@ -1805,14 +1805,14 @@ function asTweener() {
                     deltaX = dX && dX / tweener._.box.x * (x.scrollableWindow || x.scrollableArea) || 0;
                     deltaY = dY && dY / tweener._.box.y * (y.scrollableWindow || y.scrollableArea) || 0;
 
-                    if (!xDispatched && x.inertia.isInbound(parentsState[i].x + deltaX) && tweener.componentShouldScroll("scrollX", deltaX)) {
+                    if (!xDispatched && deltaX && x.inertia.isInbound(parentsState[i].x + deltaX) && tweener.componentShouldScroll("scrollX", deltaX)) {
                       x.inertia.hold(parentsState[i].x + deltaX);
                       xDispatched = true;
                     } //console.log("scrollY", tweener.isAxisOut("scrollY", parentsState[i].y
                     // + deltaY, true));
 
 
-                    if (!yDispatched && y.inertia.isInbound(parentsState[i].y + deltaY) && tweener.componentShouldScroll("scrollY", deltaY)) {
+                    if (!yDispatched && deltaY && y.inertia.isInbound(parentsState[i].y + deltaY) && tweener.componentShouldScroll("scrollY", deltaY)) {
                       y.inertia.hold(parentsState[i].y + deltaY);
                       yDispatched = true;
                     }
