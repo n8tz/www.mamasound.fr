@@ -32,7 +32,8 @@ ENV APP_DOMAIN=${APP_DOMAIN}
 RUN git clone $GIT_URL /home/app
 WORKDIR /home/app
 RUN git fetch --all --tags --prune
-RUN git checkout tags/$GIT_TAG -b $GIT_BRANCH
+RUN git checkout -b $GIT_BRANCH || sleep 0
+RUN git checkout tags/$GIT_TAG
 
 RUN npm i
 RUN npm run build

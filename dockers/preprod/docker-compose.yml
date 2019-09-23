@@ -36,7 +36,6 @@ services:
       - mongoUrl=mongodb://mongodb:27017
       - redisUrl=redis://redis:6379
       - APP_DOMAIN=${APP_DOMAIN}
-      - APP_DOMAIN=a
       - GIT_TAG=${GIT_TAG}
       - GIT_BRANCH=${GIT_BRANCH}
       - GIT_URL=${GIT_URL}
