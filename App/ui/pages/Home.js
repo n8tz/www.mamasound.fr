@@ -34,9 +34,6 @@ const wayPoints =
 export default class Home extends React.Component {
 	state = {};
 	
-	////hookScrollableTargets( targets, dir ) {
-	////	return [this, "EventNav"];
-	////}
 	componentDidMount( props = this.props ) {
 		setTimeout(
 			tm => window.addEventListener("load", function () {
@@ -53,16 +50,17 @@ export default class Home extends React.Component {
 	
 	componentDidUpdate( props ) {
 		let { appState, tweener } = this.props;
-		//console.warn(appState === props.appState)
 		if ( appState.doFocus && props.appState.currentPageFocus !== appState.currentPageFocus ) {
 			console.log(appState.currentPageFocus);
 			tweener.scrollTo(wayPoints[appState.currentPageFocus], 500, undefined, "easeSinIn");
 		}
 	}
 	
+	////hookScrollableTargets( targets, dir ) {
+	////	return [this, "EventNav"];
+	////}
 	render() {
 		let { Styles, appState, $actions } = this.props;
-		
 		return <TweenRef id={"page"} initial={Styles.page}>
 			<div className={"Home container"}>
 				

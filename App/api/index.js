@@ -26,7 +26,6 @@ const fs          = require('fs'),
       webp        = require('webp-converter'),
       express     = require('express'),
       superagent  = require('superagent'),
-      tpl         = require('../index.html.tpl'),
       compression = require('compression'),
       device      = require('express-device'),
       compressor  = compression();
@@ -70,7 +69,6 @@ export function service( server ) {
 							          ? fs.readFileSync(cssPath)
 							          : "/* ... */",
 							//state   : currentState,
-							tpl
 						},
 						( err, html, nstate ) => {
 							res.send(200, html);

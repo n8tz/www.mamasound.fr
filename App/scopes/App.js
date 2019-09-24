@@ -26,6 +26,7 @@ import shortid                        from "shortid";
 export default {
 	...$super,
 	Styles         : stores.Styles,
+	//location       : stores.location,
 	UserGeoLocation: stores.UserGeoLocation,
 	
 	@asStore

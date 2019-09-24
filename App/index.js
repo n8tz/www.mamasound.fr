@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+import "App/console";
 import "core-js";
 import "core-js/es/object/assign";
 import "core-js/features/object/from-entries";
@@ -28,12 +29,12 @@ import "regenerator-runtime/runtime";
 import shortid            from 'shortid';
 import Index              from "./index.html";
 import AppScope           from './scopes/App';
+//import AppContext           from 'App/context';
 
 const ctrl = {
 	
 	renderTo( node, state ) {
 		//return this.renderSSRTo(...arguments)
-		
 		let cScope      = new Scope(AppScope, {
 			    id         : "App",
 			    autoDestroy: true
@@ -91,19 +92,31 @@ const ctrl = {
 		})
 		
 	},
-	//renderSSR( cfg, cb, _attempts = 0 ) {
-		//let html = "<!doctype html>\n" + renderToString(<Index helmet={Helmet.renderStatic()}
-		                                                       //content={""}/>);
-		//console.warn("render !!!!")
-		//cb(null, html)
-	//},
 	renderSSR( cfg, cb, _attempts = 0 ) {
+		try {
+			this.renderFullSSR(...arguments);
+		} catch ( e ) {
+			cb(null, "<!doctype html>\n" +
+				renderToString(<Index
+					css={cfg.css}
+					state={{}}
+					ssrErrors={`<pre>${e}\n${e.stack}</pre>`}/>)
+			);
+		}
+	},
+	renderNoSSR( cfg, cb, _attempts = 0 ) {
+		let html = "<!doctype html>\n" + renderToString(<Index helmet={Helmet.renderStatic()}
+		                                                       content={""}/>);
+		console.warn("render !!!!")
+		cb(null, html)
+	},
+	renderFullSSR( cfg, cb, _attempts = 0 ) {
 		let rid     = shortid.generate(),
 		    cScope  = new Scope(AppScope, {
 			    id         : rid,
 			    autoDestroy: false
 		    }), App = withScope(cScope)(require('./App').default);
-
+		
 		//debugger;
 		if ( cfg.state ) {
 			cScope.restore(cfg.state, { alias: "App" });
@@ -111,7 +124,7 @@ const ctrl = {
 		else {
 			cScope.state.Anims = { currentBrkPts: cfg.device };
 		}
-
+		
 		let html,
 		    appHtml     = renderToString(<App location={cfg.location}/>),
 		    stable      = cScope.isStableTree();
@@ -132,7 +145,7 @@ const ctrl = {
 							css={cfg.css}
 							state={nstate}
 							content={appHtml}/>);
-
+					
 				} catch ( e ) {
 					return cb(e)
 				}

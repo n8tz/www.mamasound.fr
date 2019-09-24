@@ -139,7 +139,8 @@ export default class Highlighter extends React.Component {
 								{/*<Views.Events.BestEvents/>*/}
 								<Comps.ViewSwitcher target={Selected && Selected.Focused}
 								                    {...Styles.Focused}
-								                    DefaultView={Views.Events.BestEvents}
+								                    DefaultView={Comps.Edito}
+								                    //DefaultPreview={Views.Article.preview}
 								                    View={Views.FocusedItems.page}
 								                    ViewPreview={Views.FocusedItems.preview}
 								                    getNextTarget={this.pickNextFocused}

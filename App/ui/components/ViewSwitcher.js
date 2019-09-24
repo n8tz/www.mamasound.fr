@@ -17,18 +17,19 @@
  */
 import PropTypes                                    from "prop-types";
 import React                                        from "react";
-import {asTweener, TweenAxis, TweenRef, tweenTools} from "react-voodoo";
 import {scopeToProps}                               from "react-scopes";
+import {asTweener, TweenAxis, TweenRef, tweenTools} from "react-voodoo";
 
 
 @scopeToProps("Selected", "DataProvider")
-@asTweener({ })
+@asTweener({})
 export default class ViewSwitcher extends React.Component {
 	static propTypes    = {
 		target: PropTypes.object,
 	};
 	static defaultProps = {
 		DefaultView       : ( { style, record } ) => <pre style={style}>!!!</pre>,
+		DefaultPreview    : ( { style, record } ) => <pre style={style}>!!!</pre>,
 		View              : ( { style, record } ) => <pre style={style}>{JSON.stringify(record, null, 2)}</pre>,
 		ViewPreview       : ( { style, record } ) => <pre style={style}>{JSON.stringify(record, null, 2)}</pre>,
 		getNextTarget     : rec => undefined,
@@ -189,14 +190,15 @@ export default class ViewSwitcher extends React.Component {
 				})
 			)
 		}
-	//
+		//
 	}
+	
 	//
 	
 	render() {
 		let {
 			    target, defaultInitial = {}, defaultPreviewInitial,
-			    style, DataProvider, View, ViewPreview, getNextTarget, DefaultView
+			    style, DataProvider, View, ViewPreview, getNextTarget, DefaultView, DefaultPreview
 		    }                                                                                                            = this.props,
 		    { curTarget, prevTarget, nextTarget = getNextTarget(curTarget), showPreviewAnim, showAnim, scrollableAnims } = this.state,
 		    selected;
@@ -220,6 +222,7 @@ export default class ViewSwitcher extends React.Component {
 						{
 							prevTarget &&
 							<ViewPreview record={prevTarget} refs={DataProvider} tweener={this}/>
+							|| curTarget && <DefaultPreview/>
 						}
 					</div>
 				</TweenRef>
@@ -239,6 +242,7 @@ export default class ViewSwitcher extends React.Component {
 						{
 							curTarget &&
 							<ViewPreview record={curTarget} refs={DataProvider} tweener={this}/>
+							|| <DefaultPreview/>
 						}
 					</div>
 				</TweenRef>
