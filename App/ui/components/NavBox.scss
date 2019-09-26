@@ -34,40 +34,120 @@
 
   }
 
-  .eventTypeNav {
-    @include use_hvCenteredContent();
-    position: absolute;
-    width: 60%;
-    top: 25px;
-    left: 20px;
-    height: 50px;
-    //overflow: hidden;
-    background: rgba(255, 255, 255, 0.45);
-    border-radius: 10px;
 
-    .typeIcon {
-      width: 40px;
-      height: 40px;
-      display: inline-block;
-      cursor: pointer;
-      margin-left: 5px;
+  .StretchBox {
+    position: relative;
+    background: rgba(255, 255, 255, 0.5);
+
+    > .title {
+      background: rgba(0, 0, 0, 0.23);
+      font-family: "Roboto", sans-serif;
+      font-weight: bold;
     }
 
+    .content {
+      @include withTranspaMask();
+      padding: 2px;
+
+      .day {
+        text-align: left;
+        font-size: .75em;
+        background: rgba(207, 207, 207, 0.5);
+      }
+
+      .Event {
+        margin-left: 2px;
+        overflow: hidden;
+        position: relative;
+        text-align: left;
+        font-size: .5em;
+
+
+        > * {
+          display: inline-block;
+          margin: 1px;
+        }
+
+        .title {
+          //margin-left: 1em;
+          font-size: 1.3em;
+
+          max-width: 80%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .price {
+          display: none;
+        }
+
+        .place {
+          display: none;
+        }
+
+        .start {
+          display: none;
+        }
+
+        .icon {
+          //float: right;
+          display: inline-block;
+          width: auto;
+
+          img {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+          }
+        }
+      }
+    }
   }
 
-  .SearchBar {
-    position: absolute;
-    width: 40%;
-    top: 20px;
-    right: 5px;
+  .searchStretchBox {
+    position: absolute !important;
 
-    .icon {
-      background: #f9f9f9;
-      margin: 5px;
-      width: 1.2em;
-      height: 1.2em;
-      overflow: hidden;
-      border-radius: 25px;
+    top: 5px;
+    right: 5px;
+    @media screen and (max-width: $tablet-portrait-breakpoint) {
+      //
+      //width: 20% !important;
+    }
+  }
+
+  .eventTypeNav {
+    //@include use_hvCenteredContent();
+    position: absolute;
+    width: 70%;
+
+    @media screen and (max-width: $tablet-portrait-breakpoint) {
+
+      width: 75%;
+    }
+    top: 5px;
+    left: 0px;
+    height: 64px;
+    border-radius: 10px;
+
+    .StretchBox {
+
+      > .icon {
+
+        .typeIcon {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      > .title {
+        @include use_hvCenteredContent();
+        padding-top: 2px;
+        color:white;
+        font-size: 1.5em;
+      }
+
     }
   }
 

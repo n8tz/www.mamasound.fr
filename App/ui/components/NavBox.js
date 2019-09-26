@@ -15,11 +15,11 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import Badge                              from '@material-ui/core/Badge';
+import moment                             from "moment";
 import React                              from "react";
 import {asStore, scopeToProps, withScope} from "react-scopes";
 import {ContextMenu}                      from "../../App";
-import {Comps}                            from "../index";
+import {Comps, Views}                     from "../index";
 
 @withScope(
 	{
@@ -48,8 +48,8 @@ export default class NavBox extends React.Component {
 	
 	render() {
 		let {
-			    record  : { position, size } = {},
-			    appState: { curDay: day, viewType },
+			    record: { position, size } = {},
+			    appState,
 			    $actions
 		    }     = this.props,
 		    state = this.state;
@@ -57,26 +57,111 @@ export default class NavBox extends React.Component {
 			<div className={"NavBox"}>
 				
 				<div className={"eventTypeNav"}>
-					<Badge badgeContent={4} color="primary">
-						<img src={require("App/ui/assets/images/jip/btn-event-on.png")}
-						     onClick={e => $actions.setCurStyleTab(0)}
-						     className={"typeIcon"}/>
-					</Badge>
-					<Badge badgeContent={4} color="primary">
-						<img src={require("App/ui/assets/images/jip/concert-gif.gif")}
-						     onClick={e => $actions.setCurStyleTab(1)}
-						     className={"typeIcon"}/>
-					</Badge>
-					<Badge badgeContent={4} color="primary">
-						<img src={require("App/ui/assets/images/jip/expo-gif.gif")} className={"typeIcon"}
-						     onClick={e => $actions.setCurStyleTab(2)}
-						/>
-					</Badge>
-					<Badge badgeContent={4} color="primary">
-						<img src={require("App/ui/assets/images/jip/theatre-gif.gif")} className={"typeIcon"}
-						     onClick={e => $actions.setCurStyleTab(3)}
-						/>
-					</Badge>
+					<Comps.StretchBox
+						onClick={e => $actions.setCurStyleTab(0)}
+						title={
+							<>
+								Evenements
+							</>
+						}
+						icon={
+							<img src={require("App/ui/assets/images/jip/btn-event-on.png")}
+							     className={"typeIcon"}/>
+						}>
+						{
+							Array(appState.dayCountByViewType[0])
+								.fill(0)
+								.map(
+									( v, i ) =>
+										<Views.Events.DayEvents
+											className={"dayBlock"}
+											ViewItem={Views.Event.headerItem}
+											key={i}
+											day={moment(appState.curDay).add(i, 'day').unix() * 1000}
+											viewType={0}/>
+								)
+						}
+					</Comps.StretchBox>
+					<Comps.StretchBox
+						onClick={e => $actions.setCurStyleTab(1)}
+						title={
+							<>
+								Concerts
+							</>
+						}
+						icon={
+							<img src={require("App/ui/assets/images/jip/concert-gif.gif")}
+							     className={"typeIcon"}/>
+						}>
+						{
+							Array(appState.dayCountByViewType[1])
+								.fill(0)
+								.map(
+									( v, i ) =>
+										<Views.Events.DayEvents
+											className={"dayBlock"}
+											ViewItem={Views.Event.headerItem}
+											key={i}
+											day={moment(appState.curDay).add(i, 'day').unix() * 1000}
+											viewType={1}/>
+								)
+						}
+					</Comps.StretchBox>
+					<Comps.StretchBox
+						onClick={e => $actions.setCurStyleTab(2)}
+						title={
+							<>
+								Expos
+							</>
+						}
+						
+						icon={
+							<img src={require("App/ui/assets/images/jip/expo-gif.gif")} className={"typeIcon"}
+							/>
+						}
+					>
+						
+						{
+							Array(appState.dayCountByViewType[2])
+								.fill(0)
+								.map(
+									( v, i ) =>
+										<Views.Events.DayEvents
+											className={"dayBlock"}
+											ViewItem={Views.Event.headerItem}
+											key={i}
+											day={moment(appState.curDay).add(i, 'day').unix() * 1000}
+											viewType={2}/>
+								)
+						}
+					</Comps.StretchBox>
+					<Comps.StretchBox
+						onClick={e => $actions.setCurStyleTab(3)}
+						title={
+							<>
+								Theatre
+							</>
+						}
+						
+						icon={
+							<img src={require("App/ui/assets/images/jip/theatre-gif.gif")} className={"typeIcon"}
+							/>
+						}>
+						{
+							Array(appState.dayCountByViewType[3])
+								.fill(0)
+								.map(
+									( v, i ) =>
+										<Views.Events.DayEvents
+											className={"dayBlock"}
+											ViewItem={Views.Event.headerItem}
+											key={i}
+											day={moment(appState.curDay).add(i, 'day').unix() * 1000}
+											viewType={3}/>
+								)
+						}
+					</Comps.StretchBox>
+				
 				</div>
 				{/*<div className={"cDay"}>*/}
 				{/*	Cette semaine :*/}
@@ -84,7 +169,14 @@ export default class NavBox extends React.Component {
 				{/*		//(moment(day).format("dddd DD MMMM YYYY"))*/}
 				{/*	}*/}
 				{/*</div>*/}
-				<Comps.SearchBar/>
+				
+				<Comps.StretchBox
+					className={"searchStretchBox"}
+					title={
+						<Comps.SearchBar/>
+					}>
+					last searches
+				</Comps.StretchBox>
 			</div>
 		);
 	}

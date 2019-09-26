@@ -48,9 +48,9 @@ export const Highlighter       = {
 	position       : "absolute",
 	right          : "0%",
 	top            : ["0%"],
-	height         : ["100%", "0px", "0vh", -2*footerMiniHeight],
+	height         : ["100%", "0px", "0vh", -2 * footerMiniHeight],
 	transformOrigin: "center top",
-	zIndex         : 175,
+	zIndex         : 100,
 	transform      : [
 		{
 			//perspective: "500px",
@@ -168,7 +168,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 100,
 		apply   : {
-			height: ["-200px", 2*footerMiniHeight]
+			height: ["-200px", 2 * footerMiniHeight]
 		}
 	},
 	{
@@ -185,7 +185,7 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			height: ["-100%", 200, sliderHeight, 2*footerMiniHeight],
+			height: ["-100%", 200, sliderHeight, 2 * footerMiniHeight],
 		}
 	},
 	{
@@ -194,7 +194,7 @@ export const YAxis             = [
 		duration: 100,
 		apply   : {
 			bottom: "20%",
-			top   : ["-100%", (eventsMiniHeight + headerMiniHeight) + "px", sliderHeight]
+			top   : ["-100%", (eventsMiniHeight + headerMiniHeight) + "px", sliderHeight, footerMiniHeight, -20]
 		}
 	},
 	{

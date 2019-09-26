@@ -202,14 +202,12 @@ export default class DataProvider extends Store {
 			.then(
 				( data ) => {
 					this.pushRemoteRecord(etty, id, data)
-					//this.dispatch('setLoaded');
 					this.release()
 				},
 				( err ) => {
-					//this.dispatch('setLoaded');
 					this.release()
 					if ( err ) {
-						this.pushRemoteRecord(etty, id, {})
+						//this.pushRemoteRecord(etty, id, {})
 						return console.error("DataProvider: query fail '", etty, err);
 					}
 				}

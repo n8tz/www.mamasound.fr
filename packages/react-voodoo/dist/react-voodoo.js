@@ -208,12 +208,13 @@ var transform = _exports.transform;
 /*!********************************************************************!*\
   !*** ./src/MapOf.react_voodoo_utils_css_demux_typed_____js.gen.js ***!
   \********************************************************************/
-/*! exports provided: bool, color, int, multi, number, ratio, shadow, default */
+/*! exports provided: bool, border, color, int, multi, number, ratio, shadow, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bool", function() { return bool; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "border", function() { return border; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "color", function() { return color; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "int", function() { return int; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "multi", function() { return multi; });
@@ -297,6 +298,20 @@ if (!cExport[fPath[i]]) {
   cExport[fPath[i]] = Object.keys(_react_voodoo_utils_css_demux_typed_ratio_js).length === 1 && _react_voodoo_utils_css_demux_typed_ratio_js.default || _react_voodoo_utils_css_demux_typed_ratio_js;
 }
 
+var _react_voodoo_utils_css_demux_typed_border_js = __webpack_require__(/*! react-voodoo/utils/css/demux/typed/border.js */ "./src/utils/css/demux/typed/border.js");
+
+cExport = _exports;
+fPath = "border".split('/');
+i = 0;
+
+while (i < fPath.length - 1) {
+  cExport = cExport[fPath[i]] = cExport[fPath[i]] || {}, i++;
+}
+
+if (!cExport[fPath[i]]) {
+  cExport[fPath[i]] = Object.keys(_react_voodoo_utils_css_demux_typed_border_js).length === 1 && _react_voodoo_utils_css_demux_typed_border_js.default || _react_voodoo_utils_css_demux_typed_border_js;
+}
+
 var _react_voodoo_utils_css_demux_typed_number_js = __webpack_require__(/*! react-voodoo/utils/css/demux/typed/number.js */ "./src/utils/css/demux/typed/number.js");
 
 cExport = _exports;
@@ -326,6 +341,7 @@ if (!cExport[fPath[i]]) {
 }
 
 var bool = _exports.bool;
+var border = _exports.border;
 var color = _exports.color;
 var int = _exports.int;
 var multi = _exports.multi;
@@ -3570,6 +3586,288 @@ var mux = function mux(key, value, target, data, initials, noPropLock) {
 
 /***/ }),
 
+/***/ "./src/utils/css/demux/typed/border.js":
+/*!*********************************************!*\
+  !*** ./src/utils/css/demux/typed/border.js ***!
+  \*********************************************/
+/*! exports provided: release, demuxOne, demux, muxOne, mux */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "release", function() { return release; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "demuxOne", function() { return demuxOne; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "demux", function() { return demux; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "muxOne", function() { return muxOne; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mux", function() { return mux; });
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "undefined?df9b");
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var css_box_shadow__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! css-box-shadow */ "undefined?c6dc");
+/* harmony import */ var css_box_shadow__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(css_box_shadow__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! is */ "undefined?63a5");
+/* harmony import */ var is__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(is__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _cssUtils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../cssUtils */ "./src/utils/css/cssUtils.js");
+/* harmony import */ var _js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./(*).js */ "./src/MapOf.react_voodoo_utils_css_demux_typed_____js.gen.js");
+
+
+/*
+ *
+ * Copyright (C) 2019 Nathanael Braun
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+
+
+
+var defaultUnits = {
+  perspective: 'px'
+},
+    defaultBox = {
+  translateX: 'x'
+},
+    defaultMuxers = {
+  //blurRadius  : number,
+  inset: _js__WEBPACK_IMPORTED_MODULE_4__["bool"],
+  //offsetX     : number,
+  //offsetY     : number,
+  //spreadRadius: number,
+  color: _js__WEBPACK_IMPORTED_MODULE_4__["color"]
+};
+function release(twKey, tweenableMap, cssMap, dataMap, muxerMap, keepValues) {
+  var path = twKey.split('_'),
+      tmpKey; // not optimal at all
+
+  if (path.length > 2) {
+    // dec count on transform
+    tmpKey = path[0] + "_" + path[1] + "_" + path[2];
+
+    if (defaultMuxers[path[2]]) {
+      defaultMuxers[path[2]].release(twKey, tweenableMap, cssMap, dataMap, muxerMap, keepValues);
+
+      if (!dataMap[tmpKey]) {
+        //console.log("dec", tmpKey, dataMap[path[0]][path[1]][path[2]])
+        if (! --dataMap[path[0]][path[1]][path[2]] && !keepValues) {
+          delete dataMap[path[0]][path[1]][path[2]];
+        }
+      }
+
+      if (dataMap[path[0]].length === 0 && !keepValues) {
+        delete dataMap[path[0]];
+        delete muxerMap[path[0]];
+        delete cssMap[path[0]]; //console.log("delete color", twKey)
+      }
+
+      return;
+    } //console.log("dec", twKey, dataMap[path[0]])
+
+
+    if (! --dataMap[path[0]][path[1]][path[2]] && !keepValues) {
+      delete dataMap[path[0]][path[1]][path[2]];
+    } //if ( Object.keys(dataMap[path[0]][path[1]]).length === 0 && !keepValues )
+    //	delete dataMap[path[0]][path[1]];
+    // free transform layers
+
+
+    if (!keepValues) while (dataMap[path[0]].length && !dataMap[path[0]][dataMap[path[0]].length - 1]) {
+      dataMap[path[0]].pop();
+    } //tmpKey = path[0] + "_" + path[1] + "_" + path[2];
+    // units
+
+    if (! --dataMap[tmpKey][path[3]] && !keepValues) {
+      delete dataMap[tmpKey][path[3]]; //dataMap[path[0]][path[3]] = undefined;
+
+      delete tweenableMap[twKey]; //console.log("delete", tmpKey)
+    }
+
+    if (!keepValues) while (dataMap[tmpKey].length && !dataMap[tmpKey][dataMap[tmpKey].length - 1]) {
+      dataMap[tmpKey].pop();
+    }
+    if (dataMap[tmpKey].length === 0 && !keepValues) delete dataMap[tmpKey];
+    if (!keepValues) while (dataMap[path[0]].length && !Object.keys(dataMap[path[0]][dataMap[path[0]].length - 1]).length) {
+      dataMap[path[0]].pop();
+    }
+
+    if (dataMap[path[0]].length === 0 && !keepValues) {
+      delete dataMap[path[0]];
+      delete muxerMap[path[0]];
+      delete cssMap[path[0]]; //console.log("delete", path[0])
+    }
+  } else {
+    console.log("wtf", path);
+  }
+}
+function demuxOne(unitIndex, dkey, twVal, baseKey, data, box) {
+  var value = twVal,
+      unit = _cssUtils__WEBPACK_IMPORTED_MODULE_3__["units"][unitIndex] || defaultUnits[baseKey];
+
+  if (unit === 'box') {
+    value = value * (box[defaultBox[baseKey]] || box.x);
+    unit = 'px';
+  }
+
+  if (unit === 'bw') {
+    value = value * box.x;
+    unit = 'px';
+  }
+
+  if (unit === 'wh') {
+    value = value * box.y;
+    unit = 'px';
+  }
+
+  if (unit === 'bz') {
+    value = value * box.z;
+    unit = 'px';
+  }
+
+  if (unit === 'deg') value = value % 360;
+  return unit ? Object(_cssUtils__WEBPACK_IMPORTED_MODULE_3__["floatCut"])(value) + unit : Object(_cssUtils__WEBPACK_IMPORTED_MODULE_3__["floatCut"])(value);
+}
+function demux(key, tweenable, target, data, box) {
+  //console.log(key)
+  var shadows = [],
+      tmpValue = {};
+  var ti = 0,
+      shadowMap,
+      fkey,
+      unitKey,
+      unitIndex,
+      dkey,
+      u,
+      iValue,
+      y = 0,
+      value;
+
+  for (; ti < data[key].length; ti++) {
+    shadowMap = data[key][ti];
+    tmpValue = {};
+
+    for (fkey in shadowMap) {
+      if (shadowMap.hasOwnProperty(fkey)) {
+        dkey = key + '_' + ti + '_' + fkey;
+
+        if (defaultMuxers[fkey]) {
+          value = defaultMuxers[fkey].demux(dkey, tweenable, undefined, data, box); //continue;
+          //console.log(dkey, tweenable[dkey])
+        } else {
+          value = "";
+          y = 0;
+
+          for (unitIndex = 0; unitIndex < data[dkey].length; unitIndex++) {
+            if (data[dkey][unitIndex]) {
+              unitKey = dkey + "_" + unitIndex;
+              iValue = demuxOne(unitIndex, dkey, tweenable[unitKey], fkey, data, box);
+              if (y && iValue[0] === '-') iValue = " - " + iValue.substr(1);else if (y) iValue = " + " + iValue;
+              value += iValue;
+              y++;
+            }
+          }
+
+          if (y > 1) value = "calc(" + value + ")";
+        }
+
+        tmpValue[fkey] = value || 0;
+      }
+    }
+
+    shadows.push(tmpValue);
+  }
+
+  target[key] = css_box_shadow__WEBPACK_IMPORTED_MODULE_1___default.a.stringify(shadows); //console.log(key, shadows, target[key]);
+}
+function muxOne(key, baseKey, value, target, data, initials, noPropLock, seenUnits) {
+  var match = is__WEBPACK_IMPORTED_MODULE_2___default.a.string(value) ? value.match(_cssUtils__WEBPACK_IMPORTED_MODULE_3__["unitsRe"]) : false,
+      unit = match && match[2] || defaultUnits[baseKey] || "px",
+      unitKey = _cssUtils__WEBPACK_IMPORTED_MODULE_3__["units"].indexOf(unit),
+      realKey = unitKey !== -1 && key + '_' + unitKey || key;
+  initials[realKey] = 0;
+  data[key][unitKey] = data[key][unitKey] || 0; //console.log(key, ':', data[key][unitKey], value, noPropLock)
+
+  if (seenUnits && seenUnits[unitKey]) {
+    //console.warn(key, ':', data[key][unitKey], value, noPropLock)
+    if (match) {
+      target[realKey] += parseFloat(match[1]);
+    } else {
+      target[realKey] += parseFloat(value);
+    }
+  } else {
+    !noPropLock && data[key][unitKey]++;
+
+    if (match) {
+      target[realKey] = parseFloat(match[1]);
+    } else {
+      target[realKey] = parseFloat(value);
+    }
+
+    if (seenUnits) seenUnits[unitKey] = true;
+  }
+
+  return demux;
+}
+;
+var mux = function mux(key, value, target, data, initials, noPropLock, reOrder) {
+  data[key] = data[key] || []; //initials[key] = 0;
+
+  debugger;
+  if (!is__WEBPACK_IMPORTED_MODULE_2___default.a.array(value)) value = [value];
+  var ti = 0,
+      shadowMap,
+      tFnKey,
+      baseData,
+      fValue,
+      dkey,
+      u,
+      seenUnits;
+
+  for (; ti < value.length; ti++) {
+    shadowMap = value[ti];
+    if (is__WEBPACK_IMPORTED_MODULE_2___default.a.string(shadowMap)) shadowMap = css_box_shadow__WEBPACK_IMPORTED_MODULE_1___default.a.parse(shadowMap)[0];
+    baseData = reOrder ? {} : _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, data[key][ti] || {});
+
+    for (tFnKey in shadowMap) {
+      if (shadowMap.hasOwnProperty(tFnKey)) {
+        fValue = shadowMap[tFnKey];
+        dkey = key + '_' + ti + '_' + tFnKey;
+        baseData[tFnKey] = baseData[tFnKey] || data[key][ti] && data[key][ti][tFnKey] || 0;
+        !noPropLock && baseData[tFnKey]++;
+
+        if (defaultMuxers[tFnKey]) {
+          defaultMuxers[tFnKey].mux(dkey, fValue, target, data, initials, noPropLock, reOrder);
+        } else {
+          seenUnits = {};
+          data[dkey] = data[dkey] || [];
+
+          if (is__WEBPACK_IMPORTED_MODULE_2___default.a.array(fValue)) {
+            for (u = 0; u < fValue.length; u++) {
+              muxOne(dkey, tFnKey, fValue[u] || 0, target, data, initials, noPropLock, seenUnits);
+            }
+          } else {
+            muxOne(dkey, tFnKey, fValue || 0, target, data, initials, noPropLock);
+          }
+        }
+      }
+    }
+
+    data[key][ti] = reOrder ? _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, baseData, {}, data[key][ti] || {}, {}, baseData) : baseData; //console.log(key, reOrder, data[key][ti], baseData)
+  }
+
+  return demux;
+};
+
+/***/ }),
+
 /***/ "./src/utils/css/demux/typed/color.js":
 /*!********************************************!*\
   !*** ./src/utils/css/demux/typed/color.js ***!
@@ -4378,6 +4676,7 @@ var cssDemux = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___defau
   paddingLeft: _demux_typed_js__WEBPACK_IMPORTED_MODULE_4__["number"],
   paddingRight: _demux_typed_js__WEBPACK_IMPORTED_MODULE_4__["number"],
   paddingBottom: _demux_typed_js__WEBPACK_IMPORTED_MODULE_4__["number"],
+  borderRadius: _demux_typed_js__WEBPACK_IMPORTED_MODULE_4__["number"],
   transformOrigin: Object(_demux_typed_js__WEBPACK_IMPORTED_MODULE_4__["multi"])(2),
   zIndex: _demux_typed_js__WEBPACK_IMPORTED_MODULE_4__["int"],
   opacity: _demux_typed_js__WEBPACK_IMPORTED_MODULE_4__["ratio"]

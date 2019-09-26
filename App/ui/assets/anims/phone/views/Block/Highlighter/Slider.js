@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-let stepAngle = "1.45deg";
+let stepAngle = "1.05deg";
 //export const visibleItems    = 3;
 
 export const defaultInitial  = {
@@ -29,11 +29,11 @@ export const defaultInitial  = {
 	transform: [
 		{
 			perspective: "1250px",
-			translateY : "-20000px",
-			rotate     : "-" + stepAngle
+			translateY : "30000px",
+			rotate     : stepAngle
 		},
 		{
-			translateY: "20000px",
+			translateY: "-30010px",
 			translateZ: "-500px",
 			//translateX: "1.75box",
 			//translateY: "-.5box",
@@ -45,6 +45,19 @@ export const defaultInitial  = {
 			translateY: "-50%"
 		}]
 };
+export const scrollAxis      = [
+	{
+		from    : 0,
+		duration: 100,
+		//easeFn  : "easeSinIn",
+		apply   : {
+			transform: {
+				rotate: stepAngle,
+			},
+			zIndex   : 150,
+		}
+	},
+];
 export const defaultEntering = [
 	{
 		from    : 0,
@@ -52,8 +65,7 @@ export const defaultEntering = [
 		easeFn  : "easePolyIn",
 		apply   : {
 			transform: {
-				//translateX: "-1.25box",
-				rotate: stepAngle,
+				rotate: "-" + stepAngle,
 			},
 			zIndex   : 150,
 		}
@@ -84,7 +96,6 @@ export const defaultLeaving  = [
 			transform: [{}, {
 				rotateY   : "65deg",
 				translateZ: "-500px",
-				//rotateX: "90deg",
 			}]
 		}
 	},
@@ -98,12 +109,12 @@ export const defaultLeaving  = [
 		from    : 0,
 		duration: 100,
 		easeFn  : "easePolyOut",
+		//easeFn  : "easeSinOut",
 		apply   : {
 			zIndex: -150,
 			
 			transform: {
-				//translateX: "-1.25box",
-				rotate: stepAngle,
+				rotate: "-" + stepAngle,
 			}
 		}
 	}]

@@ -17,11 +17,11 @@
  */
 import scopes from 'App/scopes/(*).js';
 
-import {Comps, Views}                        from 'App/ui';
-import moment                                from "moment";
-import PropTypes                             from "prop-types";
-import React                                 from "react";
-import {propsToScope, withScope, scopeToProps} from "react-scopes";
+import {Views}                                 from 'App/ui';
+import moment                                  from "moment";
+import PropTypes                               from "prop-types";
+import React                                   from "react";
+import {propsToScope, scopeToProps, withScope} from "react-scopes";
 
 
 @withScope(
@@ -36,16 +36,19 @@ import {propsToScope, withScope, scopeToProps} from "react-scopes";
 @scopeToProps("EventList", "ActiveTags", "appState", "Styles")
 //@asTweener({ initialScrollPos: { scrollX: 100 }, propagateAxes: { scrollY: true } })
 export default class DayEvents extends React.Component {
-	static propTypes = {
+	static propTypes    = {
 		day     : PropTypes.number,
 		viewType: PropTypes.number,
 		filter  : PropTypes.string
 	};
-	state            = {};
+	static defaultProps = {
+		//ViewItem:
+	};
+	state               = {};
 	
 	render() {
 		let {
-			    EventList, appState, day, Styles,
+			    EventList, appState, day, Styles, ViewItem = Views.Event.item,
 			    $actions, onSelect
 		    }     = this.props,
 		    state = this.state,
@@ -59,19 +62,19 @@ export default class DayEvents extends React.Component {
 					<Views.SimpleDay day={day}/>
 				</div>
 				{/*<Comps.SlidableList {...Styles.EventsSlider}>*/}
-					{
-						EventList && EventList.items && EventList.items.map(
-							( item, i ) => {
-								return <Views.Event.item
-									onClick={e => $actions.selectEvent(item, moment(day).valueOf(), true)}
-									key={item._id}
-									day={day}
-									selected={appState.selectedEventId === item._id && moment(appState.selectedEventDT).isSame(day, "day")}
-									record={item}
-									refs={EventList.refs || {}}/>;
-							}
-						)
-					}
+				{
+					EventList && EventList.items && EventList.items.map(
+						( item, i ) => {
+							return <ViewItem
+								onClick={e => $actions.selectEvent(item, moment(day).valueOf(), true)}
+								key={item._id}
+								day={day}
+								selected={appState.selectedEventId === item._id && moment(appState.selectedEventDT).isSame(day, "day")}
+								record={item}
+								refs={EventList.refs || {}}/>;
+						}
+					)
+				}
 				{/*</Comps.SlidableList>*/}
 			</div>
 		);

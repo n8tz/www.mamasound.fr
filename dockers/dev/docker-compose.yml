@@ -15,7 +15,7 @@ services:
       - "--entrypoints.web.address=:80"
     ports:
       - "80:80"
-      - "8080:8080"
+      - "9090:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     networks:
@@ -33,6 +33,9 @@ services:
       - "traefik.http.routers.whoami.rule=Host(`${APP_DOMAIN:-mamasound.localhost}`)"
       - "traefik.http.routers.whoami.entrypoints=web"
       - 'traefik.protocol=http'
+      - 'traefik.frontend.errors.network.status=["500-599"]'
+      - 'traefik.frontend.errors.network.backend="error"'
+      - 'traefik.frontend.errors.network.query="/index.html"'
     environment:
       - mongoUrl=mongodb://mongodb:27017
       - redisUrl=redis://redis:6379
@@ -53,9 +56,20 @@ services:
       - "8080"
     ports:
       - "${APP_DOCKER_DEBUG_PORT:-9229}:9229"
-      - "9090:9090"
+#      - "9090:9090"
     networks:
       - app_network
+  error:
+    image: nginx:alpine
+    ports:
+      - "80"
+    volumes:
+      - ./500s:/usr/share/nginx/html:ro
+    labels:
+      - "traefik.backend=error"
+      - "traefik.port=80"
+      - "traefik.frontend.rule=Host:error.localhost"
+      - "traefik.enable=true"
   mongodb:
     image: mongo
     restart: always

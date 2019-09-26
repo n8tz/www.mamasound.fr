@@ -42,7 +42,7 @@ export default {
 		curDay            : undefined,
 		currentSearch     : undefined,
 		viewType          : 0,
-		dayCountByViewType: [3, 1, 1, 1, 0],
+		dayCountByViewType: [3, 3, 1, 3, 0],
 		curTags           : undefined,
 		
 		$apply( data, state ) {

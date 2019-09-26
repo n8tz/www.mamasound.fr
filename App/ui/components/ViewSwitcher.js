@@ -28,8 +28,8 @@ export default class ViewSwitcher extends React.Component {
 		target: PropTypes.object,
 	};
 	static defaultProps = {
-		DefaultView       : ( { style, record } ) => <pre style={style}>!!!</pre>,
-		DefaultPreview    : ( { style, record } ) => <pre style={style}>!!!</pre>,
+		DefaultView       : ( { style, record } ) => <pre style={style}></pre>,
+		DefaultPreview    : ( { style, record } ) => <pre style={style}></pre>,
 		View              : ( { style, record } ) => <pre style={style}>{JSON.stringify(record, null, 2)}</pre>,
 		ViewPreview       : ( { style, record } ) => <pre style={style}>{JSON.stringify(record, null, 2)}</pre>,
 		getNextTarget     : rec => undefined,

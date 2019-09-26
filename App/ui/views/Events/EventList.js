@@ -143,6 +143,7 @@ export default class EventList extends React.Component {
 						<TweenRef
 							id={"EventCatSlider"}
 							initial={Styles.EventCatSlider.style}
+							tweenAxis={Styles.EventCatSliderAxis}
 						>
 							<Comps.Slider
 								{...Styles.EventCatSlider}
@@ -185,7 +186,7 @@ export default class EventList extends React.Component {
 					activeScroll && <div className={"noScrollOverlay"}
 					                     onClick={e => $actions.setPageFocus('events', true)}></div>
 				}
-				
+			
 			</div>
 		);
 	}
