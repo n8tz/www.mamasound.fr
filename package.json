@@ -121,7 +121,6 @@
   },
   "devDependencies": {
     "webpack-inherit": "^1.8.4",
-    "wi-layer-dev-tools": "file:packages/wi-layer-dev-tools",
     "wi-layer-react-express": "^1.1.12"
   }
 }

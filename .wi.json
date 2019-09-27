@@ -165,7 +165,6 @@
       }
     },
     "extend": [
-      "wi-layer-dev-tools",
       "wpi-auth",
       "wpi-admin",
       "wpi-forms",
@@ -234,7 +233,6 @@
       }
     },
     "extend": [
-      "wi-layer-dev-tools",
       "wpi-auth",
       "wpi-admin",
       "wpi-forms",

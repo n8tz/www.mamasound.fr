@@ -18,7 +18,6 @@
 
 import $super                         from "$super";
 import stores                         from 'App/stores/(*).js';
-import {Views}                        from "App/ui";
 import moment                         from "moment";
 import {asRef, asStore, withStateMap} from "react-scopes";
 import shortid                        from "shortid";
@@ -190,26 +189,10 @@ export default {
 	@asStore
 	widgets   : {
 		// initial state
-		items: __IS_DEV__ ? [
-			{
-				"_id"     : "FfseOEKpm",
-				"size"    : { "width": 200, "height": 200 },
-				"title"   : "DevTools",
-				"type"    : "DevTools",
-				"position": { "x": 0, "y": 0 }
-			},
-			//{
-			//	"_id"     : "FfsfeOEKpm",
-			//	"size"    : { "width": 600, "height": 500 },
-			//	"title"   : "DbExplorer",
-			//	"type"    : "DbExplorer",
-			//	"position": { "x": 100, "y": 100 }
-			//}
-		] : [],
+		items: [],
 		
 		// actions
-		newWidget( type, props = {} ) {
-			let Default = Views.Widget[type] && Views.Widget[type].defaultWindow;
+		newWidget( type, props = {}, Default ) {
 			return {
 				items: [...this.nextState.items, {
 					_id     : shortid.generate(),

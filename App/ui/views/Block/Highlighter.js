@@ -84,7 +84,7 @@ export default class Highlighter extends React.Component {
 	selectFocus     =
 		( e, i, slider ) => {
 			let {
-				    MountedItems: { items = [] },
+				    MountedItems: { items = [] } = {},
 				    $actions
 			    }     = this.props,
 			    state = this.state;
@@ -93,7 +93,7 @@ export default class Highlighter extends React.Component {
 		};
 	pickNextFocused = rec => {
 		let {
-			    MountedItems: { items = [] },
+			    MountedItems: { items = [] } = {},
 		    }     = this.props,
 		    state = this.state;
 		return (items[(items.findIndex(ref => (rec && ref && rec._id === ref._id)) + 1) % items.length]);
@@ -101,7 +101,7 @@ export default class Highlighter extends React.Component {
 	
 	render() {
 		let {
-			    MountedItems: { items = [], layout = [] },
+			    MountedItems: { items = [], layout = [] } = {},
 			    Styles, Selected, children,
 			    $actions, HighlighterBackground, tweener, style
 		    }     = this.props,
@@ -140,10 +140,10 @@ export default class Highlighter extends React.Component {
 								<Comps.ViewSwitcher target={Selected && Selected.Focused}
 								                    {...Styles.Focused}
 								                    DefaultView={Comps.Edito}
-								                    //DefaultPreview={Views.Article.preview}
-								                    View={Views.FocusedItems.page}
-								                    ViewPreview={Views.FocusedItems.preview}
-								                    getNextTarget={this.pickNextFocused}
+									//DefaultPreview={Views.Article.preview}
+									                View={Views.FocusedItems.page}
+									                ViewPreview={Views.FocusedItems.preview}
+									                getNextTarget={this.pickNextFocused}
 								/>
 							</div>
 						</TweenRef>

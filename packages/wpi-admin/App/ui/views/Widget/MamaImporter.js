@@ -15,22 +15,19 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import is                                           from "is";
-import PropTypes                                    from "prop-types";
-import React                                        from "react";
-import TableGrid                                    from 'App/ui/components/TableGrid.js';
-import PopAnywhere                                  from 'App/ui/components/PopAnywhere.js';
-import {DropzoneComponent}                          from "react-dropzone-component";
-import Select                                       from 'react-select';
-import {withStateMap, asRef, asStore,withScope, Store, scopeToProps, propsToScope} from "react-scopes";
-import ImportIcon                                   from '@material-ui/icons/CloudUploadOutlined';
-import ExportIcon                                   from '@material-ui/icons/Delete';
-import SaveIcon                                     from '@material-ui/icons/Save';
-import ClearIcon                                    from '@material-ui/icons/Clear';
-import ClearCacheIcon                               from '@material-ui/icons/Refresh';
-import RefreshIcon                                  from '@material-ui/icons/CloudDownload';
-import IconButton                                   from '@material-ui/core/IconButton';
-import stores                                       from 'App/stores/(*).js';
+import IconButton                         from '@material-ui/core/IconButton';
+import RefreshIcon                        from '@material-ui/icons/CloudDownload';
+import ImportIcon                         from '@material-ui/icons/CloudUploadOutlined';
+import DelIcon                            from '@material-ui/icons/Delete';
+import ClearCacheIcon                     from '@material-ui/icons/Refresh';
+import stores                             from 'App/stores/(*).js';
+import PopAnywhere                        from 'App/ui/components/PopAnywhere.js';
+import TableGrid                          from 'App/ui/components/TableGrid.js';
+import PropTypes                          from "prop-types";
+import React                              from "react";
+import {DropzoneComponent}                from "react-dropzone-component";
+import RS, {asRef, asStore, withStateMap} from "react-scopes";
+import Select                             from 'react-select';
 
 if ( typeof window !== "undefined" )
 	require('react-dropzone-component/styles/filepicker.css');
@@ -51,7 +48,7 @@ const types = {
 	}
 }
 
-@scopeToProps("allQueries")
+@RS.connect("allQueries")
 class PlaceRenderer extends React.Component {
 	state = {
 		edit: false
@@ -61,28 +58,28 @@ class PlaceRenderer extends React.Component {
 		let { value, data, rowIndex, $actions, allQueries: { Places }, api } = this.props;
 		return (
 			<span className="PlaceRenderer"
-			      onClick={ e => this.setState({ edit: true }) }
-			      style={ { textAlign: 'center', background: data.validPlace && 'green' || 'red' } }>
+			      onClick={e => this.setState({ edit: true })}
+			      style={{ textAlign: 'center', background: data.validPlace && 'green' || 'red' }}>
                    
-			                    <PopAnywhere hovering={ this.state.edit }
-			                                 onClickOut={ e => this.setState({ edit: false }) }>
+			                    <PopAnywhere hovering={this.state.edit}
+			                                 onClickOut={e => this.setState({ edit: false })}>
 				                    {
 					                    this.state.edit ?
-					                    <Select className={ "select" }
-					                            defaultInputValue={ value.replace(/[^\w]/ig, '').substr(0, 3) }
-					                            defaultMenuIsOpen={ true }
-					                            onChange={ e => this.setState({ edit: false }, s => {
+					                    <Select className={"select"}
+					                            defaultInputValue={value.replace(/[^\w]/ig, '').substr(0, 3)}
+					                            defaultMenuIsOpen={true}
+					                            onChange={e => this.setState({ edit: false }, s => {
 						                            data.lieu       = e.label;
 						                            data.lieuId     = e.value;
 						                            data.validPlace = true;
 						                            data.valid      = data.validStyle;
 						                            api.updateRowData(data);
 						                            $actions.checkValidity();
-					                            }) }
-					                            options={ Places && Places.items.map(row => ({
+					                            })}
+					                            options={Places && Places.items.map(row => ({
 						                            label: row.label,
 						                            value: row._id
-					                            })) || [] }
+					                            })) || []}
 					                    />
 					                                    :
 					                    value
@@ -93,7 +90,7 @@ class PlaceRenderer extends React.Component {
 	}
 }
 
-@scopeToProps("allQueries")
+@RS.connect("allQueries")
 class StyleRenderer extends React.Component {
 	state = {
 		edit: false
@@ -103,26 +100,26 @@ class StyleRenderer extends React.Component {
 		let { value, data, allQueries: { EventCategories }, api, $actions } = this.props;
 		return (
 			<span className="StyleRenderer"
-			      onClick={ e => this.setState({ edit: true }) }
-			      style={ { textAlign: 'center', background: data.validStyle && 'green' || 'red' } }>
+			      onClick={e => this.setState({ edit: true })}
+			      style={{ textAlign: 'center', background: data.validStyle && 'green' || 'red' }}>
                     {
 	                    this.state.edit ?
-	                    <PopAnywhere hovering={ this.state.edit } onClickOut={ e => this.setState({ edit: false }) }>
-		                    <Select className={ "select" }
-		                            defaultInputValue={ value.replace(/[^\w]/ig, '').substr(0, 3) }
-		                            defaultMenuIsOpen={ true }
-		                            onChange={ e => this.setState({ edit: false }, s => {
+	                    <PopAnywhere hovering={this.state.edit} onClickOut={e => this.setState({ edit: false })}>
+		                    <Select className={"select"}
+		                            defaultInputValue={value.replace(/[^\w]/ig, '').substr(0, 3)}
+		                            defaultMenuIsOpen={true}
+		                            onChange={e => this.setState({ edit: false }, s => {
 			                            data.style      = e.label;
 			                            data.styleId    = e.value;
 			                            data.validStyle = true;
 			                            data.valid      = data.validPlace;
 			                            api.updateRowData(data);
 			                            $actions.checkValidity();
-		                            }) }
-		                            options={ EventCategories && EventCategories.items.map(row => ({
+		                            })}
+		                            options={EventCategories && EventCategories.items.map(row => ({
 			                            label: row.name,
 			                            value: row._id
-		                            })) || [] }
+		                            })) || []}
 		                    />
 	                    </PopAnywhere>
 	                                    :
@@ -133,7 +130,7 @@ class StyleRenderer extends React.Component {
 	}
 }
 
-@withScope(
+@RS(
 	{
 		XlsDataProvider: stores.XlsDataProvider,
 		
@@ -209,15 +206,16 @@ class StyleRenderer extends React.Component {
 		@withStateMap(
 			{
 				@asRef
-				items  : "Exportable.items",
+				items  : "MamaXls.items",
 				docName: "NewEvents",
 			}
 		)
-		Exporter: stores.XlsExporter,
+		Exporter    : stores.XlsExporter,
+		AppStateMngr: stores.AppStateMngr,
 		
 	}
 )
-@scopeToProps("MamaXls", "appState", "Importer", "Exporter")
+@RS.connect("MamaXls", "appState", "Importer", "AppStateMngr")
 export default class MamaImporter extends React.Component {
 	static propTypes = {
 		record: PropTypes.object,
@@ -243,12 +241,12 @@ export default class MamaImporter extends React.Component {
 			    groupe   : types.string,
 			    lieu     : {
 				    "type"  : "string",
-				    renderer: withScope($scope)(PlaceRenderer),
+				    renderer: RS($scope)(PlaceRenderer),
 				    sanitize: ( v ) => (v && ('' + v).trim())
 			    },
 			    style    : {
 				    "type"  : "string",
-				    renderer: withScope($scope)(StyleRenderer),
+				    renderer: RS($scope)(StyleRenderer),
 				    sanitize: ( v ) => (v && ('' + v).trim())
 			    },
 			    prix     : types.string,
@@ -262,51 +260,45 @@ export default class MamaImporter extends React.Component {
 		;
 		
 		return (
-			<div className={ "XSLImporter" }
-			     onDragEnter={ this.showUploader }
+			<div className={"XSLImporter"}
+			     onDragEnter={this.showUploader}
 			>
-				<div className={ "controls" }>
+				<div className={"controls"}>
 					<span>
-						Année en cour : { MamaXls.options && MamaXls.options.year || "inconnue" }
+						Année en cour : {MamaXls.options && MamaXls.options.year || "inconnue"}
 					</span>
-					{ !Importer.imported &&
-					<IconButton onClick={ e => {
+					{!Importer.imported &&
+					<IconButton onClick={e => {
 						if ( !Importer.valid && !confirm("Seul les events tout vert seront importé !") )
 							return;
 						$actions.doDbImport();
-					} } title={ "Upload to server" }>
+					}} title={"Upload to server"}>
 						<ImportIcon/>
-					</IconButton> }
-					{ Importer.imported &&
-					<IconButton onClick={ e => $actions.doDbDelete() } title={ "Delete imported" }>
-						<ExportIcon/>
-					</IconButton> }
-					<IconButton onClick={ e => $actions.dataProvider_flushAll() } title={ "Update styles & places" }>
+					</IconButton>}
+					{Importer.imported &&
+					<IconButton onClick={e => $actions.doDbDelete()} title={"Delete imported"}>
+						<DelIcon/>
+					</IconButton>}
+					<IconButton onClick={e => $actions.dataProvider_flushAll()} title={"Update styles & places"}>
 						<RefreshIcon/>
 					</IconButton>
-					<IconButton onClick={ e => $actions.clearWebSiteCache() } title={ "Clear website cache" }>
+					<IconButton onClick={e => $actions.clearWebSiteCache()} title={"Clear website cache"}>
 						<ClearCacheIcon/>
-					</IconButton>
-					<IconButton onClick={ e => $actions.saveState() } title={ "Save app state in the browser" }>
-						<SaveIcon/>
-					</IconButton>
-					<IconButton onClick={ e => $actions.clearState() } title={ "Clear app state" }>
-						<ClearIcon/>
 					</IconButton>
 				</div>
 				<TableGrid
-					data={ MamaXls }
-					columns={ Object.keys(schema) }
-					schema={ schema }
+					data={MamaXls}
+					columns={Object.keys(schema)}
+					schema={schema}
 					//keys={ cTable && schemas[cTable].primaryKey }
 					//onFullyUpdate={ this.onCurTableChange.bind(this) }
 				/>
 				{
 					<DropzoneComponent
-						onDragLeave={ this.hideUploader }
-						className={ !showUploader && "hidden" }
+						onDragLeave={this.hideUploader}
+						className={!showUploader && "hidden"}
 						ref="dropzone"
-						eventHandlers={ {
+						eventHandlers={{
 							addedfile: file => {
 								$actions.addXLSfile(
 									file,
@@ -315,25 +307,25 @@ export default class MamaImporter extends React.Component {
 							},
 							//complete: this.uploadSuccess,
 							drop     : this.hideUploader
-						} }
-						style={ { width: "100%", height: "100%", background: "#ffffff5c" } }
+						}}
+						style={{ width: "100%", height: "100%", background: "#ffffff5c" }}
 						
-						config={ {
+						config={{
 							parallelUploads : 100,
 							maxFiles        : 100,
 							iconFiletypes   : [".xls", ".csv", ".xslx"],
 							showFiletypeIcon: true,
 							autoDiscover    : false,
 							postUrl         : "no-url"
-						} }
-						djsConfig={ {
+						}}
+						djsConfig={{
 							parallelUploads   : 100,
 							maxFiles          : 100,
 							autoProcessQueue  : false,
 							withCredentials   : true,
 							autoDiscover      : false,
 							dictDefaultMessage: "Drop here to parse"
-						} }/>
+						}}/>
 				}
 			</div>
 		);

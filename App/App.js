@@ -42,7 +42,7 @@ export default class App extends React.Component {
 	state = {};
 	
 	render() {
-		let Router                                          = BrowserRouter;
+		let Router                                                       = BrowserRouter;
 		let { widgets = { items: [] }, appState, CurrentUser, $actions } = this.props;
 		if ( __IS_SERVER__ )
 			Router = StaticRouter;
@@ -78,8 +78,15 @@ export default class App extends React.Component {
 						New Importer
 					</div>
 					<div
-						onClick={() => $actions.newWidget('DBQuery', { title: "Db query & delete" })}>
-						New DBQuery
+						onClick={() => $actions.newWidget('DbExplorer', { title: "Db query & delete" })}>
+						New DbExplorer
+					</div>
+					<div
+						onClick={() => $actions.newWidget('DevTools', { title: "DevTools" }, {
+							"size"    : { "width": 200, "height": 250 },
+							"position": { "x": 0, "y": 0 }
+						})}>
+						New DevTools
 					</div>
 				</ContextMenu>}
 				
