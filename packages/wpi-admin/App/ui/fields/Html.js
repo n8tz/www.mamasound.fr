@@ -17,21 +17,15 @@
 
 'use strict';
 
-import React         from "react";
-import ReactDOM      from "react-dom";
-//import MediaField    from "App/ui/fields/Media";
-//import Panel         from "App/ui/kit/Panel";
-//import Image         from "App/ui/components/Image";
-import {Component}   from "react";
-import Button        from "@material-ui/core/Button";
-//import Modal         from "@material-ui/core/Modal";
+import {asFieldType}      from "App/ui/spells";
+import React, {Component} from "react";
+
 let CKEditor, ClassicEditor, isBrowser;
 if ( typeof window !== "undefined" ) {
 	isBrowser     = true;
 	CKEditor      = require('@ckeditor/ckeditor5-react');
 	ClassicEditor = require('@ckeditor/ckeditor5-build-classic');
 }
-import {asFieldType} from "App/ui/spells";
 
 @asFieldType
 export default class Html extends Component {
@@ -48,18 +42,23 @@ export default class Html extends Component {
 		                       });
 	}
 	
+	ckConfig = {
+		width : "100%",
+		height: "100%"
+	};
+	
 	render() {
 		let { defaultValue, value = defaultValue } = this.props;
 		if ( !isBrowser )
 			return <React.Fragment></React.Fragment>;
+		//debugger
 		return (
 			<React.Fragment>
-				
-				{/*<div className={ "title" }>{ this.props.label || this.props.name }</div>*/}
-				
 				<CKEditor
 					editor={ClassicEditor}
 					data={value}
+					config={this.ckConfig}
+					height={"100%"}
 					onInit={editor => {
 						// You can store the "editor" and use when it is needed.
 						console.log('Editor is ready to use!', editor);

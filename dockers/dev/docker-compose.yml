@@ -1,25 +1,40 @@
 version: '3'
 volumes:
   node_modules:
+  portainer_data:
   emptyDockerDir:
 networks:
   app_network:
+
 services:
   traefik:
-    image: "traefik:v2.0.0"
+    image: "traefik:2.0"
     command:
-      #- "--log.level=DEBUG"
-      - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
+#      - "--docker.domain=localhost"
       - "--entrypoints.web.address=:80"
     ports:
       - "80:80"
-      - "9090:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     networks:
       - app_network
+#  portainer:
+#    image: portainer/portainer
+#    restart: always
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#      - portainer_data:/data
+#    expose:
+#      - "9000"
+#      - "8000"
+#    labels:
+#      - "traefik.enable=true"
+#      - "traefik.http.routers.portainer.rule=Host(`portainer.localhost`)"
+#      - "traefik.http.routers.portainer.entrypoints=web"
+#    networks:
+#      - app_network
   app:
     restart: always
     build:
@@ -30,8 +45,8 @@ services:
     #
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`${APP_DOMAIN:-mamasound.localhost}`)"
-      - "traefik.http.routers.whoami.entrypoints=web"
+      - "traefik.http.routers.app.rule=Host(`${APP_DOMAIN:-mamasound.localhost}`)"
+      - "traefik.http.routers.app.entrypoints=web"
       - 'traefik.protocol=http'
       - 'traefik.frontend.errors.network.status=["500-599"]'
       - 'traefik.frontend.errors.network.backend="error"'
@@ -40,7 +55,7 @@ services:
       - mongoUrl=mongodb://mongodb:27017
       - redisUrl=redis://redis:6379
       - APP_MODE=${APP_MODE:-dev}
-      - APP_DOMAIN=${APP_DOMAIN:-mamasound.localhost}
+      - APP_DOMAIN=${APP_DOMAIN:-app.localhost}
     #      - CHOKIDAR_USEPOLLING=true
     links:
       - mongodb
@@ -54,14 +69,14 @@ services:
       - ../../dump:/home/app/dump
     expose:
       - "8080"
-    ports:
-      - "${APP_DOCKER_DEBUG_PORT:-9229}:9229"
+#    ports:
+#      - "${APP_DOCKER_DEBUG_PORT:-9200}:9229"
 #      - "9090:9090"
     networks:
       - app_network
   error:
     image: nginx:alpine
-    ports:
+    expose:
       - "80"
     volumes:
       - ./500s:/usr/share/nginx/html:ro
@@ -70,6 +85,8 @@ services:
       - "traefik.port=80"
       - "traefik.frontend.rule=Host:error.localhost"
       - "traefik.enable=true"
+    networks:
+      - app_network
   mongodb:
     image: mongo
     restart: always

@@ -207,21 +207,21 @@ export const YAxis             = [
 		}
 	},
 	//// EventsBlock to map
-	{
-		target  : "EventsBlock",
-		from    : 200,
-		duration: 100,
-		apply   : {
-			bottom: "20%"
-		}
-	},
-	{
-		target  : "EventMap",
-		from    : 200,
-		duration: 100,
-		apply   : {
-			height: "20%",
-			top   : "-20%"
-		}
-	},
+	//{
+	//	target  : "EventsBlock",
+	//	from    : 200,
+	//	duration: 100,
+	//	apply   : {
+	//		bottom: "20%"
+	//	}
+	//},
+	//{
+	//	target  : "EventMap",
+	//	from    : 200,
+	//	duration: 100,
+	//	apply   : {
+	//		height: "20%",
+	//		top   : "-20%"
+	//	}
+	//},
 ];

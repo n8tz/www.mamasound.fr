@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-let stepAngle = "3.5deg";
+let stepAngle = "3deg";
 
 export const defaultInitial  = {
 	position : "absolute",
@@ -67,14 +67,14 @@ export const defaultEntering = [
 		}
 	},
 	{
-		from    : 0,
-		duration: 35,
+		from    : 25,
+		duration: 10,
 		apply   : {
 			opacity: 1,
 		}
 	}, {
-		from    : 55,
-		duration: 45,
+		from    : 20,
+		duration: 80,
 		apply   : {
 			transform: [{}, {
 				rotateY   : "-15deg",
@@ -87,7 +87,7 @@ export const defaultEntering = [
 export const defaultLeaving  = [
 	{
 		from    : 0,
-		duration: 45,
+		duration: 80,
 		apply   : {
 			transform: [{}, {
 				rotateY   : "-15deg",
@@ -97,7 +97,7 @@ export const defaultLeaving  = [
 	},
 	{
 		from    : 65,
-		duration: 35,
+		duration: 10,
 		apply   : {
 			opacity: -1,
 		}

@@ -18,6 +18,7 @@ import Button from '@material-ui/core/Button';
 
 
 import entities from 'App/db/entities';
+import validate from 'App/db/validate';
 
 import stores        from 'App/stores/(*).js';
 import {fields}      from "App/ui";
@@ -25,9 +26,9 @@ import is            from "is";
 import React         from "react";
 import {ContextMenu} from 'react-inheritable-contextmenu';
 
-import {propsToScope, scopeToProps, withScope, withStateMap} from "react-scopes";
+import RS, {withStateMap} from "react-scopes";
 
-@withScope(
+@RS(
 	{
 		@withStateMap(
 			{
@@ -37,8 +38,8 @@ import {propsToScope, scopeToProps, withScope, withStateMap} from "react-scopes"
 		data: stores.MongoRecords,
 	}
 )
-@propsToScope("record:data.record")
-@scopeToProps("data.record")
+@RS.fromProps("record:data.record")
+@RS.connect("data.record")
 export default class RecordEditor extends React.Component {
 	static defaultProps = {
 		whenDone: () => {
@@ -88,69 +89,64 @@ export default class RecordEditor extends React.Component {
 	}
 	
 	onSaveComplete( r ) {
-		var db = this.props.$stores.db;
 		console.log('ok saved', r);
 		this.props.whenDone &&
 		this.props.whenDone(r);
-		db.hotReplaceRecord(r);
+		//db.hotReplaceRecord(r);
 		
 	}
 	
 	validate() {
-		var db      = this.props.$stores.db,
-		    isValid = db.validate(this.props.record, this._etty);
+		let isValid = validate(this.state.record, this.props.etty),
+		    record  = this.state.record;
 		
 		if ( isValid !== true )
 			this.setState({ errors: isValid });
 		else {
 			this.setState({ errors: {} });
+			console.log(record)
 			// me.wait();
-			if ( this.props.id )
-				db.save(this.props.etty, this.props.id, this.state.record,
-				        ( e, r ) => {
-					        // me.release();
-					        if ( e ) {
-						        // debugger;
-						        alert('Sorry it failed ! :( ( try to relog ? )');
-						        // Auth.checkLoginStatus();
-						        return;
-					        }
-					        // debugger;
-					        // me.setState({record : null});
-					        this.onSaveComplete(r);
-				        });
-			else
-				db.create(this.props.etty, this.state.record,
-				          ( e, r ) => {
-					          // this.release();
-					          if ( e ) {
-						          // debugger;
-						
-						          alert('Sorry it failed ! :( ( try to relog ? )');
-						          // Auth.checkLoginStatus();
-						          return;
-					          }
-					          // this.setState({record : null});
-					          //this.setState({record : r});
-					          this.onSaveComplete(r);
-				          });
+			/*if ( record._id )
+			 db.save(this.props.etty, record._id, record,
+			 ( e, r ) => {
+			 // me.release();
+			 if ( e ) {
+			 // debugger;
+			 alert('Sorry it failed ! :( ( try to relog ? )');
+			 // Auth.checkLoginStatus();
+			 return;
+			 }
+			 // debugger;
+			 // me.setState({record : null});
+			 this.onSaveComplete(r);
+			 });
+			 else
+			 db.create(this.props.etty, this.state.record,
+			 ( e, r ) => {
+			 // this.release();
+			 if ( e ) {
+			 // debugger;
+			 
+			 alert('Sorry it failed ! :( ( try to relog ? )');
+			 // Auth.checkLoginStatus();
+			 return;
+			 }
+			 // this.setState({record : null});
+			 //this.setState({record : r});
+			 this.onSaveComplete(r);
+			 });
+			 
+			 */
 		}
 	}
 	
 	preview() {
-		var me      = this,
-		    db      = this.$stores.db,
-		    isValid = db.validate(this.props.record, this._etty);
-		
 	}
 	
 	onClick() {
 	}
 	
 	restore() {
-		//cActions.bindEntity(this, this.props.etty, this.props.id, 'record');
-		//quick & dirty restore :D
-		//window.location.reload();
 	}
 	
 	buildForm() {
@@ -193,6 +189,11 @@ export default class RecordEditor extends React.Component {
 			});
 		return form;
 	}
+	
+	//static getDerivedStateFromProps( {record}, state ) {
+	//	return {record}
+	//}
+	
 	
 	render() {
 		let { $actions, id, DataProvider, record }

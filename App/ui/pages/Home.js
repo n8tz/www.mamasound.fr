@@ -23,10 +23,11 @@ import {asTweener, TweenAxis, TweenRef} from "react-voodoo";
 
 const wayPoints =
 	      {
-		      page  : 0,
-		      head  : 100,
-		      events: 200,
-		      map   : 300
+		      page   : 0,
+		      bighead: 50,
+		      head   : 100,
+		      events : 200,
+		      map    : 300
 	      };
 
 @scopeToProps("appState", "Styles.pages.Home:Styles")
@@ -98,6 +99,12 @@ export default class Home extends React.Component {
 							},
 							wayPoints   : [
 								{ at: 0, id: "page" },
+								{
+									//direction   : 1,
+									at          : 50,
+									id          : "bighead",
+									stopDuration: 1000
+								},
 								{
 									//direction   : 1,
 									at          : 100,

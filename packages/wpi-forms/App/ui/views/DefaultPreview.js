@@ -17,10 +17,9 @@
 
 'use strict';
 
-import React from 'react';
-
-
-import Image from 'App/ui/components/Image';
+import Image    from 'App/ui/components/Image';
+import Editable from "App/ui/Editable";
+import React    from 'react';
 
 
 export default class DefaultPreview extends React.Component {
@@ -30,6 +29,7 @@ export default class DefaultPreview extends React.Component {
 		    background = record.previewUrl;
 		
 		return <div className={"DefaultPreview"}>
+			<Editable id={record._id}/>
 			{
 				background &&
 				<Image src={background} w={250} h={250}

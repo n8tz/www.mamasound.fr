@@ -18,11 +18,10 @@
 import {eventsMiniHeight, footerMiniHeight, headerMiniHeight, sliderHeight} from "../vars";
 
 export const page              = {
-	position: "absolute",
-	top     : "0cm",
-	left    : "50%",
-	bottom  : 0,
-	
+	position : "absolute",
+	top      : "0cm",
+	left     : "50%",
+	bottom   : 0,
 	transform: {
 		translateX: "-50%"
 	}
@@ -149,7 +148,7 @@ export const YAxis             = [
 	{
 		target  : "logo",
 		from    : 0,
-		duration: 100,
+		duration: 50,
 		apply   : {
 			right: "-5%",
 			width: "60%",
@@ -158,7 +157,7 @@ export const YAxis             = [
 	{
 		target  : "header",
 		from    : 0,
-		duration: 100,
+		duration: 50,
 		apply   : {
 			height: ["-100%", headerMiniHeight + "px", sliderHeight],
 		}
@@ -207,21 +206,21 @@ export const YAxis             = [
 		}
 	},
 	//// EventsBlock to map
-	{
-		target  : "EventsBlock",
-		from    : 200,
-		duration: 100,
-		apply   : {
-			bottom: "20%"
-		}
-	},
-	{
-		target  : "EventMap",
-		from    : 200,
-		duration: 100,
-		apply   : {
-			height: "20%",
-			top   : "-20%"
-		}
-	},
+	//{
+	//	target  : "EventsBlock",
+	//	from    : 200,
+	//	duration: 100,
+	//	apply   : {
+	//		bottom: "20%"
+	//	}
+	//},
+	//{
+	//	target  : "EventMap",
+	//	from    : 200,
+	//	duration: 100,
+	//	apply   : {
+	//		height: "20%",
+	//		top   : "-20%"
+	//	}
+	//},
 ];

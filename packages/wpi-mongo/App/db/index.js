@@ -15,9 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import superagent   from "superagent";
-import typesList    from "App/db/types";
 import {mount}      from "App/db/mountRecord";
+import typesList    from "App/db/types";
+import superagent   from "superagent";
 //import {pushDbTask} from "App/db/pool";
 
 
@@ -61,6 +61,33 @@ export function remove( query ) {
 			          .then(
 				          res => {
 					          resolve(res.body)
+				          }
+			          ).catch(reject)
+		}
+	);
+};
+
+export function create( etty, record, cb ) {
+	return new Promise(
+		( resolve, reject ) => {
+			superagent.post('/db/create', {etty,record})
+			          .then(
+				          res => {
+					          resolve(res.body);
+					          cb&&cb(res.body);
+				          }
+			          ).catch(reject)
+		}
+	);
+};
+export function save( etty, record, cb ) {
+	return new Promise(
+		( resolve, reject ) => {
+			superagent.post('/db/create', {etty,record})
+			          .then(
+				          res => {
+					          resolve(res.body);
+					          cb&&cb(res.body);
 				          }
 			          ).catch(reject)
 		}

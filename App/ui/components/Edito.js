@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 import stores             from 'App/stores/(*).js';
+import Editable           from "App/ui/Editable";
 import React              from "react";
 import RS, {withStateMap} from "react-scopes";
 import {TweenRef}         from "react-voodoo";
@@ -28,8 +29,10 @@ import {TweenRef}         from "react-voodoo";
 					id       : "Edito",
 					etty     : "Article",
 					"default": {
-						title : "Edito",
-						text: "Ceci est un edito"
+						_id  : "_Edito",
+						_cls : "Article",
+						title: "Edito",
+						text : "Ceci est un edito"
 					}
 				}
 			}
@@ -47,11 +50,12 @@ export default class Edito extends React.Component {
 	
 	render() {
 		const {
-			      Edito:{data:record}, style,
+			      Edito: { data: record }, style,
 			      isNext, isCurrent
 		      } = this.props;
 		return (
 			<div className={"Edito smallView"} style={style}>
+				{/*<Editable id={record._id}/>*/}
 				
 				<div className="title">
 					{record && (record.title || record.label)}
@@ -65,14 +69,14 @@ export default class Edito extends React.Component {
 				<TweenRef
 					initial={
 						{
-							"position": "absolute",
-							top       : ["40%", "3em"],
-							left      : "40%",
+							"position"     : "absolute",
+							top            : ["40%", "3em"],
+							left           : "40%",
 							//opacity   : 0,
-							width     : "60%",
-							height    : "4px",
+							width          : "60%",
+							height         : "4px",
 							backgroundColor: "white",
-							transform : [{}, {
+							transform      : [{}, {
 								translateX: (isNext || !isCurrent) && "-40vw" || "0vw",
 							}]
 						}
