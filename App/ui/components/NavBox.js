@@ -86,31 +86,6 @@ export default class NavBox extends React.Component {
 						onClick={e => $actions.setCurStyleTab(1)}
 						title={
 							<>
-								Concerts
-							</>
-						}
-						icon={
-							<img src={require("App/ui/assets/images/jip/concert-gif.gif")}
-							     className={"typeIcon"}/>
-						}>
-						{
-							Array(appState.dayCountByViewType[1])
-								.fill(0)
-								.map(
-									( v, i ) =>
-										<Views.Events.DayEvents
-											className={"dayBlock"}
-											ViewItem={Views.Event.headerItem}
-											key={i}
-											day={moment(appState.curDay).add(i, 'day').unix() * 1000}
-											viewType={1}/>
-								)
-						}
-					</Comps.StretchBox>
-					<Comps.StretchBox
-						onClick={e => $actions.setCurStyleTab(2)}
-						title={
-							<>
 								Expos
 							</>
 						}
@@ -122,7 +97,7 @@ export default class NavBox extends React.Component {
 					>
 						
 						{
-							Array(appState.dayCountByViewType[2])
+							Array(appState.dayCountByViewType[1])
 								.fill(0)
 								.map(
 									( v, i ) =>
@@ -136,7 +111,7 @@ export default class NavBox extends React.Component {
 						}
 					</Comps.StretchBox>
 					<Comps.StretchBox
-						onClick={e => $actions.setCurStyleTab(3)}
+						onClick={e => $actions.setCurStyleTab(2)}
 						title={
 							<>
 								Theatre
@@ -157,7 +132,7 @@ export default class NavBox extends React.Component {
 											ViewItem={Views.Event.headerItem}
 											key={i}
 											day={moment(appState.curDay).add(i, 'day').unix() * 1000}
-											viewType={3}/>
+											viewType={2}/>
 								)
 						}
 					</Comps.StretchBox>

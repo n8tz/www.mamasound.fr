@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {eventsMiniHeight, sliderHeight} from "../../../vars";
+import {headerMiniHeight, sliderHeight} from "../../../vars";
 
 export const transitionDuration    = 800;
 export const defaultInitial        = {
@@ -50,9 +50,9 @@ export const defaultInitial        = {
 };
 export const defaultPreviewInitial = {
 	position       : "absolute",
-	height         : ["100vh", -eventsMiniHeight],
+	height         : ["100vh"],
 	width          : "100vw",
-	top            : "50%",
+	top            : "0%",
 	left           : "50%",
 	zIndex         : 40,
 	overflow       : "hidden",
@@ -62,11 +62,11 @@ export const defaultPreviewInitial = {
 	transform      : [
 		{
 			translateX : "-50%",
-			translateY : "-50%",
+			//translateY : "-50%",
 			perspective: "700px",
 		},
 		{
-			translateY: (parseFloat(sliderHeight) / 2) + "vh",
+			translateY: -headerMiniHeight,
 		},
 		{},
 		{}]

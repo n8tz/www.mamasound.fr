@@ -41,7 +41,7 @@ export default {
 		curDay            : undefined,
 		currentSearch     : undefined,
 		viewType          : 0,
-		dayCountByViewType: [3, 3, 1, 3, 0],
+		dayCountByViewType: [3, 1, 3, 0],
 		curTags           : undefined,
 		
 		$apply( data, state ) {
@@ -106,7 +106,7 @@ export default {
 			if ( selectedFocus && currentPageFocus === 'page' )
 				currentPageFocus = "loop";
 			else if ( selectedFocus )
-				currentPageFocus = 'head';
+				currentPageFocus = 'bighead';
 			return {
 				currentPageFocus,
 				selectedEventId: null,

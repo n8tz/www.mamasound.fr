@@ -18,11 +18,10 @@
 import {eventsMiniHeight, footerMiniHeight, headerMiniHeight, sliderHeight} from "../vars";
 
 export const page              = {
-	position: "absolute",
-	top     : "0cm",
-	left    : "50%",
-	bottom  : 0,
-	
+	position : "absolute",
+	top      : "0cm",
+	left     : "50%",
+	bottom   : 0,
 	transform: {
 		translateX: "-50%"
 	}
@@ -96,7 +95,7 @@ export const Footer            = {
 export const EventsBlock       = {
 	position       : "absolute",
 	right          : "0%",
-	bottom         : -footerMiniHeight,
+	bottom         : 0,
 	top            : "100%",
 	zIndex         : 125,
 	//overflow       : 'hidden',
@@ -149,7 +148,7 @@ export const YAxis             = [
 	{
 		target  : "logo",
 		from    : 0,
-		duration: 100,
+		duration: 50,
 		apply   : {
 			right: "-5%",
 			width: "60%",
@@ -158,7 +157,7 @@ export const YAxis             = [
 	{
 		target  : "header",
 		from    : 0,
-		duration: 100,
+		duration: 50,
 		apply   : {
 			height: ["-100%", headerMiniHeight + "px", sliderHeight],
 		}
@@ -166,17 +165,33 @@ export const YAxis             = [
 	{
 		target  : "Highlighter",
 		from    : 0,
-		duration: 100,
+		duration: 50,
 		apply   : {
-			height: ["-200px", 2 * footerMiniHeight]
+			height: ["-50px",2 * footerMiniHeight]
 		}
 	},
 	{
 		target  : "EventsBlock",
 		from    : 0,
-		duration: 100,
+		duration: 50,
 		apply   : {
-			top: -eventsMiniHeight
+			top: "-50px"
+		}
+	},
+	{
+		target  : "Highlighter",
+		from    : 50,
+		duration: 50,
+		apply   : {
+			height: ["-150px"]
+		}
+	},
+	{
+		target  : "EventsBlock",
+		from    : 50,
+		duration: 50,
+		apply   : {
+			top: [-eventsMiniHeight, 50]
 		}
 	},
 	//// highlighter to EventsBlock
@@ -193,7 +208,7 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			bottom: ["150px", footerMiniHeight],
+			bottom: ["20%", footerMiniHeight],
 			top   : ["-100%", (eventsMiniHeight + headerMiniHeight) + "px", sliderHeight, footerMiniHeight, -20]
 		}
 	},
@@ -202,8 +217,8 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			height: "150px",
-			top   : "-150px"
+			height: "20%",
+			top   : "-20%"
 		}
 	},
 	//// EventsBlock to map

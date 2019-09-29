@@ -42,7 +42,7 @@ export default class EventList extends React.Component {
 		    parentPos    = parent.scrollTop,
 		    scrollHeight = parent.scrollHeight;
 		
-		if ( scrollHeight < (parentPos + parentHeight + 500) ) {
+		if ( appState.currentPageFocus==="events" && scrollHeight < (parentPos + parentHeight + 500) ) {
 			
 			console.log("should do more query", appState.viewType);
 			this._running = true;

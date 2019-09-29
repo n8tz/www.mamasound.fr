@@ -165,17 +165,33 @@ export const YAxis             = [
 	{
 		target  : "Highlighter",
 		from    : 0,
-		duration: 100,
+		duration: 50,
 		apply   : {
-			height: ["-200px", 2 * footerMiniHeight]
+			height: ["-50px",2 * footerMiniHeight]
 		}
 	},
 	{
 		target  : "EventsBlock",
 		from    : 0,
-		duration: 100,
+		duration: 50,
 		apply   : {
-			top: -eventsMiniHeight
+			top: "-50px"
+		}
+	},
+	{
+		target  : "Highlighter",
+		from    : 50,
+		duration: 50,
+		apply   : {
+			height: ["-150px"]
+		}
+	},
+	{
+		target  : "EventsBlock",
+		from    : 50,
+		duration: 50,
+		apply   : {
+			top: [-eventsMiniHeight, 50]
 		}
 	},
 	//// highlighter to EventsBlock

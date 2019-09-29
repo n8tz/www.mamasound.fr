@@ -173,7 +173,7 @@ export default class EventMap extends React.Component {
 			              map.setView(
 				              map.unproject(
 					              map.project(poi, targetZoom)
-					                 .subtract([0, 150]),
+					                 .subtract([0, 50]),
 					              targetZoom
 				              ),
 				              targetZoom, { animate: true, duration: .25 }
@@ -202,7 +202,7 @@ export default class EventMap extends React.Component {
 		if ( map && selectedPos ) {
 			center = map.unproject(
 				map.project(selectedPos, map.getZoom())
-				   .subtract([0, 125]),
+				   .subtract([0, 50]),
 				map.getZoom()
 			)
 		}

@@ -46,7 +46,7 @@ export default {
 					etty     : 'Event',
 					query    : {
 						$or: [
-							...([0, 1].includes(type) && [
+							...([0].includes(type) && [
 								{
 									_cls    : 'Concert',
 									schedule: {
@@ -65,7 +65,7 @@ export default {
 										'$lt': to
 									}
 								}] || []),
-							...([0, 3].includes(type) && [
+							...([0, 2].includes(type) && [
 								{
 									_cls    : 'Theatre',
 									schedule: {
@@ -94,7 +94,7 @@ export default {
 										'$lt': to
 									}
 								}] || []),
-							...(type === 2 && [{
+							...(type === 1 && [{
 								_cls    : 'Expo',
 								schedule: {
 									$elemMatch: {

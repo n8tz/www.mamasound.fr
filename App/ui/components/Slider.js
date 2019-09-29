@@ -70,7 +70,7 @@ export default class Slider extends React.Component {
 			tweener.scrollTo(tweener._getAxis(scrollDir).scrollPos + dec - prevState.dec, 0, scrollDir);
 		}
 		if ( pIndex !== prevProps.index ) {
-			tweener.scrollTo(dec + step * pIndex + 100, 500, scrollDir);
+			tweener.scrollTo(dec + step * pIndex + 100, 500, scrollDir, "easeSinOut");
 			
 			if ( autoScroll ) {
 				clearTimeout(this._updater);

@@ -31,7 +31,7 @@ export const backgroundScroll = {
 	scrollY: [
 		{
 			from    : 0,
-			duration: 100,
+			duration: 50,
 			apply   : {
 				opacity: 1,
 			}
@@ -73,11 +73,22 @@ export const slide            = {
 	height   : "100%",
 	transform: {
 		perspective: "200px",
+		translateZ: "-20px",
 		rotateX    : "2deg"
 	}
 };
 export const slideScroll      = {
 	scrollY: [
+		{
+			type    : "Tween",
+			from    : 50,
+			duration: 50,
+			apply   : {
+				transform: {
+					translateZ: "20px",
+				}
+			}
+		},
 		{
 			type    : "Tween",
 			from    : 100,
@@ -106,7 +117,7 @@ export const focusedScroll    = {
 	scrollY: [
 		{
 			from    : 0,
-			duration: 100,
+			duration: 50,
 			apply   : {
 				opacity: 1,
 			}

@@ -50,6 +50,7 @@ export default class SearchBar extends React.Component {
 		      } = this.props;
 		//console.log('TagManager::render:43: ', TagManager);
 		return (<Comps.StretchBox
+				width={"24%"}
 				className={"searchStretchBox SearchBar"}
 				title={
 					<div className={"SearchBarForm"}>

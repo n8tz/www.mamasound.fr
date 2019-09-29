@@ -71,7 +71,7 @@ export default class Edito extends React.Component {
 						{
 							"position"     : "absolute",
 							top            : ["40%", "3em"],
-							left           : "40%",
+							left           : "0%",
 							//opacity   : 0,
 							width          : "60%",
 							height         : "4px",
