@@ -1,4 +1,6 @@
 FROM node:8.12.0-alpine
+ARG MONGO_URI=mongodb://mongodb:27017
+ARG REDIS_URI=redis://redis:6379
 ARG APP_DOMAIN=app.localhost
 ARG GIT_TAG=release
 ARG GIT_BRANCH=master
@@ -28,6 +30,8 @@ RUN apk --no-cache update \
 
 ENV PATH=node_modules/.bin:$PATH
 ENV APP_DOMAIN=${APP_DOMAIN}
+ENV MONGO_URI=${MONGO_URI}
+ENV REDIS_URI=${REDIS_URI}
 
 RUN git clone $GIT_URL /home/app
 WORKDIR /home/app

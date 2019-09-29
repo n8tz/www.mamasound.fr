@@ -95,7 +95,7 @@ export const Footer            = {
 export const EventsBlock       = {
 	position       : "absolute",
 	right          : "0%",
-	bottom         : -footerMiniHeight,
+	bottom         : 0,
 	top            : "100%",
 	zIndex         : 125,
 	//overflow       : 'hidden',
@@ -192,7 +192,7 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			bottom: "20%",
+			bottom: ["20%", footerMiniHeight],
 			top   : ["-100%", (eventsMiniHeight + headerMiniHeight) + "px", sliderHeight, footerMiniHeight, -20]
 		}
 	},

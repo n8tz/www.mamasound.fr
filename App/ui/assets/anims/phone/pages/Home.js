@@ -193,7 +193,7 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			bottom: "20%",
+			bottom: ["150px", footerMiniHeight],
 			top   : ["-100%", (eventsMiniHeight + headerMiniHeight) + "px", sliderHeight, footerMiniHeight, -20]
 		}
 	},
@@ -202,8 +202,8 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			height: "20%",
-			top   : "-20%"
+			height: "150px",
+			top   : "-150px"
 		}
 	},
 	//// EventsBlock to map

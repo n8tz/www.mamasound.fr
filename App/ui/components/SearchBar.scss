@@ -29,34 +29,60 @@
 }
 
 .SearchBar {
-  touch-action: none;
-  position: relative;
-  //text-align: right;
-  width: 100%;
-  height: 100%;
 
-  .input {
-    display: inline-block;
-    width: calc(100% - 3.75em);
-    //background: #d6d6d6;
-    padding: .2em;
-    margin-left: .2em;
-    margin-right: .2em;
-    border-radius: .5em;
-    //border: solid 1px rgba(0, 0, 0, 0.38);
+  .SearchBarForm {
+    touch-action: none;
+    position: relative;
+    //text-align: right;
+    width: 100%;
+    height: 100%;
 
-    height: 3em;
+    .input {
+      display: inline-block;
+      width: calc(100% - 3.75em);
+      //background: #d6d6d6;
+      padding: .2em;
+      margin-left: .2em;
+      margin-right: .2em;
+      border-radius: .5em;
+      //border: solid 1px rgba(0, 0, 0, 0.38);
 
-    > div {
+      height: 3em;
+
+      > div {
+        width: 100%;
+      }
+    }
+
+    .searchIcon {
+      padding: .2em;
+      border-radius: 0px;
+      height: 3em;
+      width: 3em;
+      box-shadow: none;
+    }
+
+    .optIcon {
+      float: right;
+      padding: .2em;
+      border-radius: 0px;
+      height: 3em;
+      width: 3em;
+      box-shadow: none;
+    }
+
+    .searchOpts {
+      position: absolute;
+      top: 100%;
+      left: 0;
       width: 100%;
+      height: 4em;
+      background: #00b3ff;
     }
   }
 
-  .searchIcon {
-    padding: .2em;
-    border-radius: 0px;
-    height: 3em;
-    width: 3em;
-    box-shadow: none;
+  .tagIcon{
+    height: 2em;
+    width: 2em;
   }
 }

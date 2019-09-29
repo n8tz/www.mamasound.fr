@@ -52,8 +52,8 @@ services:
       - 'traefik.frontend.errors.network.backend="error"'
       - 'traefik.frontend.errors.network.query="/index.html"'
     environment:
-      - mongoUrl=mongodb://mongodb:27017
-      - redisUrl=redis://redis:6379
+      - MONGO_URI=mongodb://mongodb:27017
+      - REDIS_URI=redis://redis:6379
       - APP_MODE=${APP_MODE:-dev}
       - APP_DOMAIN=${APP_DOMAIN:-app.localhost}
     #      - CHOKIDAR_USEPOLLING=true

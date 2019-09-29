@@ -170,13 +170,8 @@ export default class NavBox extends React.Component {
 				{/*	}*/}
 				{/*</div>*/}
 				
-				<Comps.StretchBox
-					className={"searchStretchBox"}
-					title={
-						<Comps.SearchBar/>
-					}>
-					last searches
-				</Comps.StretchBox>
+				<Comps.SearchBar/>
+				
 			</div>
 		);
 	}

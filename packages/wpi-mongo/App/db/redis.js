@@ -17,8 +17,8 @@
  */
 //
 let redis       = require("redis"),
-    redisClient = redis && redis.createClient(process.env.redisUrl);
-console.warn(process.env.redisUrl);
+    redisClient = redis && redis.createClient(process.env.REDIS_URI);
+console.warn(process.env.REDIS_URI);
 redis.RedisClient.prototype.delWildcard = function ( key, callback ) {
 	var redis = this;
 	

@@ -150,9 +150,12 @@ export default {
 		
 		// actions
 		$apply( data, state ) {
+			//debugger
+			//console.log('TagManager::$apply:154: ', state.available);
 			return {
 				...state,
-				selected: Object.keys(state.selectedTags)
+				available: Object.keys(state.available).map(tag => state.available[tag]),
+				selected : Object.keys(state.selectedTags)
 			}
 		},
 		selectTag( tag ) {
@@ -173,17 +176,20 @@ export default {
 			}
 		},
 		registerTags( tags ) {
-			return {
+			//debugger
+			return ( { available } ) => ({
 				available: tags.reduce(
 					( h, tag ) => {
-						h[tag.label] = h[tag.label] || tag;
+						if ( h[tag.label] )
+							h[tag.label].count++;
+						else h[tag.label] = tag;
 						return h;
 					},
 					{
-						...this.nextState.available
+						...available
 					}
 				)
-			}
+			})
 		},
 	},
 	@asStore

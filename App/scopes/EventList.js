@@ -16,8 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import stores from 'App/stores/(*).js';
-import moment from "moment";
+import console from 'App/console';
+import stores  from 'App/stores/(*).js';
+import moment  from "moment";
 
 import {asRef, asStore, withStateMap} from "react-scopes";
 
@@ -152,7 +153,14 @@ export default {
 				items: filter ?
 				       items.filter(
 					       item => {
-						       return filterRE.test(item.title);
+					       	let str = item.title;
+					       	if (item.text)
+					       		str+=" "+item.text;
+					       	if (item.category && refs[item.category.objId])
+					       		str+=" "+refs[item.category.objId].name;
+						        
+						        
+						       return filterRE.test(str);
 					       }
 				       )
 				              :
@@ -169,49 +177,51 @@ export default {
 		//@asRef
 		//TagManager: "TagManager",
 		@asRef
-		events: "!EventList",
+		events    : "!EventList",
 		
-		$apply( data, { events: { items = [], refs } } ) {
-			let available = [], seen = {}, styles = {};
+		$apply( data, { events: { items = [], refs } }, { events } ) {
+			let tags, seen = {}, styles = {};
+			if ( !events )
+				return data;
 			items.forEach(
 				event => {
 					let style = event.category && refs[event.category.objId];
 					style && style.name
 					              .replace(/([\.\(\)\/\\]+)/ig, '|')
 					              .split('|')
-					              .filter(t => (!!t && /\s*/.test(t)))
-					              .filter(t => (seen[t] && seen[t]++ || (seen[t] = 1, false)))
+					              .filter(t => (!/^\s*$/.test(t)))
+					              .filter(t => (seen[t] && seen[t]++ || (seen[t] = 1, true)))
+					              //.filter(console.log)
 					              .forEach(t => (styles[t] = styles[t] || style))
 				}
 			)
-			//this.$scope.mount("TagManager");
-			this.$actions.registerTags(
-				Object
+			tags = Object
+				.keys(seen)
+				//.filter(t => (!!styles[t]))
+				.sort(( a, b ) => (seen[a] < seen[b]
+				                   ? 1
+				                   : -1))
+				.map(tag => ({
+					label: tag,
+					style: styles[tag] || {},
+					count: seen[tag]
+				}));
+			this.$scope.mount("TagManager");
+			tags.length && this.$actions.registerTags(tags);
+			//console.log(tags, seen)
+			return {
+				available: Object
 					.keys(seen)
 					.filter(t => (!!styles[t]))
 					.sort(( a, b ) => (seen[a] < seen[b]
 					                   ? 1
 					                   : -1))
 					.map(tag => ({
-						label: tag,
+						title: tag,
 						style: styles[tag] || {},
 						count: seen[tag]
 					}))
-			);
-			
-			//return {
-			//	available: Object
-			//		.keys(seen)
-			//		.filter(t => (!!styles[t]))
-			//		.sort(( a, b ) => (seen[a] < seen[b]
-			//		                   ? 1
-			//		                   : -1))
-			//		.map(tag => ({
-			//			title: tag,
-			//			style: styles[tag] || {},
-			//			count: seen[tag]
-			//		}))
-			//};
+			};
 		},
 		
 	},

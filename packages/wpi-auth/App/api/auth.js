@@ -26,7 +26,7 @@ let express         = require("express"),
     session         = require('express-session'),
     RedisStore      = require('connect-redis')(session),
     sessionStore    = new RedisStore({
-	                                     url: process.env.redisUrl || 'redis://127.0.0.1:6379'
+	                                     url: process.env.REDIS_URI || 'redis://127.0.0.1:6379'
                                      }),
     passport        = require('passport'),
     shortid         = require('shortid'),

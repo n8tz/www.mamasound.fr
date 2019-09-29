@@ -21,7 +21,7 @@ import React          from "react";
 import {scopeToProps} from "react-scopes";
 import {TweenRef}     from "react-voodoo";
 
-@scopeToProps("appState", "Styles.views.Events.EventsList:Styles", "UserGeoLocation")
+@scopeToProps("appState", "ActiveTags", "Styles.views.Events.EventsList:Styles", "UserGeoLocation")
 export default class EventList extends React.Component {
 	static propTypes = {};
 	state            = {};
@@ -101,7 +101,7 @@ export default class EventList extends React.Component {
 	};
 	
 	componentDidMount() {
-		//this.isBotListIsInViewport()
+		this.isBotListIsInViewport()
 		this.watchCurrentDayFromScroll()
 	}
 	
@@ -134,10 +134,7 @@ export default class EventList extends React.Component {
 			<div className={"EventList"} style={style}>
 				<div className={"maskContent"}>
 					<div className={"content container"}>
-						<TweenRef
-							id={"NavBox"}
-							initial={Styles.NavBox}
-						>
+						<TweenRef id={"NavBox"} initial={Styles.NavBox}>
 							<Comps.NavBox/>
 						</TweenRef>
 						<TweenRef
@@ -174,7 +171,7 @@ export default class EventList extends React.Component {
 															)
 													}
 													{/*</Comps.Slider>*/}
-													{/*<div id={"endList_" + type}>loading...</div>*/}
+													<div id={"endList_" + type}>loading...</div>
 												</div>
 										)
 								}
@@ -182,10 +179,10 @@ export default class EventList extends React.Component {
 						</TweenRef>
 					</div>
 				</div>
-				{
-					activeScroll && <div className={"noScrollOverlay"}
-					                     onClick={e => $actions.setPageFocus('events', true)}></div>
-				}
+				{/*{*/}
+				{/*	activeScroll && <div className={"noScrollOverlay"}*/}
+				{/*	                     onClick={e => $actions.setPageFocus('events', true)}></div>*/}
+				{/*}*/}
 			
 			</div>
 		);
