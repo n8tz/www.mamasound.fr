@@ -54,26 +54,38 @@ export const slider           = {
 	zIndex   : "250",
 	transform: {
 		perspective: "200px",
-		translateY : '5px',
+		translateY : '55px',
+		translateZ: "-20px",
 		//rotateX    : "2deg"
 	}
 };
 export const sliderScroll     = [
-	//{
-	//	from    : 0,
-	//	duration: 100,
-	//	apply   : {
-	//		transform: {
-	//		}
-	//	}
-	//},
+	{
+		from    : 0,
+		duration: 50,
+		apply   : {
+			transform: {
+				//translateY : '50px'
+			}
+		}
+	},
+	{
+		from    : 50,
+		duration: 50,
+		apply   : {
+			transform: {
+				translateY : '-50px',
+				translateZ: "20px",
+			}
+		}
+	},
 ];
 export const slide            = {
 	top      : "0%",
 	height   : "100%",
 	transform: {
 		perspective: "200px",
-		translateZ: "-20px",
+		//translateZ: "-20px",
 		rotateX    : "2deg"
 	}
 };
@@ -85,7 +97,6 @@ export const slideScroll      = {
 			duration: 50,
 			apply   : {
 				transform: {
-					translateZ: "20px",
 				}
 			}
 		},

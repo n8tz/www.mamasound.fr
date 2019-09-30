@@ -25,7 +25,7 @@ export default class StretchBox extends React.Component {
 	
 	static defaultProps = {
 		color    : "black",
-		width    : "32%",
+		width    : "31%",
 		minHeight: "40px",
 		maxHeight: "135px"
 	};

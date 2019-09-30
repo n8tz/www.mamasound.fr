@@ -17,6 +17,9 @@
  */
 import {eventsMiniHeight, footerMiniHeight, headerMiniHeight, sliderHeight} from "../vars";
 
+export const bounds    = { min: 50, max: 200 };
+export const waypoints = undefined;
+
 export const page              = {
 	position : "absolute",
 	top      : "0cm",
@@ -167,7 +170,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 50,
 		apply   : {
-			height: ["-50px",2 * footerMiniHeight]
+			height: ["-50px", 2 * footerMiniHeight]
 		}
 	},
 	{

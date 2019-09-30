@@ -160,7 +160,7 @@ export default class Highlighter extends React.Component {
 						<Comps.Slider
 							{...Styles.Slider}
 							infinite={true}
-							autoScroll={10 * 1000}
+							autoScroll={20 * 1000}
 							onClick={this.selectFocus}
 						>
 							{

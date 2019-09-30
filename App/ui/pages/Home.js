@@ -70,7 +70,7 @@ export default class Home extends React.Component {
 					items={Styles.YAxis}
 					//scrollableWindow={ 225 }
 					defaultPosition={wayPoints[appState.currentPageFocus]}
-					//defaultPosition={100}
+					bounds={Styles.bounds}
 					inertia={
 						{
 							maxJump     : 1,
@@ -97,30 +97,7 @@ export default class Home extends React.Component {
 								//$actions.setPageFocus(v.id)// do not trigger redraw just before inertia
 								//console.log(i % nbItems, v)
 							},
-							wayPoints   : [
-								{ at: 0, id: "page" },
-								{
-									//direction   : 1,
-									at          : 50,
-									id          : "bighead",
-									stopDuration: 1000
-								},
-								{
-									//direction   : 1,
-									at          : 100,
-									id          : "head",
-									stopDuration: 1000
-								},
-								{
-									//direction: -1,
-									at: 200,
-									id: "events"
-								},
-								{
-									at: 300,
-									id: "map"
-								},
-							],
+							wayPoints   : Styles.waypoints,
 						}
 					}
 				/>
