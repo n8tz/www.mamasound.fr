@@ -33,7 +33,7 @@ export default class ViewSwitcher extends React.Component {
 		View              : ( { style, record } ) => <pre style={style}>{JSON.stringify(record, null, 2)}</pre>,
 		ViewPreview       : ( { style, record } ) => <pre style={style}>{JSON.stringify(record, null, 2)}</pre>,
 		getNextTarget     : rec => undefined,
-		transitionDuration: 1500,
+		transitionDuration: 1000,
 		showAnim          : {
 			from    : 0,
 			duration: 1500,

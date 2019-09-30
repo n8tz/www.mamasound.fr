@@ -57,11 +57,14 @@ export default class Slider extends React.Component {
 		this.setState({ index: nextIndex })
 	}
 	
-	goTo( index ) {
-		
+	goTo( index, then ) {
+		this._then = then;
 		this.setState({ index })
 	}
 	
+	shouldComponentUpdate( nextProps, nextState, nextContext ) {
+		return true
+	}
 	componentDidUpdate( prevProps, prevState, snapshot ) {
 		let { autoScroll, scrollDir, tweener, onChange, index: pIndex } = this.props,
 		    { index = this.props.defaultIndex, step, dec }              = this.state;
@@ -86,7 +89,7 @@ export default class Slider extends React.Component {
 				this._wasUserSnap = false;
 			}
 			else {
-				tweener.scrollTo(dec + step * index + 100, 500, scrollDir, "easeQuadInOut");
+				tweener.scrollTo(dec + step * index + 100, 500, scrollDir, "easeQuadInOut").then(this._then);
 			}
 			if ( autoScroll ) {
 				clearTimeout(this._updater);
@@ -96,6 +99,9 @@ export default class Slider extends React.Component {
 				)
 			}
 		}
+		else if ( this._then )
+			this._then();
+		this._then = null;
 	}
 	
 	componentWillReceiveProps( nextProps, nextContext ) {
@@ -104,6 +110,7 @@ export default class Slider extends React.Component {
 	}
 	
 	componentWillUnmount() {
+		console.log('destroy')
 		clearTimeout(this._updater);
 	}
 	
@@ -146,6 +153,7 @@ export default class Slider extends React.Component {
 		}
 	}
 	
+	
 	render() {
 		let {
 			    defaultIndex = 0,
@@ -160,7 +168,7 @@ export default class Slider extends React.Component {
 		    }                                                                                = this.props,
 		    { index = defaultIndex, allItems, nbGhostItems, step, dec, tweenLines, nbItems } = this.state;
 		
-		//console.log("render slider", 100 + dec + index * step, tweenLines)
+		console.log("render slider", index, 100 + dec + index * step)
 		return (
 			<div
 				className={"rSlide slider " + className}

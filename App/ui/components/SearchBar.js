@@ -15,13 +15,12 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import Fab         from '@material-ui/core/Fab';
-import TextField   from '@material-ui/core/TextField';
-import React       from "react";
-import RS          from "react-scopes";
-import TagCloud    from 'react-tag-cloud';
-import {Comps}     from "../index";
-import randomColor from 'randomcolor';
+import Fab       from '@material-ui/core/Fab';
+import TextField from '@material-ui/core/TextField';
+import React     from "react";
+import RS        from "react-scopes";
+import TagCloud  from 'react-tag-cloud';
+import {Comps}   from "../index";
 
 @RS.toProps("TagManager")
 export default class SearchBar extends React.Component {
@@ -37,7 +36,7 @@ export default class SearchBar extends React.Component {
 		              });
 		this.props.$actions.updateCurrentSearch(e.target.value)
 	};
-	selectTag = tag => {
+	selectTag          = tag => {
 		this.setState({
 			              search: tag.label,
 		              });
@@ -45,12 +44,9 @@ export default class SearchBar extends React.Component {
 	};
 	
 	render() {
-		const {
-			      TagManager,
-		      } = this.props;
-		//console.log('TagManager::render:43: ', TagManager);
+		const { TagManager, style } = this.props;
 		return (<Comps.StretchBox
-				width={"24%"}
+				style={style}
 				className={"searchStretchBox SearchBar"}
 				title={
 					<div className={"SearchBarForm"}>
@@ -79,7 +75,7 @@ export default class SearchBar extends React.Component {
 						width     : '100%',
 						height    : '100%'
 					}}
-					rotate={()=>(~~(Math.random()*3-1)*90)}
+					rotate={() => (~~(Math.random() * 3 - 1) * 90)}
 				>
 					{/*<div style={{ fontSize: 20 }}>react</div>*/}
 					{/*<div style={{color: 'green'}}>tag</div>*/}
@@ -89,8 +85,7 @@ export default class SearchBar extends React.Component {
 							tag =>
 								<div
 									key={tag.label}
-									onClick={(e)=>this.selectTag(tag)}
-									//rotate={tag.count < 8 ? 90 : 0}
+									onClick={( e ) => this.selectTag(tag)}
 									style={{
 										width: '2em !important', fontSize: 2 + (tag.count > 10 ? 10 : tag.count)
 									}}

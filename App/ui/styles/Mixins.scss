@@ -83,6 +83,12 @@
   mask-size: 200% auto;
 }
 
+@mixin withTranspaBoxMask() {
+  mask: url("../assets/images/transpaBoxMask.svg") center center; /* Élément d'un SVG utilisé comme masque répété horizontalement */
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}
+
 @mixin withMask() {
   &:after {
     //@include use_hvCenteredAbs();

@@ -20,12 +20,14 @@
   position: relative;
   touch-action: none;
   //overflow: hidden;
-  margin-left: -50vw;
-  left: 50%;
-  width: 100vw !important;
-  z-index: 150;
   //@include withMaskTop();
 
+  @media screen and (max-width: $tablet-portrait-breakpoint) {
+    margin-left: -50vw;
+    //left: 50%;
+    width: 100vw !important;
+    //z-index: 150;
+  }
   .NavTools {
     @include use_hvCenteredAbs();
     position: absolute;

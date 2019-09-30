@@ -15,10 +15,33 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import {eventsMiniHeight, footerMiniHeight, headerMiniHeight, sliderHeight} from "../vars";
+import {collWidth, eventsMiniHeight, footerMiniHeight, headerMiniHeight, mapHeight, sliderHeight} from "../vars";
 
 export const bounds    = { min: 50, max: 200 };
-export const waypoints = undefined;
+export const waypoints = [
+	{ at: 0, id: "page" },
+	{
+		//direction   : 1,
+		at          : 50,
+		id          : "bighead",
+		stopDuration: 1000
+	},
+	{
+		//direction   : 1,
+		at          : 100,
+		id          : "head",
+		stopDuration: 1000
+	},
+	{
+		//direction: -1,
+		at: 200,
+		id: "events"
+	},
+	{
+		at: 300,
+		id: "map"
+	},
+];
 
 export const page              = {
 	position : "absolute",
@@ -97,7 +120,8 @@ export const Footer            = {
 };
 export const EventsBlock       = {
 	position       : "absolute",
-	right          : "0%",
+	width          : "50%",
+	left           : "50%",
 	bottom         : 0,
 	top            : "100%",
 	zIndex         : 125,
@@ -116,12 +140,24 @@ export const EventsBlock       = {
 };
 export const EventMap          = {
 	position       : "absolute",
-	right          : "0%",
-	height         : "0%",
+	left           : "0%",
+	width          : collWidth,
+	height         : mapHeight,
+	bottom         : "-" + mapHeight,
+	//top            : "100%",
 	zIndex         : 150,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
-	top            : ["100%", -footerMiniHeight],
+	transform      : [
+		{
+			perspective: "500px",
+		},
+		{
+			//translateY: "80%",
+			//translateZ : "-50px",
+			//rotateX   : "-10deg"
+		}
+	]
 };
 export const PageBlock         = {
 	
@@ -211,7 +247,7 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			bottom: ["20%", footerMiniHeight],
+			bottom: [footerMiniHeight],
 			top   : ["-100%", (eventsMiniHeight + headerMiniHeight) + "px", sliderHeight, footerMiniHeight, -20]
 		}
 	},
@@ -220,8 +256,8 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			height: "20%",
-			top   : "-20%"
+			bottom: [footerMiniHeight, "20vw"],
+			//top   : ["-100%", (eventsMiniHeight + headerMiniHeight) + "px", sliderHeight, footerMiniHeight, 180]
 		}
 	},
 	//// EventsBlock to map

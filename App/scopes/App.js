@@ -103,10 +103,11 @@ export default {
 		},
 		selectFocus( selectedFocus, cls ) {
 			let { currentPageFocus } = this.nextState;
-			if ( selectedFocus && currentPageFocus === 'page' )
-				currentPageFocus = "loop";
-			else if ( selectedFocus )
-				currentPageFocus = 'bighead';
+			//if ( selectedFocus && currentPageFocus === 'page' )
+				//currentPageFocus = "loop";
+			//else if ( selectedFocus )
+				//currentPageFocus = "bighead";
+				//this.then(() => this.setState({ currentPageFocus: 'bighead' }));
 			return {
 				currentPageFocus,
 				selectedEventId: null,

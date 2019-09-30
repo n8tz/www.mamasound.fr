@@ -66,7 +66,7 @@ export default class page extends React.Component {
 						top       : ["40%", "3em"],
 						left      : "0%",
 						//opacity   : 0,
-						right     : "40%",
+						width     : "45vw",
 						height    : "4px",
 						//backgroundColor: "white",
 						transform : [{}, {

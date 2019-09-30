@@ -17,8 +17,12 @@
  */
 
 .NavBox {
-  position: relative;
-  margin-top: 20px;
+
+  position: absolute;
+  width: 100%;
+  top: 20px;
+  left: 50%;
+  transform: translate(-50%, 0%);
 
   &:before {
     content: ' ';
@@ -37,16 +41,16 @@
 
   .StretchBox {
     position: relative;
-    background: rgba(255, 255, 255, 0.5);
 
     > .title {
-      background: rgba(0, 0, 0, 0.23);
+      background: rgba(255, 255, 255, 0.34);
       font-family: "Roboto", sans-serif;
       font-weight: bold;
     }
 
     .content {
       @include withTranspaMask();
+      background: rgba(255, 255, 255, 0.5);
       padding: 2px;
 
       .day {
@@ -120,18 +124,11 @@
   .eventTypeNav {
     //@include use_hvCenteredContent();
     position: absolute;
-    width: 70%;
-
-    @media screen and (max-width: $tablet-portrait-breakpoint) {
-
-      width: 76%;
-    }
-    top: 5px;
-    left: 0px;
-    height: 64px;
-    border-radius: 10px;
+    //width: 70%;
+    text-align: right;
 
     .StretchBox {
+      margin-left: 5px;
 
       > .icon {
 

@@ -16,38 +16,39 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export const NavBox = {
-	height   : "120px",
-	left     : "0px",
-	top      : "0px",
-	width    : "100%",
-	position : "absolute",
-	transform: {
-		//translateY: "85%"
-	}
-};
+//export const NavBox = {
+//	height   : "120px",
+//	left     : "0px",
+//	top      : "0px",
+//	width    : "100%",
+//	position : "absolute",
+//	transform: {
+//		//translateY: "85%"
+//	}
+//};
+import {collWidth} from "../../vars";
 
 export const EventCatSliderAxis = {
-	scrollY:[
+	scrollY: [
 		{
 			from    : 100,
 			duration: 100,
 			apply   : {
-				top   : "-85px"
+				top: "-95px"
 			}
 		},
 	]
 };
-export const EventCatSlider = {
+export const EventCatSlider     = {
 	       maxJump        : 1,
 	       visibleItems   : 1,
 	       style          : {
 		       position: "absolute",
 		       right   : "0%",
-		       //left    : "300px",
-		       top     : "150px",
+		       left    : collWidth,
+		       top     : "160px",
 		       bottom  : "0%",
-		       width   : ["100%"],
+		       //width   : "auto",
 		       //overflow: "auto"
 	       },
 	       defaultInitial : {

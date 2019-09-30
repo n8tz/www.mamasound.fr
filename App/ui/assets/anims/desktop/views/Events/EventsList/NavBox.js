@@ -1,5 +1,5 @@
-/*!
- * www.mamasound.fr
+/*
+ *
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -15,15 +15,21 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-@import "Mixins.scss";
-@import "Vars.scss";
-@import "flexboxgrid.scss";
-@import "Page.scss";
-@import "Fonts.scss";
-@import "./components/*.scss";
-//@import "../containers/*.scss";
-@import "../components/**/*.scss";
-@import "../forms/**/*.scss";
-@import "../views/**/*.scss";
-@import "../pages/*.scss";
-@import "../fields/**/*.scss";
+import {collWidth} from "../../../vars";
+
+export const typesNav  = {
+	position : "absolute",
+	width    : ["100%", "-" + collWidth],
+	right    : "0px",
+	top      : "5px",
+	height   : "64px",
+	transform: {
+		//translateY: "85%"
+	}
+};
+export const SearchBar = {
+	position: "absolute",
+	width   : [collWidth, -30],
+	left    : "0px",
+	top     : "5px",
+};

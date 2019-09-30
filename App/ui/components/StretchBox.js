@@ -34,25 +34,18 @@ export default class StretchBox extends React.Component {
 	
 	
 	static getDerivedStateFromProps( props, state ) {
-		let { minHeight, maxHeight, width, defaultPosition } = props;
+		let { minHeight, maxHeight, width, style } = props;
 		return {
 			boxStyle    : {
-				position      : "relative",
-				width         : width,
-				height        : minHeight,
-				borderRadius  : "10px",
-				marginRight   : "5px",
-				overflow      : "hidden",
-				display       : "inline-block",
-				//left          : (defaultPosition.x * 100) + "%",
-				//top           : (defaultPosition.y * 100) + "%",
-				transformStyle: "preserve-3d",
-				transform     : [
-					{
-						//translateX: "-50%",
-						//translateY: "-50%",
-					},
-				]
+				position            : "relative",
+				width               : width,
+				height              : minHeight,
+				borderTopLeftRadius : "10px",
+				borderTopRightRadius: "10px",
+				//marginLeft          : "5px",
+				overflow            : "hidden",
+				display             : "inline-block",
+				...style,
 			},
 			titleStyle  : {
 				position : "absolute",

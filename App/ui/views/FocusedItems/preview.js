@@ -47,8 +47,8 @@ export default (
 			previewImage &&
 			<div className="preview">
 				
-				<Comps.Image src={previewImage} className={"leftGhost"}/>
-				<Comps.Image src={previewImage} className={"rightGhost"}/>
+				{/*<Comps.Image src={previewImage} className={"leftGhost"}/>*/}
+				{/*<Comps.Image src={previewImage} className={"rightGhost"}/>*/}
 				<Comps.Image src={previewImage}/>
 			</div>
 		}

@@ -18,7 +18,7 @@
 
 import {headerMiniHeight, sliderHeight} from "../../../vars";
 
-export const transitionDuration    = 800;
+export const transitionDuration    = 1500;
 export const defaultInitial        = {
 	position       : "absolute",
 	bottom         : "0%",

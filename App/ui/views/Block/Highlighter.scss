@@ -28,6 +28,13 @@
   margin-left: -50vw;
   left: 50%;
   width: 100vw !important;
+
+
+  img {
+    touch-action: none;
+    pointer-events: none;
+  }
+
   //overflow: hidden;
   //tr
   .focusedContent {
@@ -64,13 +71,14 @@
 
       .preview {
         position: relative;
-        width: 100%;
+        left:30%;
+        width: 60%;
         height: 50%;
 
         img {
-
+          @include withTranspaBoxMask();
           position: absolute;
-          top: 0%;
+          top: 10%;
           left: 50%;
           transform: translate(-50%, 0%);
 
@@ -103,22 +111,22 @@
         //transform: translate(-50%, 0%);
       }
 
-      &:after {
-        content: ' ';
-
-        position: absolute;
-        top: calc(30% + 3em);
-        left: 50%;
-        width: 100vw;
-
-        bottom: -5vh;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 27%, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-        transform: translateX(-50%);
-        z-index: 1;
-      }
+      //&:after {
+      //  content: ' ';
+      //
+      //  position: absolute;
+      //  top: calc(30% + 3em);
+      //  left: 50%;
+      //  width: 100vw;
+      //
+      //  bottom: -5vh;
+      //  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 27%, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      //  transform: translateX(-50%);
+      //  z-index: 1;
+      //}
     }
 
-    .Edito,.FocusedItems_page  {
+    .Edito, .FocusedItems_page {
       text-align: left;
       width: 100%;
       height: 100%;
@@ -154,7 +162,8 @@
         .title {
           position: fixed;
           top: 40%;
-          right: calc(40% + 1em);
+          width: 41vw;
+          max-width: 600px;
           left: 1em;
           //padding-left: 1em;
           text-align: left;
@@ -184,7 +193,8 @@
 
           position: absolute;
           top: calc(40% + 3em);
-          right: calc(40% + 1em);
+          width: 40vw;
+          max-width: 600px;
           left: 1em;
           bottom: 5px;
           margin: 5px;
@@ -383,6 +393,7 @@
 
       }
     }
+
     //.FocusedItems_page {
     //  text-align: left;
     //  width: 100%;

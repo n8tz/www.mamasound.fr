@@ -18,6 +18,7 @@
 import moment                             from "moment";
 import React                              from "react";
 import {asStore, scopeToProps, withScope} from "react-scopes";
+import {TweenRef}                         from "react-voodoo";
 import {ContextMenu}                      from "../../App";
 import {Comps, Views}                     from "../index";
 
@@ -41,22 +42,23 @@ import {Comps, Views}                     from "../index";
 		
 	}
 )
-@scopeToProps("appState")
+@scopeToProps("appState", "Styles.views.Events.EventsList.NavBox:Styles")
 export default class NavBox extends React.Component {
 	static propTypes = {};
 	state            = {};
 	
 	render() {
 		let {
-			    record: { position, size } = {},
+			    Styles,
 			    appState,
 			    $actions
 		    }     = this.props,
 		    state = this.state;
+		//debugger
 		return (
 			<div className={"NavBox"}>
 				
-				<div className={"eventTypeNav"}>
+				<TweenRef.div className={"eventTypeNav"} style={Styles.typesNav}>
 					<Comps.StretchBox
 						onClick={e => $actions.setCurStyleTab(0)}
 						title={
@@ -137,7 +139,7 @@ export default class NavBox extends React.Component {
 						}
 					</Comps.StretchBox>
 				
-				</div>
+				</TweenRef.div>
 				{/*<div className={"cDay"}>*/}
 				{/*	Cette semaine :*/}
 				{/*	{*/}
@@ -145,8 +147,10 @@ export default class NavBox extends React.Component {
 				{/*	}*/}
 				{/*</div>*/}
 				
-				<Comps.SearchBar/>
-				
+				<TweenRef style={Styles.SearchBar}>
+					<Comps.SearchBar/>
+				</TweenRef>
+			
 			</div>
 		);
 	}

@@ -143,7 +143,7 @@ const ctrl = {
 					html = "<!doctype html>\n" +
 						renderToString(<Index
 							helmet={Helmet.renderStatic()}
-							css={cfg.css}
+							css={!__IS_DEV__&&cfg.css}
 							state={nstate}
 							content={appHtml}/>);
 					

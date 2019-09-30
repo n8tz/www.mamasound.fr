@@ -210,21 +210,21 @@ export default class EventMap extends React.Component {
 			return <div className={"EventMap"}/>
 		return (
 			<div className={"EventMap"} style={style}>
-				<div className={"NavTools"}>
-					<div className={"container tools"}>
-						<Fab aria-label="edit" className={"newBtn button"}
-						     onClick={$actions.toggleUserGeoLocation}>
-							{
-								UserGeoLocation.activating &&
-								<GpsNoFixedIcon/> ||
-								UserGeoLocation.active &&
-								<GpsFixedIcon/> ||
-								<GpsOffIcon/>
-							}
-						
-						</Fab>
-					</div>
-				</div>
+				{/*<div className={"NavTools"}>*/}
+				{/*	<div className={"container tools"}>*/}
+				{/*		<Fab aria-label="edit" className={"newBtn button"}*/}
+				{/*		     onClick={$actions.toggleUserGeoLocation}>*/}
+				{/*			{*/}
+				{/*				UserGeoLocation.activating &&*/}
+				{/*				<GpsNoFixedIcon/> ||*/}
+				{/*				UserGeoLocation.active &&*/}
+				{/*				<GpsFixedIcon/> ||*/}
+				{/*				<GpsOffIcon/>*/}
+				{/*			}*/}
+				{/*		*/}
+				{/*		</Fab>*/}
+				{/*	</div>*/}
+				{/*</div>*/}
 				<div className={"mapContainer "}>
 					<Map center={center}
 					     zoom={zoom}

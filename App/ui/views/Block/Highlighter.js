@@ -85,11 +85,13 @@ export default class Highlighter extends React.Component {
 		( e, i, slider ) => {
 			let {
 				    MountedItems: { items = [] } = {},
-				    $actions
+				    $actions, $scope
 			    }     = this.props,
 			    state = this.state;
 			$actions.selectFocus(items[i]._id, items[i]._cls);
-			slider.goTo(i);
+			$scope.then(tm => {
+				slider.goTo(i);
+			})
 		};
 	pickNextFocused = rec => {
 		let {
@@ -158,7 +160,9 @@ export default class Highlighter extends React.Component {
 				>
 					<div className={"slider"}>
 						<Comps.Slider
+							key={"mainSlider"}
 							{...Styles.Slider}
+							ignorePropsIndex={true}
 							infinite={true}
 							autoScroll={20 * 1000}
 							onClick={this.selectFocus}
