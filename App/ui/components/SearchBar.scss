@@ -80,7 +80,14 @@
       background: #00b3ff;
     }
   }
-
+.content{
+  .tag{
+    cursor: pointer;
+    &:hover{
+      text-decoration: #00b3ff;
+    }
+  }
+}
   .tagIcon{
     height: 2em;
     width: 2em;

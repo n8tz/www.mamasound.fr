@@ -24,17 +24,24 @@ export default class StretchBox extends React.Component {
 	root = React.createRef();
 	
 	static defaultProps = {
-		color    : "black",
-		width    : "31%",
-		minHeight: "40px",
-		maxHeight: "135px"
+		startPos     : 0,
+		openDuration : 100,
+		closeDuration: 100,
+		color        : "black",
+		width        : "31%",
+		minHeight    : "40px",
+		maxHeight    : "135px"
 	};
 	state               = {};
 	nextTarget          = {};
 	
 	
 	static getDerivedStateFromProps( props, state ) {
-		let { minHeight, maxHeight, width, style } = props;
+		let {
+			    startPos,
+			    openDuration,
+			    closeDuration, minHeight, maxHeight, width, style
+		    } = props;
 		return {
 			boxStyle    : {
 				position            : "relative",
@@ -84,8 +91,8 @@ export default class StretchBox extends React.Component {
 				title  : [],
 				icon   : [
 					{
-						from    : 0,
-						duration: 100,
+						from    : startPos,
+						duration: openDuration,
 						apply   : {
 							opacity: -.5,
 							top    : minHeight,
@@ -95,8 +102,8 @@ export default class StretchBox extends React.Component {
 						}
 					},
 					{
-						from    : 100,
-						duration: 100,
+						from    : startPos + openDuration,
+						duration: closeDuration,
 						apply   : {
 							opacity: .5,
 							top    : "-" + minHeight,
@@ -109,16 +116,16 @@ export default class StretchBox extends React.Component {
 				content: [],
 				root   : [
 					{
-						from    : 0,
-						duration: 100,
+						from    : startPos,
+						duration: openDuration,
 						apply   : {
 							height   : [maxHeight, "-" + minHeight],
 							transform: [, , {}],
 						}
 					},
 					{
-						from    : 100,
-						duration: 100,
+						from    : startPos + openDuration,
+						duration: closeDuration,
 						apply   : {
 							height   : ["-" + maxHeight, minHeight],
 							transform: [, , {}],

@@ -15,12 +15,16 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+import Calendar       from '@lls/react-light-calendar';
 import {Comps, Views} from 'App/ui';
 import moment         from "moment";
 import React          from "react";
 import {scopeToProps} from "react-scopes";
 import {TweenRef}     from "react-voodoo";
 
+if ( typeof window !== "undefined" ) {
+	require('@lls/react-light-calendar/dist/index.css')
+}
 @scopeToProps("appState", "ActiveTags", "Styles.views.Events.EventsList:Styles", "UserGeoLocation")
 export default class EventList extends React.Component {
 	static propTypes = {};
@@ -42,7 +46,7 @@ export default class EventList extends React.Component {
 		    parentPos    = parent.scrollTop,
 		    scrollHeight = parent.scrollHeight;
 		
-		if ( appState.currentPageFocus==="events" && scrollHeight < (parentPos + parentHeight + 500) ) {
+		if ( appState.currentPageFocus === "events" && scrollHeight < (parentPos + parentHeight + 500) ) {
 			
 			console.log("should do more query", appState.viewType);
 			this._running = true;
@@ -101,7 +105,7 @@ export default class EventList extends React.Component {
 	};
 	
 	componentDidMount() {
-		this.isBotListIsInViewport()
+		//this.isBotListIsInViewport()
 		this.watchCurrentDayFromScroll()
 	}
 	
@@ -154,6 +158,12 @@ export default class EventList extends React.Component {
 										.map(
 											( v, type ) =>
 												<div className={"dayList"} key={type}>
+													<div className={"curdatesHeader"}>
+														<Calendar startDate={appState.curDay}
+														          endDate={moment(appState.curDay).add(appState.dayCountByViewType[type], 'day')} onChange={this.onChange}/>
+														{appState.dayCountByViewType+''}
+													</div>
+													
 													{/*<Comps.Slider*/}
 													{/*	{...EventDaySlider}*/}
 													{/*	className={"EventDay"}*/}
@@ -162,16 +172,16 @@ export default class EventList extends React.Component {
 														Array(appState.dayCountByViewType[type])
 															.fill(0)
 															.map(
-																( v, i ) =>
-																	<Views.Events.DayEvents
-																		className={"dayBlock"}
-																		key={i}
-																		day={moment(appState.curDay).add(i, 'day').unix() * 1000}
-																		viewType={type}/>
+																( v, i ) =>moment(appState.curDay).add(i, 'day').toString()
+																	//<Views.Events.DayEvents
+																		//className={"dayBlock"}
+																		//key={i}
+																		//day={moment(appState.curDay).add(i, 'day').toValue()}
+																		//viewType={type}/>
 															)
 													}
 													{/*</Comps.Slider>*/}
-													<div id={"endList_" + type}>loading...</div>
+													{/*<div id={"endList_" + type}>loading...</div>*/}
 												</div>
 										)
 								}

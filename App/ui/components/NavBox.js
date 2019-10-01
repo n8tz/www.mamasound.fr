@@ -148,7 +148,7 @@ export default class NavBox extends React.Component {
 				{/*</div>*/}
 				
 				<TweenRef style={Styles.SearchBar}>
-					<Comps.SearchBar/>
+					<Comps.SearchBar {...Styles.SearchBarProps}/>
 				</TweenRef>
 			
 			</div>

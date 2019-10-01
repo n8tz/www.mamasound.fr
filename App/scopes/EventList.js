@@ -121,7 +121,7 @@ export default {
 							}] || []),
 						]
 					},
-					limit    : 1000,
+					limit    : 10000,
 					orderby  : { startTM: 1 }
 					
 				}

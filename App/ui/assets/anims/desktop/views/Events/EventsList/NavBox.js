@@ -15,9 +15,9 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import {collWidth} from "../../../vars";
+import {collWidth, mapHeight,footerMiniHeight} from "../../../vars";
 
-export const typesNav  = {
+export const typesNav       = {
 	position : "absolute",
 	width    : ["100%", "-" + collWidth],
 	right    : "0px",
@@ -27,9 +27,17 @@ export const typesNav  = {
 		//translateY: "85%"
 	}
 };
-export const SearchBar = {
+export const SearchBar      = {
 	position: "absolute",
-	width   : [collWidth, -30],
+	width   : [collWidth],
 	left    : "0px",
 	top     : "5px",
+};
+export const SearchBarProps = {
+	startPos     : 0,
+	openDuration : 100,
+	closeDuration: 100,
+	minBottom    : footerMiniHeight,
+	maxBottom    : mapHeight,
+	minHeight    : "40px",
 };

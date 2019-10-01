@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1500"
+   height="750"
+   viewBox="0 0 396.87501 198.43749"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="transpaBoxMask.svg">
+  <defs
+     id="defs2">
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter856"
+       x="-0.020065317"
+       width="1.0401306"
+       y="-0.028708942"
+       height="1.0574179">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="2.4466533"
+         id="feGaussianBlur858" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.3833333"
+     inkscape:cx="750"
+     inkscape:cy="423.49398"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="2495"
+     inkscape:window-height="1417"
+     inkscape:window-x="1977"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     units="px" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-98.562507)">
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.81370318;stroke-miterlimit:4;stroke-dasharray:0.8137032, 1.62740638;stroke-dashoffset:0;stroke-opacity:1;filter:url(#filter856)"
+       id="rect815"
+       width="292.64267"
+       height="204.53445"
+       x="2.1786671"
+       y="89.732773"
+       ry="4.2025599"
+       transform="matrix(1.315683,0,0,0.90060078,3.0585756,24.538864)" />
+  </g>
+</svg>

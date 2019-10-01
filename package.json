@@ -25,6 +25,7 @@
     "@babel/polyfill": "^7.4.4",
     "@ckeditor/ckeditor5-build-classic": "^12.1.0",
     "@ckeditor/ckeditor5-react": "^1.1.3",
+    "@lls/react-light-calendar": "^2.0.7",
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
     "@material-ui/styles": "^4.4.3",

@@ -41,7 +41,7 @@ export default {
 		curDay            : undefined,
 		currentSearch     : undefined,
 		viewType          : 0,
-		dayCountByViewType: [3, 1, 3, 0],
+		dayCountByViewType: [6, 6, 6],
 		curTags           : undefined,
 		
 		$apply( data, state ) {
@@ -103,13 +103,13 @@ export default {
 		},
 		selectFocus( selectedFocus, cls ) {
 			let { currentPageFocus } = this.nextState;
-			//if ( selectedFocus && currentPageFocus === 'page' )
-				//currentPageFocus = "loop";
-			//else if ( selectedFocus )
-				//currentPageFocus = "bighead";
-				//this.then(() => this.setState({ currentPageFocus: 'bighead' }));
+			if ( selectedFocus && currentPageFocus === 'page' )
+				currentPageFocus = "loop";
+			else if ( selectedFocus )
+			//currentPageFocus = "bighead";
+				this.then(() => this.setState({ currentPageFocus: 'bighead' }));
 			return {
-				currentPageFocus,
+				//currentPageFocus,
 				selectedEventId: null,
 				doFocus        : !!selectedFocus,
 				selectedFocus  : { id: selectedFocus || "Page.SkxesB7ugG", etty: cls || "Page" }
