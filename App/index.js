@@ -95,7 +95,7 @@ const ctrl = {
 	},
 	renderSSR( cfg, cb, _attempts = 0 ) {
 		try {
-			this.renderNoSSR(...arguments);
+			this.renderFullSSR(...arguments);
 		} catch ( e ) {
 			cb(null, "<!doctype html>\n" +
 				renderToString(<Index

@@ -81,15 +81,15 @@
     height: 100%;
     overflow: hidden;
     background: white;
+    pointer-events: none;
   }
-
   .leaflet-container {
     @include use_hvCenteredAbs();
     height: 100%;
     min-height: 150px;
+    pointer-events: all;
     //width: 100%;
     //min-width: 900px;
-
     @media screen and (max-width: $tablet-portrait-breakpoint) {
       margin: 0 !important;
       padding: 0 !important;

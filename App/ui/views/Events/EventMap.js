@@ -15,10 +15,6 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import Fab                                                     from '@material-ui/core/Fab';
-import GpsFixedIcon                                            from '@material-ui/icons/GpsFixed';
-import GpsNoFixedIcon                                          from '@material-ui/icons/GpsNotFixed';
-import GpsOffIcon                                              from '@material-ui/icons/GpsOff';
 import scopes                                                  from 'App/scopes/(*).js';
 import {Views}                                                 from 'App/ui';
 import React                                                   from "react";
@@ -31,7 +27,7 @@ if ( typeof window !== "undefined" ) {
 	var LeafletCss = require('leaflet/dist/leaflet.css');
 	var Leaflet    = require('leaflet');
 	var {
-		    LayerGroup, Map, Popup, Marker,
+		    LayerGroup, Map, Popup, Marker, GeoJSON,
 		    Rectangle, TileLayer, ZoomControl
 	    }          = require("react-leaflet");
 	
@@ -130,7 +126,7 @@ else {
 		"day:DayEventsQuery.curDay",
 		"viewType:DayEventsQuery.viewType"
 	])
-@scopeToProps("Selected", "Styles", "Events", "UserGeoLocation", "DataProvider")
+@scopeToProps("Selected", "Styles", "Events", "UserGeoLocation", "DataProvider", "Quartiers")
 export default class EventMap extends React.Component {
 	static propTypes = {};
 	state            = {};
@@ -190,7 +186,7 @@ export default class EventMap extends React.Component {
 			    Events,
 			    Events: { center = {}, POIs = [], zoom } = {},
 			    Styles: { HomePage }, UserGeoLocation, Selected,
-			    $actions, DataProvider, style
+			    $actions, DataProvider, Quartiers, style
 		    }           = this.props,
 		    map         = this.refs.map && this.refs.map.leafletElement,
 		    selectedPOI = Selected.Page && Selected.Page.place && DataProvider[Selected.Page.place.objId],
@@ -225,15 +221,16 @@ export default class EventMap extends React.Component {
 				{/*		</Fab>*/}
 				{/*	</div>*/}
 				{/*</div>*/}
-				<div className={"mapContainer "}>
+				<div className={"mapContainer "} onDragStart={e => e.stopPropagation()}
+				     onMouseDown={e => e.stopPropagation()} onMouseMove={e => e.stopPropagation()}>
 					<Map center={center}
 					     zoom={zoom}
 					     className={"container"}
-					     scrollWheelZoom={false}
-					     animate={true}
-					     useFlyTo={true}
-					     ref={"map"}
-					     dragging={false}
+						//scrollWheelZoom={false}
+						 animate={true}
+						 useFlyTo={true}
+						 ref={"map"}
+						//dragging={false}
 					>
 						<TileLayer
 							url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -290,6 +287,28 @@ export default class EventMap extends React.Component {
 								}
 								position={{ lat: UserGeoLocation.pos.latitude, lng: UserGeoLocation.pos.longitude }}/>
 						}
+						<GeoJSON data={Quartiers.data}
+						         onMouseOver={e => {
+							         e.propagatedFrom.setStyle({
+								                                   fillOpacity: .5
+							                                   });
+						         }}
+						         onMouseOut={e => {
+							         e.propagatedFrom.setStyle({
+								                                   fillOpacity: 0
+							                                   });
+						         }}
+						         onClick={e => {
+							         $actions.setCurrentArea(e.propagatedFrom.feature.properties.LIBSQUART)
+						         }}
+						         style={{
+							         fillColor  : "white",
+							         weight     : 2,
+							         opacity    : .5,
+							         color      : 'black',
+							         dashArray  : '3',
+							         fillOpacity: 0
+						         }}/>
 					</Map>
 					
 					{/*<TweenRef id={ "EventMap_Gradient" } initial={ HomePage.EventMap_Gradient }>*/}

@@ -204,6 +204,9 @@ export default class SearchBar extends React.Component {
 			                endDate={moment(appState.curDay).add(appState.dayCountByViewType[0], 'day')}
 			                onChange={this.onChange}/>
 			<div className={"cityArea"}>
+				<span
+					className={"area " + (!appState.currentArea ? "selected" : "")}
+					onClick={e => $actions.setCurrentArea()}>Tout Montpellier</span>
 				{
 					Quartiers.liste.map(name => <span
 						className={"area " + (appState.currentArea === name ? "selected" : "")}
