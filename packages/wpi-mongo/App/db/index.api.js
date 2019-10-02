@@ -168,7 +168,8 @@ export function query( req ) {
 						    done(null, r || 0);
 					    }),
 					
-					    parse = function ( err, items ) {
+					    parse = function ( err, items = [] ) {
+						    err && console.warn (err);
 						    items.forEach(
 							    item => {
 								    items._cls = items._cls || etty;

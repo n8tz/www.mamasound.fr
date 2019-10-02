@@ -172,12 +172,12 @@ export default class EventList extends React.Component {
 														Array(appState.dayCountByViewType[type])
 															.fill(0)
 															.map(
-																( v, i ) =>moment(appState.curDay).add(i, 'day').toString()
-																	//<Views.Events.DayEvents
-																		//className={"dayBlock"}
-																		//key={i}
-																		//day={moment(appState.curDay).add(i, 'day').toValue()}
-																		//viewType={type}/>
+																( v, i ) =>
+																	<Views.Events.DayEvents
+																		className={"dayBlock"}
+																		key={i}
+																		day={moment(appState.curDay).add(i, 'day').valueOf()}
+																		viewType={type}/>
 															)
 													}
 													{/*</Comps.Slider>*/}
