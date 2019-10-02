@@ -29,6 +29,18 @@
 }
 
 .SearchBar {
+  .cityArea {
+    .area {
+      display: inline-block;
+      margin: 5px;
+      white-space: nowrap;
+      cursor: pointer;
+      &.selected{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+    }
+  }
 
   .SearchBarForm {
     touch-action: none;
@@ -80,15 +92,18 @@
       background: #00b3ff;
     }
   }
-.content{
-  .tag{
-    cursor: pointer;
-    &:hover{
-      text-decoration: #00b3ff;
+
+  .content {
+    .tag {
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: #00b3ff;
+      }
     }
   }
-}
-  .tagIcon{
+
+  .tagIcon {
     height: 2em;
     width: 2em;
   }

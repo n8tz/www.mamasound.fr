@@ -16,11 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import console from 'App/console';
-import stores  from 'App/stores/(*).js';
-import moment  from "moment";
+import stores from 'App/stores/(*).js';
+import moment from "moment";
 
 import {asRef, asStore, withStateMap} from "react-scopes";
+import whichPoly                      from "which-polygon";
 
 
 export default {
@@ -138,33 +138,63 @@ export default {
 	)
 	Queries: stores.MongoQueries,
 	
+	
 	@asStore
 	EventList: {
 		@asRef
-		items : "!Queries.events.items",
+		items      : "!Queries.events.items",
 		@asRef
-		refs  : "Queries.events.refs",
+		geoJson    : "Quartiers.data",
 		@asRef
-		filter: "appState.currentSearch",
-		$apply( data, { items, filter, refs } ) {
-			//debugger
-			let filterRE = filter && new RegExp(filter.replace(/[^\w]+/ig, '.+'), 'ig');
+		refs       : "Queries.events.refs",
+		@asRef
+		filter     : "appState.currentSearch",
+		@asRef
+		currentArea: "appState.currentArea",
+		$apply( data, { items, filter, refs, geoJson, currentArea } ) {
+			
+			let filterRE = filter && new RegExp(filter.replace(/[^\w]+/ig, '.+'), 'ig'),
+			    geoQuery = this.geoQuery = this.geoQuery || whichPoly(geoJson),
+			    newItems = filter ?
+			               items.filter(
+				               item => {
+					               let str = item.title;
+					               if ( item.text )
+						               str += " " + item.text;
+					               if ( item.category && refs[item.category.objId] )
+						               str += " " + refs[item.category.objId].name;
+					
+					
+					               return filterRE.test(str);
+				               }
+			               )
+			                      :
+			               items;
+			
+			newItems.forEach(
+				item => {
+					let place, ll, area;
+					if ( item.place && refs[item.place.objId] && !refs[item.place.objId].quartier ) {
+						place          = refs[item.place.objId];
+						ll             = place.address && place.address.geoPoint;
+						area           = ll && geoQuery(ll)
+						place.quartier = area && area.LIBSQUART || "Peripherie";
+					}
+				}
+			)
+			if ( currentArea ) {
+				newItems = newItems
+					.filter(
+						item => {
+							let place, ll, area;
+							if ( item.place && refs[item.place.objId] ) {
+								place = refs[item.place.objId];
+							}
+							return place.quartier === currentArea
+						})
+			}
 			return {
-				items: filter ?
-				       items.filter(
-					       item => {
-					       	let str = item.title;
-					       	if (item.text)
-					       		str+=" "+item.text;
-					       	if (item.category && refs[item.category.objId])
-					       		str+=" "+refs[item.category.objId].name;
-						        
-						        
-						       return filterRE.test(str);
-					       }
-				       )
-				              :
-				       items,
+				items: newItems,
 				refs,
 				filter
 			}
@@ -206,8 +236,8 @@ export default {
 					style: styles[tag] || {},
 					count: seen[tag]
 				}));
-			this.$scope.mount("TagManager");
-			tags.length && this.$actions.registerTags(tags);
+			//this.$scope.mount("TagManager");
+			//tags.length && this.$actions.registerTags(tags);
 			//console.log(tags, seen)
 			return {
 				available: Object

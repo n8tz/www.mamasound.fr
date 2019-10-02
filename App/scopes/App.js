@@ -25,8 +25,8 @@ import shortid                        from "shortid";
 export default {
 	...$super,
 	Styles         : stores.Styles,
-	//location       : stores.location,
 	UserGeoLocation: stores.UserGeoLocation,
+	Quartiers      : stores.Quartiers,
 	
 	@asStore
 	appState: {
@@ -40,6 +40,7 @@ export default {
 		selectedEventDT   : undefined,
 		curDay            : undefined,
 		currentSearch     : undefined,
+		currentArea       : undefined,
 		viewType          : 0,
 		dayCountByViewType: [6, 6, 6],
 		curTags           : undefined,
@@ -53,6 +54,9 @@ export default {
 		
 		updateCurrentSearch( currentSearch ) {
 			return { currentSearch };
+		},
+		setCurrentArea( currentArea ) {
+			return { currentArea };
 		},
 		setCurStyleTab( viewType ) {
 			return { viewType };

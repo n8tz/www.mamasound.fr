@@ -15,16 +15,11 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import Calendar       from '@lls/react-light-calendar';
 import {Comps, Views} from 'App/ui';
 import moment         from "moment";
 import React          from "react";
 import {scopeToProps} from "react-scopes";
 import {TweenRef}     from "react-voodoo";
-
-if ( typeof window !== "undefined" ) {
-	require('@lls/react-light-calendar/dist/index.css')
-}
 @scopeToProps("appState", "ActiveTags", "Styles.views.Events.EventsList:Styles", "UserGeoLocation")
 export default class EventList extends React.Component {
 	static propTypes = {};
@@ -158,12 +153,6 @@ export default class EventList extends React.Component {
 										.map(
 											( v, type ) =>
 												<div className={"dayList"} key={type}>
-													<div className={"curdatesHeader"}>
-														<Calendar startDate={appState.curDay}
-														          endDate={moment(appState.curDay).add(appState.dayCountByViewType[type], 'day')} onChange={this.onChange}/>
-														{appState.dayCountByViewType+''}
-													</div>
-													
 													{/*<Comps.Slider*/}
 													{/*	{...EventDaySlider}*/}
 													{/*	className={"EventDay"}*/}

@@ -17,12 +17,14 @@
  */
 import Fab        from '@material-ui/core/Fab';
 import TextField  from '@material-ui/core/TextField';
+import moment     from "moment";
 import React      from "react";
 import RS         from "react-scopes";
 import TagCloud   from 'react-tag-cloud';
 import {TweenRef} from "react-voodoo";
+import {Comps}    from "../index";
 
-@RS.toProps("TagManager")
+@RS.toProps("TagManager", "appState", "Quartiers")
 export default class SearchBar extends React.Component {
 	static propTypes    = {};
 	static defaultProps = {
@@ -195,38 +197,51 @@ export default class SearchBar extends React.Component {
 	}
 	
 	renderContent() {
-		const { TagManager, strechProps, style } = this.props;
-		return <TagCloud
-			style={{
-				fontFamily: 'sans-serif',
-				fontSize  : 10,
-				fontWeight: 'bold',
-				fontStyle : 'italic',
-				//color     : () => randomColor(),
-				padding   : 1,
-				width     : '100%',
-				height    : '100%'
-			}}
-			rotate={() => (~~(Math.random() * 3 - 1) * 90)}
-		>
-			{/*<div style={{ fontSize: 20 }}>react</div>*/}
-			{/*<div style={{color: 'green'}}>tag</div>*/}
-			{/*<div rotate={90}>cloud</div>*/}
-			{
-				TagManager && TagManager.available.map(
-					tag =>
-						<div
-							key={tag.label}
-							className={"tag"}
-							onClick={( e ) => this.selectTag(tag)}
-							style={{
-								width: '2em !important', fontSize: 2 + (tag.count > 10 ? 10 : tag.count)
-							}}
-						>
-							{/*<img alt={tag.title} src={tag.style.icon} className={"tagIcon"}/>*/}
-							{tag.label}
-						</div>)
-			}
-		</TagCloud>
+		const { TagManager, appState, Quartiers, $actions } = this.props;
+		return <>
+			
+			<Comps.Calendar startDate={appState.curDay}
+			                endDate={moment(appState.curDay).add(appState.dayCountByViewType[0], 'day')}
+			                onChange={this.onChange}/>
+			<div className={"cityArea"}>
+				{
+					Quartiers.liste.map(name => <span
+						className={"area " + (appState.currentArea === name ? "selected" : "")}
+						onClick={e => $actions.setCurrentArea(name)}>{name}</span>)
+				}
+			</div>
+			<TagCloud
+				style={{
+					fontFamily: 'sans-serif',
+					fontSize  : 10,
+					fontWeight: 'bold',
+					fontStyle : 'italic',
+					//color     : () => randomColor(),
+					padding   : 1,
+					width     : '100%',
+					height    : '100%'
+				}}
+				rotate={() => (~~(Math.random() * 3 - 1) * 90)}
+			>
+				{/*<div style={{ fontSize: 20 }}>react</div>*/}
+				{/*<div style={{color: 'green'}}>tag</div>*/}
+				{/*<div rotate={90}>cloud</div>*/}
+				{
+					TagManager && TagManager.available.map(
+						tag =>
+							<div
+								key={tag.label}
+								className={"tag"}
+								onClick={( e ) => this.selectTag(tag)}
+								style={{
+									width: '2em !important', fontSize: 2 + (tag.count > 10 ? 10 : tag.count)
+								}}
+							>
+								{/*<img alt={tag.title} src={tag.style.icon} className={"tagIcon"}/>*/}
+								{tag.label}
+							</div>)
+				}
+			</TagCloud>
+		</>
 	}
 };

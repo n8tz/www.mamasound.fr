@@ -119,6 +119,7 @@
     "uniforms-material": "^1.31.1",
     "url-loader": "^1.1.2",
     "webp-converter": "^2.2.3",
+    "which-polygon": "^2.2.0",
     "xlsx": "^0.14.3",
     "xxhashjs": "^0.2.2"
   },

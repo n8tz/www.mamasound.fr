@@ -95,7 +95,7 @@ const ctrl = {
 	},
 	renderSSR( cfg, cb, _attempts = 0 ) {
 		try {
-			this.renderFullSSR(...arguments);
+			this.renderNoSSR(...arguments);
 		} catch ( e ) {
 			cb(null, "<!doctype html>\n" +
 				renderToString(<Index
@@ -143,7 +143,7 @@ const ctrl = {
 					html = "<!doctype html>\n" +
 						renderToString(<Index
 							helmet={Helmet.renderStatic()}
-							css={!__IS_DEV__&&cfg.css}
+							css={!__IS_DEV__ && cfg.css}
 							state={nstate}
 							content={appHtml}/>);
 					

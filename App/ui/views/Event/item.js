@@ -68,7 +68,7 @@ export default ( { record, refs, selected, onClick, onTap } ) =>
 		{
 			record.place && refs[record.place.objId] &&
 			<div className="place">
-				( <span>{refs[record.place.objId].label}</span> )
+				( <span>{refs[record.place.objId].label} {" - " + refs[record.place.objId].quartier}</span> )
 			</div>
 		}
 		{selected && <Comps.ShareBox event={record} place={record.place && refs[record.place.objId]}/>}
