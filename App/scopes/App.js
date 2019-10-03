@@ -42,7 +42,7 @@ export default {
 		currentSearch     : undefined,
 		currentArea       : undefined,
 		viewType          : 0,
-		dayCountByViewType: [6, 6, 6],
+		dayCountByViewType: [6, 0, 0],
 		curTags           : undefined,
 		
 		$apply( data, state ) {
@@ -154,23 +154,25 @@ export default {
 		available   : {},
 		
 		// actions
-		$apply( data, state ) {
+		$apply( data, state, { selectedTags, available } ) {
 			//debugger
 			//console.log('TagManager::$apply:154: ', state.available);
 			return {
 				...state,
-				available: Object.keys(state.available).map(tag => state.available[tag]),
-				selected : Object.keys(state.selectedTags)
+				available: available
+				           ? Object.keys(state.available).map(tag => state.available[tag])
+				           : data.available || state.available,
+				selected : selectedTags
+				           ? Object.keys(state.selectedTags).map(tag => state.available[tag])
+				           : data.selected || state.selected
 			}
 		},
-		selectTag( tag ) {
-			return {
-				selectedTags: {
-					...this.nextState.selected,
-					[tag]: true
-				}
-			}
-		},
+		selectTag: ( tag ) => state => ({
+			selectedTags: {
+				...state.selectedTags,
+				[tag]: state.available[tag]
+			},
+		}),
 		unSelectTag( tag ) {
 			let selectedTags = {
 				...this.nextState.selectedTags
@@ -186,8 +188,24 @@ export default {
 				available: tags.reduce(
 					( h, tag ) => {
 						if ( h[tag.label] )
-							h[tag.label].count++;
+							h[tag.label].count += tag.count;
 						else h[tag.label] = tag;
+						return h;
+					},
+					{
+						...available
+					}
+				)
+			})
+		},
+		unRegisterTags( tags ) {
+			//debugger
+			return ( { available } ) => ({
+				available: tags.reduce(
+					( h, tag ) => {
+						if ( h[tag.label] )
+							h[tag.label].count -= tag.count;
+						
 						return h;
 					},
 					{

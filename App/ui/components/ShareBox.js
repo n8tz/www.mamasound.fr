@@ -53,7 +53,7 @@ export default (
 		<AddToCalendar event={ {
 			title      : event.title,
 			description: event.title,
-			location   : place.label + ',' + (place.address && place.address.address || "Montpellier"),
+			location   : place && (place.label + ',' + (place.address && place.address.address || "Montpellier")) ||"Vers Montpellier",
 			startTime  : moment(event.startTM),
 			endTime    : moment(event.startTM).add(1, 'hour')
 		} }/>

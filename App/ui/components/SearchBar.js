@@ -20,7 +20,6 @@ import TextField  from '@material-ui/core/TextField';
 import moment     from "moment";
 import React      from "react";
 import RS         from "react-scopes";
-import TagCloud   from 'react-tag-cloud';
 import {TweenRef} from "react-voodoo";
 import {Comps}    from "../index";
 
@@ -48,11 +47,17 @@ export default class SearchBar extends React.Component {
 		this.props.$actions.updateCurrentSearch(e.target.value)
 	};
 	selectTag          = tag => {
-		this.setState({
-			              search: tag.label,
-		              });
-		this.props.$actions.updateCurrentSearch(tag.label)
-		this.props.$actions.setPageFocus("events", true)
+		this.props.$actions.selectTag(tag.label)
+		//if ( tag.type === "style" ) {
+		//	this.setState({
+		//		              search: tag.label,
+		//	              });
+		//	this.props.$actions.updateCurrentSearch(tag.label)
+		//this.props.$actions.setPageFocus("events", true)
+		//}
+		//else {
+		//	this.props.$actions.setCurrentArea(tag.label)
+		//}
 	};
 	
 	
@@ -203,48 +208,96 @@ export default class SearchBar extends React.Component {
 			<Comps.Calendar startDate={appState.curDay}
 			                endDate={moment(appState.curDay).add(appState.dayCountByViewType[0], 'day')}
 			                onChange={this.onChange}/>
-			<div className={"cityArea"}>
-				<span
-					className={"area " + (!appState.currentArea ? "selected" : "")}
-					onClick={e => $actions.setCurrentArea()}>Tout Montpellier</span>
+			<div className={"selectedTags"}>
 				{
-					Quartiers.liste.map(name => <span
-						className={"area " + (appState.currentArea === name ? "selected" : "")}
-						onClick={e => $actions.setCurrentArea(name)}>{name}</span>)
-				}
-			</div>
-			<TagCloud
-				style={{
-					fontFamily: 'sans-serif',
-					fontSize  : 10,
-					fontWeight: 'bold',
-					fontStyle : 'italic',
-					//color     : () => randomColor(),
-					padding   : 1,
-					width     : '100%',
-					height    : '100%'
-				}}
-				rotate={() => (~~(Math.random() * 3 - 1) * 90)}
-			>
-				{/*<div style={{ fontSize: 20 }}>react</div>*/}
-				{/*<div style={{color: 'green'}}>tag</div>*/}
-				{/*<div rotate={90}>cloud</div>*/}
-				{
-					TagManager && TagManager.available.map(
+					TagManager && TagManager.selected.map(
 						tag =>
-							<div
+							<span
 								key={tag.label}
 								className={"tag"}
-								onClick={( e ) => this.selectTag(tag)}
+								onClick={( e ) => $actions.unSelectTag(tag.label)}
 								style={{
-									width: '2em !important', fontSize: 2 + (tag.count > 10 ? 10 : tag.count)
+									fontSize: 14
 								}}
 							>
 								{/*<img alt={tag.title} src={tag.style.icon} className={"tagIcon"}/>*/}
 								{tag.label}
-							</div>)
+								({tag.count})
+							</span>)
 				}
-			</TagCloud>
+			</div>
+			<div className={"label"}>Prix</div>
+			<div className={"priceTags"}>
+				<span
+					className={"area " + (!appState.currentArea ? "selected" : "")}
+					onClick={e => $actions.setCurrentArea()}>Tout les prix</span>
+				{
+					TagManager && TagManager.available
+					                        .filter(tag => !TagManager.selected.includes(tag))
+					                        .filter(tag => (tag.type === "price"))
+					                        .map(
+						                        tag =>
+							                        <span
+								                        key={tag.label}
+								                        className={"tag"}
+								                        onClick={( e ) => this.selectTag(tag)}
+								                        style={{
+									                        fontSize: 14
+								                        }}
+							                        >
+								{/*<img alt={tag.title} src={tag.style.icon} className={"tagIcon"}/>*/}
+								                        {tag.label}
+								                        ({tag.count})
+							</span>)
+				}
+			</div>
+			<div className={"label"}>Quartiers</div>
+			<div className={"areaTags"}>
+				<span
+					className={"area " + (!appState.currentArea ? "selected" : "")}
+					onClick={e => $actions.setCurrentArea()}>Tout Montpellier</span>
+				{
+					TagManager && TagManager.available
+					                        .filter(tag => !TagManager.selected.includes(tag))
+					                        .filter(tag => (tag.type === "area"))
+					                        .map(
+						                        tag =>
+							                        <span
+								                        key={tag.label}
+								                        className={"tag"}
+								                        onClick={( e ) => this.selectTag(tag)}
+								                        style={{
+									                        fontSize: 14
+								                        }}
+							                        >
+								{/*<img alt={tag.title} src={tag.style.icon} className={"tagIcon"}/>*/}
+								                        {tag.label}
+								                        ({tag.count})
+							</span>)
+				}
+			</div>
+			<div className={"label"}>Styles</div>
+			<div className={"styleTags"}>
+				{
+					TagManager && TagManager.available
+					                        .filter(tag => !TagManager.selected.includes(tag))
+					                        .filter(tag => (tag.type === "style"))
+					                        .map(
+						                        tag =>
+							                        <span
+								                        key={tag.label}
+								                        className={"tag"}
+								                        onClick={( e ) => this.selectTag(tag)}
+								                        style={{
+									                        fontSize: 14
+								                        }}
+							                        >
+								{/*<img alt={tag.title} src={tag.style.icon} className={"tagIcon"}/>*/}
+								                        {tag.label}
+								                        ({tag.count})
+							</span>)
+				}
+			</div>
 		</>
 	}
 };

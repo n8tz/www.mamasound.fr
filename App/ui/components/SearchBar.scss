@@ -29,10 +29,27 @@
 }
 
 .SearchBar {
-  .cityArea {
-    .area {
+  .label{
+    display: block;
+  }
+  .areaTags,.styleTags,.priceTags {
+    .tag {
       display: inline-block;
-      margin: 5px;
+      margin-left: 5px;
+      margin-right: 5px;
+      white-space: nowrap;
+      cursor: pointer;
+      &.selected{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+    }
+  }
+  .stylesTags {
+    .tag {
+      display: inline-block;
+      margin-left: 5px;
+      margin-right: 5px;
       white-space: nowrap;
       cursor: pointer;
       &.selected{
