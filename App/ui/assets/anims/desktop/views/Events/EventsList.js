@@ -60,10 +60,10 @@ export const EventCatSlider     = {
 		       width    : "100%",
 		       height   : "100%",
 		       zIndex   : 50,
-		       //opacity  : 0,
+		       opacity  : 0,
 		       transform: [
 			       {
-				       translateX: "100%",
+				       translateX: "200px",
 				       //translateY: "-50%"
 			       }]
 	       },
@@ -73,8 +73,9 @@ export const EventCatSlider     = {
 			       duration: 100,
 			       //easeFn  : "easeSinIn",
 			       apply   : {
+				       opacity  : 1,
 				       transform: {
-					       translateX: "-100%",
+					       translateX: "-200px",
 				       },
 				       zIndex   : 150,
 			       }
@@ -86,8 +87,9 @@ export const EventCatSlider     = {
 			       duration: 100,
 			       //easeFn  : "easeSinOut",
 			       apply   : {
+				       opacity  : -1,
 				       transform: {
-					       translateX: "-100%",
+					       translateX: "-200px",
 				       },
 				       zIndex   : -150,
 			       }

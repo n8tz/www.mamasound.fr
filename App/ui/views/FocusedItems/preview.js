@@ -41,7 +41,7 @@ export default (
 	}
 ) => {
 	//debugger;
-	return <div className={"Page FocusedItems_preview type_" + target._cls+" "+className} style={style}>
+	return <div className={"Page FocusedItems_preview type_" + target._cls + " " + className} style={style}>
 		<Editable id={record._id}/>
 		{
 			previewImage &&

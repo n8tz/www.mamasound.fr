@@ -229,7 +229,7 @@ export default class SearchBar extends React.Component {
 			<div className={"label"}>Prix</div>
 			<div className={"priceTags"}>
 				<span
-					className={"area " + (!appState.currentArea ? "selected" : "")}
+					className={"tag " + (!appState.currentArea ? "selected" : "")}
 					onClick={e => $actions.setCurrentArea()}>Tout les prix</span>
 				{
 					TagManager && TagManager.available
@@ -254,7 +254,7 @@ export default class SearchBar extends React.Component {
 			<div className={"label"}>Quartiers</div>
 			<div className={"areaTags"}>
 				<span
-					className={"area " + (!appState.currentArea ? "selected" : "")}
+					className={"tag " + (!appState.currentArea ? "selected" : "")}
 					onClick={e => $actions.setCurrentArea()}>Tout Montpellier</span>
 				{
 					TagManager && TagManager.available

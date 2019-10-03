@@ -40,6 +40,7 @@ export default {
 			    }    = state,
 			    from = moment(curDay).startOf('day').add(2, 'hour').unix() * 1000,
 			    to   = moment(curDay).endOf('day').add(2, 'hour').unix() * 1000;
+			//console.log(state)
 			return {
 				query: {
 					mountKeys: ["place", "category"],

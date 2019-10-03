@@ -1,5 +1,5 @@
 /*
- * www.mamasound.fr
+ *
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -15,21 +15,29 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+import {collWidth, mapHeight,footerMiniHeight} from "../../../vars";
 
-/**
- * @author Nathanael BRAUN
- *
- * Date: 08/12/2015
- * Time: 11:50
- */
-'use strict';
-
-import {Views} from "App/ui";
-import React   from "react";
-
-export default class page extends React.Component {
-	render() {
-		let Renderer = Views.FocusedItems.bigSlide["article"];
-		return <Renderer className={"FocusedItems_page"} {...this.props}/>
+export const typesNav       = {
+	position : "absolute",
+	width    : ["100%", "-" + collWidth],
+	right    : "0px",
+	top      : "5px",
+	height   : "64px",
+	transform: {
+		//translateY: "85%"
 	}
-}
+};
+export const SearchBar      = {
+	position: "absolute",
+	width   : [collWidth],
+	left    : "0px",
+	top     : "5px",
+};
+export const SearchBarProps = {
+	startPos     : 0,
+	openDuration : 100,
+	closeDuration: 100,
+	minBottom    : footerMiniHeight,
+	maxBottom    : mapHeight,
+	minHeight    : "40px",
+};

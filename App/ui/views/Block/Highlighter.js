@@ -114,26 +114,26 @@ export default class Highlighter extends React.Component {
 				{children}
 				<div className={"headBackground"}>
 					<div className={"maskContent"}>
-						<TweenRef
-							initial={Styles.background}
-							tweenLines={Styles.backgroundScroll}
-						>
-							<div className={"container back"}>
-								{/*{*/}
-								{/*	//appState.currentPageFocus === "head"*/}
-								{/*	//&&*/}
-								{/*	//<BackgroundVideo src="/test.mp4"*/}
-								{/*	//                 style={ { width: '100%', height: '100%', filter: "blur(5px)" } }*/}
-								{/*	//                 startTime={ 20 }*/}
-								{/*	//                 autoPlay={ true }*/}
-								{/*	//                 volume={ 0 }/>*/}
-								{/*	//||*/}
-								<img src={HighlighterBackground} className={"leftGhost"}/>
-								<img src={HighlighterBackground} className={"rightGhost"}/>
-								<img src={HighlighterBackground}/>
-								{/*}*/}
-							</div>
-						</TweenRef>
+						{/*<TweenRef*/}
+						{/*	//initial={Styles.background}*/}
+						{/*	//tweenLines={Styles.backgroundScroll}*/}
+						{/*>*/}
+						{/*<div className={"container back"}>*/}
+						{/*{*/}
+						{/*	//appState.currentPageFocus === "head"*/}
+						{/*	//&&*/}
+						{/*	//<BackgroundVideo src="/test.mp4"*/}
+						{/*	//                 style={ { width: '100%', height: '100%', filter: "blur(5px)" } }*/}
+						{/*	//                 startTime={ 20 }*/}
+						{/*	//                 autoPlay={ true }*/}
+						{/*	//                 volume={ 0 }/>*/}
+						{/*		/!*	//||*!/*/}
+						{/*		<img src={HighlighterBackground} className={"leftGhost"}/>*/}
+						{/*		<img src={HighlighterBackground} className={"rightGhost"}/>*/}
+						{/*		<img src={HighlighterBackground}/>*/}
+						{/*		/!*}*!/*/}
+						{/*	</div>*/}
+						{/*</TweenRef>*/}
 						<TweenRef
 							initial={Styles.focused}
 							tweenLines={Styles.focusedScroll}>

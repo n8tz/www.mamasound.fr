@@ -23,6 +23,7 @@
   z-index: 100;
   padding: 0 !important;
   margin-left: -50vw;
+  //padding: 1em;
   left: 50%;
   width: 100vw !important;
   user-select: none;
@@ -47,7 +48,7 @@
 
   .EventCatSlider {
     overflow: hidden;
-    background-color: rgba(255, 255, 255, 0.34);
+    background: rgba(255, 255, 255, 0.5);
     z-index: 1;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;

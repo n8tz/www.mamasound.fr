@@ -21,9 +21,11 @@
   position: absolute;
   width: 100%;
   top: 20px;
-  left: 50%;
-  transform: translate(-50%, 0%);
+  left: 0em;
+  //right: .5em;
+  //transform: translate(-50%, 0%);
   bottom: 0;
+
   &:before {
     content: ' ';
     position: absolute;
@@ -46,6 +48,19 @@
       background: rgba(255, 255, 255, 0.34);
       font-family: "Roboto", sans-serif;
       font-weight: bold;
+      cursor: pointer;
+      color: #2e2e2e;
+      &:hover {
+        background: rgba(255, 255, 255, 0.5);
+      }
+    }
+
+    &.selected {
+
+      > .title {
+        color: black;
+        background: rgba(255, 255, 255, 0.5);
+      }
     }
 
     .content {

@@ -49,7 +49,7 @@ export default class DayEvents extends React.Component {
 	render() {
 		let {
 			    EventList, appState, day, Styles, ViewItem = Views.Event.item,
-			    $actions, onSelect
+			    $actions, viewType
 		    }     = this.props,
 		    state = this.state,
 		    selected;
@@ -58,9 +58,12 @@ export default class DayEvents extends React.Component {
 				className={"DayEvents"}
 				data-dt={moment(day).valueOf()}
 			>
-				<div className={"day"}>
-					<Views.SimpleDay day={day}/>
-				</div>
+				{
+					EventList && EventList.items && EventList.items.length
+					&& <div className={"day"}>
+						<Views.SimpleDay day={day}/>
+					</div> || ''
+				}
 				{/*<Comps.SlidableList {...Styles.EventsSlider}>*/}
 				{
 					EventList && EventList.items && EventList.items.map(
@@ -73,7 +76,7 @@ export default class DayEvents extends React.Component {
 								record={item}
 								refs={EventList.refs || {}}/>;
 						}
-					)
+					) || ''
 				}
 				{/*</Comps.SlidableList>*/}
 			</div>

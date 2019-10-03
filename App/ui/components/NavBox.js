@@ -57,88 +57,36 @@ export default class NavBox extends React.Component {
 		//debugger
 		return (
 			<div className={"NavBox"}>
-				
 				<TweenRef.div className={"eventTypeNav"} style={Styles.typesNav}>
-					<Comps.StretchBox
-						onClick={e => $actions.setCurStyleTab(0)}
-						title={
-							<>
-								Evenements
-							</>
-						}
-						icon={
-							<img src={require("App/ui/assets/images/jip/btn-event-on.png")}
-							     className={"typeIcon"}/>
-						}>
-						{
-							Array(appState.dayCountByViewType[0])
-								.fill(0)
-								.map(
-									( v, i ) =>
-										<Views.Events.DayEvents
-											className={"dayBlock"}
-											ViewItem={Views.Event.headerItem}
-											key={i}
-											day={moment(appState.curDay).add(i, 'day').unix() * 1000}
-											viewType={0}/>
-								)
-						}
-					</Comps.StretchBox>
-					<Comps.StretchBox
-						onClick={e => $actions.setCurStyleTab(1)}
-						title={
-							<>
-								Expos
-							</>
-						}
-						
-						icon={
-							<img src={require("App/ui/assets/images/jip/expo-gif.gif")} className={"typeIcon"}
-							/>
-						}
-					>
-						
-						{
-							Array(appState.dayCountByViewType[1])
-								.fill(0)
-								.map(
-									( v, i ) =>
-										<Views.Events.DayEvents
-											className={"dayBlock"}
-											ViewItem={Views.Event.headerItem}
-											key={i}
-											day={moment(appState.curDay).add(i, 'day').unix() * 1000}
-											viewType={2}/>
-								)
-						}
-					</Comps.StretchBox>
-					<Comps.StretchBox
-						onClick={e => $actions.setCurStyleTab(2)}
-						title={
-							<>
-								Theatre
-							</>
-						}
-						
-						icon={
-							<img src={require("App/ui/assets/images/jip/theatre-gif.gif")} className={"typeIcon"}
-							/>
-						}>
-						{
-							Array(appState.dayCountByViewType[3])
-								.fill(0)
-								.map(
-									( v, i ) =>
-										<Views.Events.DayEvents
-											className={"dayBlock"}
-											ViewItem={Views.Event.headerItem}
-											key={i}
-											day={moment(appState.curDay).add(i, 'day').unix() * 1000}
-											viewType={2}/>
-								)
-						}
-					</Comps.StretchBox>
-				
+					{
+						[
+							{ title: "Evenements", icon: require("App/ui/assets/images/jip/btn-event-on.png") },
+							{ title: "Expos", icon: require("App/ui/assets/images/jip/expo-gif.gif") },
+							{ title: "Theatre", icon: require("App/ui/assets/images/jip/theatre-gif.gif") },
+						].map(
+							( { title, icon }, i ) =>
+								<Comps.StretchBox
+									className={appState.viewType === i ? "selected" : ""}
+									onClick={e => $actions.setCurStyleTab(i)}
+									title={title}
+									key={i}
+									icon={<img src={icon} className={"typeIcon"}/>}>
+									{
+										Array(appState.dayCountByViewType[i])
+											.fill(0)
+											.map(
+												( v, i2 ) =>
+													<Views.Events.DayEvents
+														className={"dayBlock"}
+														ViewItem={Views.Event.headerItem}
+														key={i2}
+														day={moment(appState.curDay).add(i2, 'day').unix() * 1000}
+														viewType={i}/>
+											)
+									}
+								</Comps.StretchBox>
+						)
+					}
 				</TweenRef.div>
 				{/*<div className={"cDay"}>*/}
 				{/*	Cette semaine :*/}

@@ -33,7 +33,7 @@ export default {
 		
 		currentPageFocus: "head",// head, events, page
 		
-		//selectedFocus     : { id: "Page.SkxesB7ugG", etty: 'Page' },
+		selectedFocus     : { id: "Page.SkxesB7ugG", etty: 'Page' },
 		selectedPage      : { id: "Page.SkxesB7ugG", etty: 'Page' },
 		selectedEvent     : undefined,
 		selectedEventId   : undefined,
@@ -42,7 +42,7 @@ export default {
 		currentSearch     : undefined,
 		currentArea       : undefined,
 		viewType          : 0,
-		dayCountByViewType: [6, 0, 0],
+		dayCountByViewType: [6, 1, 1],
 		curTags           : undefined,
 		
 		$apply( data, state ) {

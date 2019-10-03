@@ -73,7 +73,7 @@ export default class Slider extends React.Component {
 			tweener.scrollTo(tweener._getAxis(scrollDir).scrollPos + dec - prevState.dec, 0, scrollDir);
 		}
 		if ( pIndex !== prevProps.index ) {
-			tweener.scrollTo(dec + step * pIndex + 100, 1000, scrollDir, "easeSinOut");
+			tweener.scrollTo(dec + step * pIndex + 100, 750, scrollDir, "easeQuadInOut");
 			
 			if ( autoScroll ) {
 				clearTimeout(this._updater);
@@ -89,7 +89,7 @@ export default class Slider extends React.Component {
 				this._wasUserSnap = false;
 			}
 			else {
-				tweener.scrollTo(dec + step * index + 100, 500, scrollDir, "easeQuadInOut").then(this._then);
+				tweener.scrollTo(dec + step * index + 100, 750, scrollDir, "easeQuadInOut").then(this._then);
 			}
 			if ( autoScroll ) {
 				clearTimeout(this._updater);

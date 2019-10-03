@@ -29,30 +29,42 @@
 }
 
 .SearchBar {
-  .label{
+  .label {
     display: block;
   }
-  .areaTags,.styleTags,.priceTags {
+
+  .tag {
+
+    border-radius: 1em;
+    border: solid 1px #5b5b5b;
+    padding: 2px 8px 2px 8px;
+    background: whitesmoke;
+    cursor: pointer;
+    margin: 2px;
+  }
+
+  .areaTags, .styleTags, .priceTags {
+    max-height: 25%;
+    overflow: auto;
     .tag {
       display: inline-block;
-      margin-left: 5px;
-      margin-right: 5px;
       white-space: nowrap;
       cursor: pointer;
-      &.selected{
+
+      &.selected {
         text-decoration: underline;
         font-weight: bold;
       }
     }
   }
+
   .stylesTags {
     .tag {
       display: inline-block;
-      margin-left: 5px;
-      margin-right: 5px;
       white-space: nowrap;
       cursor: pointer;
-      &.selected{
+
+      &.selected {
         text-decoration: underline;
         font-weight: bold;
       }

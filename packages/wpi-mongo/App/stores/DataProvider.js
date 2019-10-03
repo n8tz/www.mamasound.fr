@@ -15,16 +15,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { Store, scopeToProps} from "react-scopes";
-import React                          from 'react'
-import debounce                       from 'debounce'
-import is                             from 'is'
-import shortid                        from 'shortid'
-import xxhashjs                       from 'xxhashjs'
-import {types, query, get}            from 'App/db';
+import {get, query} from 'App/db';
+import debounce     from 'debounce'
+import is           from 'is'
+import React        from 'react'
+import {Store}      from "react-scopes";
+import xxhashjs     from 'xxhashjs'
 
 var H = xxhashjs.h64(0)	// seed = 0xABCD
 
+function mkQueryH( query ) {
+	return H.update(JSON.stringify(query)).digest().toString(32)
+}
 
 /**
  * base data provider
@@ -138,7 +140,7 @@ export default class DataProvider extends Store {
 	 * @returns {*}
 	 */
 	getQuery( query, hash ) {
-		hash = hash || H.update(JSON.stringify(query)).digest().toString(32);
+		hash = hash || mkQueryH(query);
 		return query && this.data
 			&& this.data[hash];
 	}
@@ -163,7 +165,7 @@ export default class DataProvider extends Store {
 	 * @param rec
 	 */
 	pushRemoteQuery( etty, query, results, hash ) {
-		hash = hash || H.update(JSON.stringify(query)).digest().toString(32);
+		hash = hash || mkQueryH(query);
 		
 		this.data[hash]           = results;
 		this.updatedRecords[hash] = results;
@@ -407,7 +409,7 @@ export default class DataProvider extends Store {
 	 */
 	bindQuery( query, watcher ) {
 		let refs   = this.watchersByEttyId,
-		    hash   = H.update(JSON.stringify(query)).digest().toString(32),
+		    hash   = mkQueryH(query),
 		    etty   = query.etty,
 		    newRequest,
 		    noData = !this.data || !this.data[hash];
@@ -439,7 +441,7 @@ export default class DataProvider extends Store {
 	
 	unBindQuery( query, watcher ) {
 		let refs = this.watchersByEttyId,
-		    hash = JSON.stringify(query),
+		    hash = mkQueryH(query),
 		    etty = "__queries";
 		
 		refs[hash] = refs[hash] || [];
