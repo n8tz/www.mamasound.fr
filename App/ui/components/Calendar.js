@@ -36,14 +36,15 @@ export default class Calendar extends React.Component {
 	}
 	
 	onChange = ( startDate, endDate ) => {
-		this.setState({ startDate, endDate }, this.props.onChange)
+		this.props.onChange({ startDate, endDate })
 	}
 	toggle   = () => {
 		this.setState({ open: !this.state.open })
 	}
 	
 	render = () => {
-		const { startDate, endDate, open } = this.state
+		const { startDate, endDate } = this.props
+		const {  open } = this.state;
 		
 		return <div className={"Calendar"}>
 			<div onClick={this.toggle}>

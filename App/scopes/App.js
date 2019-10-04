@@ -75,11 +75,11 @@ export default {
 				return { currentPageFocus: _currentPageFocus, doFocus };
 			}
 		},
-		updateCurrentDay( _currentVisibleDay ) {
-			let { currentVisibleDay, selectedEventId } = this.nextState;
-			if ( _currentVisibleDay !== currentVisibleDay ) {
-				//selectedEventId && this.$actions.selectEvent();
-				return { currentVisibleDay: moment(_currentVisibleDay).startOf("day").valueOf() };
+		updateCurrentDay( _currentVisibleDay, userSetCDay = true ) {
+			let { curDay, selectedEventId } = this.nextState,
+			    dt                          = moment(_currentVisibleDay).startOf("day").valueOf();
+			if ( dt !== curDay ) {
+				return { curDay: dt, userSetCDay };
 			}
 		},
 		selectEvent( selectedEvent, selectedEventDT, showPageBlock ) {

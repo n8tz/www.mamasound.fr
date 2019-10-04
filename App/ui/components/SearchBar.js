@@ -46,18 +46,13 @@ export default class SearchBar extends React.Component {
 		              });
 		this.props.$actions.updateCurrentSearch(e.target.value)
 	};
+	handleDateChange   = e => {
+		//debugger
+		this.calendar.current.toggle();
+		this.props.$actions.updateCurrentDay(e.startDate);
+	};
 	selectTag          = tag => {
 		this.props.$actions.selectTag(tag.label)
-		//if ( tag.type === "style" ) {
-		//	this.setState({
-		//		              search: tag.label,
-		//	              });
-		//	this.props.$actions.updateCurrentSearch(tag.label)
-		//this.props.$actions.setPageFocus("events", true)
-		//}
-		//else {
-		//	this.props.$actions.setCurrentArea(tag.label)
-		//}
 	};
 	
 	
@@ -201,13 +196,16 @@ export default class SearchBar extends React.Component {
 		return null;
 	}
 	
+	calendar = React.createRef();
+	
 	renderContent() {
 		const { TagManager, appState, Quartiers, $actions } = this.props;
 		return <>
 			
 			<Comps.Calendar startDate={appState.curDay}
+			                ref={this.calendar}
 			                endDate={moment(appState.curDay).add(appState.dayCountByViewType[0], 'day')}
-			                onChange={this.onChange}/>
+			                onChange={this.handleDateChange}/>
 			<div className={"selectedTags"}>
 				{
 					TagManager && TagManager.selected.map(

@@ -18,7 +18,7 @@
 import {Views}                              from "App/ui";
 import Widget                               from 'App/ui/components/Widget.js';
 import Pages                                from "App/ui/pages/(*).js";
-import moment                               from 'moment';
+import moment                               from "moment";
 import React                                from 'react';
 import {Helmet}                             from "react-helmet";
 import {ContextMenu}                        from 'react-inheritable-contextmenu';
@@ -40,6 +40,23 @@ moment.locale('fr');
 @scopeToProps("widgets", "appState", "FacebookPage", "CurrentUser", "location.routes")
 export default class App extends React.Component {
 	state = {};
+	
+	constructor( props ) {
+		super(props);
+		
+		!__IS_SERVER__ && (this._uTm = setInterval(this.keepCDay, 10000))
+		
+	}
+	
+	componentWillUnmount() {
+		this._uTm && clearInterval(this._uTm);
+	}
+	
+	keepCDay = () => {
+		let { appState, $actions } = this.props;
+		if ( appState.userSetCDay && moment(Date.now()).startOf("day").valueOf() > appState.curDay )
+			$actions.updateCurrentDay(Date.now(), false);
+	}
 	
 	render() {
 		let Router                                                       = BrowserRouter;
