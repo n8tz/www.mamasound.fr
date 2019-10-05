@@ -24,6 +24,8 @@ import {Helmet}                             from "react-helmet";
 import {ContextMenu}                        from 'react-inheritable-contextmenu';
 import {BrowserRouter, Route, StaticRouter} from "react-router-dom";
 import {scopeToProps}                       from "react-scopes";
+import {ToastContainer}                     from 'react-toastify';
+
 import "regenerator-runtime/runtime";
 import "./ui/styles/index.scss"
 
@@ -121,6 +123,7 @@ export default class App extends React.Component {
 				}
 				<Route path="/" exact component={Pages.Home}/>
 				{/*<Route path="/" exact component={Pages.Admin}/>*/}
+				<ToastContainer/>
 			</React.Fragment>
 		</Router>
 	}

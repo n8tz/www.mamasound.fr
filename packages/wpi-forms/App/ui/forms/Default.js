@@ -96,51 +96,58 @@ export default class RecordEditor extends React.Component {
 		
 	}
 	
-	validate() {
-		let isValid = validate(this.state.record, this.props.etty),
-		    record  = this.state.record;
+	preview      = () => {
+		let isValid,
+		    record = this.state.record || this.props.record;
+		
+		//debugger
+		isValid = validate(record, record._cls)
+		
+		if ( isValid !== true )
+			this.setState({ errors: isValid });
+		else {
+			this.setState({ errors: {}, previewActive: true });
+			this.props.$actions.db_preview(record)
+		}
+	}
+	clearPreview = () => {
+		let isValid,
+		    record = this.state.record || this.props.record;
+		this.setState({ previewActive: false });
+		this.props.$actions.db_clearPreview(record._id)
+	}
+	save         = () => {
+		let isValid,
+		    { $actions } = this.props,
+		    record       = this.state.record || this.props.record;
+		
+		//debugger
+		isValid = validate(record, record._cls)
 		
 		if ( isValid !== true )
 			this.setState({ errors: isValid });
 		else {
 			this.setState({ errors: {} });
-			console.log(record)
-			// me.wait();
-			/*if ( record._id )
-			 db.save(this.props.etty, record._id, record,
-			 ( e, r ) => {
-			 // me.release();
-			 if ( e ) {
-			 // debugger;
-			 alert('Sorry it failed ! :( ( try to relog ? )');
-			 // Auth.checkLoginStatus();
-			 return;
-			 }
-			 // debugger;
-			 // me.setState({record : null});
-			 this.onSaveComplete(r);
-			 });
-			 else
-			 db.create(this.props.etty, this.state.record,
-			 ( e, r ) => {
-			 // this.release();
-			 if ( e ) {
-			 // debugger;
-			 
-			 alert('Sorry it failed ! :( ( try to relog ? )');
-			 // Auth.checkLoginStatus();
-			 return;
-			 }
-			 // this.setState({record : null});
-			 //this.setState({record : r});
-			 this.onSaveComplete(r);
-			 });
-			 
-			 */
+			//console.log(record)
+			this.state.previewActive && $actions.db_clearPreview(record._id, true);
+			if ( confirm("Voulez vous vraiment enregistrer?") )
+				$actions.db_save(record)
 		}
 	}
 	
-	preview() {
+	close = () => {
+		let { $actions } = this.props,
+		    record       = this.state.record || this.props.record;
+		
+		//this.state.previewActive && $actions.db_clearPreview(record._id)
+		$actions.widgetClose()
+	}
+	
+	componentWillUnmount() {
+		let { $actions } = this.props,
+		    record       = this.state.record || this.props.record;
+		
+		this.state.previewActive && $actions.db_clearPreview(record._id)
 	}
 	
 	onClick() {
@@ -222,8 +229,10 @@ export default class RecordEditor extends React.Component {
 					{record && record._cls && this.buildForm()}
 				</div>
 				<div className={"editor_btn"}>
-					<Button onClick={$actions.widgetClose}>Cancel</Button>
-					<Button onClick={this.validate.bind(this)}>Save</Button>
+					<Button onClick={this.close}>Cancel</Button>
+					<Button onClick={this.clearPreview}>Clear preview</Button>
+					<Button onClick={this.preview}>Preview</Button>
+					<Button onClick={this.save}>Save</Button>
 				</div>
 				<ContextMenu native/>
 			</div>

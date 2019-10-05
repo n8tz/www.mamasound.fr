@@ -31,13 +31,13 @@ if ( typeof window !== "undefined" ) {
 export default class Html extends Component {
 	static displayName = "Html";
 	
-	onChange( v ) {//todo: skip some..
+	onCkChange = ( event, editor ) => {//todo: skip some..
 		//this.props.value = v;
 		this.props.onChange
 		&& this.props.onChange({
 			                       target: {
 				                       name : this.props.name,
-				                       value: v.editor.getData()
+				                       value: editor.getData()
 			                       }
 		                       });
 	}
@@ -61,12 +61,9 @@ export default class Html extends Component {
 					height={"100%"}
 					onInit={editor => {
 						// You can store the "editor" and use when it is needed.
-						console.log('Editor is ready to use!', editor);
+						//console.log('Editor is ready to use!', editor);
 					}}
-					onChange={( event, editor ) => {
-						const data = editor.getData();
-						console.log({ event, editor, data });
-					}}
+					onChange={this.onCkChange}
 					onBlur={editor => {
 						console.log('Blur.', editor);
 					}}

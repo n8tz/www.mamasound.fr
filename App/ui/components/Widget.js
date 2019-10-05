@@ -15,13 +15,13 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import PropTypes                                      from "prop-types";
-import React                                          from "react";
-import {Rnd}                                          from "react-rnd";
-import {withScope, scopeToProps, propsToScope, asStore} from "react-scopes";
-import CloseIcon                                      from '@material-ui/icons/Close';
-import CardHeader                                     from '@material-ui/core/CardHeader';
-import IconButton                                     from '@material-ui/core/IconButton';
+import CardHeader                                       from '@material-ui/core/CardHeader';
+import IconButton                                       from '@material-ui/core/IconButton';
+import CloseIcon                                        from '@material-ui/icons/Close';
+import PropTypes                                        from "prop-types";
+import React                                            from "react";
+import {Rnd}                                            from "react-rnd";
+import {asStore, propsToScope, scopeToProps, withScope} from "react-scopes";
 
 
 @withScope(
@@ -58,6 +58,13 @@ export default class Widget extends React.Component {
 			});
 	};
 	
+	close = ( e, d ) => {
+		let { $actions, children } = this.props;
+		e.preventDefault();
+		e.stopPropagation();
+		$actions.widgetClose();
+	};
+	
 	render() {
 		let {
 			    record: { position, size } = {},
@@ -67,20 +74,20 @@ export default class Widget extends React.Component {
 		    state = this.state;
 		return (
 			<Rnd
-				className={ "Widget" }
-				disableDragging={ !!disabled }
-				enableResizing={ disabled }
-				dragHandleClassName={ "handle" }
-				style={ selected ? { zIndex: 2000000 } : undefined }
-				size={ state.size || size }
-				position={ state.position || position }
-				onDragStop={ this.saveState }
-				onResizeStop={ this.saveState }
-				onDragStart={ ( e, d ) => {
+				className={"Widget"}
+				disableDragging={!!disabled}
+				enableResizing={disabled}
+				dragHandleClassName={"handle"}
+				style={selected ? { zIndex: 2000000 } : undefined}
+				size={state.size || size}
+				position={state.position || position}
+				onDragStop={this.saveState}
+				onResizeStop={this.saveState}
+				onDragStart={( e, d ) => {
 					e.preventDefault();
 					e.stopPropagation();
-				} }
-				onDrag={ ( e, d ) => {
+				}}
+				onDrag={( e, d ) => {
 					e.preventDefault();
 					e.stopPropagation();
 					!selected && onSelect(record)
@@ -88,8 +95,8 @@ export default class Widget extends React.Component {
 						{
 							position: { x: d.x, y: d.y }
 						});
-				} }
-				onResize={ ( e, direction, ref, delta, position ) => {
+				}}
+				onResize={( e, direction, ref, delta, position ) => {
 					this.setState(
 						{
 							position,
@@ -98,19 +105,19 @@ export default class Widget extends React.Component {
 								height: ref.offsetHeight
 							}
 						});
-				} }>
+				}}>
 				<CardHeader
-					className={ "handle widgetHead" }
+					className={"handle widgetHead"}
 					action={
-						<IconButton onClick={ e => $actions.widgetClose() }>
+						<IconButton onClick={this.close}>
 							<CloseIcon/>
 						</IconButton>
 					}
-					title={ title || record.props && record.props.title }
+					title={title || record.props && record.props.title}
 					//subheader={ record && record.label }
 				/>
-				<div className={ " content" }>
-					{ children }
+				<div className={" content"}>
+					{children}
 				</div>
 			</Rnd>
 		);

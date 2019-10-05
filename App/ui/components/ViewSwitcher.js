@@ -162,7 +162,7 @@ export default class ViewSwitcher extends React.Component {
 	
 	componentDidUpdate( prevProps, prevState, nextContext ) {
 		let { curTarget, nextTarget, prevTarget, history } = this.state;
-		if ( prevProps.target !== this.props.target && (!nextTarget && (!curTarget || this.props.target._id !== curTarget._id) || nextTarget && this.props.target._id !== nextTarget._id) ) {
+		if ( prevProps.target !== this.props.target && (!nextTarget && (!curTarget || this.props.target !== curTarget) || nextTarget && this.props.target !== nextTarget) ) {
 			//console.log("tween new", curTarget, nextTarget, this.props.target)
 			this.setState(
 				{

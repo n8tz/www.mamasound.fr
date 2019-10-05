@@ -68,7 +68,7 @@ export default ( server, http ) => {
 		}
 	);
 	server.post(
-		'/db/update',
+		'/db/save',
 		function ( req, res, next ) {
 			let { _id, _cls } = req.body,
 			    isAdmin       = req.user && req.user.isAdmin;

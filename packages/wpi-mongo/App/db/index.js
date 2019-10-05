@@ -70,24 +70,25 @@ export function remove( query ) {
 export function create( etty, record, cb ) {
 	return new Promise(
 		( resolve, reject ) => {
-			superagent.post('/db/create', {etty,record})
+			superagent.post('/db/create', { etty, record })
 			          .then(
 				          res => {
 					          resolve(res.body);
-					          cb&&cb(res.body);
+					          cb && cb(res.body);
 				          }
 			          ).catch(reject)
 		}
 	);
 };
-export function save( etty, record, cb ) {
+
+export function save( record, cb ) {
 	return new Promise(
 		( resolve, reject ) => {
-			superagent.post('/db/create', {etty,record})
+			superagent.post('/db/save', record)
 			          .then(
 				          res => {
 					          resolve(res.body);
-					          cb&&cb(res.body);
+					          cb && cb(res.body);
 				          }
 			          ).catch(reject)
 		}
