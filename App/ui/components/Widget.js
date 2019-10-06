@@ -77,7 +77,7 @@ export default class Widget extends React.Component {
 				className={"Widget"}
 				disableDragging={!!disabled}
 				enableResizing={disabled}
-				dragHandleClassName={"handle"}
+				dragHandleClassName={"widgetHandle"}
 				style={selected ? { zIndex: 2000000 } : undefined}
 				size={state.size || size}
 				position={state.position || position}
@@ -107,7 +107,7 @@ export default class Widget extends React.Component {
 						});
 				}}>
 				<CardHeader
-					className={"handle widgetHead"}
+					className={"widgetHandle widgetHead"}
 					action={
 						<IconButton onClick={this.close}>
 							<CloseIcon/>

@@ -73,7 +73,7 @@ export default ( server, http ) => {
 			let { _id, _cls } = req.body,
 			    isAdmin       = req.user && req.user.isAdmin;
 			if ( entities[_cls] && (isAdmin) )
-				db.update(_cls, _id, req.body).then(data => res.json(data)).catch(err => res.json({ error: err + '' }, 500))
+				db.save(_cls, _id, req.body).then(data => res.json(data)).catch(err => res.json({ error: err + '' }, 500))
 			else
 				res.json({ error: 'Auth required' }, 500)
 			

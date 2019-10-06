@@ -54,7 +54,7 @@ export default {
 		"_id": types.indexes,
 		//"pubFlag" : fields.publicationFlag,
 		
-		//"_public"        : types.boolean("Publier :", false),
+		"_public"        : types.boolean("Publier :", false),
 		//"publishTs" : "<timestamp>",// ?
 		"label"       : types.labels(),
 		"previewImage": types.media({ allowedTypes: "Image" }, "Background :"),

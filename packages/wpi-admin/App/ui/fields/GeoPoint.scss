@@ -1,0 +1,79 @@
+/*!
+ *
+ * Copyright (C) 2019 Nathanael Braun
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+.field_GeoPoint {
+  position: relative;
+  min-height: 200px;
+
+  > .input {
+    //height: 100%;
+
+    height: 200px;
+
+    > .content {
+
+      //position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .searchContainer{
+      position: absolute;
+      top:0;
+      left: 0;
+      width: 100%;
+      z-index: 10000;
+      input{
+        font-size: 18px;
+        width: 100%;
+      }
+      .geosuggest__input-wrapper{
+        font-size: 1.5em;
+      }
+      .geosuggest__suggests--hidden{display: none}
+      .geosuggest__suggests-wrapper{
+        background: white;
+        >ul{
+          margin: 0;
+          padding: 0;
+          li{
+            list-style: none;
+            &:hover{
+              background: #1f8de2;
+            }
+          }
+        }
+      }
+    }
+    .mapContainer {
+
+      position: absolute;
+      top:4em;
+      left: 0;
+      width: 100%;
+      bottom: 0;
+    }
+
+    .leaflet-container {
+
+      //position: relative;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+}

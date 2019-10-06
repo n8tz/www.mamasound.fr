@@ -54,8 +54,10 @@ export default {
 		test        : /^[\w_\-\d]+$/
 	},
 	date           : ( label, props ) => ({
-		//formRenderer    : require('App/ui/fields/dateTimeField'),
+		formRenderer: "Date",
 		defaultProps: {
+			displayTime: true,
+			useInput   : true,
 			...(props || {})
 		},
 		label       : label || "Date/Heure",
@@ -139,7 +141,7 @@ export default {
 	}),
 	collection     : ( etty, filters, label ) => ({
 		//@lazyInitialize
-		//formRenderer    : require('App/ui/fields/RecordRefList'),
+		formRenderer: '',
 		defaultProps: Object.assign({}, {
 			etty        : etty,
 			// defaultProps : true,
@@ -150,7 +152,7 @@ export default {
 	}),
 	picker         : function ( etty, defaultProps = {}, label ) {
 		return {
-			formRenderer: "Picker",
+			formRenderer: "RecordRef",
 			defaultProps: {
 				defaultValue      : false,
 				disallowId        : true,
@@ -162,11 +164,9 @@ export default {
 			test        : /^[\w_\-\d]+$/
 		};
 	},
-	address        : ( cfg, label ) => ({
-		formRenderer: 'Address',
-		defaultProps: Object.assign({
-			                            //allowedType : etty
-		                            }, cfg || {}),
+	address        : ( label ) => ({
+		formRenderer: 'GeoPoint',
+		defaultProps: {},
 		label       : label,
 		test        : /^[\w_\-\d]+$/
 	}),

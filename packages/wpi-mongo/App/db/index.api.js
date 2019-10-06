@@ -106,7 +106,7 @@ export function create( etty, data, id = shortid.generate() ) {
 	)
 }
 
-export function update( etty, id, data ) {
+export function save( etty, id, data ) {
 	return new Promise(
 		( resolve, reject ) => {
 			
@@ -122,11 +122,14 @@ export function update( etty, id, data ) {
 						entities[etty],
 						etty, db,
 						( alias, datas ) => {
-							//delete datas._id;
+							let record = {}
+							Object.assign(record, data)
+							alias && (record._alias = alias.alias);
+							delete record._id;
 							db.collection(table)
 							  .update(
 								  { _id: id },
-								  { $set: data }
+								  { $set: record }
 								  , ( err, docs ) => {
 									  if ( err ) console.warn("save failed ", err);
 									  dbRelease();
@@ -169,7 +172,7 @@ export function query( req ) {
 					    }),
 					
 					    parse = function ( err, items = [] ) {
-						    err && console.warn (err);
+						    err && console.warn(err);
 						    items.forEach(
 							    item => {
 								    items._cls = items._cls || etty;

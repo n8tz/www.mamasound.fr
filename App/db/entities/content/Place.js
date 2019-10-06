@@ -16,15 +16,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import {types, validate} from 'App/db/fields';
 /**
  * @author Nathanael BRAUN
  *
  * Date: 24/11/2015
  * Time: 19:18
  */
-import React from 'react';
-
-import {types, validate} from 'App/db/fields';
+import React             from 'react';
 
 export default {
 	label     : "Lieu",
@@ -51,7 +50,7 @@ export default {
 		),
 		"description" : types.descriptions('Description'),
 		"previewImage": types.media({ allowedTypes: "Image" }, "Custom preview :"),
-		"address"     : types.address("Address :"),
+		"address"     : types.address("Adresse :"),
 		"website"     : types.labels("Site web :"),
 		"fbPages"     : types.labels("Page Facebook :"),
 		"scPage"      : types.labels("Page SoundCloud :"),

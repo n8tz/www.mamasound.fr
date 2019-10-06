@@ -33,23 +33,26 @@ export default class PopAnywhere extends Component {
 	
 	constructor( props ) {
 		super(...arguments);
-		this.state       = {
+		this.state = {
 			hovering: props.hovering
 		};
-		this._hoverLayer = document.createElement('div');
-		this._hoverLayer.classList.add("PopAnywhereLayer");
-		
-		Object.assign(
-			this._hoverLayer.style,
-			{
-				position: "absolute",
-				top     : "0",
-				left    : "0",
-				width   : "100%",
-				height  : "100%",
-				zIndex  : this.props.zIndex,
-			}
-		);
+		if ( !__IS_SERVER__ ) {
+			
+			this._hoverLayer = document.createElement('div');
+			this._hoverLayer.classList.add("PopAnywhereLayer");
+			
+			Object.assign(
+				this._hoverLayer.style,
+				{
+					position: "absolute",
+					top     : "0",
+					left    : "0",
+					width   : "100%",
+					height  : "100%",
+					zIndex  : this.props.zIndex,
+				}
+			);
+		}
 		
 	}
 	
@@ -118,25 +121,20 @@ export default class PopAnywhere extends Component {
 			// hoverLayer.style.pointerEvents = "all";
 			currentLayer           = this;
 			hoverLayer.onclick     = e => {
+				
 				if ( !e.popped ) {
-					//debugger;
 					// hoverLayer.style.pointerEvents = "none";
 					// document.elementFromPoint(e.clientX, e.clientY).dispatchEvent(e);
 					this.close();
 					
-				}
+					//e.stopPropagation()
+				}//else e.stopPropagation()
 			}
 			hoverLayer.onmousemove = e => {
-				!e.popped && this.props.onMouseOut();
+				this.props.hovering && this.props.onMouseOut();
 			}
 			
 			dummy                = document.createElement('div');
-			dummy.onclick        = ( e ) => {
-				e.popped = true;
-			};
-			dummy.onmousemove    = ( e ) => {
-				e.popped = true;
-			};
 			dummy.className      = "PopAnywhere " + (props.className || '');
 			dummy.style.position = "absolute";
 			dummy.style.width    = wrapper.offsetWidth + "px";
@@ -155,6 +153,12 @@ export default class PopAnywhere extends Component {
 			this.refs.root.appendChild(this._clone);
 			
 			dummy.appendChild(wrapper);
+			wrapper.onclick     = ( e ) => {
+				e.popped = true;
+			};
+			wrapper.onmousemove = ( e ) => {
+				e.popped = true;
+			};
 			hoverLayer.appendChild(dummy);
 			props.onRedraw
 			&& props.onRedraw(dummy)
@@ -190,10 +194,10 @@ export default class PopAnywhere extends Component {
 	
 	render() {
 		return (
-			<div className={ "PopAnywhere " + (this.props.className || '') } style={ { ...(this.props.style || {}) } }
+			<div className={"PopAnywhere " + (this.props.className || '')} style={{ ...(this.props.style || {}) }}
 			     ref="root">
-				<div className={ "PopAnywhere_wrapper" } ref="wrapper">
-					{ this.props.children }
+				<div className={"PopAnywhere_wrapper"} ref="wrapper">
+					{this.props.children}
 				</div>
 			</div>
 		);

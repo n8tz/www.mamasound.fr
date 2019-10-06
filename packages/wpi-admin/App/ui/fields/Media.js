@@ -39,6 +39,7 @@ if ( typeof window !== "undefined" )
 
 @asFieldType
 export default class Media extends React.Component {
+	static displayName = "Media";
 	
 	constructor( props ) {
 		super(...arguments);
@@ -184,13 +185,6 @@ export default class Media extends React.Component {
 			<div className={"content"}
 			     onDragEnter={this.showUploader}>
 				<div className="controls">
-					{
-						!disallowSelect &&
-						_value &&
-						<Button title="Selectionner"
-							//color={ viewmode == "select" && "primary" }
-							    onClick={e => this.setMode("select")}>Selectionner</Button>
-					}
 					
 					<Button onClick={e => this.setMode("preview")}
 					        color={viewmode == "preview" && "primary"}
@@ -200,7 +194,7 @@ export default class Media extends React.Component {
 						title="Upload"
 						color={viewmode == "upload" && "primary"}
 						onClick={e => this.setMode("upload")}>
-						Uploader un fichier
+						Uploader
 					</Button>
 					
 					<Button
@@ -221,8 +215,7 @@ export default class Media extends React.Component {
 						!disallowNone &&
 						<Button
 							title="none"
-							//color={ viewmode == "none" && "primary" }
-							onClick={e => this.setMode("none")}>
+							onClick={e => (this.setMode("none"), this.setState({ value: null }))}>
 							Aucun(e)
 						</Button>
 					}

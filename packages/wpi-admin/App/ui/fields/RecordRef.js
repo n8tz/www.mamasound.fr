@@ -115,8 +115,8 @@ import Text                                                                     
 )
 @scopeToProps("Picker.Query", "Picker.Selected", "Picker.SelectedQuery")
 @asFieldType
-export default class Picker extends React.Component {
-	static displayName  = "Picker";
+export default class RecordRef extends React.Component {
+	static displayName  = "RecordRef";
 	static defaultProps = {
 		allowTypeSelection: Object.keys(entities)
 	};

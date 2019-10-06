@@ -83,7 +83,10 @@ export default class App extends React.Component {
 					<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"/>
 					<meta name="theme-color" content="#ffffff"/>
 					<title>MamaSound</title>
+					<link rel="stylesheet" type="text/css" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
+					
 					<script src="/jwplayer/jwplayer.js"></script>
+					<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyA7XcGxipnIMdSSBJHn3tzeJe-fU3ilCak"></script>
 					<link rel="stylesheet"
 					      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"/>
 					<link
