@@ -189,7 +189,7 @@ export default class EventMap extends React.Component {
 			    $actions, DataProvider, Quartiers, style
 		    }           = this.props,
 		    map         = this.refs.map && this.refs.map.leafletElement,
-		    selectedPOI = Selected.Page && Selected.Page.place && DataProvider[Selected.Page.place.objId],
+		    selectedPOI = Selected.Event && Selected.Event.place && DataProvider[Selected.Event.place.objId],
 		    selectedPos = selectedPOI && (selectedPOI.address.geoPoint
 			    &&
 			    [...selectedPOI.address.geoPoint].reverse()
@@ -202,6 +202,7 @@ export default class EventMap extends React.Component {
 				map.getZoom()
 			)
 		}
+		console.log(Selected.Event)
 		if ( !isBrowser || !Events )
 			return <div className={"EventMap"}/>
 		return (
@@ -247,16 +248,16 @@ export default class EventMap extends React.Component {
 										[...selectedPOI.address.geoPoint].reverse()
 										|| selectedPOI.address
 									}
-									key={Selected.Page.place._id}
+									key={selectedPOI._id}
 									//style={ { marginBottom: '50px' } }
 									offset={Leaflet.point(13, 20)}
 								>
 									<Views.Event.popin
 										$scope={this.props.$scope}
-										record={Selected.Page}
+										record={Selected.Event}
 										refs={DataProvider}
 										onClick={
-											e => $actions.selectPage(Selected.Page._id)
+											e => $actions.selectEvent(Selected.Event._id)
 											
 										}
 									/>
@@ -268,6 +269,10 @@ export default class EventMap extends React.Component {
 							POIs.map(
 								( { geoPoint, event } ) =>
 									<Marker
+										onClick={
+											e => $actions.selectEvent(event._id)
+											
+										}
 										//icon={
 										//	(Selected.Event && (Selected.Event._id === event._id)) &&
 										//	Leaflet.icon.pulse({

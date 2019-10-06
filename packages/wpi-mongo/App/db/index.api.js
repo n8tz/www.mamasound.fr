@@ -46,6 +46,7 @@ export function get( cls, objId ) {
 							//	dbRelease();
 							//	return cb(404);
 							//}
+							debugger
 							db.collection(cls)
 							  .findOne(
 								  { _id: alias && alias.target.objId || objId },

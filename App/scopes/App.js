@@ -27,12 +27,12 @@ export default {
 	Styles         : stores.Styles,
 	UserGeoLocation: stores.UserGeoLocation,
 	Quartiers      : stores.Quartiers,
+	$history       : stores.$history,
 	
 	@asStore
 	appState: {
 		
-		currentPageFocus: "head",// head, events, page
-		
+		currentPageFocus  : "head",// head, events, page
 		selectedFocus     : { id: "Page.SkxesB7ugG", etty: 'Page' },
 		selectedPage      : { id: "Page.SkxesB7ugG", etty: 'Page' },
 		selectedEvent     : undefined,
@@ -52,6 +52,19 @@ export default {
 		
 		// global app actions
 		
+		loadStateFromUrl( url = !__IS_SERVER__ && location.pathname || '/' ) {
+			if ( url ) {
+				let matches = url.match(/^\/([^\/]+)\/([^\/]+)\/([^\/]+)$/);
+				return matches && {
+					curDay          : moment(matches[2], "DD-MM-YY").startOf("day"),
+					selectedEventId : matches[3],
+					selectedEvent   : { id: matches[3], etty: "Event" },
+					currentPageFocus: "events"
+				}
+			}
+			//debugger;
+			//return {};
+		},
 		updateCurrentSearch( currentSearch ) {
 			return { currentSearch };
 		},
@@ -83,15 +96,16 @@ export default {
 			}
 		},
 		selectEvent( selectedEvent, selectedEventDT, showPageBlock ) {
-			let { currentPageFocus } = this.nextState;
+			let { curDay, currentPageFocus } = this.nextState;
 			if ( selectedEvent )
 				currentPageFocus = 'map';
+			selectedEvent && this.$actions.history_set("/" + selectedEvent._cls + '/' + moment(curDay).format("DD-MM-YY") + "/" + (selectedEvent._alias || selectedEvent._id))
 			return {
 				selectedEventId: selectedEvent && selectedEvent._id,
 				selectedEventDT,
 				currentPageFocus,
 				doFocus        : true,
-				selectedPage   : selectedEvent && { id: selectedEvent._id, etty: selectedEvent._cls } || null
+				selectedEvent  : selectedEvent && { id: selectedEvent._id, etty: selectedEvent._cls } || null
 			};
 		},
 		selectPage( selectedPage ) {

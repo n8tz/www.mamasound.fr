@@ -43,8 +43,8 @@ export default class index extends React.Component {
 			</div>
 			{ssrErrors && <div id="ssrErrors" dangerouslySetInnerHTML={{ __html: ssrErrors }}/>}
 			
-			<script src="./App.js"></script>
-			<script src="./App.vendors.js"></script>
+			<script src="/App.js"></script>
+			<script src="/App.vendors.js"></script>
 			</body>
 			</html>
 		</React.Fragment>

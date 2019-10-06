@@ -72,7 +72,7 @@ export default class DayEvents extends React.Component {
 								onClick={e => $actions.selectEvent(item, moment(day).valueOf(), true)}
 								key={item._id}
 								day={day}
-								selected={appState.selectedEventId === item._id && moment(appState.selectedEventDT).isSame(day, "day")}
+								selected={(appState.selectedEventId === item._id||appState.selectedEventId === item._alias) && moment(appState.selectedEventDT).isSame(day, "day")}
 								record={item}
 								refs={EventList.refs || {}}/>;
 						}

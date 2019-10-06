@@ -115,12 +115,12 @@ export default class Home extends React.Component {
 									//background: "red",
 								}}>
 								{/*<Views.Block.PageBlock>*/}
-								{/*	<TweenRef*/}
-								{/*		id={"logo"}*/}
-								{/*		initial={Styles.logo}*/}
-								{/*	>*/}
-								{/*		<div className={"logo"}/>*/}
-								{/*	</TweenRef>*/}
+								<TweenRef
+									id={"logo"}
+									initial={Styles.logo}
+								>
+									<div className={"logo"}/>
+								</TweenRef>
 								{/*</Views.Block.PageBlock>*/}
 							
 							</header>

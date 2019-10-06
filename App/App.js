@@ -15,16 +15,16 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import {Views}                              from "App/ui";
-import Widget                               from 'App/ui/components/Widget.js';
-import Pages                                from "App/ui/pages/(*).js";
-import moment                               from "moment";
-import React                                from 'react';
-import {Helmet}                             from "react-helmet";
-import {ContextMenu}                        from 'react-inheritable-contextmenu';
-import {BrowserRouter, Route, StaticRouter} from "react-router-dom";
-import {scopeToProps}                       from "react-scopes";
-import {ToastContainer}                     from 'react-toastify';
+import {Views}                       from "App/ui";
+import Widget                        from 'App/ui/components/Widget.js';
+import Pages                         from "App/ui/pages/(*).js";
+import moment                        from "moment";
+import React                         from 'react';
+import {Helmet}                      from "react-helmet";
+import {ContextMenu}                 from 'react-inheritable-contextmenu';
+import {BrowserRouter, StaticRouter} from "react-router-dom";
+import RS                            from "react-scopes";
+import {ToastContainer}              from 'react-toastify';
 
 import "regenerator-runtime/runtime";
 import "./ui/styles/index.scss"
@@ -39,13 +39,13 @@ React.createElement = function ( type, ...argz ) {
 	return hookedRCE.apply(this, arguments);
 }
 moment.locale('fr');
-@scopeToProps("widgets", "appState", "FacebookPage", "CurrentUser", "location.routes")
+@RS.connect("widgets", "appState", "$history", "CurrentUser", "location.routes")
 export default class App extends React.Component {
 	state = {};
 	
 	constructor( props ) {
 		super(props);
-		
+		props.$actions.loadStateFromUrl(props.location)
 		!__IS_SERVER__ && (this._uTm = setInterval(this.keepCDay, 10000))
 		
 	}
@@ -65,69 +65,69 @@ export default class App extends React.Component {
 		let { widgets = { items: [] }, appState, CurrentUser, $actions } = this.props;
 		if ( __IS_SERVER__ )
 			Router = StaticRouter;
-		return <Router location={__IS_SERVER__ && this.props.location}>
-			<React.Fragment>
+		return <>
+			
+			<Helmet>
+				<meta charSet="UTF-8"/>
+				<meta name="viewport"
+				      content="width=device-width, initial-scale=1.01, maximum-scale=1.0, user-scalable=no, minimal-ui"/>
+				<meta http-equiv="X-UA-Compatible" content="IE=9;IE=10;IE=11;IE=Edge,chrome=1"/>
+				<meta name="apple-mobile-web-app-capable" content="yes"/>
+				<meta name="apple-touch-fullscreen" content="yes"/>
+				<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+				<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+				<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+				<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+				<link rel="manifest" href="/manifest.json"/>
+				<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"/>
+				<meta name="theme-color" content="#ffffff"/>
+				<title>MamaSound</title>
+				<link rel="stylesheet" type="text/css"
+				      href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
 				
-				<Helmet>
-					<meta charSet="UTF-8"/>
-					<meta name="viewport"
-					      content="width=device-width, initial-scale=1.01, maximum-scale=1.0, user-scalable=no, minimal-ui"/>
-					<meta http-equiv="X-UA-Compatible" content="IE=9;IE=10;IE=11;IE=Edge,chrome=1"/>
-					<meta name="apple-mobile-web-app-capable" content="yes"/>
-					<meta name="apple-touch-fullscreen" content="yes"/>
-					<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
-					<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
-					<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
-					<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
-					<link rel="manifest" href="/manifest.json"/>
-					<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"/>
-					<meta name="theme-color" content="#ffffff"/>
-					<title>MamaSound</title>
-					<link rel="stylesheet" type="text/css" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
-					
-					<script src="/jwplayer/jwplayer.js"></script>
-					<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyA7XcGxipnIMdSSBJHn3tzeJe-fU3ilCak"></script>
-					<link rel="stylesheet"
-					      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"/>
-					<link
-						href="https://fonts.googleapis.com/icon?family=Material+Icons"
-						rel="stylesheet"/>
-				</Helmet>
-				
-				{CurrentUser && CurrentUser.isAdmin && <ContextMenu>
-					<div
-						onClick={() => $actions.newWidget('MamaImporter', { title: "Importer d'events" })}>
-						New Importer
-					</div>
-					<div
-						onClick={() => $actions.newWidget('DbExplorer', { title: "Db query & delete" })}>
-						New DbExplorer
-					</div>
-					<div
-						onClick={() => $actions.newWidget('DevTools', { title: "DevTools" }, {
-							"size"    : { "width": 200, "height": 250 },
-							"position": { "x": 0, "y": 0 }
-						})}>
-						New DevTools
-					</div>
-				</ContextMenu>}
-				
-				{__IS_ADMIN__ &&
-				widgets.items.map(
-					widget => {
-						let WidgetComp = Views.Widget[widget.type] || 'div';
-						return <Widget key={widget._id} record={widget}
-						               onSelect={e => $actions.selectWidget(widget._id)}
-						               selected={widget._id === appState.selectedWidgetId}>
-							<WidgetComp record={widget} {...widget.props}/>
-						</Widget>
-					}
-				)
+				<script src="/jwplayer/jwplayer.js"></script>
+				<script
+					src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyA7XcGxipnIMdSSBJHn3tzeJe-fU3ilCak"></script>
+				<link rel="stylesheet"
+				      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"/>
+				<link
+					href="https://fonts.googleapis.com/icon?family=Material+Icons"
+					rel="stylesheet"/>
+			</Helmet>
+			
+			{CurrentUser && CurrentUser.isAdmin && <ContextMenu>
+				<div
+					onClick={() => $actions.newWidget('MamaImporter', { title: "Importer d'events" })}>
+					New Importer
+				</div>
+				<div
+					onClick={() => $actions.newWidget('DbExplorer', { title: "Db query & delete" })}>
+					New DbExplorer
+				</div>
+				<div
+					onClick={() => $actions.newWidget('DevTools', { title: "DevTools" }, {
+						"size"    : { "width": 200, "height": 250 },
+						"position": { "x": 0, "y": 0 }
+					})}>
+					New DevTools
+				</div>
+			</ContextMenu>}
+			
+			{__IS_ADMIN__ &&
+			widgets.items.map(
+				widget => {
+					let WidgetComp = Views.Widget[widget.type] || 'div';
+					return <Widget key={widget._id} record={widget}
+					               onSelect={e => $actions.selectWidget(widget._id)}
+					               selected={widget._id === appState.selectedWidgetId}>
+						<WidgetComp record={widget} {...widget.props}/>
+					</Widget>
 				}
-				<Route path="/" exact component={Pages.Home}/>
-				{/*<Route path="/" exact component={Pages.Admin}/>*/}
-				<ToastContainer/>
-			</React.Fragment>
-		</Router>
+			)
+			}
+			<Pages.Home/>
+			{/*<Route path="/" exact component={Pages.Admin}/>*/}
+			<ToastContainer/>
+		</>
 	}
 }

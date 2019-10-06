@@ -45,41 +45,6 @@ export function service( server ) {
 	redis.delWildcard(config.PUBLIC_URL + "_*")
 	
 	server.use(device.capture());
-	server.get(
-		'/',
-		function ( req, res, next ) {
-			let key = config.PUBLIC_URL + "_page_" + req.url + "_" + req.device.type + "_" + (req.user && req.user.login);
-			redis.get(
-				key,
-				( err, html ) => {
-					if ( html ) {
-						console.log("from redis ", key);
-						
-						res.send(200, html);
-						return;
-					}
-					let cssPath = (req.user && req.user.isAdmin)
-					              ? process.cwd() + "/dist/admin/App.css"
-					              : process.cwd() + "/dist/www/App.css";
-					App.renderSSR(
-						{
-							device  : req.device.type,
-							location: req.url,
-							css     : fs.existsSync(cssPath)
-							          ? fs.readFileSync(cssPath)
-							          : "/* ... */",
-							//state   : currentState,
-						},
-						( err, html, nstate ) => {
-							res.send(200, html);
-							redis.set(key, html, 'EX', 1000 * 60 * 60);
-						}
-					)
-					
-				}
-			)
-		}
-	);
 	server.use(
 		( req, res, next ) => {
 			if ( !(req.user && req.user.isAdmin) )
@@ -126,5 +91,43 @@ export function service( server ) {
 	});
 	server.use("/assets/static", express.static(process.cwd() + '/App/ui/assets/static'));
 	
+	server.get(
+		'*',
+		function ( req, res, next ) {
+			debugger
+			if ( /\.\w+$/ig.test(req.url) )
+				return next()
+			let key = config.PUBLIC_URL + "_page_" + req.url + "_" + req.device.type + "_" + (req.user && req.user.login);
+			redis.get(
+				key,
+				( err, html ) => {
+					if ( html ) {
+						console.log("from redis ", key);
+						
+						res.send(200, html);
+						return;
+					}
+					let cssPath = (req.user && req.user.isAdmin)
+					              ? process.cwd() + "/dist/admin/App.css"
+					              : process.cwd() + "/dist/www/App.css";
+					App.renderSSR(
+						{
+							device  : req.device.type,
+							location: req.url,
+							css     : fs.existsSync(cssPath)
+							          ? fs.readFileSync(cssPath)
+							          : "/* ... */",
+							//state   : currentState,
+						},
+						( err, html, nstate ) => {
+							res.send(200, html);
+							redis.set(key, html, 'EX', 1000 * 60 * 60);
+						}
+					)
+					
+				}
+			)
+		}
+	);
 }
 ;
