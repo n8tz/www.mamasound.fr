@@ -131,6 +131,12 @@ export default class DataProvider extends Store {
 		this.data[rec._id]           = rec;
 		this.updatedRecords[rec._id] = rec;
 		
+		if ( rec._alias && this.watchersByEttyId[rec._alias] ) {
+			this.watchersByEttyId[rec._id] = this.watchersByEttyId[rec._id] || [];
+			this.watchersByEttyId[rec._id].push(...this.watchersByEttyId[rec._alias])
+			delete this.watchersByEttyId[rec._alias];
+		}
+		
 		this.dispatchUpdates();
 		if ( this.data.___recToQuery___[rec._id] ) {
 			this.data.___recToQuery___[rec._id].forEach(

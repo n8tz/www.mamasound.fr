@@ -56,9 +56,11 @@ export default {
 			if ( url ) {
 				let matches = url.match(/^\/([^\/]+)\/([^\/]+)\/([^\/]+)$/);
 				return matches && {
-					curDay          : moment(matches[2], "DD-MM-YY").startOf("day"),
+					curDay          : moment(matches[2], "DD-MM-YY").startOf("day").valueOf(),
 					selectedEventId : matches[3],
+					selectedEventDT : moment(matches[2], "DD-MM-YY").startOf("day").valueOf(),
 					selectedEvent   : { id: matches[3], etty: "Event" },
+					selectedPage    : { id: matches[3], etty: "Event" },
 					currentPageFocus: "events"
 				}
 			}
@@ -99,7 +101,7 @@ export default {
 			let { curDay, currentPageFocus } = this.nextState;
 			if ( selectedEvent )
 				currentPageFocus = 'map';
-			selectedEvent && this.$actions.history_set("/" + selectedEvent._cls + '/' + moment(curDay).format("DD-MM-YY") + "/" + (selectedEvent._alias || selectedEvent._id))
+			selectedEvent && this.$actions.history_set("/" + selectedEvent._cls + '/' + moment(selectedEventDT).format("DD-MM-YY") + "/" + (selectedEvent._alias || selectedEvent._id))
 			return {
 				selectedEventId: selectedEvent && selectedEvent._id,
 				selectedEventDT,

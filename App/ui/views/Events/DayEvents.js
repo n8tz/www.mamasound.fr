@@ -64,7 +64,7 @@ export default class DayEvents extends React.Component {
 						<Views.SimpleDay day={day}/>
 					</div> || ''
 				}
-				{/*<Comps.SlidableList {...Styles.EventsSlider}>*/}
+				{/*{appState.selectedEventId}*/}
 				{
 					EventList && EventList.items && EventList.items.map(
 						( item, i ) => {
@@ -72,7 +72,7 @@ export default class DayEvents extends React.Component {
 								onClick={e => $actions.selectEvent(item, moment(day).valueOf(), true)}
 								key={item._id}
 								day={day}
-								selected={(appState.selectedEventId === item._id||appState.selectedEventId === item._alias) && moment(appState.selectedEventDT).isSame(day, "day")}
+								selected={(appState.selectedEventId === item._id || appState.selectedEventId === item._alias) && moment(appState.selectedEventDT).isSame(day, "day")}
 								record={item}
 								refs={EventList.refs || {}}/>;
 						}

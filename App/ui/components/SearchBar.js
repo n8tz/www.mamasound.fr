@@ -201,11 +201,11 @@ export default class SearchBar extends React.Component {
 	renderContent() {
 		const { TagManager, appState, Quartiers, $actions } = this.props;
 		return <>
-			
 			<Comps.Calendar startDate={appState.curDay}
 			                ref={this.calendar}
 			                endDate={moment(appState.curDay).add(appState.dayCountByViewType[0], 'day')}
 			                onChange={this.handleDateChange}/>
+			                
 			<div className={"selectedTags"}>
 				{
 					TagManager && TagManager.selected.map(
