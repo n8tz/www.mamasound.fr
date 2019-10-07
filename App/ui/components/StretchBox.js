@@ -101,17 +101,17 @@ export default class StretchBox extends React.Component {
 							width  : [maxHeight, "-" + minHeight, "-" + minHeight],
 						}
 					},
-					{
-						from    : startPos + openDuration,
-						duration: closeDuration,
-						apply   : {
-							opacity: .5,
-							top    : "-" + minHeight,
-							left   : ["-100%", maxHeight, "-" + minHeight],
-							height : ["-" + maxHeight, minHeight, minHeight],
-							width  : ["-" + maxHeight, minHeight, minHeight],
-						}
-					}
+					//{
+					//	from    : startPos + openDuration,
+					//	duration: closeDuration,
+					//	apply   : {
+					//		opacity: .5,
+					//		top    : "-" + minHeight,
+					//		left   : ["-100%", maxHeight, "-" + minHeight],
+					//		height : ["-" + maxHeight, minHeight, minHeight],
+					//		width  : ["-" + maxHeight, minHeight, minHeight],
+					//	}
+					//}
 				],
 				content: [],
 				root   : [

@@ -94,7 +94,7 @@ export default class TableGrid extends React.Component {
 		this.setState(
 			{
 				columnDefs: this.createColumnDefs(np),
-				rowData   : np.data.items
+				rowData   : np.data&&np.data.items||[]
 			}
 		)
 	}

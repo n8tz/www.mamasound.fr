@@ -183,10 +183,15 @@ export default {
 				           : data.selected || state.selected
 			}
 		},
+		toggleTag( tag ) {
+			this.state.selectedTags[tag]
+			? this.$actions.unSelectTag(tag)
+			: this.$actions.selectTag(tag)
+		},
 		selectTag: ( tag ) => state => ({
 			selectedTags: {
 				...state.selectedTags,
-				[tag]: state.available[tag]
+				[tag]: state.available[tag] = state.available[tag] || { label: tag, count: 0, style: {} }
 			},
 		}),
 		unSelectTag( tag ) {

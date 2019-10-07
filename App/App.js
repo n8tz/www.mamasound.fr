@@ -29,6 +29,8 @@ import {ToastContainer}              from 'react-toastify';
 import "regenerator-runtime/runtime";
 import "./ui/styles/index.scss"
 
+!__IS_SERVER__ && require('react-toastify/dist/ReactToastify.css');
+
 let hookedRCE       = React.createElement;
 React.createElement = function ( type, ...argz ) {
 	if ( !type ) {
@@ -98,18 +100,18 @@ export default class App extends React.Component {
 			{CurrentUser && CurrentUser.isAdmin && <ContextMenu>
 				<div
 					onClick={() => $actions.newWidget('MamaImporter', { title: "Importer d'events" })}>
-					New Importer
+					Event Importer
 				</div>
 				<div
-					onClick={() => $actions.newWidget('DbExplorer', { title: "Db query & delete" })}>
-					New DbExplorer
+					onClick={() => $actions.newWidget('DbExplorer', { title: "Admin" })}>
+					Admin
 				</div>
 				<div
 					onClick={() => $actions.newWidget('DevTools', { title: "DevTools" }, {
 						"size"    : { "width": 200, "height": 250 },
 						"position": { "x": 0, "y": 0 }
 					})}>
-					New DevTools
+					DevTools
 				</div>
 			</ContextMenu>}
 			
@@ -126,8 +128,8 @@ export default class App extends React.Component {
 			)
 			}
 			<Pages.Home/>
+			<ToastContainer autoClose={5000}/>
 			{/*<Route path="/" exact component={Pages.Admin}/>*/}
-			<ToastContainer/>
 		</>
 	}
 }

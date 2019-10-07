@@ -57,7 +57,11 @@ export function query( query ) {
 export function remove( query ) {
 	return new Promise(
 		( resolve, reject ) => {
-			superagent.post('/db/remove', query)
+			superagent.post('/db/remove', query._id && {
+				query: { _id: query._id },
+				limit: 1,
+				etty: query._cls
+			} || query)
 			          .then(
 				          res => {
 					          resolve(res.body)
@@ -67,10 +71,10 @@ export function remove( query ) {
 	);
 };
 
-export function create( etty, record, cb ) {
+export function create( record, cb ) {
 	return new Promise(
 		( resolve, reject ) => {
-			superagent.post('/db/create', { etty, record })
+			superagent.post('/db/create', record)
 			          .then(
 				          res => {
 					          resolve(res.body);

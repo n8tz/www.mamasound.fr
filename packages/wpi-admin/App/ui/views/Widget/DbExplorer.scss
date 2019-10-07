@@ -15,9 +15,31 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+.rc-menu-submenu{
+  z-index: 10000000;
+}
 .DbExplorer {
-
+  //perspective: 200px;
+  .rc-menu,.controls{
+    width: 100%;
+    margin:0;
+    padding:0;
+    .rc-menu-submenu-title,.rc-menu-item{
+      margin-top: 5px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      cursor: pointer;
+    }
+  }
+  .queryBar{
+    >*{
+      display: inline-block;
+    }
+    .field_Text{
+      display: inline-block;
+      width: 200px;
+    }
+  }
   .TableGrid {
     position: absolute;
     width: 100%;

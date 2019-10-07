@@ -32,7 +32,8 @@ if ( typeof window !== "undefined" ) {
 			{
 				FocusedItems: {
 					etty     : 'FocusedItems',
-					limit    : 4,
+					limit    : 50,
+					orderby  : { updated: -1 },
 					query    : {},
 					mountKeys: ["targetEtty"],
 				},

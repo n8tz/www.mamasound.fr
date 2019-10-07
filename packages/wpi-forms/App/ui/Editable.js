@@ -18,10 +18,10 @@
 'use strict';
 import React, {Component} from "react";
 import {ContextMenu}      from "react-inheritable-contextmenu";
-import {scopeToProps}     from "react-scopes";
+import RS     from "react-scopes";
 
-
-@scopeToProps("DataProvider", "CurrentUser")
+@RS
+@RS.connect("DataProvider", "CurrentUser")
 export default class Editable extends Component {
 	
 	static defaultProps = {}

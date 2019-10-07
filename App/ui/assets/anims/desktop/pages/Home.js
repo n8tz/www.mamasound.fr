@@ -37,10 +37,10 @@ export const waypoints = [
 		at: 200,
 		id: "events"
 	},
-	{
-		at: 300,
-		id: "map"
-	},
+	//{
+	//	at: 300,
+	//	id: "map"
+	//},
 ];
 
 export const page              = {

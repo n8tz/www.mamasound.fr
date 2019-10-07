@@ -85,11 +85,14 @@ body, html, #app {
   height: 100%;
   top: 0px;
   left: 0;
-  perspective: 200px;
+  //perspective: 200px;
+  transform: translate3d(0,0,0);
   text-align: center;
 
 }
+.Toastify{
 
+}
 .AppBar > div {
 
   justify-content: space-between;

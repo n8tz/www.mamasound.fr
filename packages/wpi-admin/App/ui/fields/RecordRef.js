@@ -60,8 +60,9 @@ import Text                                                                     
 					return {
 						etty,
 						query,
-						skip : page * pageLength,
-						limit: pageLength,
+						orderby: { updated: -1 },
+						skip   : page * pageLength,
+						limit  : pageLength,
 						page
 					}
 				},
@@ -155,8 +156,11 @@ export default class RecordRef extends React.Component {
 	};
 	
 	render() {
-		let { defaultValue, value = defaultValue, Query, Selected, allowTypeSelection, SelectedQuery = {}, $actions } = this.props,
-		    { currentType = SelectedQuery.etty || allowTypeSelection[0], currentSearch = "", editing }                = this.state;
+		let { defaultValue, value = defaultValue, Query, Selected, allowTypeSelection, SelectedQuery = {}, $actions } = this.props;
+		if ( allowTypeSelection === true )
+			allowTypeSelection = Object.keys((entities));
+		let
+			{ currentType = SelectedQuery.etty || value && value.cls || allowTypeSelection[0], currentSearch = "", editing } = this.state;
 		return (
 			<>
 				<div className={"menu"}>

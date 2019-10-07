@@ -72,7 +72,7 @@ export function get( cls, objId ) {
 }
 ;
 
-export function create( etty, data, id = shortid.generate() ) {
+export function create( etty, data, id = etty + '.' + shortid.generate() ) {
 	return new Promise(
 		( resolve, reject ) => {
 			
@@ -81,7 +81,7 @@ export function create( etty, data, id = shortid.generate() ) {
 				( client, dbRelease ) => {
 					let db     = client.db("mamasound_fr"),
 					    table  = entities[etty].targetCollection || etty,
-					    record = { ...data, _id: id, _cls: etty };
+					    record = { ...data, _id: id, _cls: etty, updated: Date.now(), created: Date.now() };
 					
 					// assert.equal(null, err);
 					aliasAPI.applyAlias(
@@ -125,6 +125,7 @@ export function save( etty, id, data ) {
 							let record = {}
 							Object.assign(record, data)
 							alias && (record._alias = alias.alias);
+							record.updated = Date.now();
 							delete record._id;
 							db.collection(table)
 							  .update(

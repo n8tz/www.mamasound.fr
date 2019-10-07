@@ -26,13 +26,15 @@ import is            from "is";
 import React         from "react";
 import {ContextMenu} from 'react-inheritable-contextmenu';
 
+import {toast}              from 'react-toastify';
 import RS, {withStateMap} from "react-scopes";
 
 @RS(
 	{
 		@withStateMap(
 			{
-				record: undefined
+				record          : undefined,
+				setCurrentRecord: ( etty, id ) => ({ record: { id, etty } })
 			}
 		)
 		data: stores.MongoRecords,
@@ -80,7 +82,7 @@ export default class RecordEditor extends React.Component {
 		this.setState(
 			{
 				record: {
-					...this.props.record,
+					...this.state.record,
 					[event.target.name]: event.target.value
 				}
 			}
@@ -119,10 +121,11 @@ export default class RecordEditor extends React.Component {
 	save         = () => {
 		let isValid,
 		    { $actions } = this.props,
-		    record       = this.state.record || this.props.record;
+		    record       = this.state.record || this.props.record,
+		    etty         = record && record._cls || this.props.etty;
 		
 		//debugger
-		isValid = validate(record, record._cls)
+		isValid = validate(record, etty)
 		
 		if ( isValid !== true )
 			this.setState({ errors: isValid });
@@ -130,8 +133,22 @@ export default class RecordEditor extends React.Component {
 			this.setState({ errors: {} });
 			//console.log(record)
 			this.state.previewActive && $actions.db_clearPreview(record._id, true);
-			if ( confirm("Voulez vous vraiment enregistrer?") )
-				$actions.db_save(record)
+			if ( record._id ) {
+				if ( confirm("Voulez vous vraiment enregistrer?") )
+					$actions.db_save(record, res => {
+						//$actions.setCurrentRecord(etty, res.id);
+						toast("Saved !")
+						//this.setState({ record: { ...record, _id: res._id } });
+					})
+			}
+			else {
+				if ( confirm("Voulez vous vraiment créer cet item?") )
+					$actions.db_create(record, res => {
+						$actions.setCurrentRecord(etty, res.id);
+						toast("Saved !")
+						//this.setState({ record: { ...record, _id: res._id } });
+					})
+			}
 		}
 	}
 	
@@ -157,15 +174,14 @@ export default class RecordEditor extends React.Component {
 	}
 	
 	buildForm() {
-		let { record, id, DataProvider }
+		let { record = {}, id, DataProvider }
 			    = this.props,
-		    etty      = record._cls,
+		    etty      = record && record._cls || this.props.etty,
 		    recordDef = entities[etty],
 		    errors    = this.state.errors,
 		    form      = [],
 		    values    = {},
 		    key       = 0;
-		
 		if ( !recordDef )
 			return <div>Entity not found '{etty}'</div>
 		Object.keys(recordDef.fields).map(
@@ -190,48 +206,52 @@ export default class RecordEditor extends React.Component {
 						                onChange    : this.bindChange.bind(this),
 						                bsStyle     : errors[key] && errors[name].length && "error"
 					                }} />,
-					          errors[key] && errors[key].map(( e ) => <div className="formError">
+					          errors[name] && errors[name].map(( e ) => <div className="formError">
 						          <strong>Erreur:</strong> {e}</div>) ||
 					          '']);
 			});
 		return form;
 	}
 	
-	//static getDerivedStateFromProps( {record}, state ) {
-	//	return {record}
-	//}
+	componentDidUpdate( prevProps, prevState, snapshot ) {
+		if ( prevProps.record !== this.props.record && !this.state.record._id )
+			this.setState({ record: { ...this.props.record } })
+	}
+	
+	static getDerivedStateFromProps( { record, etty }, state ) {
+		if ( state.record )
+			return state;
+		record = record || {};
+		etty   = record._cls = record._cls || etty;
+		return { record, etty }
+	}
 	
 	
 	render() {
-		let { $actions, id, DataProvider, record }
+		let { $actions, id, DataProvider, }
 			    = this.props,
-		    {}  = this.state
-		;
-		if ( !record || !record._cls ) {
-			return <div></div>;
-		}
+		    { record = {}, etty, previewActive } = this.state;
 		
 		return (
-			<div className={"form_Default form_" + record._cls}
+			<div className={"form_Default form_" + etty}
 			>
 				<div className="title">
-					Edition : {entities[record._cls] && entities[record._cls].label}
+					Edition : {entities[etty] && entities[etty].label}
 					{
-						id &&
 						(
 							<a //href={ this.getUrlTo() }
-								target="_blank">{record._alias || id}</a>
+								target="_blank">{record._alias || record._id}</a>
 						) || ''
 					}
 				</div>
 				
 				<div className="form">
-					{record && record._cls && this.buildForm()}
+					{this.buildForm()}
 				</div>
 				<div className={"editor_btn"}>
 					<Button onClick={this.close}>Cancel</Button>
-					<Button onClick={this.clearPreview}>Clear preview</Button>
-					<Button onClick={this.preview}>Preview</Button>
+					{record._id && previewActive && <Button onClick={this.clearPreview}>Clear preview</Button>}
+					{record._id && <Button onClick={this.preview}>Preview</Button>}
 					<Button onClick={this.save}>Save</Button>
 				</div>
 				<ContextMenu native/>

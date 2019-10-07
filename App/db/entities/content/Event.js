@@ -16,16 +16,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import {types, validate} from 'App/db/fields';
 /**
  * @author Nathanael BRAUN
  *
  * Date: 24/11/2015
  * Time: 19:18
  */
-import React from 'react';
-
-
-import {types, validate} from 'App/db/fields';
+import React             from 'react';
 
 export default {
 	label         : "Événements",

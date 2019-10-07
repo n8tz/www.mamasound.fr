@@ -126,7 +126,7 @@ else {
 		"day:DayEventsQuery.curDay",
 		"viewType:DayEventsQuery.viewType"
 	])
-@scopeToProps("Selected", "Styles", "Events", "UserGeoLocation", "DataProvider", "Quartiers")
+@scopeToProps("Selected", "Styles", "TagManager", "Events", "UserGeoLocation", "DataProvider", "Quartiers")
 export default class EventMap extends React.Component {
 	static propTypes = {};
 	state            = {};
@@ -184,6 +184,7 @@ export default class EventMap extends React.Component {
 	render() {
 		let {
 			    Events,
+			    TagManager,
 			    Events: { center = {}, POIs = [], zoom } = {},
 			    Styles: { HomePage }, UserGeoLocation, Selected,
 			    $actions, DataProvider, Quartiers, style
@@ -293,26 +294,30 @@ export default class EventMap extends React.Component {
 								position={{ lat: UserGeoLocation.pos.latitude, lng: UserGeoLocation.pos.longitude }}/>
 						}
 						<GeoJSON data={Quartiers.data}
+						         style={( feature, layer ) => {
+							         let active = TagManager.selectedTags[feature.properties.LIBSQUART];
+							
+							         return {
+								         weight     : 2,
+								         opacity    : .5,
+								         color      : 'black',
+								         dashArray  : '3',
+								         fillColor  : active ? "blue" : "white",
+								         fillOpacity: active ? .5 : 0
+							         }
+						         }}
 						         onMouseOver={e => {
 							         e.propagatedFrom.setStyle({
-								                                   fillOpacity: .5
+								                                   //fillOpacity: .5
 							                                   });
 						         }}
 						         onMouseOut={e => {
 							         e.propagatedFrom.setStyle({
-								                                   fillOpacity: 0
+								                                   //fillOpacity: 0
 							                                   });
 						         }}
 						         onClick={e => {
-							         $actions.setCurrentArea(e.propagatedFrom.feature.properties.LIBSQUART)
-						         }}
-						         style={{
-							         fillColor  : "white",
-							         weight     : 2,
-							         opacity    : .5,
-							         color      : 'black',
-							         dashArray  : '3',
-							         fillOpacity: 0
+							         $actions.toggleTag(e.propagatedFrom.feature.properties.LIBSQUART)
 						         }}/>
 					</Map>
 					

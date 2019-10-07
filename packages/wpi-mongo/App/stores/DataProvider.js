@@ -15,12 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {get, query, save} from 'App/db';
-import debounce           from 'debounce'
-import is                 from 'is'
-import React              from 'react'
-import {Store}            from "react-scopes";
-import xxhashjs           from 'xxhashjs'
+import {create, get, query, remove, save} from 'App/db';
+import debounce                           from 'debounce'
+import is                                 from 'is'
+import React                              from 'react'
+import {Store}                            from "react-scopes";
+import xxhashjs                           from 'xxhashjs'
 
 var H = xxhashjs.h64(0)	// seed = 0xABCD
 
@@ -60,13 +60,40 @@ export default class DataProvider extends Store {
 		db_clearPreview( id, noRefresh ) {
 			this.clearRecordPreview(id, noRefresh)
 		},
-		db_create( etty, record, cb ) {
+		db_create( record, cb ) {
+			create(record)
+				.then(
+					( data ) => {
+						cb && cb(data);
+						this.pushRemoteRecord(record)
+						this.flushAndReload()
+					},
+					( err ) => {
+						if ( err ) {
+							cb && cb(err)
+						}
+					}
+				);
 		},
-		db_remove( etty, query, cb ) {
+		db_remove( record, cb ) {
+			remove(record)
+				.then(
+					( data ) => {
+						cb && cb(data);
+						this.clearRecord(record.id)
+						this.flushAndReload()
+					},
+					( err ) => {
+						if ( err ) {
+							cb && cb(err)
+						}
+					}
+				);
 		}
 	};
 	data           = {
-		___recToQuery___: {}
+		___recToQuery___: {},
+		___hToQuery___  : {}
 	};
 	
 	constructor() {
@@ -121,6 +148,10 @@ export default class DataProvider extends Store {
 		!noRefresh && realRec && this.pushRemoteRecord(realRec);
 	}
 	
+	clearRecord( id, noRefresh ) {
+		delete this.data[id];
+	}
+	
 	/**
 	 * Update record in the store & dispatch it to the listeners
 	 * @param etty
@@ -159,6 +190,7 @@ export default class DataProvider extends Store {
 		
 		this.data[hash]                  = results;
 		this.updatedRecords[hash]        = results;
+		//this.data.___hToQuery___[hash]   = query;
 		this.data.___recToQuery___[hash] = results.items.map(r => r._id);
 		
 		!noMap && results.items.forEach(

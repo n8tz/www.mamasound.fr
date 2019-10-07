@@ -156,7 +156,7 @@ export default {
 			defaultProps: {
 				defaultValue      : false,
 				disallowId        : true,
-				allowTypeSelection: (typeof etty === 'string') ? [etty] : undefined,
+				allowTypeSelection: (typeof etty === 'string') ? [etty] : etty,
 				...defaultProps,
 				
 			},

@@ -111,7 +111,7 @@ export default class SearchBar extends React.Component {
 				title  : [],
 				icon   : [
 					{
-						from    : startPos,
+						from    : startPos + openDuration,
 						duration: openDuration,
 						apply   : {
 							opacity: -.5,
@@ -125,7 +125,7 @@ export default class SearchBar extends React.Component {
 						from    : startPos + openDuration,
 						duration: closeDuration,
 						apply   : {
-							opacity: .5,
+							//opacity: .5,
 							//top    : "-" + minHeight,
 							//left   : ["-100%", maxHeight, "-" + minHeight],
 							//height : ["-" + maxHeight, minHeight, minHeight],
@@ -185,15 +185,11 @@ export default class SearchBar extends React.Component {
 				value={this.state.search}
 				onChange={this.handleSearchChange}
 			/>
-			<Fab className={"optIcon"}>
-				<div className={"material-icons icon"}>search</div>
-			</Fab>
 		</div>;
 	}
 	
 	renderIcon() {
-		const { TagManager, strechProps, style } = this.props;
-		return null;
+		return <img src={require('App/ui/assets/images/detectCat.png')}/>;
 	}
 	
 	calendar = React.createRef();
@@ -205,7 +201,7 @@ export default class SearchBar extends React.Component {
 			                ref={this.calendar}
 			                endDate={moment(appState.curDay).add(appState.dayCountByViewType[0], 'day')}
 			                onChange={this.handleDateChange}/>
-			                
+			
 			<div className={"selectedTags"}>
 				{
 					TagManager && TagManager.selected.map(

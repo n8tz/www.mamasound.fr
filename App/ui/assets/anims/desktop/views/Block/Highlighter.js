@@ -54,8 +54,8 @@ export const slider           = {
 	zIndex   : "250",
 	transform: {
 		perspective: "200px",
-		translateY : '55px',
-		translateZ : "-20px",
+		//translateY : '55px',
+		//translateZ : "-20px",
 		//rotateX    : "2deg"
 	}
 };
@@ -74,8 +74,8 @@ export const sliderScroll     = [
 		duration: 50,
 		apply   : {
 			transform: {
-				translateY: '-50px',
-				translateZ: "20px",
+				//translateY: '-50px',
+				//translateZ: "20px",
 			}
 		}
 	},
@@ -105,8 +105,8 @@ export const slideScroll      = {
 			duration: 100,
 			apply   : {
 				transform: {
-					translateY: "-8px",
-					translateZ: "20px",
+					//translateY: "-8px",
+					//translateZ: "20px",
 					rotateX   : "-2deg"
 				}
 			}

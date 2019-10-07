@@ -64,7 +64,7 @@ export default class Media extends React.Component {
 		if ( ettys.indexOf("Video") != -1 )
 			fileTypes.push(".avi", ".mp4", ".mkv", ".webm", ".flv", ".3gp", ".mpeg", ".mpg");
 		if ( ettys.indexOf("Image") != -1 )
-			fileTypes.push(".jpg", ".jpeg", ".bmp", ".gif", ".png");
+			fileTypes.push(".jpg", ".jpeg", ".bmp", ".gif", ".png", ".jfif");
 		if ( ettys.indexOf("Document") != -1 )
 			fileTypes.push(".txt", ".pdf", ".doc", ".docx", ".xls");
 		// debugger;

@@ -33,6 +33,15 @@
     display: block;
   }
 
+  > .icon {
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
+    background: #1f8de2;
+  }
+
   .tag {
 
     border-radius: 1em;
@@ -46,6 +55,7 @@
   .areaTags, .styleTags, .priceTags {
     max-height: 35%;
     overflow: auto;
+
     .tag {
       display: inline-block;
       white-space: nowrap;
