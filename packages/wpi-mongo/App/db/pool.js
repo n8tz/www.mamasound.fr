@@ -33,7 +33,7 @@ let cfg = {
 	DB_TASK_RELEASE_TM: 1000 * 30, //30 sec : max db task time
 	DB_REPORT_TM      : 1000 * 3,//30s
 	MAX_MONGO_THREAD  : 30,// max concurrent mongo db active links
-	DB_URL            : process.env.MONGO_URI||"mongodb://localhost:27017",
+	DB_URL            : process.env.MONGO_URI || "mongodb://localhost:27017",
 	DB_NAME           : 'mamasound_fr'
 }
 

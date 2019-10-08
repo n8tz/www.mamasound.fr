@@ -33,7 +33,7 @@ export function mount( db, record, toMountKeys, cb ) {
 			    refs = {},
 			    i    = 1;
 			
-			Promise.all(
+			Promise.allSettled(
 				r.reduce(
 					( refsList, record ) => {
 						toMountKeys.forEach(
@@ -54,7 +54,9 @@ export function mount( db, record, toMountKeys, cb ) {
 				)
 			)
 			       .then(r => resolve(refs))
-			       .catch(r => resolve(refs))
+			       .catch(r => {
+				       resolve(refs)
+			       })
 		}
 	)
 }

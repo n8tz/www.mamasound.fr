@@ -48,30 +48,12 @@ if ( typeof window !== "undefined" ) {
 			{
 				@asRef
 				items  : "Queries.FocusedItems.items",
+				@asRef
+				refs  : "Queries.FocusedItems.refs",
 				imgKeys: ["previewImage"]
 			}
 		)
 		MountedItems: stores.ImgFieldsLoader,
-		@withStateMap(
-			{
-				HomeGridLayout: {
-					id       : "HomeGridLayout",
-					etty     : "Assets",
-					"default": {
-						layout: []
-					}
-				}
-			}
-		)
-		GridLayout  : stores.MongoRecords,
-		@asStore
-		Grid        : {
-			@asRef
-			items: "MountedItems.items",
-			
-			@asRef
-			layout: "GridLayout.HomeGridLayout.layout",
-		},
 		
 		
 	}

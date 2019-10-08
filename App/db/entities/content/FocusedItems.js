@@ -57,8 +57,14 @@ export default {
 		"_public"        : types.boolean("Publier :", false),
 		//"publishTs" : "<timestamp>",// ?
 		"label"       : types.labels(),
-		"previewImage": types.media({ allowedTypes: "Image" }, "Background :"),
 		"resume"      : types.descriptions('Resumé'), // TODO refactor as "summary"
+		
+		"previewImage": types.media({ allowedTypes: "Image" }, "Preview (~12/5 fb headers):"),
+		"background"  : types.media({ allowedTypes: ["Image", "Video"] }, "Background (gd image/video de fond (video LEGERE)):"),
+		"website"     : types.labels("Site web :"),
+		"fbPage"      : types.labels("Page Facebook :"),
+		"scPage"      : types.labels("Page SoundCloud :"),
+		"ytPage"      : types.labels("Page Youtube :"),
 		"targetEtty"  : types.picker(true, {
 			//allowTypeSelection: ["Concert", "Theatre", "Expo", "Event", "Article", "Collection", "Video", "Page"],
 			storeTypedItem    : true,

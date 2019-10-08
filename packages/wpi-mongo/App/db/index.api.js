@@ -35,8 +35,10 @@ export function get( cls, objId ) {
 			
 			pushDbTask(
 				( client, dbRelease ) => {
-					let db = client.db("mamasound_fr");
-					
+					let db    = client.db("mamasound_fr");
+					let _etty = cls;
+					while ( entities[_etty].targetCollection )
+						_etty = entities[_etty].targetCollection;
 					aliasAPI.getAlias(
 						cls,
 						objId,
@@ -46,18 +48,23 @@ export function get( cls, objId ) {
 							//	dbRelease();
 							//	return cb(404);
 							//}
-							db.collection(cls)
+							//console.warn("get ", _etty, cls, objId);
+							let query = { _id: alias && alias.target.objId || objId };
+							if ( _etty !== cls )
+								query._cls = cls;
+							db.collection(_etty)
 							  .findOne(
-								  { _id: alias && alias.target.objId || objId },
+								  query,
 								  ( err, docs ) => {
 									  dbRelease();
 									
 									  if ( !docs ) {
-										  console.info("Not found ", cls, objId)
+										  console.info("Not found ", cls, objId);
+										  //debugger
 										  reject(err || 404);
 										  return;
 									  }
-									  resolve({ _cls: cls, ...docs })
+									  resolve({ ...docs, _cls: cls })
 									
 								  }
 							  );

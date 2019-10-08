@@ -57,7 +57,7 @@ export default class Widget extends React.Component {
 				position: this.state.position || record.position
 			});
 	};
-	
+	//0235034185 service
 	close = ( e, d ) => {
 		let { $actions, children } = this.props;
 		e.preventDefault();
@@ -71,7 +71,15 @@ export default class Widget extends React.Component {
 			    record, children, disabled,
 			    $actions, onSelect, selected, title
 		    }     = this.props,
-		    state = this.state;
+		    state = this.state,
+		    wPos  = state.position || position,
+		    wSize = { ...(state.size || size) };
+		if ( !__IS_SERVER__ ) {
+			if ( window.innerHeight < (wPos.y + wSize.height) )
+				wSize.height = Math.min(window.innerHeight, wPos.y + wSize.height) - wPos.y - 5
+			if ( window.innerWidth < (wPos.x + wSize.width) )
+				wSize.width = Math.min(window.innerWidth, wPos.x + wSize.width) - wPos.x - 5
+		}
 		return (
 			<Rnd
 				className={"Widget"}
@@ -79,7 +87,7 @@ export default class Widget extends React.Component {
 				enableResizing={disabled}
 				dragHandleClassName={"widgetHandle"}
 				style={selected ? { zIndex: 2000000 } : undefined}
-				size={state.size || size}
+				size={wSize}
 				position={state.position || position}
 				onDragStop={this.saveState}
 				onResizeStop={this.saveState}

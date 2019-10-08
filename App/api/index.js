@@ -94,7 +94,7 @@ export function service( server ) {
 	server.get(
 		'*',
 		function ( req, res, next ) {
-			debugger
+			//debugger
 			if ( /\.\w+$/ig.test(req.url) )
 				return next()
 			let key = config.PUBLIC_URL + "_page_" + req.url + "_" + req.device.type + "_" + (req.user && req.user.login);

@@ -21,8 +21,10 @@ import config from "App/config";
 const aliasAPI = require("App/db/aliasHelpers"),
       db       = require("App/db");
 
-export default ( server, http ) => {
-	console.log("wi-layer-dev-tools server running ! :D");
+export const name          = "dev-tools service";
+export const priorityLevel = 1000000;
+
+export function service( server ) {
 	server.get(
 		'/devTools/clearCache',
 		function ( req, res, next ) {

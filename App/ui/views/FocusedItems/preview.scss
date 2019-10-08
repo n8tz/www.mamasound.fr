@@ -27,7 +27,7 @@
     position: absolute;
     right: 5%;
     width: 60%;
-    height: 50%;
+    height: 100%;
     //background: #2e2e2e;
     img {
       @include use_hvCenteredAbs();
@@ -40,7 +40,8 @@
         //@include withTranspaMask();
       }
       //width: 100%;
-      min-width:100%;
+      min-width: 100%;
+      max-height: 90vh;
     }
 
     img.leftGhost {
