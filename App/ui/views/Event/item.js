@@ -88,7 +88,7 @@ export default class eventItem extends React.Component {
 				(record._cls == "Expo")
 				&&
 				<div className="date date_exp">
-					<span>
+					<span className={"labelPeriod"}>
                         {("Du " + start.format("DD/MM"))}
 						<br/>
 						{("Au " + end.format("DD/MM"))}
@@ -102,9 +102,9 @@ export default class eventItem extends React.Component {
 			<div className="icon">
 				{
 					record.category && refs[record.category.objId] &&
-					<img src={refs[record.category.objId].icon}/>
+					<Comps.Image src={refs[record.category.objId].icon}/>
 					||
-					<img src={defaultPreview[record._cls]} style={{ transform: "scale(.8)" }}/>
+					<Comps.Image src={defaultPreview[record._cls]} style={{ transform: "scale(.8)" }}/>
 				}
 			</div>
 			{/*{ record.previewImage &&*/}
