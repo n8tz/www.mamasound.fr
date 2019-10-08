@@ -84,9 +84,8 @@ export default {
 		setPageFocus( _currentPageFocus, doFocus ) {
 			let { currentPageFocus, selectedEventId } = this.nextState;
 			if ( _currentPageFocus !== currentPageFocus || doFocus ) {
-				if ( selectedEventId && _currentPageFocus === 'events' )
+				if ( selectedEventId && _currentPageFocus !== 'events' )
 					this.$actions.selectEvent();
-				console.log(_currentPageFocus)
 				return { currentPageFocus: _currentPageFocus, doFocus };
 			}
 		},
@@ -99,9 +98,15 @@ export default {
 		},
 		selectEvent( selectedEvent, selectedEventDT, showPageBlock ) {
 			let { curDay, currentPageFocus } = this.nextState;
-			if ( selectedEvent )
-				currentPageFocus = 'map';
-			selectedEvent && this.$actions.history_set("/" + selectedEvent._cls + '/' + moment(selectedEventDT).format("DD-MM-YY") + "/" + (selectedEvent._alias || selectedEvent._id))
+			if ( selectedEvent && selectedEvent._id === this.nextState.selectedEventId )
+				selectedEvent = undefined;
+			//	currentPageFocus = 'map';
+			if ( selectedEvent ) {
+				this.$actions.history_set("/" + selectedEvent._cls + '/' + moment(selectedEventDT).format("DD-MM-YY") + "/" + (selectedEvent._alias || selectedEvent._id))
+			}
+			else {
+				this.$actions.history_set("/")
+			}
 			return {
 				selectedEventId: selectedEvent && selectedEvent._id,
 				selectedEventDT,

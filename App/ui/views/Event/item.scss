@@ -65,7 +65,19 @@
     display: inline-block;
   }
 
-  .start {
+  .date {
+    @include use_hvCenteredContent();
+    float: left;
+    height: 100%;
+    padding-top: .1em;
+    padding-left: .2em;
+    padding-right: 1em;
+    width: 3em;
+    font-size: 1.5em;
+    font-family: $hoursFontFamily;
+  }
+
+  .date_exp {
     @include use_hvCenteredContent();
     float: left;
     height: 100%;
@@ -75,6 +87,16 @@
     width: 3em;
     font-size: 1.5em;
 
+    > span {
+      text-align: center;
+    }
+
+    .label {
+      font-size: .6em;
+      display: block;
+      text-align: center;
+      font-family: $mainFontFamily;
+    }
   }
 
   .ShareBox {
@@ -146,7 +168,7 @@
       padding-top: .1em;
     }
 
-    .start {
+    .date, .date_exp {
       @include use_hvCenteredContent();
       float: left;
       height: 100%;
@@ -176,17 +198,17 @@
   }
 
   //&.EventTheatre .icon,
-  &.EventTheatre .start {
+  &.EventTheatre .date {
     background: rgba(97, 36, 153, 0.68);
   }
 
   //&.EventConcert .icon,
-  &.EventConcert .start {
+  &.EventConcert .date {
     background: rgba(207, 30, 46, 0.67);
   }
 
   //&.EventExpo .icon,
-  &.EventExpo .start {
+  &.EventExpo .date {
     background: rgba(1, 199, 151, 0.81);
   }
 }

@@ -117,7 +117,7 @@ export default class DataProvider extends Store {
 	 * @param id
 	 * @returns {*}
 	 */
-	getRecord( etty, id ) {
+	getRecord( id ) {
 		return this.data
 			&& this.data[id];
 	}
@@ -521,7 +521,7 @@ export function updateWatchers( target, DataProvider, idKeys, changes, isQuery )
 	Object.keys(idKeys)
 	      .forEach(
 		      idKey => {
-			      let newValue = isQuery ? changes[idKey] : idKeys[idKey] && changes[idKey].id;
+			      let newValue = isQuery ? changes[idKey] : idKeys[idKey] && (changes[idKey].id || idKeys[idKey]._id);
 			      if ( idKeys[idKey] &&
 				      (!watchs[idKey] || watchs[idKey].value !== newValue)
 			      ) {
@@ -529,8 +529,10 @@ export function updateWatchers( target, DataProvider, idKeys, changes, isQuery )
 					      (
 						      isQuery
 						      ? !DataProvider.getQuery(newValue)
-						      : !DataProvider.getRecord(idKeys[idKey].etty, newValue)
+						      : !DataProvider.getRecord(newValue)
 					      );
+				
+				
 				      target.__activeRequests++;
 				      hasChanges = true;
 				      if ( !isQuery )
@@ -604,7 +606,7 @@ export function getRecordsFromIdKeys( DataProvider, idKeys, changes ) {
 	Object.keys(idKeys)
 	      .forEach(
 		      idKey => {
-			      results[idKeys[idKey].target] = DataProvider.getRecord(idKeys[idKey].etty, walk(changes, idKey))
+			      results[idKeys[idKey].target] = DataProvider.getRecord(walk(changes, idKey))
 		      }
 	      )
 	return results;

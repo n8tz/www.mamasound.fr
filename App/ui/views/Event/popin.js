@@ -23,7 +23,6 @@ import React from "react";
 
 export default ( { record, record: { title, place, category }, onClose, refs, className, style, onClick, ref } ) =>
 {
-	debugger
 	return (
 		<div className={"Popin " + (className || '')} style={{ ...(style || {}) }} ref={ref} onClick={onClick}>
 			{/*<div className="closeBtn" onClick={ onClose }/>*/}
