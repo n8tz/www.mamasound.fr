@@ -58,7 +58,7 @@ export default class Calendar extends React.Component {
 		const { open }                                      = this.state;
 		
 		return <div className={"Calendar"}>
-			<div onClick={this.toggle}>
+			<div onClick={this.toggle} className={"datePeriod"}>
 				{
 					endDate ?
 					<>Du {moment(startDate).format("dddd DD MMMM")} au {moment(endDate).format("dddd DD MMMM")}</>

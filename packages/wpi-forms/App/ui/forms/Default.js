@@ -14,20 +14,16 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import Button from '@material-ui/core/Button';
-
-
-import entities from 'App/db/entities';
-import validate from 'App/db/validate';
-
-import stores        from 'App/stores/(*).js';
-import {fields}      from "App/ui";
-import is            from "is";
-import React         from "react";
-import {ContextMenu} from 'react-inheritable-contextmenu';
-
-import {toast}              from 'react-toastify';
+import Button             from '@material-ui/core/Button';
+import entities           from 'App/db/entities';
+import validate           from 'App/db/validate';
+import stores             from 'App/stores/(*).js';
+import {fields}           from "App/ui";
+import is                 from "is";
+import React              from "react";
+import {ContextMenu}      from 'react-inheritable-contextmenu';
 import RS, {withStateMap} from "react-scopes";
+import {toast}            from 'react-toastify';
 
 @RS(
 	{
@@ -146,7 +142,7 @@ export default class RecordEditor extends React.Component {
 					$actions.db_create(record, res => {
 						$actions.setCurrentRecord(etty, res.id);
 						toast("Saved !")
-						//this.setState({ record: { ...record, _id: res._id } });
+						this.setState({ record: undefined });
 					})
 			}
 		}

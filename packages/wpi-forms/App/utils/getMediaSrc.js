@@ -24,6 +24,8 @@ export default function ( src, dims ) {
 	src = src && src.replace('http://' + config.MEDIA_URL + '/', '');
 	src = src && src.replace('https://' + config.MEDIA_URL + '/', '');
 	//src = src && src.replace(/^([^\?]*)(?:\?.*)$/, "$1");
+	if ( /^https?\:/.test(src) )
+		return src;
 	if ( src && /^[^\/\s\!\?]/.test(src) )// not / & ? is local resource
 		src = "http://" + config.MEDIA_URL + "/" + src + (p ? '?' + p : '');
 	else if ( src && /^\//.test(src) )// starting with / is domain based

@@ -24,10 +24,11 @@ let currentLayer;
 export default class PopAnywhere extends Component {
 	
 	static defaultProps = {
-		onClickOut: v => false,
-		onMouseOut: v => false,
-		hovering  : false,
-		zIndex    : 1000000
+		onClickOut : v => false,
+		onMouseOut : v => false,
+		hovering   : false,
+		keepVisible: true,
+		zIndex     : 1000000
 	}
 	
 	
@@ -60,10 +61,14 @@ export default class PopAnywhere extends Component {
 		let wrapper    = this._clone,
 		    body       = document.body,
 		    hoverLayer = this._hoverLayer,
-		    box        = wrapper && wrapper.getBoundingClientRect(),
+		    box        = wrapper && this.getBoxState(wrapper, true),
 		    boxStyle   = wrapper && window.getComputedStyle(wrapper),
 		    dummy;
 		if ( !wrapper ) return;
+		if ( window.innerHeight < (box.top + box.height) )
+			box.top += window.innerHeight - (box.top + box.height);
+		if ( window.innerWidth < (box.left + box.width) )
+			box.top += window.innerWidth < (box.left + box.width);
 		dummy                = hoverLayer.firstElementChild;
 		dummy.style.position = "absolute";
 		dummy.style.width    = wrapper.offsetWidth + "px";
@@ -97,12 +102,23 @@ export default class PopAnywhere extends Component {
 	}
 	
 	
+	getBoxState( wrapper, force ) {
+		let box = (force || !this._lastBox) && wrapper.getBoundingClientRect();
+		return this._lastBox = (!force && this._lastBox) || {
+			top   : box.top,
+			left  : box.left,
+			width : box.width,
+			height: box.height,
+		};
+	}
+	
+	
 	applyHovering( props ) {
 		props          = props || this.props;
 		let wrapper    = ReactDOM.findDOMNode(this.refs.wrapper),
 		    body       = document.body,
 		    hoverLayer = this._hoverLayer,
-		    box        = (this._lastBox = wrapper.getBoundingClientRect()),
+		    box        = this.getBoxState(wrapper),
 		    boxStyle   = (this._lastBoxStyle = window.getComputedStyle(wrapper)),
 		    dummy;
 		
@@ -134,11 +150,16 @@ export default class PopAnywhere extends Component {
 				this.props.hovering && this.props.onMouseOut();
 			}
 			
-			dummy                = document.createElement('div');
+			if ( window.innerHeight < (box.top + box.height) )
+				box.top += window.innerHeight - (box.top + box.height);
+			if ( window.innerWidth < (box.left + box.width) )
+				box.top += window.innerWidth < (box.left + box.width);
+			
+			dummy                = document.createElement('span');
 			dummy.className      = "PopAnywhere " + (props.className || '');
 			dummy.style.position = "absolute";
-			dummy.style.width    = wrapper.offsetWidth + "px";
-			dummy.style.height   = wrapper.offsetHeight + "px";
+			dummy.style.width    = box.width + "px";
+			dummy.style.height   = box.height + "px";
 			dummy.style.top      = box.top + "px";
 			dummy.style.left     = box.left + "px";
 			dummy.style.fontSize = boxStyle.getPropertyValue('font-size');

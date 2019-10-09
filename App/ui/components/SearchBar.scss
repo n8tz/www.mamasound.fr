@@ -76,13 +76,20 @@
   }
 
   .areaTags, .styleTags, .priceTags {
-    &:first-child{
-      margin-left: 75px;
+    > span:first-child {
+      margin-left: 65px;
     }
-    max-height: 35%;
+
+
     //overflow: auto;
     display: inline-block;
     text-align: right;
+
+    max-height: 50px;
+
+    &.open {
+      max-height: none;
+    }
 
     .tag {
       display: inline-block;
@@ -118,11 +125,11 @@
 
     .input {
       display: inline-block;
-      width: calc(100% - 3.75em);
+      width: 100%;
       //background: #d6d6d6;
       padding: .2em;
-      margin-left: 3.5em;
-      margin-right: .2em;
+      //margin-left: 3.5em;
+      //margin-right: .2em;
       border-radius: .5em;
       //border: solid 1px rgba(0, 0, 0, 0.38);
 

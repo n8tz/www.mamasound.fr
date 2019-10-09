@@ -118,12 +118,12 @@ export const focused          = {
 	bottom   : 0,
 	//paddingBottom: [sliderHeight, 10],
 	//paddingTop   : "3em",
-	left     : "0%",
+	left     : "50%",
 	top      : headerMiniHeight,
-	width    : '100vh',
+	width    : '100vw',
 	opacity  : 0,
 	transform: [{
-		//translateX: "-50%",
+		translateX: "-50%",
 	}, {}, { translateY: '0%' }]
 };
 export const focusedScroll    = {

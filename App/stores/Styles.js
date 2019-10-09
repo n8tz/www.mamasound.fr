@@ -44,8 +44,13 @@ export default class Styles extends Store {
 			"resize",
 			this._onResize = ( e ) => {//@todo
 				let currentBrkPts;
-				if ( window.innerWidth >= 900 )
-					currentBrkPts = "desktop";
+				if ( window.innerWidth >= 900 ) {
+					if ( window.innerHeight >= 850 )
+						currentBrkPts = "desktop";
+					else
+						currentBrkPts = "desktopSmall";
+					
+				}
 				if ( window.innerWidth <= 900 )
 					currentBrkPts = "phone";
 				this.setState({ currentBrkPts })

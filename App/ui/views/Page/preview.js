@@ -24,11 +24,8 @@
  */
 'use strict';
 
-import React   from "react";
-import moment  from "moment";
 import {Comps} from "App/ui";
-
-import {NavLink} from "react-router-dom";
+import React   from "react";
 
 
 export default (
@@ -52,6 +49,14 @@ export default (
 			record.previewImage &&
 			<div className="preview">
 				<Comps.Image src={record.previewImage} w={500}/>
+			</div>
+		}
+		{
+			record.background &&
+			<div className="background">
+				<Comps.Image src={record.background} className={"leftGhost"}/>
+				<Comps.Image src={record.background} className={"rightGhost"}/>
+				<Comps.Image src={record.background}/>
 			</div>
 		}
 		{/*{*/}

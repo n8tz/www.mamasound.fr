@@ -119,7 +119,7 @@ class RecordRefRenderer extends React.Component {
 				    return {
 					    etty   : _etty, _etty: etty,
 					    query,
-					    orderby: { updated: 1 },
+					    orderby: { updated: -1 },
 					    skip   : page * pageLength,
 					    limit  : pageLength,
 					    page

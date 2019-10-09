@@ -18,19 +18,12 @@
 
 .Footer {
 
-  .toolbar {
-    position: absolute;
-    width: 100vw;
-    left: 50%;
-    top: 0px;
-    transform: translate(-50%, 0%);
-    //width: 100%;
-    text-align: center;
-    //margin-top: 5px;
-    height: 50px;
-    overflow: hidden;
-    background: grey;
-
+  @include withMaskTop();
+  width: 100vw;
+  //
+  .maskContent {
+    @include use_hvCenteredAbs();
+    background: white;
     > button {
       //@include use_hvCenteredContent();
       margin-bottom: 5px !important;
@@ -50,6 +43,21 @@
         }
       }
     }
+  }
+
+  .toolbar {
+    position: absolute;
+    width: 100vw;
+    left: 50%;
+    top: 0px;
+    transform: translate(-50%, 0%);
+    //width: 100%;
+    text-align: center;
+    //margin-top: 5px;
+    height: 50px;
+    overflow: hidden;
+    background: grey;
+
   }
 
 

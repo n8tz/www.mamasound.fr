@@ -33,8 +33,7 @@ export default {
 	appState: {
 		
 		currentPageFocus  : "head",// head, events, page
-		selectedFocus     : { id: "Page.SkxesB7ugG", etty: 'Page' },
-		selectedPage      : { id: "Page.SkxesB7ugG", etty: 'Page' },
+		selectedFocus     : { id: "Page.9HB7Gr4V", etty: 'Page' },
 		selectedEvent     : undefined,
 		selectedEventId   : undefined,
 		selectedEventDT   : undefined,
@@ -60,7 +59,6 @@ export default {
 					selectedEventId : matches[3],
 					selectedEventDT : moment(matches[2], "DD-MM-YY").startOf("day").valueOf(),
 					selectedEvent   : { id: matches[3], etty: "Event" },
-					selectedPage    : { id: matches[3], etty: "Event" },
 					currentPageFocus: "events"
 				}
 			}
@@ -120,17 +118,6 @@ export default {
 				selectedEvent  : selectedEvent && { id: selectedEvent._id, etty: selectedEvent._cls } || null
 			};
 		},
-		selectPage( selectedPage ) {
-			let { currentPageFocus } = this.nextState;
-			if ( selectedPage )
-				currentPageFocus = 'page';
-			return {
-				currentPageFocus,
-				doFocus        : true,
-				selectedEventId: null,
-				selectedPage   : selectedPage && { id: selectedPage, etty: "Page" } || null
-			};
-		},
 		selectFocus( selectedFocus, cls ) {
 			let { currentPageFocus } = this.nextState;
 			if ( selectedFocus && currentPageFocus === 'page' )
@@ -166,8 +153,6 @@ export default {
 			Focused: "appState.selectedFocus",
 			@asRef
 			Event  : "appState.selectedEvent",
-			@asRef
-			Page   : "appState.selectedPage"
 		}
 	)
 	Selected: stores.MongoRecords,
@@ -253,9 +238,11 @@ export default {
 		
 		// actions
 		newWidget( type, props = {}, Default ) {
+			let _id = shortid.generate();
+			this.$actions.selectWidget(_id)
 			return {
 				items: [...this.nextState.items, {
-					_id     : shortid.generate(),
+					_id,
 					size    : { width: 600, height: 800 },
 					type,
 					props,

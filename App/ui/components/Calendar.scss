@@ -19,6 +19,10 @@
 .Calendar {
   position: relative;
 
+  .datePeriod {
+    cursor: pointer;
+  }
+
   .rlc-calendar {
     position: absolute;
     top: 100%;

@@ -65,6 +65,22 @@ export const SearchBarProps = {
 		top     : ["100%", "-" + minHeight],
 		height  : "40px"
 	},
+	titleAxis: [
+		{
+			from    : startPos,
+			duration: openDuration,
+			apply   : {
+				paddingLeft: "3em"
+			}
+		},
+		{
+			from    : startPos + openDuration,
+			duration: closeDuration,
+			apply   : {
+				paddingLeft: "-3em"
+			}
+		}
+	],
 	rootAxis: [
 		{
 			from    : 50,
@@ -99,8 +115,8 @@ export const SearchBarProps = {
 	]
 };
 export const StretchBox     = {
-	width               : "15vw",
-	boxStyle: {
+	width    : "15vw",
+	boxStyle : {
 		position            : "relative",
 		width               : "15vw",
 		maxWidth            : "220px",
@@ -111,7 +127,7 @@ export const StretchBox     = {
 		overflow            : "hidden",
 		display             : "inline-block",
 	},
-	rootAxis: [
+	rootAxis : [
 		{
 			from    : startPos,
 			duration: openDuration,
@@ -129,7 +145,7 @@ export const StretchBox     = {
 			}
 		}
 	],
-	iconAxis: [
+	iconAxis : [
 		{
 			from    : startPos,
 			duration: openDuration,

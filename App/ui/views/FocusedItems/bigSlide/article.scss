@@ -28,6 +28,13 @@
     font-size: 12px;
   }
 
+  .background {
+    position: absolute;
+    top: 0em;
+    bottom: 0px;
+    left: 50%;
+    transform: translateY(-50%);
+  }
 
   &.smallView {
 

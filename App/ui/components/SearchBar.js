@@ -108,7 +108,7 @@ export default class SearchBar extends React.Component {
 				]
 			},
 			axis        : {
-				title  : [],
+				title  : props.titleAxis || [],
 				icon   : props.iconAxis || [
 					{
 						from    : startPos + openDuration,
@@ -176,9 +176,6 @@ export default class SearchBar extends React.Component {
 	renderTitle() {
 		const { TagManager, strechProps, style } = this.props;
 		return <div className={"SearchBarForm"}>
-			{/*<Fab className={"searchIcon"}>*/}
-			{/*	<div className={"material-icons icon"}>search</div>*/}
-			{/*</Fab>*/}
 			<TextField
 				className={"input"}
 				placeholder={"Groupe, quartier, style, date, ..."}

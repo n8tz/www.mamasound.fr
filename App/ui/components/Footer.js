@@ -29,9 +29,12 @@ export default class Footer extends React.Component {
 		    state = this.state;
 		return (
 			<div className={"Footer"} style={style}>
-				<div className={"toolbar"}>
+				<div className={"maskContent"}>
 					<Comps.LoginBox/>
 				</div>
+				{/*<div className={"toolbar"}>*/}
+				{/*	<Comps.LoginBox/>*/}
+				{/*</div>*/}
 				{/*{ ActiveTags && ActiveTags.available && ActiveTags.available.map(*/}
 				{/*tag =>*/}
 				{/*<Chip*/}

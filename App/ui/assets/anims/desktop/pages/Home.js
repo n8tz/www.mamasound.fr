@@ -111,8 +111,8 @@ export const logo              = {
 	width    : "40%",
 	minWidth : "250px",
 	right    : "5%",
-	height   : "50px",
-	bottom   : "10%",
+	height   : "100%",
+	bottom   : "0",
 	zIndex   : 200,
 	transform: [
 		{
@@ -128,13 +128,13 @@ export const logo              = {
 };
 export const Footer            = {
 	height   : footerMiniHeight,
-	left     : "0px",
+	left     : "50%",
 	top      : ["100%", -footerMiniHeight],
-	width    : "100%",
+	width    : "100vw",
 	position : "absolute",
 	zIndex   : 300,
 	transform: {
-		//translateY: "-100%"
+		translateX: "-50%"
 	}
 };
 export const EventsBlock       = {

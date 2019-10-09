@@ -95,7 +95,7 @@ export default class Media extends React.Component {
 				if ( ext && (me.state.fileTypes.indexOf(ext[1].toLowerCase()) == -1) ) {
 					alert('Ce type de fichier n\'est pas valide dans ce champ\nTypes valides :' +
 						      me.state.fileTypes.join(', '));
-					me.refs.dropzone.dropzone.removeFile(file);
+					me.dropZone.current.dropzone.removeFile(file);
 				}
 				
 				this.setState({ showUploader: false })
@@ -128,8 +128,8 @@ export default class Media extends React.Component {
 	onChange( e ) {
 		if ( e.target.name == "url" ) {
 			//this.props.value = e.target.value;
-			if ( this.refs.preview )
-				this.refs.preview.getDOMNode().src = this.props.value;
+			if ( this.preview.current )
+				this.preview.current.src = this.props.value;
 			
 			this.props.onChange &&
 			this.props.onChange({ target: this.getValue({ value: e.target.value }) });
@@ -159,6 +159,13 @@ export default class Media extends React.Component {
 			})
 	}
 	
+	clearValue   = () => {
+		if ( this.refs.preview )
+			this.preview.current.src = "about:blank";
+		this.props.onChange &&
+		this.props.onChange({ target: this.getValue({ value: "about:blank" }) });
+		this.setState({ value: "about:blank" });
+	}
 	onEditorSave = ( value ) => {
 		
 		this.props.onChange &&
@@ -175,6 +182,8 @@ export default class Media extends React.Component {
 			this.setState({ showUploader: false })
 		}
 	};
+	preview      = React.createRef();
+	dropZone     = React.createRef();
 	
 	render() {
 		let { value, defaultValue, disallowSelect, disallowNone } = this.props,
@@ -215,7 +224,7 @@ export default class Media extends React.Component {
 						!disallowNone &&
 						<Button
 							title="none"
-							onClick={e => (this.setMode("none"), this.setState({ value: null }))}>
+							onClick={e => (this.setMode("none"), this.clearValue())}>
 							Aucun(e)
 						</Button>
 					}
@@ -248,7 +257,7 @@ export default class Media extends React.Component {
 						(viewmode === "preview") &&
 						// /^[^\s]+\.i?(jpeg|jpg|png|gif|bmp)(\?.*)?$/.test(_value.toLowerCase())
 						// &&
-						<Image ref="preview" src={_value}
+						<Image ref={this.preview} src={_value}
 						       style={{ maxHeight: "300px" }}
 						       w={250} h={250}/>
 						//||
@@ -264,7 +273,7 @@ export default class Media extends React.Component {
 					<div className={"dropContainer" + (!showUploader && (viewmode !== "upload") ? " hidden" : "")}
 					     onDragLeave={this.hideUploader}>
 						<DropzoneComponent
-							ref="dropzone"
+							ref={this.dropZone}
 							style={{
 								//display   :"none" || "block",
 							}}
