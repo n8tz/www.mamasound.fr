@@ -34,7 +34,7 @@ export const EventCatSliderAxis = {
 			from    : 100,
 			duration: 100,
 			apply   : {
-				top: "-95px"
+				top: ["-100%", 64]
 			}
 		},
 	]
@@ -44,10 +44,10 @@ export const EventCatSlider     = {
 	       visibleItems   : 1,
 	       style          : {
 		       position: "absolute",
-		       right   : "0%",
-		       left    : collWidth,
-		       top     : "160px",
-		       bottom  : "0%",
+		       right   : "10px",
+		       left    : [collWidth, 10],
+		       top     : "100%",
+		       bottom  : "40px",
 		       //width   : "auto",
 		       //overflow: "auto"
 	       },

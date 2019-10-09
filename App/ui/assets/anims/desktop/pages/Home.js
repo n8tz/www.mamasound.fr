@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import {collWidth, eventsMiniHeight, footerMiniHeight, headerMiniHeight, mapHeight, sliderHeight} from "../vars";
+import {collWidth, footerMiniHeight, headerMiniHeight, mapHeight, sliderHeight} from "../vars";
 
 export const bounds    = { min: 50, max: 200 };
 export const waypoints = [
@@ -75,7 +75,26 @@ export const Highlighter       = {
 	top            : ["0%"],
 	height         : ["100%", "0px", "0vh", -2 * footerMiniHeight],
 	transformOrigin: "center top",
-	zIndex         : 100,
+	zIndex         : 50,
+	transform      : [
+		{
+			//perspective: "500px",
+		},
+		{
+			translateY: "0%",
+			//translateZ : "-50px",
+			//rotateX   : "-10deg"
+		}
+	]
+};
+export const SliderBlock       = {
+	position       : "absolute",
+	right          : "10px",
+	left           : "10px",
+	top            : ["100%", "-" + sliderHeight, -footerMiniHeight],
+	height         : sliderHeight,
+	transformOrigin: "center top",
+	zIndex         : 250,
 	transform      : [
 		{
 			//perspective: "500px",
@@ -122,8 +141,8 @@ export const EventsBlock       = {
 	position       : "absolute",
 	width          : "50%",
 	left           : "50%",
-	bottom         : 0,
-	top            : "100%",
+	bottom         : [sliderHeight, footerMiniHeight],
+	top            : headerMiniHeight,
 	zIndex         : 125,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
@@ -140,8 +159,8 @@ export const EventsBlock       = {
 };
 export const EventMap          = {
 	position       : "absolute",
-	left           : "0%",
-	width          : collWidth,
+	left           : "10px",
+	width          : [collWidth, -10],
 	height         : mapHeight,
 	bottom         : "-" + mapHeight,
 	//top            : "100%",
@@ -206,7 +225,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 50,
 		apply   : {
-			height: ["-50px", 2 * footerMiniHeight]
+			//height: ["-50px", 2 * footerMiniHeight]
 		}
 	},
 	{
@@ -214,7 +233,7 @@ export const YAxis             = [
 		from    : 0,
 		duration: 50,
 		apply   : {
-			top: "-50px"
+			//top: "-50px"
 		}
 	},
 	{
@@ -222,7 +241,7 @@ export const YAxis             = [
 		from    : 50,
 		duration: 50,
 		apply   : {
-			height: ["-150px"]
+			//height: ["-150px"]
 		}
 	},
 	{
@@ -230,7 +249,7 @@ export const YAxis             = [
 		from    : 50,
 		duration: 50,
 		apply   : {
-			top: [-eventsMiniHeight, 50]
+			//top: [-eventsMiniHeight, 50]
 		}
 	},
 	//// highlighter to EventsBlock
@@ -239,7 +258,7 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			height: ["-100%", 200, sliderHeight, 2 * footerMiniHeight],
+			//height: ["-100%", 200, sliderHeight, 2 * footerMiniHeight],
 		}
 	},
 	{
@@ -247,8 +266,8 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			bottom: [footerMiniHeight],
-			top   : ["-100%", (eventsMiniHeight + headerMiniHeight) + "px", sliderHeight, footerMiniHeight, -20]
+			//bottom: [footerMiniHeight],
+			//top   : ["-100%", (eventsMiniHeight + headerMiniHeight) + "px", sliderHeight, footerMiniHeight, -20]
 		}
 	},
 	{
@@ -256,7 +275,7 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			bottom: [footerMiniHeight, "20vw"],
+			bottom: [footerMiniHeight, "20vw", sliderHeight, "40px"],
 			//top   : ["-100%", (eventsMiniHeight + headerMiniHeight) + "px", sliderHeight, footerMiniHeight, 180]
 		}
 	},

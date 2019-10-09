@@ -74,7 +74,12 @@ export default {
 			return { currentArea };
 		},
 		setCurStyleTab( viewType ) {
-			return { viewType };
+			let { currentPageFocus, selectedEventId } = this.nextState, doFocus;
+			if ( currentPageFocus !== "events" ) {
+				currentPageFocus = "events";
+				doFocus          = true
+			}
+			return { viewType, currentPageFocus, doFocus };
 		},
 		oneMoreDay( viewType = 0 ) {
 			let { dayCountByViewType } = this.nextState;

@@ -30,7 +30,7 @@ const wayPoints =
 		      map    : 300
 	      };
 
-@scopeToProps("appState", "Styles.pages.Home:Styles")
+@scopeToProps("appState", "Styles.pages.Home:Styles", "Styles.currentBrkPts")
 @asTweener({ enableMouseDrag: true, dragDirectionLock: true })
 export default class Home extends React.Component {
 	state = {};
@@ -53,7 +53,7 @@ export default class Home extends React.Component {
 		let { appState, tweener } = this.props;
 		if ( appState.doFocus && props.appState.currentPageFocus !== appState.currentPageFocus ) {
 			console.log(appState.currentPageFocus);
-			tweener.scrollTo(wayPoints[appState.currentPageFocus], 500, undefined, "easeSinIn");
+			tweener.scrollTo(wayPoints[appState.currentPageFocus], 1000, undefined, "easeQuadInOut");
 		}
 	}
 	
@@ -61,7 +61,7 @@ export default class Home extends React.Component {
 	////	return [this, "EventNav"];
 	////}
 	render() {
-		let { Styles, appState, $actions } = this.props;
+		let { Styles, appState, currentBrkPts,$actions } = this.props;
 		return <TweenRef id={"page"} initial={Styles.page}>
 			<div className={"Home container"}>
 				
@@ -127,7 +127,13 @@ export default class Home extends React.Component {
 						</TweenRef>
 					</Views.Block.Highlighter>
 				</TweenRef>
-				
+				{
+					(currentBrkPts !== "phone") && <TweenRef
+					id={"SliderBlock"}
+					initial={Styles.SliderBlock}
+				>
+					<Views.Block.Slider/>
+				</TweenRef>}
 				<TweenRef id={"EventsBlock"} initial={Styles.EventsBlock}>
 					<Views.Events.EventList
 						activeScroll={appState.currentPageFocus !== "map" && appState.currentPageFocus !== "events"}/>

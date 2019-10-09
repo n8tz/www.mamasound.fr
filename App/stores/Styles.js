@@ -34,7 +34,7 @@ export default class Styles extends Store {
 	//};
 	//
 	//shouldSerialize() {
-		//return false;
+	//return false;
 	//}
 	
 	constructor() {
@@ -60,7 +60,7 @@ export default class Styles extends Store {
 	apply( data, { currentBrkPts } ) {
 		
 		if ( currentBrkPts )
-			return { ...(anims[currentBrkPts] || anims.desktop) }
+			return { ...(anims[currentBrkPts] || anims.desktop), currentBrkPts }
 		
 		return data;
 	}

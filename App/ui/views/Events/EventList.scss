@@ -27,7 +27,18 @@
   left: 50%;
   width: 100vw !important;
   user-select: none;
-  @include withMaskTop();
+  pointer-events: none;
+  @media screen and (max-width: $tablet-portrait-breakpoint) {
+    @include withMaskTop();
+    pointer-events: all;
+  }
+
+  .NavBox {
+    > * {
+
+      pointer-events: all;
+    }
+  }
 
   .maskContent {
     overflow: hidden;
@@ -47,6 +58,7 @@
   }
 
   .EventCatSlider {
+    pointer-events: all;
     overflow: hidden;
     background: rgba(255, 255, 255, 0.5);
     z-index: 1;

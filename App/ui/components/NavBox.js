@@ -54,10 +54,9 @@ export default class NavBox extends React.Component {
 			    $actions
 		    }     = this.props,
 		    state = this.state;
-		//debugger
 		return (
 			<div className={"NavBox"}>
-				<TweenRef.div className={"eventTypeNav"} style={Styles.typesNav}>
+				<TweenRef.div className={"eventTypeNav"} style={Styles.typesNav} tweenAxis={Styles.Axis}>
 					{
 						[
 							{ title: "Evenements", icon: require("App/ui/assets/images/jip/btn-event-on.png") },
@@ -70,7 +69,9 @@ export default class NavBox extends React.Component {
 									onClick={e => $actions.setCurStyleTab(i)}
 									title={title}
 									key={i}
-									icon={<img src={icon} className={"typeIcon"}/>}>
+									icon={<img src={icon} className={"typeIcon"}/>}
+									{...Styles.StretchBox}
+								>
 									{
 										Array(appState.dayCountByViewType[i])
 											.fill(0)
@@ -95,7 +96,7 @@ export default class NavBox extends React.Component {
 				{/*	}*/}
 				{/*</div>*/}
 				
-				<TweenRef style={Styles.SearchBar}>
+				<TweenRef initial={Styles.SearchBar}>
 					<Comps.SearchBar {...Styles.SearchBarProps}/>
 				</TweenRef>
 			

@@ -177,11 +177,11 @@ export default {
 					place      = item.place && refs[item.place.objId];
 					// tag area
 					if ( place ) {
-						if ( !place.quartier ) {
+						//if ( !place.quartier ) {
 							ll             = place.address && place.address.geoPoint;
 							area           = ll && geoQuery(ll)
 							place.quartier = area && area.LIBSQUART || "Périphérie";
-						}
+						//}
 						if ( !seen[place.quartier] )
 							tags.push(seen[place.quartier] = {
 								label: place.quartier,

@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import Fab        from '@material-ui/core/Fab';
 import TextField  from '@material-ui/core/TextField';
 import moment     from "moment";
 import React      from "react";
@@ -69,9 +68,10 @@ export default class SearchBar extends React.Component {
 				//height              : minHeight,
 				borderTopLeftRadius : "10px",
 				borderTopRightRadius: "10px",
-				bottom              : minBottom,
+				//bottom              : minBottom,
 				overflow            : "hidden",
 				display             : "inline-block",
+				...props.boxStyle,
 				...style,
 			},
 			titleStyle  : {
@@ -109,7 +109,7 @@ export default class SearchBar extends React.Component {
 			},
 			axis        : {
 				title  : [],
-				icon   : [
+				icon   : props.iconAxis || [
 					{
 						from    : startPos + openDuration,
 						duration: openDuration,
@@ -133,8 +133,8 @@ export default class SearchBar extends React.Component {
 						}
 					}
 				],
-				content: [],
-				root   : [
+				content: props.contentAxis || [],
+				root   : props.rootAxis || [
 					{
 						from    : startPos,
 						duration: openDuration,

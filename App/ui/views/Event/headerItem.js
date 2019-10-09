@@ -24,6 +24,7 @@
  */
 'use strict';
 
+import {Comps}  from 'App/ui';
 import Editable from "App/ui/Editable";
 import moment   from "moment";
 import React    from "react";
@@ -45,9 +46,9 @@ export default ( { record, refs, selected, onClick, onTap } ) =>
 		<div className="icon">
 			{
 				record.category && refs[record.category.objId] &&
-				<img src={refs[record.category.objId].icon}/>
+				<Comps.Image src={refs[record.category.objId].icon}/>
 				||
-				<img src={defaultPreview[record._cls]} style={{ transform: "scale(.8)" }}/>
+				<Comps.Image src={defaultPreview[record._cls]} style={{ transform: "scale(.8)" }}/>
 			}
 		</div>
 		{/*{ record.previewImage &&*/}

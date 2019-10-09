@@ -29,9 +29,10 @@ export default {
 		"_id"  : types.indexes,
 		"label": types.labels(),
 		
-		"previewImage": types.media({ allowedTypes: "Image" }, "Preview :"),
 		"resume"      : types.descriptions('Resume'),
 		"text"        : types.descriptions('Text'),
+		"previewImage": types.media({ allowedTypes: "Image" }, "Preview (~12/5 fb headers):"),
+		"background"  : types.media({ allowedTypes: ["Image", "Video"] }, "Background (gd image/video de fond (video LEGERE)):"),
 		//"linkedMedia" : types.collection(["Article", "Media"], {}, "Contenus liés :")
 	}
 };

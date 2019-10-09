@@ -18,7 +18,7 @@
 
 'use strict';
 
-import {View}    from "App/ui";
+import {Views}    from "App/ui";
 import Image     from "App/ui/components/Image";
 import moment    from "moment";
 import React     from "react";
@@ -94,7 +94,7 @@ export default class Menu extends React.Component {
 			return <span/>;
 		return record.childs && record.childs.length ?
 		       record.childs.map(
-			       ( child ) => <View.Menu.menu id={child.objId} key={child.objId + '_' + "MenuItem"}
+			       ( child ) => <Views.Menu.menu id={child.objId} key={child.objId + '_' + "MenuItem"}
 			                                    className={"MenuItem"}/>
 		       )
 		                                             : [

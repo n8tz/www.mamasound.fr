@@ -26,18 +26,20 @@
   //transform: translate(-50%, 0%);
   bottom: 0;
 
-  &:before {
-    content: ' ';
-    position: absolute;
-    width: 110vw;
-    top: -20px;
-    left: 50%;
-    transform: translate(-50%, 0%);
-    height: 200px;
-    //background-color: black;
-    background: url("../assets/images/shuperDesign.jpg");
-    background-size: auto 100%;
+  @media screen and (max-width: $tablet-portrait-breakpoint) {
+    &:before {
+      content: ' ';
+      position: absolute;
+      width: 110vw;
+      top: -20px;
+      left: 50%;
+      transform: translate(-50%, 0%);
+      height: 200px;
+      //background-color: black;
+      background: url("../assets/images/shuperDesign.jpg");
+      background-size: auto 100%;
 
+    }
   }
 
 
@@ -50,6 +52,7 @@
       font-weight: bold;
       cursor: pointer;
       color: #2e2e2e;
+
       &:hover {
         background: rgba(255, 255, 255, 0.5);
       }
@@ -65,7 +68,7 @@
 
     .content {
       @include withTranspaMask();
-      background: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.61);
       padding: 2px;
 
       .day {
@@ -95,6 +98,11 @@
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
+          &:before{
+            content:"⭐";
+            display: inline-block;
+            margin-right:2px;
+          }
         }
 
         .price {
@@ -125,15 +133,7 @@
     }
   }
 
-  .searchStretchBox {
-    position: absolute !important;
-
-    top: 5px;
-    right: 5px;
-    @media screen and (max-width: $tablet-portrait-breakpoint) {
-      //
-      //width: 20% !important;
-    }
+  .SearchBar {
   }
 
   .eventTypeNav {
@@ -144,7 +144,6 @@
 
     .StretchBox {
       margin-left: 5px;
-
       > .icon {
 
         .typeIcon {
@@ -159,7 +158,19 @@
         //color:white;
         font-size: 1.5em;
       }
+      .DayEvents{
 
+        font-family: $mainFontFamily;
+        text-transform: capitalize;
+        font-weight: bolder;
+        font-size: 1.05em;
+        .SimpleDay{
+          display: none;
+        }
+        .Event_headerItem{
+          margin-bottom: -3px;
+        }
+      }
     }
   }
 

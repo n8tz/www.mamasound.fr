@@ -43,7 +43,7 @@ export default class StretchBox extends React.Component {
 			    closeDuration, minHeight, maxHeight, width, style
 		    } = props;
 		return {
-			boxStyle    : {
+			boxStyle    : props.boxStyle || {
 				position            : "relative",
 				width               : width,
 				height              : minHeight,
@@ -89,7 +89,7 @@ export default class StretchBox extends React.Component {
 			},
 			axis        : {
 				title  : [],
-				icon   : [
+				icon   : props.iconAxis || [
 					{
 						from    : startPos,
 						duration: openDuration,
@@ -113,8 +113,8 @@ export default class StretchBox extends React.Component {
 					//	}
 					//}
 				],
-				content: [],
-				root   : [
+				content: props.contentAxis || [],
+				root   : props.rootAxis || [
 					{
 						from    : startPos,
 						duration: openDuration,

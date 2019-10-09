@@ -1,5 +1,5 @@
 /*
- * www.mamasound.fr
+ *
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -60,7 +60,7 @@ if ( typeof window !== "undefined" ) {
 )
 @scopeToProps("MountedItems", "Selected", "HighlighterBackground", "Styles.views.Block.Highlighter:Styles", "Styles.currentBrkPts", "DataProvider", "appState")
 @withTweener
-export default class Highlighter extends React.Component {
+export default class Slider extends React.Component {
 	static propTypes = {};
 	state            = {};
 	
@@ -93,83 +93,40 @@ export default class Highlighter extends React.Component {
 		    state = this.state;
 		return (
 			<div style={style}
-			     className={"Highlighter"}>
-				{children}
-				<div className={"headBackground"}>
-					<div className={"maskContent"}>
-						{/*<TweenRef*/}
-						{/*	//initial={Styles.background}*/}
-						{/*	//tweenLines={Styles.backgroundScroll}*/}
-						{/*>*/}
-						{/*<div className={"container back"}>*/}
-						{/*{*/}
-						{/*	//appState.currentPageFocus === "head"*/}
-						{/*	//&&*/}
-						{/*	//<BackgroundVideo src="/test.mp4"*/}
-						{/*	//                 style={ { width: '100%', height: '100%', filter: "blur(5px)" } }*/}
-						{/*	//                 startTime={ 20 }*/}
-						{/*	//                 autoPlay={ true }*/}
-						{/*	//                 volume={ 0 }/>*/}
-						{/*		/!*	//||*!/*/}
-						{/*		<img src={HighlighterBackground} className={"leftGhost"}/>*/}
-						{/*		<img src={HighlighterBackground} className={"rightGhost"}/>*/}
-						{/*		<img src={HighlighterBackground}/>*/}
-						{/*		/!*}*!/*/}
-						{/*	</div>*/}
-						{/*</TweenRef>*/}
-						<TweenRef
-							initial={Styles.focused}
-							tweenLines={Styles.focusedScroll}>
-							<div className={"focusedContent container"}>
-								{/*<Views.Events.BestEvents/>*/}
-								<Comps.ViewSwitcher target={Selected && Selected.Focused}
-								                    {...Styles.Focused}
-								                    DefaultView={Comps.Edito}
-									//DefaultPreview={Views.Article.preview}
-									                View={Views.FocusedItems.page}
-									                ViewPreview={Views.FocusedItems.preview}
-									                getNextTarget={this.pickNextFocused}
-								/>
-							</div>
-						</TweenRef>
+			     className={"SliderBlock"}>
+				<TweenRef
+					//id={"focusSlider"}
+					initial={Styles.slider}
+					tweenLines={Styles.sliderScroll}
+				>
+					<div className={"slider"}>
+						<Comps.Slider
+							key={"mainSlider"}
+							{...Styles.Slider}
+							ignorePropsIndex={true}
+							infinite={true}
+							autoScroll={14 * 1000}
+							onClick={this.selectFocus}
+						>
+							{
+								items.length &&
+								items.map(
+									( item, i ) =>
+										<TweenRef key={item._id + i}
+										          tweener={tweener}
+										          initial={Styles.slide}
+										          tweenLines={Styles.slideScroll}>
+											<Views.FocusedItems.SlideItem record={item}
+												//onTap={
+												//    e => $actions.selectFocus(item.targetEtty.objId, i)
+												//}
+											/>
+										</TweenRef>
+								)
+							}
+						</Comps.Slider>
 					</div>
-				</div>
-				
-				{
-					(currentBrkPts === "phone") && <TweenRef
-						//id={"focusSlider"}
-						initial={Styles.slider}
-						tweenLines={Styles.sliderScroll}
-					>
-						<div className={"slider"}>
-							<Comps.Slider
-								key={"mainSlider"}
-								{...Styles.Slider}
-								ignorePropsIndex={true}
-								infinite={true}
-								autoScroll={14 * 1000}
-								onClick={this.selectFocus}
-							>
-								{
-									items.length &&
-									items.map(
-										( item, i ) =>
-											<TweenRef key={item._id + i}
-											          tweener={tweener}
-											          initial={Styles.slide}
-											          tweenLines={Styles.slideScroll}>
-												<Views.FocusedItems.SlideItem record={item}
-													//onTap={
-													//    e => $actions.selectFocus(item.targetEtty.objId, i)
-													//}
-												/>
-											</TweenRef>
-									)
-								}
-							</Comps.Slider>
-						</div>
-					</TweenRef>
-				}
+				</TweenRef>
 				{/*</div>*/}
 			</div>
 		);

@@ -640,7 +640,7 @@ function (_React$Component) {
         axisItemsChange = _this3._tweenAxis !== tweenAxis && !(_this3._tweenAxis && fast_deep_equal__WEBPACK_IMPORTED_MODULE_3___default()(tweenAxis, _this3._tweenAxis));
 
         if (_this3._currentTweener && axisItemsChange) {
-          Object.keys(_this3._tweenAxisObj).forEach(function (axe) {
+          _this3._tweenAxisObj && Object.keys(_this3._tweenAxisObj).forEach(function (axe) {
             return _this3._currentTweener.rmScrollableAnim(_this3._tweenAxisObj[axe], axe);
           });
         } //console.log(twRef, axisItemsChange, this._tweenAxis, tweenAxis)
@@ -654,7 +654,7 @@ function (_React$Component) {
           _this3._tweenAxis = tweenAxis;
           if (tweenAxis && is__WEBPACK_IMPORTED_MODULE_4___default.a.array(tweenAxis)) _this3._tweenAxisObj = {
             scrollY: parentTweener.addScrollableAnim(setTarget(tweenAxis, id))
-          };else _this3._tweenAxisObj = Object.keys(tweenAxis).reduce(function (h, axe) {
+          };else _this3._tweenAxisObj = tweenAxis && Object.keys(tweenAxis).reduce(function (h, axe) {
             return h[axe] = parentTweener.addScrollableAnim(setTarget(tweenAxis[axe], id), axe), h;
           }, {});
         }
