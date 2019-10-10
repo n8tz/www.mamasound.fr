@@ -2,7 +2,7 @@ FROM node:8.12.0-alpine
 ARG MONGO_URI=mongodb://mongodb:27017
 ARG REDIS_URI=redis://redis:6379
 ARG APP_DOMAIN=app.localhost
-ARG GIT_TAG=release
+ARG GIT_TAG=latest
 ARG GIT_BRANCH=master
 ARG GIT_URL=https://github.com/n8tz/www.mamasound.fr
 
