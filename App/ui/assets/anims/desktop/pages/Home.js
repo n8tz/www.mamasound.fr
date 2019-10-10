@@ -137,6 +137,9 @@ export const Footer            = {
 		translateX: "-50%"
 	}
 };
+export const Background        = {
+	zIndex: 50,
+};
 export const EventsBlock       = {
 	position       : "absolute",
 	width          : "50%",

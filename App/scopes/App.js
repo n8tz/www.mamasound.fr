@@ -32,14 +32,8 @@ export default {
 	@withStateMap(
 		{
 			data: {
-				id       : "appTheme",
-				etty     : "Article",
-				"default": {
-					_id  : "_Edito",
-					_cls : "Article",
-					title: "Edito",
-					text : "Ceci est un edito"
-				}
+				id  : "Theme.ghTOlod-",
+				etty: "Theme",
 			}
 		}
 	)

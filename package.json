@@ -7,6 +7,7 @@
   "author": "Nathan Braun <n8tz.js@gmail.com>",
   "scripts": {
     "build": "wpi :client&&wpi :admin&&wpi :api",
+    "buildTo": "rm -rf ./dist/export&&wpi :client --output-path=./dist/export/www&&wpi :admin --output-path=./dist/export/admin&&wpi :api --output-path=./dist/export/api",
     "dev-api": "wpi :devApi -w",
     "start-dev": "wpi :devApi&&concurrently \"wpi-dev-server :devClient --hot --host 0.0.0.0 \" \"wpi :devApi -w\" \"sleep 3&&nodemon -L --watch ./dist/api/App.server.js --inspect=[::]:9229 ./dist/api/App.server.js  -p 9701\"",
     "start": "node ./dist/api/App.server.js  -p 8080",
@@ -17,7 +18,7 @@
     "docker_down": "cd dockers/dev&&docker-compose down",
     "docker_kill": "cd dockers/dev&&docker-compose kill",
     "docker_ash": "cd dockers/dev&&opener docker-compose exec app ash -c \"cd /home/app&&ash\"",
-    "docker_build": "cd dockers/dev&&opener docker-compose exec app ash -c \"cd /home/app&&npm run build\"",
+    "docker_build": "cd dockers/dev&&opener docker-compose exec app ash -c \"cd /home/app&&npm run buildTo&&cp -R dist/export dockerDist\"",
     "docker_restoreDb": "cd dockers/dev&&opener docker-compose exec app ash -c \"cd /home/app&&mongorestore --uri \\$MONGO_URI\"",
     "docker_runBrowser": "opener http://mamasound.localhost&"
   },
@@ -132,6 +133,6 @@
   },
   "devDependencies": {
     "webpack-inherit": "^1.8.4",
-    "wi-layer-react-express": "^1.1.17"
+    "wi-layer-react-express": "^1.1.19"
   }
 }

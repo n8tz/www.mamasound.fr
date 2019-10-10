@@ -30,7 +30,7 @@ const wayPoints =
 		      map    : 300
 	      };
 
-@scopeToProps("appState", "Styles.pages.Home:Styles", "Styles.currentBrkPts")
+@scopeToProps("appState", "Styles.pages.Home:Styles", "Styles.currentBrkPts", "appTheme")
 @asTweener({ enableMouseDrag: true, dragDirectionLock: true })
 export default class Home extends React.Component {
 	state = {};
@@ -61,7 +61,7 @@ export default class Home extends React.Component {
 	////	return [this, "EventNav"];
 	////}
 	render() {
-		let { Styles, appState, currentBrkPts, $actions } = this.props;
+		let { Styles, appState, currentBrkPts, appTheme, $actions } = this.props;
 		return <TweenRef id={"page"} initial={Styles.page}>
 			<div className={"Home container"}>
 				
@@ -134,6 +134,10 @@ export default class Home extends React.Component {
 					>
 						<Views.Block.Slider/>
 					</TweenRef>}
+				<TweenRef id={"background"} initial={Styles.Background}>
+					<Views.Block.Background
+						record={appTheme&&appTheme.data}/>
+				</TweenRef>
 				<TweenRef id={"EventsBlock"} initial={Styles.EventsBlock}>
 					<Views.Events.EventList
 						activeScroll={appState.currentPageFocus !== "map" && appState.currentPageFocus !== "events"}/>

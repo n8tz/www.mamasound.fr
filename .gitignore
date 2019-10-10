@@ -34,4 +34,5 @@ node_modules
 /upload
 /public
 /dist
+/dockerDist
 /docker-data

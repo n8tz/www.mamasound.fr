@@ -68,6 +68,9 @@ export const header            = {
 		}
 	]
 };
+export const Background        = {
+	zIndex: 50,
+};
 export const Highlighter       = {
 	position       : "absolute",
 	right          : "0%",

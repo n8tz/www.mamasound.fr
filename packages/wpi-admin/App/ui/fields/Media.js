@@ -141,7 +141,7 @@ export default class Media extends React.Component {
 	
 	
 	uploadSuccess( file, result, xhr ) {
-		this.refs.dropzone.dropzone.removeAllFiles();
+		this.dropZone.current.dropzone.removeAllFiles();
 		if ( result.result && result.result[0] ) {
 			this.setState({ value: result.result[0].url, viewmode: "preview" });
 			this.props.onChange &&
@@ -160,7 +160,7 @@ export default class Media extends React.Component {
 	}
 	
 	clearValue   = () => {
-		if ( this.refs.preview )
+		if ( this.preview.current )
 			this.preview.current.src = "about:blank";
 		this.props.onChange &&
 		this.props.onChange({ target: this.getValue({ value: "about:blank" }) });

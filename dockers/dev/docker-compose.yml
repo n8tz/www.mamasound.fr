@@ -1,6 +1,7 @@
 version: '3'
 volumes:
   node_modules:
+  builds:
   portainer_data:
   emptyDockerDir:
 networks:
@@ -12,7 +13,7 @@ services:
     command:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
-#      - "--docker.domain=localhost"
+      #      - "--docker.domain=localhost"
       - "--entrypoints.web.address=:80"
     ports:
       - "80:80"
@@ -20,21 +21,21 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     networks:
       - app_network
-#  portainer:
-#    image: portainer/portainer
-#    restart: always
-#    volumes:
-#      - /var/run/docker.sock:/var/run/docker.sock
-#      - portainer_data:/data
-#    expose:
-#      - "9000"
-#      - "8000"
-#    labels:
-#      - "traefik.enable=true"
-#      - "traefik.http.routers.portainer.rule=Host(`portainer.localhost`)"
-#      - "traefik.http.routers.portainer.entrypoints=web"
-#    networks:
-#      - app_network
+  #  portainer:
+  #    image: portainer/portainer
+  #    restart: always
+  #    volumes:
+  #      - /var/run/docker.sock:/var/run/docker.sock
+  #      - portainer_data:/data
+  #    expose:
+  #      - "9000"
+  #      - "8000"
+  #    labels:
+  #      - "traefik.enable=true"
+  #      - "traefik.http.routers.portainer.rule=Host(`portainer.localhost`)"
+  #      - "traefik.http.routers.portainer.entrypoints=web"
+  #    networks:
+  #      - app_network
   app:
     restart: always
     build:
@@ -67,12 +68,13 @@ services:
     volumes:
       - ../..:/home/app
       - node_modules:/home/app/node_modules
+      - builds:/home/app/dist
       - ../../dump:/home/app/dump
     expose:
       - "8080"
     ports:
       - "${APP_DOCKER_DEBUG_PORT:-9229}:9229"
-#      - "9090:9090"
+    #      - "9090:9090"
     networks:
       - app_network
   error:
