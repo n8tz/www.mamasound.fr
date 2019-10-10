@@ -2,7 +2,7 @@ FROM node:8.12.0-alpine
 ARG MONGO_URI=mongodb://mongodb:27017
 ARG REDIS_URI=redis://redis:6379
 ARG APP_DOMAIN=app.localhost
-ARG GIT_TAG=latest
+#ARG GIT_TAG=latest
 ARG GIT_BRANCH=master
 ARG GIT_URL=https://github.com/n8tz/www.mamasound.fr
 
@@ -37,7 +37,7 @@ RUN git clone $GIT_URL /home/app
 WORKDIR /home/app
 RUN git fetch --all --tags --prune
 RUN git checkout -b $GIT_BRANCH || sleep 0
-RUN git checkout tags/$GIT_TAG
+#RUN git checkout tags/$GIT_TAG
 
 RUN npm i
 RUN npm run build
