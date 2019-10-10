@@ -275,7 +275,7 @@ export const YAxis             = [
 		from    : 100,
 		duration: 100,
 		apply   : {
-			bottom: [footerMiniHeight, "20vw", sliderHeight, "40px"],
+			bottom: [footerMiniHeight, mapHeight, sliderHeight, "40px"],
 			//top   : ["-100%", (eventsMiniHeight + headerMiniHeight) + "px", sliderHeight, footerMiniHeight, 180]
 		}
 	},

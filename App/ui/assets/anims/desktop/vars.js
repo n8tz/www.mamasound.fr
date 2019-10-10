@@ -16,9 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 export const sliderHeight     = "150px";
-export const headerMiniHeight = 50;
+export const headerMiniHeight = 45;
 export const eventsMiniHeight = 200;
 export const footerMiniHeight = 30;
-export const mapHeight = "20vw";
+export const mapHeight = "25vh";
 export const collWidth = "30vw";
 

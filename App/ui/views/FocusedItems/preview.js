@@ -24,9 +24,10 @@
  */
 'use strict';
 
-import {Comps}  from "App/ui";
-import Editable from "App/ui/Editable";
-import React    from "react";
+import {Comps}    from "App/ui";
+import Editable   from "App/ui/Editable";
+import React      from "react";
+import {TweenRef} from "react-voodoo";
 
 
 export default (
@@ -37,7 +38,8 @@ export default (
 		className = "",
 		target = record.targetEtty && refs[record.targetEtty.objId] || record,
 		previewImage = target && target.previewImage || record.previewImage,
-		category = record.category && refs[record.category.objId]
+		category = record.category && refs[record.category.objId],
+		isNext, isCurrent
 	}
 ) => {
 	//debugger;
@@ -45,20 +47,153 @@ export default (
 		<Editable id={record._id}/>
 		{
 			record.background &&
-			<div className="background">
-				<Comps.Image src={record.background} className={"leftGhost"}/>
-				<Comps.Image src={record.background} className={"rightGhost"}/>
-				<Comps.Image src={record.background}/>
-			</div>
+			<TweenRef
+				initial={
+					{
+						filter: {
+							sepia: (isNext || isCurrent) ? 0 : 100,
+						}
+					}
+				}
+				tweenLines={
+					{
+						"scrollX": isNext && [
+							{
+								
+								from    : 100,
+								duration: 100,
+								easeFn  : "easeExpInOut",
+								apply   : {
+									filter: {
+										sepia: 100,
+									}
+								}
+							}] || isCurrent && [
+							{
+								
+								from    : 0,
+								duration: 100,
+								easeFn  : "easeExpInOut",
+								apply   : {
+									filter: {
+										sepia: 100,
+									}
+								}
+							},
+							{
+								
+								from    : 100,
+								duration: 100,
+								easeFn  : "easeExpInOut",
+								apply   : {
+									filter: {
+										sepia: 100,
+									}
+								}
+							}
+						] || [
+							{
+								
+								from    : 0,
+								duration: 100,
+								easeFn  : "easeExpInOut",
+								apply   : {
+									filter: {
+										sepia: 100,
+									}
+								}
+							}
+						] || []
+					}
+				}>
+				<div className="background">
+					<Comps.Image src={record.background} className={"leftGhost"}/>
+					<Comps.Image src={record.background} className={"rightGhost"}/>
+					<Comps.Image src={record.background}/>
+				</div>
+			</TweenRef>
+			
 		}
+		
 		{
 			previewImage &&
-			<div className="preview">
-				
-				{/*<Comps.Image src={previewImage} className={"leftGhost"}/>*/}
-				{/*<Comps.Image src={previewImage} className={"rightGhost"}/>*/}
-				<Comps.Image src={previewImage}/>
-			</div>
+			<TweenRef
+				initial={
+					{
+						//"position": "absolute",
+						//top       : ["0%", "3.5em"],
+						//left      : "0%",
+						opacity  : (isNext || isCurrent) ? 0 : 1,
+						//width     : "45vw",
+						//height    : "4px",
+						//backgroundColor: "white",
+						transform: [{}, {
+							translateY: (isNext || isCurrent) && "40vh" || "0vh",
+						}]
+					}
+				}
+				tweenLines={
+					{
+						"scrollX": isNext && [
+							{
+								
+								from    : 100,
+								duration: 100,
+								easeFn  : "easeExpInOut",
+								apply   : {
+									opacity  : 1,
+									transform: [{}, {
+										translateY: "-40vh",
+									}]
+								}
+							}] || isCurrent && [
+							{
+								
+								from    : 0,
+								duration: 100,
+								easeFn  : "easeExpInOut",
+								apply   : {
+									opacity  : 1,
+									transform: [{}, {
+										translateY: "-40vh",
+									}]
+								}
+							},
+							{
+								
+								from    : 100,
+								duration: 100,
+								easeFn  : "easeExpInOut",
+								apply   : {
+									opacity  : 1,
+									transform: [{}, {
+										translateY: "-40vh",
+									}]
+								}
+							}
+						] || [
+							{
+								
+								from    : 0,
+								duration: 100,
+								easeFn  : "easeExpInOut",
+								apply   : {
+									opacity  : 1,
+									transform: [{}, {
+										translateY: "-40vh",
+									}]
+								}
+							}
+						] || []
+					}
+				}>
+				<div className="preview">
+					
+					{/*<Comps.Image src={previewImage} className={"leftGhost"}/>*/}
+					{/*<Comps.Image src={previewImage} className={"rightGhost"}/>*/}
+					<Comps.Image src={previewImage}/>
+				</div>
+			</TweenRef>
 		}
 	</div>
 }

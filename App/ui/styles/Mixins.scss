@@ -181,6 +181,7 @@
       background: url("../assets/images/border.svg") top center repeat-x/4000px;
       opacity: .9;
       z-index: 100000;
+      pointer-events: none;
       //background-position: bottom;
     }
   }

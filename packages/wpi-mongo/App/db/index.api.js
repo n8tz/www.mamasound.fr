@@ -20,19 +20,26 @@ import {mount}      from "App/db/mountRecord";
 import {pushDbTask} from "App/db/pool";
 import typesList    from "App/db/types";
 import is           from "is";
+import cacheManager from "node-cache";
 import shortid      from "shortid";
 
 export const types = typesList;
 export {mount}      from "App/db/mountRecord";
-
-const defaults = { get, query }
+const memoryCache = new cacheManager({ stdTTL: 100, checkperiod: 120 });
+const defaults    = { get, query, remove, create, save }
 export default defaults;
 
-export function get( cls, objId ) {
+export function get( cls, objId, cb ) {
+	let key       = cls + "_/_" + objId,
+	    syncCache = memoryCache.get(key);
+	
+	if ( syncCache && cb )
+		return cb(null, syncCache);
+	
 	return new Promise(
 		( resolve, reject ) => {
-			
-			
+			if ( syncCache && cb )
+				return resolve(syncCache);
 			pushDbTask(
 				( client, dbRelease ) => {
 					let db    = client.db("mamasound_fr");
@@ -64,7 +71,12 @@ export function get( cls, objId ) {
 										  reject(err || 404);
 										  return;
 									  }
-									  resolve({ ...docs, _cls: cls })
+									  else {
+										  let doc = { ...docs, _cls: cls };
+										  memoryCache.set(key, doc)
+										  resolve(doc)
+									  }
+									
 									
 								  }
 							  );

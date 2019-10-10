@@ -15,13 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import inputField from '@material-ui/core/TextField';
-
 export default {
-	indexes        : {
+	indexes      : {
 		"index": true
 	},
-	hidden         : {
+	hidden       : {
 		formRenderer: "Text",
 		defaultProps: {
 			type: "text"
@@ -29,7 +27,7 @@ export default {
 		label       : "Titre",
 		test        : /^[\w_\-\d]+$/
 	},
-	url            : ( label ) => ({
+	url          : ( label ) => ({
 		formRenderer: "Text",
 		defaultProps: {
 			type: "text"
@@ -37,7 +35,7 @@ export default {
 		label       : label || "Url",
 		test        : /^[\w_\-\d]+$/ // @todo url regexp
 	}),
-	labels         : ( label ) => ({
+	labels       : ( label ) => ({
 		formRenderer: "Text",
 		defaultProps: {
 			type: "text"
@@ -45,7 +43,7 @@ export default {
 		label       : label || "Titre",
 		test        : /^[\w_\-\d]+$/
 	}),
-	dateTime       : {
+	dateTime     : {
 		//formRenderer    : require('App/ui/fields/dateTimeField'),
 		defaultProps: {
 			//type : "chrome"
@@ -53,7 +51,7 @@ export default {
 		label       : "Date/Heure",
 		test        : /^[\w_\-\d]+$/
 	},
-	date           : ( label, props ) => ({
+	date         : ( label, props ) => ({
 		formRenderer: "Date",
 		defaultProps: {
 			displayTime: true,
@@ -63,7 +61,7 @@ export default {
 		label       : label || "Date/Heure",
 		test        : /^[\w_\-\d]+$/
 	}),
-	datesList      : ( label, props ) => ({
+	datesList    : ( label, props ) => ({
 		//formRenderer    : require('App/ui/fields/dateTimeListField'),
 		defaultProps: {
 			...(props || {})
@@ -71,7 +69,7 @@ export default {
 		label       : label || "Date/Heure",
 		test        : /^[\w_\-\d]+$/
 	}),
-	color          : ( label, props ) => ({
+	color        : ( label, props ) => ({
 		//formRenderer    : require('App/ui/fields/colorField'),
 		defaultProps: {
 			type: "chrome",
@@ -80,7 +78,7 @@ export default {
 		label       : label || "Couleur",
 		test        : /^[\w_\-\d]+$/
 	}),
-	enum           : ( label, options, props ) => ({
+	enum         : ( label, options, props ) => ({
 		//formRenderer    : require('App/ui/fields/Select'),
 		defaultProps: {
 			options    : options.map(( v ) => (typeof v == "string"
@@ -93,7 +91,7 @@ export default {
 		label       : label,
 		test        : /^[\w_\-\d]+$/
 	}),
-	ettyEnum       : ( label, multiple ) => ({
+	ettyEnum     : ( label, multiple ) => ({
 		//formRenderer    : require('App/ui/fields/Select'),
 		defaultProps: {
 			multiple   : multiple,
@@ -110,25 +108,13 @@ export default {
 		label       : label,
 		test        : /^[\w_\-\d]+$/
 	}),
-	media          : ( cfg, label ) => ({
+	media        : ( cfg, label ) => ({
 		formRenderer: "Media",
 		defaultProps: { ...cfg },
 		label       : label || "Media Url",
 		test        : /^[\w_\-\d]+$/
 	}),
-	publicationFlag: {
-		formRenderer: inputField,
-		defaultProps: {
-			type       : "select",
-			options    : [
-				{ label: "En attente de validation", value: "invalid" },
-				{ label: "Publié", value: "valid" }
-			],
-			firstOption: "invalid"
-		},
-		label       : "Diffusion :"
-	},
-	collectionStr  : ( etty, filters, label ) => ({
+	collectionStr: ( etty, filters, label ) => ({
 		//formRenderer    : require('App/ui/fields/RecordRefList'),
 		defaultProps: {
 			etty        : etty,
@@ -139,7 +125,7 @@ export default {
 		label       : label || ("Liste de " + etty),
 		test        : /^[\w_\-\d]+$/
 	}),
-	collection     : ( etty, filters, label ) => ({
+	collection   : ( etty, filters, label ) => ({
 		//@lazyInitialize
 		formRenderer: '',
 		defaultProps: Object.assign({}, {
@@ -150,7 +136,7 @@ export default {
 		label       : label || ("Liste de " + etty),
 		test        : /^[\w_\-\d]+$/
 	}),
-	picker         : function ( etty, defaultProps = {}, label ) {
+	picker       : function ( etty, defaultProps = {}, label ) {
 		return {
 			formRenderer: "RecordRef",
 			defaultProps: {
@@ -164,13 +150,13 @@ export default {
 			test        : /^[\w_\-\d]+$/
 		};
 	},
-	address        : ( label ) => ({
+	address      : ( label ) => ({
 		formRenderer: 'GeoPoint',
 		defaultProps: {},
 		label       : label,
 		test        : /^[\w_\-\d]+$/
 	}),
-	value          : ( label, cfg ) => ({
+	value        : ( label, cfg ) => ({
 		//formRenderer    : require('App/ui/fields/valueSliderField'),
 		defaultProps: Object.assign({
 			                            //allowedType : etty
@@ -178,30 +164,20 @@ export default {
 		label       : label,
 		test        : /^[\w_\-\d]+$/
 	}),
-	json           : ( label, props ) => ({
-		
-		//formRenderer    : require('App/ui/fields/jsonEditorField'),
+	json         : ( label, props={} ) => ({
+		formRenderer: "Json",
 		defaultProps: props,
 		"type"      : "string",
 		label       : label
 	}),
-	descriptions   : ( label ) => ({
+	descriptions : ( label ) => ({
 		formRenderer: "Html",
 		defaultProps: {},
 		"type"      : "string",
 		label       : label || "Description",
 		test        : /^[\w_\-\d]+$/
 	}),
-	excerpt        : {
-		formRenderer: inputField,
-		label       : "Résumé",
-		"type"      : "string",
-		defaultProps: {
-			multiline: true
-		},
-		test        : /^[\w_\-\d]+$/
-	},
-	boolean        : ( label, checked ) => ({
+	boolean      : ( label, checked ) => ({
 		formRenderer: "Switch",
 		label       : label,
 		defaultProps: {

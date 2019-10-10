@@ -52,6 +52,7 @@ services:
       - 'traefik.frontend.errors.network.backend="error"'
       - 'traefik.frontend.errors.network.query="/index.html"'
     environment:
+      - node-options="--max-old-space-size=4096"
       - MONGO_URI=mongodb://mongodb:27017
       - REDIS_URI=redis://redis:6379
       - APP_MODE=${APP_MODE:-dev}
@@ -70,7 +71,7 @@ services:
     expose:
       - "8080"
     ports:
-      - "${APP_DOCKER_DEBUG_PORT:-9200}:9229"
+      - "${APP_DOCKER_DEBUG_PORT:-9229}:9229"
 #      - "9090:9090"
     networks:
       - app_network

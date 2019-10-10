@@ -196,26 +196,26 @@ export default class Media extends React.Component {
 				<div className="controls">
 					
 					<Button onClick={e => this.setMode("preview")}
-					        color={viewmode == "preview" && "primary"}
+					        //color={viewmode == "preview" && "primary"}
 					        title="Aperçu">Aperçu</Button>
 					
 					<Button
 						title="Upload"
-						color={viewmode == "upload" && "primary"}
+						//color={viewmode == "upload" && "primary"}
 						onClick={e => this.setMode("upload")}>
 						Uploader
 					</Button>
 					
 					<Button
 						title="Modifier l'url"
-						color={viewmode == "input" && "primary"}
+						//color={viewmode == "input" && "primary"}
 						onClick={e => this.setMode("input")}>
 						Modifier l'url
 					</Button>
 					
 					<Button
 						title="Editer"
-						color={viewmode == "input" && "primary"}
+						//color={viewmode == "input" && "primary"}
 						onClick={e => $actions.newWidget("ImageEditor", { src: _value, onSave: this.onEditorSave })}>
 						Editer
 					</Button>

@@ -61,7 +61,7 @@ export default class Home extends React.Component {
 	////	return [this, "EventNav"];
 	////}
 	render() {
-		let { Styles, appState, currentBrkPts,$actions } = this.props;
+		let { Styles, appState, currentBrkPts, $actions } = this.props;
 		return <TweenRef id={"page"} initial={Styles.page}>
 			<div className={"Home container"}>
 				
@@ -129,11 +129,11 @@ export default class Home extends React.Component {
 				</TweenRef>
 				{
 					(currentBrkPts !== "phone") && <TweenRef
-					id={"SliderBlock"}
-					initial={Styles.SliderBlock}
-				>
-					<Views.Block.Slider/>
-				</TweenRef>}
+						id={"SliderBlock"}
+						initial={Styles.SliderBlock}
+					>
+						<Views.Block.Slider/>
+					</TweenRef>}
 				<TweenRef id={"EventsBlock"} initial={Styles.EventsBlock}>
 					<Views.Events.EventList
 						activeScroll={appState.currentPageFocus !== "map" && appState.currentPageFocus !== "events"}/>

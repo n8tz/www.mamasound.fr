@@ -29,6 +29,22 @@ export default {
 	Quartiers      : stores.Quartiers,
 	$history       : stores.$history,
 	
+	@withStateMap(
+		{
+			data: {
+				id       : "appTheme",
+				etty     : "Article",
+				"default": {
+					_id  : "_Edito",
+					_cls : "Article",
+					title: "Edito",
+					text : "Ceci est un edito"
+				}
+			}
+		}
+	)
+	appTheme: stores.MongoRecords,
+	
 	@asStore
 	appState: {
 		

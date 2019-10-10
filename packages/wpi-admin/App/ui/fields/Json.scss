@@ -1,0 +1,65 @@
+/*!
+ *
+ * Copyright (C) 2019 Nathanael Braun
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+.field_Json {
+  position: relative;
+  //min-height: 200px;
+  overflow: visible !important;
+  height: 200px;
+
+  > .input {
+    //height: 100%;
+
+    height: 200px;
+    //padding: .5em;
+    overflow: auto;
+
+    .tabs {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.46);
+
+      > div {
+        display: inline-block;
+        padding: 5px;
+        cursor: pointer;
+
+        &.selected {
+          text-decoration: underline;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .content {
+      position: absolute;
+      top: 40px;
+      //padding: 3px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+
+      textarea {
+        width: 100%;
+        height: 95%;
+      }
+    }
+  }
+
+}
