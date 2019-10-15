@@ -33,14 +33,14 @@ export const backgroundScroll = {
 			from    : 0,
 			duration: 50,
 			apply   : {
-				opacity: 1,
+				//opacity: 1,
 			}
 		},
 		{
 			from    : 100,
 			duration: 100,
 			apply   : {
-				opacity: -1,
+				//opacity: -1,
 			}
 		},
 	],
@@ -54,9 +54,6 @@ export const slider           = {
 	zIndex   : "250",
 	transform: {
 		perspective: "200px",
-		//translateY : '55px',
-		//translateZ : "-20px",
-		//rotateX    : "2deg"
 	}
 };
 export const sliderScroll     = [
@@ -86,7 +83,7 @@ export const slide            = {
 	transform: {
 		perspective: "200px",
 		//translateZ: "-20px",
-		rotateX    : "2deg"
+		//rotateX    : "2deg"
 	}
 };
 export const slideScroll      = {
@@ -107,7 +104,7 @@ export const slideScroll      = {
 				transform: {
 					//translateY: "-8px",
 					//translateZ: "20px",
-					rotateX   : "-2deg"
+					rotateX: "-2deg"
 				}
 			}
 		},
@@ -117,10 +114,10 @@ export const focused          = {
 	position : "absolute",
 	bottom   : 0,
 	//paddingBottom: [sliderHeight, 10],
-	//paddingTop   : "3em",
+	//paddingTop   : headerMiniHeight,
 	left     : "50%",
 	top      : headerMiniHeight,
-	width    : '100vw',
+	//width    : '100vw',
 	opacity  : 0,
 	transform: [{
 		translateX: "-50%",

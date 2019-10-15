@@ -72,19 +72,19 @@ export default class NavBox extends React.Component {
 									icon={<img src={icon} className={"typeIcon"}/>}
 									{...Styles.StretchBox}
 								>
-									{
-										Array(appState.dayCountByViewType[i])
-											.fill(0)
-											.map(
-												( v, i2 ) =>
-													<Views.Events.DayEvents
-														className={"dayBlock"}
-														ViewItem={Views.Event.headerItem}
-														key={i2}
-														day={moment(appState.curDay).add(i2, 'day').unix() * 1000}
-														viewType={i}/>
-											)
-									}
+									{/*{*/}
+									{/*	Array(appState.dayCountByViewType[i])*/}
+									{/*		.fill(0)*/}
+									{/*		.map(*/}
+									{/*			( v, i2 ) =>*/}
+									{/*				<Views.Events.DayEvents*/}
+									{/*					className={"dayBlock"}*/}
+									{/*					ViewItem={Views.Event.headerItem}*/}
+									{/*					key={i2}*/}
+									{/*					day={moment(appState.curDay).add(i2, 'day').unix() * 1000}*/}
+									{/*					viewType={i}/>*/}
+									{/*		)*/}
+									{/*}*/}
 								</Comps.StretchBox>
 						)
 					}

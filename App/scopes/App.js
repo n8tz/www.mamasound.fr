@@ -43,7 +43,7 @@ export default {
 	appState: {
 		
 		currentPageFocus  : "head",// head, events, page
-		selectedFocus     : { id: "Page.9HB7Gr4V", etty: 'Page' },
+		selectedFocus     : undefined,//{ id: "Page.9HB7Gr4V", etty: 'Page' },
 		selectedEvent     : undefined,
 		selectedEventId   : undefined,
 		selectedEventDT   : undefined,

@@ -38,6 +38,7 @@ export default (
 		className = "",
 		target = record.targetEtty && refs[record.targetEtty.objId] || record,
 		previewImage = target && target.previewImage || record.previewImage,
+		rPreviewImage = record.previewImage,
 		category = record.category && refs[record.category.objId],
 		isNext, isCurrent
 	}
@@ -46,7 +47,7 @@ export default (
 	return <div className={"Page FocusedItems_preview type_" + target._cls + " " + className} style={style}>
 		<Editable id={record._id}/>
 		{
-			record.background &&
+			(record.background || rPreviewImage)&&
 			<TweenRef
 				initial={
 					{
@@ -107,9 +108,9 @@ export default (
 					}
 				}>
 				<div className="background">
-					<Comps.Image src={record.background} className={"leftGhost"}/>
-					<Comps.Image src={record.background} className={"rightGhost"}/>
-					<Comps.Image src={record.background}/>
+					<Comps.Image src={record.background || rPreviewImage} className={"leftGhost"}/>
+					<Comps.Image src={record.background || rPreviewImage} className={"rightGhost"}/>
+					<Comps.Image src={record.background || rPreviewImage}/>
 				</div>
 			</TweenRef>
 			
@@ -128,7 +129,7 @@ export default (
 						//height    : "4px",
 						//backgroundColor: "white",
 						transform: [{}, {
-							translateY: (isNext || isCurrent) && "40vh" || "0vh",
+							translateX: (isNext || isCurrent) && "40vw" || "0vw",
 						}]
 					}
 				}
@@ -143,7 +144,7 @@ export default (
 								apply   : {
 									opacity  : 1,
 									transform: [{}, {
-										translateY: "-40vh",
+										translateX: "-40vw",
 									}]
 								}
 							}] || isCurrent && [
@@ -155,7 +156,7 @@ export default (
 								apply   : {
 									opacity  : 1,
 									transform: [{}, {
-										translateY: "-40vh",
+										translateX: "-40vw",
 									}]
 								}
 							},
@@ -167,7 +168,7 @@ export default (
 								apply   : {
 									opacity  : 1,
 									transform: [{}, {
-										translateY: "-40vh",
+										translateX: "-40vw",
 									}]
 								}
 							}
@@ -180,7 +181,7 @@ export default (
 								apply   : {
 									opacity  : 1,
 									transform: [{}, {
-										translateY: "-40vh",
+										translateX: "-40vw",
 									}]
 								}
 							}

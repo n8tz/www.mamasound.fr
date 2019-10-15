@@ -92,6 +92,7 @@ export function get( cls, objId, cb ) {
 ;
 
 export function create( etty, data, id = etty + '.' + shortid.generate() ) {
+	memoryCache.flushAll()
 	return new Promise(
 		( resolve, reject ) => {
 			
@@ -126,6 +127,7 @@ export function create( etty, data, id = etty + '.' + shortid.generate() ) {
 }
 
 export function save( etty, id, data ) {
+	memoryCache.flushAll()
 	return new Promise(
 		( resolve, reject ) => {
 			

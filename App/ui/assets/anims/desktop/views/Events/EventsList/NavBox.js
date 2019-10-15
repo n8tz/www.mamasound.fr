@@ -23,19 +23,30 @@ let startPos      = 50,
     maxHeight     = "150px",
     minHeight     = "40px";
 
+export const style          = {
+	position : "relative",
+	width    : ["100%"],
+	//right    : "10px",
+	//top      : ["100%", "-" + minHeight],
+	height   : "50px",
+	//backgroundColor: "red",
+	transform: {
+		//translateY: "85%"
+	}
+};
 export const Axis           = [
 	{
 		from    : 50,
 		duration: 50,
 		apply   : {
-			top: ["-" + maxHeight, minHeight]
+			//top: ["-" + maxHeight, minHeight]
 		}
 	},
 	{
 		from    : 100,
 		duration: 100,
 		apply   : {
-			top: ["-100%", maxHeight]
+			//top: ["-100%", maxHeight]
 		}
 	},
 ];
@@ -43,7 +54,8 @@ export const SearchBarAxis  = [];
 export const typesNav       = {
 	position : "absolute",
 	width    : ["100%", "-" + collWidth],
-	right    : "10px",
+	//bottom   : "0px",
+	right    : "0px",
 	top      : ["100%", "-" + minHeight],
 	height   : "40px",
 	transform: {
@@ -58,68 +70,71 @@ export const SearchBarProps = {
 	maxBottom    : mapHeight,
 	minHeight,
 	
-	boxStyle: {
+	boxStyle  : {
 		position: "absolute",
 		width   : [collWidth, -10],
 		left    : "10px",
 		top     : ["100%", "-" + minHeight],
-		height  : "40px"
+		height  : "320px"
 	},
-	titleAxis: [
-		{
-			from    : startPos,
-			duration: openDuration,
-			apply   : {
-				paddingLeft: "3em"
-			}
-		},
-		{
-			from    : startPos + openDuration,
-			duration: closeDuration,
-			apply   : {
-				paddingLeft: "-3em"
-			}
-		}
+	titleStyle: {
+		paddingLeft: "3em"
+	},
+	titleAxis : [
+		//{
+		//	from    : startPos,
+		//	duration: openDuration,
+		//	apply   : {
+		//		paddingLeft: "3em"
+		//	}
+		//},
+		//{
+		//	from    : startPos + openDuration,
+		//	duration: closeDuration,
+		//	apply   : {
+		//		paddingLeft: "-3em"
+		//	}
+		//}
 	],
-	rootAxis: [
-		{
-			from    : 50,
-			duration: 50,
-			apply   : {
-				top: ["-" + maxHeight, minHeight]
-			}
-		},
-		{
-			from    : 100,
-			duration: 100,
-			apply   : {
-				top: ["-100%", maxHeight]
-			}
-		},
-		{
-			from    : startPos,
-			duration: openDuration,
-			apply   : {
-				height   : [maxHeight, "-" + minHeight],
-				transform: [, , {}],
-			}
-		},
-		{
-			from    : startPos + openDuration,
-			duration: closeDuration,
-			apply   : {
-				height   : ["-" + maxHeight, "100%", "-" + mapHeight, -50],
-				transform: [, , {}],
-			}
-		}
+	rootAxis  : [
+		//{
+		//	from    : 50,
+		//	duration: 50,
+		//	apply   : {
+		//		top: ["-" + maxHeight, minHeight]
+		//	}
+		//},
+		//{
+		//	from    : 100,
+		//	duration: 100,
+		//	apply   : {
+		//		top: ["-100%", maxHeight]
+		//	}
+		//},
+		//{
+		//	from    : startPos,
+		//	duration: openDuration,
+		//	apply   : {
+		//		height   : [maxHeight, "-" + minHeight],
+		//		transform: [, , {}],
+		//	}
+		//},
+		//{
+		//	from    : startPos + openDuration,
+		//	duration: closeDuration,
+		//	apply   : {
+		//		height   : ["-" + maxHeight, "100%", "-" + mapHeight, -50],
+		//		transform: [, , {}],
+		//	}
+		//}
 	]
 };
 export const StretchBox     = {
-	width    : "15vw",
-	boxStyle : {
+	width   : "30%",
+	boxStyle: {
 		position            : "relative",
-		width               : "15vw",
-		maxWidth            : "220px",
+		width               : "30%",
+		maxWidth            : "250px",
 		height              : minHeight,
 		borderTopLeftRadius : "10px",
 		borderTopRightRadius: "10px",
@@ -127,35 +142,35 @@ export const StretchBox     = {
 		overflow            : "hidden",
 		display             : "inline-block",
 	},
-	rootAxis : [
-		{
-			from    : startPos,
-			duration: openDuration,
-			apply   : {
-				height   : [maxHeight, "-" + minHeight],
-				transform: [, , {}],
-			}
-		},
-		{
-			from    : startPos + openDuration,
-			duration: closeDuration,
-			apply   : {
-				height   : ["-" + maxHeight, minHeight],
-				transform: [, , {}],
-			}
-		}
+	rootAxis: [
+		//{
+		//	from    : startPos,
+		//	duration: openDuration,
+		//	apply   : {
+		//		height   : [maxHeight, "-" + minHeight],
+		//		transform: [, , {}],
+		//	}
+		//},
+		//{
+		//	from    : startPos + openDuration,
+		//	duration: closeDuration,
+		//	apply   : {
+		//		height   : ["-" + maxHeight, minHeight],
+		//		transform: [, , {}],
+		//	}
+		//}
 	],
-	iconAxis : [
-		{
-			from    : startPos,
-			duration: openDuration,
-			apply   : {
-				opacity: -.5,
-				top    : minHeight,
-				left   : ["100%", "-" + maxHeight, minHeight],
-				height : [maxHeight, "-" + minHeight, "-" + minHeight],
-				width  : [maxHeight, "-" + minHeight, "-" + minHeight],
-			}
-		}
+	iconAxis: [
+		//{
+		//	from    : startPos,
+		//	duration: openDuration,
+		//	apply   : {
+		//		opacity: -.5,
+		//		top    : minHeight,
+		//		left   : ["100%", "-" + maxHeight, minHeight],
+		//		height : [maxHeight, "-" + minHeight, "-" + minHeight],
+		//		width  : [maxHeight, "-" + minHeight, "-" + minHeight],
+		//	}
+		//}
 	]
 };

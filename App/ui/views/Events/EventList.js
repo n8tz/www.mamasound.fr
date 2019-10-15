@@ -124,18 +124,19 @@ export default class EventList extends React.Component {
 			    UserGeoLocation,
 			    appState,
 			    Styles,
-			    activeScroll,
+			    children,
 			    $actions, style
 		    }     = this.props,
 		    state = this.state;
 		//console.log('EventList::render:136: ', activeScroll);
 		return (
-			<div className={"EventList"} style={style}>
+			<div className={"EventList container"} style={style}>
 				<div className={"maskContent"}>
 					<div className={"content container"}>
-						<TweenRef id={"NavBox"} initial={Styles.NavBox}>
+						<TweenRef id={"NavBox"} initial={Styles.NavBox.style}>
 							<Comps.NavBox/>
 						</TweenRef>
+						{children}
 						<TweenRef
 							id={"EventCatSlider"}
 							initial={Styles.EventCatSlider.style}
@@ -144,8 +145,10 @@ export default class EventList extends React.Component {
 							<Comps.Slider
 								{...Styles.EventCatSlider}
 								index={appState.viewType}
+								autoHeight={true}
 								onChange={$actions.setCurStyleTab}
 								className={"EventCatSlider "}
+								style={{height: this.state.listHeight}}
 							>
 								{
 									Array(4)

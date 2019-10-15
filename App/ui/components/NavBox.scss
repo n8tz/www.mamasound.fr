@@ -18,29 +18,29 @@
 
 .NavBox {
 
-  position: absolute;
-  width: 100%;
-  top: 20px;
-  left: 0em;
+  position: relative;
+  //width: 100%;
+  //top: 20px;
+  //left: 0em;
   //right: .5em;
   //transform: translate(-50%, 0%);
-  bottom: 0;
+  //bottom: 0;
 
-  @media screen and (max-width: $tablet-portrait-breakpoint) {
-    &:before {
-      content: ' ';
-      position: absolute;
-      width: 110vw;
-      top: -20px;
-      left: 50%;
-      transform: translate(-50%, 0%);
-      height: 200px;
-      //background-color: black;
-      background: url("../assets/images/shuperDesign.jpg");
-      background-size: auto 100%;
-
-    }
-  }
+  //@media screen and (max-width: $tablet-portrait-breakpoint) {
+  //  &:before {
+  //    content: ' ';
+  //    position: absolute;
+  //    width: 110vw;
+  //    top: -20px;
+  //    left: 50%;
+  //    transform: translate(-50%, 0%);
+  //    height: 200px;
+  //    //background-color: black;
+  //    background: url("../assets/images/shuperDesign.jpg");
+  //    background-size: auto 100%;
+  //
+  //  }
+  //}
 
 
   .StretchBox {
@@ -98,10 +98,11 @@
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
-          &:before{
-            content:"⭐";
+
+          &:before {
+            content: "⭐";
             display: inline-block;
-            margin-right:2px;
+            margin-right: 2px;
           }
         }
 
@@ -144,6 +145,7 @@
 
     .StretchBox {
       margin-left: 5px;
+
       > .icon {
 
         .typeIcon {
@@ -158,16 +160,19 @@
         //color:white;
         font-size: 1.5em;
       }
-      .DayEvents{
+
+      .DayEvents {
 
         font-family: $mainFontFamily;
         text-transform: capitalize;
         font-weight: bolder;
         font-size: 1.05em;
-        .SimpleDay{
+
+        .SimpleDay {
           display: none;
         }
-        .Event_headerItem{
+
+        .Event_headerItem {
           margin-bottom: -3px;
         }
       }

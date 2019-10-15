@@ -22,15 +22,16 @@
   perspective: 200px;
   z-index: 100;
   padding: 0 !important;
-  margin-left: -50vw;
+  //margin-left: -50vw;
   //padding: 1em;
-  left: 50%;
-  width: 100vw !important;
+  //left: 50%;
+  //width: 100vw !important;
   user-select: none;
-  pointer-events: none;
+  //pointer-events: none;
+  //@include withMaskTop();
+  //background: white;
   @media screen and (max-width: $tablet-portrait-breakpoint) {
-    @include withMaskTop();
-    pointer-events: all;
+    //pointer-events: all;
   }
 
   .NavBox {
@@ -59,12 +60,20 @@
 
   .EventCatSlider {
     pointer-events: all;
-    overflow: hidden;
+    //overflow: hidden;
     background: rgba(255, 255, 255, 0.5);
     z-index: 1;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
 
+    //direction: rtl;
+    //overflow:auto;
+    //height: 50px;
+    //width: 50px;
+    >*{
+
+      //direction:ltr;
+    }
     .dayList {
       @include withScrollBar();
       overflow: auto;

@@ -80,10 +80,8 @@ export default class SearchBar extends React.Component {
 				height   : minHeight,
 				left     : "0%",
 				top      : "0%",
-				//backgroundColor: "red",
-				transform: [
-					{}, {},
-				]
+				
+				...props.titleStyle,
 			},
 			contentStyle: {
 				position : "absolute",

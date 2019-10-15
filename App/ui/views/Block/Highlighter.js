@@ -124,11 +124,11 @@ export default class Highlighter extends React.Component {
 								{/*<Views.Events.BestEvents/>*/}
 								<Comps.ViewSwitcher target={Selected && Selected.Focused}
 								                    {...Styles.Focused}
-								                    DefaultView={Comps.Edito}
-									//DefaultPreview={Views.Article.preview}
-									                View={Views.FocusedItems.page}
-									                ViewPreview={Views.FocusedItems.preview}
-									                getNextTarget={this.pickNextFocused}
+								                    DefaultView={'div'}
+								                    DefaultPreview={'div'}
+								                    View={Views.FocusedItems.page}
+								                    ViewPreview={Views.FocusedItems.preview}
+								                    getNextTarget={this.pickNextFocused}
 								/>
 							</div>
 						</TweenRef>
@@ -136,7 +136,7 @@ export default class Highlighter extends React.Component {
 				</div>
 				
 				{
-					(currentBrkPts === "phone") && <TweenRef
+					<TweenRef
 						//id={"focusSlider"}
 						initial={Styles.slider}
 						tweenLines={Styles.sliderScroll}

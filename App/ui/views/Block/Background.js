@@ -27,7 +27,7 @@ export default class Background extends React.Component {
 			    record={}, style
 		    }     = this.props,
 		    state = this.state;
-		debugger
+		//debugger
 		return (
 			<div style={style}
 			     className={"Background"}>

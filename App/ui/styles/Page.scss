@@ -18,14 +18,22 @@
 body, html, #app {
   margin: 0;
   padding: 0;
-  overflow: hidden;
-  overscroll-behavior: none !important;
-  position: fixed;
-  width: 100%;
-  height: 100%;
+  //width: 100%;
+  //height: 100%;
   touch-action: none;
 }
 
+body {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  overscroll-behavior: none !important;
+  width: 100%;
+  height: 100%;
+}
+.inContextMenuLayer{
+  z-index: 100000000 !important;
+  position: fixed !important;
+}
 @media (min-width: 1400px) {
   .container {
     width: 1300px;
@@ -80,19 +88,21 @@ body, html, #app {
 }
 
 #app {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0px;
-  left: 0;
+  //position: absolute;
+  //width: 100%;
+  //height: 100%;
+  //top: 0px;
+  //left: 0;
   //perspective: 200px;
-  transform: translate3d(0,0,0);
+  //transform: translate3d(0, 0, 0);
   text-align: center;
 
 }
-.Toastify{
+
+.Toastify {
 
 }
+
 .AppBar > div {
 
   justify-content: space-between;

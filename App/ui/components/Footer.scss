@@ -18,12 +18,12 @@
 
 .Footer {
 
-  @include withMaskTop();
+  //@include withMaskTop();
   width: 100vw;
+  background: white;
   //
   .maskContent {
     @include use_hvCenteredAbs();
-    background: white;
     > button {
       //@include use_hvCenteredContent();
       margin-bottom: 5px !important;

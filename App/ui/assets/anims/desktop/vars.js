@@ -1,5 +1,5 @@
 /*
- * www.mamasound.fr
+ *
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -15,10 +15,10 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-export const sliderHeight     = "150px";
+export const sliderHeight     = 120;
 export const headerMiniHeight = 45;
 export const eventsMiniHeight = 200;
 export const footerMiniHeight = 30;
-export const mapHeight = "25vh";
-export const collWidth = "30vw";
+export const mapHeight        = "25vh";
+export const collWidth        = "30vw";
 

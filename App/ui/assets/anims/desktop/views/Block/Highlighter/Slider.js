@@ -1,5 +1,5 @@
 /*
- * www.mamasound.fr
+ *
  * Copyright (C) 2019 Nathanael Braun
  *
  * This program is free software: you can redistribute it and/or modify
@@ -48,7 +48,7 @@ export const scrollAxis      = [
 		//easeFn  : "easeSinIn",
 		apply   : {
 			transform: {
-				rotate: stepAngle,
+				//rotate: stepAngle,
 			},
 			zIndex   : 150,
 		}

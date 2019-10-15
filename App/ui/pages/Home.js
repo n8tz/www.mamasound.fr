@@ -46,14 +46,14 @@ export default class Home extends React.Component {
 			})
 		)
 		let { appState } = props;
-		props.tweener.scrollTo(wayPoints[appState.currentPageFocus]);
+		//props.tweener.scrollTo(wayPoints[appState.currentPageFocus]);
 	}
 	
 	componentDidUpdate( props ) {
 		let { appState, tweener } = this.props;
 		if ( appState.doFocus && props.appState.currentPageFocus !== appState.currentPageFocus ) {
 			console.log(appState.currentPageFocus);
-			tweener.scrollTo(wayPoints[appState.currentPageFocus], 1000, undefined, "easeQuadInOut");
+			//tweener.scrollTo(wayPoints[appState.currentPageFocus], 1000, undefined, "easeQuadInOut");
 		}
 	}
 	
@@ -101,51 +101,45 @@ export default class Home extends React.Component {
 						}
 					}
 				/>
+				<TweenRef
+					id={"header"}
+					initial={Styles.header}
+				>
+					<header>
+						<TweenRef
+							id={"logo"}
+							initial={Styles.logo}
+						>
+							<div className={"logo"}/>
+						</TweenRef>
+					</header>
+				</TweenRef>
 				<TweenRef id={"Highlighter"} initial={Styles.Highlighter}>
 					<Views.Block.Highlighter>
-						<TweenRef
-							id={"header"}
-							initial={Styles.header}
-						>
-							<header
-								style={{
-									zIndex : 5000,
-									display: "inline-block",
-									//width  : "100%",
-									//background: "red",
-								}}>
-								{/*<Views.Block.PageBlock>*/}
-								<TweenRef
-									id={"logo"}
-									initial={Styles.logo}
-								>
-									<div className={"logo"}/>
-								</TweenRef>
-								{/*</Views.Block.PageBlock>*/}
-							
-							</header>
-						</TweenRef>
+					
 					</Views.Block.Highlighter>
 				</TweenRef>
-				{
-					(currentBrkPts !== "phone") && <TweenRef
-						id={"SliderBlock"}
-						initial={Styles.SliderBlock}
-					>
-						<Views.Block.Slider/>
-					</TweenRef>}
+				{/*{*/}
+				{/*	//(currentBrkPts !== "phone") && <TweenRef*/}
+				{/*		//id={"SliderBlock"}*/}
+				{/*		//initial={Styles.SliderBlock}*/}
+				{/*>*/}
+				{/*<Views.Block.Slider/>*/}
+				{/*</TweenRef>}*/}
 				<TweenRef id={"background"} initial={Styles.Background}>
 					<Views.Block.Background
-						record={appTheme&&appTheme.data}/>
+						record={appTheme && appTheme.data}/>
 				</TweenRef>
 				<TweenRef id={"EventsBlock"} initial={Styles.EventsBlock}>
 					<Views.Events.EventList
-						activeScroll={appState.currentPageFocus !== "map" && appState.currentPageFocus !== "events"}/>
-				</TweenRef>
-				<TweenRef id={"EventMap"} initial={Styles.EventMap}>
-					<Views.Events.EventMap
-						day={appState.currentVisibleDay || appState.curDay}
-						viewType={appState.viewType}/>
+						activeScroll={appState.currentPageFocus !== "map" && appState.currentPageFocus !== "events"}>
+						
+						<TweenRef id={"EventMap"} initial={Styles.EventMap}>
+							<Views.Events.EventMap
+								day={appState.currentVisibleDay || appState.curDay}
+								viewType={appState.viewType}/>
+						</TweenRef>
+					</Views.Events.EventList>
 				</TweenRef>
 				<TweenRef id={"Footer"} initial={Styles.Footer}>
 					<Comps.Footer/>

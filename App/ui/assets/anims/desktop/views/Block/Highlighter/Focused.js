@@ -16,8 +16,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {headerMiniHeight} from "../../../vars";
-
 export const transitionDuration    = 1500;
 export const defaultInitial        = {
 	position       : "absolute",
@@ -48,6 +46,29 @@ export const defaultInitial        = {
 		},
 		{}]
 };
+export const defaultPreviewInitial = {
+	position       : "absolute",
+	height         : ["100%"],
+	width          : "100vw",
+	top            : "0%",
+	left           : "50%",
+	zIndex         : 40,
+	overflow       : "hidden",
+	transformOrigin: "50% 50%",
+	//display        : "none",
+	opacity        : 1,
+	transform      : [
+		{
+			translateX : "-50%",
+			//translateY : "-50%",
+			perspective: "700px",
+		},
+		{
+			//translateY: -headerMiniHeight,
+		},
+		{},
+		{}]
+};
 export const showAnim              = [
 	{
 		from    : 0,
@@ -75,6 +96,19 @@ export const showAnim              = [
 		duration: 1,
 		apply   : {}
 	}
+];
+export const showPreviewAnim       = [
+	{
+		from    : 0,
+		duration: 100,
+		//easeFn  : "easeBackOut",
+		apply   : {
+			opacity: 1,
+			//transform: [{}, {
+			//	translateX: "150px",
+			//}]
+		}
+	},
 ];
 export const hideAnim              = [
 	{
@@ -104,56 +138,18 @@ export const hideAnim              = [
 		}
 	}]
 ;
-export const defaultPreviewInitial = {
-	position       : "absolute",
-	height         : ["100vh"],
-	width          : "100vw",
-	top            : "0%",
-	left           : "50%",
-	zIndex         : 40,
-	overflow       : "hidden",
-	transformOrigin: "50% 50%",
-	//display        : "none",
-	opacity        : 1,
-	transform      : [
-		{
-			translateX : "-50%",
-			//translateY : "-50%",
-			perspective: "700px",
-		},
-		{
-			translateY: -headerMiniHeight,
-			//scale     : 1.2,
-		},
-		{},
-		{}]
-};
-export const showPreviewAnim       = [
-	{
-		from    : 0,
-		duration: 100,
-		easeFn  : "easeExpOut",
-		apply   : {
-			opacity  : 1,
-			transform: [{}, {
-				//translateX: "-150px",
-				//scale     : -.2,
-			}]
-		}
-	},
-];
 export const hidePreviewAnim       = [
 	       {
 		       from    : 0,
 		       duration: 100,
 		       apply   : {
-			       opacity  : -1,
-			       transform: [{}, {
-				       //    //rotateY: "90deg",
-				       //    translateZ: "-50px",
-				       //    //translateY: "-200px",
-				       //translateX: "-250px",
-			       }]
+			       opacity: -1,
+			       //transform: [{}, {
+			       //    //rotateY: "90deg",
+			       //    translateZ: "-50px",
+			       //    //translateY: "-200px",
+			       //    //translateX: "-250px",
+			       //}]
 		       }
 	       },
 	       {

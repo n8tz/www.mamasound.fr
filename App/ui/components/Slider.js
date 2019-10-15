@@ -17,6 +17,7 @@
  */
 import is                                           from "is";
 import React                                        from "react";
+import ReactDOM                                     from "react-dom";
 import {asTweener, TweenAxis, TweenRef, tweenTools} from "react-voodoo";
 
 @asTweener({ enableMouseDrag: true })
@@ -26,6 +27,7 @@ export default class Slider extends React.Component {
 		visibleItems   : 4,
 		maxJump        : undefined,
 		infinite       : false,
+		autoHeight     : false,
 		//overlaps       : 1 / 6,
 		defaultInitial : {},
 		defaultEntering: [],
@@ -36,12 +38,16 @@ export default class Slider extends React.Component {
 	state               = {};
 	
 	componentDidMount() {
-		let { autoScroll, defaultIndex = 0 } = this.props;
+		let { autoScroll, index = 0, autoHeight } = this.props;
 		if ( autoScroll ) {
 			this._updater = setTimeout(
 				tm => this.goNext(),
 				autoScroll
 			)
+		}
+		if ( autoHeight ) {
+			let h = ReactDOM.findDOMNode(this.slideRefs[index]);
+			this.setState({ sliderHeight: h.offsetHeight + 'px' })
 		}
 	}
 	
@@ -65,14 +71,17 @@ export default class Slider extends React.Component {
 	shouldComponentUpdate( nextProps, nextState, nextContext ) {
 		return true
 	}
+	
 	componentDidUpdate( prevProps, prevState, snapshot ) {
-		let { autoScroll, scrollDir, tweener, onChange, index: pIndex } = this.props,
-		    { index = this.props.defaultIndex, step, dec }              = this.state;
+		let { autoScroll, scrollDir, tweener, onChange, index: pIndex, autoHeight } = this.props,
+		    { index = this.props.defaultIndex, step, dec }                          = this.state,
+		    changed;
 		
 		if ( prevState.dec !== dec ) {
 			tweener.scrollTo(tweener._getAxis(scrollDir).scrollPos + dec - prevState.dec, 0, scrollDir);
 		}
 		if ( pIndex !== prevProps.index ) {
+			changed = pIndex + 1;
 			tweener.scrollTo(dec + step * pIndex + 100, 750, scrollDir, "easeQuadInOut");
 			
 			if ( autoScroll ) {
@@ -85,6 +94,7 @@ export default class Slider extends React.Component {
 		}
 		if ( prevState.index !== index ) {
 			onChange && onChange(index);
+			changed = index + 1;
 			if ( this._wasUserSnap ) {
 				this._wasUserSnap = false;
 			}
@@ -102,6 +112,10 @@ export default class Slider extends React.Component {
 		else if ( this._then )
 			this._then();
 		this._then = null;
+		if ( changed && autoHeight ) {
+			let h = ReactDOM.findDOMNode(this.slideRefs[changed - 1]);
+			this.setState({ sliderHeight: h.offsetHeight + 'px' })
+		}
 	}
 	
 	componentWillReceiveProps( nextProps, nextContext ) {
@@ -114,6 +128,8 @@ export default class Slider extends React.Component {
 		clearTimeout(this._updater);
 	}
 	
+	slideRefs = [];
+	
 	static getDerivedStateFromProps( props, state ) {
 		let {
 			    defaultIndex = 0,
@@ -121,20 +137,20 @@ export default class Slider extends React.Component {
 			    overlaps     = 1 / ((visibleItems - (visibleItems % 2)) || 1),
 			    children                                                 : _childs, scrollDir,
 			    defaultEntering, defaultLeaving, scrollY, infinite, index: pIndex
-		    }                        = props,
-		    children                 = is.array(_childs) ? _childs : [],
-		    { index = defaultIndex } = state,
-		    allItems                 = !infinite
-		                               ? [...children]
-		                               : [...children, ...children, ...children].map(( elem, i ) => React.cloneElement(elem, { key: i })),
-		    nbGhostItems             = allItems.length,
-		    step                     = 100 * overlaps,
-		    dec                      = infinite ? children.length * step : 0,
-		    scrollAxis               = [
+		    }                                      = props,
+		    children                               = is.array(_childs) ? _childs : [],
+		    { index = defaultIndex, sliderHeight } = state,
+		    allItems                               = !infinite
+		                                             ? [...children]
+		                                             : [...children, ...children, ...children].map(( elem, i ) => React.cloneElement(elem, { key: i })),
+		    nbGhostItems                           = allItems.length,
+		    step                                   = 100 * overlaps,
+		    dec                                    = infinite ? children.length * step : 0,
+		    scrollAxis                             = [
 			    ...defaultEntering,
 			    ...tweenTools.offset(defaultLeaving, 100)
 		    ],
-		    tweenLines               = allItems.map(( e, i ) => ({
+		    tweenLines                             = allItems.map(( e, i ) => ({
 			    [scrollDir]: tweenTools.offset(
 				    scrollAxis,
 				    i * step
@@ -142,6 +158,7 @@ export default class Slider extends React.Component {
 		    }));
 		
 		return {
+			sliderHeight,
 			allItems,
 			nbGhostItems,
 			nbItems   : children.length,
@@ -161,14 +178,14 @@ export default class Slider extends React.Component {
 			    style        = {},
 			    onClick,
 			    infinite,
-			    maxJump,
+			    autoHeight,
 			    visibleItems,
 			    scrollDir,
 			    className    = ""
-		    }                                                                                = this.props,
-		    { index = defaultIndex, allItems, nbGhostItems, step, dec, tweenLines, nbItems } = this.state;
+		    }                                                                                                       = this.props,
+		    { index = defaultIndex, allItems, nbGhostItems, step, dec, tweenLines, nbItems, sliderHeight = "auto" } = this.state;
 		
-		console.log("render slider", index, 100 + dec + index * step)
+		//console.log("render slider", index, 100 + dec + index * step)
 		return (
 			<div
 				className={"rSlide slider " + className}
@@ -213,23 +230,31 @@ export default class Slider extends React.Component {
 						}
 					}
 				/>
+				{autoHeight && <div
+					style={
+						{
+							height: sliderHeight,
+						}
+					}/>}
 				{
 					allItems.map(
 						( Child, i ) =>
-							<TweenRef
-								key={i}
-								//id={"slider_" + i}
-								initial={
-									defaultInitial
-								}
-								tweenLines={
-									tweenLines[i]
-								}
-							>
-								<div className={"slide"} onClick={onClick && (e => onClick(e, i % nbItems, this))}>
-									{Child}
-								</div>
-							</TweenRef>
+							(
+								<TweenRef
+									key={i}
+									ref={ref => (this.slideRefs[i] = ref)}
+									//id={"slider_" + i}
+									initial={
+										defaultInitial
+									}
+									tweenLines={
+										tweenLines[i]
+									}
+								>
+									<div className={"slide"} onClick={onClick && (e => onClick(e, i % nbItems, this))}>
+										{Child}
+									</div>
+								</TweenRef>)
 					)
 				}
 			</div>
