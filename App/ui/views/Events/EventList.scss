@@ -35,6 +35,8 @@
   }
 
   .NavBox {
+    z-index: 10;
+
     > * {
 
       pointer-events: all;
@@ -59,21 +61,26 @@
   }
 
   .EventCatSlider {
-    pointer-events: all;
+    //pointer-events: none;
     //overflow: hidden;
     background: rgba(255, 255, 255, 0.5);
     z-index: 1;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
 
+    .selected {
+      pointer-events: all;
+    }
+
     //direction: rtl;
     //overflow:auto;
     //height: 50px;
     //width: 50px;
-    >*{
+    > * {
 
       //direction:ltr;
     }
+
     .dayList {
       @include withScrollBar();
       overflow: auto;
