@@ -1,19 +1,9 @@
 /*
- * www.mamasound.fr
  * Copyright (C) 2019 Nathanael Braun
+ * All rights reserved
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *   @author : Nathanael Braun
+ *   @contact : n8tz.js@gmail.com
  */
 import CardHeader                                       from '@material-ui/core/CardHeader';
 import IconButton                                       from '@material-ui/core/IconButton';
@@ -80,6 +70,7 @@ export default class Widget extends React.Component {
 			if ( window.innerWidth < (wPos.x + wSize.width) )
 				wSize.width = Math.min(window.innerWidth, wPos.x + wSize.width) - wPos.x - 5
 		}
+		//console.log(position)
 		return (
 			<Rnd
 				className={"Widget"}

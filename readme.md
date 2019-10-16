@@ -4,7 +4,7 @@
 
 tmp url : http://mamasound.wiseways.me/
 
-_* this is personal & probono project using experimental libs ( & design )_
+_* this is personal & probono project using experimental libs ( & design )_<br/>
 _* so this is NOT corporate grade code _
 
 ## How to start
@@ -12,10 +12,13 @@ _* so this is NOT corporate grade code _
 ### using docker-compose
 
 ```
-docker-compose up
+npm run docker_start
 ```
 
 & start browser at localhost:8080
+
+Production docker ( auto built @ [n8tz/www.mamasound.fr:latest](https://cloud.docker.com/u/n8tz/repository/docker/n8tz/www.mamasound.fr) ) is [here](dockers/staging) <br/>
+Production docker-compose is [here](dockers/prod) 
 
 ### using local setup
 
