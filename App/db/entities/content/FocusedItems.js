@@ -16,15 +16,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import {types, validate} from 'App/db/fields';
 /**
  * @author Nathanael BRAUN
  *
  * Date: 24/11/2015
  * Time: 19:18
  */
-import React from 'react';
-
-import {types, validate} from 'App/db/fields';
+import React             from 'react';
 
 export default {
 	label        : "Contenu mis en avant",
@@ -54,20 +53,24 @@ export default {
 		"_id": types.indexes,
 		//"pubFlag" : fields.publicationFlag,
 		
-		"_public"        : types.boolean("Publier :", false),
-		//"publishTs" : "<timestamp>",// ?
-		"label"       : types.labels(),
-		"resume"      : types.descriptions('Resumé'), // TODO refactor as "summary"
+		"_public": types.boolean("Publier :", false),
 		
-		"previewImage": types.media({ allowedTypes: "Image" }, "Preview (~12/5 fb headers):"),
-		"background"  : types.media({ allowedTypes: ["Image", "Video"] }, "Background (gd image/video de fond (video LEGERE)):"),
-		"website"     : types.labels("Site web :"),
-		"fbPage"      : types.labels("Page Facebook :"),
-		"scPage"      : types.labels("Page SoundCloud :"),
-		"ytPage"      : types.labels("Page Youtube :"),
-		"targetEtty"  : types.picker(true, {
-			//allowTypeSelection: ["Concert", "Theatre", "Expo", "Event", "Article", "Collection", "Video", "Page"],
-			storeTypedItem    : true,
+		//"publishTs" : "<timestamp>",// ?
+		"label" : types.labels(),
+		"resume": types.descriptions('Resumé'), // TODO refactor as "summary"
+		
+		"useBackground"     : types.boolean("Afficher le background :", false),
+		"useGhostBackground": types.boolean("Afficher les ghosts flous :", false),
+		"previewImage"      : types.media({ allowedTypes: "Image" }, "Preview (~12/5 fb headers):"),
+		"background"        : types.media({ allowedTypes: ["Image", "Video"] }, "Background (gd image/video de fond (video LEGERE)):"),
+		"backgroundColor"   : types.labels("Couleur de fond :"),
+		"website"           : types.labels("Site web :"),
+		"fbPage"            : types.labels("Page Facebook :"),
+		"scPage"            : types.labels("Page SoundCloud :"),
+		"ytPage"            : types.labels("Page Youtube :"),
+		"targetEtty"        : types.picker(true, {
+			allowTypeSelection: ["Concert", "Theatre", "Expo", "Event", "Article", "Collection", "Video", "Page"],
+			storeTypedItem: true,
 		}, "Contenu cible :"),
 		//
 		//"author" : fields.picker(true, {

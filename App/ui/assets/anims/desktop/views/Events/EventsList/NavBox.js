@@ -24,11 +24,12 @@ let startPos      = 50,
     minHeight     = "40px";
 
 export const style          = {
-	position : "relative",
+	position : "absolute",
 	width    : ["100%"],
-	//right    : "10px",
-	//top      : ["100%", "-" + minHeight],
+	left     : "0px",
+	top      : ["70vh"],
 	height   : "50px",
+	zIndex:600,
 	//backgroundColor: "red",
 	transform: {
 		//translateY: "85%"

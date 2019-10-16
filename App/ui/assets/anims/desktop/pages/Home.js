@@ -60,7 +60,7 @@ export const header    = {
 	top      : 0,
 	left     : "50%",
 	//width    : "100%",
-	zIndex   : 200,
+	zIndex   : 1200,
 	transform: [
 		{
 			perspective: "500px",
@@ -96,19 +96,31 @@ export const logo      = {
 
 export const Background        = {
 	position: "absolute",
-	zIndex  : -1,
-	right   : "0%",
+	//zIndex  : -1,
+	left   : "50%",
+	bottom   : "25px",
 	width   : "100%",
-	height  : "50vh",
-	top     : 20,
+	height  : "60vh",
+	//top     : 20,
+	transform: [
+		{
+			//perspective: "500px",
+		},
+		{
+			translateX: "-50%",
+			//translateY: "-50%",
+			//translateZ : "-50px",
+			//rotateX   : "-10deg"
+		}
+	]
 };
 export const Highlighter       = {
-	//position       : "absolute",
-	//right          : "0%",
-	//top            : ["0%"],
+	position       : "absolute",
+	right          : "0%",
+	top            : ["0%"],
 	height         : ["60vh"],
 	transformOrigin: "center top",
-	zIndex         : 100,
+	zIndex         : 650,
 	transform      : [
 		{
 			//perspective: "500px",
@@ -136,8 +148,9 @@ export const EventsBlock       = {
 	//right          : "0%",
 	//bottom         : 0,
 	//top            : "100%",
-	//zIndex         : 125,
+	//zIndex         : 1250,
 	//overflow       : 'hidden',
+	marginTop      : ["70vh"],
 	transformOrigin: "center top",
 	transform      : [
 		{
@@ -153,12 +166,12 @@ export const EventsBlock       = {
 export const EventMap          = {
 	position       : "absolute",
 	left           : "10px",
-	height         : "400px",
+	height         : "300px",
 	width          : collWidth,
 	zIndex         : 150,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
-	top            : [350],
+	top            : [300],
 };
 export const PageBlock         = {
 	
@@ -183,6 +196,26 @@ export const PageBlock         = {
 export const EventMap_Gradient = {
 	opacity: 1
 };
+export const nativeScrollAxis  = [
+	
+	{
+		target  : "Highlighter",
+		from    : 0,
+		duration: 40,
+		apply   : {
+			//height: ["-50vh", sliderHeight],
+			//top   : ["-50vh", sliderHeight]
+		}
+	},
+	{
+		target  : "Highlighter",
+		from    : 50,
+		duration: 1,
+		apply   : {
+			//position: "fixed"
+		}
+	},
+];
 export const YAxis             = [
 	// header page to main highlighter
 	//{

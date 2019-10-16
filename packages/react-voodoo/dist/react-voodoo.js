@@ -1229,16 +1229,21 @@ function asTweener() {
       var _this3 = this;
 
       var _ = this._,
-          initials = {};
+          initials = {},
+          pureCss;
       if (isArray(target) && isArray(style)) return target.map(function (m, i) {
         return _this3.updateRefStyle(m, style[i], postPone);
       });
       if (isArray(target)) return target.map(function (m) {
         return _this3.updateRefStyle(m, style, postPone);
-      });
-      if (!this._.tweenRefCSS) Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["deMuxTween"])(style, _.tweenRefMaps[target], initials, _.muxDataByTarget[target], _.muxByTarget[target], true);
+      }); //if ( !this._.tweenRefCSS )
 
-      this._updateTweenRef(target);
+      pureCss = Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["deMuxTween"])(style, _.tweenRefMaps[target], initials, _.muxDataByTarget[target], _.muxByTarget[target]);
+      Object.assign(_.tweenRefCSS[target], pureCss);
+      Object.assign(_.tweenRefOriginCss[target], pureCss);
+      Object(_utils_css__WEBPACK_IMPORTED_MODULE_9__["muxToCss"])(_.tweenRefMaps[target], _.tweenRefCSS[target], _.muxByTarget[target], _.muxDataByTarget[target], _.box);
+
+      this._updateTweenRef(target, true);
     }
     /**
      * Retrieve the tween ref dom node
@@ -2135,20 +2140,22 @@ function asTweener() {
       node = this.getTweenableRef(target);
 
       if (node) {
-        //for ( let o in this._.tweenRefCSS[target] )
-        //	if ( swap[o] === undefined ) {
-        //		node.style[o] = null;
-        //		delete this._.tweenRefCSS[target][o];
-        //	}
-        for (var o in swap) {
-          if (this._.tweenRefCSS[target].hasOwnProperty(o)) {
-            if (force || swap[o] !== this._.tweenRefCSS[target][o]) {
-              node.style[o] = this._.tweenRefCSS[target][o] = swap[o]; //if ( target == "card" ) console.log(target, o, node.style[o], swap[o]);
+        for (var o in this._.tweenRefCSS[target]) {
+          if (swap[o] === undefined) {
+            node.style[o] = this._.tweenRefCSS[target][o]; //		node.style[o] = null;
+            //		delete this._.tweenRefCSS[target][o];
+          }
+        }
+
+        for (var _o in swap) {
+          if (this._.tweenRefCSS[target].hasOwnProperty(_o)) {
+            if (force || swap[_o] !== this._.tweenRefCSS[target][_o]) {
+              node.style[_o] = this._.tweenRefCSS[target][_o] = swap[_o]; //if ( target == "card" ) console.log(target, o, node.style[o], swap[o]);
 
               changes = true;
             }
 
-            delete swap[o];
+            delete swap[_o];
           }
         }
       } //if ( !changes )

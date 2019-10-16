@@ -123,7 +123,7 @@ const ctrl = {
 			cScope.restore(cfg.state, { alias: "App" });
 		}
 		else {
-			cScope.state.Anims = { currentBrkPts: cfg.device };
+			cScope.state.Anims = { currentTheme: cfg.device };
 		}
 		
 		let html,

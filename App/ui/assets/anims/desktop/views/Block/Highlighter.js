@@ -47,7 +47,7 @@ export const backgroundScroll = {
 }
 export const slider           = {
 	position : "absolute",
-	bottom   : "0px",
+	bottom   : "20px",
 	left     : "0px",
 	width    : "100%",
 	height   : [sliderHeight, -10],

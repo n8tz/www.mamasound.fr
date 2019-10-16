@@ -25,9 +25,13 @@ const initialPts = (!isBrowserSide || window.innerWidth >= 900) && "desktop" || 
 
 export default class Styles extends Store {
 	//static singleton = true;
-	static actions = {};
+	static actions = {
+		loadTheme( currentTheme ) {
+			return { currentTheme };
+		}
+	};
 	state          = {
-		currentBrkPts: "desktop",
+		currentTheme: "desktop",
 	};
 	//data             = {
 	//	//...breakPts[initialPts]
@@ -43,17 +47,17 @@ export default class Styles extends Store {
 		//isBrowserSide && window.addEventListener(
 		//	"resize",
 		//	this._onResize = ( e ) => {//@todo
-		//		let currentBrkPts;
+		//		let currentTheme;
 		//		if ( window.innerWidth >= 900 ) {
 		//			if ( window.innerHeight >= 850 )
-		//				currentBrkPts = "desktop";
+		//				currentTheme = "desktop";
 		//			else
-		//				currentBrkPts = "desktopSmall";
+		//				currentTheme = "desktopSmall";
 		//
 		//		}
 		//		if ( window.innerWidth <= 900 )
-		//			currentBrkPts = "phone";
-		//		this.setState({ currentBrkPts })
+		//			currentTheme = "phone";
+		//		this.setState({ currentTheme })
 		//	});
 		//isBrowserSide && setTimeout(tm => (this._onResize && this._onResize()), 500)
 	}
@@ -62,10 +66,10 @@ export default class Styles extends Store {
 		this.pushState(this.nextState);
 	}
 	
-	apply( data, { currentBrkPts } ) {
+	apply( data, { currentTheme } ) {
 		
-		if ( currentBrkPts )
-			return { ...anims.desktop, currentBrkPts }
+		if ( currentTheme )
+			return { ...anims[currentTheme] || anims.desktop, currentTheme }
 		
 		return data;
 	}

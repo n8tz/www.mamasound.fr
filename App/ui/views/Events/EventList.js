@@ -133,9 +133,6 @@ export default class EventList extends React.Component {
 			<div className={"EventList container"} style={style}>
 				<div className={"maskContent"}>
 					<div className={"content container"}>
-						<TweenRef id={"NavBox"} initial={Styles.NavBox.style}>
-							<Comps.NavBox/>
-						</TweenRef>
 						{children}
 						<TweenRef
 							id={"EventCatSlider"}

@@ -17,6 +17,7 @@
  */
 
 import {Comps, Views}                   from 'App/ui';
+import normalizeWheel                   from 'normalize-wheel';
 import React                            from 'react';
 import {scopeToProps}                   from "react-scopes";
 import {asTweener, TweenAxis, TweenRef} from "react-voodoo";
@@ -30,7 +31,7 @@ const wayPoints =
 		      map    : 300
 	      };
 
-@scopeToProps("appState", "Styles.pages.Home:Styles", "Styles.currentBrkPts", "appTheme")
+@scopeToProps("appState", "Styles.pages.Home:Styles", "Styles.views.Events.EventsList.NavBox", "Styles.currentTheme", "appTheme")
 @asTweener({ enableMouseDrag: true, dragDirectionLock: true })
 export default class Home extends React.Component {
 	state = {};
@@ -47,6 +48,47 @@ export default class Home extends React.Component {
 		)
 		let { appState } = props;
 		//props.tweener.scrollTo(wayPoints[appState.currentPageFocus]);
+		document.addEventListener('scroll', this.recordPosition)
+		
+	}
+	
+	componentWillUnmount() {
+		document.removeEventListener('scroll', this.recordPosition)
+	}
+	
+	recordPosition = event => {
+		
+		let { appState, tweener, $actions } = this.props;
+		let scrollTop, normalizedScrollTop;
+		
+		if ( document.scrollingElement ) {
+			scrollTop = document.scrollingElement.scrollTop
+		}
+		else {
+			if ( event.target === document ) {
+				scrollTop = event.target.body.scrollTop
+			}
+			else {
+				scrollTop = event.target.scrollTop
+			}
+		}
+		const normalized = normalizeWheel(event);
+		
+		console.log(normalized.pixelX, normalized.pixelY);
+		normalizedScrollTop = Math.max(0, ~~(((scrollTop) / window.innerHeight) * 100));
+		console.log('scroll :', normalizedScrollTop)
+		if ( normalizedScrollTop >= 40 ) {
+			//$actions.loadTheme("desktopFixed")
+			tweener.updateRefStyle("Highlighter", { position: 'fixed', height: ["190px", "0vh"] })
+			tweener.updateRefStyle("NavBox", { position: 'fixed', top: ["0vh", "270px"] })
+		}
+		else {
+			tweener.updateRefStyle("Highlighter", { position: 'absolute', height: ["60vh", "0px"] })
+			tweener.updateRefStyle("NavBox", { position: 'absolute', top: ["70vh", "0px"] })
+		}
+		//tweener.scrollTo(normalizedScrollTop, 50, "nativeScrollAxis")
+		//onScroll(scrollTop, event)
+		//this.setState({ scroll: scrollTop })
 	}
 	
 	componentDidUpdate( props ) {
@@ -61,7 +103,7 @@ export default class Home extends React.Component {
 	////	return [this, "EventNav"];
 	////}
 	render() {
-		let { Styles, appState, currentBrkPts, appTheme, $actions } = this.props;
+		let { Styles, appState, currentTheme, appTheme, $actions, NavBox } = this.props;
 		return <TweenRef id={"page"} initial={Styles.page}>
 			<div className={"Home container"}>
 				
@@ -101,6 +143,13 @@ export default class Home extends React.Component {
 						}
 					}
 				/>
+				<TweenAxis
+					axe={"nativeScrollAxis"}
+					items={Styles.nativeScrollAxis}
+					//scrollableWindow={ 225 }
+					//bounds={Styles.bounds}
+					inertia={{}}
+				/>
 				<TweenRef
 					id={"header"}
 					initial={Styles.header}
@@ -116,29 +165,35 @@ export default class Home extends React.Component {
 				</TweenRef>
 				<TweenRef id={"Highlighter"} initial={Styles.Highlighter}>
 					<Views.Block.Highlighter>
-					
+						
+						<TweenRef id={"background"} initial={Styles.Background}>
+							<Views.Block.Background
+								record={appTheme && appTheme.data}/>
+						</TweenRef>
 					</Views.Block.Highlighter>
 				</TweenRef>
 				{/*{*/}
-				{/*	//(currentBrkPts !== "phone") && <TweenRef*/}
+				{/*	//(currentTheme !== "phone") && <TweenRef*/}
 				{/*		//id={"SliderBlock"}*/}
 				{/*		//initial={Styles.SliderBlock}*/}
 				{/*>*/}
 				{/*<Views.Block.Slider/>*/}
 				{/*</TweenRef>}*/}
-				<TweenRef id={"background"} initial={Styles.Background}>
-					<Views.Block.Background
-						record={appTheme && appTheme.data}/>
-				</TweenRef>
-				<TweenRef id={"EventsBlock"} initial={Styles.EventsBlock}>
-					<Views.Events.EventList
-						activeScroll={appState.currentPageFocus !== "map" && appState.currentPageFocus !== "events"}>
+				
+				<TweenRef id={"NavBox"} initial={NavBox.style}>
+					<Comps.NavBox>
 						
 						<TweenRef id={"EventMap"} initial={Styles.EventMap}>
 							<Views.Events.EventMap
 								day={appState.currentVisibleDay || appState.curDay}
 								viewType={appState.viewType}/>
 						</TweenRef>
+					</Comps.NavBox>
+				</TweenRef>
+				<TweenRef id={"EventsBlock"} initial={Styles.EventsBlock}>
+					<Views.Events.EventList
+						activeScroll={appState.currentPageFocus !== "map" && appState.currentPageFocus !== "events"}>
+						
 					</Views.Events.EventList>
 				</TweenRef>
 				<TweenRef id={"Footer"} initial={Styles.Footer}>

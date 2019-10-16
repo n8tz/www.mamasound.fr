@@ -27,21 +27,24 @@
   //bottom: 0;
 
   //@media screen and (max-width: $tablet-portrait-breakpoint) {
-  //  &:before {
-  //    content: ' ';
-  //    position: absolute;
-  //    width: 110vw;
-  //    top: -20px;
-  //    left: 50%;
-  //    transform: translate(-50%, 0%);
-  //    height: 200px;
-  //    //background-color: black;
-  //    background: url("../assets/images/shuperDesign.jpg");
-  //    background-size: auto 100%;
-  //
-  //  }
-  //}
+  &:before {
+    content: ' ';
+    position: absolute;
+    width: 110vw;
+    top: -185px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    height: 200px;
+    background-color: white;
+    //background: url("../assets/images/shuperDesign.jpg");
+    background-size: auto 100%;
 
+  }
+
+  //}
+  > .content {
+    position: relative;
+  }
 
   .StretchBox {
     position: relative;

@@ -112,8 +112,8 @@ export default class Slider extends React.Component {
 		else if ( this._then )
 			this._then();
 		this._then = null;
-		if ( changed && autoHeight ) {
-			let h = ReactDOM.findDOMNode(this.slideRefs[changed - 1]);
+		if ( autoHeight && changed || (prevProps.children !== this.props.children) ) {
+			let h = ReactDOM.findDOMNode(this.slideRefs[changed ? changed - 1 : index]);
 			this.setState({ sliderHeight: h.offsetHeight + 'px' })
 		}
 	}

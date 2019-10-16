@@ -58,7 +58,7 @@ if ( typeof window !== "undefined" ) {
 		
 	}
 )
-@scopeToProps("MountedItems", "Selected", "HighlighterBackground", "Styles.views.Block.Highlighter:Styles", "Styles.currentBrkPts", "DataProvider", "appState")
+@scopeToProps("MountedItems", "Selected", "HighlighterBackground", "Styles.views.Block.Highlighter:Styles", "Styles.currentTheme", "DataProvider", "appState")
 @withTweener
 export default class Slider extends React.Component {
 	static propTypes = {};
@@ -88,7 +88,7 @@ export default class Slider extends React.Component {
 		let {
 			    MountedItems: { items = [], layout = [] } = {},
 			    Styles, Selected, children,
-			    $actions, currentBrkPts, tweener, style
+			    $actions, currentTheme, tweener, style
 		    }     = this.props,
 		    state = this.state;
 		return (
