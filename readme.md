@@ -15,7 +15,7 @@ _* so this is NOT corporate grade code _
 npm run docker_start
 ```
 
-& start browser at localhost:8080
+& start browser at mamasound.localhost
 
 Production docker ( auto built @ [n8tz/www.mamasound.fr:latest](https://cloud.docker.com/u/n8tz/repository/docker/n8tz/www.mamasound.fr) ) is [here](dockers/preprod) <br/>
 Production docker-compose is [here](dockers/prod) 
