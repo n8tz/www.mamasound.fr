@@ -18,6 +18,7 @@
 
 let stepAngle = "3deg";
 
+export const visibleItems    = 7;
 export const defaultInitial  = {
 	position : "absolute",
 	height   : "100%",
@@ -28,13 +29,15 @@ export const defaultInitial  = {
 	transform: [
 		{
 			perspective: "1250px",
-			translateY : "32000px",
-			rotate     : stepAngle
+			//translateY : "32000px",
+			translateX : "60vw",
+			//translateY: "-10vw",
+			//rotate     : stepAngle
 		},
 		{
-			translateY: "-32010px",
-			translateZ: "-500px",
-			rotateY   : "15deg",
+			//translateY: "-32010px",
+			//translateZ: "-500px",
+			//rotateY   : "15deg",
 		},
 		{
 			translateX: "-50%",
@@ -61,14 +64,16 @@ export const defaultEntering = [
 		//easeFn  : "easeSinIn",
 		apply   : {
 			transform: {
-				rotate: "-" + stepAngle,
+				translateX: "-30vw",
+				//translateY: "10vw",
+				//rotate: "-" + stepAngle,
 			},
 			zIndex   : 150,
 		}
 	},
 	{
-		from    : 25,
-		duration: 10,
+		from    : 80,
+		duration: 20,
 		apply   : {
 			opacity: 1,
 		}
@@ -77,8 +82,8 @@ export const defaultEntering = [
 		duration: 80,
 		apply   : {
 			transform: [{}, {
-				rotateY   : "-15deg",
-				translateZ: "500px",
+				//rotateY   : "-15deg",
+				//translateZ: "500px",
 				//rotateX: "-90deg",
 			}],
 		}
@@ -87,10 +92,12 @@ export const defaultEntering = [
 export const defaultLeaving  = [
 	{
 		from    : 0,
-		duration: 80,
+		duration: 20,
 		apply   : {
-			transform: [{}, {
-				rotateY   : "-15deg",
+			transform: [{
+				translateY: "-25px",
+			}, {
+				//rotateY   : "-15deg",
 				translateZ: "-500px",
 			}]
 		}
@@ -103,13 +110,14 @@ export const defaultLeaving  = [
 		}
 	}, {
 		from    : 0,
-		duration: 100,
+		duration: 90,
 		//easeFn  : "easeSinOut",
 		apply   : {
 			zIndex: -150,
 			
 			transform: {
-				rotate: "-" + stepAngle,
+				translateX: "-150vw",
+				//rotate: "-" + stepAngle,
 			}
 		}
 	}]

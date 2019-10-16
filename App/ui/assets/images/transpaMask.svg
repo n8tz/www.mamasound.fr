@@ -31,8 +31,8 @@
      id="namedview17"
      showgrid="false"
      inkscape:zoom="0.396"
-     inkscape:cx="1089.6465"
-     inkscape:cy="1500"
+     inkscape:cx="1133.7903"
+     inkscape:cy="1870.1607"
      inkscape:window-x="1977"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -116,7 +116,7 @@
        xlink:href="#linearGradient1376-4"
        id="linearGradient831"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(3.4714573,0,0,0.9804968,-735.56457,-878.16451)"
+       gradientTransform="matrix(3.5153007,0,0,0.97636665,-736.82713,-875.48533)"
        x1="141.36"
        y1="144.80516"
        x2="141.36"
@@ -134,23 +134,13 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <g
-     id="g895">
-    <rect
-       style="fill:url(#linearGradient831);fill-opacity:1;stroke-width:1.86952269"
-       id="rect829"
-       ry="0"
-       height="208.35274"
-       width="793.53619"
-       y="-793.08185"
-       x="-794.31116"
-       transform="scale(-1)" />
-    <rect
-       y="0"
-       x="0"
-       height="595.98059"
-       width="794.41815"
-       id="rect889"
-       style="fill:#000000;fill-opacity:0.98979594;stroke:none;stroke-width:0.55141807;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-  </g>
+  <rect
+     transform="scale(-1)"
+     x="-796.31561"
+     y="-790.76105"
+     width="803.55829"
+     height="790.76105"
+     ry="0"
+     id="rect829"
+     style="fill:url(#linearGradient831);fill-opacity:1;stroke:none;stroke-width:1.87732494" />
 </svg>
