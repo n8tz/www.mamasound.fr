@@ -104,7 +104,7 @@ passport.deserializeUser(function ( user, done ) {
 });
 
 export const name          = "Auth";
-export const priorityLevel = 100001;
+export const priorityLevel = Infinity;
 
 export function service( server, http ) {
 	console.log('Auth service running :) ');

@@ -29,7 +29,7 @@ export default ( server, http ) => {
 		'/db/remove',
 		function ( req, res, next ) {
 			if ( !(req.user && req.user.isAdmin) )
-				return reject("Auth required");
+				return res.json({ error: 'Auth required' }, 500);
 			db.remove(req.body).then(data => res.json(data)).catch(err => res.json({ error: err + '' }, 500))
 			
 		}

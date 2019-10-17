@@ -21,7 +21,7 @@ const wayPoints =
 		      map    : 300
 	      };
 
-@scopeToProps("appState", "Styles.pages.Home:Styles", "Styles.views.Events.EventsList.NavBox", "Styles.currentTheme", "appTheme")
+@scopeToProps("appState", "Styles.pages.Home:Styles", "Styles.views.Events.EventsList.NavBox", "Styles.currentTheme", "appTheme", "menus")
 @asTweener({ enableMouseDrag: true, dragDirectionLock: true })
 export default class Home extends React.Component {
 	state = {};
@@ -93,7 +93,8 @@ export default class Home extends React.Component {
 	////	return [this, "EventNav"];
 	////}
 	render() {
-		let { Styles, appState, currentTheme, appTheme, $actions, NavBox } = this.props;
+		let { Styles, appState, currentTheme, appTheme, $actions, NavBox, menus } = this.props;
+		console.log('Home::render:97: ', menus);
 		return <TweenRef id={"page"} initial={Styles.page}>
 			<div className={"Home container"}>
 				

@@ -20,7 +20,7 @@ export const defaultInitial  = {
 		{
 			perspective: "1250px",
 			//translateY : "32000px",
-			translateX : "60vw",
+			translateX : "230vw",
 			//translateY: "-10vw",
 			//rotate     : stepAngle
 		},
@@ -54,7 +54,7 @@ export const defaultEntering = [
 		//easeFn  : "easeSinIn",
 		apply   : {
 			transform: {
-				translateX: "-30vw",
+				translateX: "-200vw",
 				//translateY: "10vw",
 				//rotate: "-" + stepAngle,
 			},

@@ -28,6 +28,23 @@ export default {
 		}
 	)
 	appTheme: stores.MongoRecords,
+	@withStateMap(
+		{
+			head  : {
+				id  : "Menu.H1eF5mX_ez",
+				etty: "Menu",
+			},
+			middle: {
+				id  : "rootmiddlemenu",
+				etty: "Menu",
+			},
+			footer: {
+				id  : "Menu.BkeOeyJJF-",
+				etty: "Menu",
+			}
+		}
+	)
+	menus   : stores.MongoRecords,
 	
 	@asStore
 	appState: {

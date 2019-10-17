@@ -8,6 +8,7 @@
 import AppCtrl    from "App";
 import React      from "react";
 import RS         from "react-scopes";
+import {toast}    from 'react-toastify';
 import superagent from "superagent";
 
 var fileDownload = require('js-file-download');
@@ -61,15 +62,37 @@ export default class DevTools extends React.Component {
 		};
 		reader.readAsText(file);
 	}
+	restoreDb            = ( e ) => {
+		const { $actions } = this.props;
+		let file           = e.target.files[0],
+		    reader         = new FileReader();
+		var request        = superagent.post('/devTools/dbRestore');
+		//request.set('Authorization', 'Bearer 14d79ed924584881940d76aba1a874bf')
+		toast("Upload started...")
+		request.attach('file', file);
+		request.end(function ( res, e ) {
+			toast(e ? "seems succesfull" : "Got error")
+			console.log('yay got ', res, e);
+			e.target.value = '';
+		}).on('progress', function ( e ) {
+			console.log('Percentage done: ', e.percent);
+		});
+	}
 	
 	render() {
 		const { $actions } = this.props;
 		return (
 			<div>
-				<div onClick={this.doRestore}>db restore</div>
 				<div onClick={this.clearRedisCache}>clear Cache</div>
 				<div onClick={$actions.exportAppState}>exportAppState</div>
-				<label htmlFor="file">Restore from file</label>
+				<div><a href={"/devTools/dbDump"}>Download db dump</a></div>
+				<br/>
+				<label htmlFor="file">Restore db from file</label>
+				<input type="file"
+				       name="file"
+				       onChange={this.restoreDb}/>
+				<br/>
+				<label htmlFor="file">Restore state from file</label>
 				<input type="file"
 				       name="file"
 				       onChange={this.restoreAppState}

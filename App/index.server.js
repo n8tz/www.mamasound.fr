@@ -16,7 +16,11 @@ const express     = require("express"),
       compression = require('compression'),
       wpiConf     = require('App/.wpiConfig'),
       debug       = require('App/console').default("server");
-process.title     = wpiConf.project.name + '::server';
+
+const busboy = require('connect-busboy');
+
+
+process.title = wpiConf.project.name + '::server';
 
 debug.warn("process.env.DEBUG : ", process.env.DEBUG);
 
@@ -24,7 +28,9 @@ server.use(compression());
 server.use(express.json({ limit: '10mb' }));       // to support JSON-encoded bodies
 server.use(express.urlencoded({ extended: true, limit: '10mb' })); // to support URL-encoded bodies
 server.use(bodyParser({ limit: '50mb' }));
-
+server.use(busboy({
+	                  highWaterMark: 2 * 1024 * 1024, // Set 2MiB buffer
+                  })); // Insert the busboy middle-ware
 api(server, http);
 
 var server_instance = http.listen(parseInt(argz.p || argz.port || 8080), function () {
