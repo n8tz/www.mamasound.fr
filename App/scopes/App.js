@@ -44,7 +44,7 @@ export default {
 			}
 		}
 	)
-	menus   : stores.MongoRecords,
+	appMenu   : stores.MongoRecords,
 	
 	@asStore
 	appState: {
@@ -58,7 +58,7 @@ export default {
 		currentSearch     : undefined,
 		currentArea       : undefined,
 		viewType          : 0,
-		dayCountByViewType: [6, 1, 1],
+		dayCountByViewType: [6, 6, 1, 1],
 		curTags           : undefined,
 		
 		$apply( data, state ) {

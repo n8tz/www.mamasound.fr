@@ -91,7 +91,7 @@ services:
     networks:
       - app_network
   mongodb:
-    image: mongo:3
+    image: mongo
     restart: always
     command: --quiet
     environment:

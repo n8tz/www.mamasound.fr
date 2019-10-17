@@ -38,7 +38,7 @@ export default class NavBox extends React.Component {
 	
 	render() {
 		let {
-			    Styles, style,children,
+			    Styles, style, children,
 			    appState,
 			    $actions
 		    }     = this.props,
@@ -51,7 +51,8 @@ export default class NavBox extends React.Component {
 					              tweenAxis={Styles.Axis}>
 						{
 							[
-								{ title: "Evenements", icon: require("App/ui/assets/images/jip/btn-event-on.png") },
+								{ title: "Evénements", icon: require("App/ui/assets/images/jip/btn-event-on.png") },
+								{ title: "Concerts", icon: require("App/ui/assets/images/jip/concert-gif.gif") },
 								{ title: "Expos", icon: require("App/ui/assets/images/jip/expo-gif.gif") },
 								{ title: "Theatre", icon: require("App/ui/assets/images/jip/theatre-gif.gif") },
 							].map(

@@ -17,6 +17,7 @@
     width: 100% !important;
     border: none;
   }
+
   header {
     touch-action: none;
     position: relative;
@@ -31,7 +32,29 @@
     //@include withMask();
     background: rgba(255, 255, 255, 0.51);
     border-bottom: solid 2px black;
-    overflow: hidden;
+    //overflow: hidden;
+    > .Menu_menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      white-space: nowrap;
+      transform: translate3d(-50%, 0, 0);
+      border: solid 1px rgba(0, 0, 0, 0.5);
+      border-top: none;
+      background: rgba(255, 255, 255, 0.64);
+      font-family: $mainFontFamily;
+      //height: 20px;
+      margin-top: 2px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      width: 100%;
+      z-index: -1;
+      padding-right: 15px;
+      padding-left: 15px;
+
+      //border-bottom-left-radius: 25px 20px;
+      //border-bottom-right-radius: 25px 20px;
+    }
 
     .logo {
       background: url("../assets/images/LogoVF_MAMA_SOUND_w.png") no-repeat;

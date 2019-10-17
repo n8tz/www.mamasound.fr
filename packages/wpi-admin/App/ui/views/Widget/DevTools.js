@@ -70,9 +70,10 @@ export default class DevTools extends React.Component {
 		//request.set('Authorization', 'Bearer 14d79ed924584881940d76aba1a874bf')
 		toast("Upload started...")
 		request.attach('file', file);
-		request.end(function ( res, e ) {
-			toast(e ? "seems succesfull" : "Got error")
-			console.log('yay got ', res, e);
+		confirm("This will overwrite the whole db ! Sure ?")
+		&& request.end(function ( res, err ) {
+			toast(err ? "seems succesfull" : "Got error")
+			console.log('yay got ', res, err);
 			e.target.value = '';
 		}).on('progress', function ( e ) {
 			console.log('Percentage done: ', e.percent);

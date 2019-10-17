@@ -37,7 +37,7 @@ export default class LoginBox extends Component {
 		let { CurrentUser, $actions } = this.props;
 		
 		return (
-			<div className="LoginBox">
+			<span className="LoginBox">
 				{
 					!CurrentUser &&
 					<a className="loginLink" onClick={() => this.setState({ showModal: true })}
@@ -88,7 +88,7 @@ export default class LoginBox extends Component {
 					{/*<a className="loginBoxPasswordLost" onClick={this.doFindSubmit}>Mot de passe oublié</a>*/}
 					<button className="submit-input" onClick={this.doSubmit}>Connexion</button>
 				</Dialog>
-			</div>
+			</span>
 		)
 			;
 	}

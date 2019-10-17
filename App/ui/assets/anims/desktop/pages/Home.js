@@ -85,12 +85,12 @@ export const logo      = {
 };
 
 export const Background        = {
-	position: "absolute",
+	position : "absolute",
 	//zIndex  : -1,
-	left   : "50%",
+	left     : "50%",
 	bottom   : "25px",
-	width   : "100%",
-	height  : "60vh",
+	width    : "100%",
+	height   : "60vh",
 	//top     : 20,
 	transform: [
 		{
@@ -122,13 +122,23 @@ export const Highlighter       = {
 		}
 	]
 };
+export const MidMenu           = {
+	position       : "absolute",
+	left           : "10px",
+	height         : "50px",
+	width          : collWidth,
+	zIndex         : 150,
+	//overflow       : 'hidden',
+	transformOrigin: "center top",
+	top            : [250],
+};
 export const Footer            = {
 	position : "fixed",
 	height   : footerMiniHeight,
 	left     : "0px",
 	top      : ["100%", -footerMiniHeight],
 	width    : "100%",
-	zIndex   : 300,
+	zIndex   : 3000,
 	transform: {
 		//translateY: "-100%"
 	}
@@ -140,7 +150,7 @@ export const EventsBlock       = {
 	//top            : "100%",
 	//zIndex         : 1250,
 	//overflow       : 'hidden',
-	marginTop      : ["70vh"],
+	marginTop      : ["60vh", 50],
 	transformOrigin: "center top",
 	transform      : [
 		{

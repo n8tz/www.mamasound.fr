@@ -1,0 +1,33 @@
+/*!
+ * Copyright (C) 2019 Nathanael Braun
+ * All rights reserved
+ *
+ *   @author : Nathanael Braun
+ *   @contact : n8tz.js@gmail.com
+ */
+
+.Menu_menu {
+  display: inline-block;
+
+  .MenuItem {
+
+    font-family: $mainFontFamily;
+    //height: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 2px;
+    //padding-top: 4px;
+    padding-bottom: 2px;
+    text-transform: capitalize;
+    font-weight: bold;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 14px;
+    color: #1c1c1c;
+
+    &:hover {
+      //color: black;
+      text-decoration: underline;
+    }
+  }
+}

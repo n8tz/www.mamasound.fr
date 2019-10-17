@@ -17,9 +17,9 @@ export const style          = {
 	position : "absolute",
 	width    : ["100%"],
 	left     : "0px",
-	top      : ["70vh"],
+	top      : ["60vh", 50],
 	height   : "50px",
-	zIndex:600,
+	zIndex   : 600,
 	//backgroundColor: "red",
 	transform: {
 		//translateY: "85%"
@@ -66,7 +66,7 @@ export const SearchBarProps = {
 		width   : [collWidth, -10],
 		left    : "10px",
 		top     : ["100%", "-" + minHeight],
-		height  : "320px"
+		height  : "270px"
 	},
 	titleStyle: {
 		paddingLeft: "3em"
@@ -121,15 +121,17 @@ export const SearchBarProps = {
 	]
 };
 export const StretchBox     = {
-	width   : "30%",
+	width   : "20%",
 	boxStyle: {
 		position            : "relative",
-		width               : "30%",
-		maxWidth            : "250px",
+		width               : "20%",
+		maxWidth            : "200px",
 		height              : minHeight,
 		borderTopLeftRadius : "10px",
 		borderTopRightRadius: "10px",
-		//marginLeft          : "5px",
+		paddingLeft         : "20px",
+		whiteSpace          : "nowrap",
+		textOverflow        : "ellipsis",
 		overflow            : "hidden",
 		display             : "inline-block",
 	},

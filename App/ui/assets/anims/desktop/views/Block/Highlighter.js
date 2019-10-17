@@ -5,7 +5,7 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import {headerMiniHeight, sliderHeight} from "../../vars";
+import {headerHeight, headerMiniHeight, sliderHeight} from "../../vars";
 
 export const background       = {
 	position : "absolute",
@@ -106,7 +106,7 @@ export const focused          = {
 	//paddingBottom: [sliderHeight, 10],
 	//paddingTop   : headerMiniHeight,
 	left     : "50%",
-	top      : headerMiniHeight,
+	height   : ["-" + headerMiniHeight, headerHeight],
 	//width    : '100vw',
 	opacity  : 0,
 	transform: [{

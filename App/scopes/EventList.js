@@ -56,7 +56,26 @@ export default {
 										'$lt': to
 									}
 								}] || []),
-							...([0, 2].includes(type) && [
+							...([1].includes(type) && [
+								{
+									_cls    : 'Concert',
+									schedule: {
+										$elemMatch: {
+											startTM: {
+												'$gt': from,
+												'$lt': to
+											}
+										}
+									}
+								},
+								{
+									_cls   : 'Concert',
+									startTM: {
+										'$gt': from,
+										'$lt': to
+									}
+								}] || []),
+							...([0, 3].includes(type) && [
 								{
 									_cls    : 'Theatre',
 									schedule: {
@@ -85,7 +104,7 @@ export default {
 										'$lt': to
 									}
 								}] || []),
-							...(type === 1 && [{
+							...(type === 2 && [{
 								_cls    : 'Expo',
 								schedule: {
 									$elemMatch: {

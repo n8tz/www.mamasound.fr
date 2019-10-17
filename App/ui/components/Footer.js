@@ -14,13 +14,14 @@ export default class Footer extends React.Component {
 	
 	render() {
 		let {
-			    style
+			    style, children
 		    }     = this.props,
 		    state = this.state;
 		return (
 			<div className={"Footer"} style={style}>
 				<div className={"maskContent"}>
 					<Comps.LoginBox/>
+					{children}
 				</div>
 				{/*<div className={"toolbar"}>*/}
 				{/*	<Comps.LoginBox/>*/}

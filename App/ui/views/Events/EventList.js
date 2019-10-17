@@ -10,6 +10,7 @@ import moment         from "moment";
 import React          from "react";
 import {scopeToProps} from "react-scopes";
 import {TweenRef}     from "react-voodoo";
+
 @scopeToProps("appState", "ActiveTags", "Styles.views.Events.EventsList:Styles", "UserGeoLocation")
 export default class EventList extends React.Component {
 	static propTypes = {};
@@ -135,7 +136,7 @@ export default class EventList extends React.Component {
 								autoHeight={true}
 								onChange={$actions.setCurStyleTab}
 								className={"EventCatSlider "}
-								style={{height: this.state.listHeight}}
+								style={{ height: this.state.listHeight }}
 							>
 								{
 									Array(4)

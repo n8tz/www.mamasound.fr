@@ -21,7 +21,7 @@ const wayPoints =
 		      map    : 300
 	      };
 
-@scopeToProps("appState", "Styles.pages.Home:Styles", "Styles.views.Events.EventsList.NavBox", "Styles.currentTheme", "appTheme", "menus")
+@scopeToProps("appState", "Styles.pages.Home:Styles", "Styles.views.Events.EventsList.NavBox", "Styles.currentTheme", "appTheme", "appMenu")
 @asTweener({ enableMouseDrag: true, dragDirectionLock: true })
 export default class Home extends React.Component {
 	state = {};
@@ -49,7 +49,7 @@ export default class Home extends React.Component {
 	recordPosition = event => {
 		
 		let { appState, tweener, $actions } = this.props;
-		let scrollTop, normalizedScrollTop;
+		let scrollTop, normalizedScrollTop, switchPoint;
 		
 		if ( document.scrollingElement ) {
 			scrollTop = document.scrollingElement.scrollTop
@@ -63,18 +63,18 @@ export default class Home extends React.Component {
 			}
 		}
 		const normalized = normalizeWheel(event);
-		
+		switchPoint      = 60 - (210 / window.innerHeight) * 100;
 		console.log(normalized.pixelX, normalized.pixelY);
-		normalizedScrollTop = Math.max(0, ~~(((scrollTop) / window.innerHeight) * 100));
-		console.log('scroll :', normalizedScrollTop)
-		if ( normalizedScrollTop >= 40 ) {
+		normalizedScrollTop = Math.max(0, (((scrollTop) / window.innerHeight).toFixed(2) * 100));
+		console.log('scroll :', normalizedScrollTop, switchPoint)
+		if ( normalizedScrollTop >= (switchPoint) ) {
 			//$actions.loadTheme("desktopFixed")
-			tweener.updateRefStyle("Highlighter", { position: 'fixed', height: ["190px", "0vh"] })
-			tweener.updateRefStyle("NavBox", { position: 'fixed', top: ["0vh", "270px"] })
+			tweener.updateRefStyle("Highlighter", { position: 'fixed', height: ["210px", "0vh"] })
+			tweener.updateRefStyle("NavBox", { position: 'fixed', top: ["0vh", "250px"] })
 		}
 		else {
 			tweener.updateRefStyle("Highlighter", { position: 'absolute', height: ["60vh", "0px"] })
-			tweener.updateRefStyle("NavBox", { position: 'absolute', top: ["70vh", "0px"] })
+			tweener.updateRefStyle("NavBox", { position: 'absolute', top: ["60vh", "50px"] })
 		}
 		//tweener.scrollTo(normalizedScrollTop, 50, "nativeScrollAxis")
 		//onScroll(scrollTop, event)
@@ -93,8 +93,7 @@ export default class Home extends React.Component {
 	////	return [this, "EventNav"];
 	////}
 	render() {
-		let { Styles, appState, currentTheme, appTheme, $actions, NavBox, menus } = this.props;
-		console.log('Home::render:97: ', menus);
+		let { Styles, appState, currentTheme, appTheme, $actions, NavBox, appMenu } = this.props;
 		return <TweenRef id={"page"} initial={Styles.page}>
 			<div className={"Home container"}>
 				
@@ -152,6 +151,8 @@ export default class Home extends React.Component {
 						>
 							<div className={"logo"}/>
 						</TweenRef>
+						
+						<Views.Menu.menu id={"rootHeaderMenu"}/>
 					</header>
 				</TweenRef>
 				<TweenRef id={"Highlighter"} initial={Styles.Highlighter}>
@@ -173,7 +174,9 @@ export default class Home extends React.Component {
 				
 				<TweenRef id={"NavBox"} initial={NavBox.style}>
 					<Comps.NavBox>
-						
+						<TweenRef id={"MidMenu"} initial={Styles.MidMenu}>
+							<Views.Menu.menu id={"rootmiddlemenu"}/>
+						</TweenRef>
 						<TweenRef id={"EventMap"} initial={Styles.EventMap}>
 							<Views.Events.EventMap
 								day={appState.currentVisibleDay || appState.curDay}
@@ -184,11 +187,13 @@ export default class Home extends React.Component {
 				<TweenRef id={"EventsBlock"} initial={Styles.EventsBlock}>
 					<Views.Events.EventList
 						activeScroll={appState.currentPageFocus !== "map" && appState.currentPageFocus !== "events"}>
-						
+					
 					</Views.Events.EventList>
 				</TweenRef>
 				<TweenRef id={"Footer"} initial={Styles.Footer}>
-					<Comps.Footer/>
+					<Comps.Footer>
+						<Views.Menu.menu id={"rootbottommenu"}/>
+					</Comps.Footer>
 				</TweenRef>
 			</div>
 		</TweenRef>
