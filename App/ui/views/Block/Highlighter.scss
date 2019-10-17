@@ -32,7 +32,7 @@
   .Background{
     background: white;
     @include withTranspaMask();
-    mask-size: 60vh;
+    mask-size: 80vh;
   }
   img {
     touch-action: none;

@@ -5,7 +5,7 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import {collWidth, footerMiniHeight, mapHeight} from "../../../vars";
+import {collWidth, footerMiniHeight, headerHeight, mapHeight} from "../../../vars";
 
 let startPos      = 50,
     openDuration  = 50,
@@ -17,7 +17,7 @@ export const style          = {
 	position : "absolute",
 	width    : ["100%"],
 	left     : "0px",
-	top      : ["60vh", 50],
+	top      : [headerHeight, 50],
 	height   : "50px",
 	zIndex   : 600,
 	//backgroundColor: "red",

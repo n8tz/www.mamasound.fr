@@ -63,7 +63,7 @@ export default class Home extends React.Component {
 			}
 		}
 		const normalized = normalizeWheel(event);
-		switchPoint      = 60 - (210 / window.innerHeight) * 100;
+		switchPoint      = 70 - (210 / window.innerHeight) * 100;
 		console.log(normalized.pixelX, normalized.pixelY);
 		normalizedScrollTop = Math.max(0, (((scrollTop) / window.innerHeight).toFixed(2) * 100));
 		console.log('scroll :', normalizedScrollTop, switchPoint)
@@ -73,8 +73,8 @@ export default class Home extends React.Component {
 			tweener.updateRefStyle("NavBox", { position: 'fixed', top: ["0vh", "250px"] })
 		}
 		else {
-			tweener.updateRefStyle("Highlighter", { position: 'absolute', height: ["60vh", "0px"] })
-			tweener.updateRefStyle("NavBox", { position: 'absolute', top: ["60vh", "50px"] })
+			tweener.updateRefStyle("Highlighter", { position: 'absolute', height: ["70vh", "0px"] })
+			tweener.updateRefStyle("NavBox", { position: 'absolute', top: ["70vh", "50px"] })
 		}
 		//tweener.scrollTo(normalizedScrollTop, 50, "nativeScrollAxis")
 		//onScroll(scrollTop, event)

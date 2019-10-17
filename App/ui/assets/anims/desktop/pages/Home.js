@@ -5,7 +5,7 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import {collWidth, footerMiniHeight, headerMiniHeight} from "../vars";
+import {collWidth, footerMiniHeight, headerMiniHeight, headerHeight} from "../vars";
 
 export const bounds    = { min: 100, max: 100 };
 export const waypoints = [
@@ -90,7 +90,7 @@ export const Background        = {
 	left     : "50%",
 	bottom   : "25px",
 	width    : "100%",
-	height   : "60vh",
+	height   : headerHeight,
 	//top     : 20,
 	transform: [
 		{
@@ -108,7 +108,7 @@ export const Highlighter       = {
 	position       : "absolute",
 	right          : "0%",
 	top            : ["0%"],
-	height         : ["60vh"],
+	height         : [headerHeight],
 	transformOrigin: "center top",
 	zIndex         : 650,
 	transform      : [
@@ -150,7 +150,7 @@ export const EventsBlock       = {
 	//top            : "100%",
 	//zIndex         : 1250,
 	//overflow       : 'hidden',
-	marginTop      : ["60vh", 50],
+	marginTop      : [headerHeight, 50],
 	transformOrigin: "center top",
 	transform      : [
 		{

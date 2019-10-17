@@ -94,7 +94,7 @@ export const slideScroll      = {
 				transform: {
 					//translateY: "-8px",
 					//translateZ: "20px",
-					rotateX: "-2deg"
+					//rotateX: "-2deg"
 				}
 			}
 		},
@@ -106,9 +106,9 @@ export const focused          = {
 	//paddingBottom: [sliderHeight, 10],
 	//paddingTop   : headerMiniHeight,
 	left     : "50%",
-	height   : ["-" + headerMiniHeight, headerHeight],
+	height   : [headerHeight, -50, "-" + headerMiniHeight],
 	//width    : '100vw',
-	opacity  : 0,
+	opacity  : 1,
 	transform: [{
 		translateX: "-50%",
 	}, {}, { translateY: '0%' }]
@@ -119,20 +119,20 @@ export const focusedScroll    = {
 			from    : 0,
 			duration: 50,
 			apply   : {
-				opacity: 1,
+				//opacity: 1,
 			}
 		},
 		{
 			from    : 100,
 			duration: 100,
 			apply   : {
-				opacity  : "-1",
+				//opacity  : "-1",
 				//height   : 2.5,
 				//top      : -2.5,
 				transform: [{
-					rotateX: "4deg"
+					//rotateX: "4deg"
 				}, {
-					translateY: "-50vh",
+					//translateY: "-50vh",
 				}]
 			}
 		},
