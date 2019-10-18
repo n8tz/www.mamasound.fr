@@ -53,11 +53,11 @@ export default {
 		test        : /^[\w_\-\d]+$/
 	}),
 	datesList    : ( label, props ) => ({
-		//formRenderer    : require('App/ui/fields/dateTimeListField'),
+		formRenderer    : "PeriodList",
 		defaultProps: {
 			...(props || {})
 		},
-		label       : label || "Date/Heure",
+		label       : label || "Dates/Heures",
 		test        : /^[\w_\-\d]+$/
 	}),
 	color        : ( label, props ) => ({
@@ -155,7 +155,7 @@ export default {
 		label       : label,
 		test        : /^[\w_\-\d]+$/
 	}),
-	json         : ( label, props={} ) => ({
+	json         : ( label, props = {} ) => ({
 		formRenderer: "Json",
 		defaultProps: props,
 		"type"      : "string",

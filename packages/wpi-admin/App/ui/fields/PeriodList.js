@@ -6,39 +6,30 @@
  *   @contact : n8tz.js@gmail.com
  */
 
-import React   from "react";
-import isArray from "isarray";
-
-import Picker from '@material-ui/core/Paper';
-import Panel  from "@material-ui/core/Paper";
-
-import FloatingActionButton from '@material-ui/core/Paper';
+import FloatingActionButton from '@material-ui/core/Button';
 import ContentAdd           from '@material-ui/icons/Add';
 import ContentRm            from '@material-ui/icons/Remove';
+import {Comps}              from "App/ui";
+import {asFieldType}        from "App/ui/spells";
+import is                   from "is";
+import moment               from "moment";
+import React                from "react";
 
+@asFieldType
 export default class PeriodList extends React.Component {
-	
-	static defaultProps = {
-		value   : [],
-		onChange: e => false
-	}
+	static displayName  = "PeriodList";
+	static defaultProps = {}
 	
 	constructor( props ) {
 		super(...arguments);
 		this.state = {
-			value: (props.defaultValue || props.value)
+			value: (props.defaultValue || props.value) || props.options && props.options[0] && props.options[0].value
 		};
+		if ( props.multiple && this.state.value && !is.array(this.state.value) )
+			this.state.value = [this.state.value];
+		
 	}
 	
-	/**
-	 * get the value of the field
-	 * @returns {
-	 * {
-	 * name: *, // name of the field passed in this.props.name
-	 * value: *[] // field value
-	 * }
-	 * }
-	 */
 	getValue( s, p ) {
 		s = s || this.state;
 		p = p || this.props;
@@ -48,83 +39,91 @@ export default class PeriodList extends React.Component {
 		};
 	}
 	
-	componentWillReceiveProps( props ) {
-		this.setState(
-			{ value: props.value })
-	}
-	
 	onChange( i, prop, tm ) {
-		//debugger;
 		let { value } = this.state;
 		
 		value[i][prop] = parseInt(tm);
 		value          = [...value];
-		;
-		
 		this.props.onChange(
 			{
 				target: this.getValue({ value })// should have .value
 			});
 	}
 	
+	list = React.createRef();
+	
 	render() {
 		var { value, defaultValue } = this.state, me = this;
 		
-		value = isArray(value) ? value : value && [value] || [];
+		value = is.array(value) ? value : value && [value] || [];
 		return (
 			
-			<Panel header={ this.props.label } className="dateTimeListField">
+			<>
 				<div className="head">
 					Liste d'occurences :
 					<FloatingActionButton
-						mini={ true }
-						style={ { float: 'right' } }
+						mini={true}
+						style={{ float: 'right' }}
 						title="Ajouter une occurence"
-						onClick={ e => this.setState(
-							{ value: value.concat([{ startTM: Date.now(), endTM: Date.now() }]) }
-						) }>
+						onClick={e => {
+							this.setState(
+								{
+									value: value = value.concat([value.length
+									                             ? {
+											startTM: moment(value[value.length - 1].startTM).add(1, 'day'),
+											endTM  : moment(value[value.length - 1].endTM).add(1, 'day')
+										}
+									                             : { startTM: Date.now(), endTM: Date.now() }])
+								},
+								s => {
+									this.list.current.scrollTop = this.list.current.scrollHeight;
+								}
+							)
+							
+							this.props.onChange(
+								{
+									target: this.getValue({ value })// should have .value
+								});
+						}}>
 						<ContentAdd/>
 					</FloatingActionButton>
 				</div>
-				{
-					value.map(
-						( period, i ) => <div style={ { position: "relative" } } className="period_occur">
+				<div className={"periods"} ref={this.list}>
+					{
+						value.map(
+							( period, i ) => <div style={{ position: "relative" }} className="period_occur">
                             <span className="from">
                                 Début :
-                                <Picker
-	                                label="Début"
-	                                inputFormat="DD/MM/YYYY HH:mm"
-	                                type="chrome"
-	                                onChange={ this.onChange.bind(this, i, 'startTM') }
-	                                dateTime={ period.startTM }
-                                />
+	                            <Comps.Calendar startDate={period.startTM}
+	                                            onChange={this.onChange.bind(this, i, 'startTM')}/>
                             </span>
-							<span className="end">
+								<span className="end">
                                 Fin :
-                                <Picker
-	                                inputFormat="DD/MM/YYYY HH:mm"
-	                                type="chrome"
-	                                onChange={ this.onChange.bind(this, i, 'endTM') }
-	                                dateTime={ period.endTM }
-                                />
+	                            <Comps.Calendar startDate={period.endTM}
+	                                            onChange={this.onChange.bind(this, i, 'endTM')}/>
                             </span>
-							
-							<FloatingActionButton
-								mini={ true }
-								style={ { float: 'right' } }
-								title="Ajouter une occurence"
-								onClick={ e => {
-									value.splice(i, 1);
-									this.setState(
-										{ value }
-									)
-								} }>
-								<ContentRm/>
-							</FloatingActionButton>
-						</div>
-					)
-				}
-			</Panel>
+								
+								<FloatingActionButton
+									mini={true}
+									style={{ float: 'right' }}
+									title="Ajouter une occurence"
+									onClick={e => {
+										value.splice(i, 1);
+										this.setState(
+											{ value }
+										)
+										this.props.onChange(
+											{
+												target: this.getValue({ value })// should have .value
+											});
+									}}>
+									<ContentRm/>
+								</FloatingActionButton>
+							</div>
+						)
+					}
+				</div>
+			</>
 		);
 	}
 	

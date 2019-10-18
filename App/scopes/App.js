@@ -24,10 +24,10 @@ export default {
 			data: {
 				id     : "Theme.ghTOlod-",
 				etty   : "Theme",
-				default: {
-					_id : "_Theme",
-					_cls: "Theme",
-				}
+				//default: {
+				//	_id : "_Theme",
+				//	_cls: "Theme",
+				//}
 			}
 		}
 	)
@@ -126,7 +126,7 @@ export default {
 				selectedEvent = undefined;
 			//	currentPageFocus = 'map';
 			if ( selectedEvent ) {
-				this.$actions.history_set("/" + selectedEvent._cls + '/' + moment(selectedEventDT).format("DD-MM-YY") + "/" + (selectedEvent._alias || selectedEvent._id))
+				//this.$actions.history_set("/" + selectedEvent._cls + '/' + moment(selectedEventDT).format("DD-MM-YY") + "/" + (selectedEvent._alias || selectedEvent._id))
 			}
 			else {
 				this.$actions.history_set("/")

@@ -64,7 +64,7 @@ export const SearchBarProps = {
 	boxStyle  : {
 		position: "absolute",
 		width   : [collWidth, -10],
-		left    : "10px",
+		left    : "20px",
 		top     : ["100%", "-" + minHeight],
 		height  : "270px"
 	},

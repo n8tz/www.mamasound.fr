@@ -65,8 +65,6 @@ export default class Date extends React.Component {
 				                ref={this.calendar}
 				                {...this.props}
 				                onChange={this.handleDateChange}/>
-				
-				&nbsp;(&nbsp;{moment(value).format("DD/MM/YY HH:mm")}&nbsp;)&nbsp;
 			</>
 		);
 	}

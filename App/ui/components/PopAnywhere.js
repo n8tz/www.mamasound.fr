@@ -18,7 +18,7 @@ export default class PopAnywhere extends Component {
 		onMouseOut : v => false,
 		hovering   : false,
 		keepVisible: false,
-		zIndex     : 1000000
+		zIndex     : 1000000000
 	}
 	
 	
@@ -35,7 +35,7 @@ export default class PopAnywhere extends Component {
 			Object.assign(
 				this._hoverLayer.style,
 				{
-					position: "absolute",
+					position: "fixed",
 					top     : "0",
 					left    : "0",
 					width   : "100%",
@@ -55,10 +55,6 @@ export default class PopAnywhere extends Component {
 		    boxStyle   = wrapper && window.getComputedStyle(wrapper),
 		    dummy;
 		if ( !wrapper ) return;
-		if ( window.innerHeight < (box.top + box.height) )
-			box.top += window.innerHeight - (box.top + box.height);
-		if ( window.innerWidth < (box.left + box.width) )
-			box.top += window.innerWidth < (box.left + box.width);
 		dummy                = hoverLayer.firstElementChild;
 		dummy.style.position = "absolute";
 		dummy.style.width    = wrapper.offsetWidth + "px";
@@ -94,12 +90,19 @@ export default class PopAnywhere extends Component {
 	
 	getBoxState( wrapper, force ) {
 		let box = (force || !this._lastBox) && wrapper.getBoundingClientRect();
-		return this._lastBox = (!force && this._lastBox) || {
+		box     = this._lastBox = (!force && this._lastBox) || {
 			top   : box.top,
 			left  : box.left,
 			width : box.width,
 			height: box.height,
 		};
+		
+		if ( window.innerHeight < (box.top + box.height) )
+			box.top += window.innerHeight - (box.top + box.height);
+		if ( window.innerWidth < (box.left + box.width) )
+			box.top += window.innerWidth < (box.left + box.width);
+		//debugger
+		return box;
 	}
 	
 	
@@ -140,10 +143,6 @@ export default class PopAnywhere extends Component {
 				this.props.hovering && this.props.onMouseOut();
 			}
 			
-			if ( window.innerHeight < (box.top + box.height) )
-				box.top += window.innerHeight - (box.top + box.height);
-			if ( window.innerWidth < (box.left + box.width) )
-				box.top += window.innerWidth < (box.left + box.width);
 			
 			dummy                = document.createElement('span');
 			dummy.className      = "PopAnywhere " + (props.className || '');
