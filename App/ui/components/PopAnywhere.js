@@ -17,7 +17,7 @@ export default class PopAnywhere extends Component {
 		onClickOut : v => false,
 		onMouseOut : v => false,
 		hovering   : false,
-		keepVisible: true,
+		keepVisible: false,
 		zIndex     : 1000000
 	}
 	

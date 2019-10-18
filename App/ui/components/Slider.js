@@ -36,9 +36,21 @@ export default class Slider extends React.Component {
 			)
 		}
 		if ( autoHeight ) {
-			let h = ReactDOM.findDOMNode(this.slideRefs[index]);
-			this.setState({ sliderHeight: h.offsetHeight + 'px' })
+			this.updateHeight()
 		}
+	}
+	
+	updateHeight = () => {
+		let { index = this.props.defaultIndex, sliderHeight } = this.state;
+		clearTimeout(this._autoHeightTm);
+		try {
+			let h = ReactDOM.findDOMNode(this.slideRefs[index]);
+			if ( sliderHeight !== h.offsetHeight )
+				this.setState({ sliderHeight: h.offsetHeight + 'px' })
+		} catch ( e ) {
+		
+		}
+		this._autoHeightTm = setTimeout(this.updateHeight, 500)
 	}
 	
 	goNext() {
@@ -58,10 +70,6 @@ export default class Slider extends React.Component {
 		this.setState({ index })
 	}
 	
-	shouldComponentUpdate( nextProps, nextState, nextContext ) {
-		return true
-	}
-	
 	componentDidUpdate( prevProps, prevState, snapshot ) {
 		let { autoScroll, scrollDir, tweener, onChange, index: pIndex, autoHeight } = this.props,
 		    { index = this.props.defaultIndex, step, dec }                          = this.state,
@@ -71,9 +79,9 @@ export default class Slider extends React.Component {
 			tweener.scrollTo(tweener._getAxis(scrollDir).scrollPos + dec - prevState.dec, 0, scrollDir);
 		}
 		if ( pIndex !== prevProps.index ) {
-			changed = pIndex + 1;
-			tweener.scrollTo(dec + step * pIndex + 100, 750, scrollDir, "easeQuadInOut");
-			
+			//changed = pIndex + 1;
+			//tweener.scrollTo(dec + step * pIndex + 100, 750, scrollDir, "easeQuadInOut");
+			this.setState({index:pIndex})
 			if ( autoScroll ) {
 				clearTimeout(this._updater);
 				this._updater = setTimeout(
@@ -102,9 +110,8 @@ export default class Slider extends React.Component {
 		else if ( this._then )
 			this._then();
 		this._then = null;
-		if ( autoHeight && changed || (prevProps.children !== this.props.children) ) {
-			let h = ReactDOM.findDOMNode(this.slideRefs[changed ? changed - 1 : index]);
-			this.setState({ sliderHeight: h.offsetHeight + 'px' })
+		if ( autoHeight && changed ) {
+			this.updateHeight()
 		}
 	}
 	
@@ -114,8 +121,8 @@ export default class Slider extends React.Component {
 	}
 	
 	componentWillUnmount() {
-		console.log('destroy')
 		clearTimeout(this._updater);
+		clearTimeout(this._autoHeightTm);
 	}
 	
 	slideRefs = [];

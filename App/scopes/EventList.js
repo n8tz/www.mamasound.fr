@@ -32,7 +32,9 @@ export default {
 			    to   = moment(curDay).endOf('day').add(2, 'hour').unix() * 1000;
 			//console.log(state)
 			return {
-				query: {
+				curDay: from,
+				type,
+				query : {
 					mountKeys: ["place", "category"],
 					etty     : 'Event',
 					query    : {
@@ -154,6 +156,10 @@ export default {
 		@asRef
 		items       : "!Queries.events.items",
 		@asRef
+		curDay      : "DayEventsQuery.curDay",
+		@asRef
+		type        : "DayEventsQuery.type",
+		@asRef
 		geoJson     : "Quartiers.data",
 		@asRef
 		refs        : "Queries.events.refs",
@@ -161,7 +167,7 @@ export default {
 		filter      : "appState.currentSearch",
 		@asRef
 		selectedTags: "TagManager.selected",
-		$apply( data = {}, { items, filter, refs, geoJson, currentArea, selectedTags } ) {
+		$apply( data = {}, { items, filter, refs, geoJson, curDay, type, selectedTags } ) {
 			
 			let filterRE     = filter && new RegExp(filter.replace(/[^\w]+/ig, '.+'), 'ig'),
 			    geoQuery     = this.geoQuery = this.geoQuery || whichPoly(geoJson),
@@ -170,6 +176,7 @@ export default {
 			    filterArea   = !!selectedTags.find(t => (t.type === "area")),
 			    filterPrice  = !!selectedTags.find(t => (t.type === "price")),
 			    filterStyles = !!selectedTags.find(t => (t.type === "style")),
+			    selectedDay  = moment(curDay),
 			    newItems;
 			
 			if ( this.tags && this.tags.length ) {
@@ -187,9 +194,9 @@ export default {
 					// tag area
 					if ( place ) {
 						//if ( !place.quartier ) {
-							ll             = place.address && place.address.geoPoint;
-							area           = ll && geoQuery(ll)
-							place.quartier = area && area.LIBSQUART || "Périphérie";
+						ll             = place.address && place.address.geoPoint;
+						area           = ll && geoQuery(ll)
+						place.quartier = area && area.LIBSQUART || "Périphérie";
 						//}
 						if ( !seen[place.quartier] )
 							tags.push(seen[place.quartier] = {
@@ -300,8 +307,51 @@ export default {
 					
 					return doKeep;
 				}
-			);
+			).map(
+				record => {
+					let start, end;
+					if ( record.schedule ) {
+						// find the right tm
+						for ( let i = 0; record.schedule.length > i; i++ ) {
+							if ( selectedDay && record.schedule[i] && record.schedule[i].startTM && selectedDay.isSame(record.schedule[i].startTM, "day") ) {
+								start = record.schedule[i].startTM;
+								end   = record.schedule[i].endTM;
+								break;
+							}
+						}
+					}
+					
+					return {
+						...record,
+						realPeriod: {
+							startTM: start || record.startTM, endTM: end || record.endTM
+						}
+					}
+				}
+			).sort(( a, b ) => {// sort by duration
+				if ( type === 2 ) {
+					if (
+						a.haveVerni && moment(selectedDay).isSame(a.verniTM, 'day')
+						&&
+						b.haveVerni && moment(selectedDay).isSame(b.verniTM, 'day')
+					)
+						return a.verniTM - b.verniTM;
+					
+					if ( a.haveVerni && moment(selectedDay).isSame(a.verniTM, 'day') )
+						return -1;
+					if ( b.haveVerni && moment(selectedDay).isSame(b.verniTM, 'day') )
+						return 1;
+					
+					return (a.endTM - a.startTM) - (b.endTM - b.startTM);//durée
+				}
+				
+				a = a.haveVerni && a.verniTM || a.realPeriod.startTM;
+				b = b.haveVerni && b.verniTM || b.realPeriod.startTM;
+				return a - b;
+			});
+			//debugger
 			tags.length && this.$actions.registerTags(tags);
+			//newItems
 			return {
 				tags,
 				items: newItems,

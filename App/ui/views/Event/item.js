@@ -114,7 +114,7 @@ export default class eventItem extends React.Component {
 			{
 				record.place && refs[record.place.objId] &&
 				<div className="place">
-					( <span>{refs[record.place.objId].label} {" - " + refs[record.place.objId].quartier}</span> )
+					( <span>{refs[record.place.objId].label} </span> )
 				</div>
 			}
 			{selected && <Comps.ShareBox event={record} place={record.place && refs[record.place.objId]}/>}

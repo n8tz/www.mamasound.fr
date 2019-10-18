@@ -74,7 +74,16 @@ export default class DevTools extends React.Component {
 		&& request.end(function ( res, err ) {
 			toast(err ? "seems succesfull" : "Got error")
 			console.log('yay got ', res, err);
-			e.target.value = '';
+			try {
+				e.target.value = '';
+			}catch ( e ) {
+				
+			}
+			
+			if(!/safari/i.test(navigator.userAgent)){
+				e.target.type = ''
+				e.target.type = 'file'
+			}
 		}).on('progress', function ( e ) {
 			console.log('Percentage done: ', e.percent);
 		});

@@ -22,8 +22,12 @@ export default {
 	@withStateMap(
 		{
 			data: {
-				id  : "Theme.ghTOlod-",
-				etty: "Theme",
+				id     : "Theme.ghTOlod-",
+				etty   : "Theme",
+				default: {
+					_id : "_Theme",
+					_cls: "Theme",
+				}
 			}
 		}
 	)
@@ -44,7 +48,7 @@ export default {
 			}
 		}
 	)
-	appMenu   : stores.MongoRecords,
+	appMenu : stores.MongoRecords,
 	
 	@asStore
 	appState: {
