@@ -65,7 +65,7 @@ export default class Home extends React.Component {
 		const normalized = normalizeWheel(event);
 		switchPoint      = 70 - (210 / window.innerHeight) * 100;
 		console.log(normalized.pixelX, normalized.pixelY);
-		normalizedScrollTop = Math.max(0, (((scrollTop) / window.innerHeight).toFixed(2) * 100));
+		normalizedScrollTop = Math.max(0, (((scrollTop) / window.innerHeight).toFixed(4) * 100));
 		console.log('scroll :', normalizedScrollTop, switchPoint)
 		if ( normalizedScrollTop >= (switchPoint) ) {
 			//$actions.loadTheme("desktopFixed")

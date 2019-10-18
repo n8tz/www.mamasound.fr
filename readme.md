@@ -1,11 +1,10 @@
 <h1 align="center">work in progress next mamasound.fr website</h1>
-<p align="center">React SPA & CMS, with full SSR, including slideables, async data & metas</p>
-
+<p align="center">React SPA & CMS, with live edit, full SSR, including slideables, async data & metas</p>
 
 tmp url : http://mamasound.wiseways.me/
 
-_* this is personal & probono project using experimental libs ( & design )_<br/>
-_* so this is NOT corporate grade code _
+_* this is personal project using experimental libs & wip design<br/>
+_* this is NOT corporate grade code _
 
 ## How to start
 
@@ -44,3 +43,7 @@ npm run start
 This app inherit the base boilerplate & webpack config from [wi-layer-react-express](https://github.com/n8tz/wi-layer-react-express)
 
 See [webpack-inherit](https://github.com/n8tz/webpack-inherit)
+
+## License 
+
+Not free

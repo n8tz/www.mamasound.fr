@@ -5,7 +5,7 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import {collWidth, footerMiniHeight, headerMiniHeight, headerHeight} from "../vars";
+import {collWidth, footerMiniHeight, headerHeight, headerMiniHeight} from "../vars";
 
 export const bounds    = { min: 100, max: 100 };
 export const waypoints = [
@@ -166,7 +166,7 @@ export const EventsBlock       = {
 export const EventMap          = {
 	position       : "absolute",
 	left           : "10px",
-	height         : "300px",
+	height         : ["100vh", "-300px", -310],
 	width          : collWidth,
 	zIndex         : 150,
 	//overflow       : 'hidden',

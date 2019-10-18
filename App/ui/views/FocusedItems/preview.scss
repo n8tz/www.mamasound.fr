@@ -16,25 +16,20 @@
   .preview {
     position: absolute;
     right: 5%;
-    width: 60%;
-    max-width: 600px;
-    max-height: 500px;
-    height: 50%;
+    width: 55%;
+    //max-width: 600px;
+    //max-height: 500px;
+    bottom: 150px;
     top: 75px;
     //background: #2e2e2e;
     img {
       @include use_hvCenteredAbs();
       mask-border: url("../assets/images/previewBorderMask.svg") 35 repeat;
-
-      //@include withTranspaBoxMask();
-      //position: absolute;
-      //top: 10%;
-      //left: 50%;
-      //transform: translate(-50%, 0%);
       @media screen and (max-width: $tablet-portrait-breakpoint) {
         //@include withTranspaMask();
       }
-      max-width: 100%;
+      //width: 100%;
+      //max-width: 100%;
       //height: 40vh;
       max-height: 100%;
     }
