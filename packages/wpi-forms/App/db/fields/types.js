@@ -118,9 +118,10 @@ export default {
 	}),
 	collection   : ( etty, filters, label ) => ({
 		//@lazyInitialize
-		formRenderer: '',
+		formRenderer: 'RecordRefList',
 		defaultProps: Object.assign({}, {
-			etty        : etty,
+			//etty        : etty,
+			allowTypeSelection: (typeof etty === 'string') ? [etty] : etty,
 			// defaultProps : true,
 			defaultValue: []
 		}, filters),

@@ -13,8 +13,6 @@ import anims                                 from 'App/ui/assets/anims/(*).js';
 
 import {Comps} from 'App/ui';
 
-import Tabs                  from '@material-ui/core/Tabs';
-import Tab                   from '@material-ui/core/Tab';
 import moment                from "moment";
 import stores                from 'App/stores/(*).js';
 import {Views}               from 'App/ui';

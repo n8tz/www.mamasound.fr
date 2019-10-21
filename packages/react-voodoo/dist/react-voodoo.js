@@ -749,7 +749,7 @@ var TweenerContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext(
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/*! exports provided: asTweener, withTweener, tweenTools, Tweenable, TweenRef, TweenerContext, TweenAxis, default */
+/*! exports provided: asTweener, withTweener, tweenTools, Tweenable, TweenRef, TweenerContext, TweenAxis, domTools, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -774,8 +774,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _spells_withTweener__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./spells/withTweener */ "./src/spells/withTweener.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "withTweener", function() { return _spells_withTweener__WEBPACK_IMPORTED_MODULE_6__["default"]; });
 
-/* harmony import */ var _utils_tweenTools_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./utils/tweenTools.js */ "./src/utils/tweenTools.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "tweenTools", function() { return _utils_tweenTools_js__WEBPACK_IMPORTED_MODULE_7__; });
+/* harmony import */ var _utils_dom_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./utils/dom.js */ "./src/utils/dom.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "domTools", function() { return _utils_dom_js__WEBPACK_IMPORTED_MODULE_7__["default"]; });
+
+/* harmony import */ var _utils_tweenTools_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./utils/tweenTools.js */ "./src/utils/tweenTools.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "tweenTools", function() { return _utils_tweenTools_js__WEBPACK_IMPORTED_MODULE_8__; });
 
 
 var _class;
@@ -797,6 +800,7 @@ var _class;
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 
 
 

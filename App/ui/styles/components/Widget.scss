@@ -15,6 +15,7 @@
   text-align: left;
 
   > .widgetHead {
+    @include use_hvCenteredContent();
     padding: 7px;
     //margin: 5px;
     //padding-right: 15px;
@@ -23,6 +24,23 @@
     top: 0px;
     left: 0px;
     right: 0px;
+    height: 32px;
+    border-bottom: solid 1px darkgrey;
+    cursor: grab;
+    .title{
+      font-family: "Roboto", sans-serif;
+      font-weight: bold;
+      font-style: 1.5em;
+    }
+    .icon{
+      float: right;
+      margin: 3px;
+      border-radius: 15px;
+      cursor: pointer;
+      &:hover{
+        background: lightgrey;
+      }
+    }
   }
 
   > .content {

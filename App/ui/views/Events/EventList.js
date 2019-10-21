@@ -5,11 +5,11 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import {Comps, Views} from 'App/ui';
-import moment         from "moment";
-import React          from "react";
-import {scopeToProps} from "react-scopes";
-import {TweenRef}     from "react-voodoo";
+import {Comps, Views}       from 'App/ui';
+import moment               from "moment";
+import React                from "react";
+import {scopeToProps}       from "react-scopes";
+import {domTools, TweenRef} from "react-voodoo";
 
 @scopeToProps("appState", "ActiveTags", "Styles.views.Events.EventsList:Styles", "UserGeoLocation")
 export default class EventList extends React.Component {
@@ -67,32 +67,33 @@ export default class EventList extends React.Component {
 			    $actions,
 			    appState, $scope
 		    }       = this.props,
-		    element = document.querySelector(".EventList .EventNav");
+		    element = document.body.parentNode;
 		
 		if ( element ) {
-			this._scrollList && element.removeEventListener("scroll", this._scrollList);
+			this._scrollList && document.removeEventListener("scroll", this._scrollList);
 			
-			element.addEventListener(
+			document.addEventListener(
 				"scroll",
-				this._scrollList = e => {
-					let allDays = document.querySelectorAll(".EventList  .EventNav .DayEvents"),
+				this._scrollList = ( e ) => {//@todo
+					let allDays = document.querySelectorAll(".EventList  .DayEvents"),
 					    cDay,
 					    cPos    = element.scrollTop;
 					
 					for ( let i = 0; i < allDays.length; i++ ) {
-						if ( cPos < allDays[i].offsetTop + 50 )
+						if ( (cPos) <= (allDays[i].offsetTop + allDays[i].offsetHeight) )
 							break;
 						cDay = allDays[i].dataset.dt;
 					}
-					cDay && $actions.updateCurrentDay(parseInt(cDay));
+					cDay && $actions.updateCurrentVisibleDay(parseInt(cDay));
 				}
-			)
+			);
 		}
 	};
 	
 	componentDidMount() {
 		//this.isBotListIsInViewport()
-		this.watchCurrentDayFromScroll()
+		this.watchCurrentDayFromScroll();
+		
 	}
 	
 	componentDidUpdate() {
@@ -103,11 +104,7 @@ export default class EventList extends React.Component {
 	componentWillUnmount() {
 		//clearTimeout(this._infinite)
 		
-		let element = document.querySelector(".EventList *[aria-hidden=false] .EventNav");
-		
-		if ( element ) {
-			this._scrollList && element.removeEventListener("scroll", this._scrollList);
-		}
+		this._scrollList && document.removeEventListener("scroll", this._scrollList);
 	}
 	
 	render() {

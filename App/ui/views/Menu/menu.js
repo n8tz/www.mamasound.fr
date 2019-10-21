@@ -14,7 +14,6 @@ import Editable                           from "App/ui/Editable";
 import React                              from "react";
 import RS, {asRef, asScope, withStateMap} from "react-scopes";
 
-'use strict';
 
 
 @RS(

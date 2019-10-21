@@ -5,10 +5,11 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import scopes                                                  from 'App/scopes/(*).js';
-import {Views}                                                 from 'App/ui';
-import React                                                   from "react";
-import {asRef, asStore, propsToScope, scopeToProps, withScope} from "react-scopes";
+import scopes               from 'App/scopes/(*).js';
+import {Views}              from 'App/ui';
+import moment               from "moment";
+import React                from "react";
+import RS, {asRef, asStore} from "react-scopes";
 
 let isBrowser = false;
 
@@ -54,7 +55,7 @@ else {
 }
 
 
-@withScope(
+@RS(
 	{
 		
 		...scopes.EventList,
@@ -87,7 +88,7 @@ else {
 						latitude : POIs[0].geoPoint[1],
 						longitude: POIs[0].geoPoint[0]
 					};
-					zoom   = 16
+					zoom   = POIs[0].zoom || 16
 				}
 				else {
 					center = {
@@ -111,12 +112,12 @@ else {
 		
 	}
 )
-@propsToScope(
+@RS.fromProps(
 	[
 		"day:DayEventsQuery.curDay",
 		"viewType:DayEventsQuery.viewType"
 	])
-@scopeToProps("Selected", "Styles", "TagManager", "Events", "UserGeoLocation", "DataProvider", "Quartiers")
+@RS.connect("Selected", "Styles", "TagManager", "Events", "UserGeoLocation", "DataProvider", "Quartiers")
 export default class EventMap extends React.Component {
 	static propTypes = {};
 	state            = {};
@@ -174,7 +175,7 @@ export default class EventMap extends React.Component {
 	render() {
 		let {
 			    Events,
-			    TagManager,
+			    TagManager, day,
 			    Events: { center = {}, POIs = [], zoom } = {},
 			    Styles: { HomePage }, UserGeoLocation, Selected,
 			    $actions, DataProvider, Quartiers, style
@@ -193,26 +194,25 @@ export default class EventMap extends React.Component {
 				map.getZoom()
 			)
 		}
-		console.log(Selected.Event)
+		//console.log(Selected.Event)
 		if ( !isBrowser || !Events )
 			return <div className={"EventMap"}/>
 		return (
 			<div className={"EventMap"} style={style}>
-				{/*<div className={"NavTools"}>*/}
-				{/*	<div className={"container tools"}>*/}
-				{/*		<Fab aria-label="edit" className={"newBtn button"}*/}
-				{/*		     onClick={$actions.toggleUserGeoLocation}>*/}
-				{/*			{*/}
-				{/*				UserGeoLocation.activating &&*/}
-				{/*				<GpsNoFixedIcon/> ||*/}
-				{/*				UserGeoLocation.active &&*/}
-				{/*				<GpsFixedIcon/> ||*/}
-				{/*				<GpsOffIcon/>*/}
-				{/*			}*/}
-				{/*		*/}
-				{/*		</Fab>*/}
-				{/*	</div>*/}
-				{/*</div>*/}
+				<div className={"NavTools"}>
+					{moment(day).format("dddd DD mmmm")}
+					{/*<span aria-label="edit" className={"newBtn button"}*/}
+					{/*     onClick={$actions.toggleUserGeoLocation}>*/}
+					{/*	{*/}
+					{/*		UserGeoLocation.activating &&*/}
+					{/*		<GpsNoFixedIcon/> ||*/}
+					{/*		UserGeoLocation.active &&*/}
+					{/*		<GpsFixedIcon/> ||*/}
+					{/*		<GpsOffIcon/>*/}
+					{/*	}*/}
+					
+					{/*</span>*/}
+				</div>
 				<div className={"mapContainer "} onDragStart={e => e.stopPropagation()}
 				     onMouseDown={e => e.stopPropagation()} onMouseMove={e => e.stopPropagation()}>
 					<Map center={center}

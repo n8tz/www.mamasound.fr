@@ -5,7 +5,7 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import TextField  from '@material-ui/core/TextField';
+//import TextField  from '@material-ui/core/TextField';
 import moment     from "moment";
 import React      from "react";
 import RS         from "react-scopes";
@@ -120,12 +120,15 @@ export default class SearchBar extends React.Component {
 		const { TagManager, appState, strechProps, style } = this.props;
 		const { showPrice, showArea, showStyle }           = this.state;
 		return <div className={"SearchBarForm"}>
-			<TextField
-				className={"input"}
-				placeholder={"Rechercher"}
-				value={this.state.search}
-				onChange={this.handleSearchChange}
-			/>
+			<div className="group">
+				<input
+					type={"text"}
+					className={"input"}
+					placeholder={"Rechercher"}
+					value={this.state.search}
+					onChange={this.handleSearchChange}/>
+				<span className="bar"></span>
+			</div>
 			<span className={"filters"}>
 				<div className={"label"} onClick={this.togglePrice}>Prix</div>
 				<div className={"label"} onClick={this.toggleArea}>Quartiers</div>

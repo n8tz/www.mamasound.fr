@@ -5,9 +5,6 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import CardHeader                                       from '@material-ui/core/CardHeader';
-import IconButton                                       from '@material-ui/core/IconButton';
-import CloseIcon                                        from '@material-ui/icons/Close';
 import PropTypes                                        from "prop-types";
 import React                                            from "react";
 import {Rnd}                                            from "react-rnd";
@@ -48,7 +45,7 @@ export default class Widget extends React.Component {
 			});
 	};
 	//0235034185 service
-	close = ( e, d ) => {
+	close     = ( e, d ) => {
 		let { $actions, children } = this.props;
 		e.preventDefault();
 		e.stopPropagation();
@@ -105,16 +102,10 @@ export default class Widget extends React.Component {
 							}
 						});
 				}}>
-				<CardHeader
-					className={"widgetHandle widgetHead"}
-					action={
-						<IconButton onClick={this.close}>
-							<CloseIcon/>
-						</IconButton>
-					}
-					title={title || record.props && record.props.title}
-					//subheader={ record && record.label }
-				/>
+				<div className={"widgetHandle widgetHead"}>
+					<span className={"title"}>{title || record.props && record.props.title}</span>
+					<span className={"material-icons icon"} onClick={this.close}>close</span>
+				</div>
 				<div className={" content"}>
 					{children}
 				</div>

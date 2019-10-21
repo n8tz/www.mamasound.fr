@@ -59,6 +59,7 @@ export default {
 		selectedEventId   : undefined,
 		selectedEventDT   : undefined,
 		curDay            : undefined,
+		curVisibleDay     : undefined,
 		currentSearch     : undefined,
 		currentArea       : undefined,
 		viewType          : 0,
@@ -112,6 +113,9 @@ export default {
 					this.$actions.selectEvent();
 				return { currentPageFocus: _currentPageFocus, doFocus };
 			}
+		},
+		updateCurrentVisibleDay( curVisibleDay ) {
+			return { curVisibleDay };
 		},
 		updateCurrentDay( _currentVisibleDay, userSetCDay = true ) {
 			let { curDay, selectedEventId } = this.nextState,

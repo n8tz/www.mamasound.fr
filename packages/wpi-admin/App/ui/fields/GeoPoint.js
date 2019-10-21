@@ -89,14 +89,28 @@ export default class GeoPoint extends React.Component {
 			                                     });
 		              });
 	}
+	onZoomChange = ( v ) => {
+		this.setState({ value: { ...this.state.value, zoom: v._zoom } },
+		              s => {
+			
+			              this.props.onChange
+			              && this.props.onChange({
+				                                     target: {
+					                                     name : this.props.name,
+					                                     value: this.state.value
+				                                     }
+			                                     });
+		              });
+	}
 	
 	onSuggestSelect = ( v ) => {
 		this.setState({
 			              // name    : this.state.name,
 			              // address : v.label,
 			              value: {
+				              ...this.state.value,
 				              ...v.location,
-				              zoom    : 14,//this.state.zoom,
+				              //zoom    : 14,//this.state.zoom,
 				              name    : this.state.value.name,
 				              address : v.label,
 				              geoPoint: [v.location.lng, v.location.lat]
@@ -118,31 +132,29 @@ export default class GeoPoint extends React.Component {
 	render() {
 		let { defaultValue, value = defaultValue, UserGeoLocation } = this.props, coords = this.state.value;
 		
-		let center = [43.608091, 3.876624];
+		let center = coords.geoPoint || [43.608091, 3.876624];
 		return (
 			<div className={"content"}>
 				<div className={"searchContainer "}>
-					
 					<input type="text" onChange={this.onNameChange} placeholder='Label' className="mapLabel"
-					       mode="compact"
 					       defaultValue={coords.name}/>
 					<Geosuggest
 						onSuggestSelect={this.onSuggestSelect}
 						radius="50"
 						type="text"
-						location={new google.maps.LatLng(coords.geoPoint[1], coords.geoPoint[0])}
+						location={new google.maps.LatLng(center[1], center[0])}
 						placeholder='Adresse'
 						initialValue={coords.address}/>
 				</div>
 				<div className={"mapContainer "} onDragStart={this.stopEvent}>
-					<Map center={[coords.geoPoint[1], coords.geoPoint[0]]}
-					     zoom={coords.zoom}
+					<Map center={[center[1], center[0]]}
+					     zoom={coords.zoom || 14}
 						//className={"container"}
 						//scrollWheelZoom={false}
+						 onZoomEnd={this.onZoomChange}
 						 animate={true}
 						 useFlyTo={true}
-						 ref={"map"}
-						//dragging={false}
+						 dragging={false}
 					>
 						<TileLayer
 							url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -154,7 +166,16 @@ export default class GeoPoint extends React.Component {
 								icon={
 									Leaflet.icon.pulse({ iconSize: [12, 12], color: 'red' })
 								}
-								position={{ lat: coords.geoPoint[1], lng: coords.geoPoint[0] }}/>
+								position={{ lat: center[1], lng: center[0] }}/>
+						}
+						{
+							coords.name && <Popup
+								autoClose={false}
+								closeOnClick={false}
+								position={{ lat: center[1], lng: center[0] }}
+							>
+								{coords.name}
+							</Popup>
 						}
 						{/*<LayerGroup ref="PopupsLayer">*/}
 						{/*</LayerGroup>*/}

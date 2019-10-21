@@ -195,7 +195,7 @@ export default class Home extends React.Component {
 						{/*</TweenRef>*/}
 						<TweenRef id={"EventMap"} initial={Styles.EventMap}>
 							<Views.Events.EventMap
-								day={appState.currentVisibleDay || appState.curDay}
+								day={appState.curVisibleDay || appState.curDay}
 								viewType={appState.viewType}/>
 						</TweenRef>
 					</Comps.NavBox>
