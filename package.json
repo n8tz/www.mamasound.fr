@@ -16,7 +16,7 @@
     "docker_down": "cd dockers/dev&&docker-compose down",
     "docker_kill": "cd dockers/dev&&docker-compose kill",
     "docker_ash": "cd dockers/dev&&opener docker-compose exec app ash -c \"cd /home/app&&ash\"",
-    "docker_build": "cd dockers/dev&&opener docker-compose exec app ash -c \"cd /home/app&&npm run build&&cp -R --remove-destination dist dockerDist\"",
+    "docker_build": "cd dockers/dev&&opener docker-compose exec app ash -c \"cd /home/app&&npm run build&&cp -R dist dockerDist\"",
     "docker_restoreDb": "cd dockers/dev&&opener docker-compose exec app ash -c \"cd /home/app&&mongorestore --uri \\$MONGO_URI\"",
     "docker_runBrowser": "opener http://mamasound.localhost&"
   },
@@ -136,6 +136,6 @@
   },
   "devDependencies": {
     "webpack-inherit": "^1.8.4",
-    "wi-layer-react-express": "^1.1.19"
+    "wi-layer-react-express": "^1.1.21"
   }
 }

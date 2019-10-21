@@ -12,7 +12,7 @@ $box_names: 'xs' 'ss' 's' 'm' 'l' 'sl' 'xl';
 $box_sizes: 32px 64px 128px 192px 256px 512px 1024px;
 
 
-$focusSlidePadSize: 50px;
+$focusSlidePadSize: 10px;
 
 
 // breakpoints
@@ -59,9 +59,9 @@ $slider-padding: 2em;
 
 
 $mainTextColor: black;
-$mainBackColor: white;
-$mainBackColor_darken: #040023;
-$secondaryBackColor: lightgrey;
+$mainBackColor: rgba(75, 88, 161, 0.64);
+$secondaryBackColor: rgba(130, 174, 218, 0.27);
+$secondaryTextColor: #ffffff;
 
 $lightBackColor: #edf3f7;
 

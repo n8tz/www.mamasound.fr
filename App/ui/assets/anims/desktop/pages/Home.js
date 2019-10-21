@@ -138,7 +138,7 @@ export const Footer            = {
 	left     : "0px",
 	top      : ["100%", -footerMiniHeight],
 	width    : "100%",
-	zIndex   : 3000,
+	zIndex   : 300000000,
 	transform: {
 		//translateY: "-100%"
 	}
@@ -165,13 +165,13 @@ export const EventsBlock       = {
 };
 export const EventMap          = {
 	position       : "absolute",
-	left           : "10px",
-	height         : ["100vh", "-300px", -310],
+	right          : "10px",
+	height         : ["100vh", "-300px"],
 	width          : collWidth,
-	zIndex         : 150,
+	zIndex         : 100,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
-	top            : [300],
+	top            : [0],
 };
 export const PageBlock         = {
 	
@@ -216,100 +216,4 @@ export const nativeScrollAxis  = [
 		}
 	},
 ];
-export const YAxis             = [
-	// header page to main highlighter
-	//{
-	//	target  : "logo",
-	//	from    : 0,
-	//	duration: 50,
-	//	apply   : {
-	//		right: "-5%",
-	//		width: "60%",
-	//	}
-	//},
-	//{
-	//	target  : "header",
-	//	from    : 0,
-	//	duration: 50,
-	//	apply   : {
-	//		height: ["-100%", headerMiniHeight + "px", sliderHeight],
-	//	}
-	//},
-	//{
-	//	target  : "Highlighter",
-	//	from    : 0,
-	//	duration: 50,
-	//	apply   : {
-	//		height: ["-50px", 2 * footerMiniHeight]
-	//	}
-	//},
-	//{
-	//	target  : "EventsBlock",
-	//	from    : 0,
-	//	duration: 50,
-	//	apply   : {
-	//		top: "-50px"
-	//	}
-	//},
-	//{
-	//	target  : "Highlighter",
-	//	from    : 50,
-	//	duration: 50,
-	//	apply   : {
-	//		height: ["-150px"]
-	//	}
-	//},
-	//{
-	//	target  : "EventsBlock",
-	//	from    : 50,
-	//	duration: 50,
-	//	apply   : {
-	//		top: [-eventsMiniHeight, 50]
-	//	}
-	//},
-	////// highlighter to EventsBlock
-	//{
-	//	target  : "Highlighter",
-	//	from    : 100,
-	//	duration: 100,
-	//	apply   : {
-	//		height: ["-100%", 200, sliderHeight, 2 * footerMiniHeight],
-	//	}
-	//},
-	//{
-	//	target  : "EventsBlock",
-	//	from    : 100,
-	//	duration: 100,
-	//	apply   : {
-	//		bottom: ["20%", footerMiniHeight],
-	//		top   : ["-100%", (eventsMiniHeight + headerMiniHeight) + "px", sliderHeight, footerMiniHeight, -20]
-	//	}
-	//},
-	//{
-	//	target  : "EventMap",
-	//	from    : 100,
-	//	duration: 100,
-	//	apply   : {
-	//		height: "20%",
-	//		top   : "-20%"
-	//	}
-	//},
-	//// EventsBlock to map
-	//{
-	//	target  : "EventsBlock",
-	//	from    : 200,
-	//	duration: 100,
-	//	apply   : {
-	//		bottom: "20%"
-	//	}
-	//},
-	//{
-	//	target  : "EventMap",
-	//	from    : 200,
-	//	duration: 100,
-	//	apply   : {
-	//		height: "20%",
-	//		top   : "-20%"
-	//	}
-	//},
-];
+export const YAxis             = undefined;

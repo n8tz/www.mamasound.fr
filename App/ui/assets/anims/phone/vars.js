@@ -5,10 +5,11 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-export const sliderHeight     = "15vh";
-export const headerMiniHeight = 50;
+export const sliderHeight     = 110;
+export const headerMiniHeight = 45;
 export const eventsMiniHeight = 200;
 export const footerMiniHeight = 30;
-export const mapHeight        = "20vw";
-export const collWidth        = "30vw";
+export const headerHeight     = "70vh";
+export const mapHeight        = "25vh";
+export const collWidth        = "0%";
 

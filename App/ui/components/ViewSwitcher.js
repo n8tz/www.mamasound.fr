@@ -103,6 +103,9 @@ export default class ViewSwitcher extends React.Component {
 		};
 	}
 	
+	//hookScrollableTargets( targets, dir ) {
+	//	return ["html", this];
+	//}
 	
 	static getDerivedStateFromProps( props, state ) {
 		return {

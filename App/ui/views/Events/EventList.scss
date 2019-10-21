@@ -39,9 +39,9 @@
 
     > .content {
       position: relative;
-      height: 100%;
-      //padding: 0 !important;
-      //margin: 0 !important;
+      //height: 100%;
+      padding: 0 !important;
+      margin: 0 !important;
       @media screen and (max-width: $tablet-landscape-breakpoint) {
         margin: 0 !important;
         padding: 0 !important;
@@ -79,7 +79,7 @@
       transform: translate3d(0, 0, 0);
       //background: white;
       //position: absolute;
-      padding-top: 10px;
+      //padding-top: 10px;
       padding-bottom: 100px;
       width: 100%;
       height: 100%;
@@ -93,7 +93,8 @@
         //background: #1f8de2;
 
         .day {
-          height: 2.25em;
+          height: 1.5em;
+          font-size: 1.1em;
         }
       }
 
@@ -119,22 +120,24 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-
+      background: #2e2e2e;
       .date {
         //@include use_hvCenteredAbs();
         position: absolute;
         top: 0;
         left: 0;
         bottom: 0;
-        color: black;
+        color: #ffffff;
         min-width: 50%;
         text-align: left;
-        font-size: 1.2em;
-        font-weight: lighter;
-        font-family: EmPower42;
+        font-size: 1em;
+        font-weight: bolder;
+        font-family: $mainFontFamily;
         opacity: .9;
-        padding-top: .15em;
+        padding-top: .1em;
         padding-left: 25px;
+        text-transform: capitalize;
+        font-style: italic;
       }
 
       img {

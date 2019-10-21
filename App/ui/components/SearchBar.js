@@ -45,16 +45,17 @@ export default class SearchBar extends React.Component {
 	};
 	
 	
-	static getDerivedStateFromProps( props, state ) {
+	static getDerivedStateFromProps( props, { showPrices, showArea, showStyle } ) {
 		let {
 			    startPos,
 			    openDuration,
 			    closeDuration, minHeight, maxHeight, width, minBottom, maxBottom, style
 		    } = props;
 		return {
+			showPrices, showArea, showStyle,
 			boxStyle    : {
 				position            : "relative",
-				width               : width,
+				//width               : width,
 				//height              : minHeight,
 				borderTopLeftRadius : "10px",
 				borderTopRightRadius: "10px",
@@ -65,11 +66,11 @@ export default class SearchBar extends React.Component {
 				...style,
 			},
 			titleStyle  : {
-				position : "absolute",
-				width    : "100%",
-				height   : minHeight,
-				left     : "0%",
-				top      : "0%",
+				position: "absolute",
+				width   : "100%",
+				height  : minHeight,
+				left    : "0%",
+				top     : "0%",
 				
 				...props.titleStyle,
 			},
@@ -95,53 +96,7 @@ export default class SearchBar extends React.Component {
 					{}, {},
 				]
 			},
-			axis        : {
-				title  : props.titleAxis || [],
-				icon   : props.iconAxis || [
-					{
-						from    : startPos + openDuration,
-						duration: openDuration,
-						apply   : {
-							opacity: -.5,
-							top    : minHeight,
-							left   : ["100%", "-" + maxHeight, minHeight],
-							height : [maxHeight, "-" + minHeight, "-" + minHeight],
-							width  : [maxHeight, "-" + minHeight, "-" + minHeight],
-						}
-					},
-					{
-						from    : startPos + openDuration,
-						duration: closeDuration,
-						apply   : {
-							//opacity: .5,
-							//top    : "-" + minHeight,
-							//left   : ["-100%", maxHeight, "-" + minHeight],
-							//height : ["-" + maxHeight, minHeight, minHeight],
-							//width  : ["-" + maxHeight, minHeight, minHeight],
-						}
-					}
-				],
-				content: props.contentAxis || [],
-				root   : props.rootAxis || [
-					{
-						from    : startPos,
-						duration: openDuration,
-						apply   : {
-							//bottom   : [maxHeight, "-" + minHeight],
-							transform: [, , {}],
-						}
-					},
-					{
-						from    : startPos + openDuration,
-						duration: closeDuration,
-						apply   : {
-							top      : 40,
-							bottom   : maxBottom,
-							transform: [, , {}],
-						}
-					}
-				]
-			}
+			axis        : {}
 		}
 	}
 	
@@ -162,30 +117,122 @@ export default class SearchBar extends React.Component {
 	}
 	
 	renderTitle() {
-		const { TagManager, strechProps, style } = this.props;
+		const { TagManager, appState, strechProps, style } = this.props;
+		const { showPrice, showArea, showStyle }           = this.state;
 		return <div className={"SearchBarForm"}>
 			<TextField
 				className={"input"}
-				placeholder={"Groupe, quartier, style, date, ..."}
+				placeholder={"Rechercher"}
 				value={this.state.search}
 				onChange={this.handleSearchChange}
 			/>
+			<span className={"filters"}>
+				<div className={"label"} onClick={this.togglePrice}>Prix</div>
+				<div className={"label"} onClick={this.toggleArea}>Quartiers</div>
+				<div className={"label"} onClick={this.toggleStyle}>Styles</div>
+				<Comps.Calendar startDate={appState.curDay}
+				                ref={this.calendar}
+				                endDate={moment(appState.curDay).add(appState.dayCountByViewType[0], 'day')}
+				                onChange={this.handleDateChange}/>
+				{showPrice &&
+				<Comps.PopAnywhere hovering={showPrice} className={"priceTags"} onClickOut={this.togglePrice}>
+				<span
+					className={"tag " + (!appState.currentArea ? "selected" : "")}
+					onClick={e => $actions.setCurrentArea()}>Tout les prix</span>
+					{
+						TagManager && TagManager.available
+						                        //.filter(tag => !TagManager.selected.includes(tag))
+						                        .filter(tag => (tag.type === "price"))
+						                        .map(
+							                        tag =>
+								                        <span
+									                        key={tag.label}
+									                        className={"tag " + (TagManager.selected.includes(tag)
+									                                             ? "selected"
+									                                             : "")}
+									                        onClick={( e ) => this.selectTag(tag)}
+									                        style={{
+										                        fontSize: 14
+									                        }}
+								                        >
+								{/*<img alt={tag.title} src={tag.style.icon} className={"tagIcon"}/>*/}
+									                        {tag.label}
+									                        ({tag.count})
+							</span>)
+					}
+				</Comps.PopAnywhere>}
+				{showArea && <Comps.PopAnywhere hovering={showArea} className={"areaTags"} onClickOut={this.toggleArea}>
+				<span
+					className={"tag " + (!appState.currentArea ? "selected" : "")}
+					onClick={e => $actions.setCurrentArea()}>Tout Montpellier</span>
+					{
+						TagManager && TagManager.available
+						                        //.filter(tag => !TagManager.selected.includes(tag))
+						                        .filter(tag => (tag.type === "area"))
+						                        .map(
+							                        tag =>
+								                        <span
+									                        key={tag.label}
+									                        className={"tag " + (TagManager.selected.includes(tag)
+									                                             ? "selected"
+									                                             : "")}
+									                        onClick={( e ) => this.selectTag(tag)}
+									                        style={{
+										                        fontSize: 14
+									                        }}
+								                        >
+								{/*<img alt={tag.title} src={tag.style.icon} className={"tagIcon"}/>*/}
+									                        {tag.label}
+									                        ({tag.count})
+							</span>)
+					}
+				</Comps.PopAnywhere>}
+				{showStyle &&
+				<Comps.PopAnywhere hovering={showStyle} className={"styleTags"} onClickOut={this.toggleStyle}>
+					{
+						TagManager && TagManager.available
+						                        //.filter(tag => !TagManager.selected.includes(tag))
+						                        .filter(tag => (tag.type === "style"))
+						                        .map(
+							                        tag =>
+								                        <span
+									                        key={tag.label}
+									                        className={"tag " + (TagManager.selected.includes(tag)
+									                                             ? "selected"
+									                                             : "")}
+									                        onClick={( e ) => this.selectTag(tag)}
+									                        style={{
+										                        fontSize: 14
+									                        }}
+								                        >
+								{/*<img alt={tag.title} src={tag.style.icon} className={"tagIcon"}/>*/}
+									                        {tag.label}
+									                        ({tag.count})
+							</span>)
+					}
+				</Comps.PopAnywhere>}
+			</span>
 		</div>;
 	}
 	
 	renderIcon() {
-		return <img src={require('App/ui/assets/images/detectCat.png')}/>;
+		//return <img src={require('App/ui/assets/images/detectCat.png')}/>;
 	}
 	
-	calendar = React.createRef();
+	toggleStyle = () => {
+		this.setState({ showStyle: !this.state.showStyle })
+	}
+	togglePrice = () => {
+		this.setState({ showPrice: !this.state.showPrice })
+	}
+	toggleArea  = () => {
+		this.setState({ showArea: !this.state.showArea })
+	}
+	calendar    = React.createRef();
 	
 	renderContent() {
 		const { TagManager, appState, Quartiers, $actions } = this.props;
 		return <>
-			<Comps.Calendar startDate={appState.curDay}
-			                ref={this.calendar}
-			                endDate={moment(appState.curDay).add(appState.dayCountByViewType[0], 'day')}
-			                onChange={this.handleDateChange}/>
 			
 			<div className={"selectedTags"}>
 				{
@@ -202,78 +249,6 @@ export default class SearchBar extends React.Component {
 								{/*<img alt={tag.title} src={tag.style.icon} className={"tagIcon"}/>*/}
 								{tag.label}
 								({tag.count})
-							</span>)
-				}
-			</div>
-			<div className={"label"}>Prix</div>
-			<div className={"priceTags"}>
-				<span
-					className={"tag " + (!appState.currentArea ? "selected" : "")}
-					onClick={e => $actions.setCurrentArea()}>Tout les prix</span>
-				{
-					TagManager && TagManager.available
-					                        .filter(tag => !TagManager.selected.includes(tag))
-					                        .filter(tag => (tag.type === "price"))
-					                        .map(
-						                        tag =>
-							                        <span
-								                        key={tag.label}
-								                        className={"tag"}
-								                        onClick={( e ) => this.selectTag(tag)}
-								                        style={{
-									                        fontSize: 14
-								                        }}
-							                        >
-								{/*<img alt={tag.title} src={tag.style.icon} className={"tagIcon"}/>*/}
-								                        {tag.label}
-								                        ({tag.count})
-							</span>)
-				}
-			</div>
-			<div className={"label"}>Quartiers</div>
-			<div className={"areaTags"}>
-				<span
-					className={"tag " + (!appState.currentArea ? "selected" : "")}
-					onClick={e => $actions.setCurrentArea()}>Tout Montpellier</span>
-				{
-					TagManager && TagManager.available
-					                        .filter(tag => !TagManager.selected.includes(tag))
-					                        .filter(tag => (tag.type === "area"))
-					                        .map(
-						                        tag =>
-							                        <span
-								                        key={tag.label}
-								                        className={"tag"}
-								                        onClick={( e ) => this.selectTag(tag)}
-								                        style={{
-									                        fontSize: 14
-								                        }}
-							                        >
-								{/*<img alt={tag.title} src={tag.style.icon} className={"tagIcon"}/>*/}
-								                        {tag.label}
-								                        ({tag.count})
-							</span>)
-				}
-			</div>
-			<div className={"label"}>Styles</div>
-			<div className={"styleTags"}>
-				{
-					TagManager && TagManager.available
-					                        .filter(tag => !TagManager.selected.includes(tag))
-					                        .filter(tag => (tag.type === "style"))
-					                        .map(
-						                        tag =>
-							                        <span
-								                        key={tag.label}
-								                        className={"tag"}
-								                        onClick={( e ) => this.selectTag(tag)}
-								                        style={{
-									                        fontSize: 14
-								                        }}
-							                        >
-								{/*<img alt={tag.title} src={tag.style.icon} className={"tagIcon"}/>*/}
-								                        {tag.label}
-								                        ({tag.count})
 							</span>)
 				}
 			</div>

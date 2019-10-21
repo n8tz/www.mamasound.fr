@@ -19,24 +19,24 @@
 import {collWidth, footerMiniHeight, headerMiniHeight, sliderHeight} from "../../vars";
 
 export const EventCatSliderAxis = {
-	scrollY: [
-		{
-			from    : 100,
-			duration: 100,
-			apply   : {
-				//top: ["-100%", 64]
-			}
-		},
-	]
+	//scrollY: [
+	//	{
+	//		from    : 100,
+	//		duration: 100,
+	//		apply   : {
+	//			//top: ["-100%", 64]
+	//		}
+	//	},
+	//]
 };
 export const EventCatSlider     = {
 	       maxJump        : 1,
 	       visibleItems   : 1,
 	       style          : {
 		       position : "relative",
-		       width    : ["100%", "-"+collWidth, -30],
+		       width    : ["100%", "-" + collWidth, -30],
 		       minHeight: ["100vh", -1 * headerMiniHeight, -footerMiniHeight, -sliderHeight, -25],
-		       left     : [collWidth, 10],
+		       left     : [0],
 		       //marginTop: "50px",
 		       //bottom  : "40px",
 		       //width   : "auto",

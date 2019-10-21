@@ -12,15 +12,16 @@ html {
   height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
-  touch-action: none;
+  //touch-action: none;
   //overflow: hidden !important;
 }
 
 body {
   margin: 0;
   padding: 0;
-  overscroll-behavior: none !important;
-  //width: 100%;
+  //overscroll-behavior: none !important;
+  width: 100%;
+  overflow: hidden;
   //height: 100%;
 }
 

@@ -17,24 +17,6 @@ export const background       = {
 		translateX : '-50%',
 	}
 };
-export const backgroundScroll = {
-	scrollY: [
-		{
-			from    : 0,
-			duration: 50,
-			apply   : {
-				//opacity: 1,
-			}
-		},
-		{
-			from    : 100,
-			duration: 100,
-			apply   : {
-				//opacity: -1,
-			}
-		},
-	],
-}
 export const slider           = {
 	position : "absolute",
 	bottom   : "20px",
@@ -46,27 +28,6 @@ export const slider           = {
 		perspective: "200px",
 	}
 };
-export const sliderScroll     = [
-	{
-		from    : 0,
-		duration: 50,
-		apply   : {
-			transform: {
-				//translateY : '50px'
-			}
-		}
-	},
-	{
-		from    : 50,
-		duration: 50,
-		apply   : {
-			transform: {
-				//translateY: '-50px',
-				//translateZ: "20px",
-			}
-		}
-	},
-];
 export const slide            = {
 	top      : "0%",
 	height   : "100%",
@@ -76,30 +37,6 @@ export const slide            = {
 		//rotateX    : "2deg"
 	}
 };
-export const slideScroll      = {
-	scrollY: [
-		{
-			type    : "Tween",
-			from    : 50,
-			duration: 50,
-			apply   : {
-				transform: {}
-			}
-		},
-		{
-			type    : "Tween",
-			from    : 100,
-			duration: 100,
-			apply   : {
-				transform: {
-					//translateY: "-8px",
-					//translateZ: "20px",
-					//rotateX: "-2deg"
-				}
-			}
-		},
-	],
-}
 export const focused          = {
 	position : "absolute",
 	bottom   : 0,
@@ -113,28 +50,3 @@ export const focused          = {
 		translateX: "-50%",
 	}, {}, { translateY: '0%' }]
 };
-export const focusedScroll    = {
-	scrollY: [
-		{
-			from    : 0,
-			duration: 50,
-			apply   : {
-				//opacity: 1,
-			}
-		},
-		{
-			from    : 100,
-			duration: 100,
-			apply   : {
-				//opacity  : "-1",
-				//height   : 2.5,
-				//top      : -2.5,
-				transform: [{
-					//rotateX: "4deg"
-				}, {
-					//translateY: "-50vh",
-				}]
-			}
-		},
-	],
-}

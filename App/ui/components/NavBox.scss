@@ -15,39 +15,28 @@
   //right: .5em;
   //transform: translate(-50%, 0%);
   //bottom: 0;
-
+  text-align: left;
   //@media screen and (max-width: $tablet-portrait-breakpoint) {
-  &:before {
-    content: ' ';
-    position: absolute;
-    width: 110vw;
-    top: -185px;
-    left: 50%;
-    transform: translate(-50%, 0%);
-    height: 200px;
-    background-color: white;
-    //background: url("../assets/images/shuperDesign.jpg");
-    background-size: auto 100%;
-
-  }
 
   //}
   > .content {
     position: relative;
+    //height: 50px;
+    padding: 0 !important;
   }
 
   .StretchBox {
     position: relative;
 
+    background: $secondaryBackColor;
+    color: $secondaryTextColor;
     > .title {
-      background: rgba(255, 255, 255, 0.34);
       font-family: "Roboto", sans-serif;
       font-weight: bold;
       cursor: pointer;
-      color: #2e2e2e;
 
       &:hover {
-        background: rgba(255, 255, 255, 0.5);
+        //background: rgba(255, 255, 255, 0.5);
       }
     }
 
@@ -55,13 +44,13 @@
 
       > .title {
         color: black;
-        background: rgba(255, 255, 255, 0.5);
+        //background: rgba(255, 255, 255, 0.5);
       }
     }
 
     .content {
-      @include withTranspaMask();
-      background: rgba(255, 255, 255, 0.61);
+      //@include withTranspaMask();
+      //background: rgba(255, 255, 255, 0.61);
       padding: 2px;
 
       .day {
@@ -128,16 +117,21 @@
   }
 
   .SearchBar {
+    @media screen and (max-width: $tablet-portrait-breakpoint) {
+      display: none !important;
+    }
   }
 
   .eventTypeNav {
     //@include use_hvCenteredContent();
     position: absolute;
     //width: 70%;
-    text-align: right;
+    //text-align: right;
+    display: flex;
 
     .StretchBox {
-      margin-left: 5px;
+      //margin-left: -5px;
+      flex-grow: 1;
 
       > .icon {
 
@@ -149,9 +143,12 @@
 
       > .title {
         @include use_hvCenteredContent();
+        background: #2e2e2e;
+        color: white;
         padding-top: 2px;
+        padding-left: .5em;
         //color:white;
-        font-size: 1.3em;
+        font-size: 1.1em;
       }
 
       .DayEvents {

@@ -5,32 +5,12 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import React                              from "react";
-import {asStore, scopeToProps, withScope} from "react-scopes";
-import {TweenRef}                         from "react-voodoo";
-import {ContextMenu}                      from "../../App";
-import {Comps}                            from "../index";
+import React          from "react";
+import {scopeToProps} from "react-scopes";
+import {TweenRef}     from "react-voodoo";
+import {ContextMenu}  from "../../App";
+import {Comps}        from "../index";
 
-@withScope(
-	{
-		@asStore
-		SearchValues: {
-			tags  : [],
-			search: undefined,
-			updateSearch( str ) {
-			
-			},
-			addTag( str ) {
-			
-			},
-			rmTag( str ) {
-			
-			}
-			
-		},
-		
-	}
-)
 @scopeToProps("appState", "Styles.views.Events.EventsList.NavBox:Styles")
 export default class NavBox extends React.Component {
 	static propTypes = {};
@@ -47,6 +27,9 @@ export default class NavBox extends React.Component {
 			<div className={"NavBox"} style={style}>
 				<div className={"content container"}>
 					{children}
+					<TweenRef initial={Styles.SearchBar}>
+						<Comps.SearchBar {...Styles.SearchBarProps}/>
+					</TweenRef>
 					<TweenRef.div id={"eventTypeNav"} className={"eventTypeNav"} style={Styles.typesNav}
 					              tweenAxis={Styles.Axis}>
 						{
@@ -89,9 +72,6 @@ export default class NavBox extends React.Component {
 					{/*	}*/}
 					{/*</div>*/}
 					
-					<TweenRef initial={Styles.SearchBar}>
-						<Comps.SearchBar {...Styles.SearchBarProps}/>
-					</TweenRef>
 				
 				</div>
 			</div>

@@ -1876,10 +1876,10 @@ function asTweener() {
                   }
                 }
 
-                if (yDispatched && xDispatched) {
-                  e.stopPropagation();
-                  e.cancelable && e.preventDefault(); //return;
-                } //dX = 0;
+                if (yDispatched && xDispatched) {} //e.stopPropagation();
+                //e.cancelable && e.preventDefault();
+                //return;
+                //dX = 0;
                 //dY = 0;
 
               }

@@ -22,8 +22,8 @@ export default {
 	@withStateMap(
 		{
 			data: {
-				id     : "Theme.ghTOlod-",
-				etty   : "Theme",
+				id  : "Theme.ghTOlod-",
+				etty: "Theme",
 				//default: {
 				//	_id : "_Theme",
 				//	_cls: "Theme",
@@ -116,6 +116,9 @@ export default {
 		updateCurrentDay( _currentVisibleDay, userSetCDay = true ) {
 			let { curDay, selectedEventId } = this.nextState,
 			    dt                          = moment(_currentVisibleDay).startOf("day").valueOf();
+			
+			userSetCDay = userSetCDay && !(moment(_currentVisibleDay).isSame("day", Date.now()));
+			
 			if ( dt !== curDay ) {
 				return { curDay: dt, userSetCDay };
 			}
@@ -126,7 +129,8 @@ export default {
 				selectedEvent = undefined;
 			//	currentPageFocus = 'map';
 			if ( selectedEvent ) {
-				//this.$actions.history_set("/" + selectedEvent._cls + '/' + moment(selectedEventDT).format("DD-MM-YY") + "/" + (selectedEvent._alias || selectedEvent._id))
+				//this.$actions.history_set("/" + selectedEvent._cls + '/' + moment(selectedEventDT).format("DD-MM-YY")
+				// + "/" + (selectedEvent._alias || selectedEvent._id))
 			}
 			else {
 				this.$actions.history_set("/")

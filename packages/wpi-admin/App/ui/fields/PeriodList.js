@@ -94,12 +94,12 @@ export default class PeriodList extends React.Component {
 							( period, i ) => <div style={{ position: "relative" }} className="period_occur">
                             <span className="from">
                                 Début :
-	                            <Comps.Calendar startDate={period.startTM}
+	                            <Comps.Calendar startDate={period.startTM} useInput={true}
 	                                            onChange={this.onChange.bind(this, i, 'startTM')}/>
                             </span>
 								<span className="end">
                                 Fin :
-	                            <Comps.Calendar startDate={period.endTM}
+	                            <Comps.Calendar startDate={period.endTM} useInput={true}
 	                                            onChange={this.onChange.bind(this, i, 'endTM')}/>
                             </span>
 								

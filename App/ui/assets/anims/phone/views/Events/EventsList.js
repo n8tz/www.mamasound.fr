@@ -16,39 +16,42 @@
 //		//translateY: "85%"
 //	}
 //};
-import {collWidth} from "../../vars";
+import {footerMiniHeight, headerMiniHeight, sliderHeight} from "../../vars";
 
 export const EventCatSliderAxis = {
-	scrollY: [
-		{
-			from    : 100,
-			duration: 100,
-			apply   : {
-				top: "-95px"
-			}
-		},
-	]
+	//scrollY: [
+	//	{
+	//		from    : 100,
+	//		duration: 100,
+	//		apply   : {
+	//			//top: ["-100%", 64]
+	//		}
+	//	},
+	//]
 };
 export const EventCatSlider     = {
 	       maxJump        : 1,
 	       visibleItems   : 1,
 	       style          : {
-		       position: "absolute",
-		       right   : "0%",
-		       left    : collWidth,
-		       top     : "160px",
-		       bottom  : "0%",
+		       position : "relative",
+		       width    : ["100%"],
+		       minHeight: ["100vh", -1 * headerMiniHeight, -footerMiniHeight, -sliderHeight, -25],
+		       left     : 0,
+		       //marginTop: "50px",
+		       //bottom  : "40px",
 		       //width   : "auto",
 		       //overflow: "auto"
 	       },
 	       defaultInitial : {
 		       position : "absolute",
-		       overflow : "hidden",
+		       //overflow : "hidden",
 		       //backgroundColor: "white",
 		       top      : "0%",
 		       left     : "0%",
+		       //marginRight     : "-100%",
+		       //marginBottom     : "-100%",
 		       width    : "100%",
-		       height   : "100%",
+		       //height   : "100%",
 		       zIndex   : 50,
 		       opacity  : 0,
 		       transform: [

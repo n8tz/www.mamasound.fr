@@ -13,7 +13,7 @@ import {TweenRef, withTweener}                        from "react-voodoo";
 
 let Tetris = 'div';
 if ( typeof window !== "undefined" ) {
-	Tetris = require('react-tetris');
+	//Tetris = require('react-tetris');
 }
 
 @withScope(

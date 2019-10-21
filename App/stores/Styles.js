@@ -34,22 +34,22 @@ export default class Styles extends Store {
 	constructor() {
 		super(...arguments);
 		
-		//isBrowserSide && window.addEventListener(
-		//	"resize",
-		//	this._onResize = ( e ) => {//@todo
-		//		let currentTheme;
-		//		if ( window.innerWidth >= 900 ) {
-		//			if ( window.innerHeight >= 850 )
-		//				currentTheme = "desktop";
-		//			else
-		//				currentTheme = "desktopSmall";
-		//
-		//		}
-		//		if ( window.innerWidth <= 900 )
-		//			currentTheme = "phone";
-		//		this.setState({ currentTheme })
-		//	});
-		//isBrowserSide && setTimeout(tm => (this._onResize && this._onResize()), 500)
+		isBrowserSide && window.addEventListener(
+			"resize",
+			this._onResize = ( e ) => {//@todo
+				let currentTheme;
+				if ( window.innerWidth >= 900 ) {
+					if ( window.innerHeight >= 850 )
+						currentTheme = "desktop";
+					//else
+					//	currentTheme = "desktopSmall";
+
+				}
+				if ( window.innerWidth <= 900 )
+					currentTheme = "phone";
+				this.setState({ currentTheme })
+			});
+		isBrowserSide && setTimeout(tm => (this._onResize && this._onResize()), 500)
 	}
 	
 	__onHotReloaded() {

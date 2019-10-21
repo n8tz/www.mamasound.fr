@@ -11,9 +11,9 @@
   //overflow: hidden;
   border-left: solid 1px gray;
   border-right: solid 1px gray;
+  //margin: 0 !important;
+  padding: 0 !important;
   @media screen and (max-width: $tablet-landscape-breakpoint) {
-    margin: 0 !important;
-    padding: 0 !important;
     width: 100% !important;
     border: none;
   }

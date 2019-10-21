@@ -183,7 +183,28 @@ export default {
 				this.$actions.unRegisterTags(this.tags);
 				this.tags = []
 			}
-			newItems = items.filter(
+			newItems = items.map(
+				record => {
+					let start, end;
+					if ( record.schedule ) {
+						// find the right tm
+						for ( let i = 0; record.schedule.length > i; i++ ) {
+							if ( selectedDay && record.schedule[i] && record.schedule[i].startTM && selectedDay.isSame(record.schedule[i].startTM, "day") ) {
+								start = record.schedule[i].startTM;
+								end   = record.schedule[i].endTM;
+								break;
+							}
+						}
+					}
+					
+					return {
+						...record,
+						realPeriod: {
+							startTM: start || record.startTM, endTM: end || record.endTM
+						}
+					}
+				}
+			).filter(
 				item => {
 					let place, ll, area,
 					    price  = ('' + item.price || '0').split('[\/\s\-]').map(p => p.trim()).map(p => (/grat/ig.test(p)
@@ -193,11 +214,11 @@ export default {
 					place      = item.place && refs[item.place.objId];
 					// tag area
 					if ( place ) {
-						//if ( !place.quartier ) {
-						ll             = place.address && place.address.geoPoint;
-						area           = ll && geoQuery(ll)
-						place.quartier = area && area.LIBSQUART || "Périphérie";
-						//}
+						if ( !place.quartier ) {
+							ll             = place.address && place.address.geoPoint;
+							area           = ll && geoQuery(ll)
+							place.quartier = area && area.LIBSQUART || "Périphérie";
+						}
 						if ( !seen[place.quartier] )
 							tags.push(seen[place.quartier] = {
 								label: place.quartier,

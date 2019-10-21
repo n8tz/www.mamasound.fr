@@ -6,9 +6,7 @@
  *   @contact : n8tz.js@gmail.com
  */
 
-import {eventsMiniHeight, sliderHeight} from "../../../vars";
-
-export const transitionDuration    = 800;
+export const transitionDuration    = 1500;
 export const defaultInitial        = {
 	position       : "absolute",
 	bottom         : "0%",
@@ -40,9 +38,9 @@ export const defaultInitial        = {
 };
 export const defaultPreviewInitial = {
 	position       : "absolute",
-	height         : ["100vh", -eventsMiniHeight],
+	height         : ["100%"],
 	width          : "100vw",
-	top            : "50%",
+	top            : "0%",
 	left           : "50%",
 	zIndex         : 40,
 	overflow       : "hidden",
@@ -52,11 +50,11 @@ export const defaultPreviewInitial = {
 	transform      : [
 		{
 			translateX : "-50%",
-			translateY : "-50%",
+			//translateY : "-50%",
 			perspective: "700px",
 		},
 		{
-			translateY: (parseFloat(sliderHeight) / 2) + "vh",
+			//translateY: -headerMiniHeight,
 		},
 		{},
 		{}]

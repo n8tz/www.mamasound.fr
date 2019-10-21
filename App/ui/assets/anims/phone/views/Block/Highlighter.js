@@ -5,7 +5,7 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import {headerMiniHeight, sliderHeight} from "../../vars";
+import {headerHeight, headerMiniHeight, sliderHeight} from "../../vars";
 
 export const background       = {
 	position : "absolute",
@@ -18,126 +18,53 @@ export const background       = {
 	}
 };
 export const backgroundScroll = {
-	scrollY: [
-		{
-			from    : 0,
-			duration: 50,
-			apply   : {
-				opacity: 1,
-			}
-		},
-		{
-			from    : 100,
-			duration: 100,
-			apply   : {
-				opacity: -1,
-			}
-		},
-	],
+	//scrollY: [
+	//	{
+	//		from    : 0,
+	//		duration: 50,
+	//		apply   : {
+	//			//opacity: 1,
+	//		}
+	//	},
+	//	{
+	//		from    : 100,
+	//		duration: 100,
+	//		apply   : {
+	//			//opacity: -1,
+	//		}
+	//	},
+	//],
 }
 export const slider           = {
 	position : "absolute",
-	bottom   : "0px",
+	bottom   : "20px",
 	left     : "0px",
 	width    : "100%",
 	height   : [sliderHeight, -10],
 	zIndex   : "250",
 	transform: {
 		perspective: "200px",
-		translateY : '55px',
-		translateZ : "-20px",
-		//rotateX    : "2deg"
 	}
 };
-export const sliderScroll     = [
-	{
-		from    : 0,
-		duration: 50,
-		apply   : {
-			transform: {
-				//translateY : '50px'
-			}
-		}
-	},
-	{
-		from    : 50,
-		duration: 50,
-		apply   : {
-			transform: {
-				translateY: '-50px',
-				translateZ: "20px",
-			}
-		}
-	},
-];
 export const slide            = {
 	top      : "0%",
 	height   : "100%",
 	transform: {
 		perspective: "200px",
 		//translateZ: "-20px",
-		rotateX    : "2deg"
+		//rotateX    : "2deg"
 	}
 };
-export const slideScroll      = {
-	scrollY: [
-		{
-			type    : "Tween",
-			from    : 50,
-			duration: 50,
-			apply   : {
-				transform: {}
-			}
-		},
-		{
-			type    : "Tween",
-			from    : 100,
-			duration: 100,
-			apply   : {
-				transform: {
-					translateY: "-8px",
-					translateZ: "20px",
-					rotateX   : "-2deg"
-				}
-			}
-		},
-	],
-}
 export const focused          = {
 	position : "absolute",
 	bottom   : 0,
 	//paddingBottom: [sliderHeight, 10],
-	//paddingTop   : "3em",
-	left     : "0%",
-	top      : headerMiniHeight,
-	width    : '100vh',
-	opacity  : 0,
+	//paddingTop   : headerMiniHeight,
+	left     : "50%",
+	height   : [headerHeight, -50, "-" + headerMiniHeight],
+	//width    : '100vw',
+	opacity  : 1,
 	transform: [{
-		//translateX: "-50%",
+		translateX: "-50%",
 	}, {}, { translateY: '0%' }]
 };
-export const focusedScroll    = {
-	scrollY: [
-		{
-			from    : 0,
-			duration: 50,
-			apply   : {
-				opacity: 1,
-			}
-		},
-		{
-			from    : 100,
-			duration: 100,
-			apply   : {
-				opacity  : "-1",
-				//height   : 2.5,
-				//top      : -2.5,
-				transform: [{
-					rotateX: "4deg"
-				}, {
-					translateY: "-50vh",
-				}]
-			}
-		},
-	],
-}

@@ -38,18 +38,48 @@ export default class App extends React.Component {
 	constructor( props ) {
 		super(props);
 		props.$actions.loadStateFromUrl(props.location)
-		!__IS_SERVER__ && (this._uTm = setInterval(this.keepCDay, 10000))
+		
+		// keep page on the current day
+		if ( !__IS_SERVER__ ) {
+			(this._uTm = setTimeout(this.keepCDay, 1000))
+			var hidden, visibilityState, visibilityChange;
+			
+			if ( typeof document.hidden !== "undefined" ) {
+				hidden = "hidden", visibilityChange = "visibilitychange", visibilityState = "visibilityState";
+			}
+			else if ( typeof document.msHidden !== "undefined" ) {
+				hidden = "msHidden", visibilityChange = "msvisibilitychange", visibilityState = "msVisibilityState";
+			}
+			
+			var document_hidden = document[hidden];
+			
+			document.addEventListener(visibilityChange, this.keepCDay);
+		}
 		
 	}
 	
 	componentWillUnmount() {
-		this._uTm && clearInterval(this._uTm);
+		if ( !__IS_SERVER__ ) {
+			this._uTm && clearInterval(this._uTm);
+			var hidden, visibilityState, visibilityChange;
+			
+			if ( typeof document.hidden !== "undefined" ) {
+				hidden = "hidden", visibilityChange = "visibilitychange", visibilityState = "visibilityState";
+			}
+			else if ( typeof document.msHidden !== "undefined" ) {
+				hidden = "msHidden", visibilityChange = "msvisibilitychange", visibilityState = "msVisibilityState";
+			}
+			
+			document.removeEventListener(visibilityChange, this.keepCDay);
+		}
 	}
 	
 	keepCDay = () => {
 		let { appState, $actions } = this.props;
-		if ( appState.userSetCDay && moment(Date.now()).startOf("day").valueOf() > appState.curDay )
+		this._uTm && clearInterval(this._uTm);
+		if ( !appState.userSetCDay && !moment(Date.now()).isSame("day", appState.curDay) )
 			$actions.updateCurrentDay(Date.now(), false);
+		(this._uTm = setTimeout(this.keepCDay, 1000))
 	}
 	
 	render() {

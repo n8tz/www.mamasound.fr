@@ -19,7 +19,7 @@ export const style          = {
 	left     : "0px",
 	top      : [headerHeight, 50],
 	height   : "50px",
-	zIndex   : 600,
+	zIndex   : 600000,
 	//backgroundColor: "red",
 	transform: {
 		//translateY: "85%"
@@ -44,9 +44,9 @@ export const Axis           = [
 export const SearchBarAxis  = [];
 export const typesNav       = {
 	position : "absolute",
-	width    : ["100%", "-" + collWidth],
+	width    : ["100%", "-" + collWidth, -30],
 	//bottom   : "0px",
-	right    : "0px",
+	left     : "0px",
 	top      : ["100%", "-" + minHeight],
 	height   : "40px",
 	transform: {
@@ -63,13 +63,14 @@ export const SearchBarProps = {
 	
 	boxStyle  : {
 		position: "absolute",
-		width   : [collWidth, -10],
-		left    : "20px",
-		top     : ["100%", "-" + minHeight],
-		height  : "270px"
+		width   : ["100%", "-" + collWidth, -30],
+		//width          : "60vw",
+		left    : "0px",
+		top     : ["100%", "-" + minHeight, -40],
+		height  : "50px",
 	},
 	titleStyle: {
-		paddingLeft: "3em"
+		//paddingLeft: "3em"
 	},
 	titleAxis : [
 		//{
@@ -124,12 +125,12 @@ export const StretchBox     = {
 	width   : "20%",
 	boxStyle: {
 		position            : "relative",
-		width               : "20%",
-		maxWidth            : "200px",
+		//width               : "20%",
+		//maxWidth            : "200px",
 		height              : minHeight,
 		borderTopLeftRadius : "10px",
 		borderTopRightRadius: "10px",
-		paddingLeft         : "20px",
+		//paddingLeft         : "20px",
 		whiteSpace          : "nowrap",
 		textOverflow        : "ellipsis",
 		overflow            : "hidden",
