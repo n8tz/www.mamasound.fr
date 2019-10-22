@@ -6,6 +6,10 @@
  *   @contact : n8tz.js@gmail.com
  */
 
+body.fixedHead .Highlighter {
+  position: fixed !important;
+  height: 210px !important;
+}
 
 .Highlighter {
   //touch-action: none;
@@ -18,10 +22,10 @@
   margin-left: -50vw;
   left: 50%;
   width: 100vw !important;
-
   @media screen and (max-width: $tablet-portrait-breakpoint) {
-    overflow: hidden;
+    //overflow: hidden;
   }
+
   &:before {
     content: ' ';
     position: absolute;
@@ -35,6 +39,7 @@
     background-size: auto 100%;
 
   }
+
   //
   //&:after {
   //  content: ' ';
@@ -45,11 +50,12 @@
   //  height: 800px;
   //  background: linear-gradient(to bottom, rgba(233, 233, 233, 0) 0%, rgba(233, 233, 233, 1) 22%, rgba(233, 233, 233, 1) 52%, rgb(233, 233, 233) 100%);
   //}
-  .Background{
+  .Background {
     background: white;
     @include withTranspaMask();
     mask-size: 80vh;
   }
+
   img {
     touch-action: none;
     pointer-events: none;

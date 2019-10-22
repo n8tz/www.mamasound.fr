@@ -18,7 +18,7 @@ export default class PopAnywhere extends Component {
 		onMouseOut : v => false,
 		hovering   : false,
 		keepVisible: false,
-		zIndex     : 1000000000
+		zIndex     : 10000
 	}
 	
 	
@@ -98,10 +98,9 @@ export default class PopAnywhere extends Component {
 		};
 		
 		if ( window.innerHeight < (box.top + box.height) )
-			box.top += window.innerHeight - (box.top + box.height);
+			box.top -= box.height + 30;
 		if ( window.innerWidth < (box.left + box.width) )
-			box.top += window.innerWidth < (box.left + box.width);
-		//debugger
+			box.left -= box.width;
 		return box;
 	}
 	

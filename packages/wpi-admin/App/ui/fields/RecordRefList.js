@@ -50,7 +50,7 @@ const SortableList = SortableContainer(( { items, onRm } ) => {
 				pageLength: 10,
 				$apply( data, { active, page, pageLength, search, defaultType, types, selectedType = defaultType || types && types[0] } ) {
 					let query = {}, etty = selectedType;
-					debugger
+					//debugger
 					if ( !active )
 						return;
 					

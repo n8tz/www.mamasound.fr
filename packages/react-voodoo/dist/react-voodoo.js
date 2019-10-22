@@ -1719,24 +1719,26 @@ function asTweener() {
             lastScrollEvt;
 
         if (!this._parentTweener && isBrowserSide) {
-          if (!rootNode) console.warn("fail registering scroll listener !! ");else _utils_dom__WEBPACK_IMPORTED_MODULE_11__["default"].addWheelEvent(rootNode, this._.onScroll = function (e) {
-            //@todo
-            var now = Date.now(),
-                prevent;
-            scrollLoad.y += e.deltaY;
-            scrollLoad.x += e.deltaX;
-            lastScrollEvt = e.originalEvent;
-            prevent = _this10._doDispatch(document.elementFromPoint(lastScrollEvt.clientX, lastScrollEvt.clientY), scrollLoad.x * 5, scrollLoad.y * 5);
-            scrollLoad.y = 0;
-            scrollLoad.x = 0;
-            debounceTm = 0;
-            debounceTr = lastScrollEvt = undefined;
+          if (!rootNode) console.warn("fail registering scroll listener !! "); //else
+          //	domUtils.addWheelEvent(
+          //		rootNode,
+          //		this._.onScroll = ( e ) => {//@todo
+          //			let now       = Date.now(), prevent;
+          //			scrollLoad.y += e.deltaY;
+          //			scrollLoad.x += e.deltaX;
+          //			lastScrollEvt = e.originalEvent;
+          //			prevent       = this._doDispatch(document.elementFromPoint(lastScrollEvt.clientX, lastScrollEvt.clientY), scrollLoad.x * 5, scrollLoad.y * 5)
+          //			scrollLoad.y  = 0;
+          //			scrollLoad.x  = 0;
+          //			debounceTm    = 0;
+          //			debounceTr    = lastScrollEvt = undefined;
+          //			if ( prevent ) {
+          //				e.originalEvent.stopPropagation();
+          //				e.originalEvent.preventDefault();
+          //			}
+          //		}
+          //	);
 
-            if (prevent) {
-              e.originalEvent.stopPropagation();
-              e.originalEvent.preventDefault();
-            }
-          });
           var lastStartTm, cLock, dX, parents, dY, parentsState;
           if (!rootNode) console.warn("fail registering drag listener !! ");else _utils_dom__WEBPACK_IMPORTED_MODULE_11__["default"].addEvent(rootNode, this._.dragList = {
             'dragstart': function dragstart(e, touch, descr) {

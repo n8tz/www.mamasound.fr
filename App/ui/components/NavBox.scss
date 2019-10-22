@@ -6,6 +6,11 @@
  *   @contact : n8tz.js@gmail.com
  */
 
+body.fixedHead .NavBox {
+  position: fixed !important;
+  top: 255px !important;
+}
+
 .NavBox {
 
   position: relative;
@@ -28,8 +33,10 @@
   .StretchBox {
     position: relative;
 
+    transform: translateZ(0);
     background: $secondaryBackColor;
     color: $secondaryTextColor;
+
     > .title {
       font-family: "Roboto", sans-serif;
       font-weight: bold;
@@ -128,6 +135,8 @@
     //width: 70%;
     //text-align: right;
     display: flex;
+
+    transform: translateZ(0);
 
     .StretchBox {
       //margin-left: -5px;

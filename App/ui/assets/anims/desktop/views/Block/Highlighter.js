@@ -7,7 +7,7 @@
  */
 import {headerHeight, headerMiniHeight, sliderHeight} from "../../vars";
 
-export const background       = {
+export const background = {
 	position : "absolute",
 	//transformOrigin: "0% 0%",
 	opacity  : 0,
@@ -17,7 +17,7 @@ export const background       = {
 		translateX : '-50%',
 	}
 };
-export const slider           = {
+export const slider     = {
 	position : "absolute",
 	bottom   : "20px",
 	left     : "0px",
@@ -28,7 +28,7 @@ export const slider           = {
 		perspective: "200px",
 	}
 };
-export const slide            = {
+export const slide      = {
 	top      : "0%",
 	height   : "100%",
 	transform: {
@@ -37,7 +37,7 @@ export const slide            = {
 		//rotateX    : "2deg"
 	}
 };
-export const focused          = {
+export const focused    = {
 	position : "absolute",
 	bottom   : 0,
 	//paddingBottom: [sliderHeight, 10],
@@ -47,6 +47,7 @@ export const focused          = {
 	//width    : '100vw',
 	opacity  : 1,
 	transform: [{
+		translateZ: "0%",
 		translateX: "-50%",
 	}, {}, { translateY: '0%' }]
 };

@@ -50,7 +50,7 @@ export const header    = {
 	top      : 0,
 	left     : "50%",
 	//width    : "100%",
-	zIndex   : 1200,
+	zIndex   : 800,
 	transform: [
 		{
 			perspective: "500px",
@@ -139,7 +139,7 @@ export const Footer            = {
 	left     : "0px",
 	top      : ["100%", -footerMiniHeight],
 	width    : "100%",
-	zIndex   : 3000,
+	zIndex   : 800,
 	transform: {
 		//translateY: "-100%"
 	}

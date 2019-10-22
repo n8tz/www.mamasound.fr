@@ -50,7 +50,7 @@ export const header    = {
 	top      : 0,
 	left     : "50%",
 	//width    : "100%",
-	zIndex   : 1200,
+	zIndex   : 800,
 	transform: [
 		{
 			perspective: "500px",
@@ -116,8 +116,8 @@ export const Highlighter       = {
 			//perspective: "500px",
 		},
 		{
-			translateY: "0%",
-			//translateZ : "-50px",
+			//translateY: "0%",
+			//translateZ : "0px",
 			//rotateX   : "-10deg"
 		}
 	]
@@ -138,7 +138,7 @@ export const Footer            = {
 	left     : "0px",
 	top      : ["100%", -footerMiniHeight],
 	width    : "100%",
-	zIndex   : 300000000,
+	zIndex   : 800,
 	transform: {
 		//translateY: "-100%"
 	}
@@ -153,9 +153,9 @@ export const EventsBlock       = {
 	marginTop      : [headerHeight, 50],
 	transformOrigin: "center top",
 	transform      : [
-		{
-			perspective: "500px",
-		},
+		//{
+			//perspective: "500px",
+		//},
 		{
 			//translateY: "80%",
 			//translateZ : "-50px",

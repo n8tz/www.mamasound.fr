@@ -74,7 +74,7 @@ export default class Widget extends React.Component {
 				disableDragging={!!disabled}
 				enableResizing={disabled}
 				dragHandleClassName={"widgetHandle"}
-				style={selected ? { zIndex: 2000000 } : undefined}
+				style={selected ? { zIndex: 1000 } : undefined}
 				size={wSize}
 				position={state.position || position}
 				onDragStop={this.saveState}

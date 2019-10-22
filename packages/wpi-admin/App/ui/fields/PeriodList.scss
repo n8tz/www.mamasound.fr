@@ -38,6 +38,7 @@
         transform: translate3d(0, -50%, 0);
         text-align: center;
         width: 32px;
+        min-width: 32px;
         height: 32px;
         border-radius: 5em;
       }
@@ -55,11 +56,20 @@
       .period_occur {
         @include use_hvCenteredContent();
         position: relative;
-        height: 2em;
+        padding: 5px;
+        display: flex;
 
         .from, .end {
+          @include use_hvCenteredContent();
           display: inline-block;
-          width: 45%;
+          flex-grow: 1;
+
+          input {
+            font-size: 13px;
+            display: inline-block;
+            width: 100px;
+            text-align: center;
+          }
         }
 
         button {
@@ -69,6 +79,7 @@
           transform: translate3d(0, -50%, 0);
           text-align: center;
           width: 32px;
+          min-width: 32px;
           height: 32px;
           border-radius: 5em;
         }

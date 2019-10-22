@@ -19,10 +19,10 @@ export const style          = {
 	left     : "0px",
 	top      : [headerHeight, 50],
 	height   : "50px",
-	zIndex   : 600000,
+	zIndex   : 700,
 	//backgroundColor: "red",
 	transform: {
-		//translateY: "85%"
+		translateZ: "0"
 	}
 };
 export const Axis           = [
@@ -46,7 +46,7 @@ export const typesNav       = {
 	position : "absolute",
 	width    : ["100%", "-" + collWidth, -30],
 	//bottom   : "0px",
-	left     : "0px",
+	left     : "10px",
 	top      : ["100%", "-" + minHeight],
 	height   : "40px",
 	transform: {
@@ -65,7 +65,7 @@ export const SearchBarProps = {
 		position: "absolute",
 		width   : ["100%", "-" + collWidth, -30],
 		//width          : "60vw",
-		left    : "0px",
+		left    : "10px",
 		top     : ["100%", "-" + minHeight, -40],
 		height  : "50px",
 	},

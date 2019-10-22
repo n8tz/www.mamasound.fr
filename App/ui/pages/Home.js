@@ -7,7 +7,6 @@
  */
 
 import {Comps, Views}                   from 'App/ui';
-import normalizeWheel                   from 'normalize-wheel';
 import React                            from 'react';
 import {scopeToProps}                   from "react-scopes";
 import {asTweener, TweenAxis, TweenRef} from "react-voodoo";
@@ -62,34 +61,26 @@ export default class Home extends React.Component {
 				scrollTop = event.target.scrollTop
 			}
 		}
-		const normalized = normalizeWheel(event);
-		//if ( currentTheme === "phone" ) {
-		//	switchPoint         = 60 - (210 / window.innerHeight) * 100;
-		//	normalizedScrollTop = Math.max(0, (((scrollTop) / window.innerHeight).toFixed(4) * 100));
-		//	console.log('scroll :', normalizedScrollTop, switchPoint)
-		//	if ( normalizedScrollTop >= (switchPoint) ) {
-		//		//$actions.loadTheme("desktopFixed")
-		//		tweener.updateRefStyle("Highlighter", { position: 'fixed', height: ["210px", "0vh"] })
-		//		tweener.updateRefStyle("NavBox", { position: 'fixed', top: ["0vh", "250px"] })
-		//	}
-		//	else {
-		//		tweener.updateRefStyle("Highlighter", { position: 'absolute', height: ["60vh", "0px"] })
-		//		tweener.updateRefStyle("NavBox", { position: 'absolute', top: ["60vh", "50px"] })
-		//	}
-		//}
-		//else {
-		switchPoint = 70 - (210 / window.innerHeight) * 100;
-		console.log(normalized.pixelX, normalized.pixelY);
-		normalizedScrollTop = Math.max(0, (((scrollTop) / window.innerHeight).toFixed(4) * 100));
-		console.log('scroll :', normalizedScrollTop, switchPoint)
+		switchPoint         = 70 - (210 / document.body.parentElement.offsetHeight) * 100;
+		//console.log(tweener._.box.y);
+		normalizedScrollTop = Math.max(0, (((scrollTop) / document.body.parentElement.offsetHeight).toFixed(4) * 100));
+		//console.log('scroll :', normalizedScrollTop, switchPoint)
 		if ( normalizedScrollTop >= (switchPoint) ) {
 			//$actions.loadTheme("desktopFixed")
-			tweener.updateRefStyle("Highlighter", { position: 'fixed', height: ["210px", "0vh"] })
-			tweener.updateRefStyle("NavBox", { position: 'fixed', top: ["0vh", "250px"] })
+			if ( !this._fixed ) {
+				this._fixed = true;
+				document.body.classList.contains("fixedHead")
+				|| document.body.classList.add("fixedHead");
+			}
+			//tweener.updateRefStyle("Highlighter", { position: 'fixed', height: ["210px", "0vh"] })
+			//tweener.updateRefStyle("NavBox", { position: 'fixed', top: ["0vh", "250px"] })
 		}
-		else {
-			tweener.updateRefStyle("Highlighter", { position: 'absolute', height: ["70vh", "0px"] })
-			tweener.updateRefStyle("NavBox", { position: 'absolute', top: ["70vh", "50px"] })
+		else if ( this._fixed ) {
+			this._fixed = false;
+			document.body.classList.contains("fixedHead")
+			&& document.body.classList.remove("fixedHead");
+			//tweener.updateRefStyle("Highlighter", { position: 'absolute', height: ["70vh", "0px"] })
+			//tweener.updateRefStyle("NavBox", { position: 'absolute', top: ["70vh", "50px"] })
 		}
 		//}
 		//tweener.scrollTo(normalizedScrollTop, 50, "nativeScrollAxis")
@@ -171,15 +162,6 @@ export default class Home extends React.Component {
 						<Views.Menu.menu id={"rootHeaderMenu"}/>
 					</header>
 				</TweenRef>
-				<TweenRef id={"Highlighter"} initial={Styles.Highlighter}>
-					<Views.Block.Highlighter>
-						
-						<TweenRef id={"background"} initial={Styles.Background}>
-							<Views.Block.Background
-								record={appTheme && appTheme.data}/>
-						</TweenRef>
-					</Views.Block.Highlighter>
-				</TweenRef>
 				{/*{*/}
 				{/*	//(currentTheme !== "phone") && <TweenRef*/}
 				{/*		//id={"SliderBlock"}*/}
@@ -188,18 +170,6 @@ export default class Home extends React.Component {
 				{/*<Views.Block.Slider/>*/}
 				{/*</TweenRef>}*/}
 				
-				<TweenRef id={"NavBox"} initial={NavBox.style}>
-					<Comps.NavBox>
-						{/*<TweenRef id={"MidMenu"} initial={Styles.MidMenu}>*/}
-						{/*<Views.Menu.menu id={"rootmiddlemenu"}/>*/}
-						{/*</TweenRef>*/}
-						<TweenRef id={"EventMap"} initial={Styles.EventMap}>
-							<Views.Events.EventMap
-								day={appState.curVisibleDay || appState.curDay}
-								viewType={appState.viewType}/>
-						</TweenRef>
-					</Comps.NavBox>
-				</TweenRef>
 				<TweenRef id={"EventsBlock"} initial={Styles.EventsBlock}>
 					<Views.Events.EventList
 						activeScroll={appState.currentPageFocus !== "map" && appState.currentPageFocus !== "events"}>
@@ -210,6 +180,27 @@ export default class Home extends React.Component {
 					<Comps.Footer>
 						<Views.Menu.menu id={"rootbottommenu"}/>
 					</Comps.Footer>
+				</TweenRef>
+				<TweenRef id={"Highlighter"} initial={Styles.Highlighter}>
+					<Views.Block.Highlighter>
+						
+						<TweenRef id={"background"} initial={Styles.Background}>
+							<Views.Block.Background
+								record={appTheme && appTheme.data}/>
+						</TweenRef>
+						<TweenRef id={"NavBox"} initial={NavBox.style}>
+							<Comps.NavBox>
+								{/*<TweenRef id={"MidMenu"} initial={Styles.MidMenu}>*/}
+								{/*<Views.Menu.menu id={"rootmiddlemenu"}/>*/}
+								{/*</TweenRef>*/}
+								<TweenRef id={"EventMap"} initial={Styles.EventMap}>
+									<Views.Events.EventMap
+										day={appState.curVisibleDay || appState.curDay}
+										viewType={appState.viewType}/>
+								</TweenRef>
+							</Comps.NavBox>
+						</TweenRef>
+					</Views.Block.Highlighter>
 				</TweenRef>
 			</div>
 		</TweenRef>

@@ -6,9 +6,11 @@
  *   @contact : n8tz.js@gmail.com
  */
 
-.DayEvents{
-  .EventsSlider{
-    width:300px;
-    height:300px;
+.DayEvents {
+  transform: translateZ(0);
+
+  .EventsSlider {
+    width: 300px;
+    height: 300px;
   }
 }

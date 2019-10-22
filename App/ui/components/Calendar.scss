@@ -8,16 +8,21 @@
 
 .Calendar {
   position: relative;
+  overflow: hidden;
 
   .datePeriod {
     cursor: pointer;
   }
 
-  .rlc-calendar {
+  .PopAnywhere {
     position: absolute;
+  }
+
+  .m-input-moment {
+    //position: absolute;
     top: 100%;
     left: 0;
-    //background: white;
+    background: white;
     z-index: 100;
   }
 }
