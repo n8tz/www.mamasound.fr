@@ -182,14 +182,14 @@ export default class Home extends React.Component {
 					</Comps.Footer>
 				</TweenRef>
 				<TweenRef id={"Highlighter"} initial={Styles.Highlighter}>
-					<Views.Block.Highlighter>
+					<Views.Block.Highlighter key={"Highlighter"}>
 						
 						<TweenRef id={"background"} initial={Styles.Background}>
 							<Views.Block.Background
 								record={appTheme && appTheme.data}/>
 						</TweenRef>
 						<TweenRef id={"NavBox"} initial={NavBox.style}>
-							<Comps.NavBox>
+							<Comps.NavBox key={"NavBox"}>
 								{/*<TweenRef id={"MidMenu"} initial={Styles.MidMenu}>*/}
 								{/*<Views.Menu.menu id={"rootmiddlemenu"}/>*/}
 								{/*</TweenRef>*/}

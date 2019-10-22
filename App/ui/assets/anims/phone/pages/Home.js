@@ -116,8 +116,8 @@ export const Highlighter       = {
 			//perspective: "500px",
 		},
 		{
-			translateY: "0%",
-			//translateZ : "-50px",
+			//translateY: "0%",
+			//translateZ : "0px",
 			//rotateX   : "-10deg"
 		}
 	]
@@ -129,7 +129,6 @@ export const MidMenu           = {
 	width          : collWidth,
 	zIndex         : 150,
 	//overflow       : 'hidden',
-	display        : 'none',
 	transformOrigin: "center top",
 	top            : [250],
 };
@@ -151,12 +150,12 @@ export const EventsBlock       = {
 	//top            : "100%",
 	//zIndex         : 1250,
 	//overflow       : 'hidden',
-	marginTop      : [headerHeight, 50],
+	marginTop      : [headerHeight,50],
 	transformOrigin: "center top",
 	transform      : [
-		{
-			perspective: "500px",
-		},
+		//{
+		//perspective: "500px",
+		//},
 		{
 			//translateY: "80%",
 			//translateZ : "-50px",
@@ -165,14 +164,15 @@ export const EventsBlock       = {
 	]
 };
 export const EventMap          = {
-	position       : "absolute",
-	left           : "10px",
-	height         : ["100vh", "-300px", -310],
-	width          : collWidth,
-	zIndex         : 150,
+	position: "absolute",
+	right   : "0px",
+	
+	height         : ["20vh"],
+	width          : "100%",
+	zIndex         : 100,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
-	top            : [300],
+	top            : ["100vh", "-20vh"],
 };
 export const PageBlock         = {
 	

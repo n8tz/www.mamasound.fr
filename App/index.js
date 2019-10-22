@@ -113,7 +113,7 @@ const ctrl = {
 			cScope.restore(cfg.state, { alias: "App" });
 		}
 		else {
-			cScope.state.Anims = { currentTheme: cfg.device };
+			cScope.state.Styles = { currentTheme: cfg.device };
 		}
 		
 		let html,

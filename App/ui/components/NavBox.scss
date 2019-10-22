@@ -8,7 +8,11 @@
 
 body.fixedHead .NavBox {
   position: fixed !important;
-  top: 255px !important;
+  top: 210px !important;
+  @media screen and (max-width: $tablet-portrait-breakpoint) {
+    top: 220px !important;
+
+  }
 }
 
 .NavBox {
@@ -20,13 +24,11 @@ body.fixedHead .NavBox {
   //right: .5em;
   //transform: translate(-50%, 0%);
   //bottom: 0;
+  //background: white;
   text-align: left;
-  //@media screen and (max-width: $tablet-portrait-breakpoint) {
-
-  //}
   > .content {
     position: relative;
-    //height: 50px;
+    height:100%;
     padding: 0 !important;
   }
 
@@ -125,7 +127,7 @@ body.fixedHead .NavBox {
 
   .SearchBar {
     @media screen and (max-width: $tablet-portrait-breakpoint) {
-      display: none !important;
+      //display: none !important;
     }
   }
 

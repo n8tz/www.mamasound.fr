@@ -5,7 +5,7 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import {collWidth, footerMiniHeight, headerHeight, mapHeight} from "../../../vars";
+import {footerMiniHeight, headerHeight, mapHeight} from "../../../vars";
 
 let startPos      = 50,
     openDuration  = 50,
@@ -17,12 +17,12 @@ export const style          = {
 	position : "absolute",
 	width    : ["100%"],
 	left     : "0px",
-	top      : [headerHeight, 50],
+	top      : [headerHeight, 10],
 	height   : "50px",
-	zIndex   : 600,
-	display  : "none",
+	zIndex   : 700,
+	//backgroundColor: "red",
 	transform: {
-		//translateY: "85%"
+		translateZ: "0"
 	}
 };
 export const Axis           = [
@@ -44,10 +44,10 @@ export const Axis           = [
 export const SearchBarAxis  = [];
 export const typesNav       = {
 	position : "absolute",
-	width    : ["100%", "-" + collWidth],
+	width    : ["100%"],
 	//bottom   : "0px",
-	right    : "0px",
-	top      : ["100%", "-" + minHeight],
+	left     : "0px",
+	top      : 0,
 	height   : "40px",
 	transform: {
 		//translateY: "85%"
@@ -62,15 +62,15 @@ export const SearchBarProps = {
 	minHeight,
 	
 	boxStyle  : {
-		position       : "absolute",
-		width          : "40vh",
-		left           : "20px",
-		top            : ["100%", "-" + minHeight, -100],
-		height         : "270px",
-		backgroundColor: "rgba(0,0,0,.5)"
+		position: "absolute",
+		width   : ["100%"],
+		//width          : "60vw",
+		left    : "0px",
+		top     : ["-" + minHeight],
+		height  : "50px",
 	},
 	titleStyle: {
-		paddingLeft: "3em"
+		//paddingLeft: "3em"
 	},
 	titleAxis : [
 		//{
@@ -122,11 +122,11 @@ export const SearchBarProps = {
 	]
 };
 export const StretchBox     = {
-	width   : "23%",
+	width   : "20%",
 	boxStyle: {
 		position            : "relative",
-		width               : "23%",
-		maxWidth            : "200px",
+		//width               : "20%",
+		//maxWidth            : "200px",
 		height              : minHeight,
 		borderTopLeftRadius : "10px",
 		borderTopRightRadius: "10px",

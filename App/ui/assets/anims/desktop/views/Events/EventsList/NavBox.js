@@ -17,7 +17,7 @@ export const style          = {
 	position : "absolute",
 	width    : ["100%"],
 	left     : "0px",
-	top      : [headerHeight, 50],
+	top      : [headerHeight],
 	height   : "50px",
 	zIndex   : 700,
 	//backgroundColor: "red",
@@ -47,7 +47,7 @@ export const typesNav       = {
 	width    : ["100%", "-" + collWidth, -30],
 	//bottom   : "0px",
 	left     : "10px",
-	top      : ["100%", "-" + minHeight],
+	bottom   : 0,
 	height   : "40px",
 	transform: {
 		//translateY: "85%"
@@ -66,7 +66,7 @@ export const SearchBarProps = {
 		width   : ["100%", "-" + collWidth, -30],
 		//width          : "60vw",
 		left    : "10px",
-		top     : ["100%", "-" + minHeight, -40],
+		top     : ["-" + minHeight,10],
 		height  : "50px",
 	},
 	titleStyle: {
