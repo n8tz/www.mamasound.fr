@@ -47,7 +47,6 @@ export const focused    = {
 	//width    : '100vw',
 	opacity  : 1,
 	transform: [{
-		translateZ: "0%",
 		translateX: "-50%",
 	}, {}, { translateY: '0%' }]
 };

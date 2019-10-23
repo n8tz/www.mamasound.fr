@@ -39,17 +39,17 @@ export default class Styles extends Store {
 			this._onResize = ( e ) => {//@todo
 				let currentTheme;
 				if ( window.innerWidth >= 900 ) {
-					if ( window.innerHeight >= 850 )
+					//if ( window.innerHeight >= 850 )
 						currentTheme = "desktop";
 					//else
 					//	currentTheme = "desktopSmall";
-
+					
 				}
 				if ( window.innerWidth <= 900 )
 					currentTheme = "phone";
 				this.setState({ currentTheme })
 			});
-		isBrowserSide && setTimeout(tm => (this._onResize && this._onResize()), 500)
+		isBrowserSide && setTimeout(tm => (this._onResize && this._onResize()), 50)
 	}
 	
 	__onHotReloaded() {
@@ -57,7 +57,7 @@ export default class Styles extends Store {
 	}
 	
 	apply( data, { currentTheme } ) {
-		
+		console.log(currentTheme)
 		if ( currentTheme )
 			return { ...anims[currentTheme] || anims.desktop, currentTheme }
 		

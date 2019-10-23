@@ -23,6 +23,7 @@
   color: $mainTextColor !important;
 
   transform: translateZ(0);
+
   .label {
     padding-right: 1.5em;
     position: relative;
@@ -97,6 +98,7 @@
       display: block;
       //width: 100%;
       border: none;
+      margin-top: 5px;
       border-radius: 0;
       border-bottom: 1px solid $muted-color;
 
@@ -154,6 +156,7 @@
     }
 
     .group, .input {
+      //@include use_hvCenteredContent();
       flex-grow: 1;
       position: relative;
       display: inline-block;

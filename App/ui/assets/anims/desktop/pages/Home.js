@@ -41,6 +41,7 @@ export const page      = {
 	//overflowY: "auto",
 	//overflowX: "hidden",
 	transform: {
+		translateZ: "0px",
 		//translateX: "-50%"
 	}
 };
@@ -117,7 +118,7 @@ export const Highlighter       = {
 		},
 		{
 			//translateY: "0%",
-			//translateZ : "0px",
+			translateZ : "0px",
 			//rotateX   : "-10deg"
 		}
 	]
@@ -154,11 +155,11 @@ export const EventsBlock       = {
 	transformOrigin: "center top",
 	transform      : [
 		//{
-			//perspective: "500px",
+		//perspective: "500px",
 		//},
 		{
 			//translateY: "80%",
-			//translateZ : "-50px",
+			translateZ: "0px",
 			//rotateX   : "-10deg"
 		}
 	]

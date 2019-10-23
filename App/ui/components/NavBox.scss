@@ -7,10 +7,12 @@
  */
 
 body.fixedHead .NavBox {
-  position: fixed !important;
-  top: 210px !important;
+  //position: fixed !important;
+  //top: 210px !important;
+  //top: calc(70vh) !important;
+
   @media screen and (max-width: $tablet-portrait-breakpoint) {
-    top: 220px !important;
+    //top: 220px !important;
 
   }
 }
@@ -18,17 +20,11 @@ body.fixedHead .NavBox {
 .NavBox {
 
   position: relative;
-  //width: 100%;
-  //top: 20px;
-  //left: 0em;
-  //right: .5em;
-  //transform: translate(-50%, 0%);
-  //bottom: 0;
-  //background: white;
   text-align: left;
+
   > .content {
     position: relative;
-    height:100%;
+    height: 100%;
     padding: 0 !important;
   }
 
@@ -113,6 +109,10 @@ body.fixedHead .NavBox {
           //float: right;
           display: inline-block;
           width: auto;
+
+          @media screen and (max-width: $tablet-portrait-breakpoint) {
+            display: none;
+          }
 
           img {
             position: absolute;

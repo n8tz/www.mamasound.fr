@@ -210,14 +210,13 @@ export default class EventMap extends React.Component {
 					{/*		<GpsFixedIcon/> ||*/}
 					{/*		<GpsOffIcon/>*/}
 					{/*	}*/}
-					
 					{/*</span>*/}
 				</div>
-				<div className={"mapContainer "} onDragStart={e => e.stopPropagation()}
+				<div className={"mapContainer"} onDragStart={e => e.stopPropagation()}
 				     onMouseDown={e => e.stopPropagation()} onMouseMove={e => e.stopPropagation()}>
 					<Map center={center}
 					     zoom={zoom}
-					     className={"container"}
+					     className={"content"}
 						//scrollWheelZoom={false}
 						 animate={true}
 						 useFlyTo={true}

@@ -5,18 +5,21 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-
-@mixin aspect-ratio($ratio-or-width, $height: null) {
+@mixin aspect-ratio($ratio-or-width, $height:0) {
   $padding: if($height, percentage($height/$ratio-or-width), percentage(1/$ratio-or-width));
+  position: relative;
   &:before {
-    content: '';
-    float: left;
+    display: block;
+    content: "";
+    width: 100%;
     padding-bottom: $padding;
   }
-  &:after {
-    content: '';
-    display: table;
-    clear: both;
+  > .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
 }
 

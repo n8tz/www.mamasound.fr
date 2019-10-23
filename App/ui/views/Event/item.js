@@ -14,12 +14,10 @@
  */
 'use strict';
 
-import stores                      from 'App/stores/(*).js';
-import {Comps}                     from 'App/ui';
-import Editable                    from "App/ui/Editable";
-import moment                      from "moment";
-import React                       from "react";
-import RS, {asScope, withStateMap} from "react-scopes";
+import {Comps}  from 'App/ui';
+import Editable from "App/ui/Editable";
+import moment   from "moment";
+import React    from "react";
 
 
 let defaultPreview = {
@@ -28,37 +26,11 @@ let defaultPreview = {
 	Expo   : require("App/ui/assets/images/mme.png")
 };
 
-
-@RS(
-	{
-		@asScope
-		Event: {
-			@withStateMap(
-				{
-					data: undefined,
-				}
-			)
-			record     : stores.MongoRecords,
-			@withStateMap(
-				{
-					@RS.ref
-					record: "record.data",
-					//@RS.ref
-					//curDay: "$parent.appState.curDay"
-				}
-			)
-			currentDate: stores.Event_curDate
-			
-		},
-	}
-)
-@RS.fromProps("record:Event.record.data", "day:Event.currentDate.curDay")
-@RS.connect("Event.record.data:record", "Event.currentDate")
 export default class eventItem extends React.Component {
 	render() {
-		let { record, refs, selected, onClick, onTap, currentDate } = this.props,
-		    start                                                   = moment(currentDate && currentDate.startTM),
-		    end                                                     = moment(currentDate && currentDate.endTM);
+		let { record, refs, selected, onClick, onTap, currentDate = record.realPeriod } = this.props,
+		    start                                                                       = moment(currentDate && currentDate.startTM),
+		    end                                                                         = moment(currentDate && currentDate.endTM);
 		return <div className={"Event Event_item Event" + record._cls + ' ' + (selected ? "selected" : "")}
 		            onClick={onClick}
 		>
@@ -102,6 +74,7 @@ export default class eventItem extends React.Component {
 			{/*<img src={ record.previewImage }/>*/}
 			{/*</div>*/}
 			{/*}*/}
+			
 			<div className="title">
 				{record.title}
 			</div>
@@ -114,7 +87,7 @@ export default class eventItem extends React.Component {
 			{
 				record.place && refs[record.place.objId] &&
 				<div className="place">
-					( <span>{refs[record.place.objId].label} </span> )
+					( {refs[record.place.objId].label} )
 				</div>
 			}
 			{selected && <Comps.ShareBox event={record} place={record.place && refs[record.place.objId]}/>}

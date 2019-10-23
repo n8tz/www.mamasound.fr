@@ -8,6 +8,7 @@
 
 
 .Event_item {
+  transform: translate3d(0, 0, 0);
   font-size: 16px;
   @media screen and (max-width: $tablet-portrait-breakpoint) {
     font-size: 15px;
@@ -44,12 +45,12 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    right: (6em / 1.2);
+    right: (5em / 1.2);
     font-size: 1.2em;
     position: absolute;
     top: 0px;
     height: (3.5em / 1.2);
-    left: (11em / 1.2);
+    left: (10em / 1.2);
     text-align: left;
     padding-top: .1em;
     display: inline-block;
@@ -63,9 +64,9 @@
     height: 100%;
     padding-top: .1em;
     padding-left: .2em;
-    padding-right: 1em;
-    width: 3em;
-    font-size: 1.5em;
+    padding-right: .8em;
+    width: 4em;
+    font-size: 1.45em;
     font-family: $hoursFontFamily;
   }
 
@@ -75,9 +76,9 @@
     height: 100%;
     padding-top: .1em;
     padding-left: .2em;
-    padding-right: 1em;
-    width: 3em;
-    font-size: 1.5em;
+    padding-right: .8em;
+    width: 4em;
+    font-size: 1.45em;
 
     > span {
       text-align: center;
@@ -146,7 +147,7 @@
     overflow: hidden;
     border-radius: 3em;
     transform: scale(1.8);
-    margin-top: .1em;
+    margin-top: .35em;
     //background: rgba(249, 249, 249, 0.66);
     border: solid 1px #b0b0b0;
 
@@ -156,46 +157,46 @@
     }
   }
 
-  @media screen and (max-width: $smartphone-portrait-breakpoint) {
-    .title {
-      right: (3em / 1.25);
-      font-size: 1.25em;
-      position: absolute;
-      top: .45em;
-      height: (3.5em / 1.25);
-      left: (8.5em / 1.25);
-      text-align: left;
-      padding-top: .1em;
-    }
-
-    .date, .date_exp {
-      @include use_hvCenteredContent();
-      float: left;
-      height: 100%;
-      padding-top: .1em;
-      padding-left: 0em;
-      padding-right: .95em;
-      width: 3em;
-      font-size: 1.25em;
-    }
-
-    .price {
-      position: absolute;
-      bottom: 2px;
-      right: 2px;
-      font-size: .9em;
-    }
-
-    .icon {
-      @include use_hvCenteredContent();
-      padding: .2em;
-      width: 1.75em;
-      height: 1.75em;
-      transform: scale(1.75);
-      margin-top: .5em;
-      margin-left: -.4em;
-    }
-  }
+  //@media screen and (max-width: $smartphone-portrait-breakpoint) {
+  //  .title {
+  //    right: (3em / 1.25);
+  //    font-size: 1.25em;
+  //    position: absolute;
+  //    top: .45em;
+  //    height: (3.5em / 1.25);
+  //    left: (8.5em / 1.25);
+  //    text-align: left;
+  //    padding-top: .1em;
+  //  }
+  //
+  //  .date, .date_exp {
+  //    @include use_hvCenteredContent();
+  //    float: left;
+  //    height: 100%;
+  //    padding-top: .1em;
+  //    padding-left: 0em;
+  //    padding-right: .95em;
+  //    width: 3em;
+  //    font-size: 1.25em;
+  //  }
+  //
+  //  .price {
+  //    position: absolute;
+  //    bottom: 2px;
+  //    right: 2px;
+  //    font-size: .9em;
+  //  }
+  //
+  //  .icon {
+  //    @include use_hvCenteredContent();
+  //    padding: .2em;
+  //    width: 1.75em;
+  //    height: 1.75em;
+  //    transform: scale(1.75);
+  //    margin-top: .5em;
+  //    margin-left: -.4em;
+  //  }
+  //}
 
   //&.EventTheatre .icon,
   &.EventTheatre .date {
