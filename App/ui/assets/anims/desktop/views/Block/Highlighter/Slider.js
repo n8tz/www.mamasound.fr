@@ -15,7 +15,7 @@ export const defaultInitial  = {
 	top      : "50%",
 	left     : "50%",
 	zIndex   : 50,
-	opacity  : 0,
+	//opacity  : 0,
 	transform: [
 		{
 			perspective: "1250px",

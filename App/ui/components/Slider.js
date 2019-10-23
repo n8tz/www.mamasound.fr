@@ -45,7 +45,7 @@ export default class Slider extends React.Component {
 		clearTimeout(this._autoHeightTm);
 		try {
 			let h = ReactDOM.findDOMNode(this.slideRefs[index]);
-			if ( sliderHeight !== h.offsetHeight )
+			if ( sliderHeight !== (h.offsetHeight + 'px') )
 				this.setState({ sliderHeight: h.offsetHeight + 'px' })
 		} catch ( e ) {
 		
@@ -81,7 +81,7 @@ export default class Slider extends React.Component {
 		if ( pIndex !== prevProps.index ) {
 			//changed = pIndex + 1;
 			//tweener.scrollTo(dec + step * pIndex + 100, 750, scrollDir, "easeQuadInOut");
-			this.setState({index:pIndex})
+			this.setState({ index: pIndex })
 			if ( autoScroll ) {
 				clearTimeout(this._updater);
 				this._updater = setTimeout(
@@ -182,7 +182,7 @@ export default class Slider extends React.Component {
 		    }                                                                                                       = this.props,
 		    { index = defaultIndex, allItems, nbGhostItems, step, dec, tweenLines, nbItems, sliderHeight = "auto" } = this.state;
 		
-		//console.log("render slider", index, 100 + dec + index * step)
+		console.log("render slider", index, 100 + dec + index * step)
 		return (
 			<div
 				className={"rSlide slider " + className}

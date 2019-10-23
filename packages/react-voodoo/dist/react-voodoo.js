@@ -657,6 +657,7 @@ function (_React$Component) {
           };else _this3._tweenAxisObj = tweenAxis && Object.keys(tweenAxis).reduce(function (h, axe) {
             return h[axe] = parentTweener.addScrollableAnim(setTarget(tweenAxis[axe], id), axe), h;
           }, {});
+          twRef = parentTweener.tweenRef(id, children.props && children.props.style, style || initial, pos, noRef);
         }
 
         twRef.style = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_2___default()({}, parentTweener._updateTweenRef(id, true));
