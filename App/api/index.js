@@ -44,47 +44,11 @@ export function service( server ) {
 	);
 	
 	server.use(express.static(process.cwd() + '/static'));
-	server.use("/medias", express.static(path.join(process.cwd(), config.UPLOAD_DIR)));
-	
-	server.use("/medias", ( req, res, next ) => {
-		// try to retrieve img from the old server...
-		superagent.get(config.ALT_MEDIA_URL + req.url)
-		          .then(
-			          file => {
-				          let pathName = path.join(process.cwd(), config.UPLOAD_DIR, path.basename(req.url)).replace(/\?+.*$/, '');
-				          fs.writeFile(
-					          pathName,
-					          file.body,
-					          ( e, r ) => {
-						
-						          //webp.gwebp(pathName, pathName.replace(/(\.\w+$|$)/, '.webp'), "-q 80",
-						          //           ( status, error ) => {
-						          //               //if conversion successful status will be '100'
-						          //               //if conversion fails status will be '101'
-						          //               //console.log(status, error);
-						          //               if ( status === 100 )
-						          //                   res.redirect("/medias/" + req.url.replace(/\?+.*$/,
-						          // '').replace(/(\.\w+$|$)/, '.webp')); else
-						          res.redirect("/medias/" + req.url);
-						          //});
-						
-					          })
-				          //debugger
-			          }
-		          )
-		          .catch(
-			          file => {
-				          res.redirect(config.ALT_MEDIA_URL + req.url);
-			          }
-		          )
-		
-	});
 	server.use("/assets/static", express.static(process.cwd() + '/App/ui/assets/static'));
 	
 	server.get(
-		'*',
+		'/',
 		function ( req, res, next ) {
-			//debugger
 			if ( /\.\w+$/ig.test(req.url) )
 				return next()
 			let key = config.PUBLIC_URL + "_page_" + req.url + "_" + req.device.type + "_" + (req.user && req.user.login);
@@ -94,8 +58,8 @@ export function service( server ) {
 					if ( html ) {
 						console.log("from redis ", key);
 						
-						res.send(200, html);
-						return;
+						//res.send(200, html);
+						//return;
 					}
 					let cssPath = (req.user && req.user.isAdmin)
 					              ? process.cwd() + "/dist/admin/App.css"

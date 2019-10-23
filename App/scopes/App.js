@@ -32,23 +32,6 @@ export default {
 		}
 	)
 	appTheme: stores.MongoRecords,
-	@withStateMap(
-		{
-			head  : {
-				id  : "Menu.H1eF5mX_ez",
-				etty: "Menu",
-			},
-			middle: {
-				id  : "rootmiddlemenu",
-				etty: "Menu",
-			},
-			footer: {
-				id  : "Menu.BkeOeyJJF-",
-				etty: "Menu",
-			}
-		}
-	)
-	appMenu : stores.MongoRecords,
 	
 	@asStore
 	appState: {
@@ -63,11 +46,11 @@ export default {
 		currentSearch     : undefined,
 		currentArea       : undefined,
 		viewType          : 0,
-		dayCountByViewType: [6, 6, 1, 1],
+		dayCountByViewType: [1, 0, 0, 0],
 		curTags           : undefined,
 		
 		$apply( data, state ) {
-			!state.curDay && this.setState({ curDay: moment().startOf('day').valueOf() })
+			!state.curDay && this.setState({ curDay: moment.utc().startOf('day').valueOf() })
 			return state;
 		},
 		
@@ -84,7 +67,6 @@ export default {
 					currentPageFocus: "events"
 				}
 			}
-			//debugger;
 			//return {};
 		},
 		updateCurrentSearch( currentSearch ) {

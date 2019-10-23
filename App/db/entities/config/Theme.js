@@ -27,13 +27,23 @@ export default {
 		//     author     : [validate.mandatory]
 	},
 	fields: {
-		"_id"   : types.indexes,
-		"label" : types.labels(),
+		"_id"  : types.indexes,
+		"label": types.labels(),
 		//"resume": types.descriptions('Resumé'), // TODO refactor as "summary"
 		
 		
 		"mainBackground": types.media({ allowedTypes: "Image" }, "MainBackground:"),
-		"values"        : types.json("Variables :"),
+		
+		"menuTop": types.picker(true, {
+			allowTypeSelection: ["Menu"],
+			storeTypedItem    : true,
+		}, "Menu haut :"),
+		"menuBot": types.picker(true, {
+			allowTypeSelection: ["Menu"],
+			storeTypedItem    : true,
+		}, "Menu bas :"),
+		
+		"values": types.json("Variables :"),
 		
 	}
 };

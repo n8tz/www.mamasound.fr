@@ -16,6 +16,7 @@ import xxhashjs                           from 'xxhashjs'
 var H = xxhashjs.h64(0)	// seed = 0xABCD
 
 function mkQueryH( query ) {
+	//return JSON.stringify(query)
 	return H.update(JSON.stringify(query)).digest().toString(32)
 }
 
@@ -83,6 +84,7 @@ export default class DataProvider extends Store {
 		}
 	};
 	data           = {
+		___aliases___   : {},
 		___recToQuery___: {},
 		___hToQuery___  : {}
 	};
@@ -126,6 +128,9 @@ export default class DataProvider extends Store {
 	
 	overidedRecords = {};
 	
+	retrieve( path ) {
+		return this.data[path.join('.')];
+	}
 	pushRecordPreview( record ) {
 		if ( !this.overidedRecords[record._id] )
 			this.overidedRecords[record._id] = this.data[record._id];
@@ -390,7 +395,7 @@ export default class DataProvider extends Store {
 		else
 			!noData && watcher(this.data[id])
 		
-		return etty + "." + id;
+		return id;
 	}
 	
 	unBindRecord( etty, id, watcher ) {

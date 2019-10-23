@@ -161,49 +161,60 @@ export function query( req ) {
 	return new Promise(
 		( resolve, reject ) => {
 			
+			debugger
 			let { query: _query, etty, limit = 1000, skip, orderby, mountKeys = [] } = req;
 			pushDbTask(
 				( client, dbRelease ) => {
-					let db    = client.db("mamasound_fr"),
-					    data  = {},
-					    complete,
-					    done  = ( r, ln ) => {
-						    data.length = typeof ln == 'number' ? ln : data.length;
-						    data.items  = r && r.items || data.items;
-						    data.refs   = r && r.refs || data.refs;
-						    if ( typeof data.length == 'number' && is.array(data.items) ) {
-							    done = null;
-							    dbRelease();
-							    resolve(data)
-						    }
-						
-					    },
-					    ptr   = db.collection(etty)
-					              .find(_query || {}),//{$query : {}, $orderby : {updated : -1}}
-					    count = ptr.count(null, ( e, r ) => {
-						    done(null, r || 0);
-					    }),
-					
-					    parse = function ( err, items = [] ) {
-						    err && console.warn(err);
-						    items.forEach(
-							    item => {
-								    items._cls = items._cls || etty;
+					try {
+						let db    = client.db("mamasound_fr"),
+						    data  = {},
+						    complete,
+						    done  = ( r, ln ) => {
+							    data.length = typeof ln == 'number' ? ln : data.length;
+							    data.items  = r && r.items || data.items;
+							    data.refs   = r && r.refs || data.refs;
+							    if ( typeof data.length == 'number' && is.array(data.items) ) {
+								    done = null;
+								    dbRelease();
+								    try {
+									    resolve(data)
+								    } catch ( e ) {
+									    console.warn(e);
+								    }
 							    }
-						    )
-						    mount({ get, query }, items || [], mountKeys)
-							    .then(refs => {
-								    done({ refs, items })
-							    })
-							    .catch(data => {
-								    done({ refs, items })
-							    })
-					    };
-					ptr.sort(orderby)
-					   .skip(parseInt(skip) || 0)
-					   .limit(parseInt(limit) || 20)
-					   .toArray(parse);
-					
+							
+						    },
+						    ptr   = db.collection(etty)
+						              .find(_query || {}),//{$query : {}, $orderby : {updated : -1}}
+						    count = ptr.count(null, ( e, r ) => {
+							    done(null, r || 0);
+						    }),
+						
+						    parse = function ( err, items = [] ) {
+							    err && console.warn(err);
+							    items.forEach(
+								    item => {
+									    item._cls = item._cls || etty;
+								    }
+							    )
+							    mount({ get, query }, items || [], mountKeys)
+								    .then(refs => {
+									    done({ refs, items })
+								    })
+								    .catch(refs => {
+									    debugger
+									    done({ refs, items })
+								    })
+						    };
+						ptr.sort(orderby)
+						   .skip(parseInt(skip) || 0)
+						   .limit(parseInt(limit) || 20)
+						   .toArray(parse);
+						
+					} catch ( e ) {
+						debugger
+						console.warn(e);
+					}
 				}
 			)
 		}

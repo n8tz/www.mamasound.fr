@@ -77,8 +77,8 @@ export default class App extends React.Component {
 	keepCDay = () => {
 		let { appState, $actions } = this.props;
 		this._uTm && clearInterval(this._uTm);
-		if ( !appState.userSetCDay && !moment(Date.now()).isSame("day", appState.curDay) )
-			$actions.updateCurrentDay(Date.now(), false);
+		if ( !appState.userSetCDay && !moment.utc().isSame(appState.curDay, "day") )
+			$actions.updateCurrentDay(moment.utc(), false);
 		(this._uTm = setTimeout(this.keepCDay, 1000))
 	}
 	

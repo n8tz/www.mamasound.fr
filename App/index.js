@@ -81,7 +81,6 @@ const ctrl = {
 			}
 			node.innerHTML = appHtml;
 		})
-		
 	},
 	renderSSR( cfg, cb, _attempts = 0 ) {
 		try {
@@ -98,7 +97,7 @@ const ctrl = {
 	renderNoSSR( cfg, cb, _attempts = 0 ) {
 		let html = "<!doctype html>\n" + renderToString(<Index helmet={Helmet.renderStatic()}
 		                                                       content={""}/>);
-		console.warn("render !!!!")
+		//console.warn("render !!!!")
 		cb(null, html)
 	},
 	renderFullSSR( cfg, cb, _attempts = 0 ) {
@@ -120,11 +119,11 @@ const ctrl = {
 		    appHtml     = renderToString(<App location={cfg.location}/>),
 		    stable      = cScope.isStableTree();
 		global.contexts = Scope.scopes;
-		//console.log('ctrl::renderSSR:65: ', cfg.location, _attempts);
+		console.log('ctrl::renderSSR:65: ', cfg.location, _attempts);
 		cScope.onceStableTree(state => {
 			let nstate = cScope.serialize({ alias: "App" });
 			cScope.destroy()
-			if ( !_attempts || !stable && _attempts < 2 ) {
+			if ( !stable && _attempts < 3 ) {
 				cfg.state = nstate;
 				ctrl.renderSSR(cfg, cb, ++_attempts);
 			}

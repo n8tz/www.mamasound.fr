@@ -6,10 +6,8 @@
  *   @contact : n8tz.js@gmail.com
  */
 
-import {Scope, Store} from "react-scopes";
-
-import {types, get}                                          from 'App/db';
-import {clearWatchers, getRecordsFromIdKeys, updateWatchers} from "./DataProvider";
+import {Store}                         from "react-scopes";
+import {clearWatchers, updateWatchers} from "./DataProvider";
 
 
 export default class MongoRecords extends Store {
@@ -21,10 +19,13 @@ export default class MongoRecords extends Store {
 	
 	constructor() {
 		super(...arguments);
-		let scope = this.scope;
-		while ( scope.$parent && !scope.DataProvider )
-			scope = scope.$parent.stores;
-		this._dataProvider = scope.DataProvider;
+		let scope = this.scope, _dataProviderPath = "DataProvider";
+		while ( scope.$parent && !scope.DataProvider ) {
+			scope             = scope.$parent.stores;
+			_dataProviderPath = "$parent." + _dataProviderPath
+		}
+		this._dataProvider     = scope.DataProvider;
+		this._dataProviderPath = _dataProviderPath;
 	}
 	
 	serialize( cfg = {}, output = {} ) {
@@ -34,7 +35,7 @@ export default class MongoRecords extends Store {
 				dataRefs: Object.keys(this.__recWatchers)
 				                .reduce(
 					                ( h, k ) => {
-						                h[k] = "DataProvider." + this.__recWatchers[k].key;
+						                h[k] = this._dataProviderPath + "." + this.__recWatchers[k].key;
 						                return h;
 					                },
 					                {}
@@ -48,8 +49,10 @@ export default class MongoRecords extends Store {
 		
 		super.restore(
 			snapshot, immediate);
+		debugger
 		
-		updateWatchers(this, this._dataProvider, this.state, this.state)
+		this.$scope.restoreRefPath(this._dataProviderPath);
+		updateWatchers(this, this._dataProvider, this.state, this.nextState)
 	}
 	
 	shouldApply( changes ) {

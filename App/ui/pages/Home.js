@@ -20,7 +20,7 @@ const wayPoints =
 		      map    : 300
 	      };
 
-@scopeToProps("appState", "Styles.pages.Home:Styles", "Styles.views.Events.EventsList.NavBox", "Styles.currentTheme", "appTheme", "appMenu")
+@scopeToProps("appState", "Styles.pages.Home:Styles", "Styles.views.Events.EventsList.NavBox", "Styles.currentTheme", "appTheme")
 @asTweener({ dragDirectionLock: true })
 export default class Home extends React.Component {
 	state = {};
@@ -159,7 +159,8 @@ export default class Home extends React.Component {
 			</TweenRef>
 			<TweenRef id={"Footer"} initial={Styles.Footer}>
 				<Comps.Footer>
-					<Views.Menu.menu id={"rootbottommenu"}/>
+					{appTheme && appTheme.data && appTheme.data.menuBot &&
+					<Views.Menu.menu id={appTheme.data.menuBot.objId}/>}
 				</Comps.Footer>
 			</TweenRef>
 			<TweenRef
@@ -173,8 +174,8 @@ export default class Home extends React.Component {
 					>
 						<div className={"logo"}/>
 					</TweenRef>
-					
-					<Views.Menu.menu id={"rootHeaderMenu"}/>
+					{appTheme && appTheme.data && appTheme.data.menuTop &&
+					<Views.Menu.menu id={appTheme.data.menuTop.objId}/>}
 				</header>
 			</TweenRef>
 			<TweenRef id={"Highlighter"} initial={Styles.Highlighter}>

@@ -15,11 +15,10 @@ import React                              from "react";
 import RS, {asRef, asScope, withStateMap} from "react-scopes";
 
 
-
 @RS(
 	{
 		@asScope
-		Menu: {
+		dataRecord: {
 			@RS.store
 			ref   : { etty: 'Menu' },
 			@withStateMap(
@@ -32,12 +31,11 @@ import RS, {asRef, asScope, withStateMap} from "react-scopes";
 		},
 	}
 )
-@RS.fromProps("id:Menu.ref.id")
-@RS.connect("DataProvider", "Menu.record.data:record")
+@RS.fromProps("id:dataRecord.ref.id")
+@RS.connect("DataProvider", "dataRecord.record.data:record")
 export default class Menu extends React.Component {
 	render() {
-		let { record, DataProvider, selected, className = "" } = this.props;
-		//debugger
+		let { record, DataProvider, selected, className = "", $scope } = this.props;
 		if ( !record )
 			return <span/>;
 		return <span className={"Menu_menu " + className + ' ' + (selected ? "selected" : "")}>
@@ -47,6 +45,7 @@ export default class Menu extends React.Component {
 				record.childs.map(
 					( child ) =>
 						<Views.Menu.menu
+							//$scope={$scope.parent}
 							id={child.objId}
 							key={child.objId + '_' + "MenuItem"}
 							className={"MenuItem"}/>

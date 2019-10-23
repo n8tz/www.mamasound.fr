@@ -28,9 +28,10 @@ export default {
 				    curDay, nbDays = 0,
 				    viewType: type = 0
 			    }    = state,
-			    from = moment(curDay).startOf('day').add(2, 'hour').unix() * 1000,
-			    to   = moment(curDay).endOf('day').add(2, 'hour').unix() * 1000;
-			//console.log(state)
+			    from = moment(curDay).startOf('day').add(2, 'hour').valueOf(),
+			    to   = moment(curDay).endOf('day').add(2, 'hour').valueOf();
+			console.log(moment(curDay).startOf('day').add(2, 'hour').format())
+			console.log(moment(curDay).endOf('day').add(2, 'hour').format())
 			return {
 				curDay: from,
 				type,
@@ -133,7 +134,7 @@ export default {
 							}] || []),
 						]
 					},
-					limit    : 10000,
+					limit    : 1000,
 					orderby  : { startTM: 1 }
 					
 				}
