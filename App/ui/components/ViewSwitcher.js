@@ -191,7 +191,7 @@ export default class ViewSwitcher extends React.Component {
 	render() {
 		let {
 			    target, defaultInitial = {}, defaultPreviewInitial,
-			    style, DataProvider, View, ViewPreview, getNextTarget, DefaultView, DefaultPreview
+			    style, DataProvider, View, ViewPreview, getNextTarget, DefaultView, DefaultPreview, $stores
 		    }                                                                                                            = this.props,
 		    { curTarget, prevTarget, nextTarget = getNextTarget(curTarget), showPreviewAnim, showAnim, scrollableAnims } = this.state,
 		    selected;
@@ -214,7 +214,7 @@ export default class ViewSwitcher extends React.Component {
 					<div>
 						{
 							prevTarget &&
-							<ViewPreview record={prevTarget} refs={DataProvider} tweener={this}/>
+							<ViewPreview record={prevTarget} refs={$stores.DataProvider.data} tweener={this}/>
 							|| curTarget && <DefaultPreview/>
 						}
 					</div>
@@ -224,7 +224,7 @@ export default class ViewSwitcher extends React.Component {
 					<div>
 						{
 							prevTarget &&
-							<View record={prevTarget} refs={DataProvider} tweener={this}/>
+							<View record={prevTarget} refs={$stores.DataProvider.data} tweener={this}/>
 							|| curTarget && <DefaultView/>
 						}
 					</div>
@@ -234,7 +234,7 @@ export default class ViewSwitcher extends React.Component {
 					<div>
 						{
 							curTarget &&
-							<ViewPreview record={curTarget} refs={DataProvider} tweener={this} isCurrent={true}/>
+							<ViewPreview record={curTarget} refs={$stores.DataProvider.data} tweener={this} isCurrent={true}/>
 							|| <DefaultPreview/>
 						}
 					</div>
@@ -244,7 +244,7 @@ export default class ViewSwitcher extends React.Component {
 					<div>
 						{
 							curTarget &&
-							<View record={curTarget} refs={DataProvider} isCurrent={true}/>
+							<View record={curTarget} refs={$stores.DataProvider.data} isCurrent={true}/>
 							|| <DefaultView/>
 						}
 					</div>
@@ -254,7 +254,7 @@ export default class ViewSwitcher extends React.Component {
 					<div>
 						{
 							nextTarget &&
-							<ViewPreview record={nextTarget} refs={DataProvider} isNext={true}
+							<ViewPreview record={nextTarget} refs={$stores.DataProvider.data} isNext={true}
 							             tweener={this}/>
 						}
 					</div>
@@ -264,7 +264,7 @@ export default class ViewSwitcher extends React.Component {
 					<div>
 						{
 							nextTarget &&
-							<View record={nextTarget} refs={DataProvider} key={"next_" + nextTarget._id} isNext={true}
+							<View record={nextTarget} refs={$stores.DataProvider.data} key={"next_" + nextTarget._id} isNext={true}
 							      tweener={this}/>
 						}
 					</div>

@@ -37,6 +37,7 @@ const ctrl = {
 		//else
 		if ( state )
 			cScope.restore(state);
+		cScope.mount("DataProvider")
 		ReactDom.render(<App/>, node);
 		
 		if ( process.env.NODE_ENV !== 'production' && module.hot ) {

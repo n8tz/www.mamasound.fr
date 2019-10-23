@@ -104,6 +104,16 @@ export default class DataProvider extends Store {
 		return data;
 	}
 	
+	restore( snapshot, immediate ) {
+		let data = this.data;
+		//debugger
+		super.restore(
+			snapshot, immediate);
+		//Object.assign(data, this.data);
+		//this.data = {...this.data};
+		//this.push(this.data, true)
+	}
+	
 	/**
 	 * Get record by Id if available
 	 * @param etty
@@ -131,6 +141,7 @@ export default class DataProvider extends Store {
 	retrieve( path ) {
 		return this.data[path.join('.')];
 	}
+	
 	pushRecordPreview( record ) {
 		if ( !this.overidedRecords[record._id] )
 			this.overidedRecords[record._id] = this.data[record._id];

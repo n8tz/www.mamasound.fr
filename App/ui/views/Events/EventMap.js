@@ -178,10 +178,10 @@ export default class EventMap extends React.Component {
 			    TagManager, day,
 			    Events: { center = {}, POIs = [], zoom } = {},
 			    Styles: { HomePage }, UserGeoLocation, Selected,
-			    $actions, DataProvider, Quartiers, style
+			    $actions, $stores, DataProvider, Quartiers, style
 		    }           = this.props,
 		    map         = this.refs.map && this.refs.map.leafletElement,
-		    selectedPOI = Selected.Event && Selected.Event.place && DataProvider[Selected.Event.place.objId],
+		    selectedPOI = Selected.Event && Selected.Event.place && $stores.DataProvider.data[Selected.Event.place.objId],
 		    selectedPos = selectedPOI && (selectedPOI.address.geoPoint
 			    &&
 			    [...selectedPOI.address.geoPoint].reverse()
@@ -245,7 +245,7 @@ export default class EventMap extends React.Component {
 									<Views.Event.popin
 										$scope={this.props.$scope}
 										record={Selected.Event}
-										refs={DataProvider}
+										refs={$stores.DataProvider.data}
 										onClick={
 											e => $actions.selectEvent(Selected.Event._id)
 											
