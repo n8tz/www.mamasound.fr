@@ -7,7 +7,6 @@
  */
 
 let stepAngle = "3deg";
-
 export const visibleItems    = 7;
 export const defaultInitial  = {
 	position : "absolute",

@@ -58,8 +58,8 @@ export function service( server ) {
 					if ( html ) {
 						console.log("from redis ", key);
 						
-						//res.send(200, html);
-						//return;
+						res.send(200, html);
+						return;
 					}
 					let cssPath = (req.user && req.user.isAdmin)
 					              ? process.cwd() + "/dist/admin/App.css"
