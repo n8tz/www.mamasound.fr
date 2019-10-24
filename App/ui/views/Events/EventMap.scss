@@ -87,7 +87,7 @@ body.fixedHead .EventMap {
   }
 
   .mapContainer {
-    @include use_hvCenteredAbs();
+    //@include use_hvCenteredAbs();
     @include aspect-ratio(16, 15);
     //position: relative;
     width: 100%;

@@ -107,12 +107,12 @@ body.fixedHead .NavBox {
 
         .icon {
           //float: right;
-          display: inline-block;
+          //display: inline-block;
           width: auto;
 
-          @media screen and (max-width: $tablet-portrait-breakpoint) {
-            display: none;
-          }
+          //@media screen and (max-width: $tablet-portrait-breakpoint) {
+          display: none;
+          //}
 
           img {
             position: absolute;
@@ -126,9 +126,6 @@ body.fixedHead .NavBox {
   }
 
   .SearchBar {
-    @media screen and (max-width: $tablet-portrait-breakpoint) {
-      //display: none !important;
-    }
   }
 
   .eventTypeNav {
@@ -160,6 +157,13 @@ body.fixedHead .NavBox {
         padding-left: .5em;
         //color:white;
         font-size: 1.1em;
+
+        @media screen and (max-width: $tablet-portrait-breakpoint) {
+          padding-top: 4px;
+          padding-left: .5em;
+          font-size: 18px;
+          //border-bottom: solid 1px white;
+        }
       }
 
       .DayEvents {
@@ -218,4 +222,5 @@ body.fixedHead .NavBox {
       width: 100%;
     }
   }
+
 }

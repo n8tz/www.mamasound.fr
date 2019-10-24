@@ -7,15 +7,17 @@
  */
 import config from "App/config";
 
-const path    = require("path"),
-      shortid = require("shortid"),
-      fs      = require("fs"),
-      multer  = require('multer');
+const path                 = require("path"),
+      shortid              = require("shortid"),
+      fs                   = require("fs"),
+      multer               = require('multer');
+export const priorityLevel = 100001;
 
-export default ( server, http ) => {
+export function service( server ) {
 	console.log(path.normalize(path.join(process.cwd(), config.UPLOAD_DIR)));
-	let upload   = multer({ dest: path.normalize(path.join(process.cwd(), config.UPLOAD_DIR)) }),
-	    uploader = upload.fields([{ name: 'file', maxCount: 8 }]);
+	let uploadDir = path.normalize(path.join(process.cwd(), config.UPLOAD_DIR)),
+	    upload    = multer({ dest: uploadDir }),
+	    uploader  = upload.fields([{ name: 'file', maxCount: 8 }]);
 	console.log("Upload server running !");
 	server.post(
 		'/upload',
@@ -39,7 +41,7 @@ export default ( server, http ) => {
 									    };
 									fs.rename(
 										file.path,
-										path.join(config.projectRoot, config.UPLOAD_DIR, name),
+										path.join(uploadDir, name),
 										function ( e, r ) {
 											if ( e ) {
 												return reject(e);

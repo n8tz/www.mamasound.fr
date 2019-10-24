@@ -120,7 +120,7 @@ export default class DataProvider extends Store {
 	 * @param id
 	 * @returns {*}
 	 */
-	getRecord( id ) {
+	getRecord( id, etty ) {
 		return this.data
 			&& this.data[id];
 	}
@@ -139,7 +139,10 @@ export default class DataProvider extends Store {
 	overidedRecords = {};
 	
 	retrieve( path ) {
-		return this.data[path.join('.')];
+		let eid = path.join('.').split('µ');
+		if ( this.data.___aliases___[eid[0]] && this.data.___aliases___[eid[0]][eid[1]] )
+			return this.data[this.data.___aliases___[eid[0]][eid[1]]];
+		return this.data[path[1]];
 	}
 	
 	pushRecordPreview( record ) {
@@ -173,6 +176,10 @@ export default class DataProvider extends Store {
 			this.watchersByEttyId[rec._id] = this.watchersByEttyId[rec._id] || [];
 			this.watchersByEttyId[rec._id].push(...this.watchersByEttyId[rec._alias])
 			delete this.watchersByEttyId[rec._alias];
+			
+			this.data.___aliases___[rec._cls]             = this.data.___aliases___[rec._cls] || {};
+			this.data.___aliases___[rec._cls][rec._alias] = rec._id;
+			
 		}
 		
 		this.dispatchUpdates();
@@ -406,7 +413,7 @@ export default class DataProvider extends Store {
 		else
 			!noData && watcher(this.data[id])
 		
-		return id;
+		return etty + 'µ' + id;
 	}
 	
 	unBindRecord( etty, id, watcher ) {

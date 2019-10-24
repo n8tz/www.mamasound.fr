@@ -5,11 +5,12 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import stores                                         from 'App/stores/(*).js';
-import {Comps, Views}                                 from 'App/ui';
-import React                                          from "react";
-import {asRef, scopeToProps, withScope, withStateMap} from "react-scopes";
-import {TweenRef, withTweener}                        from "react-voodoo";
+import stores                                                  from 'App/stores/(*).js';
+import {Comps, Views}                                          from 'App/ui';
+import moment                                                  from "moment";
+import React                                                   from "react";
+import {asRef, asStore, scopeToProps, withScope, withStateMap} from "react-scopes";
+import {TweenRef, withTweener}                                 from "react-voodoo";
 
 let Tetris = 'div';
 if ( typeof window !== "undefined" ) {
@@ -18,22 +19,51 @@ if ( typeof window !== "undefined" ) {
 
 @withScope(
 	{
+		@asStore
+		FocusedItemsQuery: {
+			//@asRef
+			//curDay: "appState.curDay",
+			query: {},
+			$apply( data, state ) {
+				let {
+					    curDay,
+				    }    = state,
+				    from = moment().utc().startOf('day').valueOf(),
+				    to   = moment().utc().endOf('day').add(6, 'month').valueOf();
+				return {
+					query: {
+						etty     : 'Focused',
+						limit    : 50,
+						orderby  : { updated: -1 },
+						query    : {
+							$or: [
+								{
+									startTM: {
+										'$lt': from
+									},
+									endTM  : {
+										'$gt': from
+									}
+								},
+							
+							]
+						},
+						mountKeys: ["targetEtty"],
+					}
+				};
+			}
+			
+		},
 		@withStateMap(
 			{
-				FocusedItems: {
-					etty     : 'FocusedItems',
-					limit    : 50,
-					orderby  : { updated: -1 },
-					query    : {},
-					mountKeys: ["targetEtty"],
-				},
-				
+				@asRef
+				FocusedItems: "FocusedItemsQuery.query",
 				updateQueries() {
 					//return { FocusedItems: { ...this.nextState.FocusedItems, $skip: 5 } }
 				}
 			}
 		)
-		Queries     : stores.MongoQueries,
+		Queries          : stores.MongoQueries,
 		@withStateMap(
 			{
 				@asRef
@@ -43,7 +73,7 @@ if ( typeof window !== "undefined" ) {
 				imgKeys: ["previewImage"]
 			}
 		)
-		MountedItems: stores.ImgFieldsLoader,
+		MountedItems     : stores.ImgFieldsLoader,
 		
 		
 	}
@@ -61,7 +91,7 @@ export default class Highlighter extends React.Component {
 				    $actions, $scope
 			    }     = this.props,
 			    state = this.state;
-			$actions.selectFocus(items[i]._id, items[i]._cls);
+			$actions.selectFocus(items[i]._alias || items[i]._id, items[i]._cls);
 			$scope.then(tm => {
 				slider.goTo(i);
 			})
@@ -78,15 +108,16 @@ export default class Highlighter extends React.Component {
 		let {
 			    MountedItems: { items = [], layout = [] } = {},
 			    Styles, Selected, children,
-			    $actions, currentTheme, tweener, style
+			    $actions, navBox, tweener, style
 		    }     = this.props,
 		    state = this.state;
 		return (
 			<div style={style}
 			     className={"Highlighter"}>
-				{children}
+				{navBox}
 				<div className={"headBackground"}>
 					<div className={"maskContent"}>
+						{children}
 						{/*<TweenRef*/}
 						{/*	//initial={Styles.background}*/}
 						{/*	//tweenLines={Styles.backgroundScroll}*/}
@@ -141,8 +172,9 @@ export default class Highlighter extends React.Component {
 								onClick={this.selectFocus}
 							>
 								{
-									items.length &&
-									items.map(
+									(items &&
+										items.length &&
+										items || []).map(
 										( item, i ) =>
 											<TweenRef key={item._id + i}
 											          tweener={tweener}

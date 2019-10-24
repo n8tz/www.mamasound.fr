@@ -34,6 +34,9 @@
       cursor: pointer;
       color: #1c1c1c;
 
+      img{
+        display: none;
+      }
       &:hover {
         color: black;
       }

@@ -47,9 +47,9 @@ export function service( server ) {
 	server.use("/assets/static", express.static(process.cwd() + '/App/ui/assets/static'));
 	
 	server.get(
-		'/',
+		'*',
 		function ( req, res, next ) {
-			if ( /\.\w+$/ig.test(req.url) )
+			if ( /^\/medias/ig.test(req.url) )
 				return next()
 			let key = config.PUBLIC_URL + "_page_" + req.url + "_" + req.device.type + "_" + (req.user && req.user.login);
 			redis.get(
@@ -57,7 +57,6 @@ export function service( server ) {
 				( err, html ) => {
 					if ( html ) {
 						console.log("from redis ", key);
-						
 						res.send(200, html);
 						return;
 					}

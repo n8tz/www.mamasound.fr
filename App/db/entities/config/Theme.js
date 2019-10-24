@@ -34,11 +34,15 @@ export default {
 		
 		"mainBackground": types.media({ allowedTypes: "Image" }, "MainBackground:"),
 		
-		"menuTop": types.picker(true, {
+		"menuTop"   : types.picker(true, {
 			allowTypeSelection: ["Menu"],
 			storeTypedItem    : true,
 		}, "Menu haut :"),
-		"menuBot": types.picker(true, {
+		"menuSocial": types.picker(true, {
+			allowTypeSelection: ["Menu"],
+			storeTypedItem    : true,
+		}, "Menu menuSocial :"),
+		"menuBot"   : types.picker(true, {
 			allowTypeSelection: ["Menu"],
 			storeTypedItem    : true,
 		}, "Menu bas :"),

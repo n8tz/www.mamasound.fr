@@ -49,16 +49,16 @@
     .title {
       position: fixed;
       top: 0.75em;
-      width: 40vw;
+      width: 55%;
       max-width: 600px;
       left: calc(#{$focusSlidePadSize} + .25em);
       //padding-left: ;
       text-align: left;
       font-size: 2em;
-      font-weight: lighter;
-      font-family: EmPower42;
+      font-weight: bolder;
+      font-family: $mainFontFamily;
       //border-top:solid 1px grey;
-      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 5px #fff, 0 0 5px rgba(255, 255, 255, 0.4);
+      //text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 5px #fff, 0 0 5px rgba(255, 255, 255, 0.4);
       transition: all 500ms;
       z-index: 10;
       //border-bottom: solid 2px lightgrey;

@@ -41,7 +41,7 @@ export const page      = {
 	//overflowY: "auto",
 	//overflowX: "hidden",
 	transform: {
-		translateZ: "0px",
+		//translateZ: "0px",
 		//translateX: "-50%"
 	}
 };
@@ -172,7 +172,7 @@ export const EventMap          = {
 	zIndex         : 100,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
-	top            : [0],
+	top            : [50],
 };
 export const PageBlock         = {
 	

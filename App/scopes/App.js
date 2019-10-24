@@ -55,20 +55,20 @@ export default {
 		},
 		
 		// global app actions
-		
-		loadStateFromUrl( url = !__IS_SERVER__ && location.pathname || '/' ) {
-			if ( url ) {
-				let matches = url.match(/^\/([^\/]+)\/([^\/]+)\/([^\/]+)$/);
-				return matches && {
-					curDay          : moment(matches[2], "DD-MM-YY").startOf("day").valueOf(),
-					selectedEventId : matches[3],
-					selectedEventDT : moment(matches[2], "DD-MM-YY").startOf("day").valueOf(),
-					selectedEvent   : { id: matches[3], etty: "Event" },
-					currentPageFocus: "events"
-				}
-			}
-			//return {};
-		},
+		//
+		//loadStateFromUrl( url = !__IS_SERVER__ && location.pathname || '/' ) {
+		//	if ( url ) {
+		//		let matches = url.match(/^\/([^\/]+)\/([^\/]+)\/([^\/]+)$/);
+		//		return matches && {
+		//			curDay          : moment(matches[2], "DD-MM-YY").startOf("day").valueOf(),
+		//			selectedEventId : matches[3],
+		//			selectedEventDT : moment(matches[2], "DD-MM-YY").startOf("day").valueOf(),
+		//			selectedEvent   : { id: matches[3], etty: "Event" },
+		//			currentPageFocus: "events"
+		//		}
+		//	}
+		//	//return {};
+		//},
 		updateCurrentSearch( currentSearch ) {
 			return { currentSearch };
 		},
@@ -115,8 +115,8 @@ export default {
 				selectedEvent = undefined;
 			//	currentPageFocus = 'map';
 			if ( selectedEvent ) {
-				//this.$actions.history_set("/" + selectedEvent._cls + '/' + moment(selectedEventDT).format("DD-MM-YY")
-				// + "/" + (selectedEvent._alias || selectedEvent._id))
+				this.$actions.history_set("/" + selectedEvent._cls + '/' + moment(selectedEventDT).format("DD-MM-YY")
+					                          + "/" + (selectedEvent._alias || selectedEvent._id))
 			}
 			else {
 				this.$actions.history_set("/")
@@ -136,6 +136,9 @@ export default {
 			else if ( selectedFocus )
 			//currentPageFocus = "bighead";
 				this.then(() => this.setState({ currentPageFocus: 'bighead' }));
+			if ( selectedFocus ) {
+				this.$actions.history_set("/" + cls + '/' + selectedFocus)
+			}
 			return {
 				//currentPageFocus,
 				selectedEventId: null,

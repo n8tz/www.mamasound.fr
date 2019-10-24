@@ -15,7 +15,9 @@ const wpiConf  = require('App/config'),
 /*
  @todo use insert/remove many
  */
-export default ( server, http ) => {
+export const priorityLevel = 100001;
+
+export function service( server ) {
 	console.log("Importer service running !");
 	
 	server.post(

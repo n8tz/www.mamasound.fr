@@ -25,9 +25,14 @@
     font-size: 14px;
     color: #1c1c1c;
 
-    &:hover {
-      //color: black;
-      text-decoration: underline;
+    a {
+      color: #1c1c1c;
+      text-decoration: none;
+
+      &:hover {
+        //color: black;
+        text-decoration: underline;
+      }
     }
   }
 }

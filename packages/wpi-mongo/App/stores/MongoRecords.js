@@ -49,7 +49,6 @@ export default class MongoRecords extends Store {
 		
 		super.restore(
 			snapshot, immediate);
-		//debugger
 		
 		this.$scope.restoreRefPath(this._dataProviderPath);
 		updateWatchers(this, this._dataProvider, this.state, this.nextState)

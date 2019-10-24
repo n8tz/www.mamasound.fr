@@ -37,7 +37,7 @@ export default (
 	return <div className={"Page FocusedItems_preview type_" + target._cls + " " + className} style={style}>
 		<Editable id={record._id}/>
 		{
-			record.useBackground && (record.background || rPreviewImage)&&
+			record.useBackground &&
 			<TweenRef
 				initial={
 					{
@@ -97,17 +97,21 @@ export default (
 						] || []
 					}
 				}>
-				<div className="background">
-					<Comps.Image src={record.background || rPreviewImage} className={"leftGhost"}/>
-					<Comps.Image src={record.background || rPreviewImage} className={"rightGhost"}/>
-					<Comps.Image src={record.background || rPreviewImage}/>
+				<div className="background" style={{ backgroundColor: record.backgroundColor || 'transparent' }}>
+					{(record.background) && <>
+						{record.useGhostBackground && <>
+							<Comps.Image src={record.background || rPreviewImage} className={"leftGhost"}/>
+							<Comps.Image src={record.background || rPreviewImage} className={"rightGhost"}/>
+						</>}
+						<Comps.Image src={record.background || rPreviewImage}/>
+					</>}
 				</div>
 			</TweenRef>
 			
 		}
 		
 		{
-			previewImage &&
+			record.usePreviewImage && previewImage &&
 			<TweenRef
 				initial={
 					{

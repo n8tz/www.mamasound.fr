@@ -19,6 +19,7 @@ const fs          = require('fs'),
       compressor  = compression();
 
 export const name = "Media service";
+export const priorityLevel = 100001;
 
 export function service( server ) {
 	//if ( process.env.NODE_ENV === 'production' ) {

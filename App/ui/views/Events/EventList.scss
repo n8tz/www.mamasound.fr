@@ -13,6 +13,10 @@
   user-select: none;
   padding: 0 !important;
 
+  @media screen and (min-width: $tablet-landscape-breakpoint) {
+    margin-left: 2px;
+  }
+
   .NavBox {
     z-index: 10;
 

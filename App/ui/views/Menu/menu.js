@@ -9,11 +9,10 @@
 'use strict';
 
 import stores                             from 'App/stores/(*).js';
-import {Views}                            from 'App/ui';
+import {Comps, Views}                     from 'App/ui';
 import Editable                           from "App/ui/Editable";
 import React                              from "react";
 import RS, {asRef, asScope, withStateMap} from "react-scopes";
-
 
 @RS(
 	{
@@ -34,6 +33,13 @@ import RS, {asRef, asScope, withStateMap} from "react-scopes";
 @RS.fromProps("id:dataRecord.ref.id")
 @RS.connect("DataProvider", "dataRecord.record.data:record")
 export default class Menu extends React.Component {
+	doClick = ( e ) => {
+		let { record, $actions } = this.props;
+		$actions.history_push(record.path);
+		e.preventDefault();
+		e.stopPropagation();
+	};
+	
 	render() {
 		let { record, DataProvider, selected, className = "", $scope } = this.props;
 		if ( !record )
@@ -49,7 +55,13 @@ export default class Menu extends React.Component {
 							id={child.objId}
 							key={child.objId + '_' + "MenuItem"}
 							className={"MenuItem"}/>
-				) : <span className="label">{record.label}</span>
+				) : <a href={record.path}
+				       target={record.outLink ? "_blank" : undefined}
+				       onClick={!record.outLink && this.doClick}
+				       className="label">
+					{!record.hideTitle ? record.label : ""}
+					{record.previewImage ? <Comps.Image src={record.previewImage}/> : ""}
+				</a>
 			}
 		</span>
 			;

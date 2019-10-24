@@ -6,10 +6,19 @@
  *   @contact : n8tz.js@gmail.com
  */
 
-.LoginBoxDialog{
+.LoginBoxDialog {
   padding: 5px;
   border-radius: 10px;
-  H1{
+
+  H1 {
     text-align: center;
+  }
+}
+
+.LoginBox {
+
+  img {
+    margin-top: 2px;
+    height: 28px;
   }
 }

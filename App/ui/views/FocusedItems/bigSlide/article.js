@@ -14,9 +14,8 @@
  */
 'use strict';
 
-import Editable   from "App/ui/Editable";
-import React      from "react";
-import {TweenRef} from "react-voodoo";
+import Editable from "App/ui/Editable";
+import React    from "react";
 
 export default class page extends React.Component {
 	state = {
@@ -38,16 +37,16 @@ export default class page extends React.Component {
 		                                                                       ? " bigView"
 		                                                                       : "smallView") + ' ' + className}>
 			<Editable id={record._id}/>
-			<div className="title">
+			{record.useTitle && <div className="title">
 				{target && (target.title || target.label)}
-			</div>
-			<div className="resume">
+			</div>}
+			{record.useResume && <div className="resume">
 				{
 					target && !/^\s*$/.test(target.text || '') &&
 					<div className="content" dangerouslySetInnerHTML={{ __html: target.text }}
 					     onClick={e => this.setState({ big: !big })}/> || ''
 				}
-			</div>
+			</div>}
 			
 			
 			{/*<TweenRef*/}

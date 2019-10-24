@@ -96,7 +96,8 @@ export default class ViewSwitcher extends React.Component {
 				}
 			},
 			wayPoints   : [{ at: 0 }, { at: 100 }, { at: 200 }]
-		}
+		};
+		//debugger
 		this.state    = {
 			curTarget: props.target,
 			history  : []
@@ -157,31 +158,38 @@ export default class ViewSwitcher extends React.Component {
 		let { curTarget, nextTarget, prevTarget, history } = this.state;
 		if ( prevProps.target !== this.props.target && (!nextTarget && (!curTarget || this.props.target !== curTarget) || nextTarget && this.props.target !== nextTarget) ) {
 			//console.log("tween new", curTarget, nextTarget, this.props.target)
-			this.setState(
-				{
-					nextTarget: this.props.target
-				}
-				,
-				(( s ) => {
-					this.props.tweener.scrollTo(200, this.props.transitionDuration, "scrollX")
-					    .then(
-						    v => {
-							    this.setState(
-								    {
-									    history   : prevTarget && [...history, prevTarget] || history,
-									    prevTarget: curTarget,
-									    curTarget : this.props.target,
-									    nextTarget: undefined
-								    }
-								    ,
-								    v => {
-									    this.props.tweener.scrollTo(100, 0, "scrollX")
-								    }
-							    )
-						    }
-					    )
-				})
-			)
+			if ( this.props.target && prevProps.target && prevProps.target._id === this.props.target._id ) {
+				this.setState(
+					{
+						curTarget: this.props.target
+					})
+			}
+			else
+				this.setState(
+					{
+						nextTarget: this.props.target
+					}
+					,
+					(( s ) => {
+						this.props.tweener.scrollTo(200, this.props.transitionDuration, "scrollX")
+						    .then(
+							    v => {
+								    this.setState(
+									    {
+										    history   : prevTarget && [...history, prevTarget] || history,
+										    prevTarget: curTarget,
+										    curTarget : this.props.target,
+										    nextTarget: undefined
+									    }
+									    ,
+									    v => {
+										    this.props.tweener.scrollTo(100, 0, "scrollX")
+									    }
+								    )
+							    }
+						    )
+					})
+				)
 		}
 		//
 	}
@@ -234,7 +242,8 @@ export default class ViewSwitcher extends React.Component {
 					<div>
 						{
 							curTarget &&
-							<ViewPreview record={curTarget} refs={$stores.DataProvider.data} tweener={this} isCurrent={true}/>
+							<ViewPreview record={curTarget} refs={$stores.DataProvider.data} tweener={this}
+							             isCurrent={true}/>
 							|| <DefaultPreview/>
 						}
 					</div>
@@ -264,7 +273,8 @@ export default class ViewSwitcher extends React.Component {
 					<div>
 						{
 							nextTarget &&
-							<View record={nextTarget} refs={$stores.DataProvider.data} key={"next_" + nextTarget._id} isNext={true}
+							<View record={nextTarget} refs={$stores.DataProvider.data} key={"next_" + nextTarget._id}
+							      isNext={true}
 							      tweener={this}/>
 						}
 					</div>

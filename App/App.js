@@ -7,6 +7,7 @@
  */
 import {Views}                       from "App/ui";
 import Widget                        from 'App/ui/components/Widget.js';
+import Editable                      from "App/ui/Editable";
 import Pages                         from "App/ui/pages/(*).js";
 import moment                        from "moment";
 import React                         from 'react';
@@ -31,7 +32,7 @@ React.createElement = function ( type, ...argz ) {
 	return hookedRCE.apply(this, arguments);
 }
 moment.locale('fr');
-@RS.connect("widgets", "appState", "$history", "CurrentUser", "location.routes")
+@RS.connect("widgets", "appState", "appTheme", "$history", "CurrentUser", "location.routes")
 export default class App extends React.Component {
 	state = {};
 	
@@ -83,8 +84,8 @@ export default class App extends React.Component {
 	}
 	
 	render() {
-		let Router                                                       = BrowserRouter;
-		let { widgets = { items: [] }, appState, CurrentUser, $actions } = this.props;
+		let Router                                                                 = BrowserRouter;
+		let { widgets = { items: [] }, appState, appTheme, CurrentUser, $actions } = this.props;
 		if ( __IS_SERVER__ )
 			Router = StaticRouter;
 		return <>
@@ -134,6 +135,8 @@ export default class App extends React.Component {
 					DevTools
 				</div>
 			</ContextMenu>}
+			{CurrentUser && CurrentUser.isAdmin && appTheme && appTheme.data &&
+			<Editable id={appTheme.data._id}/>}
 			
 			<div className={"widgetBox"}>
 				{

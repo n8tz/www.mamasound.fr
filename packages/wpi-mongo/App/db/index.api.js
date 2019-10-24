@@ -161,7 +161,6 @@ export function query( req ) {
 	return new Promise(
 		( resolve, reject ) => {
 			
-			debugger
 			let { query: _query, etty, limit = 1000, skip, orderby, mountKeys = [] } = req;
 			pushDbTask(
 				( client, dbRelease ) => {

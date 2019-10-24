@@ -8,12 +8,11 @@
 
 'use strict';
 
-import Button             from '@material-ui/core/Button';
-import Dialog             from '@material-ui/core/Dialog';
-import IconPerson         from '@material-ui/icons/AccountBox';
-import React, {Component} from "react";
+import Dialog from '@material-ui/core/Dialog';
 
-import {scopeToProps} from "react-scopes";
+import {Comps}            from 'App/ui';
+import React, {Component} from "react";
+import {scopeToProps}     from "react-scopes";
 
 
 @scopeToProps("CurrentUser")
@@ -40,23 +39,20 @@ export default class LoginBox extends Component {
 			<span className="LoginBox">
 				{
 					!CurrentUser &&
-					<a className="loginLink" onClick={() => this.setState({ showModal: true })}
-					   title="Connexion"><IconPerson/></a>
+					<a className="loginLink material-icons" onClick={() => this.setState({ showModal: true })}
+					   title="Connexion">person</a>
 				}
 				{
 					CurrentUser &&
 					<React.Fragment>
-						<Button color="primary"
-						        onClick={event => this.setState({ menu: event.currentTarget })}>
-							{CurrentUser._id}
-						</Button>
+						<Comps.Image src={CurrentUser.avatar}/>
 						<span onClick={$actions.logout}>Sign out</span>
 					</React.Fragment>
 					
 				}
 				<Dialog open={this.state.showModal}
 				        title='My awesome dialog'
-				        classes={{paper:"LoginBoxDialog"}}
+				        classes={{ paper: "LoginBoxDialog" }}
 				        onClose={() => this.setState({ showModal: false })}>
 					<h1>Connexion</h1>
 					

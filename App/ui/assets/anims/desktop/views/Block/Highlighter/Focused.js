@@ -43,7 +43,7 @@ export const defaultPreviewInitial = {
 	top            : "0%",
 	left           : "50%",
 	zIndex         : 40,
-	overflow       : "hidden",
+	//overflow       : "hidden",
 	transformOrigin: "50% 50%",
 	//display        : "none",
 	opacity        : 1,

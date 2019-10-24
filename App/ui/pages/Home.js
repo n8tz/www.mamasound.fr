@@ -21,7 +21,7 @@ const wayPoints =
 	      };
 
 @scopeToProps("appState", "Styles.pages.Home:Styles", "Styles.views.Events.EventsList.NavBox", "Styles.currentTheme", "appTheme")
-@asTweener({ dragDirectionLock: true })
+@asTweener({ enableMouseDrag: true, dragDirectionLock: true })
 export default class Home extends React.Component {
 	state = {};
 	
@@ -155,49 +155,54 @@ export default class Home extends React.Component {
 						
 						</Views.Events.EventList>
 					</TweenRef>
-				</div>
-			</TweenRef>
-			<TweenRef id={"Footer"} initial={Styles.Footer}>
-				<Comps.Footer>
-					{appTheme && appTheme.data && appTheme.data.menuBot &&
-					<Views.Menu.menu id={appTheme.data.menuBot.objId}/>}
-				</Comps.Footer>
-			</TweenRef>
-			<TweenRef
-				id={"header"}
-				initial={Styles.header}
-			>
-				<header>
+					<TweenRef id={"Footer"} initial={Styles.Footer}>
+						<Comps.Footer>
+							{appTheme && appTheme.data && appTheme.data.menuBot &&
+							<Views.Menu.menu id={appTheme.data.menuBot.objId}/>}
+						</Comps.Footer>
+					</TweenRef>
 					<TweenRef
-						id={"logo"}
-						initial={Styles.logo}
+						id={"header"}
+						initial={Styles.header}
 					>
-						<div className={"logo"}/>
-					</TweenRef>
-					{appTheme && appTheme.data && appTheme.data.menuTop &&
-					<Views.Menu.menu id={appTheme.data.menuTop.objId}/>}
-				</header>
-			</TweenRef>
-			<TweenRef id={"Highlighter"} initial={Styles.Highlighter}>
-				<Views.Block.Highlighter key={"Highlighter"}>
-					
-					<TweenRef id={"background"} initial={Styles.Background}>
-						<Views.Block.Background
-							record={appTheme && appTheme.data}/>
-					</TweenRef>
-					<TweenRef id={"NavBox"} initial={NavBox.style}>
-						<Comps.NavBox key={"NavBox"}>
-							{/*<TweenRef id={"MidMenu"} initial={Styles.MidMenu}>*/}
-							{/*<Views.Menu.menu id={"rootmiddlemenu"}/>*/}
-							{/*</TweenRef>*/}
-							<TweenRef id={"EventMap"} initial={Styles.EventMap}>
-								<Views.Events.EventMap
-									day={appState.curVisibleDay || appState.curDay}
-									viewType={appState.viewType}/>
+						<header>
+							<TweenRef
+								id={"logo"}
+								initial={Styles.logo}
+							>
+								<div className={"logo"}/>
 							</TweenRef>
-						</Comps.NavBox>
+							{appTheme && appTheme.data && appTheme.data.menuSocial &&
+							<Views.Menu.menu id={appTheme.data.menuSocial.objId} className={"socialMenu"}/>}
+							{appTheme && appTheme.data && appTheme.data.menuTop &&
+							<Views.Menu.menu id={appTheme.data.menuTop.objId} className={"topMenu"}/>}
+						</header>
 					</TweenRef>
-				</Views.Block.Highlighter>
+					<TweenRef id={"Highlighter"} initial={Styles.Highlighter}>
+						<Views.Block.Highlighter key={"Highlighter"}
+						                         navBox={
+							                         <TweenRef id={"NavBox"} initial={NavBox.style}>
+								                         <Comps.NavBox key={"NavBox"}>
+									                         {/*<TweenRef id={"MidMenu"} initial={Styles.MidMenu}>*/}
+									                         {/*<Views.Menu.menu id={"rootmiddlemenu"}/>*/}
+									                         {/*</TweenRef>*/}
+									                         <TweenRef id={"EventMap"} initial={Styles.EventMap}>
+										                         <Views.Events.EventMap
+											                         day={appState.curVisibleDay || appState.curDay}
+											                         viewType={appState.viewType}/>
+									                         </TweenRef>
+								                         </Comps.NavBox>
+							                         </TweenRef>
+						                         }
+						>
+							
+							<TweenRef id={"background"} initial={Styles.Background}>
+								<Views.Block.Background
+									record={appTheme && appTheme.data}/>
+							</TweenRef>
+						</Views.Block.Highlighter>
+					</TweenRef>
+				</div>
 			</TweenRef>
 		</>
 	}
