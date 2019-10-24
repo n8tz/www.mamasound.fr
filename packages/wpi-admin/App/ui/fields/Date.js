@@ -36,7 +36,6 @@ export default class Date extends React.Component {
 	}
 	
 	handleDateChange = period => {
-		//debugger
 		//this.calendar.current.toggle();
 		this.setState(
 			{ value: period.startDate },

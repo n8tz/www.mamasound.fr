@@ -65,6 +65,7 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
+      text-transform: capitalize;
       //@media screen and (max-width: $tablet-portrait-breakpoint) {
       //  left: 5%;
       //  top: 35%;
@@ -129,7 +130,7 @@
         right: 2.5em;
         font-family: "Roboto", sans-serif;
         font-weight: bold;
-        text-shadow: 0 0 2px #fff, 0 0 2px #fff, 0 0 2px #fff, 0 0 2px rgba(255, 255, 255, 0.4);
+        //text-shadow: 0 0 2px #fff, 0 0 2px #fff, 0 0 2px #fff, 0 0 2px rgba(255, 255, 255, 0.4);
 
       }
 
@@ -188,7 +189,7 @@
       font-weight: lighter;
       font-family: EmPower42;
       //border-top:solid 1px grey;
-      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 5px #fff, 0 0 5px rgba(255, 255, 255, 0.4);
+      //text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 5px #fff, 0 0 5px rgba(255, 255, 255, 0.4);
 
       border-bottom: solid 2px lightgrey;
       text-overflow: ellipsis;

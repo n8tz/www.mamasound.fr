@@ -71,7 +71,7 @@ export default class Slider extends React.Component {
 			    MountedItems: { items = [] } = {},
 		    }     = this.props,
 		    state = this.state;
-		return (items[(items.findIndex(ref => (rec && ref && rec._id === ref._id)) + 1) % items.length]);
+		return items && (items[(items.findIndex(ref => (rec && ref && rec._id === ref._id)) + 1) % items.length]);
 	};
 	
 	render() {
@@ -99,7 +99,7 @@ export default class Slider extends React.Component {
 							onClick={this.selectFocus}
 						>
 							{
-								items.length &&
+								items && items.length &&
 								items.map(
 									( item, i ) =>
 										<TweenRef key={item._id + i}

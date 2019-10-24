@@ -5,10 +5,13 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
+import config       from "App/config";
 import aliasAPI     from "App/db/aliasHelpers";
 import entities     from "App/db/entities";
 import {mount}      from "App/db/mountRecord";
 import {pushDbTask} from "App/db/pool";
+
+import redis        from "App/db/redis.js";
 import typesList    from "App/db/types";
 import is           from "is";
 import cacheManager from "node-cache";
@@ -118,7 +121,6 @@ export function create( etty, data, id = etty + '.' + shortid.generate() ) {
 }
 
 export function save( etty, id, data ) {
-	memoryCache.flushAll()
 	return new Promise(
 		( resolve, reject ) => {
 			
@@ -145,6 +147,8 @@ export function save( etty, id, data ) {
 								  { $set: record }
 								  , ( err, docs ) => {
 									  if ( err ) console.warn("save failed ", err);
+									  memoryCache.flushAll();
+									  redis.delWildcard(config.PUBLIC_URL + "_*");
 									  dbRelease();
 									  !err && resolve(data);
 									  err && reject(err);
@@ -176,6 +180,8 @@ export function query( req ) {
 								    done = null;
 								    dbRelease();
 								    try {
+									    memoryCache.flushAll();
+									    redis.delWildcard(config.PUBLIC_URL + "_*");
 									    resolve(data)
 								    } catch ( e ) {
 									    console.warn(e);
@@ -201,7 +207,6 @@ export function query( req ) {
 									    done({ refs, items })
 								    })
 								    .catch(refs => {
-									    debugger
 									    done({ refs, items })
 								    })
 						    };
@@ -211,7 +216,6 @@ export function query( req ) {
 						   .toArray(parse);
 						
 					} catch ( e ) {
-						debugger
 						console.warn(e);
 					}
 				}
@@ -225,11 +229,14 @@ export function remove( req ) {
 		( resolve, reject ) => {
 			
 			let { query: _query, etty, limit = 1000, skip, orderby, mountKeys = [] } = req;
+			
 			pushDbTask(
 				( client, dbRelease ) => {
 					var db = client.db("mamasound_fr");
 					db.collection(etty)
 					  .deleteMany(_query || {}).then(function ( r ) {
+						redis.delWildcard(config.PUBLIC_URL + "_*")
+						memoryCache.flushAll()
 						resolve(r.result)
 					}).catch(e => reject(e + ""));
 					

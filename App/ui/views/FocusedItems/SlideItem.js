@@ -14,10 +14,9 @@
  */
 'use strict';
 
-import React    from "react";
+import {Comps}  from "App/ui";
 import Editable from "App/ui/Editable";
-
-import {NavLink}          from "react-router-dom";
+import React    from "react";
 
 export default class SlideItem extends React.Component {
 	render() {
@@ -25,19 +24,17 @@ export default class SlideItem extends React.Component {
 			    record, style, className, onClick
 		    } = this.props;
 		return (
-			<div className="FocusedItems" style={ style } onClick={onClick}>
-				<Editable id={ record._id }/>
+			<div className="FocusedItems" style={style} onClick={onClick}>
+				<Editable id={record._id}/>
 				
-				{ record.previewImage &&
+				{record.sliderImage &&
 				<div className="preview">
-					<img src={ record.previewImage + "w=420" } draggable="false"/>
+					<Comps.Image src={record.sliderImage}/>
 				</div>
 				}
 				<div className="title">
-					{ record.label }
+					{record.label}
 				</div>
-				{ !/^\s*$/.test(record.resume || '') &&
-				<div className="resume" dangerouslySetInnerHTML={ { __html: record.resume } }/> || '' }
 			</div>
 		);
 	}

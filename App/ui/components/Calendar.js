@@ -30,14 +30,14 @@ export default class Calendar extends React.Component {
 	
 	onChange      = ( startDate ) => {
 		this.props.onChange({ startDate: startDate.valueOf() });
-		console.log(moment(startDate).format("DD/MM/YY HH:mm"))
+		//console.log(moment(startDate).format("DD/MM/YY HH:mm"))
 		this.input.current
 		&& (this.input.current.value = moment(startDate).format("DD/MM/YY HH:mm"));
 		//setTimeout(tm => this.toggle())
 	}
 	onInputChange = ( e ) => {
 		//debugger
-		this.props.onChange({ startDate: moment(e.target.value, "DD/MM/YY HH:mm") })
+		this.props.onChange({ startDate: moment(e.target.value, "DD/MM/YY HH:mm").valueOf() })
 	}
 	toggle        = () => {
 		this.setState({ open: !this.state.open })

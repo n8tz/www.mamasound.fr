@@ -31,9 +31,9 @@ export default {
 	},
 	autoMount    : ["targetEtty"],
 	
-	aliasField    : "label",
-	labelField    : "label",
-	schema: {
+	aliasField: "label",
+	labelField: "label",
+	schema    : {
 		label     : [validate.mandatory, validate.noHtml],
 		previewUrl: [validate.mandatory],
 		resume    : [validate.noJs],
@@ -41,7 +41,7 @@ export default {
 		item_link : [validate.noJs, validate.isUrl],
 		//     author     : [validate.mandatory]
 	},
-	fields: {
+	fields    : {
 		"_id": types.indexes,
 		//"pubFlag" : fields.publicationFlag,
 		
@@ -54,9 +54,11 @@ export default {
 		"startTM": types.date("Début"),
 		"endTM"  : types.date("Fin"),
 		
-		"useTitle"   : types.boolean("Afficher le titre :", true),
+		"useTitle"    : types.boolean("Afficher le titre :", true),
 		"useResume"   : types.boolean("Afficher le résumé :", true),
 		"useBigResume": types.boolean("Afficher le résumé en grand direct:", false),
+		
+		"sliderImage": types.media({ allowedTypes: "Image" }, "Slide (~12/5 fb headers):"),
 		
 		"useBackground"     : types.boolean("Afficher le background :", false),
 		"useGhostBackground": types.boolean("Afficher les ghosts flous :", false),
@@ -65,7 +67,7 @@ export default {
 		
 		"usePreviewImage"   : types.boolean("Afficher une image preview :", true),
 		"useBigPreviewImage": types.boolean("Afficher une l'image preview en grand :", false),
-		"previewImage"      : types.media({ allowedTypes: "Image" }, "Preview (~12/5 fb headers):"),
+		"previewImage"      : types.media({ allowedTypes: "Image" }, "Preview:"),
 		
 		"website"   : types.labels("Site web :"),
 		"fbPage"    : types.labels("Page Facebook :"),
