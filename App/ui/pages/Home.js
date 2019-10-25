@@ -38,12 +38,12 @@ export default class Home extends React.Component {
 		let { appState } = props;
 		//props.tweener.scrollTo(wayPoints[appState.currentPageFocus]);
 		document.addEventListener('scroll', this.recordPosition, { passive: false })
-		//this._rpTm = setInterval(this.recordPosition, 100)
+		this._rpTm = setInterval(this.recordPosition, 300)
 	}
 	
 	componentWillUnmount() {
 		document.removeEventListener('scroll', this.recordPosition)
-		//clearInterval(this._rpTm)
+		clearInterval(this._rpTm)
 	}
 	
 	recordPosition = event => {
@@ -56,29 +56,33 @@ export default class Home extends React.Component {
 		//console.log(tweener._.box.y);
 		normalizedScrollTop = Math.max(0, (((scrollTop) / document.body.parentElement.offsetHeight) * 100));
 		//console.log('scroll :', normalizedScrollTop, switchPoint)
+		
+		
+		if ( ~~normalizedScrollTop === 0 ) {
+			//$actions.loadTheme("desktopFixed")
+			if ( !this._head ) {
+				this._head = true;
+				document.body.classList.add("onTop");
+			}
+		}
+		else if ( this._head ) {
+			this._head = false;
+			document.body.classList.remove("onTop");
+		}
+		
 		if ( normalizedScrollTop >= (switchPoint) ) {
 			//$actions.loadTheme("desktopFixed")
 			if ( !this._fixed ) {
 				this._fixed = true;
-				//document.body.classList.contains("fixedHead")
-				//||
 				document.body.classList.add("fixedHead");
 			}
-			//tweener.updateRefStyle("Highlighter", { position: 'fixed', height: ["210px", "0vh"] })
-			//tweener.updateRefStyle("NavBox", { position: 'fixed', top: ["0vh", "250px"] })
 		}
 		else if ( this._fixed ) {
 			this._fixed = false;
-			//document.body.classList.contains("fixedHead")
-			//&&
 			document.body.classList.remove("fixedHead");
-			//tweener.updateRefStyle("Highlighter", { position: 'absolute', height: ["70vh", "0px"] })
-			//tweener.updateRefStyle("NavBox", { position: 'absolute', top: ["70vh", "50px"] })
 		}
-		//}
 		//tweener.scrollTo(normalizedScrollTop, 50, "nativeScrollAxis")
 		//onScroll(scrollTop, event)
-		//this.setState({ scroll: scrollTop })
 	}
 	
 	componentDidUpdate( props ) {
@@ -107,11 +111,6 @@ export default class Home extends React.Component {
 						inertia={
 							{
 								maxJump     : 1,
-								//shouldLoop  : ( v ) => {
-								//	if ( (v + 1) > (350) ) {
-								//		return -350;
-								//	}
-								//},
 								onInertiaEnd: ( i, v ) => {
 									if ( v ) {
 										
@@ -141,13 +140,6 @@ export default class Home extends React.Component {
 						//bounds={Styles.bounds}
 						inertia={{}}
 					/>
-					{/*{*/}
-					{/*	//(currentTheme !== "phone") && <TweenRef*/}
-					{/*		//id={"SliderBlock"}*/}
-					{/*		//initial={Styles.SliderBlock}*/}
-					{/*>*/}
-					{/*<Views.Block.Slider/>*/}
-					{/*</TweenRef>}*/}
 					
 					<TweenRef id={"EventsBlock"} initial={Styles.EventsBlock}>
 						<Views.Events.EventList

@@ -73,7 +73,7 @@
 
 @mixin withTranspaMask() {
   mask: url("../assets/images/transpaMask.svg") bottom center; /* Élément d'un SVG utilisé comme masque répété horizontalement */
-  mask-size: 200% auto;
+  mask-size: auto 100%;
 }
 
 @mixin withTranspaBoxMask() {

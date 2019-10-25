@@ -36,7 +36,7 @@ body.fixedHead {
   padding: 0 !important;
   //margin-left: -50vw;
   //left: 50%;
-  width: 100vw !important;
+  width: 100% !important;
   backface-visibility: hidden;
 
   @media screen and (max-width: $tablet-portrait-breakpoint) {
@@ -78,7 +78,7 @@ body.fixedHead {
 
   img {
     touch-action: none;
-    pointer-events: none;
+    //pointer-events: none;
   }
 
   //overflow: hidden;
@@ -88,7 +88,7 @@ body.fixedHead {
     @media screen and (max-width: $tablet-landscape-breakpoint) {
       margin: 0 !important;
       padding: 0 !important;
-      width: 100vw !important;
+      width: 100% !important;
     }
   }
 
@@ -126,7 +126,7 @@ body.fixedHead {
     .back {
       @include use_hvCenteredAbs();
       user-select: none;
-      pointer-events: none;
+      //pointer-events: none;
       @media screen and (max-width: $tablet-portrait-breakpoint) {
         margin: 0 !important;
         padding: 0 !important;

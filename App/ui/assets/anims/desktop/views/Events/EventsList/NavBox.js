@@ -46,7 +46,7 @@ export const typesNav       = {
 	position : "absolute",
 	width    : ["100%", "-" + collWidth, -30],
 	//bottom   : "0px",
-	left     : "10px",
+	left     : "0px",
 	bottom   : 0,
 	height   : "40px",
 	transform: {

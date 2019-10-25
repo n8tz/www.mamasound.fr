@@ -47,76 +47,7 @@ export default class page extends React.Component {
 					     onClick={e => this.setState({ big: !big })}/> || ''
 				}
 			</div>}
-			
-			
-			{/*<TweenRef*/}
-			{/*	initial={*/}
-			{/*		{*/}
-			{/*			"position": "absolute",*/}
-			{/*			top       : ["0%", "3.5em"],*/}
-			{/*			left      : "0%",*/}
-			{/*			//opacity   : 0,*/}
-			{/*			width     : "45vw",*/}
-			{/*			height    : "4px",*/}
-			{/*			//backgroundColor: "white",*/}
-			{/*			transform : [{}, {*/}
-			{/*				translateX: (isNext || isCurrent) && "-40vw" || "0vw",*/}
-			{/*			}]*/}
-			{/*		}*/}
-			{/*	}*/}
-			{/*	tweenLines={*/}
-			{/*		{*/}
-			{/*			"scrollX": isNext && [*/}
-			{/*				{*/}
-			{/*					*/}
-			{/*					from    : 100,*/}
-			{/*					duration: 100,*/}
-			{/*					easeFn  : "easeSinOut",*/}
-			{/*					apply   : {*/}
-			{/*						transform: [{}, {*/}
-			{/*							translateX: "40vw",*/}
-			{/*						}]*/}
-			{/*					}*/}
-			{/*				}] || isCurrent && [*/}
-			{/*				{*/}
-			{/*					*/}
-			{/*					from    : 0,*/}
-			{/*					duration: 100,*/}
-			{/*					easeFn  : "easeSinIn",*/}
-			{/*					apply   : {*/}
-			{/*						transform: [{}, {*/}
-			{/*							translateX: "40vw",*/}
-			{/*						}]*/}
-			{/*					}*/}
-			{/*				},*/}
-			{/*				{*/}
-			{/*					*/}
-			{/*					from    : 100,*/}
-			{/*					duration: 100,*/}
-			{/*					easeFn  : "easeSinOut",*/}
-			{/*					apply   : {*/}
-			{/*						transform: [{}, {*/}
-			{/*							translateX: "40vw",*/}
-			{/*						}]*/}
-			{/*					}*/}
-			{/*				}*/}
-			{/*			] || [*/}
-			{/*				{*/}
-			{/*					*/}
-			{/*					from    : 0,*/}
-			{/*					duration: 100,*/}
-			{/*					easeFn  : "easeSinIn",*/}
-			{/*					apply   : {*/}
-			{/*						transform: [{}, {*/}
-			{/*							translateX: "40vw",*/}
-			{/*						}]*/}
-			{/*					}*/}
-			{/*				}*/}
-			{/*			] || []*/}
-			{/*		}*/}
-			{/*	}>*/}
-			{/*	<div className={"styleBar"}/>*/}
-			{/*</TweenRef>*/}
+		
 		</div>
 	}
 }

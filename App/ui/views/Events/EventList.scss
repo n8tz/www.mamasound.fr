@@ -7,8 +7,9 @@
  */
 .bigHead .EventList {
 
-  margin-top: calc(90vh + 20px) !important;
+  margin-top: calc(90vh + 50px) !important;
 }
+
 .EventList {
   //touch-action: none;
   position: relative;
@@ -17,7 +18,7 @@
   padding: 0 !important;
   transition: margin-top 500ms;
   @media screen and (min-width: $tablet-landscape-breakpoint) {
-    margin-left: 2px;
+    //margin-left: 2px;
   }
 
   .NavBox {
@@ -116,7 +117,8 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background: #2e2e2e;
+      background: $focusedColor !important;
+      color: $focusedTextColor;
 
       .date {
         //@include use_hvCenteredAbs();
@@ -124,7 +126,6 @@
         top: 0;
         left: 0;
         bottom: 0;
-        color: #ffffff;
         min-width: 50%;
         text-align: left;
         font-size: 1em;

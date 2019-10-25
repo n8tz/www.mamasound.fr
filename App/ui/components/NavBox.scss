@@ -54,9 +54,9 @@ body.fixedHead {
         flex-grow: 1.7;
       }
 
-      &.selected {
-        height: 42px !important;
-        margin-top: -2px;
+      &.selected, &:hover {
+        //height: 42px !important;
+        //margin-top: -2px;
 
         .title {
           background: $focusedColor !important;
@@ -67,13 +67,19 @@ body.fixedHead {
 
       > .icon {
 
-        //height: 100%;
+        @include use_hvCenteredContent();
+        height: 100%;
         z-index: 1000;
-        width: 3em;
 
-        @media screen and (max-width: $tablet-portrait-breakpoint) {
-          display: none;
+        img {
+          padding: 5px;
+          width: 3em;
+          height: auto !important;
         }
+
+        //@media screen and (max-width: $tablet-portrait-breakpoint) {
+        display: none;
+        //}
       }
 
       > .content {

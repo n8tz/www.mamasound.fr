@@ -57,8 +57,9 @@ export default class $history extends Store {
 		let path = location.pathname.split('/'), $actions = this.$actions;
 		path.shift();
 		if ( path.length === 1 ) {
-			if ( path[0] === "" )
+			if ( path[0] === "" ) {
 				$actions.setCurStyleTab(0);
+			}
 			else if ( path[0] === "Concerts" )
 				$actions.setCurStyleTab(1);
 			else if ( path[0] === "Expositions" )
@@ -68,7 +69,8 @@ export default class $history extends Store {
 			
 			this.$stores.appState
 			    .setState({
-				              selectedEvent: null
+				              selectedEvent: null,
+				              selectedFocus: null
 			              })
 		}
 		else if ( path.length === 2 ) {
