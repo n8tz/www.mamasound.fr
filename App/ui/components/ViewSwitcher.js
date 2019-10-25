@@ -161,7 +161,7 @@ export default class ViewSwitcher extends React.Component {
 			if ( this.props.target && prevProps.target && prevProps.target._id === this.props.target._id ) {
 				this.setState(
 					{
-						curTarget: this.props.target
+						curTarget: {...this.props.target}
 					})
 			}
 			else

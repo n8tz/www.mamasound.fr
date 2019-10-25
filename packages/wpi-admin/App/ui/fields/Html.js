@@ -22,18 +22,22 @@ if ( !__IS_SERVER__ && typeof CKEDITOR !== "undefined" ) {
 			{ name: 'document', items: ['Source', '-', 'Print', '-', 'Templates'] },
 			{ name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'] },
 			{ name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt'] },
-			{ name   : 'forms',
+			{
+				name : 'forms',
 				items: ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField']
 			},
 			'/',
-			{ name   : 'basicstyles',
+			{
+				name : 'basicstyles',
 				items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat']
 			},
-			{ name   : 'paragraph',
+			{
+				name : 'paragraph',
 				items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language']
 			},
 			{ name: 'links', items: ['Link', 'Unlink', 'Anchor'] },
-			{ name   : 'insert',
+			{
+				name : 'insert',
 				items: ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']
 			},
 			'/',
@@ -161,16 +165,44 @@ export default class Html extends Component {
 		this._willMountCk = null;
 		ck                = this._CKEditor = CKEDITOR.replace(
 			ReactDOM.findDOMNode(this.textarea.current),
-			{}
+			{
+				toolbar : [
+					{ name: 'document', items: ['Source', '-', 'Print', '-', 'Templates'] },
+					{ name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'] },
+					{ name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt'] },
+					{
+						name : 'forms',
+						items: ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField']
+					},
+					'/',
+					{
+						name : 'basicstyles',
+						items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat']
+					},
+					{
+						name : 'paragraph2',
+						items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language']
+					},
+					{ name: 'links', items: ['Link', 'Unlink', 'Anchor'] },
+					{
+						name : 'insert',
+						items: ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']
+					},
+					'/',
+					{ name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+					{ name: 'colors', items: ['TextColor', 'BGColor'] },
+					{ name: 'tools', items: ['Maximize', 'ShowBlocks'] },
+				]
+			}
 		);
-		this._CKEditor.on('change', this.onChange.bind(this));
 		
-		this._CKEditor.on('instanceReady', function ( ev ) {
+		this._CKEditor.on('instanceReady', ( ev ) => {
 			me._ckComplete = true;
 			if ( !me._CKEditor || me._CKEditor !== ck ) {
 				ck.removeAllListeners();
 				ck.destroy(false);
 			}
+			this._CKEditor.on('change', this.onCkChange);
 			
 		});
 		this._CKEditor.on('openFileBrowser', ( target ) => {
@@ -185,9 +217,8 @@ export default class Html extends Component {
 		}
 	}
 	
-	onChange( v ) {//todo: skip some..
-		//debugger;
-		//this.props.value = v;
+	
+	onCkChange = ( v ) => {//todo: skip some..
 		this.props.onChange
 		&& this.props.onChange({
 			                       target: {
@@ -196,23 +227,6 @@ export default class Html extends Component {
 			                       }
 		                       });
 	}
-	
-	onCkChange = ( event, editor ) => {//todo: skip some..
-		//this.props.value = v;
-		this.props.onChange
-		&& this.props.onChange({
-			                       target: {
-				                       name : this.props.name,
-				                       value: editor.getData()
-			                       }
-		                       });
-	}
-	
-	ckConfig = {
-		//width : "100%",
-		//height: "100%",
-		toolbar: ["undo", "redo", "alignment", "bold", "italic", "blockQuote", "imageTextAlternative", "imageUpload", "heading", "imageStyle:full", "imageStyle:side", "link", "numberedList", "bulletedList", "mediaEmbed", "insertTable", "tableColumn", "tableRow", "mergeTableCells"]
-	};
 	textarea = React.createRef();
 	
 	render() {

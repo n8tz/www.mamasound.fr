@@ -1,0 +1,35 @@
+/*!
+ * Copyright (C) 2019 Nathanael Braun
+ * All rights reserved
+ *
+ *   @author : Nathanael Braun
+ *   @contact : n8tz.js@gmail.com
+ */
+
+.field_Color {
+  position: relative;
+  //min-height: 200px;
+  //overflow: visible !important;
+  height: 4em;
+
+  > .input {
+    //height: 100%;
+    text-align: center;
+    button {
+      @include use_hvCenteredContent();
+      padding-top: 10px;
+      height: 4em;
+      min-width: 4em;
+    }
+  }
+
+}
+
+.m-input-moment {
+  background: white;
+  //font-size: 10px;
+}
+
+.PopAnywhere_wrapper {
+  //display: inline-block;
+}

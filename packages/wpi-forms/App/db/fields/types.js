@@ -53,7 +53,7 @@ export default {
 		test        : /^[\w_\-\d]+$/
 	}),
 	datesList    : ( label, props ) => ({
-		formRenderer    : "PeriodList",
+		formRenderer: "PeriodList",
 		defaultProps: {
 			...(props || {})
 		},
@@ -61,7 +61,7 @@ export default {
 		test        : /^[\w_\-\d]+$/
 	}),
 	color        : ( label, props ) => ({
-		//formRenderer    : require('App/ui/fields/colorField'),
+		formRenderer: "Color",
 		defaultProps: {
 			type: "chrome",
 			...(props || {})
@@ -123,7 +123,7 @@ export default {
 			//etty        : etty,
 			allowTypeSelection: (typeof etty === 'string') ? [etty] : etty,
 			// defaultProps : true,
-			defaultValue: []
+			defaultValue      : []
 		}, filters),
 		label       : label || ("Liste de " + etty),
 		test        : /^[\w_\-\d]+$/

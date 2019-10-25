@@ -63,7 +63,7 @@ export default {
 		"useBackground"     : types.boolean("Afficher le background :", false),
 		"useGhostBackground": types.boolean("Afficher les ghosts flous :", false),
 		"background"        : types.media({ allowedTypes: ["Image", "Video"] }, "Background (gd image/video de fond (video LEGERE)):"),
-		"backgroundColor"   : types.labels("Couleur de fond :"),
+		"backgroundColor"   : types.color("Couleur de fond :"),
 		
 		"usePreviewImage"   : types.boolean("Afficher une image preview :", true),
 		"useBigPreviewImage": types.boolean("Afficher une l'image preview en grand :", false),
