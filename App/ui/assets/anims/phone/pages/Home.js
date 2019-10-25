@@ -41,6 +41,7 @@ export const page      = {
 	//overflowY: "auto",
 	//overflowX: "hidden",
 	transform: {
+		//translateZ: "0px",
 		//translateX: "-50%"
 	}
 };
@@ -90,7 +91,7 @@ export const Background        = {
 	left     : "50%",
 	bottom   : "25px",
 	width    : "100%",
-	height   : headerHeight,
+	height   : "100%",
 	//top     : 20,
 	transform: [
 		{
@@ -117,7 +118,7 @@ export const Highlighter       = {
 		},
 		{
 			//translateY: "0%",
-			//translateZ : "0px",
+			translateZ: "0px",
 			//rotateX   : "-10deg"
 		}
 	]
@@ -150,7 +151,7 @@ export const EventsBlock       = {
 	//top            : "100%",
 	//zIndex         : 1250,
 	//overflow       : 'hidden',
-	marginTop      : [headerHeight,50],
+	marginTop      : [headerHeight, 50],
 	transformOrigin: "center top",
 	transform      : [
 		//{
@@ -158,21 +159,20 @@ export const EventsBlock       = {
 		//},
 		{
 			//translateY: "80%",
-			//translateZ : "-50px",
+			translateZ: "0px",
 			//rotateX   : "-10deg"
 		}
 	]
 };
 export const EventMap          = {
-	position: "absolute",
-	right   : "0px",
-	
-	height         : ["20vh"],
-	width          : "100%",
+	position       : "absolute",
+	right          : "-100000px",
+	height         : [0],
+	width          : collWidth,
 	zIndex         : 100,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
-	top            : ["100vh", "-20vh"],
+	top            : [50],
 };
 export const PageBlock         = {
 	

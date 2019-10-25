@@ -48,20 +48,20 @@
 
     .title {
       position: fixed;
-      top: 0.75em;
+      top: 45px;
       width: 55%;
       max-width: 600px;
       left: calc(#{$focusSlidePadSize} + .25em);
       //padding-left: ;
       text-align: left;
-      font-size: 2em;
+      font-size: 1.5em;
       font-weight: bolder;
       font-family: $mainFontFamily;
       //border-top:solid 1px grey;
       //text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 5px #fff, 0 0 5px rgba(255, 255, 255, 0.4);
       transition: all 500ms;
       z-index: 10;
-      //border-bottom: solid 2px lightgrey;
+      border-bottom: solid 1px lightgrey;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
@@ -80,14 +80,14 @@
       //@include withScrollBar();
 
       position: absolute;
-      top: 4em;
+      top: 40px;
       width: 40vw;
       max-width: 600px;
       bottom: 150px;
       //left: 0;
-      //padding-top: 3em;
       //padding-bottom: 15vh;
       padding: 1em 1em 1em 1em;
+      padding-top: 55px;
       left: calc(#{$focusSlidePadSize} + .5em);
       overflow: hidden;
       //background: rgba(255, 255, 255, 0.61);
@@ -98,6 +98,7 @@
       direction: rtl;
       text-shadow: none;
       transition: all 500ms;
+      font-size: .85em;
 
       > .content {
         @include withTranspaMask();
@@ -178,19 +179,20 @@
       //background: linear-gradient(45deg, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 20%,rgba(255,255,255,0.71) 43%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
       //background: rgba(255, 255, 255, 0.6);
 
-      position: fixed;
-      top: 0.5em;
-      width: 40vw;
-      max-width: 600px;
+      position: absolute;
+      top: 30px;
+      width: 100%;
+      //max-width: 600px;
       left: 0em;
+      z-index: 100;
       padding-left: calc(#{$focusSlidePadSize} + .25em);
-      text-align: left;
+      text-align: center;
       font-size: 2em;
-      font-weight: lighter;
-      font-family: EmPower42;
+      //font-weight: lighter;
+      //font-family: EmPower42;
       //border-top:solid 1px grey;
       //text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 5px #fff, 0 0 5px rgba(255, 255, 255, 0.4);
-
+      text-transform: capitalize;
       border-bottom: solid 2px lightgrey;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -207,14 +209,15 @@
     .resume {
 
       position: absolute;
-      top: 0em;
-      width: 40vw;
-      max-width: 600px;
-      bottom: 0px;
-      left: 0;
+      top: 30px;
+      width: calc(100% - 20px);
+      //max-width: 600px;
+      bottom: 150px;
+      left: 30px;
+
       //padding-top: 3em;
       //padding-bottom: 15vh;
-      padding: 5em 1em 170px 3em;
+      padding: 70px 1em 10px 3em;
       padding-left: calc(#{$focusSlidePadSize} + 1.5em);
       overflow: hidden;
       margin: 5px;
@@ -224,11 +227,11 @@
 
       > .content {
         @include withScrollBar();
-        position: absolute;
+        //position: absolute;
         //@include withTranspaMask();
         left: 3px;
         right: 1px;
-        top: 3px;
+        top: 60px;
         bottom: 3px;
         padding-left: 5px;
         overflow: auto !important;

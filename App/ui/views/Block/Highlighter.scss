@@ -6,14 +6,29 @@
  *   @contact : n8tz.js@gmail.com
  */
 
-body.fixedHead .Highlighter {
-  position: fixed !important;
-  top: calc(-70vh + 210px) !important;
+body.fixedHead {
+  .Highlighter {
+    position: fixed !important;
+    top: calc(-70vh + 210px) !important;
+  }
+
+  .bigHead .Highlighter {
+
+    top: calc(-90vh + 210px) !important;
+  }
+
+}
+
+.bigHead .Highlighter {
+
+  height: 90vh !important;
 }
 
 .Highlighter {
   //touch-action: none;
   position: relative;
+  //height: 70vh !important;
+  transition: height 500ms;
 
   perspective: 200px;
   //height: 100%;
@@ -57,8 +72,8 @@ body.fixedHead .Highlighter {
   //}
   .Background {
     background: white;
-    @include withTranspaMask();
-    mask-size: 80vh;
+    //@include withTranspaMask();
+    mask-size: 100%;
   }
 
   img {

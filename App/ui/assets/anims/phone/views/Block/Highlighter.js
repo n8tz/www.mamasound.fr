@@ -5,10 +5,11 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import {headerHeight, headerMiniHeight, sliderHeight} from "../../vars";
+import {sliderHeight} from "../../vars";
 
 export const background = {
 	position : "absolute",
+	//transformOrigin: "0% 0%",
 	opacity  : 0,
 	transform: {
 		perspective: "200px",
@@ -42,11 +43,10 @@ export const focused    = {
 	//paddingBottom: [sliderHeight, 10],
 	//paddingTop   : headerMiniHeight,
 	left     : "50%",
-	height   : [headerHeight, -50, "-" + headerMiniHeight],
+	top      : [50],
 	//width    : '100vw',
 	opacity  : 1,
 	transform: [{
-		translateZ: "0%",
 		translateX: "-50%",
 	}, {}, { translateY: '0%' }]
 };

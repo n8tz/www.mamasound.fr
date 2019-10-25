@@ -5,14 +5,17 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
+.bigHead .EventList {
 
+  margin-top: calc(90vh + 20px) !important;
+}
 .EventList {
   //touch-action: none;
   position: relative;
   perspective: 200px;
   user-select: none;
   padding: 0 !important;
-
+  transition: margin-top 500ms;
   @media screen and (min-width: $tablet-landscape-breakpoint) {
     margin-left: 2px;
   }

@@ -91,7 +91,7 @@ export const Background        = {
 	left     : "50%",
 	bottom   : "25px",
 	width    : "100%",
-	height   : headerHeight,
+	height   : "100%",
 	//top     : 20,
 	transform: [
 		{

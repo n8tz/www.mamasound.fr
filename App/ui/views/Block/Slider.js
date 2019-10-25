@@ -54,7 +54,7 @@ export default class Slider extends React.Component {
 	static propTypes = {};
 	state            = {};
 	
-	selectFocus     =
+	selectFocus =
 		( e, i, slider ) => {
 			let {
 				    MountedItems: { items = [] } = {},
@@ -66,6 +66,7 @@ export default class Slider extends React.Component {
 				slider.goTo(i);
 			})
 		};
+	
 	pickNextFocused = rec => {
 		let {
 			    MountedItems: { items = [] } = {},

@@ -17,7 +17,7 @@ export const style          = {
 	position : "absolute",
 	width    : ["100%"],
 	left     : "0px",
-	top      : [headerHeight],
+	bottom   : -50,
 	height   : "50px",
 	zIndex   : 700,
 	//backgroundColor: "red",

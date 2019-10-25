@@ -32,8 +32,7 @@ export default class page extends React.Component {
 		    {
 			    big
 		    } = this.state;
-		//debugger;
-		return <div className={"bigSlide_article type_" + target._cls + " " + (big
+		return <div className={"bigSlide_article type_" + target._cls + " " + (big || record.useBigResume
 		                                                                       ? " bigView"
 		                                                                       : "smallView") + ' ' + className}>
 			<Editable id={record._id}/>
@@ -43,7 +42,8 @@ export default class page extends React.Component {
 			{record.useResume && <div className="resume">
 				{
 					target && !/^\s*$/.test(target.text || '') &&
-					<div className="content" dangerouslySetInnerHTML={{ __html: target.text }}
+					<div className="content"
+					     dangerouslySetInnerHTML={{ __html: big || record.useBigResume ? target.text : record.resume }}
 					     onClick={e => this.setState({ big: !big })}/> || ''
 				}
 			</div>}

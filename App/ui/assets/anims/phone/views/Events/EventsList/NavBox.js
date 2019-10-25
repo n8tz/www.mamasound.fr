@@ -5,7 +5,7 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import {footerMiniHeight, headerHeight, mapHeight} from "../../../vars";
+import {footerMiniHeight, mapHeight} from "../../../vars";
 
 let startPos      = 50,
     openDuration  = 50,
@@ -17,7 +17,7 @@ export const style          = {
 	position : "absolute",
 	width    : ["100%"],
 	left     : "0px",
-	top      : [headerHeight, 10],
+	bottom   : -60,
 	height   : "50px",
 	zIndex   : 700,
 	//backgroundColor: "red",

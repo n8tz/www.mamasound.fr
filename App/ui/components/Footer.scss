@@ -12,6 +12,10 @@
   width: 100vw;
   background: white;
   border-top: solid 1px rgba(0, 0, 0, 0.58);
+  @media screen and (max-width: $tablet-portrait-breakpoint) {
+    bottom: auto !important;
+    top:10px !important;
+  }
   //
   .maskContent {
     width: 100%;
@@ -34,9 +38,10 @@
       cursor: pointer;
       color: #1c1c1c;
 
-      img{
+      img {
         display: none;
       }
+
       &:hover {
         color: black;
       }

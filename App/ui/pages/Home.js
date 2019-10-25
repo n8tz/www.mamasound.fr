@@ -48,11 +48,11 @@ export default class Home extends React.Component {
 	
 	recordPosition = event => {
 		
-		//let { currentTheme, tweener, $actions } = this.props;
-		let scrollTop, normalizedScrollTop, switchPoint;
+		let { appState }                                    = this.props;
+		let scrollTop, normalizedScrollTop, switchPoint, vp = appState.selectedFocus ? 90 : 70;
 		
 		scrollTop           = document.body.parentElement.scrollTop;
-		switchPoint         = 70 - (210 / document.body.parentElement.offsetHeight) * 100;
+		switchPoint         = vp - (210 / document.body.parentElement.offsetHeight) * 100;
 		//console.log(tweener._.box.y);
 		normalizedScrollTop = Math.max(0, (((scrollTop) / document.body.parentElement.offsetHeight) * 100));
 		//console.log('scroll :', normalizedScrollTop, switchPoint)
@@ -96,7 +96,7 @@ export default class Home extends React.Component {
 		let { Styles, appState, currentTheme, appTheme, $actions, NavBox, appMenu } = this.props;
 		return <>
 			<TweenRef id={"page"} initial={Styles.page}>
-				<div className={"Home container"}>
+				<div className={"Home container " + (appState.selectedFocus ? "bigHead" : "")}>
 					
 					<TweenAxis
 						axe={"scrollY"}
