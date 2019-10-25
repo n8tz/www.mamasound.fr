@@ -14,21 +14,19 @@
  */
 'use strict';
 
-import React           from "react";
 import moment          from "moment";
-import AddToCalendar   from 'react-add-to-calendar';
+import React           from "react";
 import * as shareStuff from 'react-share';
-import {NavLink}       from "react-router-dom";
 
 
 let shareLinks = [
 	"Facebook",
 	"Linkedin",
 	"Twitter",
-	"Telegram",
+	//"Telegram",
 	"Whatsapp",
-	"Pinterest",
-	"Tumblr",
+	//"Pinterest",
+	//"Tumblr",
 ];
 
 export default (
@@ -39,30 +37,31 @@ export default (
 	}
 ) => {
 	//debugger;
-	return <div className={ "ShareBox" }>
-		<AddToCalendar event={ {
-			title      : event.title,
-			description: event.title,
-			location   : place && (place.label + ',' + (place.address && place.address.address || "Montpellier")) ||"Vers Montpellier",
-			startTime  : moment(event.startTM),
-			endTime    : moment(event.startTM).add(1, 'hour')
-		} }/>
-		<a href={ "sms:?body=" + encodeURI(shareBody) }>
-			Share via SMS
+	return <div className={"ShareBox"} onClick={e => e.stopPropagation()}>
+		{/*<AddToCalendar*/}
+		{/*	buttonLabel={"Ajouter au calendrier"}*/}
+		{/*	event={{*/}
+		{/*		title      : event.title,*/}
+		{/*		description: event.title,*/}
+		{/*		location   : place && (place.label + ',' + (place.address && place.address.address || "Montpellier")) || "Vers Montpellier",*/}
+		{/*		startTime  : moment(event.startTM),*/}
+		{/*		endTime    : moment(event.startTM).add(1, 'hour')*/}
+		{/*	}}/>*/}
+		<a href={"sms:?body=" + encodeURI(shareBody)}>
+			<img src={require('App/ui/assets/icons/sms.png')} className={"sIcon"}/>
 		</a>
-		<br/>
-		<a href={ "mailto://?body=" + encodeURI(shareBody) }
-		   target={ "_blank" }>
-			Share via mail
+		<a href={"mailto://?body=" + encodeURI(shareBody)}
+		   target={"_blank"}>
+			<img src={require('App/ui/assets/icons/email.png')} className={"sIcon"}/>
 		</a>
 		{
 			shareLinks.map(
 				id => {
 					let ShareLink = shareStuff[id + "ShareButton"],
 					    ShareIcon = shareStuff[id + "Icon"];
-					return <ShareLink url={ "http://www.mamasound.fr" } key={ id }>
+					return <ShareLink url={"http://www.mamasound.fr"} key={id}>
 						<ShareIcon
-							size={ 32 }
+							size={32}
 							round/>
 					</ShareLink>
 				}

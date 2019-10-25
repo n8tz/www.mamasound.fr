@@ -91,8 +91,8 @@ export default class eventItem extends React.Component {
 				</div>
 			}
 			{selected && <Comps.ShareBox event={record} place={record.place && refs[record.place.objId]}/>}
-			{!/^\s*$/.test(record.resume || '') &&
-			<div className="resume" dangerouslySetInnerHTML={{ __html: record.resume }}/> || ''}
+			{!/^\s*$/.test(record.resume || record.description || '') &&
+			<div className="resume" dangerouslySetInnerHTML={{ __html: record.resume || record.description }}/> || ''}
 		</div>
 			;
 	}
