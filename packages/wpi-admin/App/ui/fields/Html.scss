@@ -5,13 +5,33 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
+.ckUploadModal {
+  width: 400px;
+  height: 300px;
+  position: relative;
+
+  .field_Media {
+
+    position: absolute;
+    bottom: 30px;
+    right: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  > button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}
 
 .field_Html {
 
   > .input {
-    height: auto;
+    min-height: 300px;
 
-    > .ck-editor {
+    > .cke {
       height: 100%;
       width: 100%;
 

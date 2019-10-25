@@ -5,6 +5,17 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
+
+.bigSlide_article.bigView {
+  .resume .content{
+    pointer-events: none;
+  }
+}
+body.onTop .bigSlide_article.bigView {
+  .resume .content{
+    pointer-events: all !important;
+  }
+}
 .bigSlide_article {
   text-align: left;
   width: 100%;

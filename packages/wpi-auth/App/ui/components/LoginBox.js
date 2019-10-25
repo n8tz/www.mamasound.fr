@@ -8,10 +8,10 @@
 
 'use strict';
 
-import Dialog from '@material-ui/core/Dialog';
 
 import {Comps}            from 'App/ui';
 import React, {Component} from "react";
+import Modal              from 'react-responsive-modal';
 import {scopeToProps}     from "react-scopes";
 
 
@@ -50,10 +50,10 @@ export default class LoginBox extends Component {
 					</React.Fragment>
 					
 				}
-				<Dialog open={this.state.showModal}
-				        title='My awesome dialog'
-				        classes={{ paper: "LoginBoxDialog" }}
-				        onClose={() => this.setState({ showModal: false })}>
+				<Modal open={this.state.showModal}
+				       center
+				       styles={{ overlay: { zIndex: 200000000 } }}
+				       onClose={() => this.setState({ showModal: false })}>
 					<h1>Connexion</h1>
 					
 					<form onKeyPress={
@@ -83,7 +83,7 @@ export default class LoginBox extends Component {
 					<br/>
 					{/*<a className="loginBoxPasswordLost" onClick={this.doFindSubmit}>Mot de passe oublié</a>*/}
 					<button className="submit-input" onClick={this.doSubmit}>Connexion</button>
-				</Dialog>
+				</Modal>
 			</span>
 		)
 			;

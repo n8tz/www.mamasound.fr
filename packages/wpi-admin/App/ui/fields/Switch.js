@@ -7,7 +7,6 @@
  */
 
 import React            from "react";
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switcher         from '@material-ui/core/Switch';
 import {asFieldType}    from "App/ui/spells";
 

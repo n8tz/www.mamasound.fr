@@ -108,6 +108,7 @@ export default class App extends React.Component {
 				<link rel="stylesheet" type="text/css"
 				      href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
 				
+				<script src="/scripts/ckeditor/ckeditor.js"></script>
 				<script src="/jwplayer/jwplayer.js"></script>
 				<script
 					src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyA7XcGxipnIMdSSBJHn3tzeJe-fU3ilCak"></script>
