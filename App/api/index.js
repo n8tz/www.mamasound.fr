@@ -43,8 +43,6 @@ export function service( server ) {
 		}
 	);
 	
-	server.use(express.static(process.cwd() + '/static'));
-	server.use("/assets/static", express.static(process.cwd() + '/App/ui/assets/static'));
 	
 	server.get(
 		'*',

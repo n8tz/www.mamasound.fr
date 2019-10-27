@@ -135,6 +135,7 @@ export default class SearchBar extends React.Component {
 				<div className={"label"} onClick={this.toggleStyle}>Styles</div>
 				<Comps.Calendar startDate={appState.curDay}
 				                ref={this.calendar}
+				                calClassName={"search"}
 				                endDate={moment(appState.curDay).add(appState.dayCountByViewType[0], 'day')}
 				                onChange={this.handleDateChange}/>
 				{showPrice &&

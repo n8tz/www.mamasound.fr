@@ -7,7 +7,6 @@
  */
 import scopes               from 'App/scopes/(*).js';
 import {Views}              from 'App/ui';
-import moment               from "moment";
 import React                from "react";
 import RS, {asRef, asStore} from "react-scopes";
 
@@ -199,19 +198,11 @@ export default class EventMap extends React.Component {
 			return <div className={"EventMap"}/>
 		return (
 			<div className={"EventMap"} style={style}>
-				<div className={"NavTools"}>
-					{moment(day).format("dddd DD mmmm")}
-					{/*<span aria-label="edit" className={"newBtn button"}*/}
-					{/*     onClick={$actions.toggleUserGeoLocation}>*/}
-					{/*	{*/}
-					{/*		UserGeoLocation.activating &&*/}
-					{/*		<GpsNoFixedIcon/> ||*/}
-					{/*		UserGeoLocation.active &&*/}
-					{/*		<GpsFixedIcon/> ||*/}
-					{/*		<GpsOffIcon/>*/}
-					{/*	}*/}
-					{/*</span>*/}
-				</div>
+				
+				{/*{Selected.Event &&*/}
+				{/*<Views.Event.overlay record={Selected.Event} refs={$stores.DataProvider.data}*/}
+				{/*                     className={"previewBlock"}>*/}
+				{/*</Views.Event.overlay>}*/}
 				<div className={"mapContainer"} onDragStart={e => e.stopPropagation()}
 				     onMouseDown={e => e.stopPropagation()} onMouseMove={e => e.stopPropagation()}>
 					<Map center={center}
@@ -306,7 +297,7 @@ export default class EventMap extends React.Component {
 							                                   });
 						         }}
 						         onClick={e => {
-							         $actions.toggleTag(e.propagatedFrom.feature.properties.LIBSQUART)
+							         //$actions.toggleTag(e.propagatedFrom.feature.properties.LIBSQUART)
 						         }}/>
 					</Map>
 					

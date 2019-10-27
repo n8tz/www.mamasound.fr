@@ -162,7 +162,8 @@ export default class Home extends React.Component {
 								id={"logo"}
 								initial={Styles.logo}
 							>
-								<div className={"logo"}/>
+								<a className={"logo"} href={'/'}
+								   onClick={e => (e.stopPropagation(), e.preventDefault(), $actions.history_push('/'))}/>
 							</TweenRef>
 							{appTheme && appTheme.data && appTheme.data.menuSocial &&
 							<Views.Menu.menu id={appTheme.data.menuSocial.objId} className={"socialMenu"}/>}

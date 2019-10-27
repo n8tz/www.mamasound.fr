@@ -12,6 +12,7 @@ import {asFieldType}      from "App/ui/spells";
 import is                 from "is";
 import React, {Component} from "react";
 import {JsonTree}         from "react-editable-json-tree";
+//import CSSEditor from "@microsoft/fast-tooling-react/dist/css-editor";
 
 @asFieldType
 export default class Json extends Component {
@@ -66,18 +67,17 @@ export default class Json extends Component {
 					</div>
 				</div>
 				<div className={"content"}>
-				
-				{
-					(viewmode === "json")
-					&&
-					<JsonTree data={this.state.value} onFullyUpdate={this.onChange.bind(this)}/>
-					||
-					<textarea
-						ref="json" onChange={( e ) => this.onChange((Function("return " + e.target.value))())}
-						style={{ width: '100%', minHeight: '10em' }}>
+					{
+						(viewmode === "json")
+						&&
+						<JsonTree data={this.state.value} onFullyUpdate={this.onChange.bind(this)}/>
+						||
+						<textarea
+							ref="json" onChange={( e ) => this.onChange((Function("return " + e.target.value))())}
+							style={{ width: '100%', minHeight: '10em' }}>
                             {JSON.stringify(this.state.value, null, 2)}
                         </textarea>
-				}
+					}
 				</div>
 			</>
 		);

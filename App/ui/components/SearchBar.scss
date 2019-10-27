@@ -155,12 +155,18 @@
       }
     }
 
-    .group, .input {
+    .group {
       //@include use_hvCenteredContent();
-      flex-grow: 1;
+      width: 40%;
       position: relative;
       display: inline-block;
 
+      .input {
+        width: 100%;
+      }
+
+      @media screen and (max-width: $tablet-portrait-breakpoint) {
+      }
       //width: 100%;
       //background: #d6d6d6;
 
@@ -170,9 +176,15 @@
     }
 
     .filters {
-      flex-grow: 3;
+      width: 60%;
       @include use_hvCenteredContent();
       display: inline-block;
+      @media screen and (max-width: $tablet-portrait-breakpoint) {
+        font-size: 12px;
+        .Calendar {
+
+        }
+      }
       //width: 45%;
     }
 
@@ -224,6 +236,7 @@
   width: 100%;
   max-height: 150px;
   overflow: auto;
+  background: white;
 
   > span:first-child {
     margin-left: 65px;

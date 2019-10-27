@@ -42,32 +42,14 @@ export default {
 		//     author     : [validate.mandatory]
 	},
 	fields    : {
-		"_id": types.indexes,
-		//"pubFlag" : fields.publicationFlag,
-		
-		//"_public": types.boolean("Publier :", false),
-		
-		//"publishTs" : "<timestamp>",// ?
+		"_id"   : types.indexes,
 		"label" : types.labels(),
 		"resume": types.descriptions('Resumé'), // TODO refactor as "summary"
 		
 		"startTM": types.date("Début"),
 		"endTM"  : types.date("Fin"),
 		
-		"useTitle"    : types.boolean("Afficher le titre :", true),
-		"useResume"   : types.boolean("Afficher le résumé :", true),
-		"useBigResume": types.boolean("Afficher le résumé en grand direct:", false),
-		
 		"sliderImage": types.media({ allowedTypes: "Image" }, "Slide (~12/5 fb headers):"),
-		
-		"useBackground"     : types.boolean("Afficher le background :", false),
-		"useGhostBackground": types.boolean("Afficher les ghosts flous :", false),
-		"background"        : types.media({ allowedTypes: ["Image", "Video"] }, "Background (gd image/video de fond (video LEGERE)):"),
-		"backgroundColor"   : types.color("Couleur de fond :"),
-		
-		"usePreviewImage"   : types.boolean("Afficher une image preview :", true),
-		"useBigPreviewImage": types.boolean("Afficher une l'image preview en grand :", false),
-		"previewImage"      : types.media({ allowedTypes: "Image" }, "Preview:"),
 		
 		"website"   : types.labels("Site web :"),
 		"fbPage"    : types.labels("Page Facebook :"),
@@ -77,6 +59,24 @@ export default {
 			allowTypeSelection: ["Concert", "Theatre", "Expo", "Event", "Article", "Collection", "Video", "Page"],
 			storeTypedItem    : true,
 		}, "Contenu cible :"),
+		
+		"hideTitle"         : types.boolean("Cacher le titre :", true),
+		"hideResume"        : types.boolean("Cacher le résumé :", false),
+		"useBigResume"      : types.boolean("Afficher le résumé en grand direct:", false),
+		"titleStyle"        : types.json("titleStyle :"),
+		"resumeStyle"       : types.json("resumeStyle :"),
+		"resumeContentStyle": types.json("resumeContentStyle :"),
+		
+		"useBackground"     : types.boolean("Afficher le background :", false),
+		"useGhostBackground": types.boolean("Afficher les ghosts flous :", false),
+		"background"        : types.media({ allowedTypes: ["Image", "Video"] }, "Background (gd image/video de fond (video LEGERE)):"),
+		"backgroundColor"   : types.color("Couleur de fond :"),
+		
+		"usePreviewImage"   : types.boolean("Afficher une image preview :", true),
+		"useBigPreviewImage": types.boolean("Afficher une l'image preview en grand :", false),
+		"previewImage"      : types.media({ allowedTypes: "Image" }, "Preview:"),
+		"previewStyle"      : types.json("previewStyle :"),
+		
 		
 	}
 };

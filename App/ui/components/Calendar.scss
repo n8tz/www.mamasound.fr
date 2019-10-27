@@ -12,6 +12,19 @@
 
   .datePeriod {
     cursor: pointer;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    @media screen and (max-width: $tablet-portrait-breakpoint) {
+      color: transparent;
+      width: 64px;
+      &:before {
+        @include use_hvCenteredAbs();
+        content: '📅';
+        color: black;
+      }
+    }
   }
 
   .PopAnywhere {
@@ -26,7 +39,22 @@
     z-index: 100;
   }
 }
+
 .m-input-moment {
   //position: absolute;
   background: white;
+
+  &.search {
+    .tab {
+      height: 270px;
+    }
+
+    .btn-save {
+      display: none;
+    }
+
+    .options {
+      display: none;
+    }
+  }
 }

@@ -74,6 +74,7 @@ export const showAnim              = [
 		duration: 75,
 		easeFn  : "easeSinOut",
 		apply   : {
+			zIndex:50,
 			opacity  : 1,
 			transform: [{}, {
 				//translateZ: "50px",
@@ -106,6 +107,7 @@ export const hideAnim              = [
 		duration: 50, easeFn: "easeSinOut",
 		
 		apply: {
+			zIndex:-50,
 			opacity  : -1,
 			transform: [{}, {
 				//rotateY: "90deg",

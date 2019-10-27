@@ -6,8 +6,9 @@
  *   @contact : n8tz.js@gmail.com
  */
 import "App/console";
-import "core-js";
+//import "core-js";
 import "core-js/es/object/assign";
+import "core-js/es/promise";
 import "core-js/features/object/from-entries";
 import React              from "react";
 import ReactDom           from 'react-dom';
@@ -19,7 +20,6 @@ import "regenerator-runtime/runtime";
 import shortid            from 'shortid';
 import Index              from "./index.html";
 import AppScope           from './scopes/App';
-//import AppContext           from 'App/context';
 
 const ctrl = {
 	

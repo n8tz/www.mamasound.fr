@@ -5,7 +5,7 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import {collWidth, footerMiniHeight, headerHeight, mapHeight} from "../../../vars";
+import {collWidth, footerMiniHeight, mapHeight} from "../../../vars";
 
 let startPos      = 50,
     openDuration  = 50,
@@ -46,7 +46,7 @@ export const typesNav       = {
 	position : "absolute",
 	width    : ["100%", "-" + collWidth, -30],
 	//bottom   : "0px",
-	left     : "0px",
+	left     : "10px",
 	bottom   : 0,
 	height   : "40px",
 	transform: {

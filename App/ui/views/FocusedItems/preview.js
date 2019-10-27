@@ -115,6 +115,7 @@ export default (
 			<TweenRef
 				initial={
 					{
+						...record.previewStyle,
 						//"position": "absolute",
 						//top       : ["0%", "3.5em"],
 						//left      : "0%",

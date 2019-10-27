@@ -19,7 +19,7 @@ else {
 console.warn("baseDomain",baseDomain)
 export default {
 	STATIC_URL      : baseDomain + "/medias",//"static.mamasound.fr",
-	PUBLIC_URL      : "mamasound.fr",
+	PUBLIC_URL      : baseDomain,
 	ROOT_DOMAIN     : baseDomain,
 	UPLOAD_URL      : baseDomain + "/upload",
 	MEDIA_URL       : baseDomain + "/medias",

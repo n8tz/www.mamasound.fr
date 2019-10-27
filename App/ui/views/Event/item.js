@@ -27,12 +27,20 @@ let defaultPreview = {
 };
 
 export default class eventItem extends React.Component {
+	state = {};
+	
 	render() {
 		let { record, refs, selected, onClick, onTap, currentDate = record.realPeriod } = this.props,
+		    { big }                                                                     = this.state,
 		    start                                                                       = moment(currentDate && currentDate.startTM),
 		    end                                                                         = moment(currentDate && currentDate.endTM);
-		return <div className={"Event Event_item Event" + record._cls + ' ' + (selected ? "selected" : "")}
-		            onClick={onClick}
+		return <div className={"Event Event_item Event" + record._cls + ' ' + (selected ? "selected" : "") + ' ' + (big
+		                                                                                                            ? " big"
+		                                                                                                            : "")}
+		            onClick={e => {
+			            big && this.setState({ big: false });
+			            onClick(e);
+		            }}
 		>
 			<Editable id={record._id}/>
 			{
@@ -86,13 +94,23 @@ export default class eventItem extends React.Component {
 			</div>
 			{
 				record.place && refs[record.place.objId] &&
-				<div className="place">
+				refs[record.place.objId].address &&
+				<a className="place"
+				   target={"_blank"}
+				   href={"https://www.google.fr/maps/search/" + (refs[record.place.objId].address.address)}>
 					( {refs[record.place.objId].label} )
-				</div>
+				</a>
 			}
 			{selected && <Comps.ShareBox event={record} place={record.place && refs[record.place.objId]}/>}
 			{!/^\s*$/.test(record.resume || record.description || '') &&
-			<div className="resume" dangerouslySetInnerHTML={{ __html: record.resume || record.description }}/> || ''}
+			<div className="resume" dangerouslySetInnerHTML={{
+				__html: !big
+				        ? record.resume || record.description
+				        : record.description || record.resume
+			}}/> || ''}
+			{record.description && <div className="more material-icons"
+			                            onClick={e => (e.stopPropagation(), e.preventDefault(), this.setState({ big: true }))}>add
+			</div>}
 		</div>
 			;
 	}

@@ -69,6 +69,7 @@ export default class Calendar extends React.Component {
 				<Comps.PopAnywhere hovering={open} onClickOut={this.toggle}>
 					<InputMoment moment={moment(startDate)}
 					             onSave={this.toggle}
+					             className={this.props.calClassName}
 					             onChange={this.onChange}
 						//dayLabels={DAY_LABELS}
 						//timezone={"Europe/Paris"}

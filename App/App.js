@@ -5,8 +5,7 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import {Views}                       from "App/ui";
-import Widget                        from 'App/ui/components/Widget.js';
+import {Comps, Views}                from "App/ui";
 import Editable                      from "App/ui/Editable";
 import Pages                         from "App/ui/pages/(*).js";
 import moment                        from "moment";
@@ -108,7 +107,7 @@ export default class App extends React.Component {
 				<link rel="stylesheet" type="text/css"
 				      href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
 				{
-					__IS_ADMIN__ &&
+					CurrentUser && CurrentUser.isAdmin &&
 					<script src="/scripts/ckeditor/ckeditor.js"></script>
 				}
 				<script src="/scripts/jwplayer/jwplayer.js"></script>
@@ -147,11 +146,11 @@ export default class App extends React.Component {
 					widgets.items.map(
 						widget => {
 							let WidgetComp = Views.Widget[widget.type] || 'div';
-							return <Widget key={widget._id} record={widget}
-							               onSelect={e => $actions.selectWidget(widget._id)}
-							               selected={widget._id === appState.selectedWidgetId}>
+							return <Comps.Widget key={widget._id} record={widget}
+							                     onSelect={e => $actions.selectWidget(widget._id)}
+							                     selected={widget._id === appState.selectedWidgetId}>
 								<WidgetComp record={widget} {...widget.props}/>
-							</Widget>
+							</Comps.Widget>
 						}
 					)
 				}

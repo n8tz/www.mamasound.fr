@@ -110,4 +110,23 @@ body.fixedHead {
     }
   }
 
+  .cDayOverlay {
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    right: 0;
+    background: $focusedColor !important;
+    color: $focusedTextColor;
+
+    text-align: left;
+    font-size: 18px;
+
+    font-weight: bolder;
+    font-family: $mainFontFamily;
+    //opacity: .9;
+    padding-top: .1em;
+    padding-left: 25px;
+    text-transform: capitalize;
+    font-style: italic;
+  }
 }

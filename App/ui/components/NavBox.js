@@ -5,7 +5,9 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import React          from "react";
+import moment from "moment";
+import React  from "react";
+
 import {scopeToProps} from "react-scopes";
 import {TweenRef}     from "react-voodoo";
 import {ContextMenu}  from "../../App";
@@ -22,7 +24,8 @@ export default class NavBox extends React.Component {
 			    appState,
 			    $actions
 		    }     = this.props,
-		    state = this.state;
+		    state = this.state,
+		    day   = appState.curVisibleDay || appState.curDay;
 		return (
 			<div className={"NavBox"} style={style}>
 				<div className={"content container"}>
@@ -64,14 +67,22 @@ export default class NavBox extends React.Component {
 									</Comps.StretchBox>
 							)
 						}
+						<div className={"cDayOverlay"}>
+							{(moment(day).isSame(moment(), 'week'))
+							&&
+							moment(day).calendar(moment(), {
+								sameDay : '[Aujourd\'hui]',
+								nextDay : '[Demain]',
+								nextWeek: 'dddd',
+								lastDay : '[hier]',
+								lastWeek: 'dddd [dernier]',
+								sameElse: '[Le ]DD/MM/YYYY'
+							})
+							||
+							(moment(day).format("dddd DD MMMM YYYY"))}
+						</div>
 					</TweenRef.div>
-					{/*<div className={"cDay"}>*/}
-					{/*	Cette semaine :*/}
-					{/*	{*/}
-					{/*		//(moment(day).format("dddd DD MMMM YYYY"))*/}
-					{/*	}*/}
-					{/*</div>*/}
-					
+				
 				
 				</div>
 			</div>

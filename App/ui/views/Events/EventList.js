@@ -5,11 +5,11 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import {Comps, Views}       from 'App/ui';
-import moment               from "moment";
-import React                from "react";
-import {scopeToProps}       from "react-scopes";
-import {domTools, TweenRef} from "react-voodoo";
+import {Comps, Views} from 'App/ui';
+import moment         from "moment";
+import React          from "react";
+import {scopeToProps} from "react-scopes";
+import {TweenRef}     from "react-voodoo";
 
 @scopeToProps("appState", "ActiveTags", "Styles.views.Events.EventsList:Styles", "UserGeoLocation")
 export default class EventList extends React.Component {
@@ -76,13 +76,20 @@ export default class EventList extends React.Component {
 				"scroll",
 				this._scrollList = ( e ) => {//@todo
 					let allDays = document.querySelectorAll(".EventList  .DayEvents"),
-					    cDay,
-					    cPos    = element.scrollTop;
+					    cDay, offset,
+					    cPos    = element.scrollTop + 274, elem;
 					
 					for ( let i = 0; i < allDays.length; i++ ) {
-						if ( (cPos) <= (allDays[i].offsetTop + allDays[i].offsetHeight) )
-							break;
+						elem   = allDays[i];
+						offset = allDays[i].offsetHeight
+						while ( elem ) {
+							offset += elem.offsetTop + elem.scrollTop;
+							elem = elem.offsetParent;
+						}
 						cDay = allDays[i].dataset.dt;
+						//console.log('EventList::_scrollList:82: ', i, cPos, offset);
+						if ( (cPos) <= (offset) )
+							break;
 					}
 					cDay && $actions.updateCurrentVisibleDay(parseInt(cDay));
 				}

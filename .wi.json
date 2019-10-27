@@ -72,7 +72,7 @@
           "material-ui": "@material-ui/core"
         }
       },
-      "babelInclude": "(ansi\\-regex|strip\\-ansi)",
+      "babelInclude": "(ansi\\-regex|tui\\-image\\-editor|strip\\-ansi|\\@microsoft\\/fast\\-tooling\\-react)",
       "babelPreset": {
         "targets": {
           "browsers": "> 0.25%, not dead, safari >= 6, ios >= 6, chrome >= 52"
@@ -98,7 +98,7 @@
       "targetDir": "dist/admin",
       "extractCss": true,
       "production": true,
-      "babelInclude": "(ansi\\-regex|strip\\-ansi)",
+      "babelInclude": "(ansi\\-regex|tui\\-image\\-editor|strip\\-ansi|\\@microsoft\\/fast\\-tooling\\-react)",
       "DefinePluginCfg": {
         "__IS_DEV__": false,
         "__IS_ADMIN__": true,
@@ -139,7 +139,7 @@
         "__IS_ADMIN__": true,
         "__IS_SERVER__": false
       },
-      "babelInclude": "(ansi\\-regex|strip\\-ansi|tui\\-image\\-editor)",
+      "babelInclude": "(ansi\\-regex|tui\\-image\\-editor|strip\\-ansi|\\@microsoft\\/fast\\-tooling\\-react)",
       "babelPreset": {
         "targets": {
           "browsers": "> 0.25%, not dead, safari >= 6, ios >= 6, chrome >= 52"

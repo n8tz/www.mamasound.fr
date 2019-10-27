@@ -29,6 +29,7 @@ export function service( server ) {
 	//
 	//let localMedias = express.static(path.join(process.cwd(), config.UPLOAD_DIR));
 	server.use(express.static(process.cwd() + '/static'));
+	server.use("/assets/static", express.static(process.cwd() + '/App/ui/assets/static'));
 	server.use("/medias", express.static(path.join(process.cwd(), config.UPLOAD_DIR)));
 	
 	//server.use("/medias", ( req, res, next ) => {

@@ -37,6 +37,9 @@ header {
   border-bottom: solid 2px black;
   //overflow: hidden;
   > .topMenu {
+    @media screen and (max-width: $tablet-portrait-breakpoint) {
+      display: none;
+    }
     position: absolute;
     top: 100%;
     left: 50%;

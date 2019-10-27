@@ -69,6 +69,8 @@ export default class $history extends Store {
 			
 			this.$stores.appState
 			    .setState({
+				              selectedEventId: null,
+				              selectedEventDT: null,
 				              selectedEvent: null,
 				              selectedFocus: null
 			              })

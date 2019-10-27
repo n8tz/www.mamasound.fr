@@ -26,6 +26,7 @@
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
     "@material-ui/styles": "^4.4.3",
+    "@microsoft/fast-tooling-react": "^1.22.2",
     "@toast-ui/react-image-editor": "^1.0.1",
     "ag-grid": "^18.1.2",
     "ag-grid-community": "^20.1.0",

@@ -1,0 +1,58 @@
+/*!
+ * Copyright (C) 2019 Nathanael Braun
+ * All rights reserved
+ *
+ *   @author : Nathanael Braun
+ *   @contact : n8tz.js@gmail.com
+ */
+
+
+.Event_overlay {
+  .botBlock {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10%;
+  }
+
+  .topBlock {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    @include withTranspaMask();
+    display: flex;
+
+    .name {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .preview {
+      display: inline-block;
+      width: 40%;
+      position: relative;
+
+      img {
+        //@include use_hvCenteredAbs();
+        //transform: translateX(-50%);
+        height: 100%;
+        //width: 100%;
+      }
+    }
+
+    .address {
+      display: inline-block;
+      padding-top: 20px;
+      width: 60%;
+    }
+
+  }
+}

@@ -37,13 +37,13 @@ export default class page extends React.Component {
 		                                                                       ? " bigView"
 		                                                                       : "smallView") + ' ' + className}>
 			<Editable id={record._id}/>
-			{record.useTitle && <div className="title">
+			{!record.hideTitle && <div className="title" style={record.titleStyle}>
 				{record.label || target && (target.title || target.label)}
 			</div>}
-			{record.useResume && <div className="resume">
+			{!record.hideResume && <div className="resume" style={record.resumeStyle}>
 				{
 					resume && !/^\s*$/.test(resume || '') &&
-					<div className="content"
+					<div className="content" style={record.resumeContentStyle}
 					     dangerouslySetInnerHTML={{ __html: resume }}
 					     onClick={e => this.setState({ big: !big })}/> || ''
 				}
