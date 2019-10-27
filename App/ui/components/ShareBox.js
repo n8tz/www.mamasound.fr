@@ -21,7 +21,7 @@ import * as shareStuff from 'react-share';
 
 let shareLinks = [
 	"Facebook",
-	"Linkedin",
+	//"Linkedin",
 	"Twitter",
 	//"Telegram",
 	"Whatsapp",

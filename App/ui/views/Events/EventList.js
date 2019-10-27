@@ -77,20 +77,25 @@ export default class EventList extends React.Component {
 				this._scrollList = ( e ) => {//@todo
 					let allDays = document.querySelectorAll(".EventList  .DayEvents"),
 					    cDay, offset,
-					    cPos    = element.scrollTop + 274, elem;
+					    cPos    = element.scrollTop + 275, elem;
 					
 					for ( let i = 0; i < allDays.length; i++ ) {
 						elem   = allDays[i];
-						offset = allDays[i].offsetHeight
+						offset = 0
+						
 						while ( elem ) {
 							offset += elem.offsetTop + elem.scrollTop;
 							elem = elem.offsetParent;
 						}
-						cDay = allDays[i].dataset.dt;
-						//console.log('EventList::_scrollList:82: ', i, cPos, offset);
-						if ( (cPos) <= (offset) )
+						if ( !cDay && allDays[i].offsetHeight )
+							cDay = allDays[i].dataset.dt;
+						
+						if ( allDays[i].offsetHeight && (cPos) <= (offset) )
 							break;
+						
+						cDay = allDays[i].dataset.dt;
 					}
+					//console.log('EventList::_scrollList:82: ', cPos, offset);
 					cDay && $actions.updateCurrentVisibleDay(parseInt(cDay));
 				}
 			);
@@ -105,7 +110,9 @@ export default class EventList extends React.Component {
 	
 	componentDidUpdate() {
 		this.scrollToSelected();
-		this.watchCurrentDayFromScroll();
+		//this.watchCurrentDayFromScroll();
+		this._scrollList();
+		setTimeout(tm => this._scrollList(), 500)
 	}
 	
 	componentWillUnmount() {

@@ -6,11 +6,15 @@
  *   @contact : n8tz.js@gmail.com
  */
 
-import stores from 'App/stores/(*).js';
-import moment from "moment";
-
+import stores                         from 'App/stores/(*).js';
+import moment                         from "moment";
 import {asRef, asStore, withStateMap} from "react-scopes";
+import striptags                      from "striptags";
 import whichPoly                      from "which-polygon";
+
+const Entities = require('html-entities').AllHtmlEntities;
+
+const entities = new Entities();
 
 
 export default {
@@ -30,8 +34,8 @@ export default {
 			    }    = state,
 			    from = moment(curDay).startOf('day').add(2, 'hour').valueOf(),
 			    to   = moment(curDay).endOf('day').add(2, 'hour').valueOf();
-			console.log(moment(curDay).startOf('day').add(2, 'hour').format())
-			console.log(moment(curDay).endOf('day').add(2, 'hour').format())
+			//console.log(moment(curDay).startOf('day').add(2, 'hour').format())
+			//console.log(moment(curDay).endOf('day').add(2, 'hour').format())
 			return {
 				curDay: from,
 				type,
@@ -170,7 +174,7 @@ export default {
 		selectedTags: "TagManager.selected",
 		$apply( data = {}, { items, filter, refs, geoJson, curDay, type, selectedTags } ) {
 			
-			let filterRE     = filter && new RegExp(filter.replace(/[^\w]+/ig, '.+'), 'ig'),
+			let filterRE     = filter && new RegExp(filter.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^\w]+/ig, '.+'), 'ig'),
 			    geoQuery     = this.geoQuery = this.geoQuery || whichPoly(geoJson),
 			    tags         = [],
 			    seen         = {},
@@ -302,11 +306,11 @@ export default {
 					
 					
 					if ( filter ) {
-						doKeep = doKeep && filterRE.test(item.title);
-						if ( item.text )
-							doKeep = doKeep && filterRE.test(item.text);
-						if ( item.category && refs[item.category.objId] )
-							doKeep = doKeep && filterRE.test(refs[item.category.objId].name);
+						let text = entities.decode(striptags(item.title + ' ' + item.resume + ' ' + item.description + ' ' + (item.category && refs[item.category.objId]
+						                                                                                                      ? refs[item.category.objId].name
+						                                                                                                      : "")
+						)).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[\n\r]/g, " ");
+						doKeep   = doKeep && filterRE.test(text);
 					}
 					
 					if ( filterPrice ) {
@@ -318,7 +322,8 @@ export default {
 						);
 					}
 					
-					if ( place && filterArea ) {
+					if ( place && filterArea
+					) {
 						doKeep = doKeep && selectedTags.find(t => (t.type === "area" && t.label === place.quartier))
 					}
 					
@@ -371,9 +376,9 @@ export default {
 				b = b.haveVerni && b.verniTM || b.realPeriod.startTM;
 				return a - b;
 			});
-			//debugger
+//debugger
 			tags.length && this.$actions.registerTags(tags);
-			//newItems
+//newItems
 			return {
 				tags,
 				items: newItems,
@@ -385,46 +390,50 @@ export default {
 	
 	
 	@asStore
-	ActiveTags: {
-		//@asRef
-		//TagManager: "TagManager",
-		@asRef
-		events: "!Queries.events",
-		
-		$apply( data = {}, { events: { items = [], refs } }, { events } ) {
-			let tags, seen = {}, styles = {};
-			if ( !events )
-				return data;
-			data && data.tags && data.tags.length && this.$actions.unRegisterTags(data.tags);
+	ActiveTags:
+		{
+			//@asRef
+			//TagManager: "TagManager",
+			@asRef
+			events:
+				"!Queries.events",
 			
-			items.forEach(
-				event => {
-					let style = event.category && refs[event.category.objId];
-					style && style.name
-					              .replace(/([\.\(\)\/\\]+)/ig, '|')
-					              .split('|')
-					              .filter(t => (!/^\s*$/.test(t)))
-					              .filter(t => (seen[t] && seen[t]++ || (seen[t] = 1, true)))
-					              //.filter(console.log)
-					              .forEach(t => (styles[t] = styles[t] || style))
-				}
-			)
-			tags = Object
-				.keys(seen)
-				//.filter(t => (!!styles[t]))
-				.map(tag => ({
-					label: tag,
-					type : "style",
-					style: styles[tag] || {},
-					count: seen[tag]
-				}));
-			//this.$scope.mount("TagManager");
-			tags.length && this.$actions.registerTags(tags);
-			//console.log(tags, seen)
-			return {
-				tags,
-			};
-		},
-		
-	},
+			$apply( data = {}, { events: { items = [], refs } }, { events } ) {
+				let tags, seen = {}, styles = {};
+				if ( !events )
+					return data;
+				data && data.tags && data.tags.length && this.$actions.unRegisterTags(data.tags);
+				
+				items.forEach(
+					event => {
+						let style = event.category && refs[event.category.objId];
+						style && style.name
+						              .replace(/([\.\(\)\/\\]+)/ig, '|')
+						              .split('|')
+						              .filter(t => (!/^\s*$/.test(t)))
+						              .filter(t => (seen[t] && seen[t]++ || (seen[t] = 1, true)))
+						              //.filter(console.log)
+						              .forEach(t => (styles[t] = styles[t] || style))
+					}
+				)
+				tags = Object
+					.keys(seen)
+					//.filter(t => (!!styles[t]))
+					.map(tag => ({
+						label: tag,
+						type : "style",
+						style: styles[tag] || {},
+						count: seen[tag]
+					}));
+				//this.$scope.mount("TagManager");
+				tags.length && this.$actions.registerTags(tags);
+				//console.log(tags, seen)
+				return {
+					tags,
+				};
+			}
+			,
+			
+		}
+	,
 }
