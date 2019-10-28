@@ -39,12 +39,12 @@ export default class eventItem extends React.Component {
 	render() {
 		let {
 			    record, record: { title, place, category },
-			    refs, selected, onClick, onTap, currentDate = record.realPeriod
+			    refs, selected, onClick, appState, currentDate = record.realPeriod
 		    }       = this.props,
 		    { big } = this.state,
 		    start   = moment(currentDate && currentDate.startTM),
 		    end     = moment(currentDate && currentDate.endTM),
-		    url     = "http://" + config.PUBLIC_URL + "/" + record._cls + '/' + moment(start).format("DD-MM-YY")
+		    url     = "http://" + config.PUBLIC_URL + "/" + appState.viewTypeList[appState.viewType] + '/' + moment(start).format("DD-MM-YY")
 			    + "/" + (record._alias || record._id);
 		
 		let preview = record.previewImage || (place && refs[place.objId] && refs[place.objId].previewImage || category && refs[category.objId] && refs[category.objId].icon)
@@ -54,7 +54,7 @@ export default class eventItem extends React.Component {
 		            onClick={e => {
 			            big && this.setState({ big: false });
 			            onClick(e);
-		            }}
+		            }} id={selected && "selected"}
 		>
 			<Editable id={record._id}/>
 			{

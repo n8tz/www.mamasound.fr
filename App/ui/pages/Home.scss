@@ -77,6 +77,7 @@ header {
 
     img {
       height: 32px;
+      padding-right: 5px;
     }
 
     //border-bottom-left-radius: 25px 20px;
@@ -89,7 +90,7 @@ header {
     //background-size: auto 100%;
     background-position: center center;
     height: 100%;
-    filter: invert(100%);
+    //filter: invert(100%);
     display: inline-block;
     width: 100%;
 

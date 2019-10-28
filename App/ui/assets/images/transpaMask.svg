@@ -10,10 +10,10 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="3000"
+   width="30000"
    height="3000"
    version="1.1"
-   viewBox="0 0 793.74998 793.74998"
+   viewBox="0 0 7937.4998 793.74998"
    id="svg15"
    sodipodi:docname="transpaMask.svg"
    inkscape:version="0.92.3 (2405546, 2018-03-11)">
@@ -31,7 +31,7 @@
      id="namedview17"
      showgrid="false"
      inkscape:zoom="0.396"
-     inkscape:cx="723.43676"
+     inkscape:cx="1295.2042"
      inkscape:cy="1466.1203"
      inkscape:window-x="1977"
      inkscape:window-y="-8"
@@ -116,7 +116,7 @@
        xlink:href="#linearGradient1376-4"
        id="linearGradient831"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(3.4831489,0,0,0.97636665,-737.37123,-875.48533)"
+       gradientTransform="matrix(34.753088,0,0,0.99948048,-7356.0485,-896.21096)"
        x1="140.97636"
        y1="144.80516"
        x2="140.97636"
@@ -130,17 +130,17 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <rect
      transform="scale(-1)"
-     x="-795.64746"
-     y="-775.39386"
-     width="795.54059"
-     height="775.39386"
+     x="-7937.5"
+     y="-793.75"
+     width="7937.5"
+     height="793.75"
      ry="0"
      id="rect829"
-     style="fill:url(#linearGradient831);fill-opacity:1;stroke:none;stroke-width:1.86871994" />
+     style="fill:url(#linearGradient831);fill-opacity:1;stroke:none;stroke-width:5.97221708" />
 </svg>

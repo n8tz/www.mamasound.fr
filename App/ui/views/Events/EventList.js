@@ -46,17 +46,33 @@ export default class EventList extends React.Component {
 		let {
 			    $actions,
 			    appState, $scope
-		    }       = this.props,
-		    element = document.querySelector(".EventList *[aria-hidden=false] .selected");
-		if ( element ) {
-			let
-				parent       = document.querySelector(".EventList *[aria-hidden=false] .EventNav"),
-				elemPos      = element.offsetTop,
-				scrollHeight = parent.scrollHeight;
-			parent.scrollTo({
-				                top     : elemPos - 60,
-				                behavior: 'smooth',
-			                });
+		    }    = this.props,
+		    elem = document.querySelector(" .type_" + this.props.appState.viewType + " .Event_item.selected");
+		if ( elem ) {
+			let offset = 0;//this.props.appState.selectedEventId?180:0;
+			console.log(elem)
+			while ( elem ) {
+				offset += elem.offsetTop;
+				elem = elem.offsetParent;
+			}
+			if ( this.lastPos && this.lastPos < offset ) {
+				this.lastPos = offset;
+				offset -= 160;
+			}
+			else
+			{
+				this.lastPos = offset;
+				if (!this.lastPos)
+					offset -= 160;
+			}
+			//document.body.parentElement.scrollTo(offset - 200)
+			document.body.parentElement.scrollTo({
+				                                     top     : offset - 300,
+				                                     behavior: 'smooth'
+			                                     })
+		}
+		else {
+			//setTimeout(this.scrollToSelected, 50)
 		}
 	};
 	/**
@@ -106,15 +122,27 @@ export default class EventList extends React.Component {
 		//this.isBotListIsInViewport()
 		this.watchCurrentDayFromScroll();
 		
+		if ( this.props.appState.selectedEvent ) {
+			
+			//this.scrollToSelected();
+			setTimeout(this.scrollToSelected, 500)
+		}
+		
 	}
 	
-	componentDidUpdate() {
-		this.scrollToSelected();
+	componentDidUpdate( prevProps, prevState, snapshot ) {
+		//this.scrollToSelected();
 		//this.watchCurrentDayFromScroll();
-		this._scrollList();
-		setTimeout(tm => this._scrollList(), 500)
-		setTimeout(tm => this._scrollList(), 1000)
-		setTimeout(tm => this._scrollList(), 1500)
+		//this._scrollList();
+		setTimeout(tm => this._scrollList(), 500);
+		setTimeout(tm => this._scrollList(), 1000);
+		
+		if ( prevProps.appState.selectedEvent !== this.props.appState.selectedEvent ) {
+			
+			//this.scrollToSelected();
+			setTimeout(this.scrollToSelected, 50)
+		}
+		
 	}
 	
 	componentWillUnmount() {
@@ -146,6 +174,7 @@ export default class EventList extends React.Component {
 							<Comps.Slider
 								{...Styles.EventCatSlider}
 								index={appState.viewType}
+								defaultIndex={appState.viewType}
 								autoHeight={true}
 								onChange={$actions.setCurStyleTab}
 								className={"EventCatSlider "}

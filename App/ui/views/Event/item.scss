@@ -51,16 +51,18 @@
     content: ' ';
     background: url('../assets/images/mapIcon.png') center no-repeat / cover;
     position: absolute;
-    height: 6em;
-    width: 4em;
+    height: 5em;
+    width: 3.5em;
     left: 1em;
-    top: -2em;
+    top: -1.5em;
   }
 
   .Place_mini {
     //background: transparent !important;
     //pointer-events: none;
-    display: none;
+    //display: none;
+    opacity: 0;
+    transition: all 500ms;
     overflow: visible !important;
     border-radius: 2em;
     padding-left: 2em;
@@ -70,7 +72,7 @@
     height: 2.5em;
     left: 7em;
     right: 140px;
-    bottom: 0.5em;
+    bottom: -5em;
     border: solid 1px rgba(128, 128, 128, 0.43);
 
     .details {
@@ -189,18 +191,24 @@
     height: 12em;
 
     .Place_mini {
-      display: block;
+      //display: block;
+      opacity: 1;
+      bottom: 0.5em;
     }
 
     .resume {
       display: block;
       position: absolute;
-      top: 3.25em;
-      left: 6.75em;
+      top: 3.75em;
+      left: 7.5em;
       right: 60px;
-      bottom: 2.5em;
+      bottom: 3em;
       overflow-x: hidden;
       overflow-y: auto;
+    }
+
+    .ShareBox {
+      right: 0px;
     }
 
     .more {
@@ -229,7 +237,7 @@
       top: 4em;
       left: 6em;
       right: 80px;
-      bottom: 2.5em;
+      bottom: 3.5em;
       overflow-x: hidden;
       overflow-y: auto;
     }
@@ -306,8 +314,8 @@
     position: absolute;
     bottom: 0;
     top: 0;
-
-    right: 0px;
+    transition: all 500ms;
+    right: -50px;
     font-size: .9em;
     width: 50px;
     background: rgba(255, 255, 255, 0.55);
@@ -367,7 +375,7 @@
     overflow: hidden;
     border-radius: 3em;
     transform: scale(1.8);
-    margin-top: .35em;
+    margin-top: .475em;
     //background: rgba(249, 249, 249, 0.66);
     border: solid 1px #b0b0b0;
 

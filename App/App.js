@@ -37,7 +37,7 @@ export default class App extends React.Component {
 	
 	constructor( props ) {
 		super(props);
-		props.$actions.loadStateFromUrl(props.location)
+		__IS_SERVER__ && props.$actions.loadStateFromUrl(props.location)
 		
 		// keep page on the current day
 		if ( !__IS_SERVER__ ) {

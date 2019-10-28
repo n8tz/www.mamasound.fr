@@ -32,6 +32,7 @@ export default {
 		//"resume": types.descriptions('Resumé'), // TODO refactor as "summary"
 		
 		
+		"logo"          : types.media({ allowedTypes: "Image" }, "Logo:"),
 		"mainBackground": types.media({ allowedTypes: "Image" }, "MainBackground:"),
 		
 		"menuTop"   : types.picker(true, {

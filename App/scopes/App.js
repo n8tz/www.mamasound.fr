@@ -46,6 +46,8 @@ export default {
 		currentSearch     : undefined,
 		currentArea       : undefined,
 		viewType          : 0,
+		viewTypesList     : ["Evenements", "Concerts", "Expositions", "Theatres"],
+		viewTypeList      : ["Evenement", "Concert", "Exposition", "Theatre"],
 		dayCountByViewType: [6, 6, 1, 1],
 		curTags           : undefined,
 		
@@ -56,19 +58,59 @@ export default {
 		
 		// global app actions
 		//
-		//loadStateFromUrl( url = !__IS_SERVER__ && location.pathname || '/' ) {
-		//	if ( url ) {
-		//		let matches = url.match(/^\/([^\/]+)\/([^\/]+)\/([^\/]+)$/);
-		//		return matches && {
-		//			curDay          : moment(matches[2], "DD-MM-YY").startOf("day").valueOf(),
-		//			selectedEventId : matches[3],
-		//			selectedEventDT : moment(matches[2], "DD-MM-YY").startOf("day").valueOf(),
-		//			selectedEvent   : { id: matches[3], etty: "Event" },
-		//			currentPageFocus: "events"
-		//		}
-		//	}
-		//	//return {};
-		//},
+		loadStateFromUrl( url = '/' ) {
+			let path = url.split('/'), $actions = this.$actions, viewType;
+			path.shift();
+			if ( path.length === 1 ) {
+				if ( path[0] === "" ) {
+					viewType = 0;
+				}
+				else if ( path[0] === "Concerts" )
+					viewType = 1
+				else if ( path[0] === "Expositions" )
+					viewType = 2
+				else if ( path[0] === "Theatres" )
+					viewType = 3
+				
+				return {
+					currentSearch  : '',
+					selectedEventId: null,
+					selectedEventDT: null,
+					selectedEvent  : null,
+					selectedFocus  : null
+				}
+			}
+			else if ( path.length === 2 ) {
+				//debugger
+				$actions.selectFocus(path[1], path[0]);
+				return {
+					selectedEvent: null
+				}
+			}
+			else if ( path.length === 3 ) {
+				let matches = url.match(/^\/([^\/]+)\/([^\/]+)\/([^\/]+)$/);
+				//debugger
+				if ( path[0] === "Evenements" ) {
+					viewType = 0;
+				}
+				else if ( path[0] === "Concerts" )
+					viewType = 1
+				else if ( path[0] === "Expositions" )
+					viewType = 2
+				else if ( path[0] === "Theatres" )
+					viewType = 3
+				
+				return {
+					viewType,
+					userSetCDay    : true,
+					curDay         : moment(matches[2], "DD-MM-YY").startOf("day").valueOf(),
+					selectedEventId: matches[3],
+					selectedEventDT: moment(matches[2], "DD-MM-YY").startOf("day").valueOf(),
+					selectedEvent  : { id: matches[3], etty: "Event" },
+					//selectedFocus  : { id: matches[3], etty: "Event" },
+				}
+			}
+		},
 		updateCurrentSearch( currentSearch ) {
 			return { currentSearch };
 		},
@@ -76,11 +118,13 @@ export default {
 			return { currentArea };
 		},
 		setCurStyleTab( viewType ) {
-			let { currentPageFocus, selectedEventId } = this.nextState, doFocus;
+			let { currentPageFocus, viewTypesList } = this.nextState, doFocus;
 			if ( currentPageFocus !== "events" ) {
 				currentPageFocus = "events";
 				doFocus          = true
 			}
+			
+			this.$actions.history_set("/" + viewTypesList[viewType])
 			return { viewType, currentPageFocus, doFocus };
 		},
 		oneMoreDay( viewType = 0 ) {
@@ -110,12 +154,12 @@ export default {
 			}
 		},
 		selectEvent( selectedEvent, selectedEventDT, showPageBlock ) {
-			let { curDay, currentPageFocus } = this.nextState;
+			let { viewType, currentPageFocus, viewTypeList } = this.nextState;
 			if ( selectedEvent && selectedEvent._id === this.nextState.selectedEventId )
 				selectedEvent = undefined;
 			//	currentPageFocus = 'map';
 			if ( selectedEvent ) {
-				this.$actions.history_set("/" + selectedEvent._cls + '/' + moment(selectedEventDT).format("DD-MM-YY")
+				this.$actions.history_set("/" + viewTypeList[viewType] + '/' + moment(selectedEventDT).format("DD-MM-YY")
 					                          + "/" + (selectedEvent._alias || selectedEvent._id))
 			}
 			else {
@@ -126,7 +170,8 @@ export default {
 				selectedEventDT,
 				currentPageFocus,
 				doFocus        : true,
-				selectedEvent  : selectedEvent && { id: selectedEvent._id, etty: selectedEvent._cls } || null
+				selectedEvent  : selectedEvent && { id: selectedEvent._id, etty: selectedEvent._cls } || null,
+				//selectedFocus  : selectedEvent && { id: selectedEvent._id, etty: selectedEvent._cls } || null
 			};
 		},
 		selectFocus( selectedFocus, cls ) {

@@ -16,7 +16,7 @@ const aliasAPI = require("App/db/aliasHelpers"),
       fs       = require("fs");
 
 export const name          = "dev-tools service";
-export const priorityLevel = 1000000;
+export const priorityLevel = 100000;
 
 export function service( server ) {
 	server.get(

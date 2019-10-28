@@ -113,7 +113,10 @@
       //border: solid 1px rgba(0, 0, 0, 0.38);
 
       height: 1.5em;
-
+      ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: black;
+        opacity: .7; /* Firefox */
+      }
       &:focus {
         outline: none;
       }

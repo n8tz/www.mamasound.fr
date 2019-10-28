@@ -10,6 +10,7 @@ import {Comps, Views}                   from 'App/ui';
 import React                            from 'react';
 import {scopeToProps}                   from "react-scopes";
 import {asTweener, TweenAxis, TweenRef} from "react-voodoo";
+import getMediaSrc                      from "../../../packages/wpi-forms/App/utils/getMediaSrc";
 
 const wayPoints =
 	      {
@@ -163,6 +164,10 @@ export default class Home extends React.Component {
 								initial={Styles.logo}
 							>
 								<a className={"logo"} href={'/'}
+								   style={appTheme && appTheme.data && appTheme.data.logo && {
+									   background    : "url('" + getMediaSrc(appTheme.data.logo) + "') center no-repeat",
+									   backgroundSize: "auto 100%"
+								   }}
 								   onClick={e => (e.stopPropagation(), e.preventDefault(), $actions.history_push('/'))}/>
 							</TweenRef>
 							{appTheme && appTheme.data && appTheme.data.menuSocial &&

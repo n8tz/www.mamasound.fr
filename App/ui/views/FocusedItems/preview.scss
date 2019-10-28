@@ -59,7 +59,7 @@
     //background: #2e2e2e;
     img {
       @include use_hvCenteredAbs();
-      mask-border: url("../assets/images/previewBorderMask.svg") 35 repeat;
+      //mask-border: url("../assets/images/previewBorderMask.svg") 35 repeat;
       //@include withTranspaBoxMask();
       //position: absolute;
       //top: 10%;
