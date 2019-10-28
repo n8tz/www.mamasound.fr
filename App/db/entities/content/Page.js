@@ -33,18 +33,27 @@ export default {
 		                                "Contenus liés :"),
 		
 		
-		"useTitle"    : types.boolean("Afficher le titre :", true),
-		"useResume"   : types.boolean("Afficher le résumé :", true),
-		"useBigResume": types.boolean("Afficher le résumé en grand direct:", false),
+		"website"   : types.labels("Site web :"),
+		"fbPage"    : types.labels("Page Facebook :"),
+		"scPage"    : types.labels("Page SoundCloud :"),
+		"ytPage"    : types.labels("Page Youtube :"),
+		
+		"hideTitle"         : types.boolean("Cacher le titre :", true),
+		"hideResume"        : types.boolean("Cacher le résumé :", false),
+		"useBigResume"      : types.boolean("Afficher le résumé en grand direct:", false),
+		"titleStyle"        : types.json("titleStyle :"),
+		"resumeStyle"       : types.json("resumeStyle :"),
+		"resumeContentStyle": types.json("resumeContentStyle :"),
 		
 		"useBackground"     : types.boolean("Afficher le background :", false),
 		"useGhostBackground": types.boolean("Afficher les ghosts flous :", false),
 		"background"        : types.media({ allowedTypes: ["Image", "Video"] }, "Background (gd image/video de fond (video LEGERE)):"),
-		"backgroundColor"   : types.labels("Couleur de fond :"),
+		"backgroundColor"   : types.color("Couleur de fond :"),
 		
 		"usePreviewImage"   : types.boolean("Afficher une image preview :", true),
 		"useBigPreviewImage": types.boolean("Afficher une l'image preview en grand :", false),
-		"previewImage"      : types.media({ allowedTypes: "Image" }, "Preview (~12/5 fb headers):"),
+		"previewImage"      : types.media({ allowedTypes: "Image" }, "Preview:"),
+		"previewStyle"      : types.json("previewStyle :"),
 		
 		
 	}

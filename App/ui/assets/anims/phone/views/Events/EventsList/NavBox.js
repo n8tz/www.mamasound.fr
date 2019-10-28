@@ -59,15 +59,15 @@ export const SearchBarProps = {
 	closeDuration: 100,
 	minBottom    : footerMiniHeight,
 	maxBottom    : mapHeight,
-	minHeight,
+	minHeight    : 40,
 	
 	boxStyle  : {
 		position: "absolute",
 		width   : ["100%"],
 		//width          : "60vw",
 		left    : "0px",
-		top     : ["-" + minHeight],
-		height  : "50px",
+		top     : ["-40px"],
+		height  : "40px",
 	},
 	titleStyle: {
 		//paddingLeft: "3em"

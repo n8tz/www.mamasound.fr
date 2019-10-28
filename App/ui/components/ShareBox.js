@@ -22,9 +22,9 @@ import * as shareStuff from 'react-share';
 let shareLinks = [
 	"Facebook",
 	//"Linkedin",
-	"Twitter",
+	//"Twitter",
 	//"Telegram",
-	"Whatsapp",
+	//"Whatsapp",
 	//"Pinterest",
 	//"Tumblr",
 ];
@@ -32,8 +32,8 @@ let shareLinks = [
 export default (
 	{
 		event,
-		place,
-		shareBody = "Yo !\nViens voir " + event.title + " au " + (place && place.label) + ", le " + moment(event.startTM).format("ddd DD/MM à H:mm")
+		place, url = "",
+		shareBody = "Yo !\nViens voir " + event.title + " au " + (place && place.label) + ", le " + moment(event.startTM).format("ddd DD/MM à H:mm") + "\n" + url
 	}
 ) => {
 	//debugger;
@@ -59,7 +59,7 @@ export default (
 				id => {
 					let ShareLink = shareStuff[id + "ShareButton"],
 					    ShareIcon = shareStuff[id + "Icon"];
-					return <ShareLink url={"http://www.mamasound.fr"} key={id}>
+					return <ShareLink url={url} key={id}>
 						<ShareIcon
 							size={32}
 							round/>

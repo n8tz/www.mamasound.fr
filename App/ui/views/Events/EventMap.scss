@@ -10,7 +10,7 @@ body.fixedHead .EventMap {
   //position: fixed !important;
   //top: 210px !important;
   //top: calc(70vh) !important;
-  //pointer-events: all !important;
+  pointer-events: all !important;
   &:after {
     display: none;
   }
@@ -26,7 +26,7 @@ body.fixedHead .EventMap {
   touch-action: none;
   overflow: hidden;
   //@include withMaskTop();
-  //pointer-events: none;
+  pointer-events: none;
   backface-visibility: hidden;
   transform: translateZ(0);
   @media screen and (max-width: $tablet-portrait-breakpoint) {
@@ -87,9 +87,9 @@ body.fixedHead .EventMap {
   .mapContainer {
     @include aspect-ratio(16, 15);
     position: absolute;
-    bottom: 0%;
+    top: 0%;
     width: 100%;
-    height: 70%;
+    //height: 70%;
     //@include use_hvCenteredAbs();
     //position: relative;
     //height: 100%;

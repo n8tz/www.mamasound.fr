@@ -32,8 +32,8 @@ export default class page extends React.Component {
 		    {
 			    big
 		    }      = this.state,
-		    resume = big || record.useBigResume ? target.text : record.resume;
-		return <div className={"bigSlide_article type_" + target._cls + " " + (big || record.useBigResume
+		    resume = big || record.useBigResume ? target.text || record.resume : record.resume || target.text;
+		return <div className={"bigSlide_article type_" + target._cls + " " + (record.useBigResume
 		                                                                       ? " bigView"
 		                                                                       : "smallView") + ' ' + className}>
 			<Editable id={record._id}/>

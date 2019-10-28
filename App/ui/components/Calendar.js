@@ -47,8 +47,8 @@ export default class Calendar extends React.Component {
 		const { startDate, endDate, displayTime, useInput } = this.props
 		const { open }                                      = this.state;
 		
-		return <div className={"Calendar"}>
-			<div onClick={this.toggle} className={"datePeriod"}>
+		return <div className={"Calendar"} onClick={this.toggle}>
+			<div className={"datePeriod"}>
 				{
 					endDate ?
 					<>Du {moment(startDate).format("DD MMM")} au {moment(endDate).format("DD MMM")}</>

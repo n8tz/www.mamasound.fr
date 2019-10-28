@@ -25,6 +25,7 @@
       @include use_hvCenteredAbs();
       mask-border: url("../assets/images/previewBorderMask.svg") 35 repeat;
       height: 100%;
+      max-height: 70vh;
     }
 
     @media screen and (min-width: $tablet-portrait-breakpoint) {
@@ -35,7 +36,7 @@
       }
 
       img.rightGhost {
-        transform: translate(50%, -50%) scale(1.25);
+        transform: translate(0%, -50%) scale(1.25);
         filter: blur(10px);
 
       }

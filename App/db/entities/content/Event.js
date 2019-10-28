@@ -64,5 +64,7 @@ export default {
 			allowedUploadTypes: ["Image", "Video"],
 			allowUpload       : true
 		}, "Média lié :"),
+		
+		
 	}
 };

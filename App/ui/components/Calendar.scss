@@ -18,11 +18,12 @@
     display: inline-block;
     @media screen and (max-width: $tablet-landscape-breakpoint) {
       color: transparent;
-      width: 64px;
+      width: 26px;
       &:before {
         @include use_hvCenteredAbs();
         content: '📅';
         color: black;
+        margin-left: -8px;
       }
     }
   }
@@ -37,12 +38,19 @@
     left: 0;
     background: white;
     z-index: 100;
+    @media screen and (max-height: 350px) {
+      transform: scale(.8);
+    }
   }
 }
 
 .m-input-moment {
   //position: absolute;
   background: white;
+
+  @media screen and (max-height: 350px) {
+    transform: scale(.8) translate(30px, 70px);
+  }
 
   &.search {
     .tab {

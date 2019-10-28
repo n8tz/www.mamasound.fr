@@ -18,7 +18,7 @@ export const style          = {
 	width    : ["100%"],
 	left     : "0px",
 	top      : [headerHeight, 10],
-	height   : "50px",
+	height   : "40px",
 	zIndex   : 700,
 	//backgroundColor: "red",
 	transform: {
@@ -67,7 +67,7 @@ export const SearchBarProps = {
 		//width          : "60vw",
 		left    : "0px",
 		top     : ["-" + minHeight],
-		height  : "50px",
+		height  : "40px",
 	},
 	titleStyle: {
 		//paddingLeft: "3em"

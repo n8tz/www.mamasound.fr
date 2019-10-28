@@ -118,7 +118,7 @@ export const Highlighter       = {
 		},
 		{
 			//translateY: "0%",
-			translateZ : "0px",
+			translateZ: "0px",
 			//rotateX   : "-10deg"
 		}
 	]

@@ -7,15 +7,17 @@
  */
 
 .bigSlide_article.bigView {
-  .resume .content{
+  .resume .content {
     pointer-events: none;
   }
 }
+
 body.onTop .bigSlide_article.bigView {
-  .resume .content{
+  .resume .content {
     pointer-events: all !important;
   }
 }
+
 .bigSlide_article {
   text-align: left;
   width: 100%;
@@ -58,17 +60,18 @@ body.onTop .bigSlide_article.bigView {
     .title {
       position: fixed;
       top: 50px;
+      //text-align: center;
       width: 40vw;
       max-width: 600px;
       left: calc(#{$focusSlidePadSize} + .25em);
-      //padding-left: ;
+      padding-left: 1em;
       text-align: left;
       font-size: 1.5em;
       font-weight: bolder;
       font-family: $mainFontFamily;
       //border-top:solid 1px grey;
       //text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 5px #fff, 0 0 5px rgba(255, 255, 255, 0.4);
-      transition: all 500ms;
+      //transition: all 500ms;
       z-index: 10;
       border-bottom: solid 1px lightgrey;
       text-overflow: ellipsis;
@@ -89,8 +92,9 @@ body.onTop .bigSlide_article.bigView {
       top: 45px;
       width: 40vw;
       max-width: 600px;
-      bottom: 40%;
-      padding: 1em 1em 1em 1em;
+      //bottom: 40%;
+      max-height: 80%;
+      padding: 1em 1em 1em 2em;
       padding-top: 55px;
       left: calc(#{$focusSlidePadSize} + .5em);
       overflow: hidden;
@@ -98,9 +102,9 @@ body.onTop .bigSlide_article.bigView {
       cursor: pointer;
       direction: rtl;
       text-shadow: none;
-      transition: all 500ms;
+      //transition: all 500ms;
       font-size: 14px;
-
+      background: rgba(255, 255, 255, 0.75);
       @media screen and (max-width: $tablet-portrait-breakpoint) {
         top: 50%;
         width: auto;
@@ -112,12 +116,25 @@ body.onTop .bigSlide_article.bigView {
       }
 
       > .content {
+
+        @include withScrollBar();
+        //position: absolute;
+        //@include withTranspaMask();
+        left: 3px;
+        right: 1px;
+        top: 3.5em;
+        bottom: 100px;
+        padding-left: 5px;
+        max-height: calc(100% - 100px);
+        overflow: auto !important;
+        overflow-x: hidden !important;
+        overflow-y: scroll !important;
+        direction: rtl;
+
+        font-size: 1.1em;
         //@include withTranspaMask();
         width: 100%;
         height: 100%;
-        direction: ltr;
-        overflow: hidden;
-        padding-left: 5px;
 
         * {
           margin: 0;
@@ -190,8 +207,8 @@ body.onTop .bigSlide_article.bigView {
       top: 20px;
       //width: 100%;
       //max-width: 600px;
-      left: calc(#{$focusSlidePadSize} + .5em);
-      right: calc(#{$focusSlidePadSize} + .5em);
+      left: 0;
+      right: 0;
       z-index: 100;
       //padding-left: calc(#{$focusSlidePadSize} + .25em);
       text-align: center;
@@ -209,7 +226,7 @@ body.onTop .bigSlide_article.bigView {
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
-      transition: all 500ms;
+      //transition: all 500ms;
       @media screen and (max-width: $tablet-portrait-breakpoint) {
 
         left: 10px;
@@ -222,20 +239,20 @@ body.onTop .bigSlide_article.bigView {
     .resume {
 
       position: absolute;
-      top: 17px;
-      width: calc(100% - 20px);
+      top: 20px;
+      //width: calc(100% - 20px);
       //max-width: 600px;
-      bottom: 130px;
+      bottom: 50px;
 
       //padding-top: 3em;
       //padding-bottom: 15vh;
-      padding: 35px 1em 10px 3em;
+      padding: 2em 1em 150px 3em;
       //padding-left: calc(#{$focusSlidePadSize} + 1.5em);
-      right: calc(#{$focusSlidePadSize} + .5em);
-      left: calc(#{$focusSlidePadSize} + .5em);
+      left: 0;
+      right: 0;
       overflow: hidden;
       margin: 5px;
-      transition: all 500ms;
+      //transition: all 500ms;
       border-radius: 3px;
       background: $secondaryBackColor;
 
@@ -247,12 +264,12 @@ body.onTop .bigSlide_article.bigView {
 
       > .content {
         @include withScrollBar();
-        //position: absolute;
+        position: absolute;
         //@include withTranspaMask();
         left: 3px;
         right: 1px;
         top: 3.5em;
-        bottom: 3px;
+        bottom: 100px;
         padding-left: 5px;
         overflow: auto !important;
         overflow-x: hidden !important;

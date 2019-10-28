@@ -69,10 +69,11 @@ export default class $history extends Store {
 			
 			this.$stores.appState
 			    .setState({
+				              currentSearch  : '',
 				              selectedEventId: null,
 				              selectedEventDT: null,
-				              selectedEvent: null,
-				              selectedFocus: null
+				              selectedEvent  : null,
+				              selectedFocus  : null
 			              })
 		}
 		else if ( path.length === 2 ) {

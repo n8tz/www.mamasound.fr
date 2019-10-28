@@ -14,26 +14,40 @@
  */
 'use strict';
 
-import {Comps}  from 'App/ui';
-import Editable from "App/ui/Editable";
-import moment   from "moment";
-import React    from "react";
-
+import config         from "App/config";
+import {Comps, Views} from 'App/ui';
+import Editable       from "App/ui/Editable";
+import getMediaSrc    from "App/utils/getMediaSrc";
+import moment         from "moment";
+import React          from "react";
+import {Helmet}       from "react-helmet";
 
 let defaultPreview = {
 	Concert: require("App/ui/assets/images/mms.png"),
 	Theatre: require("App/ui/assets/images/mmt.png"),
 	Expo   : require("App/ui/assets/images/mme.png")
 };
+let defaultTypes   = {
+	Concert: "MusicEvent",
+	Theatre: "TheaterEvent",
+	Expo   : "VisualArtsEvent"
+};
 
 export default class eventItem extends React.Component {
 	state = {};
 	
 	render() {
-		let { record, refs, selected, onClick, onTap, currentDate = record.realPeriod } = this.props,
-		    { big }                                                                     = this.state,
-		    start                                                                       = moment(currentDate && currentDate.startTM),
-		    end                                                                         = moment(currentDate && currentDate.endTM);
+		let {
+			    record, record: { title, place, category },
+			    refs, selected, onClick, onTap, currentDate = record.realPeriod
+		    }       = this.props,
+		    { big } = this.state,
+		    start   = moment(currentDate && currentDate.startTM),
+		    end     = moment(currentDate && currentDate.endTM),
+		    url     = "http://" + config.PUBLIC_URL + "/" + record._cls + '/' + moment(start).format("DD-MM-YY")
+			    + "/" + (record._alias || record._id);
+		
+		let preview = record.previewImage || (place && refs[place.objId] && refs[place.objId].previewImage || category && refs[category.objId] && refs[category.objId].icon)
 		return <div className={"Event Event_item Event" + record._cls + ' ' + (selected ? "selected" : "") + ' ' + (big
 		                                                                                                            ? " big"
 		                                                                                                            : "")}
@@ -43,6 +57,40 @@ export default class eventItem extends React.Component {
 		            }}
 		>
 			<Editable id={record._id}/>
+			{
+				selected &&
+				<Helmet
+					title={"Mama Sound - " + moment(currentDate && currentDate.startTM || record.startTM).format("DD/MM/YY H:mm") + ' - ' + record.title}
+					
+					meta={[
+						{ "property": "robots", "content": "noodp" },
+						{ "property": "Description", "content": record.resume || record.description || record.title },
+						{ "property": "og:site_name", "content": "MamaSound" },
+						{
+							"property": "og:image",
+							"content" : preview && getMediaSrc(preview)
+						}
+					]}
+					script={place && refs[place.objId] && [{
+						"type"     : "application/ld+json",
+						"innerHTML": `{
+                                          "@context": "http://schema.org",
+                                          "@type": "${defaultTypes[[this.props.record._cls] || "MusicEvent"]}",
+                                          "name": "${(title || "").replace(/(['"\\])/g, '\\\$1')}",
+                                          "url": "${url}",
+                                          "image": "${preview}",
+                                          "startDate": "${start.toISOString()}",
+                                          "location": {
+                                             "@type": "Place",
+                                             "name": "${refs[place.objId].label}",
+                                             "address": "${(refs[place.objId].address && refs[place.objId].address.address || "").replace(
+							/(['"\\])/g, '\\\$1')}"
+                                          }
+                                    }`
+					}] || []}
+				
+				/>
+			}
 			{
 				(record._cls == "Expo") && record.haveVerni
 				&& record.verniTM &&
@@ -83,9 +131,9 @@ export default class eventItem extends React.Component {
 			{/*</div>*/}
 			{/*}*/}
 			
-			<div className="title">
+			<a className="title" href={url} onClick={e => (e.preventDefault())}>
 				{record.title}
-			</div>
+			</a>
 			
 			<div className="price">
 				{
@@ -95,22 +143,26 @@ export default class eventItem extends React.Component {
 			{
 				record.place && refs[record.place.objId] &&
 				refs[record.place.objId].address &&
-				<a className="place"
-				   target={"_blank"}
-				   href={"https://www.google.fr/maps/search/" + (refs[record.place.objId].address.address)}>
+				<div className="place"
+				>
 					( {refs[record.place.objId].label} )
-				</a>
+				</div>
 			}
-			{selected && <Comps.ShareBox event={record} place={record.place && refs[record.place.objId]}/>}
+			{selected && <Comps.ShareBox
+				url={url}
+				event={record} place={record.place && refs[record.place.objId]}/>}
 			{!/^\s*$/.test(record.resume || record.description || '') &&
 			<div className="resume" dangerouslySetInnerHTML={{
 				__html: !big
 				        ? record.resume || record.description
 				        : record.description || record.resume
 			}}/> || ''}
-			{record.description && <div className="more material-icons"
-			                            onClick={e => (e.stopPropagation(), e.preventDefault(), this.setState({ big: true }))}>add
+			{record.description && <div className="more"
+			                            onClick={e => (e.stopPropagation(), e.preventDefault(), this.setState({ big: true }))}>
 			</div>}
+			
+			{record.place && refs[record.place.objId] && <Views.Place.mini record={refs[record.place.objId]}/>}
+		
 		</div>
 			;
 	}

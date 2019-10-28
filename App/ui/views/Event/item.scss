@@ -20,6 +20,7 @@
     font-size: 10px;
 
   }
+  cursor: pointer;
   height: 3.5em;
   position: relative;
   display: block;
@@ -30,6 +31,135 @@
     background: white;
   }
 
+  .more {
+    content: ' ';
+    background: url('../assets/images/more.png') center no-repeat / cover;
+    position: absolute;
+    height: 32px;
+    width: 32px;
+    right: 100px;
+    bottom: .75em;
+
+  }
+
+  .more:hover {
+    content: ' ';
+    background: url('../assets/images/more_hover.png') center no-repeat / cover;
+  }
+
+  .Place_mini:before {
+    content: ' ';
+    background: url('../assets/images/mapIcon.png') center no-repeat / cover;
+    position: absolute;
+    height: 6em;
+    width: 4em;
+    left: 1em;
+    top: -2em;
+  }
+
+  .Place_mini {
+    //background: transparent !important;
+    //pointer-events: none;
+    display: none;
+    overflow: visible !important;
+    border-radius: 2em;
+    padding-left: 2em;
+    padding-right: 2em;
+    background: lightgrey;
+    position: absolute;
+    height: 2.5em;
+    left: 7em;
+    right: 140px;
+    bottom: 0.5em;
+    border: solid 1px rgba(128, 128, 128, 0.43);
+
+    .details {
+
+      position: absolute;
+      height: 100%;
+      //width: 100%;
+      left: 0;
+      right: 1em;
+      top: 0;
+      //background: rgba(255, 255, 255, 0.63);
+      //padding: .5em;
+      font-size: .9em;
+      z-index: 20000;
+      font-weight: bold;
+    }
+
+    .descr {
+      width: 100%;
+      margin: 0;
+      left: 0 !important;
+    }
+
+    .title > span {
+      display: none;
+    }
+
+    .title {
+      padding-top: .25em;
+
+    }
+
+    .title:before {
+      content: "Où ? ";
+    }
+
+    .preview {
+      float: right;
+      margin-left: -50%;
+      //position: absolute;
+      right: 0;
+      height: 100%;
+      top: 0;
+      width: 35%;
+      -webkit-clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 100%);
+      clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 100%);
+      //z-index: 1000;
+      border-radius: 0 2em 2em 0;
+      overflow: hidden;
+
+      img {
+        padding: 0 !important;
+        width: 100%;
+        height: auto;
+        max-height: none !important;
+        opacity: .4;
+      }
+    }
+
+    .title, .address {
+      pointer-events: all;
+      display: block;
+      //width: auto;
+      height: auto;
+      //max-width: none;
+      float: left;
+      text-align: left !important;
+      max-width: 80%;
+      margin-left: 6em;
+      padding-right: 2em;
+      //z-index: 2000;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      a {
+        text-align: left !important;
+      }
+
+      //height: 1em;
+    }
+
+    .description {
+      display: none;
+      float: none;
+
+    }
+  }
+
   transition: all 500ms;
 
   .resume {
@@ -37,11 +167,18 @@
   }
 
   .more {
-    position: absolute;
-    bottom: 20px;
-    right: 100px;
-    font-size: 2em;
+    //position: absolute;
+    //bottom: 20px;
+    //right: 100px;
+    //font-size: 2em;
     display: none;
+  }
+
+  &:hover {
+
+    .title {
+      text-decoration: underline;
+    }
   }
 
   &.selected {
@@ -51,13 +188,17 @@
 
     height: 12em;
 
+    .Place_mini {
+      display: block;
+    }
+
     .resume {
       display: block;
       position: absolute;
-      top: 4em;
-      left: 6em;
-      right: 80px;
-      bottom: 0em;
+      top: 3.25em;
+      left: 6.75em;
+      right: 60px;
+      bottom: 2.5em;
       overflow-x: hidden;
       overflow-y: auto;
     }
@@ -66,6 +207,13 @@
       display: block;
     }
 
+    .icon {
+      //margin-left: -1.25em;
+    }
+
+    > .title {
+      //margin-left: -1em;
+    }
   }
 
   &.selected.big {
@@ -81,7 +229,7 @@
       top: 4em;
       left: 6em;
       right: 80px;
-      bottom: 0em;
+      bottom: 2.5em;
       overflow-x: hidden;
       overflow-y: auto;
     }
@@ -92,7 +240,7 @@
 
   }
 
-  .title {
+  > .title {
     @include use_hvCenteredContent();
     white-space: nowrap;
     overflow: hidden;
@@ -107,7 +255,10 @@
     padding-top: .1em;
     display: inline-block;
     font-family: $mainFontFamily;
+    color: black;
+    text-decoration: none;
     text-transform: capitalize;
+    transition: all 500ms;
   }
 
   .date {
@@ -158,8 +309,8 @@
 
     right: 0px;
     font-size: .9em;
-    width: 80px;
-    background: white;
+    width: 50px;
+    background: rgba(255, 255, 255, 0.55);
     padding-top: 2.5em;
     padding-bottom: 1.5em;
     padding-right: 3px;
@@ -179,6 +330,10 @@
     right: 2px;
     font-size: .9em;
     font-family: $mainFontFamily;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100px;
+    overflow: hidden;
   }
 
   .place {
@@ -205,7 +360,7 @@
     @include use_hvCenteredContent();
     float: left;
     background: rgb(249, 249, 249);
-
+    transition: all 500ms;
     padding: .2em;
     width: 2.5em;
     height: 2.5em;

@@ -25,6 +25,10 @@ body.fixedHead {
 }
 
 .Highlighter {
+
+  @media screen and (max-height: 350px) {
+    transform: translateY(-120px) !important;
+  }
   //touch-action: none;
   position: relative;
   //height: 70vh !important;

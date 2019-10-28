@@ -18,7 +18,7 @@ export const style          = {
 	width    : ["100%"],
 	left     : "0px",
 	bottom   : -50,
-	height   : "50px",
+	height   : "40px",
 	zIndex   : 700,
 	//backgroundColor: "red",
 	transform: {
@@ -59,15 +59,15 @@ export const SearchBarProps = {
 	closeDuration: 100,
 	minBottom    : footerMiniHeight,
 	maxBottom    : mapHeight,
-	minHeight,
+	minHeight    : 40,
 	
 	boxStyle  : {
 		position: "absolute",
 		width   : ["100%", "-" + collWidth, -30],
 		//width          : "60vw",
 		left    : "10px",
-		top     : ["-" + minHeight, 10],
-		height  : "50px",
+		top     : ["-" + 40, 10],
+		height  : "40px",
 	},
 	titleStyle: {
 		//paddingLeft: "3em"
@@ -133,7 +133,7 @@ export const StretchBox     = {
 		fontSize            : "12px",
 		whiteSpace          : "nowrap",
 		textOverflow        : "ellipsis",
-		overflow            : "hidden",
+		//overflow            : "hidden",
 		display             : "inline-block",
 	},
 	iconStyle: {

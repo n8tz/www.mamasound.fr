@@ -35,7 +35,7 @@ export const EventCatSlider     = {
 	       style          : {
 		       position : "relative",
 		       width    : ["100%", "-" + collWidth, -30],
-		       minHeight: ["100vh", -1 * headerMiniHeight, -footerMiniHeight, -sliderHeight, -25],
+		       minHeight: ["100vh", -1 * headerMiniHeight, -footerMiniHeight, -sliderHeight, -65],
 		       left     : [10],
 		       //marginTop: "50px",
 		       //bottom  : "40px",

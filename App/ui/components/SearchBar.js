@@ -60,7 +60,7 @@ export default class SearchBar extends React.Component {
 				borderTopLeftRadius : "10px",
 				borderTopRightRadius: "10px",
 				//bottom              : minBottom,
-				overflow            : "hidden",
+				//overflow            : "hidden",
 				display             : "inline-block",
 				...props.boxStyle,
 				...style,
@@ -117,8 +117,8 @@ export default class SearchBar extends React.Component {
 	}
 	
 	renderTitle() {
-		const { TagManager, appState, strechProps, style } = this.props;
-		const { showPrice, showArea, showStyle }           = this.state;
+		const { TagManager, appState, $actions, style } = this.props;
+		const { showPrice, showArea, showStyle }        = this.state;
 		return <div className={"SearchBarForm"}>
 			<div className="group">
 				<input
@@ -139,10 +139,10 @@ export default class SearchBar extends React.Component {
 				                endDate={moment(appState.curDay).add(appState.dayCountByViewType[0], 'day')}
 				                onChange={this.handleDateChange}/>
 				{showPrice &&
-				<Comps.PopAnywhere hovering={showPrice} className={"priceTags"} onClickOut={this.togglePrice}>
-				<span
-					className={"tag " + (!appState.currentArea ? "selected" : "")}
-					onClick={e => $actions.setCurrentArea()}>Tout les prix</span>
+				<div hovering={showPrice} className={"priceTags"} onClickOut={this.togglePrice}>
+					{/*<span*/}
+					{/*	//className={"tag " + (!appState.currentArea ? "selected" : "")}*/}
+					{/*	//onClick={e => $actions.setCurrentArea()}>Tout les prix</span>*/}
 					{
 						TagManager && TagManager.available
 						                        //.filter(tag => !TagManager.selected.includes(tag))
@@ -154,21 +154,21 @@ export default class SearchBar extends React.Component {
 									                        className={"tag " + (TagManager.selected.includes(tag)
 									                                             ? "selected"
 									                                             : "")}
-									                        onClick={( e ) => this.selectTag(tag)}
+									                        onClick={( e ) => $actions.toggleTag(tag.label)}
 									                        style={{
 										                        fontSize: 14
 									                        }}
 								                        >
 								{/*<img alt={tag.title} src={tag.style.icon} className={"tagIcon"}/>*/}
 									                        {tag.label}
-									                        ({tag.count})
+									                        {/*({tag.count})*/}
 							</span>)
 					}
-				</Comps.PopAnywhere>}
-				{showArea && <Comps.PopAnywhere hovering={showArea} className={"areaTags"} onClickOut={this.toggleArea}>
-				<span
-					className={"tag " + (!appState.currentArea ? "selected" : "")}
-					onClick={e => $actions.setCurrentArea()}>Tout Montpellier</span>
+				</div>}
+				{showArea && <div hovering={showArea} className={"areaTags"} onClickOut={this.toggleArea}>
+					{/*<span*/}
+					{/*	className={"tag " + (!appState.currentArea ? "selected" : "")}*/}
+					{/*	onClick={e => $actions.setCurrentArea()}>Tout Montpellier</span>*/}
 					{
 						TagManager && TagManager.available
 						                        //.filter(tag => !TagManager.selected.includes(tag))
@@ -180,19 +180,19 @@ export default class SearchBar extends React.Component {
 									                        className={"tag " + (TagManager.selected.includes(tag)
 									                                             ? "selected"
 									                                             : "")}
-									                        onClick={( e ) => this.selectTag(tag)}
+									                        onClick={( e ) => $actions.toggleTag(tag.label)}
 									                        style={{
 										                        fontSize: 14
 									                        }}
 								                        >
 								{/*<img alt={tag.title} src={tag.style.icon} className={"tagIcon"}/>*/}
 									                        {tag.label}
-									                        ({tag.count})
+									                        {/*({tag.count})*/}
 							</span>)
 					}
-				</Comps.PopAnywhere>}
+				</div>}
 				{showStyle &&
-				<Comps.PopAnywhere hovering={showStyle} className={"styleTags"} onClickOut={this.toggleStyle}>
+				<div hovering={showStyle} className={"styleTags"} onClickOut={this.toggleStyle}>
 					{
 						TagManager && TagManager.available
 						                        //.filter(tag => !TagManager.selected.includes(tag))
@@ -204,17 +204,17 @@ export default class SearchBar extends React.Component {
 									                        className={"tag " + (TagManager.selected.includes(tag)
 									                                             ? "selected"
 									                                             : "")}
-									                        onClick={( e ) => this.selectTag(tag)}
+									                        onClick={( e ) => $actions.toggleTag(tag.label)}
 									                        style={{
 										                        fontSize: 14
 									                        }}
 								                        >
 								{/*<img alt={tag.title} src={tag.style.icon} className={"tagIcon"}/>*/}
 									                        {tag.label}
-									                        ({tag.count})
+									                        {/*({tag.count})*/}
 							</span>)
 					}
-				</Comps.PopAnywhere>}
+				</div>}
 			</span>
 		</div>;
 	}
@@ -224,13 +224,13 @@ export default class SearchBar extends React.Component {
 	}
 	
 	toggleStyle = () => {
-		this.setState({ showStyle: !this.state.showStyle })
+		this.setState({ showStyle: !this.state.showStyle, showArea: false, showPrice: false })
 	}
 	togglePrice = () => {
-		this.setState({ showPrice: !this.state.showPrice })
+		this.setState({ showPrice: !this.state.showPrice, showStyle: false, showArea: false })
 	}
 	toggleArea  = () => {
-		this.setState({ showArea: !this.state.showArea })
+		this.setState({ showArea: !this.state.showArea, showStyle: false, showPrice: false })
 	}
 	calendar    = React.createRef();
 	
@@ -238,24 +238,24 @@ export default class SearchBar extends React.Component {
 		const { TagManager, appState, Quartiers, $actions } = this.props;
 		return <>
 			
-			<div className={"selectedTags"}>
-				{
-					TagManager && TagManager.selected.map(
-						tag =>
-							<span
-								key={tag.label}
-								className={"tag"}
-								onClick={( e ) => $actions.unSelectTag(tag.label)}
-								style={{
-									fontSize: 14
-								}}
-							>
-								{/*<img alt={tag.title} src={tag.style.icon} className={"tagIcon"}/>*/}
-								{tag.label}
-								({tag.count})
-							</span>)
-				}
-			</div>
+			{/*<div className={"selectedTags"}>*/}
+			{/*	{*/}
+			{/*		TagManager && TagManager.selected.map(*/}
+			{/*			tag =>*/}
+			{/*				<span*/}
+			{/*					key={tag.label}*/}
+			{/*					className={"tag"}*/}
+			{/*					onClick={( e ) => $actions.unSelectTag(tag.label)}*/}
+			{/*					style={{*/}
+			{/*						fontSize: 14*/}
+			{/*					}}*/}
+			{/*				>*/}
+			{/*					/!*<img alt={tag.title} src={tag.style.icon} className={"tagIcon"}/>*!/*/}
+			{/*					{tag.label}*/}
+			{/*					({tag.count})*/}
+			{/*				</span>)*/}
+			{/*	}*/}
+			{/*</div>*/}
 		</>
 	}
 };

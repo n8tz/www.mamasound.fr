@@ -75,7 +75,7 @@ export default class EventList extends React.Component {
 			document.addEventListener(
 				"scroll",
 				this._scrollList = ( e ) => {//@todo
-					let allDays = document.querySelectorAll(".EventList  .DayEvents"),
+					let allDays = document.querySelectorAll(".EventList .type_" + this.props.appState.viewType + " .DayEvents"),
 					    cDay, offset,
 					    cPos    = element.scrollTop + 275, elem;
 					
@@ -113,6 +113,8 @@ export default class EventList extends React.Component {
 		//this.watchCurrentDayFromScroll();
 		this._scrollList();
 		setTimeout(tm => this._scrollList(), 500)
+		setTimeout(tm => this._scrollList(), 1000)
+		setTimeout(tm => this._scrollList(), 1500)
 	}
 	
 	componentWillUnmount() {
@@ -154,7 +156,7 @@ export default class EventList extends React.Component {
 										.fill(0)
 										.map(
 											( v, type ) =>
-												<div className={"dayList"} key={type}>
+												<div className={"dayList type_" + type} key={type}>
 													{/*<Comps.Slider*/}
 													{/*	{...EventDaySlider}*/}
 													{/*	className={"EventDay"}*/}
@@ -165,7 +167,7 @@ export default class EventList extends React.Component {
 															.map(
 																( v, i ) =>
 																	<Views.Events.DayEvents
-																		className={"dayBlock"}
+																		className={"dayBlock "}
 																		key={i}
 																		day={moment(appState.curDay).add(i, 'day').valueOf()}
 																		viewType={type}/>
