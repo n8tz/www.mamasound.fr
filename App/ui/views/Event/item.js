@@ -88,8 +88,28 @@ export default class eventItem extends React.Component {
                                           }
                                     }`
 					}] || []}
-				
-				/>
+				>
+					<script type={"application/ld+json"} dangerouslySetInnerHTML={{
+						__html: `{
+                                          "@context": "http://schema.org",
+                                          "@type": "${defaultTypes[[this.props.record._cls] || "MusicEvent"]}",
+                                          "name": "${(title || "").replace(/(['"\\])/g, '\\\$1')}",
+                                          "url": "${url}",
+                                          "image": "${preview}",
+                                          "startDate": "${start.toISOString()}",
+                                          "location": {
+                                             "@type": "Place",
+                                             "name": "${refs[place.objId].label}",
+                                             "address": "${(refs[place.objId].address && refs[place.objId].address.address || "").replace(
+							/(['"\\])/g, '\\\$1')}"
+                                          }
+                                    }`
+					}}/>
+					<meta property="og:site_name"
+					      content={"MamaSound"}/>
+					<meta property="og:image"
+					      content={preview && getMediaSrc(preview)}/>
+				</Helmet>
 			}
 			{
 				(record._cls == "Expo") && record.haveVerni

@@ -46,7 +46,7 @@ export default {
 		currentSearch     : undefined,
 		currentArea       : undefined,
 		viewType          : 0,
-		viewTypesList     : ["Evenements", "Concerts", "Expositions", "Theatres"],
+		viewTypesList     : ["", "Concerts", "Expositions", "Theatres"],
 		viewTypeList      : ["Evenement", "Concert", "Exposition", "Theatre"],
 		dayCountByViewType: [6, 6, 1, 1],
 		curTags           : undefined,
@@ -62,17 +62,12 @@ export default {
 			let path = url.split('/'), $actions = this.$actions, viewType;
 			path.shift();
 			if ( path.length === 1 ) {
-				if ( path[0] === "" ) {
+				viewType = this.state.viewTypesList.indexOf(path[0]);
+				if ( viewType < 0 )
 					viewType = 0;
-				}
-				else if ( path[0] === "Concerts" )
-					viewType = 1
-				else if ( path[0] === "Expositions" )
-					viewType = 2
-				else if ( path[0] === "Theatres" )
-					viewType = 3
 				
 				return {
+					viewType,
 					currentSearch  : '',
 					selectedEventId: null,
 					selectedEventDT: null,
@@ -90,16 +85,7 @@ export default {
 			else if ( path.length === 3 ) {
 				let matches = url.match(/^\/([^\/]+)\/([^\/]+)\/([^\/]+)$/);
 				//debugger
-				if ( path[0] === "Evenements" ) {
-					viewType = 0;
-				}
-				else if ( path[0] === "Concerts" )
-					viewType = 1
-				else if ( path[0] === "Expositions" )
-					viewType = 2
-				else if ( path[0] === "Theatres" )
-					viewType = 3
-				
+				viewType    = this.state.viewTypeList.indexOf(path[0]);
 				return {
 					viewType,
 					userSetCDay    : true,

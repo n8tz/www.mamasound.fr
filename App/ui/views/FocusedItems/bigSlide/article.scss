@@ -121,6 +121,8 @@ body.onTop .bigSlide_article {
         //@include withScrollBar();
         //position: absolute;
         //@include withTranspaMask();
+        user-select: auto !important;
+        cursor: text !important;
         left: 3px;
         right: 1px;
         top: 3.5em;

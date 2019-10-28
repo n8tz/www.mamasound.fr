@@ -97,7 +97,9 @@ export default (
 						] || []
 					}
 				}>
-				<div className="background" style={{ backgroundColor: record.backgroundColor || 'transparent' }}>
+				<div className="background">
+					{(record.backgroundColor) &&
+					<div className={"backColor"} style={{ backgroundColor: record.backgroundColor || 'transparent' }}/>}
 					{(record.background) && <>
 						{record.useGhostBackground && <>
 							<Comps.Image src={record.background || rPreviewImage} className={"leftGhost"}/>

@@ -95,6 +95,11 @@ export default class Highlighter extends React.Component {
 			$scope.then(tm => {
 				slider.goTo(i);
 			})
+			
+			document.body.parentElement.scrollTo({
+				                                     top     : 0,
+				                                     behavior: 'smooth'
+			                                     })
 		};
 	pickNextFocused = rec => {
 		let {

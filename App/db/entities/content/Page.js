@@ -41,6 +41,7 @@ export default {
 		"hideTitle"         : types.boolean("Cacher le titre :", true),
 		"hideResume"        : types.boolean("Cacher le résumé :", false),
 		"useBigResume"      : types.boolean("Afficher le résumé en grand direct:", false),
+		"useCollumn"        : types.boolean("Afficher le texte en colonne:", false),
 		"titleStyle"        : types.json("titleStyle :"),
 		"resumeStyle"       : types.json("resumeStyle :"),
 		"resumeContentStyle": types.json("resumeContentStyle :"),
