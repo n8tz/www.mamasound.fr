@@ -119,7 +119,7 @@ else {
 @RS.connect("Selected", "Styles", "TagManager", "Events", "UserGeoLocation", "DataProvider", "Quartiers")
 export default class EventMap extends React.Component {
 	static propTypes = {};
-	state            = {};
+	state            = { active: false };
 	
 	onPoiClicked = ( e ) => {
 		let {
@@ -203,16 +203,19 @@ export default class EventMap extends React.Component {
 				{/*<Views.Event.overlay record={Selected.Event} refs={$stores.DataProvider.data}*/}
 				{/*                     className={"previewBlock"}>*/}
 				{/*</Views.Event.overlay>}*/}
+				<div className={"NavTools"}>
+					<div className={"material-icons"}>touch_app</div>
+				</div>
 				<div className={"mapContainer"} onDragStart={e => e.stopPropagation()}
 				     onMouseDown={e => e.stopPropagation()} onMouseMove={e => e.stopPropagation()}>
 					<Map center={center}
 					     zoom={zoom}
 					     className={"content"}
-						//scrollWheelZoom={false}
-						 animate={true}
-						 useFlyTo={true}
-						 ref={"map"}
-						//dragging={false}
+					     scrollWheelZoom={this.state.active}
+					     animate={true}
+					     useFlyTo={true}
+					     ref={"map"}
+					     dragging={this.state.active}
 					>
 						<TileLayer
 							url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

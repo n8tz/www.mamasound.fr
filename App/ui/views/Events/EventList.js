@@ -50,7 +50,7 @@ export default class EventList extends React.Component {
 		    elem = document.querySelector(" .type_" + this.props.appState.viewType + " .Event_item.selected");
 		if ( elem ) {
 			let offset = 0;//this.props.appState.selectedEventId?180:0;
-			console.log(elem)
+			//console.log(elem)
 			while ( elem ) {
 				offset += elem.offsetTop;
 				elem = elem.offsetParent;
@@ -63,7 +63,7 @@ export default class EventList extends React.Component {
 			{
 				this.lastPos = offset;
 				if (!this.lastPos)
-					offset -= 160;
+					offset -= 320;
 			}
 			//document.body.parentElement.scrollTo(offset - 200)
 			document.body.parentElement.scrollTo({

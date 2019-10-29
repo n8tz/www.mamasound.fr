@@ -35,6 +35,9 @@ header {
   //@include withMask();
   background: rgba(255, 255, 255, 0.51);
   border-bottom: solid 2px black;
+  @media screen and (max-width: $tablet-portrait-breakpoint) {
+    height: 40px;
+  }
   //overflow: hidden;
   > .topMenu {
     @media screen and (max-width: $tablet-portrait-breakpoint) {

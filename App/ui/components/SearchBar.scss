@@ -24,8 +24,9 @@
 
   transform: translateZ(0);
   z-index: 100000;
-  top:-40px !important;
+  top: -40px !important;
   height: 40px !important;
+
   .label {
     padding-right: 1.5em;
     position: relative;
@@ -65,8 +66,8 @@
     border-bottom: solid 1px rgba(0, 0, 0, 0.34);
     padding-bottom: 3px;
     margin: 7px;
-    padding-right: 1em;
-    padding-left: .5em;
+    padding-right: 10px;
+    padding-left: 3px;
 
     &:after {
       content: '🞃';
@@ -113,10 +114,12 @@
       //border: solid 1px rgba(0, 0, 0, 0.38);
 
       height: 1.5em;
+
       ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
         color: black;
         opacity: .7; /* Firefox */
       }
+
       &:focus {
         outline: none;
       }
@@ -130,6 +133,11 @@
 
       &:focus ~ .bar:before {
         width: 100%;
+      }
+
+      @media screen and (max-width: $tablet-portrait-breakpoint) {
+        font-size: 16px;
+
       }
     }
 
@@ -173,6 +181,9 @@
       }
 
       @media screen and (max-width: $tablet-portrait-breakpoint) {
+        width: 35%;
+
+        padding-left: 3px;
       }
       //width: 100%;
       //background: #d6d6d6;
@@ -183,13 +194,14 @@
     }
 
     .filters {
-      width: 60%;
+      width: 65%;
       @include use_hvCenteredContent();
       display: inline-block;
+      white-space: nowrap;
       user-select: none;
       font-family: $mainFontFamily;
       @media screen and (max-width: $tablet-portrait-breakpoint) {
-        font-size: 13px;
+        font-size: 12px;
         .Calendar {
 
         }

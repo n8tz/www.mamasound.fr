@@ -162,19 +162,18 @@ export default {
 		},
 		selectFocus( selectedFocus, cls ) {
 			let { currentPageFocus } = this.nextState;
-			if ( selectedFocus && currentPageFocus === 'page' )
-				currentPageFocus = "loop";
-			else if ( selectedFocus )
-			//currentPageFocus = "bighead";
-				this.then(() => this.setState({ currentPageFocus: 'bighead' }));
 			if ( selectedFocus ) {
-				this.$actions.history_set("/" + cls + '/' + selectedFocus)
+				this.$actions.history_set("/" + cls + '/' + selectedFocus);
+				!__IS_SERVER__ && document.body.scrollTo({
+					                                           behavior: 'smooth',
+					                                           top     : 0
+				                                           })
 			}
 			return {
 				//currentPageFocus,
 				selectedEventId: null,
 				doFocus        : !!selectedFocus,
-				selectedFocus  : { id: selectedFocus || "Page.SkxesB7ugG", etty: cls || "Page" }
+				selectedFocus  : selectedFocus && { id: selectedFocus || "Page.SkxesB7ugG", etty: cls || "Page" }
 			};
 		},
 		selectWidget( selectedWidgetId ) {

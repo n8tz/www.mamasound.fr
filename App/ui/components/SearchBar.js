@@ -29,6 +29,19 @@ export default class SearchBar extends React.Component {
 		multi : null,
 	};
 	
+	componentDidMount() {
+		document.body.addEventListener("click", this._close = e => this.setState({
+			                                                                         showStyle: false,
+			                                                                         showArea : false,
+			                                                                         showPrice: false
+		                                                                         })
+		)
+	}
+	
+	componentWillUnmount() {
+		document.body.removeEventListener("click", this._close);
+	}
+	
 	handleSearchChange = e => {
 		this.setState({
 			              search: e.target.value,
@@ -154,7 +167,7 @@ export default class SearchBar extends React.Component {
 									                        className={"tag " + (TagManager.selected.includes(tag)
 									                                             ? "selected"
 									                                             : "")}
-									                        onClick={( e ) => $actions.toggleTag(tag.label)}
+									                        onClick={( e ) => ($actions.toggleTag(tag.label), e.stopPropagation(), e.preventDefault())}
 									                        style={{
 										                        fontSize: 14
 									                        }}
@@ -180,7 +193,7 @@ export default class SearchBar extends React.Component {
 									                        className={"tag " + (TagManager.selected.includes(tag)
 									                                             ? "selected"
 									                                             : "")}
-									                        onClick={( e ) => $actions.toggleTag(tag.label)}
+									                        onClick={( e ) => ($actions.toggleTag(tag.label), e.stopPropagation(), e.preventDefault())}
 									                        style={{
 										                        fontSize: 14
 									                        }}
@@ -204,7 +217,7 @@ export default class SearchBar extends React.Component {
 									                        className={"tag " + (TagManager.selected.includes(tag)
 									                                             ? "selected"
 									                                             : "")}
-									                        onClick={( e ) => $actions.toggleTag(tag.label)}
+									                        onClick={( e ) => ($actions.toggleTag(tag.label), e.stopPropagation(), e.preventDefault())}
 									                        style={{
 										                        fontSize: 14
 									                        }}

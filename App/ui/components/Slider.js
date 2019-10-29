@@ -182,7 +182,7 @@ export default class Slider extends React.Component {
 		    }                                                                                                       = this.props,
 		    { index = defaultIndex, allItems, nbGhostItems, step, dec, tweenLines, nbItems, sliderHeight = "auto" } = this.state;
 		
-		console.log("render slider", index, 100 + dec + index * step)
+		//console.log("render slider", index, 100 + dec + index * step)
 		return (
 			<div
 				className={"rSlide slider " + className}
