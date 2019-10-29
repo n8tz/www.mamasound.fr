@@ -38,11 +38,23 @@ export function service( server ) {
 		}
 	);
 	
+	server.use(express.static(process.cwd() + '/static'));
+	server.use("/assets/static", express.static(process.cwd() + '/App/ui/assets/static'));
 	
 	server.get(
 		'*',
 		function ( req, res, next ) {
 			if ( /^\/medias/ig.test(req.url) )
+				return next()
+			if ( /^\/assets/ig.test(req.url) )
+				return next()
+			if ( /^\/devTools/ig.test(req.url) )
+				return next()
+			if ( /^\/upload/ig.test(req.url) )
+				return next()
+			if ( /^\/socket/ig.test(req.url) )
+				return next()
+			if ( /^\/tout\-montpellier/ig.test(req.url) )
 				return next()
 			let key = config.PUBLIC_URL + "_page_" + req.url + "_" + req.device.type + "_" + (req.user && req.user.login);
 			redis.get(

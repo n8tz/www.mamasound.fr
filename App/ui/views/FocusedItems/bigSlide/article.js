@@ -33,15 +33,17 @@ export default class page extends React.Component {
 		let {
 			    record, className = '',
 			    refs              = {},
-			    target            = record.targetEtty && refs[record.targetEtty.objId],
+			    target            = record.targetEtty && refs[record.targetEtty.objId] || record,
 			    previewImage      = target && target.previewImage || record.previewImage,
 			    isNext, isCurrent
 		    }      = this.props,
 		    {
 			    big
 		    }      = this.state,
-		    descr  = entities.decode(striptags(record.resume || target && target.description || record.description || (record.label || target && (target.title || target.label)))),
-		    resume = big || record.useBigResume ? target.text || record.resume : record.resume || target.text;
+		    descr  = entities.decode(striptags(record.resume || target && (target.description || target.text) || record.description || (record.label || target && (target.title || target.label)))),
+		    resume = big || record.useBigResume
+		             ? target.description || target.text || record.resume
+		             : record.resume || target.description || target.text;
 		return <div className={
 			"bigSlide_article type_" + target._cls + " " + (record.useCollumn
 			                                                ? " collView"
@@ -58,17 +60,20 @@ export default class page extends React.Component {
 					<meta property="og:site_name"
 					      content={"MamaSound"}/>
 					<meta property="og:image"
-					      content={(record.sliderImage || previewImage) && getMediaSrc(record.sliderImage || previewImage)}/>
+					      content={(record.sliderImage || previewImage) && getMediaSrc(record.sliderImage || previewImage, {
+						      w: 200,
+						      h: 200
+					      })}/>
 					<meta name="description" content={descr}/>
 				</Helmet>
 			}
 			
 			{!record.hideTitle && <div className="title" style={record.titleStyle}>
 				{record.label || target && (target.title || target.label)}
-				{
-					target && target.startTM &&
-					<div className={"material-icons"}>calendar</div>
-				}
+				{/*{*/}
+				{/*	//target && target.startTM &&*/}
+					{/*<div className={"material-icons"}>calendar</div>*/}
+				{/*}*/}
 			</div>}
 			{!record.hideResume && <div className="resume" style={record.resumeStyle}>
 				{

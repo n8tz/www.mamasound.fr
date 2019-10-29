@@ -151,7 +151,7 @@ export const EventsBlock       = {
 	//top            : "100%",
 	//zIndex         : 1250,
 	//overflow       : 'hidden',
-	marginTop      : [headerHeight, 50],
+	marginTop      : [headerHeight, 55],
 	transformOrigin: "center top",
 	transform      : [
 		//{

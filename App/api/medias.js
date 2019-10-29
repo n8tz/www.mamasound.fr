@@ -30,8 +30,6 @@ export function service( server ) {
 	var upDir       = path.join(process.cwd(), config.UPLOAD_DIR) + '/',
 	    staticServe = express.static(upDir);
 	
-	server.use(express.static(process.cwd() + '/static'));
-	server.use("/assets/static", express.static(process.cwd() + '/App/ui/assets/static'));
 	//server.use("/medias", express.static(path.join(process.cwd(), config.UPLOAD_DIR)));
 	
 	var download = function ( uri, filename, ext, callback ) {
@@ -122,9 +120,9 @@ export function service( server ) {
 			var id   = req.query.w + 'x' + req.query.h + '.',
 			    gm   = require('gm').subClass({});
 			req.path = req.url = id + asked;
-			console.log('resize : ', upDir + asked);
 			return staticServe(req, res, function () {
 				
+				console.log('resize : ', upDir + asked);
 				gm(upDir + asked)
 					.resize(req.query.w || null, req.query.h || null)
 					.autoOrient()
@@ -155,8 +153,7 @@ export function service( server ) {
 					});
 			});
 		}
-		else
-		{
+		else {
 			
 			req.path = req.url = '/' + asked;
 			return staticServe(
