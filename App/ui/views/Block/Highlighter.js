@@ -48,7 +48,7 @@ if ( typeof window !== "undefined" ) {
 							
 							]
 						},
-						mountKeys: ["targetEtty"],
+						mountKeys: ["targetEtty", "relatedEvents"],
 					}
 				};
 			}

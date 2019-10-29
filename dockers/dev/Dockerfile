@@ -19,6 +19,7 @@ RUN apk --no-cache update \
         rsync \
         git \
         nano \
+        graphicsmagick \
         htop \
         certbot
 

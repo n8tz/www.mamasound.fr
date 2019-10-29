@@ -108,7 +108,7 @@ export default class eventItem extends React.Component {
 					<meta property="og:site_name"
 					      content={"MamaSound"}/>
 					<meta property="og:image"
-					      content={preview && getMediaSrc(preview)}/>
+					      content={preview && getMediaSrc(preview, { w: 200 })}/>
 				</Helmet>
 			}
 			{
@@ -140,9 +140,9 @@ export default class eventItem extends React.Component {
 			<div className="icon">
 				{
 					record.category && refs[record.category.objId] &&
-					<Comps.Image src={refs[record.category.objId].icon}/>
+					<Comps.Image src={refs[record.category.objId].icon} w={64}/>
 					||
-					<Comps.Image src={defaultPreview[record._cls]} style={{ transform: "scale(.8)" }}/>
+					<Comps.Image src={defaultPreview[record._cls]} style={{ transform: "scale(.8)" }} w={64}/>
 				}
 			</div>
 			{/*{ record.previewImage &&*/}

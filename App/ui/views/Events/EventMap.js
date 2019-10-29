@@ -204,7 +204,9 @@ export default class EventMap extends React.Component {
 				{/*                     className={"previewBlock"}>*/}
 				{/*</Views.Event.overlay>}*/}
 				<div className={"NavTools"}>
-					<div className={"material-icons"}>touch_app</div>
+					<div className={"material-icons activate " + (!this.state.active ? "disabled" : "")}
+					     onClick={e => this.setState({ active: !this.state.active })}>touch_app
+					</div>
 				</div>
 				<div className={"mapContainer"} onDragStart={e => e.stopPropagation()}
 				     onMouseDown={e => e.stopPropagation()} onMouseMove={e => e.stopPropagation()}>

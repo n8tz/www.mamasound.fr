@@ -33,7 +33,7 @@ export default class page extends React.Component {
 		let {
 			    record, className = '',
 			    refs              = {},
-			    target            = record.targetEtty && refs[record.targetEtty.objId] || record,
+			    target            = record.targetEtty && refs[record.targetEtty.objId],
 			    previewImage      = target && target.previewImage || record.previewImage,
 			    isNext, isCurrent
 		    }      = this.props,
@@ -65,6 +65,10 @@ export default class page extends React.Component {
 			
 			{!record.hideTitle && <div className="title" style={record.titleStyle}>
 				{record.label || target && (target.title || target.label)}
+				{
+					target && target.startTM &&
+					<div className={"material-icons"}>calendar</div>
+				}
 			</div>}
 			{!record.hideResume && <div className="resume" style={record.resumeStyle}>
 				{

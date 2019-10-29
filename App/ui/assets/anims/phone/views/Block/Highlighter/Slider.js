@@ -52,7 +52,7 @@ export const defaultEntering = [
 	{
 		from    : 0,
 		duration: 100,
-		//easeFn  : "easeSinIn",
+		easeFn  : "easeSinIn",
 		apply   : {
 			transform: {
 				rotate: "-" + stepAngle,
@@ -99,7 +99,7 @@ export const defaultLeaving  = [
 		from    : 0,
 		duration: 100,
 		//easeFn  : "easeSinOut",
-		//easeFn  : "easeSinOut",
+		easeFn  : "easeSinOut",
 		apply   : {
 			zIndex: -150,
 			

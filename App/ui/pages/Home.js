@@ -49,7 +49,7 @@ export default class Home extends React.Component {
 	
 	recordPosition = event => {
 		
-		let { appState,$actions }                                    = this.props;
+		let { appState, $actions }                          = this.props;
 		let scrollTop, normalizedScrollTop, switchPoint, vp = appState.selectedFocus ? 90 : 70;
 		
 		scrollTop           = document.body.parentElement.scrollTop;

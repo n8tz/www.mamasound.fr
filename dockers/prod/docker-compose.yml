@@ -28,8 +28,10 @@ services:
     #
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`${APP_DOMAIN}`)"
-      - "traefik.http.routers.whoami.entrypoints=web"
+      - "traefik.http.routers.app.rule=Host(`${APP_DOMAIN:-mamasound.localhost}`)"
+      - "traefik.http.routers.app.entrypoints=web"
+      - "traefik.http.routers.static.rule=Host(`static.${APP_DOMAIN:-mamasound.localhost}`)"
+      - "traefik.http.routers.static.entrypoints=web"
       - 'traefik.protocol=http'
     environment:
       - MONGO_URI=mongodb://mongodb:27017

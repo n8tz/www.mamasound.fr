@@ -24,11 +24,6 @@ export const name          = "Rendering service";
 export const priorityLevel = 100000;
 
 export function service( server ) {
-	//if ( process.env.NODE_ENV === 'production' ) {
-	//	let creds = JSON.parse(fs.readFileSync(process.cwd() + '/creds.json'));
-	//	server.use(basicAuth(creds.user, creds.pass))
-	//}
-	//
 	let publicFiles = express.static(process.cwd() + '/dist/www'),
 	    adminFiles  = express.static(process.cwd() + '/dist/admin');
 	

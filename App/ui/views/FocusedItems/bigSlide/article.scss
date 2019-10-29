@@ -246,6 +246,7 @@ body.onTop .bigSlide_article {
 
     .resume {
 
+      @include withTranspaMask();
       position: absolute;
       top: 15px;
       //width: calc(100% - 20px);
@@ -348,7 +349,7 @@ body.onTop .bigSlide_article {
       //width: 100%;
       //max-width: 600px;
       left: 10px;
-      right: calc(50% + 10px);
+      right: calc(40% + 10px);
       z-index: 100;
       //padding-left: calc(#{$focusSlidePadSize} + .25em);
       text-align: left;
@@ -384,12 +385,13 @@ body.onTop .bigSlide_article {
       //max-width: 600px;
       bottom: 30px;
 
+      @include withTranspaMask();
       //padding-top: 3em;
       //padding-bottom: 15vh;
       padding: 30px 1em 150px 3em;
       //padding-left: calc(#{$focusSlidePadSize} + 1.5em);
       left: 0;
-      right: calc(50%);
+      right: calc(40%);
       overflow: hidden;
       margin: 5px;
       //transition: all 500ms;

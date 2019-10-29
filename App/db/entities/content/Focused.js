@@ -51,6 +51,9 @@ export default {
 		
 		"sliderImage": types.media({ allowedTypes: "Image" }, "Slide (~12/5 fb headers):"),
 		
+		"relatedEvents": types.collection(["Concert", "Theatre", "Expo"], {},
+		                                  "Events liés :"),
+		
 		"website"   : types.labels("Site web :"),
 		"fbPage"    : types.labels("Page Facebook :"),
 		"scPage"    : types.labels("Page SoundCloud :"),

@@ -11,6 +11,7 @@ body.fixedHead .EventMap {
   //top: 210px !important;
   //top: calc(70vh) !important;
   pointer-events: all !important;
+
   &:after {
     display: none;
   }
@@ -36,6 +37,22 @@ body.fixedHead .EventMap {
     //z-index: 150;
   }
 
+  .activate {
+    cursor: pointer;
+    position: relative;
+
+    &.disabled {
+      opacity: .5;
+
+      &:after {
+        content: '/';
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+
   .Event_overlay {
     position: absolute;
     top: 0;
@@ -57,11 +74,11 @@ body.fixedHead .EventMap {
   }
 
   .NavTools {
-    //@include use_hvCenteredAbs();
+    //@include use_hvCenteredContent();
     position: absolute;
     top: 0;
     width: 100%;
-    height: 50px;
+    height: 26px;
     overflow: hidden;
     z-index: 1000;
     text-align: right;

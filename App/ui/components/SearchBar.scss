@@ -197,7 +197,7 @@
       width: 65%;
       @include use_hvCenteredContent();
       display: inline-block;
-      white-space: nowrap;
+      //white-space: nowrap;
       user-select: none;
       font-family: $mainFontFamily;
       @media screen and (max-width: $tablet-portrait-breakpoint) {

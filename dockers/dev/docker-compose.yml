@@ -48,6 +48,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.app.rule=Host(`${APP_DOMAIN:-mamasound.localhost}`)"
       - "traefik.http.routers.app.entrypoints=web"
+      - "traefik.http.routers.static.rule=Host(`static.${APP_DOMAIN:-mamasound.localhost}`)"
+      - "traefik.http.routers.static.entrypoints=web"
       - 'traefik.protocol=http'
       - 'traefik.frontend.errors.network.status=["500-599"]'
       - 'traefik.frontend.errors.network.backend="error"'

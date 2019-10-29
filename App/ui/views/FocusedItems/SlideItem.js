@@ -29,12 +29,12 @@ export default class SlideItem extends React.Component {
 				
 				{record.sliderImage &&
 				<div className="preview">
-					<Comps.Image src={record.sliderImage}/>
+					<Comps.Image src={record.sliderImage} w={250}/>
 				</div>
 				}
-				<div className="title">
-					{record.label}
-				</div>
+				{/*<div className="title">*/}
+				{/*	{record.label}*/}
+				{/*</div>*/}
 			</div>
 		);
 	}

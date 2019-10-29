@@ -18,6 +18,7 @@ RUN apk --no-cache update \
         libffi-dev \
         openssl-dev \
         mongodb-tools \
+        graphicsmagick \
         bash \
         mongodb-tools \
         rsync \
