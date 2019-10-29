@@ -84,9 +84,71 @@ export function get( cls, objId, cb ) {
 		;
 }
 ;
+export function query( req ) {
+	return new Promise(
+		( resolve, reject ) => {
+			
+			let { query: _query, etty, limit = 1000, skip, orderby, mountKeys = [] } = req;
+			pushDbTask(
+				( client, dbRelease ) => {
+					try {
+						let db    = client.db("mamasound_fr"),
+						    data  = {},
+						    complete,
+						    done  = ( r, ln ) => {
+							    data.length = typeof ln == 'number' ? ln : data.length;
+							    data.items  = r && r.items || data.items;
+							    data.refs   = r && r.refs || data.refs;
+							    if ( typeof data.length == 'number' && is.array(data.items) ) {
+								    done = null;
+								    dbRelease();
+								    try {
+									    //memoryCache.flushAll();
+									    //redis.delWildcard(config.PUBLIC_URL + "_*");
+									    resolve(data)
+								    } catch ( e ) {
+									    console.warn(e);
+								    }
+							    }
+							
+						    },
+						    ptr   = db.collection(etty)
+						              .find(_query || {}),//{$query : {}, $orderby : {updated : -1}}
+						    count = ptr.count(null, ( e, r ) => {
+							    done(null, r || 0);
+						    }),
+						
+						    parse = function ( err, items = [] ) {
+							    err && console.warn(err);
+							    items.forEach(
+								    item => {
+									    item._cls = item._cls || etty;
+								    }
+							    )
+							    mount({ get, query }, items || [], mountKeys)
+								    .then(refs => {
+									    done({ refs, items })
+								    })
+								    .catch(refs => {
+									    done({ refs, items })
+								    })
+						    };
+						ptr.sort(orderby)
+						   .skip(parseInt(skip) || 0)
+						   .limit(parseInt(limit) || 20)
+						   .toArray(parse);
+						
+					} catch ( e ) {
+						console.warn(e);
+					}
+				}
+			)
+		}
+	);
+};
 
 export function create( etty, data, id = etty + '.' + shortid.generate() ) {
-	memoryCache.flushAll()
+	//memoryCache.flushAll()
 	return new Promise(
 		( resolve, reject ) => {
 			
@@ -110,6 +172,8 @@ export function create( etty, data, id = etty + '.' + shortid.generate() ) {
 								  , ( err, docs ) => {
 									  if ( err ) console.warn("save failed ", err);
 									  dbRelease();
+									  memoryCache.flushAll();
+									  redis.delWildcard(config.PUBLIC_URL + "_*");
 									  !err && resolve({ id, etty });
 									  err && reject(err);
 								  });
@@ -161,68 +225,6 @@ export function save( etty, id, data ) {
 }
 ;
 
-export function query( req ) {
-	return new Promise(
-		( resolve, reject ) => {
-			
-			let { query: _query, etty, limit = 1000, skip, orderby, mountKeys = [] } = req;
-			pushDbTask(
-				( client, dbRelease ) => {
-					try {
-						let db    = client.db("mamasound_fr"),
-						    data  = {},
-						    complete,
-						    done  = ( r, ln ) => {
-							    data.length = typeof ln == 'number' ? ln : data.length;
-							    data.items  = r && r.items || data.items;
-							    data.refs   = r && r.refs || data.refs;
-							    if ( typeof data.length == 'number' && is.array(data.items) ) {
-								    done = null;
-								    dbRelease();
-								    try {
-									    memoryCache.flushAll();
-									    redis.delWildcard(config.PUBLIC_URL + "_*");
-									    resolve(data)
-								    } catch ( e ) {
-									    console.warn(e);
-								    }
-							    }
-							
-						    },
-						    ptr   = db.collection(etty)
-						              .find(_query || {}),//{$query : {}, $orderby : {updated : -1}}
-						    count = ptr.count(null, ( e, r ) => {
-							    done(null, r || 0);
-						    }),
-						
-						    parse = function ( err, items = [] ) {
-							    err && console.warn(err);
-							    items.forEach(
-								    item => {
-									    item._cls = item._cls || etty;
-								    }
-							    )
-							    mount({ get, query }, items || [], mountKeys)
-								    .then(refs => {
-									    done({ refs, items })
-								    })
-								    .catch(refs => {
-									    done({ refs, items })
-								    })
-						    };
-						ptr.sort(orderby)
-						   .skip(parseInt(skip) || 0)
-						   .limit(parseInt(limit) || 20)
-						   .toArray(parse);
-						
-					} catch ( e ) {
-						console.warn(e);
-					}
-				}
-			)
-		}
-	);
-};
 
 export function remove( req ) {
 	return new Promise(

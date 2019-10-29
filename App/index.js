@@ -124,7 +124,7 @@ const ctrl = {
 		cScope.onceStableTree(state => {
 			let nstate = cScope.serialize({ alias: "App" });
 			cScope.destroy()
-			if ( !stable && _attempts < 3 ) {
+			if ( !stable && _attempts <= 4 ) {
 				cfg.state = nstate;
 				ctrl.renderSSR(cfg, cb, ++_attempts);
 			}

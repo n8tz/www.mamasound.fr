@@ -57,6 +57,8 @@ export function service( server ) {
 			if ( /^\/tout\-montpellier/ig.test(req.url) )
 				return next()
 			let key = config.PUBLIC_URL + "_page_" + req.url + "_" + req.device.type + "_" + (req.user && req.user.login);
+			
+			console.warn("get",key)
 			redis.get(
 				key,
 				( err, html ) => {
@@ -78,8 +80,9 @@ export function service( server ) {
 							//state   : currentState,
 						},
 						( err, html, nstate ) => {
+							console.warn("set",key)
+							redis.set(key, html, 'EX', 1000 * 60 * 60, console.log);
 							res.send(200, html);
-							redis.set(key, html, 'EX', 1000 * 60 * 60);
 						}
 					)
 					
