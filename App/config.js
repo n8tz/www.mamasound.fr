@@ -16,14 +16,15 @@ if ( __IS_SERVER__ ) {
 else {
 	baseDomain = location.host;
 }
-console.warn("baseDomain",baseDomain)
+console.warn("baseDomain", baseDomain)
 export default {
 	STATIC_URL      : baseDomain + "/medias",//"static.mamasound.fr",
 	PUBLIC_URL      : baseDomain,
 	ROOT_DOMAIN     : baseDomain,
 	UPLOAD_URL      : baseDomain + "/upload",
 	MEDIA_URL       : baseDomain + "/medias",
-	ALT_MEDIA_URL   : "http://static.mamasound.fr/",
+	ALT_MEDIA_URL   : "http://mamasound.wiseways.me/medias",
+	//ALT_MEDIA_URL   : "http://static.mamasound.fr/",
 	UPLOAD_DIR      : "./upload",
 	SESSION_CHECK_TM: 60000,
 	...$super

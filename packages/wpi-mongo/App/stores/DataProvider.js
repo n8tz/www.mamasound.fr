@@ -242,20 +242,18 @@ export default class DataProvider extends Store {
 		//}
 		//this.dispatch('setLoading');
 		this.wait();
-		get(etty, id)
-			.then(
-				( data ) => {
-					this.pushRemoteRecord(data)
-					this.release()
-				},
-				( err ) => {
-					this.release()
-					if ( err ) {
-						//this.pushRemoteRecord(etty, id, {})
-						return console.error("DataProvider: query fail '", etty, err);
-					}
-				}
-			);
+		get(etty, id,
+		    ( err, data ) => {
+			    this.release()
+			
+			    if ( err ) {
+				    //this.pushRemoteRecord(etty, id, {})
+				    return console.error("DataProvider: get fail '", etty, err);
+			    }
+			    else
+				    this.pushRemoteRecord(data)
+		    }
+		);
 	}
 	
 	/**
@@ -265,20 +263,17 @@ export default class DataProvider extends Store {
 	syncRemoteQuery( queryData, hash ) {
 		//console.info("! query : ", hash, queryData)
 		this.wait()
-		query(queryData)
-			.then(
-				( data ) => {
-					this.pushRemoteQuery(queryData, data, hash)
-					this.release()
-				},
-				( err ) => {
-					this.release()
-					if ( err ) {
-						this.pushRemoteQuery(queryData, { items: [], total: 0, length: 0 })
-						return console.error("DataProvider: query fail '", queryData.etty, err);
-					}
-				}
-			);
+		query(queryData, ( err, data ) => {
+			
+			this.release()
+			if ( err ) {
+				this.pushRemoteQuery(queryData, { items: [], total: 0, length: 0 })
+				return console.error("DataProvider: query fail '", queryData.etty, err);
+			}
+			else {
+				this.pushRemoteQuery(queryData, data, hash)
+			}
+		})
 	}
 	
 	/**

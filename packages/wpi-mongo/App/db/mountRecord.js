@@ -18,37 +18,43 @@ import is from "is";
  * @param mounted
  */
 export function mount( db, record, toMountKeys, cb ) {
-	return new Promise(
-		( resolve, reject ) => {
-			var r    = is.array(record) && record || [record],
-			    refs = {},
-			    i    = 1;
-			
-			Promise.allSettled(
-				r.reduce(
-					( refsList, record ) => {
-						toMountKeys.forEach(
-							key => (
-								record[key]
-								&&
-								refsList.push(
-									db.get(
-										record[key].cls,
-										record[key].objId
-									).then(doc => (refs[record[key].objId] = doc))
-								)
-							))
-						;
-						return refsList;
-					},
-					[]
-				)
-			)
-			       .then(r => resolve(refs))
-			       .catch(r => {
-				       resolve(refs)
-			       })
-		}
-	)
+	let refsList = is.array(record) && record || [record],
+	    refs     = {},
+	    sema     = 0,
+	    done     = () => (0 === --sema && (resolve(refs))),
+	    resolve,
+	    mounting = new Promise(
+		    ( r, reject ) => {
+			    resolve = r;
+		    }
+	    )
+		    .then(data => (cb && cb(null, refs),refsList))
+		    .catch(err => (cb && cb(err, refs)));
+	
+	refsList.forEach(
+		( record ) => {
+			toMountKeys.forEach(
+				( key ) => (
+					record[key]
+					&&
+					(sema++,
+							db.get(
+								record[key].cls,
+								record[key].objId,
+								( err, doc ) => (refs[record[key].objId] = doc, done())
+							)
+					)
+				))
+			;
+			return refsList;
+		},
+		[]
+	);
+	
+	
+	if ( !sema )
+		sema++, done();
+	
+	return mounting;
 }
 

@@ -27,10 +27,14 @@ export default class SlideItem extends React.Component {
 			<div className="FocusedItems SlideItem" style={style} onClick={onClick}>
 				<Editable id={record._id}/>
 				
-				{record.sliderImage &&
-				<div className="preview">
-					<Comps.Image src={record.sliderImage} w={250}/>
-				</div>
+				{
+					record.sliderImage &&
+					<a className="preview"
+					   href={"/" + record._cls + "/" + (record._alias || record._id)}
+					   onClick={e => e.preventDefault()}
+					>
+						<Comps.Image src={record.sliderImage} w={250}/>
+					</a>
 				}
 				{/*<div className="title">*/}
 				{/*	{record.label}*/}

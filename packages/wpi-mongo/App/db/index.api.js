@@ -16,10 +16,18 @@ import typesList    from "App/db/types";
 import is           from "is";
 import cacheManager from "node-cache";
 import shortid      from "shortid";
+import xxhashjs     from 'xxhashjs'
+
+var H = xxhashjs.h64(0)	// seed = 0xABCD
+
+function mkQueryH( query ) {
+	//return JSON.stringify(query)
+	return H.update(JSON.stringify(query)).digest().toString(32)
+}
 
 export const types = typesList;
 export {mount}      from "App/db/mountRecord";
-const memoryCache = new cacheManager({ stdTTL: 100, checkperiod: 120 });
+const memoryCache = new cacheManager({ stdTTL: 60 * 60, checkperiod: 60 * 10 });
 const defaults    = { get, query, remove, create, save }
 export default defaults;
 
@@ -32,8 +40,10 @@ export function get( cls, objId, cb ) {
 	
 	return new Promise(
 		( resolve, reject ) => {
-			if ( syncCache && cb )
+			if ( syncCache && !cb )
 				return resolve(syncCache);
+			
+			
 			pushDbTask(
 				( client, dbRelease ) => {
 					let db    = client.db("mamasound_fr");
@@ -45,11 +55,6 @@ export function get( cls, objId, cb ) {
 						objId,
 						db,
 						( err, alias ) => {
-							//if ( err ) {
-							//	dbRelease();
-							//	return cb(404);
-							//}
-							//console.warn("get ", _etty, cls, objId);
 							let query = { _id: alias && alias.target.objId || objId };
 							if ( _etty !== cls )
 								query._cls = cls;
@@ -63,10 +68,12 @@ export function get( cls, objId, cb ) {
 										  console.info("Not found ", cls, objId);
 										  //debugger
 										  reject(err || 404);
+										  cb && cb(err, null)
 										  return;
 									  }
 									  else {
 										  let doc = { ...docs, _cls: cls };
+										  cb && cb(null, doc)
 										  memoryCache.set(key, doc)
 										  resolve(doc)
 									  }
@@ -80,13 +87,20 @@ export function get( cls, objId, cb ) {
 				}
 			)
 		}
-	)
-		;
+	);
 }
 ;
-export function query( req ) {
+
+export function query( req, cb ) {
+	let key       = mkQueryH(req),
+	    syncCache = memoryCache.get(key);
+	
+	if ( syncCache && cb )
+		return cb(null, syncCache);
 	return new Promise(
 		( resolve, reject ) => {
+			if ( syncCache && !cb )
+				return resolve(syncCache);
 			
 			let { query: _query, etty, limit = 1000, skip, orderby, mountKeys = [] } = req;
 			pushDbTask(
@@ -103,6 +117,7 @@ export function query( req ) {
 								    done = null;
 								    dbRelease();
 								    try {
+									    memoryCache.set(key, data)
 									    //memoryCache.flushAll();
 									    //redis.delWildcard(config.PUBLIC_URL + "_*");
 									    resolve(data)
@@ -125,13 +140,10 @@ export function query( req ) {
 									    item._cls = item._cls || etty;
 								    }
 							    )
-							    mount({ get, query }, items || [], mountKeys)
-								    .then(refs => {
-									    done({ refs, items })
-								    })
-								    .catch(refs => {
-									    done({ refs, items })
-								    })
+							    mount({ get, query }, items || [], mountKeys,
+							          ( err, refs = {} ) => {
+								          done({ refs, items })
+							          })
 						    };
 						ptr.sort(orderby)
 						   .skip(parseInt(skip) || 0)
@@ -144,7 +156,9 @@ export function query( req ) {
 				}
 			)
 		}
-	);
+	)
+		.then(data => (cb && cb(null, data)))
+		.catch(err => (cb && cb(err, null)));
 };
 
 export function create( etty, data, id = etty + '.' + shortid.generate() ) {

@@ -10,6 +10,14 @@
   margin-top: calc(90vh + 50px) !important;
 }
 
+.SSR .EventList .slider {
+  .slide {
+    position: static !important;
+    opacity: 1 !important;
+    transform: translateZ(0) !important;
+  }
+}
+
 .EventList {
   //touch-action: none;
   position: relative;
@@ -24,6 +32,7 @@
   @media screen and (max-height: 350px) {
     transform: translateY(-110px) !important;
   }
+
   .NavBox {
     z-index: 10;
 

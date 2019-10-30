@@ -1,5 +1,5 @@
 <h1 align="center">work in progress next mamasound.fr website</h1>
-<p align="center">React SPA & CMS, with live edit, full SSR, including slideables, async data & metas</p>
+<p align="center">React SPA & CMS, with live edit, full SSR, including slideables, async data & metas, browsable without JS, etc </p>
 
 tmp url : http://mamasound.wiseways.me/
 

@@ -14,7 +14,7 @@ export default class Background extends React.Component {
 	
 	render() {
 		let {
-			    record={}, style
+			    record = {}, style
 		    }     = this.props,
 		    state = this.state;
 		//debugger
@@ -24,9 +24,9 @@ export default class Background extends React.Component {
 				{
 					record.mainBackground &&
 					<div className="background">
-						<Comps.Image src={record.mainBackground} className={"leftGhost"}/>
-						<Comps.Image src={record.mainBackground} className={"rightGhost"}/>
-						<Comps.Image src={record.mainBackground}/>
+						<Comps.Image src={record.mainBackground} className={"leftGhost"} h={800}/>
+						<Comps.Image src={record.mainBackground} className={"rightGhost"} h={800}/>
+						<Comps.Image src={record.mainBackground} h={800}/>
 					</div>
 					
 				}

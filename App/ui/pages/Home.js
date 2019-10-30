@@ -38,6 +38,7 @@ export default class Home extends React.Component {
 		//)
 		let { appState } = props;
 		//props.tweener.scrollTo(wayPoints[appState.currentPageFocus]);
+		document.body.classList.remove("SSR");
 		document.addEventListener('scroll', this.recordPosition, { passive: false })
 		this._rpTm = setInterval(this.recordPosition, 300)
 	}
@@ -102,7 +103,9 @@ export default class Home extends React.Component {
 		let { Styles, appState, currentTheme, appTheme, $actions, NavBox, appMenu } = this.props;
 		return <>
 			<TweenRef id={"page"} initial={Styles.page}>
-				<div className={"Home container " + (appState.selectedFocus ? "bigHead" : "")}>
+				<div className={"Home container " + (appState.selectedFocus ? "bigHead" : "") + (__IS_SERVER__
+				                                                                                 ? " SSR"
+				                                                                                 : "")}>
 					
 					<TweenAxis
 						axe={"scrollY"}
