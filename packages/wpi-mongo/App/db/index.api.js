@@ -27,7 +27,7 @@ function mkQueryH( query ) {
 
 export const types = typesList;
 export {mount}      from "App/db/mountRecord";
-const memoryCache = new cacheManager({ stdTTL: 60 * 60, checkperiod: 60 * 10 });
+const memoryCache = new cacheManager({ stdTTL: 60 * 60, checkperiod: 60 * 10, useClone: false });
 const defaults    = { get, query, remove, create, save }
 export default defaults;
 
@@ -67,8 +67,9 @@ export function get( cls, objId, cb ) {
 									  if ( !docs ) {
 										  console.info("Not found ", cls, objId);
 										  //debugger
+										  query, alias, _etty;
 										  reject(err || 404);
-										  cb && cb(err, null)
+										  cb && cb(err || 404, null)
 										  return;
 									  }
 									  else {

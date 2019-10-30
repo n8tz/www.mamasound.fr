@@ -104,8 +104,8 @@ export default class App extends React.Component {
 				<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"/>
 				<meta name="theme-color" content="#ffffff"/>
 				<title>MamaSound</title>
-				<link rel="stylesheet" type="text/css"
-				      href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
+				{/*<link rel="stylesheet" type="text/css"*/}
+				{/*      //href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>*/}
 				{
 					CurrentUser && CurrentUser.isAdmin &&
 					<script src="/scripts/ckeditor/ckeditor.js"></script>
@@ -119,7 +119,6 @@ export default class App extends React.Component {
 					href="https://fonts.googleapis.com/icon?family=Material+Icons"
 					rel="stylesheet"/>
 			</Helmet>
-			
 			{CurrentUser && CurrentUser.isAdmin && <ContextMenu>
 				<div
 					onClick={() => $actions.newWidget('MamaImporter', { title: "Importer d'events" })}>

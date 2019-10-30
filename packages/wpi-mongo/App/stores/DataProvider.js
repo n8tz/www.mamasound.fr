@@ -179,7 +179,6 @@ export default class DataProvider extends Store {
 			
 			this.data.___aliases___[rec._cls]             = this.data.___aliases___[rec._cls] || {};
 			this.data.___aliases___[rec._cls][rec._alias] = rec._id;
-			
 		}
 		
 		this.dispatchUpdates();
@@ -209,7 +208,7 @@ export default class DataProvider extends Store {
 		
 		!noMap && results.items.forEach(
 			record => {
-				this.pushRemoteRecord(record);
+				record && this.pushRemoteRecord(record);
 				this.data.___recToQuery___[record._id] = this.data.___recToQuery___[record._id] || [];
 				!this.data.___recToQuery___[record._id].includes(hash)
 				&& this.data.___recToQuery___[record._id].push(hash);

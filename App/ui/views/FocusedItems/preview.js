@@ -189,7 +189,7 @@ export default (
 					
 					{/*<Comps.Image src={previewImage} className={"leftGhost"}/>*/}
 					{/*<Comps.Image src={previewImage} className={"rightGhost"}/>*/}
-					<Comps.Image src={previewImage} w={500} h={900}/>
+					<Comps.Image src={previewImage} w={500}/>
 				</div>
 			</TweenRef>
 		}
