@@ -44,6 +44,8 @@ html {
 *:after {
   -webkit-box-sizing: inherit;
   box-sizing: inherit;
+
+  user-drag: none;
 }
 
 body,

@@ -6,9 +6,16 @@
  *   @contact : n8tz.js@gmail.com
  */
 
-.SlideItem{
-  img{
+.SlideItem {
+  img {
     touch-action: none;
     pointer-events: none;
+
+    user-drag: none;
+  }
+
+  a {
+    touch-action: none;
+    user-drag: none;
   }
 }
