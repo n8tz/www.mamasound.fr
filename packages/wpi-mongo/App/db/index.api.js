@@ -28,7 +28,7 @@ function mkQueryH( query ) {
 export const types = typesList;
 export {mount}      from "App/db/mountRecord";
 const memoryCache = new cacheManager({ stdTTL: 60 * 60, checkperiod: 60 * 10, useClone: false });
-const defaults    = { get, query, remove, create, save }
+const defaults    = { get, query, remove, create, save };
 export default defaults;
 
 export function get( cls, objId, cb ) {
@@ -43,6 +43,8 @@ export function get( cls, objId, cb ) {
 			if ( syncCache && !cb )
 				return resolve(syncCache);
 			
+			if ( !entities[cls] )
+				return reject("Bad entity id : " + cls);
 			
 			pushDbTask(
 				( client, dbRelease ) => {
@@ -89,8 +91,7 @@ export function get( cls, objId, cb ) {
 			)
 		}
 	);
-}
-;
+};
 
 export function query( req, cb ) {
 	let key       = mkQueryH(req),
@@ -237,8 +238,7 @@ export function save( etty, id, data ) {
 				});
 		}
 	)
-}
-;
+};
 
 
 export function remove( req ) {

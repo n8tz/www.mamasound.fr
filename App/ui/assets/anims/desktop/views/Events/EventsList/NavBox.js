@@ -5,7 +5,7 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import {collWidth, footerMiniHeight, mapHeight} from "../../../vars";
+import {collRightWidth, footerMiniHeight, mapHeight, collLeftWidth} from "../../../vars";
 
 let startPos      = 50,
     openDuration  = 50,
@@ -44,9 +44,9 @@ export const Axis           = [
 export const SearchBarAxis  = [];
 export const typesNav       = {
 	position : "absolute",
-	width    : ["100%", "-" + collWidth, -30],
+	width    : ["100%", "-" + collRightWidth, -30, "-" + collLeftWidth],
 	//bottom   : "0px",
-	left     : "10px",
+	left     : ["10px", collLeftWidth],
 	bottom   : 0,
 	height   : "40px",
 	transform: {
@@ -63,9 +63,9 @@ export const SearchBarProps = {
 	
 	boxStyle  : {
 		position: "absolute",
-		width   : ["100%", "-" + collWidth, -30],
-		//width          : "60vw",
-		left    : "10px",
+		width   : ["100%", "-" + collRightWidth, -30, "-" + collLeftWidth],
+		//bottom   : "0px",
+		left    : ["10px", collLeftWidth],
 		top     : ["-" + 40, 10],
 		height  : "40px",
 	},

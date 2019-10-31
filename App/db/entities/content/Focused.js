@@ -67,19 +67,17 @@ export default {
 		"hideResume"        : types.boolean("Cacher le résumé :", false),
 		"useBigResume"      : types.boolean("Afficher le résumé en grand direct:", false),
 		"useCollumn"        : types.boolean("Afficher le texte en colonne:", false),
-		"titleStyle"        : types.json("titleStyle :"),
-		"resumeStyle"       : types.json("resumeStyle :"),
-		"resumeContentStyle": types.json("resumeContentStyle :"),
-		
+		"usePreviewImage"   : types.boolean("Afficher une image preview :", true),
+		"useBigPreviewImage": types.boolean("Afficher une l'image preview en grand :", false),
+		"previewImage"      : types.media({ allowedTypes: "Image" }, "Preview:"),
 		"useBackground"     : types.boolean("Afficher le background :", false),
 		"useGhostBackground": types.boolean("Afficher les ghosts flous :", false),
 		"background"        : types.media({ allowedTypes: ["Image", "Video"] }, "Background (gd image/video de fond (video LEGERE)):"),
 		"backgroundColor"   : types.color("Couleur de fond :"),
-		
-		"usePreviewImage"   : types.boolean("Afficher une image preview :", true),
-		"useBigPreviewImage": types.boolean("Afficher une l'image preview en grand :", false),
-		"previewImage"      : types.media({ allowedTypes: "Image" }, "Preview:"),
 		"previewStyle"      : types.json("previewStyle :"),
+		"titleStyle"        : types.json("titleStyle :"),
+		"resumeStyle"       : types.json("resumeStyle :"),
+		"resumeContentStyle": types.json("resumeContentStyle :"),
 		
 		
 	}

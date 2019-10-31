@@ -50,12 +50,16 @@ export default class Home extends React.Component {
 	
 	recordPosition = event => {
 		
-		let { appState, $actions }                          = this.props;
-		let scrollTop, normalizedScrollTop, switchPoint, vp = appState.selectedFocus ? 90 : 70;
+		let {
+			    appState, $actions
+		    }  = this.props;
+		let scrollTop,
+		    normalizedScrollTop,
+		    switchPoint,
+		    vp = appState.selectedFocus ? 98 : 70;
 		
 		scrollTop           = document.body.parentElement.scrollTop;
 		switchPoint         = vp - (210 / document.body.parentElement.offsetHeight) * 100;
-		//console.log(tweener._.box.y);
 		normalizedScrollTop = Math.max(0, (((scrollTop) / document.body.parentElement.offsetHeight) * 100));
 		//console.log('scroll :', normalizedScrollTop, switchPoint)
 		
@@ -193,11 +197,14 @@ export default class Home extends React.Component {
 											                         day={appState.curVisibleDay || appState.curDay}
 											                         viewType={appState.viewType}/>
 									                         </TweenRef>
+									                         <TweenRef id={"ArticleList"} initial={Styles.ArticleList}>
+										                         <Views.Articles.ArticleList
+											                         day={appState.curVisibleDay || appState.curDay}
+											                         viewType={appState.viewType}/>
+									                         </TweenRef>
 								                         </Comps.NavBox>
 							                         </TweenRef>
-						                         }
-						>
-							
+						                         }>
 							<TweenRef id={"background"} initial={Styles.Background}>
 								<Views.Block.Background
 									record={appTheme && appTheme.data}/>

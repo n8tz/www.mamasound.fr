@@ -89,7 +89,7 @@ export default class eventItem extends React.Component {
                                     }`
 					}] || []}
 				>
-					<script type={"application/ld+json"} dangerouslySetInnerHTML={{
+					{place && <script type={"application/ld+json"} dangerouslySetInnerHTML={{
 						__html: `{
                                           "@context": "http://schema.org",
                                           "@type": "${defaultTypes[[this.props.record._cls] || "MusicEvent"]}",
@@ -105,6 +105,7 @@ export default class eventItem extends React.Component {
                                           }
                                     }`
 					}}/>
+					}
 					<meta property="og:site_name"
 					      content={"MamaSound"}/>
 					<meta property="og:image"

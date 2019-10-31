@@ -5,7 +5,7 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import {collWidth, footerMiniHeight, headerHeight, headerMiniHeight} from "../vars";
+import {collRightWidth, footerMiniHeight, headerHeight, collLeftWidth, headerMiniHeight} from "../vars";
 
 export const bounds    = { min: 100, max: 100 };
 export const waypoints = [
@@ -127,11 +127,21 @@ export const MidMenu           = {
 	position       : "absolute",
 	left           : "10px",
 	height         : "50px",
-	width          : collWidth,
+	width          : collRightWidth,
 	zIndex         : 150,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
 	top            : [250],
+};
+export const ArticleList       = {
+	position       : "absolute",
+	left           : "10px",
+	height         : ["100vh", "-300px"],
+	width          : collLeftWidth,
+	zIndex         : 100,
+	display        : 'none',
+	transformOrigin: "center top",
+	top            : [0],
 };
 export const Footer            = {
 	position : "fixed",
@@ -168,7 +178,7 @@ export const EventMap          = {
 	position       : "absolute",
 	right          : "-100000px",
 	height         : [0],
-	width          : collWidth,
+	width          : collRightWidth,
 	zIndex         : 100,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",

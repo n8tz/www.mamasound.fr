@@ -21,29 +21,32 @@ export function mount( db, record, toMountKeys, cb ) {
 	let refsList = is.array(record) && record || [record],
 	    refs     = {},
 	    sema     = 0,
-	    done     = () => (0 === --sema && (resolve(refs))),
+	    done     = () => ((0 === --sema) && (resolve(refs))),
+	    doGetRef = ( ref ) => (
+		    !refs.hasOwnProperty(ref.objId) && (
+			    sema++,
+				    refs[ref.objId] = undefined,
+				    db.get(ref.cls, ref.objId,
+				           ( err, doc ) => (refs[ref.objId] = doc, done())
+				    )
+		    )
+	    ),
 	    resolve,
 	    mounting = new Promise(
 		    ( r, reject ) => {
 			    resolve = r;
 		    }
 	    )
-		    .then(data => (cb && cb(null, refs),refsList))
+		    .then(data => (cb && cb(null, refs), refsList))
 		    .catch(err => (cb && cb(err, refs)));
 	
 	refsList.forEach(
 		( record ) => {
 			toMountKeys.forEach(
 				( key ) => (
-					record[key]
-					&&
-					(sema++,
-							db.get(
-								record[key].cls,
-								record[key].objId,
-								( err, doc ) => (refs[record[key].objId] = doc, done())
-							)
-					)
+					is.array(record[key]) ?
+					record[key].forEach(doGetRef) :
+					record[key] && doGetRef(record[key])
 				))
 			;
 			return refsList;

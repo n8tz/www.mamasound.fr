@@ -5,7 +5,7 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import {collWidth, footerMiniHeight, headerHeight, headerMiniHeight} from "../vars";
+import {collRightWidth, footerMiniHeight, headerHeight, headerMiniHeight} from "../vars";
 
 export const bounds    = { min: 100, max: 100 };
 export const waypoints = [
@@ -126,7 +126,7 @@ export const MidMenu           = {
 	position       : "absolute",
 	left           : "10px",
 	height         : "50px",
-	width          : collWidth,
+	width          : collRightWidth,
 	zIndex         : 150,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",

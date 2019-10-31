@@ -11,5 +11,6 @@ export const eventsMiniHeight = 200;
 export const footerMiniHeight = 27;
 export const headerHeight     = "70vh";
 export const mapHeight        = "25vh";
-export const collWidth        = "40%";
+export const collRightWidth        = "40%";
+export const collLeftWidth        = "0%";
 

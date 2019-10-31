@@ -43,11 +43,12 @@ export default class EventList extends React.Component {
 	 * scrollTo selected
 	 */
 	scrollToSelected          = () => {
-		let {
-			    $actions,
-			    appState, $scope
-		    }    = this.props,
+		
+		let { appState, $actions } = this.props;
+		
+		let vp   = appState.selectedFocus ? 98 : 70,
 		    elem = document.querySelector(" .type_" + this.props.appState.viewType + " .Event_item.selected");
+		
 		if ( elem ) {
 			let offset = 0;//this.props.appState.selectedEventId?180:0;
 			//console.log(elem)
@@ -59,10 +60,9 @@ export default class EventList extends React.Component {
 				this.lastPos = offset;
 				offset -= 160;
 			}
-			else
-			{
+			else {
 				this.lastPos = offset;
-				if (!this.lastPos)
+				if ( !this.lastPos )
 					offset -= 320;
 			}
 			//document.body.parentElement.scrollTo(offset - 200)

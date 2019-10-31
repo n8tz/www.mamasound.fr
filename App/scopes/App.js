@@ -146,7 +146,7 @@ export default {
 			//	currentPageFocus = 'map';
 			if ( selectedEvent ) {
 				this.$actions.history_set("/" + viewTypeList[viewType] + '/' + moment(selectedEventDT).format("DD-MM-YY")
-					                          + "/" + (selectedEvent._alias || selectedEvent._id))
+					                          + "/" + (selectedEvent._alias || selectedEvent._id));
 			}
 			else {
 				this.$actions.history_set("/")
@@ -164,10 +164,10 @@ export default {
 			let { currentPageFocus } = this.nextState;
 			if ( selectedFocus ) {
 				this.$actions.history_set("/" + cls + '/' + selectedFocus);
-				!__IS_SERVER__ && document.body.scrollTo({
-					                                           behavior: 'smooth',
-					                                           top     : 0
-				                                           })
+				!__IS_SERVER__ && document.body.parentNode.scrollTo({
+					                                         behavior: 'smooth',
+					                                         top     : 0
+				                                         })
 			}
 			return {
 				//currentPageFocus,

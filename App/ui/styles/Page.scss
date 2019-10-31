@@ -22,7 +22,10 @@ body {
   padding: 0;
   //overscroll-behavior: none !important;
   width: 100%;
-  overflow: hidden;
+  overflow: hidden !important;
+  position: relative;
+  left: 0;
+  top: 0;
   //height: 100%;
 }
 
@@ -89,12 +92,18 @@ ul {
   //padding: 0 !important;
 }
 
-@media (min-width: 1400px) {
+@media (max-width: 1600px) {
   .container {
-    width: 1300px;
+    width: 100%;
   }
 }
 
+//@media (min-width: 1400px) {
+//  .container {
+//    width: 1300px;
+//  }
+//}
+//
 @media (min-width: 1600px) {
   .container {
     width: 1500px;
@@ -115,7 +124,7 @@ ul {
 
 @media (max-width: 1200px) {
   .container {
-    width: 100% !important;
+    //width: 100% !important;
     //margin: 0 !important;
     //padding: 0 !important;
   }

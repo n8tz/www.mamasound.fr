@@ -6,8 +6,6 @@
  *   @contact : n8tz.js@gmail.com
  */
 
-import {headerMiniHeight, sliderHeight} from "../../../vars";
-
 export const transitionDuration    = 1500;
 export const defaultInitial        = {
 	position       : "absolute",
@@ -40,12 +38,12 @@ export const defaultInitial        = {
 };
 export const defaultPreviewInitial = {
 	position       : "absolute",
-	height         : ["100vh"],
+	height         : ["100%"],
 	width          : "100vw",
 	top            : "0%",
 	left           : "50%",
 	zIndex         : 40,
-	overflow       : "hidden",
+	//overflow       : "hidden",
 	transformOrigin: "50% 50%",
 	//display        : "none",
 	opacity        : 1,
@@ -56,7 +54,7 @@ export const defaultPreviewInitial = {
 			perspective: "700px",
 		},
 		{
-			translateY: -headerMiniHeight,
+			//translateY: -headerMiniHeight,
 		},
 		{},
 		{}]
@@ -76,6 +74,7 @@ export const showAnim              = [
 		duration: 75,
 		easeFn  : "easeSinOut",
 		apply   : {
+			zIndex:50,
 			opacity  : 1,
 			transform: [{}, {
 				//translateZ: "50px",
@@ -108,6 +107,7 @@ export const hideAnim              = [
 		duration: 50, easeFn: "easeSinOut",
 		
 		apply: {
+			zIndex:-50,
 			opacity  : -1,
 			transform: [{}, {
 				//rotateY: "90deg",

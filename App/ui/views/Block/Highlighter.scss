@@ -9,19 +9,19 @@
 body.fixedHead {
   .Highlighter {
     position: fixed !important;
-    top: calc(-70vh + 200px) !important;
+    top: calc(-70vh + 220px) !important;
   }
 
   .bigHead .Highlighter {
 
-    top: calc(-90vh + 200px) !important;
+    top: calc(-98vh + 220px) !important;
   }
 
 }
 
 .bigHead .Highlighter {
 
-  height: 90vh !important;
+  height: 98vh !important;
 }
 
 .Highlighter {
@@ -33,7 +33,8 @@ body.fixedHead {
   position: relative;
   //height: 70vh !important;
   transition: height 500ms;
-
+  //overflow-x: hidden;
+  //overflow-y: visible;
   perspective: 200px;
   //height: 100%;
   z-index: 150;
