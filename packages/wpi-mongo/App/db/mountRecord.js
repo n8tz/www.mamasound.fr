@@ -20,8 +20,8 @@ import is from "is";
 export function mount( db, record, toMountKeys, cb ) {
 	let refsList = is.array(record) && record || [record],
 	    refs     = {},
-	    sema     = 0,
-	    done     = () => ((0 === --sema) && (resolve(refs))),
+	    sema     = 1,
+	    done     = () => ((0 === --sema) && (cb(null, refs))),
 	    doGetRef = ( ref ) => (
 		    !refs.hasOwnProperty(ref.objId) && (
 			    sema++,
@@ -30,15 +30,7 @@ export function mount( db, record, toMountKeys, cb ) {
 				           ( err, doc ) => (refs[ref.objId] = doc, done())
 				    )
 		    )
-	    ),
-	    resolve,
-	    mounting = new Promise(
-		    ( r, reject ) => {
-			    resolve = r;
-		    }
-	    )
-		    .then(data => (cb && cb(null, refs), refsList))
-		    .catch(err => (cb && cb(err, refs)));
+	    );
 	
 	refsList.forEach(
 		( record ) => {
@@ -54,10 +46,10 @@ export function mount( db, record, toMountKeys, cb ) {
 		[]
 	);
 	
-	
+	// when all refs are retrieved synchrone or there no refs the sema === 1
+	sema--;
 	if ( !sema )
 		sema++, done();
 	
-	return mounting;
 }
 

@@ -118,14 +118,15 @@ export function query( req, cb ) {
 							    if ( typeof data.length == 'number' && is.array(data.items) ) {
 								    done = null;
 								    dbRelease();
-								    try {
-									    memoryCache.set(key, data)
-									    //memoryCache.flushAll();
-									    //redis.delWildcard(config.PUBLIC_URL + "_*");
-									    resolve(data)
-								    } catch ( e ) {
-									    console.warn(e);
-								    }
+								    //try {
+								    memoryCache.set(key, data)
+								    //memoryCache.flushAll();
+								    //redis.delWildcard(config.PUBLIC_URL + "_*");
+								    resolve(data)
+								    //} catch ( e ) {
+								    //resolve(data)
+								    //console.warn(e);
+								    //}
 							    }
 							
 						    },

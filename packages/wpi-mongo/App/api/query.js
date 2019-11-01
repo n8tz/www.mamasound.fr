@@ -20,7 +20,7 @@ export default ( server, http ) => {
 		function ( req, res, next ) {
 			let isAdmin = req.user && req.user.isAdmin;
 			if ( entities[req.body.etty] && (!entities[req.body.etty].requireAdmin || isAdmin) )
-				db.query(req.body).then(data => res.json(data)).catch(err => res.json({ error: err + '' }, 500))
+				db.query(req.body, ( err, data ) => (!err ? res.json(data) : res.json({ error: err + '' }, 500)))
 			else
 				res.json({ error: 'Auth required' }, 500)
 		}
@@ -40,7 +40,7 @@ export default ( server, http ) => {
 			let { objId, cls } = req.body,
 			    isAdmin        = req.user && req.user.isAdmin;
 			if ( entities[cls] && (!entities[cls].requireAdmin || isAdmin) )
-				db.get(cls, objId).then(data => res.json(data)).catch(err => res.json({ error: err + '' }, 500))
+				db.get(cls, objId, ( err, data ) => (!err ? res.json(data) : res.json({ error: err + '' }, 500)))
 			else
 				res.json({ error: 'Auth required' }, 500)
 			
