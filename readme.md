@@ -3,7 +3,7 @@
 
 tmp url : http://mamasound.wiseways.me/
 
-_* this is personal project using experimental libs & wip design<br/>
+_* this is personal project using wip design<br/>
 _* this is NOT corporate grade code _
 
 <p align="center"><img src="etc/demo.gif" alt="Samples" /></p>
