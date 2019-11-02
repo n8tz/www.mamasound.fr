@@ -529,7 +529,8 @@ export function updateWatchers( target, DataProvider, idKeys, changes, isQuery )
 	Object.keys(idKeys)
 	      .forEach(
 		      idKey => {
-			      let newValue = isQuery ? changes[idKey] : idKeys[idKey] && (changes[idKey].id || idKeys[idKey]._id);
+			      let newValue = isQuery ? changes[idKey] : idKeys[idKey] && (changes[idKey].id || idKeys[idKey]._id),
+			          key      = idKeys[idKey] && idKeys[idKey].target || idKey;
 			      if ( idKeys[idKey] &&
 				      (!watchs[idKey] || watchs[idKey].value !== newValue)
 			      ) {
@@ -567,7 +568,7 @@ export function updateWatchers( target, DataProvider, idKeys, changes, isQuery )
 							      target.push(
 								      {
 									      ...target.data,
-									      [idKeys[idKey].target || idKey]: update
+									      [key]: update
 								      })
 						      }
 					      }
@@ -583,17 +584,17 @@ export function updateWatchers( target, DataProvider, idKeys, changes, isQuery )
 							      watchs[idKey].value,
 							      watchs[idKey].fn
 						      );
-					      if ( (!target.data || !target.data[idKeys[idKey].target]) && changes[idKey].default )
+					      if ( (!target.data || !target.data[key]) && changes[idKey].default )
 						      target.push(
 							      {
-								      [idKeys[idKey].target || idKey]: { ...changes[idKey].default }
+								      [key]: { ...changes[idKey].default }
 							      })
 				      }
 				      else {
 					      target.push(
 						      {
 							      ...target.data,
-							      [idKeys[idKey].target || idKey]: null
+							      [key]: null
 						      })
 				      }
 			      }
@@ -601,7 +602,7 @@ export function updateWatchers( target, DataProvider, idKeys, changes, isQuery )
 				      target.push(
 					      {
 						      ...target.data,
-						      [idKeys[idKey] && idKeys[idKey].target || idKey]: null
+						      [key]: null
 					      })
 			      }
 		      }

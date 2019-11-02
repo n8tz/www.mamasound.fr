@@ -57,7 +57,7 @@ export function service( server ) {
 							aliasAPI.applyAlias(
 								record,
 								{ aliasField: 'title' },
-								'Event',
+								'Concert',
 								db,
 								function ( alias, record ) {
 									

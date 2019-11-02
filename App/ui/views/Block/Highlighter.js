@@ -96,14 +96,15 @@ export default class Highlighter extends React.Component {
 				slider.goTo(i);
 			})
 			
-			document.body.parentElement.scrollTo({
-				                                     top     : 0,
-				                                     behavior: 'smooth'
-			                                     })
+			//document.body.parentElement.scrollTo({
+			//	                                     top     : 0,
+			//	duration
+			//	                                     behavior: 'smooth'
+			//                                     })
 		};
 	pickNextFocused = rec => {
 		let {
-			    MountedItems: { items = [] } = {},
+			    MountedItems: { items = [] } = {},appState
 		    }     = this.props,
 		    state = this.state;
 		return (items[(items.findIndex(ref => (rec && ref && rec._id === ref._id)) + 1) % items.length]);
@@ -112,7 +113,7 @@ export default class Highlighter extends React.Component {
 	render() {
 		let {
 			    MountedItems: { items = [], layout = [] } = {},
-			    Styles, Selected, children,
+			    Styles, Selected, children,appState,
 			    $actions, navBox, tweener, style
 		    }     = this.props,
 		    state = this.state;
@@ -160,8 +161,9 @@ export default class Highlighter extends React.Component {
 						</TweenRef>
 					</div>
 				</div>
-				
 				{
+					items &&
+					items.length &&
 					<TweenRef
 						//id={"focusSlider"}
 						initial={Styles.slider}
@@ -171,8 +173,9 @@ export default class Highlighter extends React.Component {
 							<Comps.Slider
 								key={"mainSlider"}
 								{...Styles.Slider}
-								ignorePropsIndex={true}
+								//ignorePropsIndex={true}
 								infinite={true}
+								defaultIndex={appState.selectedFocus && items.findIndex(rec => (appState.selectedFocus.id === rec._id || appState.selectedFocus.id === rec._alias))}
 								autoScroll={14 * 1000}
 								onClick={this.selectFocus}
 							>

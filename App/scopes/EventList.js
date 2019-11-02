@@ -62,6 +62,24 @@ export default {
 										'$gt': from,
 										'$lt': to
 									}
+								},
+								{
+									_cls    : 'Event',
+									schedule: {
+										$elemMatch: {
+											startTM: {
+												'$gt': from,
+												'$lt': to
+											}
+										}
+									}
+								},
+								{
+									_cls   : 'Event',
+									startTM: {
+										'$gt': from,
+										'$lt': to
+									}
 								}] || []),
 							...([1].includes(type) && [
 								{
@@ -77,6 +95,24 @@ export default {
 								},
 								{
 									_cls   : 'Concert',
+									startTM: {
+										'$gt': from,
+										'$lt': to
+									}
+								},
+								{
+									_cls    : 'Event',
+									schedule: {
+										$elemMatch: {
+											startTM: {
+												'$gt': from,
+												'$lt': to
+											}
+										}
+									}
+								},
+								{
+									_cls   : 'Event',
 									startTM: {
 										'$gt': from,
 										'$lt': to

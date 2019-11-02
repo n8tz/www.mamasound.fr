@@ -27,8 +27,8 @@ function mkQueryH( query ) {
 
 export const types = typesList;
 export {mount}      from "App/db/mountRecord";
-const memoryCache = new cacheManager({ stdTTL: 60 * 60, checkperiod: 60 * 10, useClone: false });
-const defaults    = { get, query, remove, create, save };
+export const memoryCache = new cacheManager({ stdTTL: 60 * 60, checkperiod: 60 * 10, useClone: false });
+const defaults           = { get, query, remove, create, save, memoryCache };
 export default defaults;
 
 export function get( cls, objId, cb ) {

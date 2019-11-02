@@ -15,6 +15,7 @@
 'use strict';
 
 import Editable    from "App/ui/Editable";
+import config      from "App/config";
 import getMediaSrc from "App/utils/getMediaSrc";
 import React       from "react";
 import {Helmet}    from "react-helmet";
@@ -25,9 +26,32 @@ const Entities = require('html-entities').AllHtmlEntities;
 
 const entities = new Entities();
 export default class page extends React.Component {
-	state = {
+	state     = {
 		big: false
 	};
+	linkClick = ( e ) => {
+		if ( e.target.href.includes(config.ROOT_DOMAIN) || e.target.href[0] === '/' ) {
+			e.preventDefault();
+			e.stopPropagation();
+			this.props.$actions.history_push(e.target.href.replace(/^https?:\/\/[^\/]+/ig, ""));
+		}
+	}
+	
+	componentDidMount() {
+		let node = this.text.current;
+		node.querySelectorAll("a").forEach(
+			node => node.addEventListener("click", this.linkClick)
+		)
+	}
+	componentDidUpdate() {
+		let node = this.text.current;
+		node.querySelectorAll("a").forEach(
+			node => (node.removeEventListener("click", this.linkClick),
+					node.addEventListener("click", this.linkClick))
+		)
+	}
+	
+	text = React.createRef();
 	
 	render() {
 		let {
@@ -72,10 +96,10 @@ export default class page extends React.Component {
 				{record.label || target && (target.title || target.label)}
 				{/*{*/}
 				{/*	//target && target.startTM &&*/}
-					{/*<div className={"material-icons"}>calendar</div>*/}
+				{/*<div className={"material-icons"}>calendar</div>*/}
 				{/*}*/}
 			</div>}
-			{!record.hideResume && <div className="resume" style={record.resumeStyle}>
+			{!record.hideResume && <div className="resume" style={record.resumeStyle} ref={this.text}>
 				{
 					resume && !/^\s*$/.test(resume || '') &&
 					<div className="content" style={record.resumeContentStyle}

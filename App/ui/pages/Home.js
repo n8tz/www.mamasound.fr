@@ -59,7 +59,7 @@ export default class Home extends React.Component {
 		    vp = appState.selectedFocus ? 98 : 70;
 		
 		scrollTop           = document.body.parentElement.scrollTop;
-		switchPoint         = vp - (210 / document.body.parentElement.offsetHeight) * 100;
+		switchPoint         = vp - (185 / document.body.parentElement.offsetHeight) * 100;
 		normalizedScrollTop = Math.max(0, (((scrollTop) / document.body.parentElement.offsetHeight) * 100));
 		//console.log('scroll :', normalizedScrollTop, switchPoint)
 		

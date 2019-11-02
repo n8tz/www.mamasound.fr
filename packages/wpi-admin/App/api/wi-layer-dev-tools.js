@@ -5,12 +5,12 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import config  from "App/config";
-//
-import redis   from "App/db/redis.js";
-import moment  from "moment";
-import backup  from "mongodb-backup";
-import restore from "mongodb-restore";
+import config        from "App/config";
+import redis         from "App/db/redis.js";
+import {memoryCache} from "App/db/index";
+import moment        from "moment";
+import backup        from "mongodb-backup";
+import restore       from "mongodb-restore";
 
 const aliasAPI = require("App/db/aliasHelpers"),
       fs       = require("fs");
@@ -22,6 +22,7 @@ export function service( server ) {
 	server.get(
 		'/devTools/clearCache',
 		function ( req, res, next ) {
+			memoryCache.flushAll();
 			redis.delWildcard(config.PUBLIC_URL + "_*")
 			res.json({ status: 'ok', deleted: config.PUBLIC_URL + "_*" })
 			

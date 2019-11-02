@@ -21,6 +21,16 @@
 
 }
 
+body.fixedHead {
+  header {
+    > .topMenu {
+      transform: translate3d(-50%, -100%, 0) !important;
+      opacity: 0;
+    }
+  }
+
+}
+
 header {
   touch-action: none;
   position: relative;
@@ -46,6 +56,7 @@ header {
     position: absolute;
     top: 100%;
     left: 50%;
+
     white-space: nowrap;
     transform: translate3d(-50%, 0, 0);
     border: solid 1px rgba(0, 0, 0, 0.5);
@@ -60,7 +71,7 @@ header {
     z-index: -1;
     padding-right: 15px;
     padding-left: 15px;
-
+    transition: all 500ms;
     img {
       display: none;
     }

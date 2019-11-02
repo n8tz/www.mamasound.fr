@@ -9,12 +9,12 @@
 body.fixedHead {
   .Highlighter {
     position: fixed !important;
-    top: calc(-70vh + 220px) !important;
+    top: calc(-70vh + 185px) !important;
   }
 
   .bigHead .Highlighter {
 
-    top: calc(-98vh + 220px) !important;
+    top: calc(-98vh + 185px) !important;
   }
 
 }
@@ -32,7 +32,7 @@ body.fixedHead {
   //touch-action: none;
   position: relative;
   //height: 70vh !important;
-  transition: height 500ms;
+  transition: height 750ms;
   //overflow-x: hidden;
   //overflow-y: visible;
   perspective: 200px;
