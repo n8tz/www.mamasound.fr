@@ -12,6 +12,12 @@
   }
 }
 
+.SSR .bigSlide_article {
+  .resume .content {
+    pointer-events: all !important;
+  }
+}
+
 body.onTop .bigSlide_article {
   .resume .content {
     pointer-events: all !important;
