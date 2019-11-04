@@ -8,20 +8,21 @@
 
 body.fixedHead {
   .Highlighter {
-    position: fixed !important;
-    top: calc(-70vh + 185px) !important;
+    //position: fixed !important;
+    //top: calc(-60vh + 185px) !important;
   }
 
   .bigHead .Highlighter {
 
-    top: calc(-98vh + 185px) !important;
+    //top: calc(-98vh + 185px) !important;
   }
 
 }
 
-.bigHead .Highlighter {
+.bigHead.Highlighter {
 
   height: 98vh !important;
+  top: calc(185px - 98vh) !important;
 }
 
 .Highlighter {
@@ -30,7 +31,7 @@ body.fixedHead {
     transform: translateY(-120px) !important;
   }
   //touch-action: none;
-  position: relative;
+  position: sticky;
   //height: 70vh !important;
   transition: height 750ms;
   //overflow-x: hidden;
@@ -189,6 +190,11 @@ body.fixedHead {
       .preview {
         @include use_hvCenteredAbs();
         height: 100%;
+
+        a {
+
+          touch-action: none;
+        }
 
         img {
           box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.75);

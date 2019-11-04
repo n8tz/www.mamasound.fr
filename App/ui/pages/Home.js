@@ -56,7 +56,7 @@ export default class Home extends React.Component {
 		let scrollTop,
 		    normalizedScrollTop,
 		    switchPoint,
-		    vp = appState.selectedFocus ? 98 : 70;
+		    vp = appState.selectedFocus ? 98 : 60;
 		
 		scrollTop           = document.body.parentElement.scrollTop;
 		switchPoint         = vp - (185 / document.body.parentElement.offsetHeight) * 100;
@@ -104,12 +104,43 @@ export default class Home extends React.Component {
 	//	return [this, "EventNav"];
 	//}
 	render() {
-		let { Styles, appState, currentTheme, appTheme, $actions, NavBox, appMenu } = this.props;
+		let { Styles, appState, currentTheme, appTheme, $actions, NavBox, appMenu } = this.props,
+		    useBig                                                                  = appState.selectedFocus &&
+			    (appState.selectedFocus.etty !== "Place");
 		return <>
+			<TweenRef id={"Highlighter"} initial={Styles.Highlighter}>
+				<Views.Block.Highlighter key={"Highlighter"}
+				                         navBox={
+					                         <TweenRef id={"NavBox"} initial={NavBox.style}>
+						                         <Comps.NavBox key={"NavBox"}>
+							                         {/*<TweenRef id={"MidMenu"} initial={Styles.MidMenu}>*/}
+							                         {/*<Views.Menu.menu id={"rootmiddlemenu"}/>*/}
+							                         {/*</TweenRef>*/}
+							                         <TweenRef id={"EventMap"} initial={Styles.EventMap}>
+								                         <Views.Events.EventMap
+									                         day={appState.curVisibleDay || appState.curDay}
+									                         viewType={appState.viewType}/>
+							                         </TweenRef>
+							                         {currentTheme === "desktop" &&
+							                         <TweenRef id={"ArticleList"} initial={Styles.ArticleList}>
+								                         <Views.Articles.ArticleList
+									                         day={appState.curVisibleDay || appState.curDay}
+									                         viewType={appState.viewType}/>
+							                         </TweenRef>
+							                         }
+						                         </Comps.NavBox>
+					                         </TweenRef>
+				                         }>
+					<TweenRef id={"background"} initial={Styles.Background}>
+						<Views.Block.Background
+							record={appTheme && appTheme.data}/>
+					</TweenRef>
+				</Views.Block.Highlighter>
+			</TweenRef>
 			<TweenRef id={"page"} initial={Styles.page}>
-				<div className={"Home container " + (appState.selectedFocus ? "bigHead" : "") + (__IS_SERVER__
-				                                                                                 ? " SSR"
-				                                                                                 : "")}>
+				<div className={"Home container " + (useBig ? "bigHead" : "") + (__IS_SERVER__
+				                                                                 ? " SSR"
+				                                                                 : "")}>
 					
 					<TweenAxis
 						axe={"scrollY"}
@@ -183,33 +214,6 @@ export default class Home extends React.Component {
 							{appTheme && appTheme.data && appTheme.data.menuTop &&
 							<Views.Menu.menu id={appTheme.data.menuTop.objId} className={"topMenu"}/>}
 						</header>
-					</TweenRef>
-					<TweenRef id={"Highlighter"} initial={Styles.Highlighter}>
-						<Views.Block.Highlighter key={"Highlighter"}
-						                         navBox={
-							                         <TweenRef id={"NavBox"} initial={NavBox.style}>
-								                         <Comps.NavBox key={"NavBox"}>
-									                         {/*<TweenRef id={"MidMenu"} initial={Styles.MidMenu}>*/}
-									                         {/*<Views.Menu.menu id={"rootmiddlemenu"}/>*/}
-									                         {/*</TweenRef>*/}
-									                         <TweenRef id={"EventMap"} initial={Styles.EventMap}>
-										                         <Views.Events.EventMap
-											                         day={appState.curVisibleDay || appState.curDay}
-											                         viewType={appState.viewType}/>
-									                         </TweenRef>
-									                         <TweenRef id={"ArticleList"} initial={Styles.ArticleList}>
-										                         <Views.Articles.ArticleList
-											                         day={appState.curVisibleDay || appState.curDay}
-											                         viewType={appState.viewType}/>
-									                         </TweenRef>
-								                         </Comps.NavBox>
-							                         </TweenRef>
-						                         }>
-							<TweenRef id={"background"} initial={Styles.Background}>
-								<Views.Block.Background
-									record={appTheme && appTheme.data}/>
-							</TweenRef>
-						</Views.Block.Highlighter>
 					</TweenRef>
 				</div>
 			</TweenRef>

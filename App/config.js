@@ -23,8 +23,8 @@ export default {
 	ROOT_DOMAIN     : baseDomain,
 	UPLOAD_URL      : baseDomain + "/upload",
 	MEDIA_URL       : baseDomain + "/medias",
-	ALT_MEDIA_URL   : "http://mamasound.wiseways.me/medias",
-	//ALT_MEDIA_URL   : "http://static.mamasound.fr",
+	//ALT_MEDIA_URL   : "http://mamasound.wiseways.me/medias",
+	ALT_MEDIA_URL   : "http://static.mamasound.fr",
 	UPLOAD_DIR      : "./upload",
 	SESSION_CHECK_TM: 60000,
 	...$super

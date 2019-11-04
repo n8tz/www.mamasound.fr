@@ -8,22 +8,22 @@
 
 'use strict';
 
-import React from "react";
+import React          from "react";
+import {Comps, Views} from 'App/ui';
 
 
-export default ( { record, record: { title, place, category }, onClose, refs, className, style, onClick, ref } ) =>
-{
+export default ( { record, record: { label, previewImage, address }, event, onClose, refs, className, style, onClick, ref } ) => {
 	return (
 		<div className={"Popin " + (className || '')} style={{ ...(style || {}) }} ref={ref} onClick={onClick}>
 			{/*<div className="closeBtn" onClick={ onClose }/>*/}
 			<div className="topBlock">
-				<img className="logo"
-				     src={"http://static.mamasound.fr/" + (refs[place.objId].previewImage || record.previewImage || category && refs[category.objId] && refs[category.objId].icon)}/>
+				<Comps.Image className="logo"
+				             src={(previewImage || record.previewImage || event && event.category && refs[event.category.objId] && refs[event.category.objId].icon)}/>
 				<div className="name">
-					{refs[place.objId].label}
+					{label}
 				</div>
 				<div className="address">
-					{refs[record.place.objId] && refs[place.objId].address.address},<br/>
+					{address.address},<br/>
 				</div>
 			</div>
 		</div>

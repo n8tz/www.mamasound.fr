@@ -43,11 +43,12 @@ export default class page extends React.Component {
 			node => node.addEventListener("click", this.linkClick)
 		)
 	}
+	
 	componentDidUpdate() {
 		let node = this.text.current;
 		node.querySelectorAll("a").forEach(
 			node => (node.removeEventListener("click", this.linkClick),
-					node.addEventListener("click", this.linkClick))
+				node.addEventListener("click", this.linkClick))
 		)
 	}
 	
@@ -59,7 +60,7 @@ export default class page extends React.Component {
 			    refs              = {},
 			    target            = record.targetEtty && refs[record.targetEtty.objId] || record,
 			    previewImage      = target && target.previewImage || record.previewImage,
-			    isNext, isCurrent
+			    isNext, isCurrent, $actions
 		    }      = this.props,
 		    {
 			    big
@@ -98,6 +99,7 @@ export default class page extends React.Component {
 				{/*	//target && target.startTM &&*/}
 				{/*<div className={"material-icons"}>calendar</div>*/}
 				{/*}*/}
+				<span className={"close material-icons"} onClick={e => $actions.history_push("/")}>close</span>
 			</div>}
 			{!record.hideResume && <div className="resume" style={record.resumeStyle} ref={this.text}>
 				{

@@ -9,7 +9,7 @@
 import {Comps}        from "App/ui";
 import {asFieldType}  from "App/ui/spells";
 import React          from "react";
-import {PhotoshopPicker} from 'react-color'
+import {ChromePicker} from 'react-color'
 
 @asFieldType
 class Color extends React.Component {
@@ -32,8 +32,9 @@ class Color extends React.Component {
 			<div style={{ position: "relative" }}>
 				<button style={{ backgroundColor: color }}
 				        onClick={e => this.setState({ open: !this.state.open })}>{color}</button>
-				{this.state.open && <Comps.PopAnywhere hovering={this.state.open} onClickOut={e => this.setState({ open: !this.state.open })}>
-					<PhotoshopPicker
+				{this.state.open && <Comps.PopAnywhere hovering={this.state.open}
+				                                       onClickOut={e => this.setState({ open: !this.state.open })}>
+					<ChromePicker
 						type="compact"
 						onChange={this.onCChange}
 						color={color}

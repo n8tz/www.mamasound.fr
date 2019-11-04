@@ -138,6 +138,7 @@ export default class SearchBar extends React.Component {
 					type={"text"}
 					className={"input"}
 					placeholder={"Rechercher"}
+					defaultValue={appState.currentSearch}
 					value={this.state.search}
 					onChange={this.handleSearchChange}/>
 				<span className="bar"></span>

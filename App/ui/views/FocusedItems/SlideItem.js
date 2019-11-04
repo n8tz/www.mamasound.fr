@@ -31,6 +31,7 @@ export default class SlideItem extends React.Component {
 					record.sliderImage &&
 					<a className="preview"
 					   href={"/" + record._cls + "/" + (record._alias || record._id)}
+					   onDragStart={e => e.preventDefault()}
 					   onClick={e => e.preventDefault()}
 					>
 						<Comps.Image src={record.sliderImage} w={250}/>

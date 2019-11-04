@@ -122,7 +122,10 @@ export default class DataProvider extends Store {
 	 */
 	getRecord( id, etty ) {
 		return this.data
-			&& this.data[id];
+			&& this.data[id]
+			|| this.data.___aliases___[etty]
+			&& this.data.___aliases___[etty][id]
+			&& this.data[this.data.___aliases___[etty][id]];
 	}
 	
 	/**

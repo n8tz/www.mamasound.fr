@@ -83,13 +83,13 @@
 
     @media screen and (min-width: $tablet-portrait-breakpoint) {
       img.leftGhost {
-        transform: translate(-50%, 0%) translateX(-50%) scale(1.25);
+        transform: translate(0, -50%) translateX(-50%) scale(1.25);
         filter: blur(10px);
 
       }
 
       img.rightGhost {
-        transform: translate(-50%, 0%) translateX(50%) scale(1.25);
+        transform: translate(0, 50%) translateX(50%) scale(1.25);
         filter: blur(10px);
 
       }

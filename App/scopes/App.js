@@ -76,23 +76,30 @@ export default {
 				}
 			}
 			else if ( path.length === 2 ) {
-				//debugger
+				let target = this.$stores.DataProvider.getRecord(path[1], path[0]);
 				$actions.selectFocus(path[1], path[0]);
 				return {
-					selectedEvent: null
+					selectedEvent: null,
+					//currentSearch: path[0] === "Place" ? target && target.label : this.state.currentSearch
 				}
 			}
 			else if ( path.length === 3 ) {
 				let matches = url.match(/^\/([^\/]+)\/([^\/]+)\/([^\/]+)$/);
 				//debugger
 				viewType    = this.state.viewTypeList.indexOf(path[0]);
+				//this.$scope.then(e => {
+					setTimeout(tm => this.setState({
+						                               selectedEventId: matches[3],
+						                               selectedEventDT: moment(matches[2], "DD-MM-YY").startOf("day").valueOf(),
+						                               selectedEvent  : { id: matches[3], etty: "Event" }
+					                               })
+					)
+				//})
 				return {
 					viewType,
-					userSetCDay    : true,
-					curDay         : moment(matches[2], "DD-MM-YY").startOf("day").valueOf(),
-					selectedEventId: matches[3],
-					selectedEventDT: moment(matches[2], "DD-MM-YY").startOf("day").valueOf(),
-					selectedEvent  : { id: matches[3], etty: "Event" },
+					userSetCDay: true,
+					curDay     : moment(matches[2], "DD-MM-YY").startOf("day").valueOf(),
+					
 					//selectedFocus  : { id: matches[3], etty: "Event" },
 				}
 			}
@@ -165,9 +172,9 @@ export default {
 			if ( selectedFocus ) {
 				this.$actions.history_set("/" + cls + '/' + selectedFocus);
 				!__IS_SERVER__ && document.body.parentNode.scrollTo({
-					                                         behavior: 'smooth',
-					                                         top     : 0
-				                                         })
+					                                                    behavior: 'smooth',
+					                                                    top     : 0
+				                                                    })
 			}
 			return {
 				//currentPageFocus,

@@ -63,6 +63,7 @@ export default class DayEvents extends React.Component {
 								key={item._id}
 								day={day}
 								appState={appState}
+								$actions={$actions}
 								selected={(appState.selectedEventId === item._id || appState.selectedEventId === item._alias) && moment(appState.selectedEventDT).isSame(day, "day")}
 								record={item}
 								refs={EventList.refs || {}}/>;

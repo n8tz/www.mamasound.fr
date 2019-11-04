@@ -6,13 +6,13 @@
  *   @contact : n8tz.js@gmail.com
  */
 html {
+  position: relative;
+  left: 0;
+  top: 0;
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100vh;
-  overflow: hidden;
-  overflow-y: scroll;
-  overflow-x: hidden;
   //touch-action: none;
   //overflow: hidden !important;
 }
@@ -22,10 +22,14 @@ body {
   padding: 0;
   //overscroll-behavior: none !important;
   width: 100%;
-  overflow: hidden !important;
+  height: 100vh;
+  //overflow: hidden !important;
   position: relative;
   left: 0;
   top: 0;
+  overflow: hidden;
+  overflow-y: scroll;
+  overflow-x: hidden;
   //height: 100%;
 }
 

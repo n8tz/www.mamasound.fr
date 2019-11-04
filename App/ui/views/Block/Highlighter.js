@@ -104,7 +104,7 @@ export default class Highlighter extends React.Component {
 		};
 	pickNextFocused = rec => {
 		let {
-			    MountedItems: { items = [] } = {},appState
+			    MountedItems: { items = [] } = {}, appState
 		    }     = this.props,
 		    state = this.state;
 		return (items[(items.findIndex(ref => (rec && ref && rec._id === ref._id)) + 1) % items.length]);
@@ -113,13 +113,15 @@ export default class Highlighter extends React.Component {
 	render() {
 		let {
 			    MountedItems: { items = [], layout = [] } = {},
-			    Styles, Selected, children,appState,
+			    Styles, Selected, children, appState,
 			    $actions, navBox, tweener, style
-		    }     = this.props,
-		    state = this.state;
+		    }      = this.props,
+		    state  = this.state,
+		    useBig = appState.selectedFocus &&
+			    (appState.selectedFocus.etty !== "Place");
 		return (
 			<div style={style}
-			     className={"Highlighter"}>
+			     className={"Highlighter " + (useBig ? "bigHead" : "")}>
 				{navBox}
 				<div className={"headBackground"}>
 					<div className={"maskContent"}>

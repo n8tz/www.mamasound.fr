@@ -9,11 +9,12 @@
 
 import config from "App/config";
 
-const fs      = require('fs'),
-      path    = require('path'),
-      sharp   = require('sharp'),
-      express = require('express'),
-      request = require('request');
+const fs             = require('fs'),
+      path           = require('path'),
+      sharp          = require('sharp'),
+      { createHash } = require('crypto'),
+      express        = require('express'),
+      request        = require('request');
 
 export const name          = "Media service";
 export const priorityLevel = 100001;
@@ -73,11 +74,11 @@ export function service( server ) {
 		if ( req.query.cache ) {
 			const sha256 = createHash('sha256'),
 			      cache  = req.query.cache;
-			fn           = '_' + sha256.update(decodeURIComponent(req.query.cache), 'utf8').digest('hex') + ext;
+			fn           = '_' + sha256.update(decodeURIComponent(req.query.cache), 'utf8').digest('hex');
 			
 			delete req.query.cache;
 			req.doLookInCache = true;
-			req.path          = req.url = '/' + fn;
+			req.path          = req.url = '/medias/' + fn;
 			return loop(req, res, function () {
 				console.warn('not found : ', upDir + fn);
 				req.doLookInCache = false;
@@ -93,7 +94,20 @@ export function service( server ) {
 						function ( err, r, mt ) {
 							reqDone = true;
 							console.warn('dld say : ', err, r, '/' + fn);
-							req.path = req.url = '/' + fn;
+							req.path = req.url = '/medias/' + fn;
+							sharp(upDir + fn)
+								.webp({ lossless: false })
+								.toBuffer(( err, buffer ) => {
+									fs.writeFile(upDir + fn + '.webp', buffer, function ( err ) {
+										if ( req.doLookInCache ) return staticServe(req, res, _next);
+										err && console.log('convert failed : ', fn + '.webp', err);
+										req.path = req.url = "/medias/" + fn + '.webp';
+										if ( !err ) staticServe(req, res, e => res.send(404));
+										else
+											res.send(404);
+										;
+									})
+								})
 							mt && res.set("content-type", mt);
 							if ( !err ) loop(req, res, _next);
 							else _next();

@@ -51,10 +51,10 @@
     content: ' ';
     background: url('../assets/images/mapIcon.png') center no-repeat / cover;
     position: absolute;
-    height: 5em;
-    width: 3.5em;
-    left: 1em;
-    top: -1.5em;
+    height: 50px;
+    width: 75px;
+    right: 5px;
+    top: -25px;
   }
 
   .Place_mini {
@@ -64,28 +64,29 @@
     opacity: 0;
     transition: all 500ms;
     overflow: visible !important;
-    border-radius: 2em;
-    padding-left: 2em;
-    padding-right: 2em;
+    border-radius: 10px;
+    //padding-left: 2em;
+    //padding-right: 2em;
     background: lightgrey;
     position: absolute;
-    height: 2.5em;
-    left: 7em;
-    right: 100px;
+    height: 75px;
+    left: 5px;
+    width: 8.25em;
     bottom: -5em;
     border: solid 1px rgba(128, 128, 128, 0.43);
 
     .details {
 
       position: absolute;
-      height: 100%;
+      bottom: 0%;
       //width: 100%;
       left: 0;
       right: 1em;
-      top: 0;
+      top: 10px;
       //background: rgba(255, 255, 255, 0.63);
       //padding: .5em;
-      font-size: .9em;
+      padding: 3px;
+      font-size: .85em;
       z-index: 20000;
       font-weight: bold;
     }
@@ -106,7 +107,7 @@
     }
 
     .title:before {
-      content: "Où ? ";
+      //content: "Où ? ";
     }
 
     .preview {
@@ -116,7 +117,7 @@
       right: 0;
       height: 100%;
       top: 0;
-      width: 35%;
+      width: 48px;
       -webkit-clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 100%);
       clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 100%);
       //z-index: 1000;
@@ -125,14 +126,15 @@
 
       img {
         padding: 0 !important;
-        width: 100%;
+
+        width: 48px;
         height: auto;
         max-height: none !important;
         opacity: .4;
       }
     }
 
-    .title, .address {
+    .title {
       pointer-events: all;
       display: block;
       //width: auto;
@@ -141,11 +143,38 @@
       float: left;
       text-align: left !important;
       max-width: 80%;
-      margin-left: 6em;
+      margin-left: 50px;
       padding-right: 2em;
       //z-index: 2000;
       white-space: nowrap;
       overflow: hidden;
+      text-overflow: ellipsis;
+
+      a {
+        text-align: left !important;
+      }
+
+      //height: 1em;
+    }
+
+    .address {
+      pointer-events: all;
+      display: block;
+      //width: auto;
+      height: auto;
+      //max-width: none;
+      float: left;
+      text-align: left !important;
+      max-width: 100%;
+      margin-left: 0px;
+
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      //padding-right: 2em;
+      //z-index: 2000;
+      //white-space: nowrap;
       text-overflow: ellipsis;
 
       a {
@@ -188,7 +217,7 @@
       text-decoration: underline;
     }
 
-    height: 180px;
+    height: 275px;
 
     .Place_mini {
       //display: block;
@@ -199,10 +228,10 @@
     .resume {
       display: block;
       position: absolute;
-      top: 3.75em;
-      left: 7.5em;
-      right: 60px;
-      bottom: 3em;
+      top: 0em;
+      left: 0em;
+      right: 80px;
+      bottom: 0em;
       overflow-x: hidden;
       overflow-y: auto;
     }
@@ -211,7 +240,7 @@
       right: 0px;
     }
 
-    .more {
+    .more, .details {
       display: block;
     }
 
@@ -234,10 +263,10 @@
     .resume {
       display: block;
       position: absolute;
-      top: 4em;
-      left: 6em;
+      top: 0em;
+      left: 0em;
       right: 80px;
-      bottom: 3.5em;
+      bottom: 0em;
       overflow-x: hidden;
       overflow-y: auto;
     }
@@ -283,6 +312,7 @@
     width: 4em;
     font-size: 1.45em;
     font-family: $hoursFontFamily;
+    max-height: (3.5em / 1.45);
   }
 
 
@@ -348,6 +378,38 @@
     overflow: hidden;
   }
 
+  .details {
+    position: absolute;
+    top: 3.5em;
+    right: 0px;
+    display: none;
+
+    bottom: 0px;
+    left: (9.5em / 1);
+
+    .resume {
+      position: absolute;
+      top: 10px;
+      left: 0%;
+      right: 50px;
+      bottom: 0px;
+    }
+    .preview {
+      position: absolute;
+      top: 10px;
+      right: 100%;
+      width: 9.5em;
+      height: 100px;
+      img{
+        @include use_hvCenteredAbs();
+        border-radius: 5px;
+        overflow: hidden;
+        height: 95%;
+        max-width: 95%;
+      }
+    }
+  }
+
   .place {
     position: absolute;
     top: 1px;
@@ -355,6 +417,7 @@
     //font-size: .9em;
     text-decoration: none;
     color: black;
+    z-index: 10;
     //font-family: $mainFontFamily;
     //text-overflow: ellipsis;
     //white-space: nowrap;

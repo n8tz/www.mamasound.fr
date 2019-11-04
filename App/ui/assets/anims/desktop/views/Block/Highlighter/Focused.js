@@ -6,7 +6,7 @@
  *   @contact : n8tz.js@gmail.com
  */
 
-export const transitionDuration    = 1500;
+export const transitionDuration    = 500;
 export const defaultInitial        = {
 	position       : "absolute",
 	bottom         : "0%",
@@ -22,7 +22,7 @@ export const defaultInitial        = {
 		{
 			//translateX : "-50%",
 			//translateY : "-50%",
-			perspective: "250px",
+			perspective: "50px",
 		},
 		{
 			//translateX: "-200px",
@@ -78,7 +78,7 @@ export const showAnim              = [
 			opacity  : 1,
 			transform: [{}, {
 				//translateZ: "50px",
-				translateX: "-250px",
+				translateX: "-50px",
 			}]
 		}
 	},
@@ -104,7 +104,8 @@ export const showPreviewAnim       = [
 export const hideAnim              = [
 	{
 		from    : 0,
-		duration: 50, easeFn: "easeSinOut",
+		duration: 50,
+		easeFn: "easeSinIn",
 		
 		apply: {
 			zIndex:-50,
@@ -113,7 +114,7 @@ export const hideAnim              = [
 				//rotateY: "90deg",
 				//translateZ: "-50px",
 				//translateY: "-200px",
-				translateX: "-250px",
+				translateX: "-50px",
 			}]
 		}
 	},

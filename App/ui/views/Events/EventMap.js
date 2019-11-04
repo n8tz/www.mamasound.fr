@@ -61,10 +61,12 @@ else {
 		@asStore
 		Events: {
 			@asRef
-			selected    : "Selected.record",
+			selected     : "Selected.record",
 			@asRef
-			MountedItems: "!EventList",
-			$apply( d, { MountedItems: { items, refs }, selected } ) {
+			selectedFocus: "Selected.Focused",
+			@asRef
+			MountedItems : "!EventList",
+			$apply( d, { MountedItems: { items, refs }, selected, selectedFocus } ) {
 				let POIs = [], center, zoom = 13;
 				if ( selected ) {
 					items = [selected];
@@ -81,8 +83,14 @@ else {
 						
 					}
 				);
-				
-				if ( selected && POIs[0] ) {
+				if ( selectedFocus && selectedFocus.address && selectedFocus.address.geoPoint ) {
+					center = {
+						latitude : selectedFocus.address.geoPoint[1],
+						longitude: selectedFocus.address.geoPoint[0]
+					};
+					zoom   = selectedFocus.address.zoom || 16
+				}
+				else if ( selected && POIs[0] ) {
 					center = {
 						latitude : POIs[0].geoPoint[1],
 						longitude: POIs[0].geoPoint[0]
@@ -180,7 +188,9 @@ export default class EventMap extends React.Component {
 			    $actions, $stores, DataProvider, Quartiers, style
 		    }           = this.props,
 		    map         = this.refs.map && this.refs.map.leafletElement,
-		    selectedPOI = Selected.Event && Selected.Event.place && $stores.DataProvider.data[Selected.Event.place.objId],
+		    selectedPOI = Selected.Focused &&
+		                  Selected.Focused._cls === "Place" ? Selected.Focused :
+		                  Selected.Event && Selected.Event.place && $stores.DataProvider.data[Selected.Event.place.objId],
 		    selectedPos = selectedPOI && (selectedPOI.address.geoPoint
 			    &&
 			    [...selectedPOI.address.geoPoint].reverse()
@@ -238,12 +248,13 @@ export default class EventMap extends React.Component {
 									//style={ { marginBottom: '50px' } }
 									offset={Leaflet.point(13, 20)}
 								>
-									<Views.Event.popin
+									<Views.Place.popin
 										$scope={this.props.$scope}
-										record={Selected.Event}
+										record={selectedPOI}
+										event={Selected.Event}
 										refs={$stores.DataProvider.data}
 										onClick={
-											e => $actions.selectEvent(Selected.Event._id)
+											e => $actions.selectEvent(selectedPOI._id)
 											
 										}
 									/>

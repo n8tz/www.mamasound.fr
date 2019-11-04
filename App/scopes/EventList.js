@@ -195,20 +195,22 @@ export default {
 	@asStore
 	EventList: {
 		@asRef
-		items       : "!Queries.events.items",
+		items        : "!Queries.events.items",
 		@asRef
-		curDay      : "DayEventsQuery.curDay",
+		curDay       : "DayEventsQuery.curDay",
 		@asRef
-		type        : "DayEventsQuery.type",
+		type         : "DayEventsQuery.type",
 		@asRef
-		geoJson     : "Quartiers.data",
+		geoJson      : "Quartiers.data",
 		@asRef
-		refs        : "Queries.events.refs",
+		refs         : "Queries.events.refs",
 		@asRef
-		filter      : "appState.currentSearch",
+		filter       : "appState.currentSearch",
 		@asRef
-		selectedTags: "TagManager.selected",
-		$apply( data = {}, { items, filter, refs, geoJson, curDay, type, selectedTags } ) {
+		selectedFocus: "appState.selectedFocus",
+		@asRef
+		selectedTags : "TagManager.selected",
+		$apply( data = {}, { items, filter, refs, geoJson, curDay, type, selectedTags, selectedFocus } ) {
 			
 			let filterRE     = filter && new RegExp(filter.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^\w]+/ig, '.+'), 'ig'),
 			    geoQuery     = this.geoQuery = this.geoQuery || whichPoly(geoJson),
@@ -341,10 +343,16 @@ export default {
 					}
 					
 					
+					if ( selectedFocus && selectedFocus.etty === "Place" ) {
+						doKeep    = doKeep && (selectedFocus.id === place._id || selectedFocus.id === place._alias);
+					}
+					
+					
 					if ( filter ) {
-						let text = entities.decode(striptags(item.title + ' ' + item.resume + ' ' + item.description + ' ' + (item.category && refs[item.category.objId]
-						                                                                                                      ? refs[item.category.objId].name
-						                                                                                                      : "")
+						let text = entities.decode(striptags(item.title + ' ' + item.resume + ' ' + item.description + ' '
+							                                     + (item.category && refs[item.category.objId]
+							                                        ? refs[item.category.objId].name
+							                                        : "") + ' '
 						)).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[\n\r]/g, " ");
 						doKeep   = doKeep && filterRE.test(text);
 					}

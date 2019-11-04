@@ -38,14 +38,16 @@ export default class eventItem extends React.Component {
 	
 	render() {
 		let {
-			    record, record: { title, place, category },
+			    record, record: { title, place, category }, $actions,
 			    refs, selected, onClick, appState, currentDate = record.realPeriod
-		    }       = this.props,
-		    { big } = this.state,
-		    start   = moment(currentDate && currentDate.startTM),
-		    end     = moment(currentDate && currentDate.endTM),
-		    url     = "http://" + config.PUBLIC_URL + "/" + appState.viewTypeList[appState.viewType] + '/' + moment(start).format("DD-MM-YY")
-			    + "/" + (record._alias || record._id);
+		    }           = this.props,
+		    { big }     = this.state,
+		    placeRecord = record.place && refs[record.place.objId],
+		    start       = moment(currentDate && currentDate.startTM),
+		    end         = moment(currentDate && currentDate.endTM),
+		    url         = "/" + appState.viewTypeList[appState.viewType] + '/' + moment(start).format("DD-MM-YY")
+			    + "/" + (record._alias || record._id),
+		    urlPlace    = placeRecord && ("/Place/" + (placeRecord._alias || placeRecord._id));
 		
 		let preview = record.previewImage || (place && refs[place.objId] && refs[place.objId].previewImage || category && refs[category.objId] && refs[category.objId].icon)
 		return <div className={"Event Event_item Event" + record._cls + ' ' + (selected ? "selected" : "") + ' ' + (big
@@ -164,25 +166,36 @@ export default class eventItem extends React.Component {
 			{
 				record.place && refs[record.place.objId] &&
 				refs[record.place.objId].address &&
-				<div className="place"
-				>
-					( <span>{refs[record.place.objId].label}</span> )
-				</div>
+				(refs[record.place.objId].browsable ?
+				 <div className="place">
+					 ( <a className="title" href={urlPlace}
+					      onClick={e => (e.preventDefault(), e.stopPropagation(), $actions.history_push(urlPlace))}>{refs[record.place.objId].label}</a> )
+				 </div> :
+				 <div className="place">
+					 ( <span>{refs[record.place.objId].label}</span> )
+				 </div>)
 			}
-			{selected && <Comps.ShareBox
-				url={url}
-				event={record} place={record.place && refs[record.place.objId]}/>}
-			{!/^\s*$/.test(record.resume || record.description || '') &&
-			<div className="resume" dangerouslySetInnerHTML={{
-				__html: !big
-				        ? record.resume || record.description
-				        : record.description || record.resume
-			}}/> || ''}
-			{record.description && <div className="more"
-			                            onClick={e => (e.stopPropagation(), e.preventDefault(), this.setState({ big: true }))}>
-			</div>}
 			
 			{record.place && refs[record.place.objId] && <Views.Place.mini record={refs[record.place.objId]}/>}
+			{selected && <div className="details">
+				<div className="preview">
+					<Comps.Image src={preview} w={150}/>
+				</div>
+				
+				<Comps.ShareBox
+					url={url}
+					event={record} place={record.place && refs[record.place.objId]}/>
+				{!/^\s*$/.test(record.resume || record.description || '') &&
+				<div className="resume" dangerouslySetInnerHTML={{
+					__html: !big
+					        ? record.resume || record.description
+					        : record.description || record.resume
+				}}/> || ''}
+				{record.description && <div className="more"
+				                            onClick={e => (e.stopPropagation(), e.preventDefault(), this.setState({ big: true }))}>
+				</div>}
+			</div>}
+		
 		
 		</div>
 			;

@@ -29,7 +29,7 @@ export default {
 		"_id": types.indexes,
 		
 		"label"      : types.labels(),
-		"browsable"  : types.boolean("Afficher dans les recherches ?", false),
+		"browsable"  : types.boolean("Afficher comme page dedié ?", false),
 		"type"       : types.enum("Type de lieu",
 		                          [
 			                          { label: "Bar", value: "bar" },
@@ -51,6 +51,15 @@ export default {
 			allowedUploadTypes: ["Image"],
 			allowUpload       : true
 		}, "Média lié :"),
+		
+		"bigPage": types.boolean("Afficher en grand :", false),
+		
+		"pageType": types.enum("Type de page",
+		                       [
+			                       { label: "Plein", value: "bar" },
+			                       { label: "Parc", value: "parc" },
+		                       ]
+		),
 		
 		"hideTitle"         : types.boolean("Cacher le titre :", true),
 		"hideResume"        : types.boolean("Cacher le résumé :", false),
