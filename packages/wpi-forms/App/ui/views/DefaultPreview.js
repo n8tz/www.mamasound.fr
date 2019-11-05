@@ -20,7 +20,7 @@ export default class DefaultPreview extends React.Component {
 		    background = record.previewUrl;
 		
 		return <div className={"DefaultPreview"}>
-			<Editable id={record._id}/>
+			<Editable id={record._id} etty={record._cls}/>
 			{
 				background &&
 				<Image src={background} w={250} h={250}

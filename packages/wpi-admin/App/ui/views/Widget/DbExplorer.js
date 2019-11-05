@@ -300,7 +300,7 @@ export default class DbExplorer extends React.Component {
 								<Button className={'entityAddItem entityAdd' + Query.etty + 'Item'}
 								        onClick={e => $actions.newWidget('RecordEditor', {
 									        etty : Query._etty,
-									        title: entities[Query._etty].label
+									        //title: entities[Query._etty].label
 								        }, {
 									
 									                                         "size": { "width": 600, "height": 800 },

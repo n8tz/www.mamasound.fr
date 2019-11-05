@@ -23,6 +23,7 @@ body.fixedHead {
 
   height: 98vh !important;
   top: calc(185px - 98vh) !important;
+  transition: height 500ms 750ms;
 }
 
 .Highlighter {
@@ -33,7 +34,7 @@ body.fixedHead {
   //touch-action: none;
   position: sticky;
   //height: 70vh !important;
-  transition: height 750ms;
+  transition: height 750ms 500ms;
   //overflow-x: hidden;
   //overflow-y: visible;
   perspective: 200px;

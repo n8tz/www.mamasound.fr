@@ -49,16 +49,19 @@ export default class ArticleList extends React.Component {
 		//console.log('EventList::render:136: ', activeScroll);
 		return (
 			<div className={"ArticleList container"} style={style}>
-				{
-					articles
-					&& articles.items
-					&& articles.items.map(
-						article => <Views.Article.card record={article}
-						                               onClick={e => {
-							                               $actions.selectFocus(article._id, article._cls)
-						                               }}/>
-					)
-				}
+				<div className={"content"}>
+					{
+						articles
+						&& articles.items
+						&& articles.items.map(
+							article => <span><Views.Article.card record={article}
+							                                     className={"content"}
+							                                     onClick={e => {
+								                                     $actions.selectFocus(article._id, article._cls)
+							                                     }}/></span>
+						)
+					}
+				</div>
 			</div>
 		);
 	}

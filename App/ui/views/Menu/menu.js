@@ -45,7 +45,7 @@ export default class Menu extends React.Component {
 		if ( !record )
 			return <span/>;
 		return <span className={"Menu_menu " + className + ' ' + (selected ? "selected" : "")}>
-			<Editable id={record._id}/>
+			<Editable id={record._id} etty={"Menu"}/>
 			{
 				record.childs && record.childs.length ?
 				record.childs.map(

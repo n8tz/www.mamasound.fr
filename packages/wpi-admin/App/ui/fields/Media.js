@@ -18,6 +18,7 @@ import Input               from "App/ui/fields/Text";
 import {asFieldType}       from "App/ui/spells";
 import React               from "react";
 import {DropzoneComponent} from 'react-dropzone-component';
+import getMediaSrc         from "App/utils/getMediaSrc";
 
 
 if ( typeof window !== "undefined" )
@@ -81,7 +82,6 @@ export default class Media extends React.Component {
 		};
 		this.lists           = {
 			addedfile: ( file, result, xhr ) => {
-				
 				var ext = file.name.match(/(\.[^\.]+)$/i), me = this;
 				if ( ext && (me.state.fileTypes.indexOf(ext[1].toLowerCase()) == -1) ) {
 					alert('Ce type de fichier n\'est pas valide dans ce champ\nTypes valides :' +
@@ -187,8 +187,8 @@ export default class Media extends React.Component {
 				<div className="controls">
 					
 					<Button onClick={e => this.setMode("preview")}
-					        //color={viewmode == "preview" && "primary"}
-					        title="Aperçu">Aperçu</Button>
+						//color={viewmode == "preview" && "primary"}
+						    title="Aperçu">Aperçu</Button>
 					
 					<Button
 						title="Upload"
@@ -204,12 +204,12 @@ export default class Media extends React.Component {
 						Modifier l'url
 					</Button>
 					
-					<Button
-						title="Editer"
-						//color={viewmode == "input" && "primary"}
-						onClick={e => $actions.newWidget("ImageEditor", { src: _value, onSave: this.onEditorSave })}>
-						Editer
-					</Button>
+					{/*<Button*/}
+					{/*	title="Editer"*/}
+					{/*	//color={viewmode == "input" && "primary"}*/}
+					{/*	onClick={e => $actions.newWidget("ImageEditor", { src: _value, onSave: this.onEditorSave })}>*/}
+					{/*	Editer*/}
+					{/*</Button>*/}
 					
 					{
 						!disallowNone &&
@@ -241,9 +241,7 @@ export default class Media extends React.Component {
 							/^[^\s]+\.i?(avi|mp4|mkv|webm|flv|3gp|mpeg|mpg)(\?.*)?$/.test(_value)
 							|| /youtube/.test(_value)
 						)
-						&& <div className=" use_mBox">
-							<Player item={{ mediaUrl: _value, visible: true }}/>
-						</div>
+						&& <Player item={{ mediaUrl: getMediaSrc(_value), visible: true }}/>
 						||
 						(viewmode === "preview") &&
 						// /^[^\s]+\.i?(jpeg|jpg|png|gif|bmp)(\?.*)?$/.test(_value.toLowerCase())
@@ -255,8 +253,8 @@ export default class Media extends React.Component {
 						///soundcloud/.test(_value)
 						//&& <PlayerSC item={{mediaUrl: _value, visible:true}}/>
 						||
-						<div
-							onClick={e => this.setMode("select")}>
+						<div className=" none"
+						     onClick={e => this.setMode("select")}>
 							"Aucun media selectionné"
 						</div>
 						

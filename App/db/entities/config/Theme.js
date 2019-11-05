@@ -20,13 +20,15 @@ export default {
 	apiRroute : "Theme",
 	adminRoute: "Config/Theme",
 	
-	schema: {
+	aliasField: "label",
+	labelField: "label",
+	schema    : {
 		label         : [validate.mandatory, validate.noHtml],
 		mainBackground: [validate.mandatory],
 		resume        : [validate.noJs],
 		//     author     : [validate.mandatory]
 	},
-	fields: {
+	fields    : {
 		"_id"  : types.indexes,
 		"label": types.labels(),
 		//"resume": types.descriptions('Resumé'), // TODO refactor as "summary"

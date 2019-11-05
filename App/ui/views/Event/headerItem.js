@@ -29,7 +29,7 @@ export default ( { record, refs, selected, onClick, onTap } ) =>
 	<div className={"Event Event_headerItem Event" + record._cls + ' ' + (selected ? "selected" : "")}
 	     onClick={onClick}
 	>
-		<Editable id={record._id}/>
+		<Editable id={record._id} etty={record._cls}/>
 		<div className="start">
 			{moment(record.startTM).format("H:mm")}
 		</div>

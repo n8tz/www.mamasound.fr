@@ -25,7 +25,7 @@ export default class SlideItem extends React.Component {
 		    } = this.props;
 		return (
 			<div className="FocusedItems SlideItem" style={style} onClick={onClick}>
-				<Editable id={record._id}/>
+				<Editable id={record._id} etty={record._cls}/>
 				
 				{
 					record.sliderImage &&

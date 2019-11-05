@@ -70,17 +70,14 @@ export default class page extends React.Component {
 		             ? target.description || target.text || record.resume
 		             : record.resume || target.description || target.text;
 		return <div className={
-			"bigSlide_article type_" + target._cls + " " + (record.useCollumn
-			                                                ? " collView"
-			                                                : (record.useBigResume
-			                                                   ? " bigView"
-			                                                   : "smallView")) + ' ' + className}>
-			<Editable id={record._id}/>
+			"bigSlide_article type_" + target._cls + " "
+			+ " " + (record.layoutMode || 'smallView')
+			+ ' ' + className}>
+			<Editable id={record._id} etty={record._cls}/>
 			{
 				isCurrent &&
 				<Helmet
 					title={"Mama Sound - " + (record.label || target && (target.title || target.label))}
-				
 				>
 					<meta property="og:site_name"
 					      content={"MamaSound"}/>

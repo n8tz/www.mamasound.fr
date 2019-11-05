@@ -14,10 +14,11 @@
  */
 'use strict';
 
-import {Comps}    from "App/ui";
-import Editable   from "App/ui/Editable";
-import React      from "react";
-import {TweenRef} from "react-voodoo";
+import {Comps}     from "App/ui";
+import Editable    from "App/ui/Editable";
+import React       from "react";
+import {TweenRef}  from "react-voodoo";
+import getMediaSrc from "App/utils/getMediaSrc";
 
 
 export default (
@@ -34,10 +35,17 @@ export default (
 	}
 ) => {
 	//debugger;
-	return <div className={"Page FocusedItems_preview type_" + target._cls + " " + className} style={style}>
-		<Editable id={record._id}/>
+	return <div
+		className={
+			"Page FocusedItems_preview type_" + target._cls + " " + className
+			+ " " + (record.backgroundMode || '')
+			+ " " + (record.previewMode || '')
+		}
+		style={style}>
+		<Editable id={record._id} etty={record._cls}/>
 		{
-			record.useBackground &&
+			record.backgroundMode &&
+			record.backgroundMode !== "back_hidden" &&
 			<TweenRef
 				initial={
 					{
@@ -100,13 +108,26 @@ export default (
 				<div className="background">
 					{(record.backgroundColor) &&
 					<div className={"backColor"} style={{ backgroundColor: record.backgroundColor || 'transparent' }}/>}
-					{(record.background) && <>
-						{record.useGhostBackground && <>
-							<Comps.Image src={record.background || rPreviewImage} className={"leftGhost"}/>
-							<Comps.Image src={record.background || rPreviewImage} className={"rightGhost"}/>
-						</>}
-						<Comps.Image src={record.background || rPreviewImage}/>
+					{record.backgroundMode !== "big_wghost" && <>
+						<Comps.Image src={record.background} className={"leftGhost"}/>
+						<Comps.Image src={record.background} className={"rightGhost"}/>
 					</>}
+					{
+						(/^[^\s]+\.i?(avi|mp4|mkv|webm|flv|3gp|mpeg|mpg)(\?.*)?$/.test(record.background)
+							|| /youtube/.test(record.background))
+						&&
+						<Comps.Player
+							item={{
+								mediaUrl : getMediaSrc(record.background),
+								visible  : true,
+								jwOptions: { repeat: true, mute: true }
+							}}
+							style={{ width: '100%', height: '100%' }}
+							startTime={20}
+							autoplay={true}
+							volume={0}/>
+						|| <Comps.Image src={record.background}/>
+					}
 				</div>
 			</TweenRef>
 			
@@ -126,7 +147,7 @@ export default (
 						//height    : "4px",
 						//backgroundColor: "white",
 						transform: [{}, {
-							translateX: (isNext || isCurrent) && "40vw" || "0vw",
+							translateX: (isNext || isCurrent) && "100px" || "0px",
 						}]
 					}
 				}
@@ -141,7 +162,7 @@ export default (
 								apply   : {
 									opacity  : 1,
 									transform: [{}, {
-										translateX: "-40vw",
+										translateX: "-100px",
 									}]
 								}
 							}] || isCurrent && [
@@ -153,7 +174,7 @@ export default (
 								apply   : {
 									opacity  : 1,
 									transform: [{}, {
-										translateX: "-40vw",
+										translateX: "-100px",
 									}]
 								}
 							},
@@ -165,7 +186,7 @@ export default (
 								apply   : {
 									opacity  : 1,
 									transform: [{}, {
-										translateX: "-40vw",
+										translateX: "-100px",
 									}]
 								}
 							}
@@ -178,7 +199,7 @@ export default (
 								apply   : {
 									opacity  : 1,
 									transform: [{}, {
-										translateX: "-40vw",
+										translateX: "-100px",
 									}]
 								}
 							}

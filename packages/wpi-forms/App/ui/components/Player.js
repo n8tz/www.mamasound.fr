@@ -10,8 +10,12 @@ import React from 'react';
 import is    from 'is';
 
 
-
 class Player extends React.Component {
+	static defaultProps = {
+		volume   : .8,
+		jwOptions: {}
+	}
+	
 	constructor( props ) {
 		super(props);
 		this.state = {
@@ -29,27 +33,37 @@ class Player extends React.Component {
 	}
 	
 	componentDidMount() {
-		var me = this;
-		// debugger;
-		//
+		this.loadPlayer()
+	}
+	
+	loadPlayer() {
 		if ( !this._jwplayer ) {
-			// console.warn('gfhgfhgfhfgghf');
-			this._jwplayer = jwplayer(this.refs.player);
-			this._jwplayer.off('playlistItem', this.onPlayListItem.bind(this));
-			this._jwplayer.on('playlistItem', this.onPlayListItem.bind(this));
+			try {
+				this._jwplayer = jwplayer(this.refs.player);
+				this._jwplayer.off('playlistItem', this.onPlayListItem.bind(this));
+				this._jwplayer.on('playlistItem', this.onPlayListItem.bind(this));
+			} catch ( e ) {
+				this._jwplayer = undefined;
+				this._loadJwTm = setTimeout(tm => this.loadPlayer(), 500);
+			}
 		}
 		
-		if ( this.props.item )
+		if ( this._jwplayer && this.props.item )
 			this.playItem(this.props.item, this.props.autoplay);
 	}
 	
 	componentWillReceiveProps( props ) {
-		if ( props.item && props.item != this.props.item )
-			this.playItem(props.item);
+		if ( props.item && props.item !== this.props.item && (!props.item || !this.props.item || props.item.mediaUrl !== this.props.item.mediaUrl) )
+			this.playItem(props.item, this.props.autoplay);
 	}
 	
 	componentWillUnmount() {
-		this._jwplayer && this._jwplayer.remove();
+		try {
+			this._jwplayer && this._jwplayer.remove();
+		} catch ( e ) {
+		
+		}
+		clearTimeout(this._loadJwTm);
 	}
 	
 	onPlayListItem( state ) {
@@ -95,13 +109,16 @@ class Player extends React.Component {
 			var mediaUrl = record.mediaUrl;
 			
 			var jwOptions = {
-				width    : "100%",
-				height   : "100%",
+				width     : "100%",
+				height    : "100%",
 				//aspectratio: "16:9",
-				image    : url,
-				autostart: play && "viewable"
+				image     : url,
+				autostart : play && "viewable",
+				stretching: "fill",
+				...record.jwOptions,
+				...this.props.jwOptions
 			};
-			
+			//debugger
 			if ( record.mediaUrls ) {
 				jwOptions.sources = Object.keys(record.mediaUrls).map(
 					( k ) => ({
@@ -165,9 +182,9 @@ class Player extends React.Component {
 	
 	render() {
 		return (
-			<div className={ (this.props.className || "vidPlayer") + " " +
-			                 this.state.visible ? "active-player" : "inactive-player" } onClick={ this.props.onClick }
-			     style={ this.props.style }
+			<div className={(this.props.className || "vidPlayer") + " " +
+			                this.state.visible ? "active-player" : "inactive-player"} onClick={this.props.onClick}
+			     style={this.props.style}
 			>
 				
 				<div className="jwplayer" ref="player"/>

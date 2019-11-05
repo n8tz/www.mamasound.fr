@@ -17,6 +17,9 @@ import {asStore, propsToScope, scopeToProps, withScope} from "react-scopes";
 		widget: {
 			widgetClose() {
 				this.$actions.rmWidget(this.state.record._id)
+			},
+			widgetUpdate( props ) {
+				this.$actions.updateWidget({ ...this.state.record, props })
 			}
 		}
 	}

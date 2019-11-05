@@ -22,29 +22,34 @@
         top: 0px;
         left: 0px;
         bottom: 0px;
-        width: 200px;
+        width: 120px;
         z-index: 1;
-        background-color: rgba(255, 255, 255, 0.53);
+        background-color: rgba(255, 255, 255, 0.5);
 
         button {
           display: block;
-          width:100%;
+          width: 100%;
           text-align: left;
         }
       }
 
-      .mediaPreview {
+      .mediaPreview, .active-player {
 
         position: absolute;
         top: 0px;
-        left: 200px;
+        left: 0px;
         bottom: 0px;
         right: 0px;
-        img{
+
+        img {
           @include use_hvCenteredAbs();
           max-width: 100%;
           max-height: 100%;
         }
+      }
+
+      .none {
+        @include use_hvCenteredAbs()
       }
 
       .dropContainer {

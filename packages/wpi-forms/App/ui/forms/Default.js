@@ -5,30 +5,37 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import Button             from '@material-ui/core/Button';
-import entities           from 'App/db/entities';
-import validate           from 'App/db/validate';
-import stores             from 'App/stores/(*).js';
-import {fields}           from "App/ui";
-import is                 from "is";
-import React              from "react";
-import {ContextMenu}      from 'react-inheritable-contextmenu';
-import RS, {withStateMap} from "react-scopes";
-import {toast}            from 'react-toastify';
+import Button                      from '@material-ui/core/Button';
+import entities                    from 'App/db/entities';
+import validate                    from 'App/db/validate';
+import stores                      from 'App/stores/(*).js';
+import {fields}                    from "App/ui";
+import is                          from "is";
+import React                       from "react";
+import {ContextMenu}               from 'react-inheritable-contextmenu';
+import RS, {withStateMap, asScope} from "react-scopes";
+import {toast}                     from 'react-toastify';
 
 @RS(
 	{
-		@withStateMap(
-			{
-				record          : undefined,
-				setCurrentRecord: ( etty, id ) => ({ record: { id, etty } })
-			}
-		)
-		data: stores.MongoRecords,
+		@asScope
+		RecordEditor: {
+			@RS.store
+			ref   : {
+				setCurrentRecord: ( etty, id ) => ({ id, etty })
+			},
+			@withStateMap(
+				{
+					@RS.ref
+					data: "ref",
+				}
+			)
+			record: stores.MongoRecords,
+		},
 	}
 )
-@RS.fromProps("record:data.record")
-@RS.connect("data.record")
+@RS.fromProps("id:RecordEditor.ref.id", "etty:RecordEditor.ref.etty")
+@RS.connect("RecordEditor.record.data:record")
 export default class RecordEditor extends React.Component {
 	static defaultProps = {
 		whenDone: () => {
@@ -56,8 +63,10 @@ export default class RecordEditor extends React.Component {
 		if ( nextState.errors && (nextState.errors !== this.state.errors) ) {
 			return true;
 		}
-		if ( nextProps.record && this.props.record && nextProps.record._id === this.props.record._id )
+		if ( nextProps.record && (!this.props.record || nextProps.record._id !== this.props.record._id) && (!this.state.record || !this.state.record._id) ) {
+			this.setState({ record: { ...nextProps.record } }, e=>this.forceUpdate())
 			return false;
+		}
 		if ( nextProps.record && !this.props.record )
 			return true;
 		return false;
@@ -105,6 +114,32 @@ export default class RecordEditor extends React.Component {
 		this.setState({ previewActive: false });
 		this.props.$actions.db_clearPreview(record._id)
 	}
+	saveAs       = () => {
+		let isValid,
+		    { $actions } = this.props,
+		    record       = this.state.record || this.props.record,
+		    etty         = record && record._cls || this.props.etty;
+		
+		//debugger
+		isValid = validate(record, etty)
+		
+		if ( isValid !== true )
+			this.setState({ errors: isValid });
+		else {
+			this.setState({ errors: {} });
+			//console.log(record)
+			this.state.previewActive && $actions.db_clearPreview(record._id, true);
+			if ( confirm("Voulez vous vraiment créer cet item?") ) {
+				let savingRecord = { ...record };
+				delete savingRecord._id;
+				$actions.db_create(savingRecord, res => {
+					this.setState({ record: savingRecord });
+					$actions.widgetUpdate({ etty, id: res.id });
+					toast("Saved !")
+				})
+			}
+		}
+	}
 	save         = () => {
 		let isValid,
 		    { $actions } = this.props,
@@ -131,9 +166,9 @@ export default class RecordEditor extends React.Component {
 			else {
 				if ( confirm("Voulez vous vraiment créer cet item?") )
 					$actions.db_create(record, res => {
-						$actions.setCurrentRecord(etty, res.id);
+						$actions.widgetUpdate({ etty, id: res.id });
 						toast("Saved !")
-						this.setState({ record: undefined });
+						//this.setState({ record: undefined });
 					})
 			}
 		}
@@ -200,11 +235,11 @@ export default class RecordEditor extends React.Component {
 		return form;
 	}
 	
-	componentDidUpdate( prevProps, prevState, snapshot ) {
-		if ( prevProps.record !== this.props.record && !this.state.record._id )
-			this.setState({ record: { ...this.props.record } })
-	}
-	
+	//componentDidUpdate( prevProps, prevState, snapshot ) {
+	//if ( prevProps.record !== this.props.record && !this.state.record._id )
+	//	this.setState({ record: { ...this.props.record } })
+	//}
+	//
 	static getDerivedStateFromProps( { record, etty }, state ) {
 		if ( state.record )
 			return state;
@@ -223,7 +258,7 @@ export default class RecordEditor extends React.Component {
 			<div className={"form_Default form_" + etty}
 			>
 				<div className="title">
-					Edition : {entities[etty] && entities[etty].label}
+					<span>Edition : {entities[etty] && entities[etty].label}</span>&nbsp;-&nbsp;
 					{
 						(
 							<a //href={ this.getUrlTo() }
@@ -240,6 +275,7 @@ export default class RecordEditor extends React.Component {
 					{record._id && previewActive && <Button onClick={this.clearPreview}>Clear preview</Button>}
 					{record._id && <Button onClick={this.preview}>Preview</Button>}
 					<Button onClick={this.save}>Save</Button>
+					<Button onClick={this.saveAs}>Save as</Button>
 				</div>
 				<ContextMenu native/>
 			</div>

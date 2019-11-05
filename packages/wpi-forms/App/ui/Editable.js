@@ -18,25 +18,23 @@ export default class Editable extends Component {
 	static defaultProps = {}
 	
 	doEdit = ( e ) => {
-		let { $actions, id, $stores: { DataProvider }, CurrentUser } = this.props;
+		let { $actions, id, $stores: { DataProvider }, etty = DataProvider.data[id] && DataProvider.data[id]._cls } = this.props;
 		
 		$actions.newWidget("RecordEditor", {
-			record: {
-				id,
-				etty: DataProvider.data[id] && DataProvider.data[id]._cls
-			}
+			id,
+			etty
 		})
 	}
 	
 	render() {
-		let { $actions, id, $stores: { DataProvider }, CurrentUser } = this.props;
+		let { $actions, id, $stores: { DataProvider }, CurrentUser,etty } = this.props;
 		
 		return (
 			CurrentUser && CurrentUser.isAdmin ?
 			<ContextMenu>
 				<div className={"record_edit_menu"}
 				     onClick={this.doEdit}>
-					Edit "{DataProvider.data[id] && DataProvider.data[id]._alias || id}"
+					Edit "{DataProvider.getRecord(id) && DataProvider.getRecord(id)._alias || id}"
 				</div>
 			</ContextMenu> :
 			''

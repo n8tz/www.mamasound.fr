@@ -1,0 +1,32 @@
+/*!
+ * Copyright (C) 2019 Nathanael Braun
+ * All rights reserved
+ *
+ *   @author : Nathanael Braun
+ *   @contact : n8tz.js@gmail.com
+ */
+
+.ArticleList {
+  text-align: right;
+  position: relative;
+
+  > .content {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    width: 46vh;
+    max-width: 420px;
+
+    > span {
+      @include aspect-ratio(3, 4);
+      //overflow: hidden;
+      //height: 30vh;
+      width: 22vh;
+      max-width: 200px;
+      display: inline-block;
+      margin-left: 5px;
+      //background: black;
+      text-align: center;
+    }
+  }
+}

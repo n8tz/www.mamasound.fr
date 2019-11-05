@@ -52,31 +52,40 @@ export default {
 			allowUpload       : true
 		}, "Média lié :"),
 		
-		"bigPage": types.boolean("Afficher en grand :", false),
 		
-		"pageType": types.enum("Type de page",
-		                       [
-			                       { label: "Plein", value: "bar" },
-			                       { label: "Parc", value: "parc" },
-		                       ]
+		"layoutMode"        : types.enum("Type de layout",
+		                                 [
+			                                 {
+				                                 label: "Resumé en haut a gauche avec titre dedans",
+				                                 value: "smallView"
+			                                 },
+			                                 { label: "Gros titre + resumé en bas a droite", value: "big_right_mini" },
+			                                 { label: "Colonne gauche", value: "collView" },
+			                                 { label: "Grosse page", value: "bigView" },
+			                                 { label: "Grosse page sans titre", value: "bigView notitle" }
+		                                 ]
 		),
-		
-		"hideTitle"         : types.boolean("Cacher le titre :", true),
-		"hideResume"        : types.boolean("Cacher le résumé :", false),
-		"useBigResume"      : types.boolean("Afficher le résumé en grand direct:", false),
-		"useCollumn"        : types.boolean("Afficher le texte en colonne:", false),
+		"previewMode"       : types.enum("Type de preview",
+		                                 [
+			                                 { label: "Aucun", value: "hidden" },
+			                                 { label: "50% droite", value: "right_50" },
+			                                 { label: "50% droite grand", value: "right_big_50" },
+			                                 { label: "center h/v", value: "centerized" },
+		                                 ]
+		),
+		"previewImage"      : types.media({ allowedTypes: "Image" }, "Preview:"),
+		"backgroundMode"    : types.enum("Type d'image' background",
+		                                 [
+			                                 { label: "Aucun", value: "back_hidden" },
+			                                 { label: "Tout l'espace dispo", value: "big_back" },
+			                                 { label: "Tout l'espace dispo avec ghost", value: "big_wghost" }
+		                                 ]
+		),
+		"background"        : types.media({ allowedTypes: ["Image", "Video"] }, "Background (gd image/video de fond (video LEGERE)):"),
+		"backgroundColor"   : types.color("Couleur de fond :"),
+		"previewStyle"      : types.json("previewStyle :"),
 		"titleStyle"        : types.json("titleStyle :"),
 		"resumeStyle"       : types.json("resumeStyle :"),
 		"resumeContentStyle": types.json("resumeContentStyle :"),
-		
-		"useBackground"     : types.boolean("Afficher le background :", false),
-		"useGhostBackground": types.boolean("Afficher les ghosts flous :", false),
-		"background"        : types.media({ allowedTypes: ["Image", "Video"] }, "Background (gd image/video de fond (video LEGERE)):"),
-		"backgroundColor"   : types.color("Couleur de fond :"),
-		
-		"usePreviewImage"   : types.boolean("Afficher une image preview :", true),
-		"useBigPreviewImage": types.boolean("Afficher une l'image preview en grand :", false),
-		"previewImage"      : types.media({ allowedTypes: "Image" }, "Preview:"),
-		"previewStyle"      : types.json("previewStyle :"),
 	}
 };

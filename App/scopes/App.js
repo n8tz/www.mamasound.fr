@@ -87,13 +87,12 @@ export default {
 				let matches = url.match(/^\/([^\/]+)\/([^\/]+)\/([^\/]+)$/);
 				//debugger
 				viewType    = this.state.viewTypeList.indexOf(path[0]);
-				//this.$scope.then(e => {
-					setTimeout(tm => this.setState({
-						                               selectedEventId: matches[3],
-						                               selectedEventDT: moment(matches[2], "DD-MM-YY").startOf("day").valueOf(),
-						                               selectedEvent  : { id: matches[3], etty: "Event" }
-					                               })
-					)
+				setTimeout(tm => this.setState({
+					                               selectedEventId: matches[3],
+					                               selectedEventDT: moment(matches[2], "DD-MM-YY").startOf("day").valueOf(),
+					                               selectedEvent  : { id: matches[3], etty: "Event" }
+				                               })
+				)
 				//})
 				return {
 					viewType,

@@ -101,7 +101,8 @@ body.onTop .bigSlide_article {
         margin: 7.5px;
         opacity: .7;
         cursor: pointer;
-        &:hover{
+
+        &:hover {
           opacity: 1;
         }
       }
@@ -115,9 +116,9 @@ body.onTop .bigSlide_article {
       max-width: 600px;
       //bottom: 40%;
       max-height: 80%;
-      padding: 1em 1em 1em 2em;
+      padding: 1em 1em 1em 1em;
       padding-top: 55px;
-      padding-bottom: 50px;
+      padding-bottom: 2em;
       left: calc(#{$focusSlidePadSize} + .5em);
       overflow: hidden;
       border-radius: 15px;
@@ -148,7 +149,7 @@ body.onTop .bigSlide_article {
         right: 1px;
         top: 3.5em;
         bottom: 100px;
-        padding-left: 5px;
+        //padding-left: 5px;
         max-height: calc(100% - 100px);
         overflow: auto !important;
         //overflow-x: hidden !important;
@@ -258,12 +259,14 @@ body.onTop .bigSlide_article {
         margin-top: .25em;
         margin-bottom: .25em;
       }
+
       .close {
         float: right;
         margin: 7.5px;
         opacity: .7;
         cursor: pointer;
-        &:hover{
+
+        &:hover {
           opacity: 1;
         }
       }
@@ -400,12 +403,14 @@ body.onTop .bigSlide_article {
         margin-top: .25em;
         margin-bottom: .25em;
       }
+
       .close {
         float: right;
         margin: 7.5px;
         opacity: .7;
         cursor: pointer;
-        &:hover{
+
+        &:hover {
           opacity: 1;
         }
       }
@@ -422,7 +427,7 @@ body.onTop .bigSlide_article {
       //@include withTranspaMask();
       //padding-top: 3em;
       //padding-bottom: 15vh;
-      padding: 30px 1em 1em 3em;
+      padding: 40px 1em 1em 3em;
       //padding-left: calc(#{$focusSlidePadSize} + 1.5em);
       left: 0;
       right: calc(40%);

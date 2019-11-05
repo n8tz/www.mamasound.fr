@@ -58,7 +58,7 @@ export default class eventItem extends React.Component {
 			            onClick(e);
 		            }} id={selected && "selected"}
 		>
-			<Editable id={record._id}/>
+			<Editable id={record._id} etty={record._cls}/>
 			{
 				selected &&
 				<Helmet

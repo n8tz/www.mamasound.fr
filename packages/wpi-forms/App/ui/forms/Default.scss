@@ -5,7 +5,8 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-$labelsWidth: 150px;
+$labelsWidth: 30%;
+$maxLabelsWidth: 200px;
 .form_Default {
   .formError{
     text-align: center;
@@ -65,6 +66,7 @@ $labelsWidth: 150px;
         text-align: left;
         display: inline-block;
         width: $labelsWidth;
+        max-width: $maxLabelsWidth;
         font-size: 1.1em;
         padding: 0 10px;
         //height: 100%;
@@ -74,6 +76,7 @@ $labelsWidth: 150px;
         position: relative;
         display: inline-block;
         width: calc(100% - #{$labelsWidth} - 30px);
+        min-width: calc(100% - #{$maxLabelsWidth} - 30px);
         float: right;
         //margin: 0 10px;
         //left: $labelsWidth + 20px;

@@ -131,7 +131,15 @@ export function service( server ) {
 				
 				console.log('resize : ', upDir + asked);
 				sharp(upDir + asked)
-					.resize(parseInt(req.query.w) || undefined, parseInt(req.query.h) || undefined)
+					.resize(parseInt(req.query.w) || undefined, parseInt(req.query.h) || undefined, {
+						fit       : "contain",
+						background: {
+							r    : 0,
+							g    : 0,
+							b    : 0,
+							alpha: 0
+						}
+					})
 					.webp({ lossless: false })
 					.toBuffer(( err, buffer ) => {
 						if ( err && config.ALT_MEDIA_URL ) {// try prod..

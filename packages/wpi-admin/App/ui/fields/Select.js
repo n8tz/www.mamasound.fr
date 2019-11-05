@@ -17,7 +17,8 @@ import Checkbox      from '@material-ui/core/Checkbox';
 
 @asFieldType
 export default class Select extends React.Component {
-	static defaultProps = {}
+	static displayName  = "Select";
+	static defaultProps = {};
 	
 	constructor( props ) {
 		super(...arguments);

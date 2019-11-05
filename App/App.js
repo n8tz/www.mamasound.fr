@@ -137,7 +137,7 @@ export default class App extends React.Component {
 				</div>
 			</ContextMenu>}
 			{CurrentUser && CurrentUser.isAdmin && appTheme && appTheme.data &&
-			<Editable id={appTheme.data._id}/>}
+			<Editable id={appTheme.data._id}  etty={appTheme.data._cls}/>}
 			
 			<div className={"widgetBox"}>
 				{

@@ -70,7 +70,7 @@ export default {
 		test        : /^[\w_\-\d]+$/
 	}),
 	enum         : ( label, options, props ) => ({
-		//formRenderer    : require('App/ui/fields/Select'),
+		formRenderer: 'Select',
 		defaultProps: {
 			options    : options.map(( v ) => (typeof v == "string"
 			                                   ? { label: v, value: v }
