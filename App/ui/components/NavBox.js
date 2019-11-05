@@ -30,9 +30,6 @@ export default class NavBox extends React.Component {
 			<div className={"NavBox"} style={style}>
 				<div className={"content container"}>
 					{children}
-					<TweenRef initial={Styles.SearchBar}>
-						<Comps.SearchBar {...Styles.SearchBarProps}/>
-					</TweenRef>
 					<TweenRef.div id={"eventTypeNav"} className={"eventTypeNav"} style={Styles.typesNav}
 					              tweenAxis={Styles.Axis}>
 						{
@@ -46,7 +43,7 @@ export default class NavBox extends React.Component {
 									<Comps.StretchBox
 										className={appState.viewType === i ? "selected" : ""}
 										onClick={e => $actions.setCurStyleTab(i)}
-										title={title}
+										title={<a href={"/" + appState.viewTypesList[i]} onClick={e=>e.preventDefault()}>{title}</a>}
 										key={i}
 										icon={<img src={icon} className={"typeIcon"}/>}
 										{...Styles.StretchBox}

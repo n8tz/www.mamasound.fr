@@ -14,6 +14,7 @@
   }
   .SearchBar {
     display: block !important;
+    position: fixed !important;
   }
 
 }
@@ -24,8 +25,8 @@
 
   transform: translateZ(0);
   z-index: 100000;
-  top: -40px !important;
-  height: 40px !important;
+  //top: -40px !important;
+  //height: 40px !important;
 
   .label {
     padding-right: 1.5em;

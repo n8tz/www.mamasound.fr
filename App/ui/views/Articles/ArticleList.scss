@@ -16,17 +16,35 @@
     top: 0;
     width: 46vh;
     max-width: 420px;
+    //text-align: right;
+    //display: flex;
+    //flex-direction: column;
+
+    //writing-mode: vertical-rl;
 
     > span {
+
       @include aspect-ratio(3, 4);
+      writing-mode: horizontal-tb;
+      float: right;
       //overflow: hidden;
       //height: 30vh;
       width: 22vh;
+      //height: 22vh;
       max-width: 200px;
       display: inline-block;
-      margin-left: 5px;
+      margin: 5px;
       //background: black;
       text-align: center;
+      opacity: .5;
+
+      &:nth-child(1) {
+        opacity: 1;
+      }
+
+      &:nth-child(3) {
+        opacity: 1;
+      }
     }
   }
 }

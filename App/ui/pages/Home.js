@@ -116,6 +116,10 @@ export default class Home extends React.Component {
 							                         {/*<TweenRef id={"MidMenu"} initial={Styles.MidMenu}>*/}
 							                         {/*<Views.Menu.menu id={"rootmiddlemenu"}/>*/}
 							                         {/*</TweenRef>*/}
+							
+							                         {currentTheme !== "phone" &&
+							                         <Comps.SearchBar {...Styles.SearchBarProps}/>
+							                         }
 							                         <TweenRef id={"EventMap"} initial={Styles.EventMap}>
 								                         <Views.Events.EventMap
 									                         day={appState.curVisibleDay || appState.curDay}
@@ -137,6 +141,9 @@ export default class Home extends React.Component {
 					</TweenRef>
 				</Views.Block.Highlighter>
 			</TweenRef>
+			{currentTheme === "phone" &&
+			<Comps.SearchBar {...Styles.SearchBarProps}/>
+			}
 			<TweenRef id={"page"} initial={Styles.page}>
 				<div className={"Home container " + (useBig ? "bigHead" : "") + (__IS_SERVER__
 				                                                                 ? " SSR"

@@ -84,24 +84,24 @@ export default class EventList extends React.Component {
 			    $actions,
 			    appState, $scope
 		    }       = this.props,
-		    element = document.body.parentNode;
+		    element = document.body;
 		
 		if ( element ) {
-			this._scrollList && document.removeEventListener("scroll", this._scrollList);
+			this._scrollList && element.removeEventListener("scroll", this._scrollList);
 			
-			document.addEventListener(
+			element.addEventListener(
 				"scroll",
 				this._scrollList = ( e ) => {//@todo
 					let allDays = document.querySelectorAll(".EventList .type_" + this.props.appState.viewType + " .DayEvents"),
 					    cDay, offset,
-					    cPos    = element.scrollTop + 275, elem;
+					    cPos    = element.scrollTop + 245, elem;
 					
 					for ( let i = 0; i < allDays.length; i++ ) {
 						elem   = allDays[i];
 						offset = 0
 						
 						while ( elem ) {
-							offset += elem.offsetTop + elem.scrollTop;
+							offset += elem.offsetTop;
 							elem = elem.offsetParent;
 						}
 						if ( !cDay && allDays[i].offsetHeight )
@@ -112,7 +112,7 @@ export default class EventList extends React.Component {
 						
 						cDay = allDays[i].dataset.dt;
 					}
-					//console.log('EventList::_scrollList:82: ', cPos, offset);
+					//console.log('EventList::_scrollList:82: ', cPos, offset, moment(parseInt(cDay)).format());
 					cDay && $actions.updateCurrentVisibleDay(parseInt(cDay));
 				}
 			);

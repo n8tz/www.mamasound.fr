@@ -5,7 +5,15 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import {collRightWidth, footerMiniHeight, headerHeight, collLeftWidth, headerMiniHeight,sliderHeight} from "../vars";
+import {
+	collRightWidth,
+	footerMiniHeight,
+	headerHeight,
+	collLeftWidth,
+	headerMiniHeight,
+	sliderHeight,
+	mapHeight
+} from "../vars";
 
 export const bounds    = { min: 100, max: 100 };
 export const waypoints = [
@@ -161,7 +169,7 @@ export const EventsBlock       = {
 	//top            : "100%",
 	//zIndex         : 1250,
 	//overflow       : 'hidden',
-	marginTop      : [55],
+	marginTop      : [-10],
 	transformOrigin: "center top",
 	transform      : [
 		//{
@@ -202,6 +210,73 @@ export const PageBlock         = {
 			//translateZ : "-50px",
 			//rotateX   : "-10deg"
 		}
+	]
+};
+export const SearchBarProps    = {
+	startPos     : 50,
+	openDuration : 50,
+	closeDuration: 100,
+	minBottom    : footerMiniHeight,
+	maxBottom    : mapHeight,
+	minHeight    : 40,
+	
+	boxStyle  : {
+		position: "fixed",
+		width   : ["100%"],
+		left    : "0px",
+		top     : ["100%", -40],
+		height  : "40px",
+	},
+	titleStyle: {
+		//paddingLeft: "3em"
+	},
+	titleAxis : [
+		//{
+		//	from    : startPos,
+		//	duration: openDuration,
+		//	apply   : {
+		//		paddingLeft: "3em"
+		//	}
+		//},
+		//{
+		//	from    : startPos + openDuration,
+		//	duration: closeDuration,
+		//	apply   : {
+		//		paddingLeft: "-3em"
+		//	}
+		//}
+	],
+	rootAxis  : [
+		//{
+		//	from    : 50,
+		//	duration: 50,
+		//	apply   : {
+		//		top: ["-" + maxHeight, minHeight]
+		//	}
+		//},
+		//{
+		//	from    : 100,
+		//	duration: 100,
+		//	apply   : {
+		//		top: ["-100%", maxHeight]
+		//	}
+		//},
+		//{
+		//	from    : startPos,
+		//	duration: openDuration,
+		//	apply   : {
+		//		height   : [maxHeight, "-" + minHeight],
+		//		transform: [, , {}],
+		//	}
+		//},
+		//{
+		//	from    : startPos + openDuration,
+		//	duration: closeDuration,
+		//	apply   : {
+		//		height   : ["-" + maxHeight, "100%", "-" + mapHeight, -50],
+		//		transform: [, , {}],
+		//	}
+		//}
 	]
 };
 export const EventMap_Gradient = {

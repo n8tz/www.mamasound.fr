@@ -39,7 +39,7 @@ export const EventCatSlider     = {
 		       left     : [0],
 		       //marginTop: "50px",
 		       //bottom  : "40px",
-		       //width   : "auto",
+		       height   : "auto",
 		       //overflow: "auto"
 	       },
 	       defaultInitial : {
