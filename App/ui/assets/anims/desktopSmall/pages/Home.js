@@ -54,7 +54,7 @@ export const page      = {
 	}
 };
 export const header    = {
-	position : "fixed",
+	position : "absolute",
 	height   : headerMiniHeight,
 	top      : 0,
 	left     : "50%",

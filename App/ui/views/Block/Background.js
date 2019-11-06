@@ -22,11 +22,17 @@ export default class Background extends React.Component {
 			<div style={style}
 			     className={"Background"}>
 				{
-					record.mainBackground &&
+					record.backgroundMode &&
+					record.backgroundMode !== "back_hidden" &&
 					<div className="background">
-						<Comps.Image src={record.mainBackground} className={"leftGhost"} h={800}/>
-						<Comps.Image src={record.mainBackground} className={"rightGhost"} h={800}/>
-						<Comps.Image src={record.mainBackground} h={800}/>
+						{(record.backgroundColor) &&
+						<div className={"backColor"}
+						     style={{ backgroundColor: record.backgroundColor || 'transparent' }}/>}
+						{record.backgroundMode !== "big_wghost" && <>
+							<Comps.Image src={record.mainBackground} className={"leftGhost"}/>
+							<Comps.Image src={record.mainBackground} className={"rightGhost"}/>
+						</>}
+						<Comps.Image src={record.mainBackground}/>
 					</div>
 					
 				}

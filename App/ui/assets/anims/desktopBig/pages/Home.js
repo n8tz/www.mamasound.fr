@@ -56,7 +56,7 @@ export const page      = {
 export const header    = {
 	position : "fixed",
 	height   : headerMiniHeight,
-	top      : -1,
+	top      : 0,
 	left     : "50%",
 	//width    : "100%",
 	zIndex   : 800,
@@ -75,7 +75,7 @@ export const header    = {
 export const logo      = {
 	position : "absolute",
 	width    : "20%",
-	maxWidth : "500px",
+	maxWidth : "400px",
 	minWidth : "300px",
 	left     : "0%",
 	height   : headerMiniHeight,

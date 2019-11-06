@@ -170,7 +170,7 @@ export default {
 			let { currentPageFocus } = this.nextState;
 			if ( selectedFocus ) {
 				this.$actions.history_set("/" + cls + '/' + selectedFocus);
-				!__IS_SERVER__ && document.body.parentNode.scrollTo({
+				!__IS_SERVER__ && document.body.scrollTo({
 					                                                    behavior: 'smooth',
 					                                                    top     : 0
 				                                                    })

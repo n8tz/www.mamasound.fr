@@ -24,8 +24,8 @@
 body.fixedHead {
   header {
     > .topMenu {
-      transform: translate3d(-50%, -100%, 0) !important;
-      opacity: 0;
+      //transform: translate3d(-50%, -100%, 0) !important;
+      //opacity: 0;
     }
   }
 
@@ -50,18 +50,19 @@ header {
   }
   //overflow: hidden;
   > .topMenu {
+    @include use_hvCenteredAbs();
     @media screen and (max-width: $tablet-portrait-breakpoint) {
       display: none;
     }
     position: absolute;
-    top: 100%;
-    left: 50%;
-
+    //top: 100%;
+    left: 25%;
+    text-align: left;
     white-space: nowrap;
-    transform: translate3d(-50%, 0, 0);
-    border: solid 1px rgba(0, 0, 0, 0.5);
+    transform: translate3d(0%, -50%, 0);
+    //border: solid 1px rgba(0, 0, 0, 0.5);
     border-top: none;
-    background: rgba(255, 255, 255, 0.64);
+    //background: rgba(255, 255, 255, 0.64);
     font-family: $mainFontFamily;
     //height: 20px;
     margin-top: 2px;
@@ -72,6 +73,7 @@ header {
     padding-right: 15px;
     padding-left: 15px;
     transition: all 500ms;
+
     img {
       display: none;
     }
@@ -106,7 +108,7 @@ header {
     height: 100%;
     //filter: invert(100%);
     display: inline-block;
-    width: 100%;
+    width: 300px;
 
     @media screen and (max-width: $smartphone-landscape-breakpoint) {
 

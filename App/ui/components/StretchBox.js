@@ -91,8 +91,8 @@ export default class StretchBox extends React.Component {
 		                     initial={boxStyle}>
 			<TweenRef.div initial={titleStyle} className={"title"}
 			              tweenAxis={axis.title}>{title}</TweenRef.div>
-			<TweenRef.div initial={iconStyle} className={"icon"}
-			              tweenAxis={axis.icon}>{icon}</TweenRef.div>
+			{/*<TweenRef.div initial={iconStyle} className={"icon"}*/}
+			{/*              tweenAxis={axis.icon}>{icon}</TweenRef.div>*/}
 			<TweenRef.div initial={contentStyle} className={"content"}
 			              tweenAxis={axis.content}>{children}</TweenRef.div>
 		</TweenRef.div>;

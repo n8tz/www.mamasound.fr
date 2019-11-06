@@ -17,41 +17,8 @@ import {
 
 export const bounds    = { min: 100, max: 100 };
 export const waypoints = [
-//	{ at: 0, id: "page" },
-//	{
-//		//direction   : 1,
-//		at          : 50,
-//		id          : "bighead",
-//		stopDuration: 1000
-//	},
-//	{
-//		//direction   : 1,
-//		at          : 100,
-//		id          : "head",
-//		stopDuration: 1000
-//	},
-//	{
-//		//direction: -1,
-//		at: 200,
-//		id: "events"
-//	},
-//	{
-//		at: 300,
-//		id: "map"
-//	},
 ];
 export const page      = {
-	//position : "absolute",
-	//top      : headerMiniHeight,
-	//left     : "50%",
-	//height   : "100%",
-	//bottom   : 0,
-	//overflowY: "auto",
-	//overflowX: "hidden",
-	transform: {
-		//translateZ: "0px",
-		//translateX: "-50%"
-	}
 };
 export const header    = {
 	position : "fixed",
@@ -74,8 +41,11 @@ export const header    = {
 };
 export const logo      = {
 	position : "absolute",
-	width    : "100%",
-	minWidth : "250px",
+	
+	width    : "20%",
+	maxWidth : "300px",
+	minWidth : "200px",
+	//minWidth : "250px",
 	left     : "50%",
 	height   : headerMiniHeight,
 	bottom   : "0%",
@@ -116,7 +86,7 @@ export const Background        = {
 export const Highlighter       = {
 	//position       : "absolute",
 	right          : "0%",
-	top            : ["-" + headerHeight, sliderHeight, 100],
+	top            : ["-" + headerHeight, sliderHeight, 70],
 	height         : [headerHeight],
 	transformOrigin: "center top",
 	zIndex         : 650,
@@ -169,7 +139,7 @@ export const EventsBlock       = {
 	//top            : "100%",
 	//zIndex         : 1250,
 	//overflow       : 'hidden',
-	marginTop      : [-10],
+	marginTop      : [-20],
 	transformOrigin: "center top",
 	transform      : [
 		//{
@@ -218,14 +188,14 @@ export const SearchBarProps    = {
 	closeDuration: 100,
 	minBottom    : footerMiniHeight,
 	maxBottom    : mapHeight,
-	minHeight    : 40,
+	minHeight    : 30,
 	
 	boxStyle  : {
 		position: "fixed",
 		width   : ["100%"],
 		left    : "0px",
-		top     : ["100%", -40],
-		height  : "40px",
+		top     : ["100%", -30],
+		height  : "30px",
 	},
 	titleStyle: {
 		//paddingLeft: "3em"

@@ -34,8 +34,16 @@ export default {
 		//"resume": types.descriptions('Resumé'), // TODO refactor as "summary"
 		
 		
-		"logo"          : types.media({ allowedTypes: "Image" }, "Logo:"),
-		"mainBackground": types.media({ allowedTypes: "Image" }, "MainBackground:"),
+		"logo"           : types.media({ allowedTypes: "Image" }, "Logo:"),
+		"mainBackground" : types.media({ allowedTypes: "Image" }, "MainBackground:"),
+		"backgroundMode" : types.enum("Type d'image' background",
+		                              [
+			                              { label: "Aucun", value: "back_hidden" },
+			                              { label: "Tout l'espace dispo", value: "big_back" },
+			                              { label: "Tout l'espace dispo avec ghost", value: "big_wghost" }
+		                              ]
+		),
+		"backgroundColor": types.color("Couleur de fond :"),
 		
 		"menuTop"   : types.picker(true, {
 			allowTypeSelection: ["Menu"],

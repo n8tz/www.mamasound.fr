@@ -52,7 +52,7 @@ html {
   -webkit-box-sizing: inherit;
   box-sizing: inherit;
 
-  user-drag: none;
+ // touch-action: initial !important;
 }
 
 body,
@@ -72,7 +72,8 @@ ul {
 
 .inContextMenuLayer {
   z-index: 100000000 !important;
-  position: fixed !important;
+  //position: fixed !important;
+  overflow: visible !important;
 }
 
 .widgetBox {
@@ -110,13 +111,18 @@ ul {
 //
 @media (min-width: 1600px) {
   .container {
-    width: 1500px;
+    width: 1550px;
   }
 }
 
 @media (min-width: 1800px) {
   .container {
-    width: 1700px;
+    width: 1750px;
+  }
+}
+@media (min-width: 1900px) {
+  .container {
+    width: 1850px;
   }
 }
 

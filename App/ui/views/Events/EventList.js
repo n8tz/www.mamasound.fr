@@ -66,7 +66,7 @@ export default class EventList extends React.Component {
 					offset -= 320;
 			}
 			//document.body.parentElement.scrollTo(offset - 200)
-			document.body.parentElement.scrollTo({
+			document.body.scrollTo({
 				                                     top     : offset - 300,
 				                                     behavior: 'smooth'
 			                                     })

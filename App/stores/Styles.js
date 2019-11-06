@@ -39,7 +39,9 @@ export default class Styles extends Store {
 			this._onResize = ( e ) => {//@todo
 				let currentTheme;
 				if ( window.innerWidth >= 900 ) {
-					if ( window.innerWidth >= 1200 )
+					if ( window.innerWidth >= 1500 )
+						currentTheme = "desktopBig";
+					else if ( window.innerWidth >= 1100 )
 						currentTheme = "desktop";
 					else
 						currentTheme = "desktopSmall";

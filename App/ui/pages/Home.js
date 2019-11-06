@@ -58,9 +58,9 @@ export default class Home extends React.Component {
 		    switchPoint,
 		    vp = appState.selectedFocus ? 98 : 60;
 		
-		scrollTop           = document.body.parentElement.scrollTop;
-		switchPoint         = vp - (185 / document.body.parentElement.offsetHeight) * 100;
-		normalizedScrollTop = Math.max(0, (((scrollTop) / document.body.parentElement.offsetHeight) * 100));
+		scrollTop           = document.body.scrollTop;
+		switchPoint         = vp - (185 / document.body.offsetHeight) * 100;
+		normalizedScrollTop = Math.max(0, (((scrollTop) / document.body.offsetHeight) * 100));
 		//console.log('scroll :', normalizedScrollTop, switchPoint)
 		
 		
@@ -107,7 +107,29 @@ export default class Home extends React.Component {
 		let { Styles, appState, currentTheme, appTheme, $actions, NavBox, appMenu } = this.props,
 		    useBig                                                                  = appState.selectedFocus &&
 			    (appState.selectedFocus.etty !== "Place");
-		return <>
+		return <div>
+			<TweenRef
+				id={"header"}
+				initial={Styles.header}
+			>
+				<header>
+					<TweenRef
+						id={"logo"}
+						initial={Styles.logo}
+					>
+						<a className={"logo"} href={'/'}
+						   style={appTheme && appTheme.data && appTheme.data.logo && {
+							   background    : "url('" + getMediaSrc(appTheme.data.logo) + "') center no-repeat",
+							   backgroundSize: "auto 100%"
+						   }}
+						   onClick={e => (e.stopPropagation(), e.preventDefault(), $actions.history_push('/'))}/>
+					</TweenRef>
+					{appTheme && appTheme.data && appTheme.data.menuSocial &&
+					<Views.Menu.menu id={appTheme.data.menuSocial.objId} className={"socialMenu"}/>}
+					{appTheme && appTheme.data && appTheme.data.menuTop &&
+					<Views.Menu.menu id={appTheme.data.menuTop.objId} className={"topMenu"}/>}
+				</header>
+			</TweenRef>
 			<TweenRef id={"Highlighter"} initial={Styles.Highlighter}>
 				<Views.Block.Highlighter key={"Highlighter"}
 				                         navBox={
@@ -125,7 +147,7 @@ export default class Home extends React.Component {
 									                         day={appState.curVisibleDay || appState.curDay}
 									                         viewType={appState.viewType}/>
 							                         </TweenRef>
-							                         {currentTheme === "desktop" &&
+							                         {currentTheme.startsWith("desktop") &&
 							                         <TweenRef id={"ArticleList"} initial={Styles.ArticleList}>
 								                         <Views.Articles.ArticleList
 									                         day={appState.curVisibleDay || appState.curDay}
@@ -194,37 +216,15 @@ export default class Home extends React.Component {
 						
 						</Views.Events.EventList>
 					</TweenRef>
-					<TweenRef id={"Footer"} initial={Styles.Footer}>
-						<Comps.Footer>
-							{appTheme && appTheme.data && appTheme.data.menuBot &&
-							<Views.Menu.menu id={appTheme.data.menuBot.objId}/>}
-						</Comps.Footer>
-					</TweenRef>
-					<TweenRef
-						id={"header"}
-						initial={Styles.header}
-					>
-						<header>
-							<TweenRef
-								id={"logo"}
-								initial={Styles.logo}
-							>
-								<a className={"logo"} href={'/'}
-								   style={appTheme && appTheme.data && appTheme.data.logo && {
-									   background    : "url('" + getMediaSrc(appTheme.data.logo) + "') center no-repeat",
-									   backgroundSize: "auto 100%"
-								   }}
-								   onClick={e => (e.stopPropagation(), e.preventDefault(), $actions.history_push('/'))}/>
-							</TweenRef>
-							{appTheme && appTheme.data && appTheme.data.menuSocial &&
-							<Views.Menu.menu id={appTheme.data.menuSocial.objId} className={"socialMenu"}/>}
-							{appTheme && appTheme.data && appTheme.data.menuTop &&
-							<Views.Menu.menu id={appTheme.data.menuTop.objId} className={"topMenu"}/>}
-						</header>
-					</TweenRef>
+					{/*<TweenRef id={"Footer"} initial={Styles.Footer}>*/}
+					{/*	<Comps.Footer>*/}
+					{/*		{appTheme && appTheme.data && appTheme.data.menuBot &&*/}
+					{/*		<Views.Menu.menu id={appTheme.data.menuBot.objId}/>}*/}
+					{/*	</Comps.Footer>*/}
+					{/*</TweenRef>*/}
 				</div>
 			</TweenRef>
-		</>
+		</div>
 	}
 }
 

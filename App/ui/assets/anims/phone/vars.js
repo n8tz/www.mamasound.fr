@@ -9,8 +9,8 @@ export const sliderHeight     = 100;
 export const headerMiniHeight = 40;
 export const eventsMiniHeight = 200;
 export const footerMiniHeight = 27;
-export const headerHeight     = "60vh";
+export const headerHeight     = "45vh";
 export const mapHeight        = "25vh";
-export const collRightWidth        = "40%";
-export const collLeftWidth        = "0%";
+export const collRightWidth   = "40%";
+export const collLeftWidth    = "0%";
 

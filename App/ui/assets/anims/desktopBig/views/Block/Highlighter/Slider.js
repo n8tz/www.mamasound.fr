@@ -6,7 +6,7 @@
  *   @contact : n8tz.js@gmail.com
  */
 
-let stepAngle = "1.75deg";
+let stepAngle = "2.5deg";
 //export const visibleItems    = 3;
 
 export const defaultInitial  = {
@@ -18,17 +18,17 @@ export const defaultInitial  = {
 	opacity  : 0,
 	transform: [
 		{
-			perspective: "1250px",
-			translateY : "30000px",
+			perspective: "850px",
+			translateY : "40000px",
 			rotate     : stepAngle
 		},
 		{
-			translateY: "-30010px",
+			translateY: "-40010px",
 			translateZ: "-500px",
 			//translateX: "1.75box",
 			//translateY: "-.5box",
 			//rotateY   : "-3deg",
-			rotateY   : "-65deg",
+			rotateY   : "-45deg",
 		},
 		{
 			translateX: "-50%",
@@ -71,7 +71,7 @@ export const defaultEntering = [
 		duration: 45,
 		apply   : {
 			transform: [{}, {
-				rotateY   : "65deg",
+				rotateY   : "45deg",
 				translateZ: "500px",
 				//rotateX: "-90deg",
 			}],
@@ -84,7 +84,7 @@ export const defaultLeaving  = [
 		duration: 45,
 		apply   : {
 			transform: [{}, {
-				rotateY   : "65deg",
+				rotateY   : "45deg",
 				translateZ: "-500px",
 			}]
 		}

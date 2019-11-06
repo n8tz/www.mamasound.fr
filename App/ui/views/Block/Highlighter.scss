@@ -21,9 +21,15 @@ body.fixedHead {
 
 .bigHead.Highlighter {
 
-  height: 98vh !important;
-  top: calc(185px - 98vh) !important;
+  height: calc(100vh - 20px) !important;
+  top: calc(250px - 100vh) !important;
+  //top: calc(-100vh - 50px) !important;
   transition: height 500ms 750ms;
+  //transform: translateY(-100%) !important;
+  @media screen and (max-width: $tablet-portrait-breakpoint) {
+    height: calc(100vh - 15px) !important;
+    top: calc(200px - 100vh) !important;
+  }
 }
 
 .Highlighter {
@@ -62,7 +68,8 @@ body.fixedHead {
     //background: url("../assets/images/shuperDesign.jpg");
     background-size: auto 100%;
     @media screen and (max-width: $tablet-portrait-breakpoint) {
-      bottom: -10px;
+      bottom: 0px;
+      height: 50px;
     }
 
   }
@@ -91,7 +98,7 @@ body.fixedHead {
   //overflow: hidden;
   //tr
   .focusedContent {
-
+    overflow: hidden;
     @media screen and (max-width: $tablet-landscape-breakpoint) {
       margin: 0 !important;
       padding: 0 !important;
@@ -120,7 +127,7 @@ body.fixedHead {
   }
 
   .headBackground {
-    height: calc(100% + 10px);
+    height: 100%;
     width: 100%;
     @include withTranspaMask();
     //background: white;

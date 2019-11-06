@@ -6,7 +6,7 @@
  *   @contact : n8tz.js@gmail.com
  */
 
-body.fixedHead {
+body {
   .NavBox {
     //position: fixed !important;
     //top: 210px !important;
@@ -19,8 +19,15 @@ body.fixedHead {
   }
 
   .bigHead .NavBox {
-    top: 98vh !important;
-    margin-top: 20px !important;
+    top: calc(100vh - 0px) !important;
+    //margin-top: -40px !important;
+    //margin-top: 20px !important;
+    @media screen and (max-width: $tablet-portrait-breakpoint) {
+      //top: 220px !important;
+
+      //top: calc(100vh - 40px) !important;
+      margin-top: -60px !important;
+    }
   }
 }
 
@@ -61,7 +68,8 @@ body.fixedHead {
 
         .title {
           background: $focusedColor !important;
-          a{
+
+          a {
             color: $focusedTextColor;
           }
         }
