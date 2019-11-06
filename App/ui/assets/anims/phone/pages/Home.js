@@ -16,10 +16,8 @@ import {
 } from "../vars";
 
 export const bounds    = { min: 100, max: 100 };
-export const waypoints = [
-];
-export const page      = {
-};
+export const waypoints = [];
+export const page      = {};
 export const header    = {
 	position : "fixed",
 	height   : headerMiniHeight,
@@ -40,22 +38,22 @@ export const header    = {
 	]
 };
 export const logo      = {
-	position : "absolute",
+	//position : "absolute",
 	
-	width    : "20%",
-	maxWidth : "300px",
-	minWidth : "200px",
+	//width    : "20%",
+	//maxWidth : "350px",
+	//minWidth : "200px",
 	//minWidth : "250px",
-	left     : "50%",
-	height   : headerMiniHeight,
-	bottom   : "0%",
+	//left     : "0%",
+	height   : [headerMiniHeight, -2],
+	//bottom   : "0%",
 	zIndex   : 200,
 	transform: [
 		{
 			//perspective: "500px",
 		},
 		{
-			translateX: "-50%",
+			//translateX: "-50%",
 			//translateY: "-50%",
 			//translateZ : "-50px",
 			//rotateX   : "-10deg"

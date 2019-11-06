@@ -6,7 +6,7 @@
  *   @contact : n8tz.js@gmail.com
  */
 export const sliderHeight     = 100;
-export const headerMiniHeight = 40;
+export const headerMiniHeight = 50;
 export const eventsMiniHeight = 200;
 export const footerMiniHeight = 27;
 export const headerHeight     = "45vh";

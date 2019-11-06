@@ -28,7 +28,7 @@ export const defaultInitial  = {
 			//translateX: "1.75box",
 			//translateY: "-.5box",
 			//rotateY   : "-3deg",
-			rotateY   : "-65deg",
+			rotateY   : "-15deg",
 		},
 		{
 			translateX: "-50%",
@@ -71,7 +71,7 @@ export const defaultEntering = [
 		duration: 45,
 		apply   : {
 			transform: [{}, {
-				rotateY   : "65deg",
+				rotateY   : "15deg",
 				translateZ: "500px",
 				//rotateX: "-90deg",
 			}],
@@ -84,7 +84,7 @@ export const defaultLeaving  = [
 		duration: 45,
 		apply   : {
 			transform: [{}, {
-				rotateY   : "65deg",
+				rotateY   : "15deg",
 				translateZ: "-500px",
 			}]
 		}

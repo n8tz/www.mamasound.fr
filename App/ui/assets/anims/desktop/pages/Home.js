@@ -73,13 +73,13 @@ export const header    = {
 	]
 };
 export const logo      = {
-	position : "absolute",
-	width    : "20%",
-	maxWidth : "500px",
-	minWidth : "300px",
-	left     : "0%",
-	height   : headerMiniHeight,
-	bottom   : "0%",
+	//position : "absolute",
+	//width    : "20%",
+	//maxWidth : "500px",
+	//minWidth : "300px",
+	//left     : "0%",
+	height   : [headerMiniHeight, -2],
+	//bottom   : "0%",
 	zIndex   : 200,
 	transform: [
 		{
@@ -117,7 +117,7 @@ export const Background        = {
 export const Highlighter       = {
 	//position       : "absolute",
 	right          : "0%",
-	top            : ["-" + headerHeight, sliderHeight, 60],
+	top            : ["-" + headerHeight, sliderHeight, 75],
 	height         : [headerHeight],
 	transformOrigin: "center top",
 	zIndex         : 650,
@@ -147,7 +147,7 @@ export const Footer            = {
 	height   : footerMiniHeight,
 	left     : "0px",
 	top      : ["100%", -footerMiniHeight],
-	width    : "100%",
+	//width    : "100%",
 	zIndex   : 800,
 	transform: {
 		//translateY: "-100%"
@@ -188,6 +188,7 @@ export const ArticleList       = {
 	left           : "10px",
 	height         : ["100vh", "-300px"],
 	width          : collLeftWidth,
+	display        : 'block',
 	zIndex         : 100,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",

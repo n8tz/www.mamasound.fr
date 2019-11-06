@@ -73,19 +73,21 @@ export const header    = {
 	]
 };
 export const logo      = {
-	position : "absolute",
-	width    : "100%",
-	minWidth : "250px",
-	left     : "50%",
-	height   : headerMiniHeight,
-	bottom   : "0%",
+	//position : "absolute",
+	//width    : "30%",
+	//maxWidth : "400px",
+	//minWidth : "200px",
+	//left     : "0%",
+	
+	height   : [headerMiniHeight, -2],
+	//bottom   : "0%",
 	zIndex   : 200,
 	transform: [
 		{
 			//perspective: "500px",
 		},
 		{
-			translateX: "-50%",
+			//translateX: "-50%",
 			//translateY: "-50%",
 			//translateZ : "-50px",
 			//rotateX   : "-10deg"
@@ -116,7 +118,7 @@ export const Background        = {
 export const Highlighter       = {
 	//position       : "sticky",
 	right          : "0%",
-	top            : ["-" + headerHeight, sliderHeight, 60],
+	top            : ["-" + headerHeight, sliderHeight, 75],
 	height         : [headerHeight],
 	transformOrigin: "center top",
 	zIndex         : 650,
@@ -146,7 +148,7 @@ export const Footer            = {
 	height   : footerMiniHeight,
 	left     : "0px",
 	top      : ["100%", -footerMiniHeight],
-	width    : "100%",
+	//width    : "100%",
 	zIndex   : 800,
 	transform: {
 		//translateY: "-100%"

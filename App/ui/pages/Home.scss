@@ -41,25 +41,29 @@ header {
   padding: 0 !important;
   margin-left: -50vw;
   left: 50%;
-  width: 100vw !important;
+  width: calc(100vw - 17px) !important;
   //@include withMask();
-  background: rgba(255, 255, 255, 0.51);
+  background: rgba(255, 255, 255, 1);
   border-bottom: solid 2px black;
+  display: flex;
   @media screen and (max-width: $tablet-portrait-breakpoint) {
     height: 40px;
+    width: 100vw !important;
   }
   //overflow: hidden;
   > .topMenu {
-    @include use_hvCenteredAbs();
+    flex-grow: 8;
+    @include use_hvCenteredContent();
     @media screen and (max-width: $tablet-portrait-breakpoint) {
-      display: none;
+      //display: none;
     }
-    position: absolute;
+    font-size: 16px;
+    //position: static !important;
     //top: 100%;
-    left: 25%;
+    //left: 25%;
     text-align: left;
     white-space: nowrap;
-    transform: translate3d(0%, -50%, 0);
+    //transform: translate3d(0%, -50%, 0);
     //border: solid 1px rgba(0, 0, 0, 0.5);
     border-top: none;
     //background: rgba(255, 255, 255, 0.64);
@@ -67,11 +71,12 @@ header {
     //height: 20px;
     margin-top: 2px;
     padding-top: 2px;
+    padding-left: 2vw;
     padding-bottom: 2px;
-    width: 100%;
-    z-index: -1;
+    //width: 100%;
+    //z-index: -1;
     padding-right: 15px;
-    padding-left: 15px;
+    //padding-left: 15px;
     transition: all 500ms;
 
     img {
@@ -83,11 +88,12 @@ header {
   }
 
   > .socialMenu {
-    position: absolute;
-    top: 0%;
-    right: 0%;
+    @include use_hvCenteredContent();
+    flex-grow: 2;
+    //position: absolute;
     white-space: nowrap;
-    margin-top: 2px;
+    margin-top: 8px;
+    text-align: right;
     padding: 2px;
     z-index: 2000;
 
@@ -101,11 +107,12 @@ header {
   }
 
   .logo {
+    flex-grow: 4;
     background: url("../assets/images/LogoVF_MAMA_SOUND_w.png") no-repeat;
     background-size: auto 100%;
     //background-size: auto 100%;
     background-position: center center;
-    height: 100%;
+    height: calc(100% - 2px);
     //filter: invert(100%);
     display: inline-block;
     width: 300px;

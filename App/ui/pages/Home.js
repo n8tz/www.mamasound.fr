@@ -124,10 +124,10 @@ export default class Home extends React.Component {
 						   }}
 						   onClick={e => (e.stopPropagation(), e.preventDefault(), $actions.history_push('/'))}/>
 					</TweenRef>
-					{appTheme && appTheme.data && appTheme.data.menuSocial &&
-					<Views.Menu.menu id={appTheme.data.menuSocial.objId} className={"socialMenu"}/>}
 					{appTheme && appTheme.data && appTheme.data.menuTop &&
 					<Views.Menu.menu id={appTheme.data.menuTop.objId} className={"topMenu"}/>}
+					{appTheme && appTheme.data && appTheme.data.menuSocial &&
+					<Views.Menu.menu id={appTheme.data.menuSocial.objId} className={"socialMenu"}/>}
 				</header>
 			</TweenRef>
 			<TweenRef id={"Highlighter"} initial={Styles.Highlighter}>
@@ -216,12 +216,12 @@ export default class Home extends React.Component {
 						
 						</Views.Events.EventList>
 					</TweenRef>
-					{/*<TweenRef id={"Footer"} initial={Styles.Footer}>*/}
-					{/*	<Comps.Footer>*/}
-					{/*		{appTheme && appTheme.data && appTheme.data.menuBot &&*/}
-					{/*		<Views.Menu.menu id={appTheme.data.menuBot.objId}/>}*/}
-					{/*	</Comps.Footer>*/}
-					{/*</TweenRef>*/}
+					<TweenRef id={"Footer"} initial={Styles.Footer}>
+						<Comps.Footer>
+							{/*{appTheme && appTheme.data && appTheme.data.menuBot &&*/}
+							{/*<Views.Menu.menu id={appTheme.data.menuBot.objId}/>}*/}
+						</Comps.Footer>
+					</TweenRef>
 				</div>
 			</TweenRef>
 		</div>

@@ -7,68 +7,69 @@
  */
 
 .Footer {
-
+  height: 40px;
+  width: 40px;
   //@include withMaskTop();
-  width: 100vw;
-  background: white;
-  border-top: solid 1px rgba(0, 0, 0, 0.58);
-  @media screen and (max-width: $tablet-portrait-breakpoint) {
-    position: fixed !important;
-    bottom: auto !important;
-    right: auto !important;
-    top: 5px !important;
-    left: 5px !important;
-    background: rgba(255, 255, 255, 1) !important;
-    width: 30px !important;
-    height: 30px !important;
-    border: solid 1px grey;
-    border-radius: 5px;
-    z-index: 5000 !important;
-    &:before {
-      @include use_hvCenteredAbs();
-      content: '🎪';
-      font-weight: bolder;
-    }
-    > .maskContent {
-      display: none;
-      border-radius: 0px 5px 5px 5px;
-      position: absolute;
-      top: 100% !important;
-      width: auto !important;
-      left: 0 !important;
-      height: auto !important;
-      background: white;
-      transform: none !important;
-    }
-    &:active {
-
-      border-radius: 5px 5px 0 0;
-
-      > .maskContent {
-        display: block;
-      }
-    }
-    border-top: none;
-    border-bottom: solid 1px rgba(0, 0, 0, 0.58);
-    .MenuItem {
-      //display: block !important;
-      margin-top: 2px !important;
-      padding-top: 2px !important;
-      background: transparent !important;
-      cursor: pointer;
-      text-align: left !important;
-    }
-  }
+  //width: 100vw;
+  //background: white;
+  //border-top: solid 1px rgba(0, 0, 0, 0.58);
+  //@media screen and (max-width: $tablet-portrait-breakpoint) {
+  //  position: fixed !important;
+  //  bottom: auto !important;
+  //  right: auto !important;
+  //  top: 5px !important;
+  //  left: 5px !important;
+  //  background: rgba(255, 255, 255, 1) !important;
+  //  width: 30px !important;
+  //  height: 30px !important;
+  //  border: solid 1px grey;
+  //  border-radius: 5px;
+  //  z-index: 5000 !important;
+  //  &:before {
+  //    @include use_hvCenteredAbs();
+  //    content: '🎪';
+  //    font-weight: bolder;
+  //  }
+  //  > .maskContent {
+  //    display: none;
+  //    border-radius: 0px 5px 5px 5px;
+  //    position: absolute;
+  //    top: 100% !important;
+  //    width: auto !important;
+  //    left: 0 !important;
+  //    height: auto !important;
+  //    background: white;
+  //    transform: none !important;
+  //  }
+  //  &:active {
+  //
+  //    border-radius: 5px 5px 0 0;
+  //
+  //    > .maskContent {
+  //      display: block;
+  //    }
+  //  }
+  //  border-top: none;
+  //  border-bottom: solid 1px rgba(0, 0, 0, 0.58);
+  //  .MenuItem {
+  //    //display: block !important;
+  //    margin-top: 2px !important;
+  //    padding-top: 2px !important;
+  //    background: transparent !important;
+  //    cursor: pointer;
+  //    text-align: left !important;
+  //  }
+  //}
   //
   .maskContent {
-    width: 100%;
+    //width: 100%;
 
     @include use_hvCenteredAbs();
 
     .LoginBox {
-      position: absolute;
-      left: 0;
-      top: 0px;
+      //position: absolute;
+      //left: 0;
+      //top: 0px;
 
       img {
         max-height: 100%;

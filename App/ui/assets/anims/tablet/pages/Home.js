@@ -137,7 +137,7 @@ export const Footer            = {
 	height   : footerMiniHeight,
 	left     : "0px",
 	top      : ["100%", -footerMiniHeight],
-	width    : "100%",
+	//width    : "100%",
 	zIndex   : 800,
 	transform: {
 		//translateY: "-100%"

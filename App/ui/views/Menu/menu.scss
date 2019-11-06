@@ -22,8 +22,13 @@
     font-weight: bold;
     white-space: nowrap;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 18px;
     color: #1c1c1c;
+
+
+    @media screen and (max-width: $tablet-portrait-breakpoint) {
+      font-size: 13px;
+    }
 
     a {
       color: #1c1c1c;
