@@ -9,34 +9,68 @@
 .Menu_menu {
   display: inline-block;
 
-  .MenuItem {
+  > .subMenu {
+    display: block;
 
-    font-family: $mainFontFamily;
-    //height: 20px;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-top: 2px;
-    //padding-top: 4px;
-    padding-bottom: 2px;
-    text-transform: capitalize;
-    font-weight: bold;
-    white-space: nowrap;
-    cursor: pointer;
-    font-size: 18px;
-    color: #1c1c1c;
+    > .MenuItem {
+      position: relative;
+      font-family: $mainFontFamily;
+      //height: 20px;
+      //padding-top: 4px;
+      padding: 0px 7px;
+      border-bottom: solid 3px transparent;
+      text-transform: capitalize;
+      font-weight: bold;
+      white-space: nowrap;
+      cursor: pointer;
 
-
-    @media screen and (max-width: $tablet-portrait-breakpoint) {
-      font-size: 13px;
-    }
-
-    a {
+      font-size: 18px;
       color: #1c1c1c;
-      text-decoration: none;
+      display: inline-block !important;
+
+      > .label {
+        margin-bottom: -3px;
+      }
+
+      > .subMenu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: rgba(255, 255, 255, 0.8);
+        max-width: 500px;
+        min-width: 180px;
+        margin-top: 3px;
+
+        > .MenuItem {
+          display: block !important;
+
+          &:hover {
+            background: rgba(128, 128, 128, 1);
+          }
+        }
+      }
 
       &:hover {
-        //color: black;
-        text-decoration: underline;
+        border-bottom: solid 3px black;
+
+        > .subMenu {
+          display: block;
+        }
+      }
+
+      @media screen and (max-width: $tablet-portrait-breakpoint) {
+        font-size: 13px;
+      }
+
+      a {
+        color: #1c1c1c;
+        text-decoration: none;
+
+        &:hover {
+          //color: black;
+          //text-decoration: underline;
+        }
       }
     }
   }

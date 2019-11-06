@@ -16,38 +16,8 @@ import {
 } from "../vars";
 
 export const bounds    = { min: 100, max: 100 };
-export const waypoints = [
-//	{ at: 0, id: "page" },
-//	{
-//		//direction   : 1,
-//		at          : 50,
-//		id          : "bighead",
-//		stopDuration: 1000
-//	},
-//	{
-//		//direction   : 1,
-//		at          : 100,
-//		id          : "head",
-//		stopDuration: 1000
-//	},
-//	{
-//		//direction: -1,
-//		at: 200,
-//		id: "events"
-//	},
-//	{
-//		at: 300,
-//		id: "map"
-//	},
-];
+export const waypoints = [];
 export const page      = {
-	//position : "absolute",
-	//top      : headerMiniHeight,
-	//left     : "50%",
-	//height   : "100%",
-	//bottom   : 0,
-	//overflowY: "auto",
-	//overflowX: "hidden",
 	transform: {
 		//translateZ: "0px",
 		//translateX: "-50%"
@@ -73,13 +43,7 @@ export const header    = {
 	]
 };
 export const logo      = {
-	//position : "absolute",
-	//width    : "20%",
-	//maxWidth : "500px",
-	//minWidth : "300px",
-	//left     : "0%",
 	height   : [headerMiniHeight, -2],
-	//bottom   : "0%",
 	zIndex   : 200,
 	transform: [
 		{
@@ -100,8 +64,8 @@ export const Background        = {
 	left     : "50%",
 	bottom   : "25px",
 	width    : "100%",
-	height   : "100%",
-	//top     : 20,
+	//height   : "100%",
+	top      : headerMiniHeight,
 	transform: [
 		{
 			//perspective: "500px",
@@ -119,6 +83,7 @@ export const Highlighter       = {
 	right          : "0%",
 	top            : ["-" + headerHeight, sliderHeight, 75],
 	height         : [headerHeight],
+	//minHeight      : 500,
 	transformOrigin: "center top",
 	zIndex         : 650,
 	transform      : [

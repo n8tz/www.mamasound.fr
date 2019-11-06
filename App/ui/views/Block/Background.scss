@@ -32,7 +32,8 @@
       @include use_hvCenteredAbs();
       mask-border: url("../assets/images/previewBorderMask.svg") 35 repeat;
       height: 100%;
-      max-height: 80vh;
+      top:calc(50% - 80px);
+      max-height: calc(100% - 160px);
     }
 
     @media screen and (min-width: $tablet-portrait-breakpoint) {

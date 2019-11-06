@@ -48,17 +48,26 @@ export default class Menu extends React.Component {
 			<Editable id={record._id} etty={"Menu"}/>
 			{
 				record.childs && record.childs.length ?
-				record.childs.map(
-					( child ) =>
-						<Views.Menu.menu
-							//$scope={$scope.parent}
-							id={child.objId}
-							key={child.objId + '_' + "MenuItem"}
-							className={"MenuItem"}/>
-				) : <a href={record.path}
-				       target={record.outLink ? "_blank" : undefined}
-				       onClick={!record.outLink && this.doClick}
-				       className="label">
+				<>
+					<span className={"label"}>
+						{!record.hideTitle ? record.label : ""}
+						{record.previewImage ? <Comps.Image src={record.previewImage}/> : ""}
+					</span>
+					<span className={"subMenu"}>
+					{record.childs.map(
+						( child ) =>
+							<Views.Menu.menu
+								//$scope={$scope.parent.parent}
+								id={child.objId}
+								key={child.objId + '_' + "MenuItem"}
+								className={"MenuItem"}/>
+					)}
+					</span>
+				</> :
+				<a href={record.path}
+				   target={record.outLink ? "_blank" : undefined}
+				   onClick={!record.outLink && this.doClick}
+				   className="label">
 					{!record.hideTitle ? record.label : ""}
 					{record.previewImage ? <Comps.Image src={record.previewImage}/> : ""}
 				</a>

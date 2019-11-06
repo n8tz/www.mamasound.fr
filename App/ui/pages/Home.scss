@@ -45,81 +45,86 @@ header {
   //@include withMask();
   background: rgba(255, 255, 255, 1);
   border-bottom: solid 2px black;
-  display: flex;
   @media screen and (max-width: $tablet-portrait-breakpoint) {
     height: 40px;
     width: 100vw !important;
   }
   //overflow: hidden;
-  > .topMenu {
-    flex-grow: 8;
-    @include use_hvCenteredContent();
-    @media screen and (max-width: $tablet-portrait-breakpoint) {
-      //display: none;
-    }
-    font-size: 16px;
-    //position: static !important;
-    //top: 100%;
-    //left: 25%;
-    text-align: left;
-    white-space: nowrap;
-    //transform: translate3d(0%, -50%, 0);
-    //border: solid 1px rgba(0, 0, 0, 0.5);
-    border-top: none;
-    //background: rgba(255, 255, 255, 0.64);
-    font-family: $mainFontFamily;
-    //height: 20px;
-    margin-top: 2px;
-    padding-top: 2px;
-    padding-left: 2vw;
-    padding-bottom: 2px;
-    //width: 100%;
-    //z-index: -1;
-    padding-right: 15px;
-    //padding-left: 15px;
-    transition: all 500ms;
+  .container {
+    display: flex;
 
-    img {
-      display: none;
-    }
+    > .topMenu {
 
-    //border-bottom-left-radius: 25px 20px;
-    //border-bottom-right-radius: 25px 20px;
-  }
+      flex-grow: 8;
+      @include use_hvCenteredContent();
+      @media screen and (max-width: $tablet-portrait-breakpoint) {
+        //display: none;
+      }
+      font-size: 16px;
+      //position: static !important;
+      //top: 100%;
+      //left: 25%;
+      text-align: left;
+      white-space: nowrap;
+      //transform: translate3d(0%, -50%, 0);
+      //border: solid 1px rgba(0, 0, 0, 0.5);
+      border-top: none;
+      //background: rgba(255, 255, 255, 0.64);
+      font-family: $mainFontFamily;
+      //height: 20px;
+      margin-top: 2px;
+      padding-top: 2px;
+      padding-left: 2vw;
+      padding-bottom: 2px;
+      //width: 100%;
+      //z-index: -1;
+      padding-right: 15px;
+      //padding-left: 15px;
+      transition: all 500ms;
 
-  > .socialMenu {
-    @include use_hvCenteredContent();
-    flex-grow: 2;
-    //position: absolute;
-    white-space: nowrap;
-    margin-top: 8px;
-    text-align: right;
-    padding: 2px;
-    z-index: 2000;
+      img {
+        display: none;
+      }
 
-    img {
-      height: 32px;
-      padding-right: 5px;
+      //border-bottom-left-radius: 25px 20px;
+      //border-bottom-right-radius: 25px 20px;
     }
 
-    //border-bottom-left-radius: 25px 20px;
-    //border-bottom-right-radius: 25px 20px;
-  }
+    > .socialMenu {
+      @include use_hvCenteredContent();
+      flex-grow: 2;
+      //position: absolute;
+      white-space: nowrap;
+      margin-top: 8px;
+      text-align: right;
+      padding: 2px;
+      z-index: 2000;
 
-  .logo {
-    flex-grow: 4;
-    background: url("../assets/images/LogoVF_MAMA_SOUND_w.png") no-repeat;
-    background-size: auto 100%;
-    //background-size: auto 100%;
-    background-position: center center;
-    height: calc(100% - 2px);
-    //filter: invert(100%);
-    display: inline-block;
-    width: 300px;
+      img {
+        height: 32px;
+        padding-right: 5px;
+      }
 
-    @media screen and (max-width: $smartphone-landscape-breakpoint) {
+      //border-bottom-left-radius: 25px 20px;
+      //border-bottom-right-radius: 25px 20px;
+    }
 
-      //max-height: 50px;
+    .logo {
+      flex-grow: 4;
+      max-width: 400px;
+      background: url("../assets/images/LogoVF_MAMA_SOUND_w.png") no-repeat;
+      background-size: auto 100%;
+      //background-size: auto 100%;
+      background-position: center center;
+      height: calc(100% - 2px);
+      //filter: invert(100%);
+      display: inline-block;
+      width: 300px;
+
+      @media screen and (max-width: $smartphone-landscape-breakpoint) {
+
+        //max-height: 50px;
+      }
     }
   }
 }

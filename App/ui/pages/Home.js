@@ -113,21 +113,23 @@ export default class Home extends React.Component {
 				initial={Styles.header}
 			>
 				<header>
-					<TweenRef
-						id={"logo"}
-						initial={Styles.logo}
-					>
-						<a className={"logo"} href={'/'}
-						   style={appTheme && appTheme.data && appTheme.data.logo && {
-							   background    : "url('" + getMediaSrc(appTheme.data.logo) + "') center no-repeat",
-							   backgroundSize: "auto 100%"
-						   }}
-						   onClick={e => (e.stopPropagation(), e.preventDefault(), $actions.history_push('/'))}/>
-					</TweenRef>
-					{appTheme && appTheme.data && appTheme.data.menuTop &&
-					<Views.Menu.menu id={appTheme.data.menuTop.objId} className={"topMenu"}/>}
-					{appTheme && appTheme.data && appTheme.data.menuSocial &&
-					<Views.Menu.menu id={appTheme.data.menuSocial.objId} className={"socialMenu"}/>}
+					<div className={"container"}>
+						<TweenRef
+							id={"logo"}
+							initial={Styles.logo}
+						>
+							<a className={"logo"} href={'/'}
+							   style={appTheme && appTheme.data && appTheme.data.logo && {
+								   background    : "url('" + getMediaSrc(appTheme.data.logo) + "') center no-repeat",
+								   backgroundSize: "auto 100%"
+							   }}
+							   onClick={e => (e.stopPropagation(), e.preventDefault(), $actions.history_push('/'))}/>
+						</TweenRef>
+						{appTheme && appTheme.data && appTheme.data.menuTop &&
+						<Views.Menu.menu id={appTheme.data.menuTop.objId} className={"topMenu"}/>}
+						{appTheme && appTheme.data && appTheme.data.menuSocial &&
+						<Views.Menu.menu id={appTheme.data.menuSocial.objId} className={"socialMenu"}/>}
+					</div>
 				</header>
 			</TweenRef>
 			<TweenRef id={"Highlighter"} initial={Styles.Highlighter}>

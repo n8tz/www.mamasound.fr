@@ -39,6 +39,7 @@ body.fixedHead {
   }
   //touch-action: none;
   position: sticky;
+  min-height: 500px;
   //height: 70vh !important;
   transition: height 750ms 500ms;
   //overflow-x: hidden;
@@ -98,7 +99,7 @@ body.fixedHead {
   //overflow: hidden;
   //tr
   .focusedContent {
-    overflow: hidden;
+    //overflow: hidden;
     @media screen and (max-width: $tablet-landscape-breakpoint) {
       margin: 0 !important;
       padding: 0 !important;
