@@ -44,9 +44,11 @@
 
         > .MenuItem {
           display: block !important;
+          border-bottom: none !important;
 
           &:hover {
             background: rgba(128, 128, 128, 1);
+            color: lightgrey;
           }
         }
       }

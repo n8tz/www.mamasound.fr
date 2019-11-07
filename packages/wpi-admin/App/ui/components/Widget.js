@@ -85,11 +85,16 @@ export default class Widget extends React.Component {
 				onDragStart={( e, d ) => {
 					e.preventDefault();
 					e.stopPropagation();
+					!selected && onSelect(record)
+				}}
+				onClick={( e, d ) => {
+					e.preventDefault();
+					e.stopPropagation();
+					!selected && onSelect(record)
 				}}
 				onDrag={( e, d ) => {
 					e.preventDefault();
 					e.stopPropagation();
-					!selected && onSelect(record)
 					this.setState(
 						{
 							position: { x: d.x, y: d.y }

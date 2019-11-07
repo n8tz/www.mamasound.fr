@@ -22,6 +22,9 @@ export function service( server ) {
 	server.get(
 		'/devTools/clearCache',
 		function ( req, res, next ) {
+			if ( !(req.user && req.user.isAdmin) )
+				return res.json({ error: 'Auth required' }, 500);
+			
 			memoryCache.flushAll();
 			redis.delWildcard(config.PUBLIC_URL + "_*")
 			res.json({ status: 'ok', deleted: config.PUBLIC_URL + "_*" })
@@ -33,6 +36,7 @@ export function service( server ) {
 		function ( req, res, next ) {
 			if ( !(req.user && req.user.isAdmin) )
 				return res.json({ error: 'Auth required' }, 500);
+			
 			res.writeHead(200, {
 				"Content-Disposition": "attachment;filename=dump_" + moment().format("DD-MM-YY_hh-mm") + ".tar.gz",
 			});

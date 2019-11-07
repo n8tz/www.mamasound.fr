@@ -127,6 +127,8 @@ export default class Home extends React.Component {
 						</TweenRef>
 						{appTheme && appTheme.data && appTheme.data.menuTop &&
 						<Views.Menu.menu id={appTheme.data.menuTop.objId} className={"topMenu"}/>}
+						{appTheme && appTheme.data && appTheme.data.menuPro &&
+						<Views.Menu.menu id={appTheme.data.menuPro.objId} className={"proMenu"}/>}
 						{appTheme && appTheme.data && appTheme.data.menuSocial &&
 						<Views.Menu.menu id={appTheme.data.menuSocial.objId} className={"socialMenu"}/>}
 					</div>

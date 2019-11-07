@@ -154,8 +154,8 @@ export default class Media extends React.Component {
 		if ( this.preview.current )
 			this.preview.current.src = "about:blank";
 		this.props.onChange &&
-		this.props.onChange({ target: this.getValue({ value: "about:blank" }) });
-		this.setState({ value: "about:blank" });
+		this.props.onChange({ target: this.getValue({ value: undefined }) });
+		this.setState({ value: undefined });
 	}
 	onEditorSave = ( value ) => {
 		

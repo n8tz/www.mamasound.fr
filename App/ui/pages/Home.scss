@@ -80,7 +80,7 @@ header {
       //z-index: -1;
       padding-right: 15px;
       //padding-left: 15px;
-      transition: all 500ms;
+      //transition: all 500ms;
 
       img {
         display: none;
@@ -90,15 +90,52 @@ header {
       //border-bottom-right-radius: 25px 20px;
     }
 
-    > .socialMenu {
+    > .proMenu {
       @include use_hvCenteredContent();
-      flex-grow: 2;
+      flex-grow: 4;
       //position: absolute;
       white-space: nowrap;
-      margin-top: 8px;
+      margin-top: 2px;
+      padding-top: 2px;
+      padding-left: 2px;
+      padding-bottom: 2px;
+      //width: 100%;
+      //z-index: -1;
+      //padding-right: 15px;
       text-align: right;
-      padding: 2px;
       z-index: 2000;
+
+      * {
+        vertical-align: middle;
+      }
+
+      img {
+        height: 32px;
+        padding-right: 5px;
+      }
+
+      //border-bottom-left-radius: 25px 20px;
+      //border-bottom-right-radius: 25px 20px;
+    }
+
+    > .socialMenu {
+      @include use_hvCenteredContent();
+      flex-grow: 1;
+      //position: absolute;
+      white-space: nowrap;
+      margin-top: 2px;
+      padding-top: 2px;
+      padding-left: 2vw;
+      padding-bottom: 2px;
+      //width: 100%;
+      //z-index: -1;
+      //padding-right: 15px;
+      text-align: right;
+      z-index: 2000;
+
+      * {
+        vertical-align: middle;
+      }
 
       img {
         height: 32px;
