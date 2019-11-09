@@ -10,7 +10,7 @@ import {Comps, Views}                   from 'App/ui';
 import React                            from 'react';
 import {scopeToProps}                   from "react-scopes";
 import {asTweener, TweenAxis, TweenRef} from "react-voodoo";
-import getMediaSrc                      from "../../../packages/wpi-forms/App/utils/getMediaSrc";
+import getMediaSrc                      from "App/utils/getMediaSrc";
 
 const wayPoints =
 	      {
@@ -107,7 +107,7 @@ export default class Home extends React.Component {
 		let { Styles, appState, currentTheme, appTheme, $actions, NavBox, appMenu } = this.props,
 		    useBig                                                                  = appState.selectedFocus &&
 			    (appState.selectedFocus.etty !== "Place");
-		return <div>
+		return <div className={"HomePage"}>
 			<TweenRef
 				id={"header"}
 				initial={Styles.header}
@@ -143,9 +143,9 @@ export default class Home extends React.Component {
 							                         {/*<Views.Menu.menu id={"rootmiddlemenu"}/>*/}
 							                         {/*</TweenRef>*/}
 							
-							                         {currentTheme !== "phone" &&
-							                         <Comps.SearchBar {...Styles.SearchBarProps}/>
-							                         }
+							                         {/*{currentTheme !== "phone" &&*/}
+							                         {/*<Comps.SearchBar {...Styles.SearchBarProps}/>*/}
+							                         {/*}*/}
 							                         <TweenRef id={"EventMap"} initial={Styles.EventMap}>
 								                         <Views.Events.EventMap
 									                         day={appState.curVisibleDay || appState.curDay}

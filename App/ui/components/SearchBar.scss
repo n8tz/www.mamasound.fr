@@ -20,8 +20,6 @@
 }
 
 .SearchBar {
-  background: $secondaryBackColor !important;
-  color: $secondaryTextColor !important;
 
   transform: translateZ(0);
   z-index: 100000;
@@ -95,6 +93,7 @@
     height: 100%;
     display: flex;
 
+    @include use_hvCenteredContent();
     input {
       background: none;
       color: black;
@@ -171,8 +170,8 @@
     }
 
     .group {
-      //@include use_hvCenteredContent();
-      width: 40%;
+      @include use_hvCenteredContent();
+      //width: 40%;
       position: relative;
       display: inline-block;
       padding-left: 10px;

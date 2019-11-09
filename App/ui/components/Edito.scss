@@ -7,104 +7,22 @@
  */
 
 .Edito {
-  touch-action: none;
-  position: relative;
+  .searchBox {
+    @include use_hvCenteredAbs();
+    width: 90%;
+    top: calc(50% - 75px);
+    min-width: 600px;
+    max-width: 1000px;
+    background: rgba(255, 255, 255, 0.53);
+    border-radius: 30px !important;
+    height: 70px;
 
-  perspective: 200px;
-  height: 100%;
-  z-index: 50;
-  min-height: 40px;
-  left: 0%;
-  text-align: left;
-  @media screen and (max-width: $tablet-portrait-breakpoint) {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 95vw !important;
-  }
-  @media screen and (max-width: $tablet-portrait-breakpoint) {
-    font-size: 12px;
-  }
-  //background: #1f8de2;
-  > .title {
-    font-size: 2em;
-    font-weight: lighter;
-    font-family: EmPower42;
-
-    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 5px #fff, 0 0 5px rgba(255, 255, 255, 0.4);
-
-  }
-
-  .day {
-    margin-left: 1em;
-    padding-right: 1em;
-    .date {
-      font-size: 1.5em;
-      font-weight: lighter;
-      font-family: EmPower42;
-      color: #2e2e2e;
-      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 5px #fff, 0 0 5px rgba(255, 255, 255, 0.4);
-
-      &::first-letter {
-        text-transform: uppercase;
-      }
-    }
-  }
-
-  .Event {
-    margin-left: 2em;
-    background: rgba(231, 240, 249, 0.36);
-    clear: both;
-    overflow: hidden;
     @include use_hvCenteredContent();
-    position: relative;
-    text-align: left;
 
-
-    > * {
-      display: inline-block;
-      margin: 5px;
-    }
-
-    .title {
-      //margin-left: 1em;
-      font-size: 1.3em;
-      font-weight: lighter;
-      font-family: EmPower42;
-
-      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 5px #fff, 0 0 5px rgba(255, 255, 255, 0.4);
-      max-width: 45vw;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .price {
-      display: none;
-    }
-
-    .start {
-      display: none;
-      font-size: 2em;
-      font-weight: bold;
-
-      &::before {
-        content: 'à ';
-        text-transform: uppercase;
-
-      }
-    }
-
-    .icon {
-      //float: right;
-      display: inline-block;
-      width: auto;
-
-      img {
-        position: absolute;
-        right: 0;
-        top: 0;
-        height: 100%;
-      }
+    .SearchBar {
+      height: 40px;
+      width: calc( 100% - 50px );
+      //background: none;
     }
   }
 }

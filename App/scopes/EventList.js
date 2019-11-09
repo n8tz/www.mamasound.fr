@@ -259,7 +259,7 @@ export default {
 					if ( place ) {
 						if ( !place.quartier ) {
 							ll             = place.address && place.address.geoPoint;
-							area           = ll && geoQuery(ll)
+							//area           = ll && geoQuery(ll)
 							place.quartier = area && area.LIBSQUART || "Périphérie";
 						}
 						if ( !seen[place.quartier] )

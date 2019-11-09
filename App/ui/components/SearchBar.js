@@ -120,12 +120,7 @@ export default class SearchBar extends React.Component {
 		                     tweenAxis={axis.root}
 		                     onClick={onClick}
 		                     initial={boxStyle}>
-			<TweenRef.div initial={titleStyle} className={"title"}
-			              tweenAxis={axis.title}>{this.renderTitle()}</TweenRef.div>
-			<TweenRef.div initial={iconStyle} className={"icon"}
-			              tweenAxis={axis.icon}>{this.renderIcon()}</TweenRef.div>
-			<TweenRef.div initial={contentStyle} className={"content"}
-			              tweenAxis={axis.content}>{this.renderContent()}</TweenRef.div>
+			{this.renderTitle()}
 		</TweenRef.div>;
 	}
 	
