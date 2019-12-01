@@ -25,6 +25,7 @@
   z-index: 100000;
   //top: -40px !important;
   //height: 40px !important;
+  background: rgba(255, 255, 255, 0.52);
 
   .label {
     padding-right: 1.5em;
@@ -94,6 +95,7 @@
     display: flex;
 
     @include use_hvCenteredContent();
+
     input {
       background: none;
       color: black;

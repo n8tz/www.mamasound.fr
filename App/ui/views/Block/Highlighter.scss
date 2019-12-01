@@ -19,18 +19,6 @@ body.fixedHead {
 
 }
 
-.bigHead.Highlighter {
-
-  height: calc(100vh - 20px) !important;
-  top: calc(250px - 100vh) !important;
-  //top: calc(-100vh - 50px) !important;
-  transition: height 500ms 750ms;
-  //transform: translateY(-100%) !important;
-  @media screen and (max-width: $tablet-portrait-breakpoint) {
-    height: calc(100vh - 15px) !important;
-    top: calc(200px - 100vh) !important;
-  }
-}
 
 .Highlighter {
 
@@ -40,7 +28,7 @@ body.fixedHead {
   //touch-action: none;
   position: sticky;
   //height: 70vh !important;
-  transition: height 750ms 500ms;
+  transition: height 750ms;
   //overflow-x: hidden;
   //overflow-y: visible;
   perspective: 200px;
@@ -224,9 +212,34 @@ body.fixedHead {
       //overflow: hidden;
       cursor: pointer;
       border: none;
+      //transform: scale(1.5) translateY(-30px) !important;
+      transition: transform 500ms;
     }
 
   }
 
 
+}
+
+.bigHead .Highlighter {
+
+  height: calc(100vh - 20px) !important;
+  top: calc(250px - 100vh) !important;
+  //top: calc(-100vh - 50px) !important;
+  //transition: height 500ms; // 750ms;
+  //transform: translateY(-100%) !important;
+  @media screen and (max-width: $tablet-portrait-breakpoint) {
+    height: calc(100vh - 15px) !important;
+    top: calc(200px - 100vh) !important;
+  }
+
+  >.slider {
+
+    transform: perspective(200px) scale(.75) !important;
+
+    .FocusedItems {
+
+    }
+
+  }
 }

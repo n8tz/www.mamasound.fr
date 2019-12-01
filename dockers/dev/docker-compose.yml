@@ -74,8 +74,8 @@ services:
       - ../../dump:/home/app/dump
     expose:
       - "8080"
-    ports:
-      - "${APP_DOCKER_DEBUG_PORT:-9229}:9229"
+#    ports:
+#      - "${APP_DOCKER_DEBUG_PORT:-9229}:9229"
     #      - "9090:9090"
     networks:
       - app_network

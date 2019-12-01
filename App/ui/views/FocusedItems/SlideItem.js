@@ -34,7 +34,7 @@ export default class SlideItem extends React.Component {
 					   onDragStart={e => e.preventDefault()}
 					   onClick={e => e.preventDefault()}
 					>
-						<Comps.Image src={record.sliderImage} w={250}/>
+						<Comps.Image src={record.sliderImage} h={500}/>
 					</a>
 				}
 				{/*<div className="title">*/}

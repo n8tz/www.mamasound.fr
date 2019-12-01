@@ -507,4 +507,21 @@ body.onTop .bigSlide_article {
     //touch-action: auto;
 
   }
+
+
+  .title {
+    display: none;
+  }
+
+  .resume {
+    display: none;
+  }
+}
+
+
+.bigHead .bigSlide_article {
+
+  .resume, .title {
+    display: block;
+  }
 }

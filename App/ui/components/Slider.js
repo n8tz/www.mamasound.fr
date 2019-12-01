@@ -72,7 +72,7 @@ export default class Slider extends React.Component {
 	
 	componentDidUpdate( prevProps, prevState, snapshot ) {
 		let { autoScroll, scrollDir, tweener, onChange, index: pIndex, autoHeight } = this.props,
-		    { index = this.props.defaultIndex, step, dec }                          = this.state,
+		    { index = this.props.defaultIndex, step, dec, nbItems }                 = this.state,
 		    changed;
 		
 		if ( prevState.dec !== dec ) {
@@ -91,7 +91,7 @@ export default class Slider extends React.Component {
 			}
 		}
 		if ( prevState.index !== index ) {
-			onChange && onChange(index);
+			onChange && onChange(index % nbItems, this);
 			changed = index + 1;
 			if ( this._wasUserSnap ) {
 				this._wasUserSnap = false;

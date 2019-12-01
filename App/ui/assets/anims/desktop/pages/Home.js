@@ -146,7 +146,7 @@ export const EventMap          = {
 	zIndex         : 100,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
-	top            : [0],
+	top            : [40],
 };
 export const ArticleList       = {
 	position       : "absolute",
@@ -157,7 +157,7 @@ export const ArticleList       = {
 	zIndex         : 100,
 	//overflow       : 'hidden',
 	transformOrigin: "center top",
-	top            : [0],
+	top            : [40],
 };
 export const PageBlock         = {
 	
@@ -263,6 +263,33 @@ export const nativeScrollAxis  = [
 	},
 	{
 		target  : "Highlighter",
+		from    : 50,
+		duration: 1,
+		apply   : {
+			//position: "fixed"
+		}
+	},
+];
+export const XAxis             = [
+	{
+		target  : "articleMenu",
+		from    : 0,
+		duration: 40,
+		apply   : {
+			//height: ["-50vh", sliderHeight],
+			//top   : ["-50vh", sliderHeight]
+		}
+	},
+	{
+		target  : "eventMenu",
+		from    : 50,
+		duration: 1,
+		apply   : {
+			//position: "fixed"
+		}
+	},
+	{
+		target  : "mapMenu",
 		from    : 50,
 		duration: 1,
 		apply   : {

@@ -344,7 +344,7 @@ export default {
 					
 					
 					if ( selectedFocus && selectedFocus.etty === "Place" ) {
-						doKeep    = doKeep && (selectedFocus.id === place._id || selectedFocus.id === place._alias);
+						doKeep = doKeep && (selectedFocus.id === place._id || selectedFocus.id === place._alias);
 					}
 					
 					

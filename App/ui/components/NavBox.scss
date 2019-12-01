@@ -19,7 +19,7 @@ body {
   }
 
   .bigHead .NavBox {
-    top: calc(100vh - 0px) !important;
+    top: calc(100% - 0px) !important;
     //margin-top: -40px !important;
     //margin-top: 20px !important;
     @media screen and (max-width: $tablet-portrait-breakpoint) {
@@ -45,84 +45,81 @@ body {
   .eventTypeNav {
     position: absolute;
     display: flex;
-
+    margin-bottom: 5px;
     transform: translateZ(0);
+    border-bottom: solid 3px $mainTextColor;
 
-    .StretchBox {
-      position: relative;
-      //margin-left: -5px;
-      flex-grow: 1;
+    .menuTabGroup {
 
-      transition: height 500ms, margin-top 500ms;
-      font-family: "Roboto", sans-serif;
-      font-weight: bold;
-      cursor: pointer;
+      display: flex;
+      font-size: 20px;
 
-      &:first-of-type {
-        flex-grow: 1.7;
-      }
 
-      &.selected, &:hover {
-        //height: 42px !important;
-        //margin-top: -2px;
+      .menuTab {
+        display: table-cell;
+        text-decoration: none;
+        text-align: center;
+        overflow: hidden;
+        font-family: $mainFontFamily;
+        text-overflow: ellipsis;
+        padding-left: 1px;
+        padding-right: 1px;
+        padding-top: 12px;
+        border-radius: 10px 10px 0 0;
+        color: black;
 
-        .title {
-          background: $focusedColor !important;
+        flex-grow: 1;
+        width: 0px;
+        //flex-shrink: 1;
+        &:first-of-type {
+          width: 40%;
+          max-width: 150px;
+          //flex-grow: 3;
+        }
+        &:first-of-type(2) {
+          width: 30%;
+          //flex-grow: 3;
+        }
 
-          a {
-            color: $focusedTextColor;
-          }
+
+        &.selected {
+          font-weight: bold;
         }
       }
 
+      &.selected {
+        font-size: 28px;
 
-      > .icon {
-
-        @include use_hvCenteredContent();
-        height: 100%;
-        z-index: 1000;
-
-        img {
-          padding: 5px;
-          width: 3em;
-          height: auto !important;
-        }
-
-        //@media screen and (max-width: $tablet-portrait-breakpoint) {
-        display: none;
-        //}
-      }
-
-      > .content {
-
-        background: $secondaryBackColor;
-      }
-
-      > .title {
-        @include use_hvCenteredContent();
-        background: $mainBackColor;
-        color: $mainTextColor;
-        padding-top: 2px;
-        padding-left: 2px;
-        //color:white;
-        font-family: "Roboto", sans-serif;
-        font-weight: bold;
-        transition: background 500ms;
-        font-size: 1.4em;
-
-        a {
-          text-decoration: none;
-          color: $mainTextColor;
-        }
-
-        @media screen and (max-width: $tablet-portrait-breakpoint) {
+        .menuTab {
+          flex-grow: 1;
+          width: auto;
+          max-width: initial;
           padding-top: 2px;
-          padding-left: 0px;
-          font-size: 16px;
-          //border-bottom: solid 1px white;
         }
       }
 
+    }
+
+    .articleMenu {
+      position: absolute;
+      width: $collRightWidth;
+      left: 0px;
+      bottom: 0;
+      height: 40px;
+    }
+
+    .eventMenu {
+      position: absolute;
+      width: calc(100% - #{$collRightWidth} - #{$collLeftWidth} - 20px);
+      left: calc(5px + #{$collRightWidth});
+      height: 40px;
+    }
+
+    .mapMenu {
+      position: absolute;
+      width: calc(#{$collLeftWidth});
+      left: calc(100% - 5px - #{$collLeftWidth});
+      height: 40px;
     }
   }
 

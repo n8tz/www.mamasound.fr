@@ -5,7 +5,14 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import {collRightWidth, footerMiniHeight, mapHeight, collLeftWidth} from "../../../vars";
+import {
+	collRightWidth,
+	footerMiniHeight,
+	mapHeight,
+	collLeftWidth,
+	headerMiniHeight,
+	sliderHeight
+} from "../../../vars";
 
 let startPos      = 50,
     openDuration  = 50,
@@ -13,19 +20,31 @@ let startPos      = 50,
     maxHeight     = "150px",
     minHeight     = "40px";
 
-export const style          = {
+export const style         = {
+	position       : "absolute",
+	width          : ["100%"],
+	left           : "0px",
+	bottom         : -60,
+	height         : "40px",
+	zIndex         : 700,
+	backgroundColor: "white",
+	transform      : {
+		translateZ: "0"
+	}
+};
+export const botTopOverlay = {
 	position : "absolute",
-	width    : ["100%"],
-	left     : "0px",
-	bottom   : -60,
-	height   : "40px",
+	//width    : ["100%"],
+	left     : [collRightWidth, 10],
+	right    : [collLeftWidth, 20],
+	//bottom   : -60,
+	//height   : "40px",
 	zIndex   : 700,
-	//backgroundColor: "red",
 	transform: {
 		translateZ: "0"
 	}
 };
-export const Axis           = [
+export const Axis          = [
 	{
 		from    : 50,
 		duration: 50,
@@ -41,19 +60,22 @@ export const Axis           = [
 		}
 	},
 ];
-export const SearchBarAxis  = [];
-export const typesNav       = {
+export const SearchBarAxis = [];
+export const typesNav      = {
 	position : "absolute",
-	width    : ["100%", "-" + collRightWidth, -30, "-" + collLeftWidth],
+	width    : ["100%", -20],
 	//bottom   : "0px",
-	left     : ["10px", collLeftWidth],
+	left     : ["10px"],
+	//right     : ["10px"],
 	bottom   : 0,
 	height   : "40px",
 	transform: {
 		//translateY: "85%"
 	}
 };
-export const StretchBox     = {
+
+
+export const StretchBox = {
 	width    : "20%",
 	boxStyle : {
 		position            : "relative",

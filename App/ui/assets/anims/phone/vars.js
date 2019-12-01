@@ -5,7 +5,7 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-export const sliderHeight     = 100;
+export const sliderHeight     = 150;
 export const headerMiniHeight = 50;
 export const eventsMiniHeight = 200;
 export const footerMiniHeight = 27;

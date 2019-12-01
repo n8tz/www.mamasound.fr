@@ -102,6 +102,24 @@ export default class Highlighter extends React.Component {
 			//	                                     behavior: 'smooth'
 			//                                     })
 		};
+	selectFocusAuto     =
+		( i, slider ) => {
+			let {
+				    MountedItems: { items = [] } = {},
+				    $actions, $scope
+			    }     = this.props,
+			    state = this.state;
+			$actions.selectFocus(items[i]._alias || items[i]._id, items[i]._cls);
+			$scope.then(tm => {
+				slider.goTo(i);
+			})
+			
+			//document.body.parentElement.scrollTo({
+			//	                                     top     : 0,
+			//	duration
+			//	                                     behavior: 'smooth'
+			//                                     })
+		};
 	pickNextFocused = rec => {
 		let {
 			    MountedItems: { items = [] } = {}, appState
@@ -116,12 +134,10 @@ export default class Highlighter extends React.Component {
 			    Styles, Selected, children, appState,
 			    $actions, navBox, tweener, style
 		    }      = this.props,
-		    state  = this.state,
-		    useBig = appState.selectedFocus &&
-			    (appState.selectedFocus.etty !== "Place");
+		    state  = this.state;
 		return (
 			<div style={style}
-			     className={"Highlighter " + (useBig ? "bigHead" : "")}>
+			     className={"Highlighter "}>
 				{navBox}
 				<div className={"headBackground"}>
 					<div className={"maskContent"}>
@@ -153,7 +169,7 @@ export default class Highlighter extends React.Component {
 								{/*<Views.Events.BestEvents/>*/}
 								<Comps.ViewSwitcher target={Selected && Selected.Focused}
 								                    {...Styles.Focused}
-								                    DefaultView={Comps.Edito}
+								                    DefaultView={'div'}
 								                    DefaultPreview={'div'}
 								                    View={Views.FocusedItems.page}
 								                    ViewPreview={Views.FocusedItems.preview}
@@ -179,6 +195,7 @@ export default class Highlighter extends React.Component {
 								infinite={true}
 								defaultIndex={appState.selectedFocus && items.findIndex(rec => (appState.selectedFocus.id === rec._id || appState.selectedFocus.id === rec._alias))}
 								autoScroll={14 * 1000}
+								//onChange={this.selectFocusAuto}
 								onClick={this.selectFocus}
 							>
 								{

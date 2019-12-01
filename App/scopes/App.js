@@ -46,6 +46,7 @@ export default {
 		currentSearch     : undefined,
 		currentArea       : undefined,
 		viewType          : 0,
+		selectedTabGroup  : "events",
 		viewTypesList     : ["", "Concerts", "Expositions", "Theatres"],
 		viewTypeList      : ["Evenement", "Concert", "Exposition", "Theatre"],
 		dayCountByViewType: [6, 6, 1, 1],
@@ -171,9 +172,9 @@ export default {
 			if ( selectedFocus ) {
 				this.$actions.history_set("/" + cls + '/' + selectedFocus);
 				!__IS_SERVER__ && document.body.scrollTo({
-					                                                    behavior: 'smooth',
-					                                                    top     : 0
-				                                                    })
+					                                         behavior: 'smooth',
+					                                         top     : 0
+				                                         })
 			}
 			return {
 				//currentPageFocus,

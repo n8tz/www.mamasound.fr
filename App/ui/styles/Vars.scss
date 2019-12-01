@@ -11,15 +11,17 @@
 $box_names: 'xs' 'ss' 's' 'm' 'l' 'sl' 'xl';
 $box_sizes: 32px 64px 128px 192px 256px 512px 1024px;
 
-
-$focusSlidePadSize: 10px;
-
-
 // breakpoints
 $tablet-landscape-breakpoint: 1200px;
 $tablet-portrait-breakpoint: 980px;
 $smartphone-landscape-breakpoint: 720px;
 $smartphone-portrait-breakpoint: 480px;
+
+$focusSlidePadSize: 10px;
+$collRightWidth:24%;
+$collLeftWidth:24%;
+
+
 
 
 // colors

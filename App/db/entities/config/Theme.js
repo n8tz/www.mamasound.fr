@@ -23,9 +23,9 @@ export default {
 	aliasField: "label",
 	labelField: "label",
 	schema    : {
-		label         : [validate.mandatory, validate.noHtml],
-		mainBackground: [validate.mandatory],
-		resume        : [validate.noJs],
+		label : [validate.mandatory, validate.noHtml],
+		//mainBackground: [validate.mandatory],
+		resume: [validate.noJs],
 		//     author     : [validate.mandatory]
 	},
 	fields    : {

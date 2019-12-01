@@ -108,7 +108,7 @@ export default (
 				<div className="background">
 					{(record.backgroundColor) &&
 					<div className={"backColor"} style={{ backgroundColor: record.backgroundColor || 'transparent' }}/>}
-					{record.backgroundMode !== "big_wghost" && <>
+					{record.backgroundMode === "big_wghost" && <>
 						<Comps.Image src={record.background} className={"leftGhost"}/>
 						<Comps.Image src={record.background} className={"rightGhost"}/>
 					</>}
@@ -213,6 +213,15 @@ export default (
 					<Comps.Image src={previewImage} w={500}/>
 				</div>
 			</TweenRef>
+		}
+		{
+			record.sliderImage &&
+			<div className="sliderImage">
+				
+				{/*<Comps.Image src={previewImage} className={"leftGhost"}/>*/}
+				{/*<Comps.Image src={previewImage} className={"rightGhost"}/>*/}
+				<Comps.Image src={record.sliderImage} w={800}/>
+			</div>
 		}
 	</div>
 }

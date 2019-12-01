@@ -104,10 +104,12 @@ export default class Home extends React.Component {
 	//	return [this, "EventNav"];
 	//}
 	render() {
-		let { Styles, appState, currentTheme, appTheme, $actions, NavBox, appMenu } = this.props,
-		    useBig                                                                  = appState.selectedFocus &&
-			    (appState.selectedFocus.etty !== "Place");
-		return <div className={"HomePage"}>
+		let {
+			    Styles, appState, currentTheme,
+			    appTheme, $actions, NavBox, appMenu
+		    }      = this.props,
+		    useBig = appState.selectedFocus && (appState.selectedFocus.etty !== "Place");
+		return <div className={"HomePage " + (useBig ? "bigHead" : "")}>
 			<TweenRef
 				id={"header"}
 				initial={Styles.header}
@@ -131,6 +133,10 @@ export default class Home extends React.Component {
 						<Views.Menu.menu id={appTheme.data.menuPro.objId} className={"proMenu"}/>}
 						{appTheme && appTheme.data && appTheme.data.menuSocial &&
 						<Views.Menu.menu id={appTheme.data.menuSocial.objId} className={"socialMenu"}/>}
+						{/*{*/}
+						{/*	currentTheme !== "phone" &&*/}
+						{/*	<Comps.SearchBar {...Styles.SearchBarProps}/>*/}
+						{/*}*/}
 					</div>
 				</header>
 			</TweenRef>
@@ -143,20 +149,22 @@ export default class Home extends React.Component {
 							                         {/*<Views.Menu.menu id={"rootmiddlemenu"}/>*/}
 							                         {/*</TweenRef>*/}
 							
-							                         {/*{currentTheme !== "phone" &&*/}
-							                         {/*<Comps.SearchBar {...Styles.SearchBarProps}/>*/}
-							                         {/*}*/}
-							                         <TweenRef id={"EventMap"} initial={Styles.EventMap}>
-								                         <Views.Events.EventMap
-									                         day={appState.curVisibleDay || appState.curDay}
-									                         viewType={appState.viewType}/>
-							                         </TweenRef>
-							                         {currentTheme.startsWith("desktop") &&
-							                         <TweenRef id={"ArticleList"} initial={Styles.ArticleList}>
-								                         <Views.Articles.ArticleList
-									                         day={appState.curVisibleDay || appState.curDay}
-									                         viewType={appState.viewType}/>
-							                         </TweenRef>
+							
+							                         {
+								                         currentTheme !== "phone" &&
+								                         <TweenRef id={"EventMap"} initial={Styles.EventMap}>
+									                         <Views.Events.EventMap
+										                         day={appState.curVisibleDay || appState.curDay}
+										                         viewType={appState.viewType}/>
+								                         </TweenRef>
+							                         }
+							                         {
+								                         currentTheme.startsWith("desktop") &&
+								                         <TweenRef id={"ArticleList"} initial={Styles.ArticleList}>
+									                         <Views.Articles.ArticleList
+										                         day={appState.curVisibleDay || appState.curDay}
+										                         viewType={appState.viewType}/>
+								                         </TweenRef>
 							                         }
 						                         </Comps.NavBox>
 					                         </TweenRef>
