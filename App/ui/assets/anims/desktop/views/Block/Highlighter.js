@@ -19,7 +19,7 @@ export const background = {
 };
 export const slider     = {
 	position : "absolute",
-	bottom   : "20px",
+	bottom   : "0px",
 	left     : "0px",
 	width    : "100%",
 	height   : [sliderHeight, -10],

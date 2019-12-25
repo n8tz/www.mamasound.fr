@@ -154,7 +154,7 @@ export default class eventItem extends React.Component {
 			{/*</div>*/}
 			{/*}*/}
 			
-			<a className="title" href={url} onClick={e => (e.preventDefault())}>
+			<a className="title" href={url} onClick={e => (e.preventDefault())} rel="nofollow">
 				{record.title}
 			</a>
 			

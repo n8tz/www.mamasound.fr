@@ -23,11 +23,19 @@ const fs          = require('fs'),
 export const name          = "Rendering service";
 export const priorityLevel = 100000;
 
+
 export function service( server ) {
 	let publicFiles = express.static(process.cwd() + '/dist/www'),
 	    adminFiles  = express.static(process.cwd() + '/dist/admin');
 	
 	redis.delWildcard(config.PUBLIC_URL + "_*")
+	
+	const cssAdmin  = fs.existsSync(process.cwd() + "/dist/admin/App.css")
+	                  ? fs.readFileSync(process.cwd() + "/dist/admin/App.css")
+	                  : "/* ... */",
+	      cssPublic = fs.existsSync(process.cwd() + "/dist/www/App.css")
+	                  ? fs.readFileSync(process.cwd() + "/dist/www/App.css")
+	                  : "/* ... */";
 	
 	server.use(device.capture());
 	server.use(
@@ -57,8 +65,9 @@ export function service( server ) {
 			if ( /^\/tout\-montpellier/ig.test(req.url) )
 				return next()
 			let key = config.PUBLIC_URL + "_page_" + req.url + "_" + req.device.type + "_" + (req.user && req.user.login);
-			
-			console.warn("get",key)
+			if (req.device.type==="bot")
+				return res.send(404, "404");;
+			console.warn("get", key)
 			redis.get(
 				key,
 				( err, html ) => {
@@ -67,20 +76,18 @@ export function service( server ) {
 						res.send(200, html);
 						return;
 					}
-					let cssPath = (req.user && req.user.isAdmin)
-					              ? process.cwd() + "/dist/admin/App.css"
-					              : process.cwd() + "/dist/www/App.css";
+					let cssContent = (req.user && req.user.isAdmin)
+					                 ? cssAdmin
+					                 : cssPublic;
 					App.renderSSR(
 						{
 							device  : req.device.type,
 							location: req.url,
-							css     : fs.existsSync(cssPath)
-							          ? fs.readFileSync(cssPath)
-							          : "/* ... */",
+							css     : cssContent,
 							//state   : currentState,
 						},
 						( err, html, nstate ) => {
-							console.warn("set",key)
+							console.warn("set", key)
 							redis.set(key, html, 'EX', 1000 * 60 * 60, console.log);
 							res.send(200, html);
 						}

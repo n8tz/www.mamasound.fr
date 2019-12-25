@@ -108,7 +108,6 @@ const ctrl = {
 			    autoDestroy: false
 		    }), App = withScope(cScope)(require('./App').default);
 		
-		//debugger;
 		if ( cfg.state ) {
 			cScope.restore(cfg.state, { alias: "App" });
 		}
@@ -124,7 +123,7 @@ const ctrl = {
 		cScope.onceStableTree(state => {
 			let nstate = cScope.serialize({ alias: "App" });
 			cScope.destroy()
-			if ( !stable && _attempts < 4 ) {
+			if ( !stable && _attempts < 3 ) {
 				cfg.state = nstate;
 				ctrl.renderSSR(cfg, cb, ++_attempts);
 			}

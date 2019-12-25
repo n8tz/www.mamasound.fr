@@ -128,6 +128,11 @@ export default class SearchBar extends React.Component {
 		const { TagManager, appState, $actions, style } = this.props;
 		const { showPrice, showArea, showStyle }        = this.state;
 		return <div className={"SearchBarForm"}>
+			<Comps.Calendar startDate={appState.curDay}
+			                ref={this.calendar}
+			                calClassName={"search"}
+			                endDate={moment(appState.curDay).add(appState.dayCountByViewType[0], 'day')}
+			                onChange={this.handleDateChange}/>
 			<div className="group">
 				<input
 					type={"text"}
@@ -142,11 +147,6 @@ export default class SearchBar extends React.Component {
 				<div className={"label"} onClick={this.togglePrice}>Prix</div>
 				<div className={"label"} onClick={this.toggleArea}>Quartiers</div>
 				<div className={"label"} onClick={this.toggleStyle}>Styles</div>
-				<Comps.Calendar startDate={appState.curDay}
-				                ref={this.calendar}
-				                calClassName={"search"}
-				                endDate={moment(appState.curDay).add(appState.dayCountByViewType[0], 'day')}
-				                onChange={this.handleDateChange}/>
 				{showPrice &&
 				<div hovering={showPrice} className={"priceTags"} onClickOut={this.togglePrice}>
 					{/*<span*/}
@@ -228,10 +228,6 @@ export default class SearchBar extends React.Component {
 		</div>;
 	}
 	
-	renderIcon() {
-		//return <img src={require('App/ui/assets/images/detectCat.png')}/>;
-	}
-	
 	toggleStyle = () => {
 		this.setState({ showStyle: !this.state.showStyle, showArea: false, showPrice: false })
 	}
@@ -243,28 +239,4 @@ export default class SearchBar extends React.Component {
 	}
 	calendar    = React.createRef();
 	
-	renderContent() {
-		const { TagManager, appState, Quartiers, $actions } = this.props;
-		return <>
-			
-			{/*<div className={"selectedTags"}>*/}
-			{/*	{*/}
-			{/*		TagManager && TagManager.selected.map(*/}
-			{/*			tag =>*/}
-			{/*				<span*/}
-			{/*					key={tag.label}*/}
-			{/*					className={"tag"}*/}
-			{/*					onClick={( e ) => $actions.unSelectTag(tag.label)}*/}
-			{/*					style={{*/}
-			{/*						fontSize: 14*/}
-			{/*					}}*/}
-			{/*				>*/}
-			{/*					/!*<img alt={tag.title} src={tag.style.icon} className={"tagIcon"}/>*!/*/}
-			{/*					{tag.label}*/}
-			{/*					({tag.count})*/}
-			{/*				</span>)*/}
-			{/*	}*/}
-			{/*</div>*/}
-		</>
-	}
 };

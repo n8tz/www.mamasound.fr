@@ -155,7 +155,7 @@ class RecordRefRenderer extends React.Component {
 				          .map(
 					          ( field ) => (
 						          TableGridSchema[field] = {
-							          ...field,
+							          //...field,
 							          renderer: ( { value, data } ) => {
 								          //debugger
 								          return <div>

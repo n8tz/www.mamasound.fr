@@ -39,16 +39,12 @@ export default class NavBox extends React.Component {
 								{
 									[
 										{
-											title: "Articles",
+											title: "Les articles",
 											//icon : require("App/ui/assets/images/jip/btn-event-on.png")
 										},
 										{
 											title: "MamaEvents",
 											//icon : require("App/ui/assets/images/jip/concert-gif.gif")
-										},
-										{
-											title: "Culture",
-											//icon : require("App/ui/assets/images/jip/theatre-gif.gif")
 										},
 									].map(
 										( { title, icon }, i ) => <a href={"/" + appState.viewTypesList[i]}
@@ -101,7 +97,7 @@ export default class NavBox extends React.Component {
 								{
 									[
 										{
-											title: "Carte",
+											title: "Autour de toi",
 											//icon : require("App/ui/assets/images/jip/btn-event-on.png")
 										},
 										{
@@ -128,6 +124,7 @@ export default class NavBox extends React.Component {
 					</TweenRef>
 					
 					<TweenRef.div className={"cDayOverlay"} style={Styles.botTopOverlay}>
+						<Comps.SearchBar/>
 						{(moment(day).isSame(moment(), 'week'))
 						&&
 						moment(day).calendar(moment(), {

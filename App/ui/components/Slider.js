@@ -139,7 +139,7 @@ export default class Slider extends React.Component {
 		    { index = defaultIndex, sliderHeight } = state,
 		    allItems                               = !infinite
 		                                             ? [...children]
-		                                             : [...children, ...children, ...children].map(( elem, i ) => React.cloneElement(elem, { key: i })),
+		                                             : [...children, ...children, ...children, ...children, ...children, ...children].map(( elem, i ) => React.cloneElement(elem, { key: i })),
 		    nbGhostItems                           = allItems.length,
 		    step                                   = 100 * overlaps,
 		    dec                                    = infinite ? children.length * step : 0,

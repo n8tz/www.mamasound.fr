@@ -48,7 +48,7 @@ export const typesNav      = {
 	//bottom   : "0px",
 	left     : "0px",
 	top      : 0,
-	height   : "30px",
+	height   : "40px",
 	transform: {
 		//translateY: "85%"
 	}
