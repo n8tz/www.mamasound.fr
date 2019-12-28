@@ -51,7 +51,7 @@ export default class MongoRecords extends Store {
 			snapshot, immediate);
 		
 		this.$scope.restoreRefPath(this._dataProviderPath);
-		updateWatchers(this, this._dataProvider, this.state, this.nextState)
+		updateWatchers(this, this._dataProvider, this.nextState, this.nextState)
 	}
 	
 	shouldApply( changes ) {

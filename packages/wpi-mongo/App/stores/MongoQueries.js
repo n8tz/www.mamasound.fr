@@ -45,7 +45,7 @@ export default class MongoQueries extends Store {
 		
 		super.restore(snapshot, immediate);
 		
-		updateWatchers(this, this._dataProvider, this.state, this.state, true)
+		updateWatchers(this, this._dataProvider, this.nextState, this.nextState, true)
 	}
 	
 	shouldApply( changes ) {

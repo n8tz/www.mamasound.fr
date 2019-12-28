@@ -24,10 +24,6 @@ export default {
 			data: {
 				id  : "Theme.ghTOlod-",
 				etty: "Theme",
-				//default: {
-				//	_id : "_Theme",
-				//	_cls: "Theme",
-				//}
 			}
 		}
 	)
@@ -87,7 +83,9 @@ export default {
 			else if ( path.length === 3 ) {
 				let matches = url.match(/^\/([^\/]+)\/([^\/]+)\/([^\/]+)$/);
 				//debugger
-				viewType    = this.state.viewTypeList.indexOf(path[0]);
+				if ( !matches )
+					return;
+				viewType = this.state.viewTypeList.indexOf(path[0]);
 				setTimeout(tm => this.setState({
 					                               selectedEventId: matches[3],
 					                               selectedEventDT: moment(matches[2], "DD-MM-YY").startOf("day").valueOf(),

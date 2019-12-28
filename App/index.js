@@ -27,7 +27,8 @@ const ctrl = {
 		//return this.renderSSRTo(...arguments)
 		let cScope      = new Scope(AppScope, {
 			    id         : "App",
-			    autoDestroy: true
+			    autoDestroy: true,
+			    snapshot   : state
 		    }),
 		    App         = withScope(cScope)(require('./App').default);
 		window.contexts = Scope.scopes;
@@ -35,8 +36,8 @@ const ctrl = {
 		//if ( localStorage.mama )
 		//cScope.restore(JSON.parse(localStorage.mama));
 		//else
-		if ( state )
-			cScope.restore(state);
+		//if ( state )
+		//	cScope.restore(state);
 		cScope.mount("DataProvider")
 		ReactDom.render(<App/>, node);
 		
@@ -59,28 +60,31 @@ const ctrl = {
 		//
 	},
 	
-	renderSSRTo( node, state, _attempts = 0 ) {
+	renderSSRTo( node, state, _scope, _attempts = 0 ) {
 		
 		let rid     = shortid.generate(),
-		    cScope  = new Scope(AppScope, {
+		    cScope  = _scope || new Scope(AppScope, {
 			    id         : rid,
 			    autoDestroy: false
 		    }), App = withScope(cScope)(require('./App').default);
 		
 		
-		state && cScope.restore(state, { alias: "App" });
+		//state && cScope.restore(state, { alias: "App" });
 		let html,
-		    appHtml = renderToString(<App location={"/"}/>),
-		    stable  = cScope.isStableTree();
+		    appHtml    = renderToString(<App location={"/"}/>),
+		    stable     = cScope.isStableTree();
 		//console.log('ctrl::renderSSR:65: ', cfg.location, _attempts);
+		node.innerHTML = appHtml;
 		cScope.onceStableTree(s => {
-			state = cScope.serialize({ alias: "App" });
-			//debugger
-			cScope.destroy()
-			if ( !stable && _attempts < 2 ) {
-				ctrl.renderSSRTo(node, state, ++_attempts);
+			//state = cScope.serialize({ alias: "App" });
+			debugger
+			cScope.resetKeys();
+			if ( !stable && _attempts < 5 ) {
+				ctrl.renderSSRTo(node, state, cScope, ++_attempts);
 			}
-			node.innerHTML = appHtml;
+			else {
+				debugger
+			}
 		})
 	},
 	renderSSR( cfg, cb, _attempts = 0 ) {
@@ -101,9 +105,9 @@ const ctrl = {
 		//console.warn("render !!!!")
 		cb(null, html)
 	},
-	renderFullSSR( cfg, cb, _attempts = 0 ) {
+	renderFullSSR( cfg, cb, _cScope, _attempts = 0 ) {
 		let rid     = shortid.generate(),
-		    cScope  = new Scope(AppScope, {
+		    cScope  = _cScope || new Scope(AppScope, {
 			    id         : rid,
 			    autoDestroy: false
 		    }), App = withScope(cScope)(require('./App').default);
@@ -121,13 +125,14 @@ const ctrl = {
 		global.contexts = Scope.scopes;
 		console.log('ctrl::renderSSR:65: ', cfg.location, _attempts);
 		cScope.onceStableTree(state => {
-			let nstate = cScope.serialize({ alias: "App" });
-			cScope.destroy()
-			if ( !stable && _attempts < 3 ) {
-				cfg.state = nstate;
-				ctrl.renderSSR(cfg, cb, ++_attempts);
+			if ( !stable && _attempts < 5 ) {
+				//cfg.state = nstate;
+				cScope.resetKeys()
+				ctrl.renderSSR(cfg, cb, cScope, ++_attempts);
 			}
 			else {
+				let nstate = cScope.serialize({ alias: "App" });
+				cScope.destroy();
 				try {
 					html = "<!doctype html>\n" +
 						renderToString(<Index
