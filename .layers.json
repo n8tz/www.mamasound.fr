@@ -14,15 +14,15 @@
       },
       "api": {
         "clearBefore": "dist/api",
-        "run": "wpi :devApi -w"
+        "run": "lpack :devApi -w"
       },
       "www": {
         "clearBefore": "dist/www",
-        "run": "wpi-dev-server :devClient --hot --host 0.0.0.0"
+        "run": "lpack-dev-server :devClient --hot --host 0.0.0.0"
       }
     },
     "extend": [
-      "wi-layer-react-express"
+      "lpack-react"
     ]
   },
   "prod": {
@@ -31,17 +31,17 @@
     "commands": {
       "www": {
         "clearBefore": "dist/www",
-        "run": "wpi :client"
+        "run": "lpack :client"
       },
       "admin": {
         "wait": "www",
         "clearBefore": "dist/admin",
-        "run": "wpi :admin"
+        "run": "lpack :admin"
       },
       "api": {
         "wait": "admin",
         "clearBefore": "dist/api",
-        "run": "wpi :api"
+        "run": "lpack :api"
       },
       "server": {
         "wait": "api",
@@ -51,7 +51,7 @@
       }
     },
     "extend": [
-      "wi-layer-react-express"
+      "lpack-react"
     ]
   },
   "client": {
@@ -84,10 +84,10 @@
       }
     },
     "extend": [
-      "wpi-auth",
-      "wpi-forms",
-      "wpi-mongo",
-      "wi-layer-react-express"
+      "layer-auth",
+      "layer-forms",
+      "layer-mongo",
+      "lpack-react"
     ]
   },
   "admin": {
@@ -120,11 +120,11 @@
       }
     },
     "extend": [
-      "wpi-auth",
-      "wpi-admin",
-      "wpi-forms",
-      "wpi-mongo",
-      "wi-layer-react-express"
+      "layer-auth",
+      "layer-admin",
+      "layer-forms",
+      "layer-mongo",
+      "lpack-react"
     ]
   },
   "devClient": {
@@ -165,11 +165,11 @@
       }
     },
     "extend": [
-      "wpi-auth",
-      "wpi-admin",
-      "wpi-forms",
-      "wpi-mongo",
-      "wi-layer-react-express"
+      "layer-auth",
+      "layer-admin",
+      "layer-forms",
+      "layer-mongo",
+      "lpack-react"
     ]
   },
   "api": {
@@ -199,11 +199,11 @@
       }
     },
     "extend": [
-      "wpi-auth",
-      "wpi-admin",
-      "wpi-forms",
-      "wpi-mongo",
-      "wi-layer-react-express"
+      "layer-auth",
+      "layer-admin",
+      "layer-forms",
+      "layer-mongo",
+      "lpack-react"
     ]
   },
   "devApi": {
@@ -233,11 +233,11 @@
       }
     },
     "extend": [
-      "wpi-auth",
-      "wpi-admin",
-      "wpi-forms",
-      "wpi-mongo",
-      "wi-layer-react-express"
+      "layer-auth",
+      "layer-admin",
+      "layer-forms",
+      "layer-mongo",
+      "lpack-react"
     ]
   }
 }

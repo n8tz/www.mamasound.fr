@@ -42,7 +42,7 @@ services:
       context: .
     working_dir: /home/app
     #    command: bash -c "npm i&&wi-run :dev start"
-    command: bash -c "${APP_RUN_BEFORE:-sleep 0}&&wi-run :${APP_MODE:-dev} start"
+    command: bash -c "${APP_RUN_BEFORE:-sleep 0}&&lpack-run :${APP_MODE:-dev} start"
     #
     labels:
       - "traefik.enable=true"

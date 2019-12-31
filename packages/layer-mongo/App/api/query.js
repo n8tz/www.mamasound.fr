@@ -14,7 +14,7 @@ const config   = require('App/config'),
 //multer  = require('multer');
 
 export default ( server, http ) => {
-	console.log("wpi-mongo server running ! :D");
+	console.log("lpack-mongo server running ! :D");
 	server.post(
 		'/db/query',
 		function ( req, res, next ) {

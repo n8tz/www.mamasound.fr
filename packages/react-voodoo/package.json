@@ -7,9 +7,9 @@
   "repository": "https://github.com/n8tz/react-voodoo",
   "description": "Additive & swipeable animation engine for React",
   "scripts": {
-    "build": "wpi && wpi :samples",
-    "devLib": "wpi :staging -w",
-    "devSamples": "wpi-dev-server :samples --hot --host 0.0.0.0",
+    "build": "lpack && lpack :samples",
+    "devLib": "lpack :staging -w",
+    "devSamples": "lpack-dev-server :samples --hot --host 0.0.0.0",
     "startSamples": "ws -d ./dist.samples -p 8080",
     "runBrowser": "start http://localhost:8080"
   },

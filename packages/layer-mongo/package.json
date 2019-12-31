@@ -1,11 +1,11 @@
 {
-  "name": "wpi-mongo",
+  "name": "lpack-mongo",
   "version": "1.0.0",
   "private": true,
   "license": "MIT",
   "main": "./dist/App.server.js",
   "author": "Nathan Braun <n8tz.js@gmail.com>",
-  "wpInherit": {
+  "layerPack": {
     "default": {
       "rootFolder": "App"
     }
@@ -19,6 +19,6 @@
     "superagent": "^3.8.2"
   },
   "devDependencies": {
-    "webpack-inherit": "^1.7.2"
+    "layer-pack": "^1.0.1"
   }
 }

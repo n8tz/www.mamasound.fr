@@ -14,13 +14,13 @@ const express     = require("express"),
       argz        = require('minimist')(process.argv.slice(2)),
       bodyParser  = require('body-parser'),
       compression = require('compression'),
-      wpiConf     = require('App/.wpiConfig'),
+      lpackConf     = require('App/.buildInfos'),
       debug       = require('App/console').default("server");
 
 const busboy = require('connect-busboy');
 
 
-process.title = wpiConf.project.name + '::server';
+process.title = lpackConf.project.name + '::server';
 
 debug.warn("process.env.DEBUG : ", process.env.DEBUG);
 

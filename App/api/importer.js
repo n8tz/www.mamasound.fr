@@ -8,7 +8,7 @@
 //
 import {pushDbTask} from "App/db/pool";
 
-const wpiConf  = require('App/config'),
+const lpackConf  = require('App/config'),
       aliasAPI = require("App/db/aliasHelpers").default,
       shortid  = require("shortid");
 
